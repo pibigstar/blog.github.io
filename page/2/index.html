@@ -270,173 +270,6 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://pibigstar.com/2019/09/29/golang对接支付宝支付/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="派大星">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/qq.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="派大星的博客">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/09/29/golang对接支付宝支付/" itemprop="url">Untitled</a></h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-09-29T22:56:41+08:00">
-                2019-09-29
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>title: golang对接支付宝支付<br>date: 2018-07-22 22:10:31<br>tags: [支付宝,golang,打开浏览器]<br>categories: go</p>
-<p>本文采用沙箱环境</p>
-<h1 id="1-开启沙箱"><a href="#1-开启沙箱" class="headerlink" title="1. 开启沙箱"></a>1. 开启沙箱</h1><p>文档：<a href="https://docs.open.alipay.com/200/105311/" target="_blank" rel="noopener">https://docs.open.alipay.com/200/105311/</a><br>沙箱地址：<a href="https://openhome.alipay.com/platform/appDaily.htm" target="_blank" rel="noopener">https://openhome.alipay.com/platform/appDaily.htm</a></p>
-<h1 id="2-生成应用公钥和秘钥（已弃用）"><a href="#2-生成应用公钥和秘钥（已弃用）" class="headerlink" title="2. 生成应用公钥和秘钥（已弃用）"></a>2. 生成应用公钥和秘钥（已弃用）</h1><blockquote>
-<p>本文中的签名方法默认为 RSA2，采用支付宝提供的 RSA签名&amp;验签工具 生成秘钥时，秘钥的格式必须为 PKCS1，秘钥长度推荐 2048。所以在支付宝管理后台请注意配置 RSA2(SHA256)密钥。<br>生成秘钥对之后，将公钥提供给支付宝（通过支付宝后台上传）对我们请求的数据进行签名验证，我们的代码中将使用私钥对请求数据签名。</p>
-</blockquote>
-<p>RSA签名和验证工具下载：<a href="https://docs.open.alipay.com/291/105971" target="_blank" rel="noopener">https://docs.open.alipay.com/291/105971</a></p>
-<ol>
-<li>下载之后解压</li>
-<li>双击<code>RSA签名验签工具.bat</code></li>
-<li>秘钥格式选择<code>PKCS1</code></li>
-<li>点击生成秘钥</li>
-<li>复制公钥</li>
-<li>回到沙箱中，点击查看应用公钥，然后点击修改<br><img src="https://img-blog.csdnimg.cn/201907201240149.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2p1bm1veGk=,size_16,color_FFFFFF,t_70" alt></li>
-<li>保存好私钥，我们一会需要在代码中用到</li>
-<li>复制支付宝公钥，代码中验证需要用到<br><img src="https://img-blog.csdnimg.cn/20190720133503423.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2p1bm1veGk=,size_16,color_FFFFFF,t_70" alt></li>
-<li>配置支付成功后的回调地址（这必须是个公网地址）<br><img src="https://img-blog.csdnimg.cn/20190727161229344.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2p1bm1veGk=,size_16,color_FFFFFF,t_70" alt><h1 id="3-证书认证"><a href="#3-证书认证" class="headerlink" title="3. 证书认证"></a>3. 证书认证</h1><blockquote>
-<p>目前新创建的支付宝应用只支持证书方式认证，已经弃用之前的公钥和私钥的方式</p>
-</blockquote>
-</li>
-</ol>
-<p><strong>公钥秘钥说明</strong></p>
-<blockquote>
-<p>我们生成秘钥对之后，将公钥提供给支付宝（通过支付宝后台上传）对我们请求的数据进行签名验证，我们的代码中使用私钥对请求数据签名。</p>
-</blockquote>
-<ul>
-<li>证书签名请求文件（用来提交给支付宝后台生成证书的）</li>
-<li>应用私钥（调用支付宝接口的时候，我们需要使用该私钥对参数进行签名）</li>
-<li>支付宝公钥证书（用来验证我们的签名的，现在已经被支付宝公钥证书取代）</li>
-</ul>
-<h2 id="3-1-下载生成工具"><a href="#3-1-下载生成工具" class="headerlink" title="3.1 下载生成工具"></a>3.1 下载生成工具</h2><p>下载地址与文档：<a href="https://docs.open.alipay.com/291/105971" target="_blank" rel="noopener">https://docs.open.alipay.com/291/105971</a><br><img src="https://img-blog.csdnimg.cn/20190920212402568.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2p1bm1veGk=,size_16,color_FFFFFF,t_70" alt></p>
-<h2 id="3-2-生成csr证书签名请求文件"><a href="#3-2-生成csr证书签名请求文件" class="headerlink" title="3.2 生成csr证书签名请求文件"></a>3.2 生成csr证书签名请求文件</h2><p>工具安装好之后打开，点击获取<br><img src="https://img-blog.csdnimg.cn/20190920212856648.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2p1bm1veGk=,size_16,color_FFFFFF,t_70" alt></p>
-<h2 id="3-3-输入信息"><a href="#3-3-输入信息" class="headerlink" title="3.3 输入信息"></a>3.3 输入信息</h2><blockquote>
-<p>主要是组织/公司这块一定要写的和你支付宝中应用的名一样，不然不会通过的，填写完毕之后点击<code>生成CSR文件</code> ，点击页面的打开文件位置，就可以看到三个文件了，分别是<code>证书签名请求文件</code>，<code>应用公钥</code>，<code>应用私钥</code></p>
-</blockquote>
-<p><img src="https://img-blog.csdnimg.cn/20190920212925809.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2p1bm1veGk=,size_16,color_FFFFFF,t_70" alt></p>
-<h2 id="3-4-上传CSR证书签名请求文件"><a href="#3-4-上传CSR证书签名请求文件" class="headerlink" title="3.4 上传CSR证书签名请求文件"></a>3.4 上传CSR证书签名请求文件</h2><blockquote>
-<p>回到支付宝后台，点击 <code>接口加签方式</code> 设置，选择公钥证书，点击上次CSR生成证书，把我们刚才生成的那个证书(<code>.csr</code>)上传进去</p>
-</blockquote>
-<p><img src="https://img-blog.csdnimg.cn/20190920213258422.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2p1bm1veGk=,size_16,color_FFFFFF,t_70" alt></p>
-<h2 id="3-5-下载证书"><a href="#3-5-下载证书" class="headerlink" title="3.5 下载证书"></a>3.5 下载证书</h2><p>上传好之后，会弹出让你下载证书的页面，把那三个证书都下载下来，分别是: 应用公钥证书，支付宝公钥证书，支付宝根证书<br><img src="https://img-blog.csdnimg.cn/20190920213958158.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2p1bm1veGk=,size_16,color_FFFFFF,t_70" alt></p>
-<h1 id="代码部分"><a href="#代码部分" class="headerlink" title="代码部分"></a>代码部分</h1><p>下载第三方库<br><code>go get github.com/smartwalle/alipay/v3</code></p>
-<h3 id="1-网页扫码支付"><a href="#1-网页扫码支付" class="headerlink" title="1. 网页扫码支付"></a>1. 网页扫码支付</h3><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> (</span><br><span class="line">	<span class="string">"fmt"</span></span><br><span class="line">	<span class="string">"github.com/smartwalle/alipay"</span></span><br><span class="line">	<span class="string">"net/http"</span></span><br><span class="line">	<span class="string">"os/exec"</span></span><br><span class="line">	<span class="string">"strings"</span></span><br><span class="line">	<span class="string">"time"</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> (</span><br><span class="line">	<span class="comment">// appId</span></span><br><span class="line">	appId = <span class="string">""</span></span><br><span class="line">	<span class="comment">// 应用公钥</span></span><br><span class="line">	aliPublicKey = <span class="string">""</span></span><br><span class="line">	<span class="comment">// 应用私钥</span></span><br><span class="line">	privateKey = <span class="string">""</span></span><br><span class="line">	client, _ = alipay.New(appId, aliPublicKey, privateKey, <span class="literal">false</span>)</span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">init</span><span class="params">()</span></span> &#123;</span><br><span class="line">	client.LoadAppPublicCert(<span class="string">"应用公钥证书"</span>)</span><br><span class="line">	client.LoadAliPayPublicCert(<span class="string">"支付宝公钥证书"</span>)</span><br><span class="line">	client.LoadAliPayRootCert(<span class="string">"支付宝根证书"</span>)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//网站扫码支付</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">WebPageAlipay</span><span class="params">()</span></span> &#123;</span><br><span class="line">	pay := alipay.AliPayTradePagePay&#123;&#125;</span><br><span class="line">	<span class="comment">// 支付宝回调地址（需要在支付宝后台配置）</span></span><br><span class="line">	<span class="comment">// 支付成功后，支付宝会发送一个POST消息到该地址</span></span><br><span class="line">	pay.NotifyURL = <span class="string">"http://www.pibigstar/alipay"</span></span><br><span class="line">	<span class="comment">// 支付成功之后，浏览器将会重定向到该 URL</span></span><br><span class="line">	pay.ReturnURL = <span class="string">"http://localhost:8088/return"</span></span><br><span class="line">	<span class="comment">//支付标题</span></span><br><span class="line">	pay.Subject = <span class="string">"支付宝支付测试"</span></span><br><span class="line">	<span class="comment">//订单号，一个订单号只能支付一次</span></span><br><span class="line">	pay.OutTradeNo = time.Now().String()</span><br><span class="line">	<span class="comment">//销售产品码，与支付宝签约的产品码名称,目前仅支持FAST_INSTANT_TRADE_PAY</span></span><br><span class="line">	pay.ProductCode = <span class="string">"FAST_INSTANT_TRADE_PAY"</span></span><br><span class="line">	<span class="comment">//金额</span></span><br><span class="line">	pay.TotalAmount = <span class="string">"0.01"</span></span><br><span class="line"></span><br><span class="line">	url, err := client.TradePagePay(pay)</span><br><span class="line">	<span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">		fmt.Println(err)</span><br><span class="line">	&#125;</span><br><span class="line">	payURL := url.String()</span><br><span class="line">	<span class="comment">//这个 payURL 即是用于支付的 URL，可将输出的内容复制，到浏览器中访问该 URL 即可打开支付页面。</span></span><br><span class="line">	fmt.Println(payURL)</span><br><span class="line"></span><br><span class="line">	<span class="comment">//打开默认浏览器</span></span><br><span class="line">	payURL = strings.Replace(payURL,<span class="string">"&amp;"</span>,<span class="string">"^&amp;"</span>,<span class="number">-1</span>)</span><br><span class="line">	exec.Command(<span class="string">"cmd"</span>, <span class="string">"/c"</span>, <span class="string">"start"</span>,payURL).Start()</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//手机客户端支付</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">WapAlipay</span><span class="params">()</span></span> &#123;</span><br><span class="line">	pay := alipay.AliPayTradeWapPay&#123;&#125;</span><br><span class="line">	<span class="comment">// 支付成功之后，支付宝将会重定向到该 URL</span></span><br><span class="line">	pay.ReturnURL = <span class="string">"http://localhost:8088/return"</span></span><br><span class="line">	<span class="comment">//支付标题</span></span><br><span class="line">	pay.Subject = <span class="string">"支付宝支付测试"</span></span><br><span class="line">	<span class="comment">//订单号，一个订单号只能支付一次</span></span><br><span class="line">	pay.OutTradeNo = time.Now().String()</span><br><span class="line">	<span class="comment">//商品code</span></span><br><span class="line">	pay.ProductCode = time.Now().String()</span><br><span class="line">	<span class="comment">//金额</span></span><br><span class="line">	pay.TotalAmount = <span class="string">"0.01"</span></span><br><span class="line"></span><br><span class="line">	url, err := client.TradeWapPay(pay)</span><br><span class="line">	<span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">		fmt.Println(err)</span><br><span class="line">	&#125;</span><br><span class="line">	payURL := url.String()</span><br><span class="line">	<span class="comment">//这个 payURL 即是用于支付的 URL，可将输出的内容复制，到浏览器中访问该 URL 即可打开支付页面。</span></span><br><span class="line">	fmt.Println(payURL)</span><br><span class="line">	<span class="comment">//打开默认浏览器</span></span><br><span class="line">	payURL = strings.Replace(payURL,<span class="string">"&amp;"</span>,<span class="string">"^&amp;"</span>,<span class="number">-1</span>)</span><br><span class="line">	exec.Command(<span class="string">"cmd"</span>, <span class="string">"/c"</span>, <span class="string">"start"</span>,payURL).Start()</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">	<span class="comment">//生成支付URL</span></span><br><span class="line">	WapAlipay()</span><br><span class="line">	<span class="comment">//支付成功之后的返回URL页面</span></span><br><span class="line">	http.HandleFunc(<span class="string">"/return"</span>, <span class="function"><span class="keyword">func</span><span class="params">(rep http.ResponseWriter, req *http.Request)</span></span> &#123;</span><br><span class="line">		req.ParseForm()</span><br><span class="line">		ok, err := client.VerifySign(req.Form)</span><br><span class="line">		<span class="keyword">if</span> err == <span class="literal">nil</span> &amp;&amp; ok &#123;</span><br><span class="line">			rep.Write([]<span class="keyword">byte</span>(<span class="string">"支付成功"</span>))</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;)</span><br><span class="line">	<span class="comment">//支付成功之后的通知页面</span></span><br><span class="line">	http.HandleFunc(<span class="string">"/alipay"</span>, <span class="function"><span class="keyword">func</span><span class="params">(rep http.ResponseWriter, req *http.Request)</span></span> &#123;</span><br><span class="line">		<span class="keyword">var</span> noti, _ = client.GetTradeNotification(req)</span><br><span class="line">		<span class="keyword">if</span> noti != <span class="literal">nil</span> &#123;</span><br><span class="line">			fmt.Println(<span class="string">"支付成功"</span>)</span><br><span class="line">			<span class="comment">//修改订单状态。。。。</span></span><br><span class="line">		&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">			fmt.Println(<span class="string">"支付失败"</span>)</span><br><span class="line">		&#125;</span><br><span class="line">		alipay.AckNotification(rep) <span class="comment">// 确认收到通知消息</span></span><br><span class="line">	&#125;)</span><br><span class="line">	</span><br><span class="line">	fmt.Println(<span class="string">"server start...."</span>)</span><br><span class="line">	http.ListenAndServe(<span class="string">":8088"</span>, <span class="literal">nil</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    <div>
-      
-    </div>
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://pibigstar.com/2019/09/29/使用HttpClient获得网页内容/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1106,130 +939,6 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://pibigstar.com/2019/09/29/使用Maven+Hibernate访问数据库/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="派大星">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/qq.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="派大星的博客">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/09/29/使用Maven+Hibernate访问数据库/" itemprop="url">Untitled</a></h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-09-29T22:56:41+08:00">
-                2019-09-29
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>title: 使用Maven+Hibernate访问数据库<br>date: 2019-05-13 22:10:31<br>tags: [hibernate.maven,java]<br>categories: Java,框架学习使用</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    <div>
-      
-    </div>
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://pibigstar.com/2019/09/29/GoLang module操作/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1389,6 +1098,266 @@
 
 </li>
 </ol>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    <div>
+      
+    </div>
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://pibigstar.com/2019/09/29/使用Maven+Hibernate访问数据库/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="派大星">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/qq.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="派大星的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/09/29/使用Maven+Hibernate访问数据库/" itemprop="url">Untitled</a></h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-09-29T22:56:41+08:00">
+                2019-09-29
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>title: 使用Maven+Hibernate访问数据库<br>date: 2019-05-13 22:10:31<br>tags: [hibernate.maven,java]<br>categories: Java,框架学习使用</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    <div>
+      
+    </div>
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://pibigstar.com/2019/09/29/Fiddler高级使用——规则编写/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="派大星">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/qq.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="派大星的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/09/29/Fiddler高级使用——规则编写/" itemprop="url">Untitled</a></h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-09-29T22:56:41+08:00">
+                2019-09-29
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>title: Fiddler高级使用——规则编写<br>date: 2018-08-13 22:10:31<br>tags: [fiddler,抓包,规则过滤,脚本]<br>categories: 工具使用</p>
+<h4 id="打开规则脚本编写"><a href="#打开规则脚本编写" class="headerlink" title="打开规则脚本编写"></a>打开规则脚本编写</h4><p><img src="https://img-blog.csdnimg.cn/20190127130212401.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2p1bm1veGk=,size_16,color_FFFFFF,t_70" alt></p>
+<h4 id="在此函数下面编写"><a href="#在此函数下面编写" class="headerlink" title="在此函数下面编写"></a>在此函数下面编写</h4><p><img src="https://img-blog.csdnimg.cn/20190127130300398.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2p1bm1veGk=,size_16,color_FFFFFF,t_70" alt></p>
+<h1 id="1-替换json里面部分参数，然后返回给客户端"><a href="#1-替换json里面部分参数，然后返回给客户端" class="headerlink" title="1. 替换json里面部分参数，然后返回给客户端"></a>1. 替换json里面部分参数，然后返回给客户端</h1><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (oSession.fullUrl.Contains(<span class="string">"http://www.baidu.com"</span>))</span><br><span class="line"> &#123;</span><br><span class="line">	<span class="comment">// 获取Response Body、Request Body中JSON字符串，转换为可编辑的JSONObject变量</span></span><br><span class="line">	<span class="keyword">var</span> responseStringOriginal =  oSession.GetResponseBodyAsString();</span><br><span class="line">	<span class="keyword">var</span> responseJSON = Fiddler.WebFormats.JSON.JsonDecode(responseStringOriginal);</span><br><span class="line">	<span class="keyword">var</span> requestStringOriginal=oSession.GetRequestBodyAsString();</span><br><span class="line">	<span class="keyword">var</span> requestJSON = Fiddler.WebFormats.JSON.JsonDecode(requestStringOriginal);</span><br><span class="line">	<span class="comment">//请求参数中，若type为1，对返回值做如下修改</span></span><br><span class="line">	responseJSON.JSONObject[<span class="string">'付费'</span>] = <span class="string">"true"</span>;</span><br><span class="line">	<span class="comment">// 重新设置Response Body</span></span><br><span class="line">	<span class="keyword">var</span> responseStringDestinal = Fiddler.WebFormats.JSON.JsonEncode(responseJSON.JSONObject);</span><br><span class="line">	oSession.utilSetResponseBody(responseStringDestinal);</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="2-修改request的Body里面的部分参数"><a href="#2-修改request的Body里面的部分参数" class="headerlink" title="2. 修改request的Body里面的部分参数"></a>2. 修改request的Body里面的部分参数</h1><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span>(oSession.uriContains(<span class="string">"http://www.baidu.com"</span>))</span><br><span class="line">&#123;</span><br><span class="line">	<span class="comment">// 获取Request 中的body字符串</span></span><br><span class="line">	<span class="keyword">var</span> strBody=oSession.GetRequestBodyAsString();</span><br><span class="line">	<span class="comment">// 用正则表达式或者replace方法去修改string，将false改为true</span></span><br><span class="line">	strBody=strBody.replace(<span class="string">"false"</span>,<span class="string">"true"</span>);</span><br><span class="line">	<span class="comment">// 弹个对话框检查下修改后的body </span></span><br><span class="line">	FiddlerObject.alert(strBody);</span><br><span class="line">	<span class="comment">// 将修改后的body，重新写回Request中</span></span><br><span class="line">	oSession.utilSetRequestBody(strBody);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="3-修改cookie"><a href="#3-修改cookie" class="headerlink" title="3. 修改cookie"></a>3. 修改cookie</h1><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span>(oSession.HostnameIs(<span class="string">'www.baidu.com'</span>) &amp;&amp; oSession.uriContains(<span class="string">'pagewithCookie'</span>) &amp;&amp; oSession.oRequest.headers.Contains(<span class="string">"Cookie"</span>))</span><br><span class="line">&#123; </span><br><span class="line">	<span class="keyword">var</span> sCookie = oSession.oRequest[<span class="string">"Cookie"</span>]; </span><br><span class="line">	<span class="comment">//  用replace方法或者正则表达式的方法去操作cookie的string</span></span><br><span class="line">	sCookie = sCookie.Replace(<span class="string">"付费=false"</span>, <span class="string">"付费=true"</span>); </span><br><span class="line">	oSession.oRequest[<span class="string">"Cookie"</span>] = sCookie;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="4-查看是否访问了某个网站"><a href="#4-查看是否访问了某个网站" class="headerlink" title="4. 查看是否访问了某个网站"></a>4. 查看是否访问了某个网站</h1><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span>(oSession.HostnameIs(<span class="string">"www.baidu.com"</span>)) </span><br><span class="line">&#123;</span><br><span class="line">	oSession[<span class="string">"ui-color"</span>] = <span class="string">"red"</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="5-自动保存某个接口的数据到本地"><a href="#5-自动保存某个接口的数据到本地" class="headerlink" title="5. 自动保存某个接口的数据到本地"></a>5. 自动保存某个接口的数据到本地</h1><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (oSession.fullUrl.Contains(<span class="string">"www.baidu.com/playurl/v1/"</span>) )</span><br><span class="line">&#123;  </span><br><span class="line">	<span class="comment">//消除保存的请求可能存在乱码的情况</span></span><br><span class="line">	oSession.utilDecodeResponse();</span><br><span class="line">	<span class="keyword">var</span> fso;</span><br><span class="line">	<span class="keyword">var</span> file;</span><br><span class="line">	fso = <span class="keyword">new</span> ActiveXObject(<span class="string">"Scripting.FileSystemObject"</span>);</span><br><span class="line">	<span class="comment">//文件保存路径，可自定义</span></span><br><span class="line">	file = fso.OpenTextFile(<span class="string">"D:\\Sessions.txt"</span>,<span class="number">8</span> ,<span class="literal">true</span>, <span class="literal">true</span>);</span><br><span class="line">	<span class="comment">//file.writeLine("Response code: " + oSession.responseCode);</span></span><br><span class="line">	file.writeLine(<span class="string">"Response body: "</span> + oSession.GetResponseBodyAsString());</span><br><span class="line">	file.writeLine(<span class="string">"\n"</span>);</span><br><span class="line">	file.close();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
 
           
         
@@ -1664,7 +1633,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://pibigstar.com/2019/09/29/Fiddler高级使用——规则编写/">
+    <link itemprop="mainEntityOfPage" href="http://pibigstar.com/2019/09/29/docker安装使用ELK/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="派大星">
@@ -1683,7 +1652,7 @@
         
           <h2 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2019/09/29/Fiddler高级使用——规则编写/" itemprop="url">Untitled</a></h2>
+                <a class="post-title-link" href="/2019/09/29/docker安装使用ELK/" itemprop="url">Untitled</a></h2>
         
 
         <div class="post-meta">
@@ -1735,19 +1704,96 @@
       
         
           
-            <p>title: Fiddler高级使用——规则编写<br>date: 2018-08-13 22:10:31<br>tags: [fiddler,抓包,规则过滤,脚本]<br>categories: 工具使用</p>
-<h4 id="打开规则脚本编写"><a href="#打开规则脚本编写" class="headerlink" title="打开规则脚本编写"></a>打开规则脚本编写</h4><p><img src="https://img-blog.csdnimg.cn/20190127130212401.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2p1bm1veGk=,size_16,color_FFFFFF,t_70" alt></p>
-<h4 id="在此函数下面编写"><a href="#在此函数下面编写" class="headerlink" title="在此函数下面编写"></a>在此函数下面编写</h4><p><img src="https://img-blog.csdnimg.cn/20190127130300398.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2p1bm1veGk=,size_16,color_FFFFFF,t_70" alt></p>
-<h1 id="1-替换json里面部分参数，然后返回给客户端"><a href="#1-替换json里面部分参数，然后返回给客户端" class="headerlink" title="1. 替换json里面部分参数，然后返回给客户端"></a>1. 替换json里面部分参数，然后返回给客户端</h1><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (oSession.fullUrl.Contains(<span class="string">"http://www.baidu.com"</span>))</span><br><span class="line"> &#123;</span><br><span class="line">	<span class="comment">// 获取Response Body、Request Body中JSON字符串，转换为可编辑的JSONObject变量</span></span><br><span class="line">	<span class="keyword">var</span> responseStringOriginal =  oSession.GetResponseBodyAsString();</span><br><span class="line">	<span class="keyword">var</span> responseJSON = Fiddler.WebFormats.JSON.JsonDecode(responseStringOriginal);</span><br><span class="line">	<span class="keyword">var</span> requestStringOriginal=oSession.GetRequestBodyAsString();</span><br><span class="line">	<span class="keyword">var</span> requestJSON = Fiddler.WebFormats.JSON.JsonDecode(requestStringOriginal);</span><br><span class="line">	<span class="comment">//请求参数中，若type为1，对返回值做如下修改</span></span><br><span class="line">	responseJSON.JSONObject[<span class="string">'付费'</span>] = <span class="string">"true"</span>;</span><br><span class="line">	<span class="comment">// 重新设置Response Body</span></span><br><span class="line">	<span class="keyword">var</span> responseStringDestinal = Fiddler.WebFormats.JSON.JsonEncode(responseJSON.JSONObject);</span><br><span class="line">	oSession.utilSetResponseBody(responseStringDestinal);</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
+            <p>title: docker安装使用ELK<br>date: 2019-08-25 22:10:31<br>tags: [docker-compose,elasticsearch,logstash,kibana,cerebro]<br>categories: elk</p>
+<h1 id="1-安装docker"><a href="#1-安装docker" class="headerlink" title="1. 安装docker"></a>1. 安装docker</h1><blockquote>
+<p>Docker 分为 CE 和 EE 两大版本。CE 即社区版（免费），EE 即企业版，强调安全，付费使用，这里我们使用的CE版</p>
+</blockquote>
+<p>为了确保系统的稳定性，建议先update一下</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo yum update</span><br></pre></td></tr></table></figure>
 
-<h1 id="2-修改request的Body里面的部分参数"><a href="#2-修改request的Body里面的部分参数" class="headerlink" title="2. 修改request的Body里面的部分参数"></a>2. 修改request的Body里面的部分参数</h1><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span>(oSession.uriContains(<span class="string">"http://www.baidu.com"</span>))</span><br><span class="line">&#123;</span><br><span class="line">	<span class="comment">// 获取Request 中的body字符串</span></span><br><span class="line">	<span class="keyword">var</span> strBody=oSession.GetRequestBodyAsString();</span><br><span class="line">	<span class="comment">// 用正则表达式或者replace方法去修改string，将false改为true</span></span><br><span class="line">	strBody=strBody.replace(<span class="string">"false"</span>,<span class="string">"true"</span>);</span><br><span class="line">	<span class="comment">// 弹个对话框检查下修改后的body </span></span><br><span class="line">	FiddlerObject.alert(strBody);</span><br><span class="line">	<span class="comment">// 将修改后的body，重新写回Request中</span></span><br><span class="line">	oSession.utilSetRequestBody(strBody);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>安装依赖包</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo yum install -y yum-utils device-mapper-persistent-data lvm2</span><br></pre></td></tr></table></figure>
 
-<h1 id="3-修改cookie"><a href="#3-修改cookie" class="headerlink" title="3. 修改cookie"></a>3. 修改cookie</h1><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span>(oSession.HostnameIs(<span class="string">'www.baidu.com'</span>) &amp;&amp; oSession.uriContains(<span class="string">'pagewithCookie'</span>) &amp;&amp; oSession.oRequest.headers.Contains(<span class="string">"Cookie"</span>))</span><br><span class="line">&#123; </span><br><span class="line">	<span class="keyword">var</span> sCookie = oSession.oRequest[<span class="string">"Cookie"</span>]; </span><br><span class="line">	<span class="comment">//  用replace方法或者正则表达式的方法去操作cookie的string</span></span><br><span class="line">	sCookie = sCookie.Replace(<span class="string">"付费=false"</span>, <span class="string">"付费=true"</span>); </span><br><span class="line">	oSession.oRequest[<span class="string">"Cookie"</span>] = sCookie;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>添加docker镜像</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo</span><br></pre></td></tr></table></figure>
 
-<h1 id="4-查看是否访问了某个网站"><a href="#4-查看是否访问了某个网站" class="headerlink" title="4. 查看是否访问了某个网站"></a>4. 查看是否访问了某个网站</h1><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span>(oSession.HostnameIs(<span class="string">"www.baidu.com"</span>)) </span><br><span class="line">&#123;</span><br><span class="line">	oSession[<span class="string">"ui-color"</span>] = <span class="string">"red"</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>如果官方源下载速度太慢，建议使用国内源</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo yum-config-manager --add-repo https://mirrors.ustc.edu.cn/docker-ce/linux/centos/docker-ce.repo</span><br></pre></td></tr></table></figure>
 
-<h1 id="5-自动保存某个接口的数据到本地"><a href="#5-自动保存某个接口的数据到本地" class="headerlink" title="5. 自动保存某个接口的数据到本地"></a>5. 自动保存某个接口的数据到本地</h1><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (oSession.fullUrl.Contains(<span class="string">"www.baidu.com/playurl/v1/"</span>) )</span><br><span class="line">&#123;  </span><br><span class="line">	<span class="comment">//消除保存的请求可能存在乱码的情况</span></span><br><span class="line">	oSession.utilDecodeResponse();</span><br><span class="line">	<span class="keyword">var</span> fso;</span><br><span class="line">	<span class="keyword">var</span> file;</span><br><span class="line">	fso = <span class="keyword">new</span> ActiveXObject(<span class="string">"Scripting.FileSystemObject"</span>);</span><br><span class="line">	<span class="comment">//文件保存路径，可自定义</span></span><br><span class="line">	file = fso.OpenTextFile(<span class="string">"D:\\Sessions.txt"</span>,<span class="number">8</span> ,<span class="literal">true</span>, <span class="literal">true</span>);</span><br><span class="line">	<span class="comment">//file.writeLine("Response code: " + oSession.responseCode);</span></span><br><span class="line">	file.writeLine(<span class="string">"Response body: "</span> + oSession.GetResponseBodyAsString());</span><br><span class="line">	file.writeLine(<span class="string">"\n"</span>);</span><br><span class="line">	file.close();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>安装docker</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo yum makecache fast</span><br><span class="line">sudo yum install docker-ce</span><br></pre></td></tr></table></figure>
 
+<p>测试是否安装成功</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run hello-world</span><br></pre></td></tr></table></figure>
+
+<p>建立一个docker组，并将当前用户加入到此组中，这样不用root用户即可访问到 Docker 引擎的 Unix socket</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 创建docker组</span></span><br><span class="line">sudo groupadd docker</span><br><span class="line"><span class="comment"># 将当前用户加入到组中</span></span><br><span class="line">sudo usermod -aG docker <span class="variable">$USER</span></span><br></pre></td></tr></table></figure>
+
+<p>如果上面安装失败，我们可以卸载docker，重新安装</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">sudo yum remove docker \</span><br><span class="line">  docker-client \</span><br><span class="line">  docker-client-latest \</span><br><span class="line">  docker-common \</span><br><span class="line">  docker-latest \</span><br><span class="line">  docker-latest-logrotate \</span><br><span class="line">  docker-logrotate \</span><br><span class="line">  docker-selinux \</span><br><span class="line">  docker-engine-selinux \</span><br><span class="line">  docker-engine</span><br></pre></td></tr></table></figure>
+
+<h1 id="2-安装docker-compose"><a href="#2-安装docker-compose" class="headerlink" title="2. 安装docker-compose"></a>2. 安装docker-compose</h1><blockquote>
+<p>docker-compose是一个docker编排工具，它可以有效的解决我们镜像之间的依赖关系</p>
+</blockquote>
+<p>这里提供两种方式安装：</p>
+<h4 id="直接下载"><a href="#直接下载" class="headerlink" title="直接下载"></a>直接下载</h4><ol>
+<li><p>下载docker-compose文件</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl -L <span class="string">"https://github.com/docker/compose/releases/download/1.23.2/docker-compose-<span class="variable">$(uname -s)</span>-<span class="variable">$(uname -m)</span>"</span> -o /usr/<span class="built_in">local</span>/bin/docker-compose</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>赋予文件可执行权限</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo chmod +x /usr/<span class="built_in">local</span>/bin/docker-compose</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>验证是否安装成功</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker-compose version</span><br></pre></td></tr></table></figure>
+
+</li>
+</ol>
+<h4 id="pip方式安装"><a href="#pip方式安装" class="headerlink" title="pip方式安装"></a>pip方式安装</h4><ol>
+<li><p>安装pip</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#安装依赖</span></span><br><span class="line">yum -y install epel-release</span><br><span class="line"><span class="comment">#安装pip</span></span><br><span class="line">yum -y install python-pip</span><br><span class="line"><span class="comment">#更新pip</span></span><br><span class="line">pip install --upgrade pip</span><br><span class="line"><span class="comment"># 验证pip</span></span><br><span class="line">pip --version</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>安装docker-compose</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install -U docker-compose==1.23.2</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>验证安装是否成功</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker-compose version</span><br></pre></td></tr></table></figure>
+
+</li>
+</ol>
+<h1 id="3-安装ELKC"><a href="#3-安装ELKC" class="headerlink" title="3. 安装ELKC"></a>3. 安装ELKC</h1><blockquote>
+<p>ELKC为 elasticsearch（搜索型数据库）、logstash（日志搜集、过滤、分析）、kibana（提供Web页面分析日志）、cerebro（监控elasticsearch状态）</p>
+</blockquote>
+<p>docker-compose.yml 文件如下</p>
+<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">version:</span> <span class="string">'2.2'</span></span><br><span class="line"><span class="attr">services:</span></span><br><span class="line"> <span class="comment"># elasticsearch节点1</span></span><br><span class="line"><span class="attr">  elasticsearch:</span></span><br><span class="line"><span class="attr">    image:</span> <span class="string">docker.elastic.co/elasticsearch/elasticsearch:7.1.0</span></span><br><span class="line"><span class="attr">    container_name:</span> <span class="string">es7_01</span></span><br><span class="line"><span class="attr">    environment:</span></span><br><span class="line"><span class="bullet">      -</span> <span class="string">cluster.name=pibigstar</span></span><br><span class="line"><span class="bullet">      -</span> <span class="string">node.name=es7_01</span></span><br><span class="line"><span class="bullet">      -</span> <span class="string">bootstrap.memory_lock=true</span></span><br><span class="line"><span class="bullet">      -</span> <span class="string">"ES_JAVA_OPTS=-Xms512m -Xmx512m"</span></span><br><span class="line"><span class="bullet">      -</span> <span class="string">discovery.seed_hosts=es7_01</span></span><br><span class="line"><span class="bullet">      -</span> <span class="string">cluster.initial_master_nodes=es7_01,es7_02</span></span><br><span class="line"><span class="attr">    ulimits:</span></span><br><span class="line"><span class="attr">      memlock:</span></span><br><span class="line"><span class="attr">        soft:</span> <span class="bullet">-1</span></span><br><span class="line"><span class="attr">        hard:</span> <span class="bullet">-1</span></span><br><span class="line"><span class="attr">    volumes:</span></span><br><span class="line"><span class="attr">      - es7data1:</span><span class="string">/usr/share/elasticsearch/data</span></span><br><span class="line"><span class="attr">    ports:</span></span><br><span class="line"><span class="bullet">      -</span> <span class="number">9200</span><span class="string">:9200</span></span><br><span class="line"><span class="attr">    networks:</span></span><br><span class="line"><span class="bullet">      -</span> <span class="string">es7net</span></span><br><span class="line"> <span class="comment"># elasticsearch节点2</span></span><br><span class="line"><span class="attr">  elasticsearch2:</span></span><br><span class="line"><span class="attr">    image:</span> <span class="string">docker.elastic.co/elasticsearch/elasticsearch:7.1.0</span></span><br><span class="line"><span class="attr">    container_name:</span> <span class="string">es7_02</span></span><br><span class="line"><span class="attr">    environment:</span></span><br><span class="line"><span class="bullet">      -</span> <span class="string">cluster.name=pibigstar</span></span><br><span class="line"><span class="bullet">      -</span> <span class="string">node.name=es7_02</span></span><br><span class="line"><span class="bullet">      -</span> <span class="string">bootstrap.memory_lock=true</span></span><br><span class="line"><span class="bullet">      -</span> <span class="string">"ES_JAVA_OPTS=-Xms512m -Xmx512m"</span></span><br><span class="line"><span class="bullet">      -</span> <span class="string">discovery.seed_hosts=es7_01</span></span><br><span class="line"><span class="bullet">      -</span> <span class="string">cluster.initial_master_nodes=es7_01,es7_02</span></span><br><span class="line"><span class="attr">    ulimits:</span></span><br><span class="line"><span class="attr">      memlock:</span></span><br><span class="line"><span class="attr">        soft:</span> <span class="bullet">-1</span></span><br><span class="line"><span class="attr">        hard:</span> <span class="bullet">-1</span></span><br><span class="line"><span class="attr">    volumes:</span></span><br><span class="line"><span class="attr">      - es7data2:</span><span class="string">/usr/share/elasticsearch/data</span></span><br><span class="line"><span class="attr">    networks:</span></span><br><span class="line"><span class="bullet">      -</span> <span class="string">es7net</span></span><br><span class="line"><span class="comment"># kibana</span></span><br><span class="line"><span class="attr">  kibana:</span></span><br><span class="line"><span class="attr">    image:</span> <span class="string">docker.elastic.co/kibana/kibana:7.1.0</span></span><br><span class="line"><span class="attr">    container_name:</span> <span class="string">kibana7</span></span><br><span class="line"><span class="attr">    environment:</span></span><br><span class="line"><span class="bullet">      -</span> <span class="string">I18N_LOCALE=zh-CN</span></span><br><span class="line"><span class="bullet">      -</span> <span class="string">XPACK_GRAPH_ENABLED=true</span></span><br><span class="line"><span class="bullet">      -</span> <span class="string">TIMELION_ENABLED=true</span></span><br><span class="line"><span class="bullet">      -</span> <span class="string">XPACK_MONITORING_COLLECTION_ENABLED="true"</span></span><br><span class="line"><span class="attr">    ports:</span></span><br><span class="line"><span class="bullet">      -</span> <span class="string">"5601:5601"</span></span><br><span class="line"><span class="attr">    networks:</span></span><br><span class="line"><span class="bullet">      -</span> <span class="string">es7net</span></span><br><span class="line"><span class="comment"># cerebro   </span></span><br><span class="line"><span class="attr">  cerebro:</span></span><br><span class="line"><span class="attr">    image:</span> <span class="string">lmenezes/cerebro:0.8.3</span></span><br><span class="line"><span class="attr">    container_name:</span> <span class="string">cerebro</span></span><br><span class="line"><span class="attr">    ports:</span></span><br><span class="line"><span class="bullet">      -</span> <span class="string">"9000:9000"</span></span><br><span class="line"><span class="attr">    command:</span></span><br><span class="line"><span class="bullet">      -</span> <span class="bullet">-Dhosts.0.host=http://elasticsearch:9200</span></span><br><span class="line"><span class="attr">    networks:</span></span><br><span class="line"><span class="bullet">      -</span> <span class="string">es7net</span></span><br><span class="line"><span class="attr">volumes:</span></span><br><span class="line"><span class="attr">  es7data1:</span></span><br><span class="line"><span class="attr">    driver:</span> <span class="string">local</span></span><br><span class="line"><span class="attr">  es7data2:</span></span><br><span class="line"><span class="attr">    driver:</span> <span class="string">local</span></span><br><span class="line"></span><br><span class="line"><span class="attr">networks:</span></span><br><span class="line"><span class="attr">  es7net:</span></span><br><span class="line"><span class="attr">    driver:</span> <span class="string">bridge</span></span><br></pre></td></tr></table></figure>
+
+<p>启动</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker-compose up</span><br></pre></td></tr></table></figure>
+
+<p><strong>注意：</strong> </p>
+<p>1、如果你看到这个提示：<br><strong>max virtual memory areas vm.max_map_count [65530] is too low, increase to at least”</strong><br>那说明你设置的 max_map_count 小了，编辑<code>/etc/sysctl.conf</code>，追加以下内容：<code>vm.max_map_count=262144</code>保存后，执行：<code>sysctl -p</code>重新启动。</p>
+<p>2、如果启动过程中出现问题，关闭后再次启动前要先清除下数据</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 停止容器并且移除数据</span></span><br><span class="line">docker-compose down -v</span><br><span class="line"><span class="comment"># 再次启动</span></span><br><span class="line">docker-compose up</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>kibnan页面：<a href="http://localhost:5601" target="_blank" rel="noopener">http://localhost:5601</a></li>
+<li>cretebro页面：<a href="http://localhost:9000" target="_blank" rel="noopener">http://localhost:9000</a></li>
+</ul>
+<h1 id="4-启动Logstash"><a href="#4-启动Logstash" class="headerlink" title="4. 启动Logstash"></a>4. 启动Logstash</h1><ol>
+<li><p>下载测试数据<br><a href="http://files.grouplens.org/datasets/movielens/ml-latest-small.zip" target="_blank" rel="noopener">http://files.grouplens.org/datasets/movielens/ml-latest-small.zip</a></p>
+</li>
+<li><p>下载Logstash</p>
+</li>
+</ol>
+<p><a href="https://www.elastic.co/cn/downloads/logstash" target="_blank" rel="noopener">https://www.elastic.co/cn/downloads/logstash</a></p>
+<ol start="3">
+<li><p>配置logstash.conf</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line">input &#123;</span><br><span class="line">  file &#123;</span><br><span class="line">    path =&gt; [&quot;F:/elasticsearch/ml-latest-small/movies.csv&quot;]</span><br><span class="line">    start_position =&gt; &quot;beginning&quot;</span><br><span class="line">    sincedb_path =&gt; &quot;nul&quot;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">filter &#123;</span><br><span class="line">  csv &#123;</span><br><span class="line">    separator =&gt; &quot;,&quot;</span><br><span class="line">    columns =&gt; [&quot;id&quot;,&quot;content&quot;,&quot;genre&quot;]</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  mutate &#123;</span><br><span class="line">    split =&gt; &#123; &quot;genre&quot; =&gt; &quot;|&quot; &#125;</span><br><span class="line">    remove_field =&gt; [&quot;path&quot;, &quot;host&quot;,&quot;@timestamp&quot;,&quot;message&quot;]</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  mutate &#123;</span><br><span class="line"></span><br><span class="line">    split =&gt; [&quot;content&quot;, &quot;(&quot;]</span><br><span class="line">    add_field =&gt; &#123; &quot;title&quot; =&gt; &quot;%&#123;[content][0]&#125;&quot;&#125;</span><br><span class="line">    add_field =&gt; &#123; &quot;year&quot; =&gt; &quot;%&#123;[content][1]&#125;&quot;&#125;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">  mutate &#123;</span><br><span class="line">    convert =&gt; &#123;</span><br><span class="line">      &quot;year&quot; =&gt; &quot;integer&quot;</span><br><span class="line">    &#125;</span><br><span class="line">    strip =&gt; [&quot;title&quot;]</span><br><span class="line">    remove_field =&gt; [&quot;path&quot;, &quot;host&quot;,&quot;@timestamp&quot;,&quot;message&quot;,&quot;content&quot;]</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">output &#123;</span><br><span class="line">   elasticsearch &#123;</span><br><span class="line">     hosts =&gt; &quot;http://localhost:9200&quot;</span><br><span class="line">     index =&gt; &quot;movies&quot;</span><br><span class="line">     document_id =&gt; &quot;%&#123;id&#125;&quot;</span><br><span class="line">   &#125;</span><br><span class="line">  stdout &#123;&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>启动logstash</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> bin</span><br><span class="line">logstash -f F:\elasticsearch\conf\logstash.cnf</span><br></pre></td></tr></table></figure>
+
+</li>
+</ol>
 
           
         
@@ -1846,7 +1892,25 @@
             
 
             
+              
+              
+              <div class="site-state-item site-state-categories">
+                
+                  <span class="site-state-item-count">1</span>
+                  <span class="site-state-item-name">categories</span>
+                
+              </div>
+            
 
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                
+                  <span class="site-state-item-count">3</span>
+                  <span class="site-state-item-name">tags</span>
+                
+              </div>
             
 
           </nav>

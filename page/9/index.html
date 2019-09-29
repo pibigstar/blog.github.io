@@ -270,140 +270,6 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://pibigstar.com/2019/09/29/油猴插件编写学习/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="派大星">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/qq.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="派大星的博客">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/09/29/油猴插件编写学习/" itemprop="url">Untitled</a></h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-09-29T22:56:40+08:00">
-                2019-09-29
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>title: 油猴插件编写学习<br>date: 2019-09-10 22:10:31<br>tags: [油猴,脚本,浏览器插件]<br>categories: js</p>
-<p>油猴可以帮助我们在任意网页中镶嵌脚本来达到一些辅助我们的目的。</p>
-<p>油猴官网：<a href="https://tampermonkey.net/" target="_blank" rel="noopener">https://tampermonkey.net/</a></p>
-<h1 id="1-基本编写"><a href="#1-基本编写" class="headerlink" title="1. 基本编写"></a>1. 基本编写</h1><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// ==UserScript==</span></span><br><span class="line"><span class="comment">// @name         脚本的名称</span></span><br><span class="line"><span class="comment">// @namespace    可以写个人的网站什么的</span></span><br><span class="line"><span class="comment">// @version      版本号</span></span><br><span class="line"><span class="comment">// @description  脚本的描述</span></span><br><span class="line"><span class="comment">// @author       作者</span></span><br><span class="line"><span class="comment">// @match        匹配站点，在那个网页中启用该脚本，可使用正则进行匹配</span></span><br><span class="line"><span class="comment">// @match        http://119.36.55.224:6850/zentao/my/</span></span><br><span class="line"><span class="comment">// @match        http://www.iqiyi.com/v_*</span></span><br><span class="line"><span class="comment">// @grant        需要什么权限（GM_addStyle添加css样式权限）</span></span><br><span class="line"><span class="comment">// @grant        GM_addStyle</span></span><br><span class="line"><span class="comment">// @require		 引用外部js</span></span><br><span class="line"><span class="comment">// @require		 http://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js</span></span><br><span class="line"><span class="comment">// ==/UserScript==</span></span><br><span class="line">$(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="comment">//在这里编写我们的脚本</span></span><br><span class="line">&#125;)();</span><br></pre></td></tr></table></figure>
-
-<h1 id="2-写一个百度自动搜索小脚本"><a href="#2-写一个百度自动搜索小脚本" class="headerlink" title="2. 写一个百度自动搜索小脚本"></a>2. 写一个百度自动搜索小脚本</h1><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// ==UserScript==</span></span><br><span class="line"><span class="comment">// @name         自动输入</span></span><br><span class="line"><span class="comment">// @namespace    http://pibigstar.com/</span></span><br><span class="line"><span class="comment">// @version      0.1</span></span><br><span class="line"><span class="comment">// @description  百度框自动输入</span></span><br><span class="line"><span class="comment">// @author       派大星</span></span><br><span class="line"><span class="comment">// @match        https://www.baidu.com</span></span><br><span class="line"><span class="comment">// @require		 https://cdn.bootcss.com/jquery/2.2.1/jquery.js</span></span><br><span class="line"><span class="comment">// @grant        none</span></span><br><span class="line"><span class="comment">// ==/UserScript==</span></span><br><span class="line">(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    $(<span class="string">"#kw"</span>).val(<span class="string">"java派大星"</span>);</span><br><span class="line">    $(<span class="string">"#su"</span>).click();</span><br><span class="line">&#125;)();</span><br></pre></td></tr></table></figure>
-
-<h1 id="3-为百度新添加一个按钮"><a href="#3-为百度新添加一个按钮" class="headerlink" title="3. 为百度新添加一个按钮"></a>3. 为百度新添加一个按钮</h1><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// ==UserScript==</span></span><br><span class="line"><span class="comment">// @name         自动输入</span></span><br><span class="line"><span class="comment">// @namespace    http://pibigstar.com/</span></span><br><span class="line"><span class="comment">// @version      0.1</span></span><br><span class="line"><span class="comment">// @description  百度框自动输入</span></span><br><span class="line"><span class="comment">// @author       派大星</span></span><br><span class="line"><span class="comment">// @match        https://www.baidu.com</span></span><br><span class="line"><span class="comment">// @match        http://www.cnblogs.com/*</span></span><br><span class="line"><span class="comment">// @require		 https://cdn.bootcss.com/jquery/2.2.1/jquery.js</span></span><br><span class="line"><span class="comment">// @grant        GM_addStyle</span></span><br><span class="line"><span class="comment">// ==/UserScript==</span></span><br><span class="line">(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="comment">//与元数据块中的@grant值相对应，功能是生成一个style样式</span></span><br><span class="line">    GM_addStyle(<span class="string">'#myBtn&#123;color: white;position: absolute;left: 1100px;top: 243px;width: 100px;height: 36px;background: #3385ff;border-bottom: 1px solid #2d7'</span>);</span><br><span class="line">    <span class="keyword">var</span> html = <span class="string">"&lt;input type='button' id='myBtn' value='新增按钮' /&gt;"</span>;</span><br><span class="line">    $(<span class="string">"body"</span>).append(html);</span><br><span class="line">    <span class="comment">// 定义按钮事件</span></span><br><span class="line">    $(<span class="string">"#myBtn"</span>).click(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">      alert(<span class="string">"点击了新增按钮"</span>);</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;)();</span><br></pre></td></tr></table></figure>
-
-<h1 id="4-综合，写一个VIP视频解析脚本"><a href="#4-综合，写一个VIP视频解析脚本" class="headerlink" title="4. 综合，写一个VIP视频解析脚本"></a>4. 综合，写一个VIP视频解析脚本</h1><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="comment">// ==UserScript==</span></span><br><span class="line"><span class="comment">// @name         视频vip解析</span></span><br><span class="line"><span class="comment">// @namespace    http://mxspvip.cn</span></span><br><span class="line"><span class="comment">// @version      1.2</span></span><br><span class="line"><span class="comment">// @description  支持，优酷、爱奇艺、腾讯、乐视等vip视频播放</span></span><br><span class="line"><span class="comment">// @author       pibigstar</span></span><br><span class="line"><span class="comment">// @match        http://www.iqiyi.com/v_*</span></span><br><span class="line"><span class="comment">// @match        http://www.mgtv.com/v/*</span></span><br><span class="line"><span class="comment">// @match        http://www.le.com/ptv/*</span></span><br><span class="line"><span class="comment">// @match        http://v.youku.com/v_show/*</span></span><br><span class="line"><span class="comment">// @match        http://film.sohu.com/album/*</span></span><br><span class="line"><span class="comment">// @match        http://tv.sohu.com/*</span></span><br><span class="line"><span class="comment">// @match        https://v.qq.com/x/cover/*</span></span><br><span class="line"><span class="comment">// @grant        GM_addStyle</span></span><br><span class="line"><span class="comment">// @require      https://cdn.bootcss.com/jquery/2.2.1/jquery.js</span></span><br><span class="line"><span class="comment">// ==/UserScript==</span></span><br><span class="line"></span><br><span class="line">(<span class="function"><span class="keyword">function</span> (<span class="params"></span>)</span>&#123;</span><br><span class="line">GM_addStyle(<span class="string">'#floatDivBoxs&#123;width:170px;background:#fff;position:fixed;top:180px;right:0;z-index:999;&#125;'</span>)</span><br><span class="line">GM_addStyle(<span class="string">'#floatDivBoxs a&#123;color:#666;text-decoration:none;outline:none;&#125;'</span>)</span><br><span class="line">GM_addStyle(<span class="string">'#floatDivBoxs a:hover&#123;color:#e8431f;&#125;'</span>)</span><br><span class="line">GM_addStyle(<span class="string">'#floatDivBoxs .floatDtt&#123;width:100%;height:50px;line-height:50px; background:#f08326;color:#fff;font-size:20px;text-indent:22px;position:relative;&#125;'</span>)</span><br><span class="line">GM_addStyle(<span class="string">'#floatDivBoxs .floatDqq&#123;padding:0 14px;&#125;'</span>)</span><br><span class="line">GM_addStyle(<span class="string">'#floatDivBoxs .floatDqq li&#123;height:45px;line-height:45px;font-size:15px;border-bottom:1px solid #e3e3e3;&#125;'</span>)</span><br><span class="line">GM_addStyle(<span class="string">'#floatDivBoxs .floatDbg&#123;width:100%;height:20px;box-shadow:-2px 0 3px rgba(0,0,0,0.25);&#125;'</span>)</span><br><span class="line">GM_addStyle(<span class="string">'.floatShadow&#123;box-shadow:-2px 0 3px rgba(0,0,0,0.25);&#125;'</span>)</span><br><span class="line">GM_addStyle(<span class="string">'#rightArrow&#123;width:50px;height:45px;position:fixed;top:180px;right:170px;z-index:999;&#125;'</span>)</span><br><span class="line">GM_addStyle(<span class="string">'#rightArrow a&#123;background:#F08326;display:block;height:50px;&#125;'</span>)</span><br><span class="line">    GM_addStyle(<span class="string">'#rightArrow a img&#123;background:#F08326;display:block;height:50px;width:45px;&#125;'</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> html = <span class="string">'&lt;div id="rightArrow"&gt;&lt;a href="javascript:;" title=""&gt;&lt;img id="rightImg" src="http://pmyln8jkg.bkt.clouddn.com/youhou/right.png" /&gt;&lt;/a&gt;&lt;/div&gt;'</span></span><br><span class="line">  html += <span class="string">'&lt;div id="floatDivBoxs"&gt;'</span></span><br><span class="line">  html += <span class="string">'&lt;div class="floatDtt"&gt;vip通道&lt;/div&gt;'</span></span><br><span class="line">  html += <span class="string">'&lt;div class="floatShadow"&gt;'</span></span><br><span class="line">  html += <span class="string">'&lt;ul class="floatDqq"&gt;'</span></span><br><span class="line">       html += <span class="string">'&lt;li&gt;&lt;a href="#" name="vip" url="http://www.wmxz.wang/video.php?url="&gt; 无名小站&lt;/a&gt;&lt;/li&gt;'</span></span><br><span class="line">       html += <span class="string">'&lt;li&gt;&lt;a href="#" name="vip" url="https://cn.bjbanshan.cn/jiexi.php?url="&gt;1号接口&lt;/a&gt;&lt;/li&gt;'</span></span><br><span class="line">       html += <span class="string">'&lt;li&gt;&lt;a href="#" name="vip" url="https://aikan-tv.com/tong.php?url="&gt;2号接口&lt;/a&gt;&lt;/li&gt;'</span></span><br><span class="line">       html += <span class="string">'&lt;li&gt;&lt;a href="#" name="vip" url="http://api.51ckm.com/jx.php?url="&gt;3号接口&lt;/a&gt;&lt;/li&gt;'</span></span><br><span class="line">       html += <span class="string">'&lt;li&gt;&lt;a href="#" name="vip" url="http://api.nepian.com/ckparse/?url="&gt;4号接口&lt;/a&gt;&lt;/li&gt;'</span></span><br><span class="line">       html += <span class="string">'&lt;li&gt;&lt;a href="#" name="vip" url="http://jqaaa.com/jq3/?url="&gt;5号接口&lt;/a&gt;&lt;/li&gt;'</span></span><br><span class="line">       html += <span class="string">'&lt;li&gt;&lt;a href="#" name="vip" url="http://2gty.com/apiurl/yun.php?url="&gt;6号接口&lt;/a&gt;&lt;/li&gt;'</span></span><br><span class="line">       html += <span class="string">'&lt;li&gt;&lt;a href="#" name="vip" url="http://http://aikan-tv.com/?url="&gt;7号接口&lt;/a&gt;&lt;/li&gt;'</span></span><br><span class="line">       html += <span class="string">'&lt;li&gt;&lt;a href="#" name="vip" url="http://y.mt2t.com/lines?url="&gt;8号接口&lt;/a&gt;&lt;/li&gt;'</span></span><br><span class="line">   html += <span class="string">' &lt;/ul&gt;'</span></span><br><span class="line">  html += <span class="string">'&lt;/div&gt;'</span></span><br><span class="line">  html += <span class="string">'&lt;/div&gt;'</span></span><br><span class="line"><span class="comment">// 添加到页面上</span></span><br><span class="line">$(<span class="string">"body"</span>).append(html);</span><br><span class="line"><span class="comment">//浮动代码</span></span><br><span class="line"><span class="keyword">var</span> flag=<span class="number">1</span>;</span><br><span class="line">$(<span class="string">'#rightArrow'</span>).click(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">	<span class="keyword">if</span>(flag==<span class="number">1</span>)&#123;</span><br><span class="line">		$(<span class="string">"#floatDivBoxs"</span>).animate(&#123;<span class="attr">right</span>: <span class="string">'-175px'</span>&#125;,<span class="number">300</span>);</span><br><span class="line">		$(<span class="keyword">this</span>).animate(&#123;<span class="attr">right</span>: <span class="string">'-5px'</span>&#125;,<span class="number">300</span>);</span><br><span class="line">		$(<span class="keyword">this</span>).css(<span class="string">'background-position'</span>,<span class="string">'-50px 0'</span>);</span><br><span class="line">        $(<span class="string">"#rightImg"</span>).attr(<span class="string">"src"</span>,<span class="string">"http://pmyln8jkg.bkt.clouddn.com/youhou/left.png"</span>);</span><br><span class="line">		flag=<span class="number">0</span>;</span><br><span class="line">	&#125;<span class="keyword">else</span>&#123;</span><br><span class="line">		$(<span class="string">"#floatDivBoxs"</span>).animate(&#123;<span class="attr">right</span>: <span class="string">'0'</span>&#125;,<span class="number">300</span>);</span><br><span class="line">		$(<span class="keyword">this</span>).animate(&#123;<span class="attr">right</span>: <span class="string">'170px'</span>&#125;,<span class="number">300</span>);</span><br><span class="line">		$(<span class="keyword">this</span>).css(<span class="string">'background-position'</span>,<span class="string">'0px 0'</span>);</span><br><span class="line">        $(<span class="string">"#rightImg"</span>).attr(<span class="string">"src"</span>,<span class="string">"http://pmyln8jkg.bkt.clouddn.com/youhou/right.png"</span>);</span><br><span class="line">		flag=<span class="number">1</span>;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">&#125;)();</span><br><span class="line"><span class="comment">// 监听每一个接口点击事件</span></span><br><span class="line">$(<span class="string">"a[name='vip']"</span>).on(<span class="string">"click"</span>,<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="comment">//获取当前网址</span></span><br><span class="line">    <span class="keyword">var</span> url = <span class="built_in">window</span>.location;</span><br><span class="line">    <span class="keyword">var</span> api = $(<span class="keyword">this</span>).attr(<span class="string">"url"</span>);</span><br><span class="line">    <span class="built_in">window</span>.open(api+url,<span class="string">''</span>,<span class="string">'width=632,height=388,toolbar=no,location=no,status=no, menubar=no, resizable=yes, scrollbars=yes'</span>);</span><br><span class="line">	<span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
-
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    <div>
-      
-    </div>
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://pibigstar.com/2019/09/29/MySQL实战45讲学习笔记（8~15）/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -746,130 +612,6 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://pibigstar.com/2019/09/29/JQuery实现购物车数量加减总价累加/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="派大星">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/qq.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="派大星的博客">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/09/29/JQuery实现购物车数量加减总价累加/" itemprop="url">Untitled</a></h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-09-29T22:56:40+08:00">
-                2019-09-29
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>title: JQuery实现购物车数量加减总价累加<br>date: 2018-11-08 22:10:31<br>tags: []<br>categories: js</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    <div>
-      
-    </div>
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://pibigstar.com/2019/09/29/Linux释放内存/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -947,6 +689,130 @@
 <h2 id="释放内存"><a href="#释放内存" class="headerlink" title="释放内存"></a>释放内存</h2><p>可用内存为：free + buff/caches的</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 写缓存到文件系统</span></span><br><span class="line">sync</span><br><span class="line"><span class="comment"># 释放内存</span></span><br><span class="line"><span class="built_in">echo</span> 0 &gt; /proc/sys/vm/drop_caches</span><br></pre></td></tr></table></figure>
 
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    <div>
+      
+    </div>
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://pibigstar.com/2019/09/29/JQuery实现购物车数量加减总价累加/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="派大星">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/qq.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="派大星的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/09/29/JQuery实现购物车数量加减总价累加/" itemprop="url">Untitled</a></h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-09-29T22:56:40+08:00">
+                2019-09-29
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>title: JQuery实现购物车数量加减总价累加<br>date: 2018-11-08 22:10:31<br>tags: []<br>categories: js</p>
 
           
         
@@ -1792,6 +1658,163 @@ C:要有父类引用指向子类对象。
 
 
     
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://pibigstar.com/2019/09/29/Linux随笔记/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="派大星">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/qq.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="派大星的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/09/29/Linux随笔记/" itemprop="url">Untitled</a></h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-09-29T22:56:40+08:00">
+                2019-09-29
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>title: Linux随笔记<br>date: 2018-06-19 22:10:31<br>tags: [linux,随笔记]<br>categories: Linux</p>
+<p>@[toc]</p>
+<h1 id="后台执行任务"><a href="#后台执行任务" class="headerlink" title="后台执行任务"></a>后台执行任务</h1><ol>
+<li><p>开启任务</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nohup 命令 &gt; temp.log &amp;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>查看正在运行的任务</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">jobs</span> -l</span><br></pre></td></tr></table></figure>
+
+</li>
+</ol>
+<h1 id="查找文件"><a href="#查找文件" class="headerlink" title="查找文件"></a>查找文件</h1><p>从 根目录<code>/</code> 开始查询</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">find / -name <span class="string">"my.ini"</span></span><br></pre></td></tr></table></figure>
+
+<h1 id="Fork炸弹"><a href="#Fork炸弹" class="headerlink" title="Fork炸弹"></a>Fork炸弹</h1><blockquote>
+<p>请不要轻易执行，会耗尽服务器资源，使服务器不能正常的对外提供服务</p>
+</blockquote>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">:()&#123;:|:&amp;&#125;;:</span><br></pre></td></tr></table></figure>
+
+<h1 id="根据名称停止所有相关进程"><a href="#根据名称停止所有相关进程" class="headerlink" title="根据名称停止所有相关进程"></a>根据名称停止所有相关进程</h1><blockquote>
+<p>杀死进程中所有进程名中有 <code>kube</code>关键字的进程</p>
+</blockquote>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pkill -9 kube</span><br></pre></td></tr></table></figure>
+
+<h1 id="漂亮的进程监控"><a href="#漂亮的进程监控" class="headerlink" title="漂亮的进程监控"></a>漂亮的进程监控</h1><ol>
+<li><p>安装htop</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum install -y htop</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>查看进程</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">htop</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>效果<br><img src="https://img-blog.csdnimg.cn/20190919221012369.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2p1bm1veGk=,size_16,color_FFFFFF,t_70" alt></p>
+</li>
+</ol>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    <div>
+      
+    </div>
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
   </section>
 
   
@@ -1851,7 +1874,25 @@ C:要有父类引用指向子类对象。
             
 
             
+              
+              
+              <div class="site-state-item site-state-categories">
+                
+                  <span class="site-state-item-count">1</span>
+                  <span class="site-state-item-name">categories</span>
+                
+              </div>
+            
 
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                
+                  <span class="site-state-item-count">3</span>
+                  <span class="site-state-item-name">tags</span>
+                
+              </div>
             
 
           </nav>

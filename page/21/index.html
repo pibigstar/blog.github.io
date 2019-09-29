@@ -270,132 +270,6 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://pibigstar.com/2019/09/29/js特效/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="派大星">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/qq.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="派大星的博客">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/09/29/js特效/" itemprop="url">Untitled</a></h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-09-29T22:56:39+08:00">
-                2019-09-29
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>title: js特效<br>date: 2018-08-30 22:10:31<br>tags: [js,特效]<br>categories: 前端</p>
-<h1 id="鼠标点击产生红心特效"><a href="#鼠标点击产生红心特效" class="headerlink" title="鼠标点击产生红心特效"></a>鼠标点击产生红心特效</h1><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br></pre></td><td class="code"><pre><span class="line">! <span class="function"><span class="keyword">function</span> (<span class="params">e, t, a</span>) </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">n</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">        c(</span><br><span class="line">            <span class="string">".heart&#123;width: 10px;height: 10px;position: fixed;background: #f00;transform: rotate(45deg);-webkit-transform: rotate(45deg);-moz-transform: rotate(45deg);&#125;.heart:after,.heart:before&#123;content: '';width: inherit;height: inherit;background: inherit;border-radius: 50%;-webkit-border-radius: 50%;-moz-border-radius: 50%;position: fixed;&#125;.heart:after&#123;top: -5px;&#125;.heart:before&#123;left: -5px;&#125;"</span></span><br><span class="line">        ), o(), r()</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">r</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">var</span> e = <span class="number">0</span>; e &lt; d.length; e++) d[e].alpha &lt;= <span class="number">0</span> ? (t.body.removeChild(d[e].el), d.splice(e, <span class="number">1</span>)) : (d[e].y--,</span><br><span class="line">            d[e].scale += <span class="number">.004</span>, d[e].alpha -= <span class="number">.013</span>, d[e].el.style.cssText = <span class="string">"left:"</span> + d[e].x + <span class="string">"px;top:"</span> + d[e].y +</span><br><span class="line">            <span class="string">"px;opacity:"</span> + d[e].alpha + <span class="string">";transform:scale("</span> + d[e].scale + <span class="string">","</span> + d[e].scale +</span><br><span class="line">            <span class="string">") rotate(45deg);background:"</span> + d[e].color + <span class="string">";z-index:99999"</span>);</span><br><span class="line">        requestAnimationFrame(r)</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">o</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="keyword">var</span> t = <span class="string">"function"</span> == <span class="keyword">typeof</span> e.onclick &amp;&amp; e.onclick;</span><br><span class="line">        e.onclick = <span class="function"><span class="keyword">function</span> (<span class="params">e</span>) </span>&#123;</span><br><span class="line">            t &amp;&amp; t(), i(e)</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">i</span>(<span class="params">e</span>) </span>&#123;</span><br><span class="line">        <span class="keyword">var</span> a = t.createElement(<span class="string">"div"</span>);</span><br><span class="line">        a.className = <span class="string">"heart"</span>, d.push(&#123;</span><br><span class="line">            el: a,</span><br><span class="line">            x: e.clientX - <span class="number">5</span>,</span><br><span class="line">            y: e.clientY - <span class="number">5</span>,</span><br><span class="line">            scale: <span class="number">1</span>,</span><br><span class="line">            alpha: <span class="number">1</span>,</span><br><span class="line">            color: s()</span><br><span class="line">        &#125;), t.body.appendChild(a)</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">c</span>(<span class="params">e</span>) </span>&#123;</span><br><span class="line">        <span class="keyword">var</span> a = t.createElement(<span class="string">"style"</span>);</span><br><span class="line">        a.type = <span class="string">"text/css"</span>;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            a.appendChild(t.createTextNode(e))</span><br><span class="line">        &#125; <span class="keyword">catch</span> (t) &#123;</span><br><span class="line">            a.styleSheet.cssText = e</span><br><span class="line">        &#125;</span><br><span class="line">        t.getElementsByTagName(<span class="string">"head"</span>)[<span class="number">0</span>].appendChild(a)</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">s</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">"rgb("</span> + ~~(<span class="number">255</span> * <span class="built_in">Math</span>.random()) + <span class="string">","</span> + ~~(<span class="number">255</span> * <span class="built_in">Math</span>.random()) + <span class="string">","</span> + ~~(<span class="number">255</span> * <span class="built_in">Math</span>.random()) + <span class="string">")"</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">var</span> d = [];</span><br><span class="line">    e.requestAnimationFrame = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> e.requestAnimationFrame || e.webkitRequestAnimationFrame || e.mozRequestAnimationFrame || e.oRequestAnimationFrame ||</span><br><span class="line">            e.msRequestAnimationFrame || <span class="function"><span class="keyword">function</span> (<span class="params">e</span>) </span>&#123;</span><br><span class="line">                setTimeout(e, <span class="number">1e3</span> / <span class="number">60</span>)</span><br><span class="line">            &#125;</span><br><span class="line">    &#125;(), n()</span><br><span class="line">&#125;(<span class="built_in">window</span>, <span class="built_in">document</span>);</span><br></pre></td></tr></table></figure>
-
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    <div>
-      
-    </div>
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://pibigstar.com/2019/09/29/SpringBoot安全验证之Referer拦截器/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1151,190 +1025,6 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://pibigstar.com/2019/09/29/git高级使用/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="派大星">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/qq.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="派大星的博客">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/09/29/git高级使用/" itemprop="url">Untitled</a></h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-09-29T22:56:39+08:00">
-                2019-09-29
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>title: git高级使用<br>date: 2018-08-13 22:10:31<br>tags: [git]<br>categories: 工具使用,git</p>
-<p>此篇是为了我以后回顾而写的，所以写的有点简单，也有点乱，如果想系统的学习，请去这个网站：<a href="https://learngitbranching.js.org" target="_blank" rel="noopener">https://learngitbranching.js.org</a></p>
-<p>此网站常用命令</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 回到关卡选择页面</span></span><br><span class="line">levels</span><br><span class="line"><span class="comment"># 查看答案</span></span><br><span class="line">show solution</span><br><span class="line"><span class="comment"># 重新开始</span></span><br><span class="line">level advance3</span><br></pre></td></tr></table></figure>
-
-<h1 id="1-rebase"><a href="#1-rebase" class="headerlink" title="1. rebase"></a>1. rebase</h1><ul>
-<li><p><strong>合并分支</strong><br>我在bugFix分支来rebase master分支，那么我这个bugFix 分支就是基于master分支的一个新的节点</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 切换到bugFix分支</span></span><br><span class="line">git checkout bugFix </span><br><span class="line"><span class="comment"># 让bugFix分支融合master分支的内容</span></span><br><span class="line">git rebase master</span><br></pre></td></tr></table></figure>
-</li>
-<li><p><strong>合并提交</strong></p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 合并这次与上次提交</span></span><br><span class="line">git rebase -i HEAD~2</span><br></pre></td></tr></table></figure>
-</li>
-<li><p><strong>解决远程仓库fast-forward</strong><br>当我们提交代码时，可能别人已经提交过内容到远程仓库了，这时我们提交代码时就会提醒我们<code>fast-forward</code>，让我们先更新下代码再提交，我们可以用<code>rebase</code>很快的解决这个问题。</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 先拉取最新代码进行rebase</span></span><br><span class="line">git pull --rebase origin master</span><br><span class="line"><span class="comment"># 然后再提交</span></span><br><span class="line">git push</span><br></pre></td></tr></table></figure>
-</li>
-<li><p><strong>本地分支与远程分支关联</strong><br>将本地master分支与远程master分支关联，这样可以在master分支中直接执行<code>git pull</code>进行拉取代码，不用再指定后面的分支</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git branch --<span class="built_in">set</span>-upstream-to=origin/master  master</span><br></pre></td></tr></table></figure>
-
-</li>
-</ul>
-<h1 id="2-merge"><a href="#2-merge" class="headerlink" title="2. merge"></a>2. merge</h1><blockquote>
-<p>我在master分支来merge bugFix分支，那么我这个master分支就是在master分支的基础上再次融合bugFix分支的内容。</p>
-</blockquote>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 切换到master分支</span></span><br><span class="line">git checkout master</span><br><span class="line"><span class="comment"># 融合bugFix分支的内容</span></span><br><span class="line">git merge bugFix</span><br></pre></td></tr></table></figure>
-
-<h1 id="3-checkout"><a href="#3-checkout" class="headerlink" title="3. checkout"></a>3. checkout</h1><ul>
-<li><p><strong>移动当前分支</strong><br>也可以理解为回滚上一次提交，放弃本次提交的修改，<code>c2</code>是通过<code>git log</code>进行查看的 <code>commit id</code></p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git checkout c2</span><br></pre></td></tr></table></figure>
-</li>
-<li><p><strong>移动某个分支</strong></p>
-<blockquote>
-<p>移动提交记录。也可以理解为回滚，回滚到上一次提交，移动分支到某个提交记录处，</p>
-</blockquote>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git branch -f bugFix c2</span><br></pre></td></tr></table></figure>
-
-</li>
-</ul>
-<p>也可以直接通过<code>HEAD^</code>来指向上一个提交记录，或通过<code>HEAD~3</code> 往上移动3级</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git branch -f bugFix HEAD^</span><br><span class="line">git branch -f bugFix HEAD~2</span><br></pre></td></tr></table></figure>
-
-<h1 id="4-reset"><a href="#4-reset" class="headerlink" title="4. reset"></a>4. reset</h1><blockquote>
-<p>回退到上一次提交的版本，</p>
-</blockquote>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 回到此分支的上一个提交</span></span><br><span class="line">git reset HEAD^</span><br><span class="line"><span class="comment"># 回到master分支的上一个提交</span></span><br><span class="line">git reset master^</span><br></pre></td></tr></table></figure>
-
-<p>如果是远程也想要回退到上一个版本，可以使用</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git revert HEAD^</span><br></pre></td></tr></table></figure>
-
-<p>如果想撤销远程分支上的内容需要使用git revert，它会新创建一个提交，而新创建的提交的状态正好等于你上一个版本的状态，假如我们现在的版本是<code>c2</code>,它上一个版本就是<code>c1</code>，那么执行完这个命令之后，就会新创建一个提交 为 <code>c1’</code>,它与<code>c1</code>的内容一致，我们将这它推送到远程端，别人更新之后就可以了</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git revert HEAD^</span><br></pre></td></tr></table></figure>
-
-<h1 id="5-cherry-pick"><a href="#5-cherry-pick" class="headerlink" title="5. cherry-pick"></a>5. cherry-pick</h1><blockquote>
-<p>将其他提交，抓过来，放到此分支下面, <code>c2</code>，<code>c2</code>，<code>c7</code>是<code>git log</code>中的<code>commit id</code></p>
-</blockquote>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 切换到master分支</span></span><br><span class="line">git checkout master</span><br><span class="line"><span class="comment"># 将其他分支的提交，拿过来，放到master上，特别注意，这几个记录的顺序问题</span></span><br><span class="line">git cherry-pick c2 c4 c7</span><br><span class="line"><span class="comment"># 结果: HEAD——&gt; c7——&gt; c4——&gt; c2</span></span><br></pre></td></tr></table></figure>
-
-<h1 id="6-tag"><a href="#6-tag" class="headerlink" title="6. tag"></a>6. tag</h1><blockquote>
-<p>也就是做个锚点，因为分支是很容易被改变，为了防止以后不能返回，所以可以打个tag，做个回滚记录点</p>
-</blockquote>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># c1 为提交记录的id</span></span><br><span class="line">git tag tag名 c1</span><br></pre></td></tr></table></figure>
-
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    <div>
-      
-    </div>
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://pibigstar.com/2019/09/29/sed和awk常用操作/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1545,7 +1235,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://pibigstar.com/2019/09/29/Mybatis联表查询/">
+    <link itemprop="mainEntityOfPage" href="http://pibigstar.com/2019/09/29/git高级使用/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="派大星">
@@ -1564,7 +1254,7 @@
         
           <h2 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2019/09/29/Mybatis联表查询/" itemprop="url">Untitled</a></h2>
+                <a class="post-title-link" href="/2019/09/29/git高级使用/" itemprop="url">Untitled</a></h2>
         
 
         <div class="post-meta">
@@ -1616,37 +1306,66 @@
       
         
           
-            <p>title: Mybatis联表查询<br>date: 2018-08-03 22:10:31<br>tags: [mybatis,联表查询,注解联表查询]<br>categories: Java,数据库,mybatis,SpringBoot技能大全</p>
-<h1 id="1-使用注解方式"><a href="#1-使用注解方式" class="headerlink" title="1 使用注解方式"></a>1 使用注解方式</h1><h2 id="1-1-一对一"><a href="#1-1-一对一" class="headerlink" title="1.1 一对一"></a>1.1 一对一</h2><p>ClazzModel.java （返回前端的模型）</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ClazzModel</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">private</span> Long id;</span><br><span class="line">    <span class="keyword">private</span> String name;</span><br><span class="line">    <span class="keyword">private</span> String description;</span><br><span class="line">    <span class="keyword">private</span> Grade grade; <span class="comment">//联表</span></span><br><span class="line">    <span class="keyword">private</span> User user;<span class="comment">// 联表</span></span><br><span class="line">	<span class="comment">//setter、getter</span></span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+            <p>title: git高级使用<br>date: 2018-08-13 22:10:31<br>tags: [git]<br>categories: 工具使用,git</p>
+<p>此篇是为了我以后回顾而写的，所以写的有点简单，也有点乱，如果想系统的学习，请去这个网站：<a href="https://learngitbranching.js.org" target="_blank" rel="noopener">https://learngitbranching.js.org</a></p>
+<p>此网站常用命令</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 回到关卡选择页面</span></span><br><span class="line">levels</span><br><span class="line"><span class="comment"># 查看答案</span></span><br><span class="line">show solution</span><br><span class="line"><span class="comment"># 重新开始</span></span><br><span class="line">level advance3</span><br></pre></td></tr></table></figure>
 
-<p>ClazzMapper.java</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Select</span>(<span class="string">"select * from poll_clazz"</span>)</span><br><span class="line"><span class="meta">@Results</span>(&#123;</span><br><span class="line">	<span class="comment">//一对一  one = @One()</span></span><br><span class="line">	<span class="meta">@Result</span>(property=<span class="string">"id"</span>,column=<span class="string">"id"</span>),<span class="comment">//不加这个查出来的id会为null</span></span><br><span class="line">	<span class="meta">@Result</span>(property = <span class="string">"grade"</span>,column = <span class="string">"grade_id"</span>,one = <span class="meta">@One</span>(select=<span class="string">"com.pibigstar.dao.GradeMapper.selectByPrimaryKey"</span>)),</span><br><span class="line">	<span class="meta">@Result</span>(property = <span class="string">"user"</span>,column = <span class="string">"user_id"</span>,one = <span class="meta">@One</span>(select=<span class="string">"com.pibigstar.dao.UserMapper.selectByPrimaryKey"</span>))</span><br><span class="line">&#125;)</span><br><span class="line"><span class="function">List&lt;ClazzModel&gt; <span class="title">findAll</span><span class="params">()</span></span>;</span><br></pre></td></tr></table></figure>
+<h1 id="1-rebase"><a href="#1-rebase" class="headerlink" title="1. rebase"></a>1. rebase</h1><ul>
+<li><p><strong>合并分支</strong><br>我在bugFix分支来rebase master分支，那么我这个bugFix 分支就是基于master分支的一个新的节点</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 切换到bugFix分支</span></span><br><span class="line">git checkout bugFix </span><br><span class="line"><span class="comment"># 让bugFix分支融合master分支的内容</span></span><br><span class="line">git rebase master</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>合并提交</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 合并这次与上次提交</span></span><br><span class="line">git rebase -i HEAD~2</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>解决远程仓库fast-forward</strong><br>当我们提交代码时，可能别人已经提交过内容到远程仓库了，这时我们提交代码时就会提醒我们<code>fast-forward</code>，让我们先更新下代码再提交，我们可以用<code>rebase</code>很快的解决这个问题。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 先拉取最新代码进行rebase</span></span><br><span class="line">git pull --rebase origin master</span><br><span class="line"><span class="comment"># 然后再提交</span></span><br><span class="line">git push</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>本地分支与远程分支关联</strong><br>将本地master分支与远程master分支关联，这样可以在master分支中直接执行<code>git pull</code>进行拉取代码，不用再指定后面的分支</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git branch --<span class="built_in">set</span>-upstream-to=origin/master  master</span><br></pre></td></tr></table></figure>
 
-<h2 id="1-2-一对多"><a href="#1-2-一对多" class="headerlink" title="1.2 一对多"></a>1.2 一对多</h2><p>QuestionModel.java</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">QuestionModel</span></span>&#123;</span><br><span class="line">	<span class="keyword">private</span> Long id;</span><br><span class="line">    <span class="keyword">private</span> String name;</span><br><span class="line">    <span class="keyword">private</span> String questionType;</span><br><span class="line">    <span class="keyword">private</span> List&lt;Options&gt; options;</span><br><span class="line">    <span class="comment">//省略 setter、getter方法</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h1 id="2-merge"><a href="#2-merge" class="headerlink" title="2. merge"></a>2. merge</h1><blockquote>
+<p>我在master分支来merge bugFix分支，那么我这个master分支就是在master分支的基础上再次融合bugFix分支的内容。</p>
+</blockquote>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 切换到master分支</span></span><br><span class="line">git checkout master</span><br><span class="line"><span class="comment"># 融合bugFix分支的内容</span></span><br><span class="line">git merge bugFix</span><br></pre></td></tr></table></figure>
 
-<p>QuestionMapper.java</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">    <span class="meta">@Select</span>(<span class="string">"select * from poll_questions"</span>)</span><br><span class="line">    <span class="meta">@Results</span>(&#123;</span><br><span class="line">    	 <span class="comment">// 一对多  many = @Many()</span></span><br><span class="line">    	 <span class="meta">@Result</span>(property=<span class="string">"id"</span>,column=<span class="string">"id"</span>),<span class="comment">//不加这个查出来的id会为null</span></span><br><span class="line"><span class="meta">@Result</span>(property=<span class="string">"options"</span>,column=<span class="string">"id"</span>,many=<span class="meta">@Many</span>(select=<span class="string">"com.pibigstar.dao.OptionsMapper.findAllByQuestionId"</span>))</span><br><span class="line">    &#125;)</span><br><span class="line">	<span class="function">List&lt;QuestionModel&gt; <span class="title">findAll</span><span class="params">()</span></span>;</span><br></pre></td></tr></table></figure>
+<h1 id="3-checkout"><a href="#3-checkout" class="headerlink" title="3. checkout"></a>3. checkout</h1><ul>
+<li><p><strong>移动当前分支</strong><br>也可以理解为回滚上一次提交，放弃本次提交的修改，<code>c2</code>是通过<code>git log</code>进行查看的 <code>commit id</code></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git checkout c2</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>移动某个分支</strong></p>
+<blockquote>
+<p>移动提交记录。也可以理解为回滚，回滚到上一次提交，移动分支到某个提交记录处，</p>
+</blockquote>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git branch -f bugFix c2</span><br></pre></td></tr></table></figure>
 
-<h2 id="1-3-多对多"><a href="#1-3-多对多" class="headerlink" title="1.3 多对多"></a>1.3 多对多</h2><p>业务介绍： 有一张问卷表（questionnaire），一张题库表（question），一张问卷与题库的桥表（qq）</p>
-<p>希望能查出所有的问卷，每个问卷有对应的题</p>
-<p>思路：我们先查出所有的问卷，然后通过问卷id 在桥表中查找出此问卷中的所有问题</p>
-<p>QuestionnaireModel.java</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">QuestionnaireModel</span></span>&#123;</span><br><span class="line">	<span class="keyword">private</span> Long id;</span><br><span class="line">	<span class="keyword">private</span> String name;</span><br><span class="line">    <span class="keyword">private</span> String description;</span><br><span class="line">    <span class="keyword">private</span> List&lt;QuestionModel&gt; questions;</span><br><span class="line">    <span class="comment">//省略setter、getter方法</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>也可以直接通过<code>HEAD^</code>来指向上一个提交记录，或通过<code>HEAD~3</code> 往上移动3级</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git branch -f bugFix HEAD^</span><br><span class="line">git branch -f bugFix HEAD~2</span><br></pre></td></tr></table></figure>
 
-<p>QuestionnaireMapper.java</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Select</span>(<span class="string">"select * from poll_questionnaire"</span>)</span><br><span class="line"><span class="meta">@Results</span>(&#123;</span><br><span class="line">	<span class="meta">@Result</span>(property=<span class="string">"id"</span>,column=<span class="string">"id"</span>),</span><br><span class="line">	  <span class="meta">@Result</span>(property=<span class="string">"questions"</span>,column=<span class="string">"id"</span>,many=<span class="meta">@Many</span>(select=<span class="string">"com.pibigstar.dao.QQMapper.selectAllQuestions"</span>)),</span><br><span class="line">&#125;)</span><br><span class="line"><span class="function">List&lt;QuestionnaireModel&gt; <span class="title">findAllModel</span><span class="params">()</span></span>;</span><br></pre></td></tr></table></figure>
+<h1 id="4-reset"><a href="#4-reset" class="headerlink" title="4. reset"></a>4. reset</h1><blockquote>
+<p>回退到上一次提交的版本，</p>
+</blockquote>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 回到此分支的上一个提交</span></span><br><span class="line">git reset HEAD^</span><br><span class="line"><span class="comment"># 回到master分支的上一个提交</span></span><br><span class="line">git reset master^</span><br></pre></td></tr></table></figure>
 
-<p>QQMapper.java</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Select</span>(<span class="string">"select * from poll_questions where id in (select questions_id from poll_qq where questionnaire_id=#&#123;id&#125;)"</span>)</span><br><span class="line">  <span class="meta">@Results</span>(&#123;</span><br><span class="line">  	<span class="meta">@Result</span>(property=<span class="string">"id"</span>,column=<span class="string">"id"</span>),</span><br><span class="line">  	<span class="meta">@Result</span>(property=<span class="string">"options"</span>,column=<span class="string">"id"</span>,many=<span class="meta">@Many</span>(select=<span class="string">"com.pibigstar.dao.OptionsMapper.findAllByQuestionId"</span>))</span><br><span class="line">  &#125;)</span><br><span class="line">  <span class="function">List&lt;QuestionModel&gt; <span class="title">selectAllQuestions</span><span class="params">(Long id)</span></span>;</span><br></pre></td></tr></table></figure>
+<p>如果是远程也想要回退到上一个版本，可以使用</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git revert HEAD^</span><br></pre></td></tr></table></figure>
 
-<h2 id="1-4-注意："><a href="#1-4-注意：" class="headerlink" title="1.4 注意："></a>1.4 注意：</h2><p>分步查询有时候非常浪费数据库资源，我们可以采用懒加载方式，当有需要的时候才进行分步查询<br>使用：fetchType=FetchType.LAZY</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="meta">@Select</span>(<span class="string">"select * from poll_clazz"</span>)</span><br><span class="line"><span class="meta">@Results</span>(&#123;</span><br><span class="line">	<span class="comment">//一对一  one = @One()</span></span><br><span class="line">	<span class="meta">@Result</span>(property=<span class="string">"id"</span>,column=<span class="string">"id"</span>),<span class="comment">//不加这个查出来的id会为null</span></span><br><span class="line">	<span class="meta">@Result</span>(property = <span class="string">"grade"</span>,column = <span class="string">"grade_id"</span>,one = <span class="meta">@One</span>(fetchType=FetchType.LAZY,select=<span class="string">"com.pibigstar.dao.GradeMapper.selectByPrimaryKey"</span>)),</span><br><span class="line"></span><br><span class="line"><span class="function">List&lt;ClazzModel&gt; <span class="title">findAll</span><span class="params">()</span></span>;</span><br></pre></td></tr></table></figure>
+<p>如果想撤销远程分支上的内容需要使用git revert，它会新创建一个提交，而新创建的提交的状态正好等于你上一个版本的状态，假如我们现在的版本是<code>c2</code>,它上一个版本就是<code>c1</code>，那么执行完这个命令之后，就会新创建一个提交 为 <code>c1’</code>,它与<code>c1</code>的内容一致，我们将这它推送到远程端，别人更新之后就可以了</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git revert HEAD^</span><br></pre></td></tr></table></figure>
 
-<h1 id="2-使用xml配置方式"><a href="#2-使用xml配置方式" class="headerlink" title="2 使用xml配置方式"></a>2 使用xml配置方式</h1><h2 id="2-1-一对一"><a href="#2-1-一对一" class="headerlink" title="2.1 一对一"></a>2.1 一对一</h2><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version="1.0" encoding="UTF-8"?&gt;</span></span><br><span class="line"><span class="meta">&lt;!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd"&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">mapper</span> <span class="attr">namespace</span>=<span class="string">"com.briup.apps.poll.dao.extend.ClazzVMMapper"</span>&gt;</span></span><br><span class="line">  </span><br><span class="line">  <span class="tag">&lt;<span class="name">resultMap</span> <span class="attr">id</span>=<span class="string">"clazzVMResultMap"</span> <span class="attr">type</span>=<span class="string">"com.briup.apps.poll.bean.extend.ClazzVM"</span>&gt;</span></span><br><span class="line">  	<span class="tag">&lt;<span class="name">id</span> <span class="attr">column</span>=<span class="string">"id"</span> <span class="attr">jdbcType</span>=<span class="string">"BIGINT"</span> <span class="attr">property</span>=<span class="string">"id"</span> /&gt;</span></span><br><span class="line">	<span class="comment">&lt;!-- 联表查询 association  --&gt;</span></span><br><span class="line"> 	<span class="tag">&lt;<span class="name">association</span> <span class="attr">column</span>=<span class="string">"grade_id"</span> <span class="attr">property</span>=<span class="string">"grade"</span> <span class="attr">select</span>=<span class="string">"com.briup.apps.poll.dao.GradeMapper.selectByPrimaryKey"</span>&gt;</span><span class="tag">&lt;/<span class="name">association</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">association</span> <span class="attr">column</span>=<span class="string">"charge_id"</span> <span class="attr">property</span>=<span class="string">"charge"</span> <span class="attr">select</span>=<span class="string">"com.briup.apps.poll.dao.UserMapper.selectByPrimaryKey"</span>&gt;</span><span class="tag">&lt;/<span class="name">association</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">resultMap</span>&gt;</span></span><br><span class="line">  </span><br><span class="line">   <span class="tag">&lt;<span class="name">select</span> <span class="attr">id</span>=<span class="string">"selectById"</span> <span class="attr">parameterType</span>=<span class="string">"java.lang.Long"</span> <span class="attr">resultMap</span>=<span class="string">"clazzVMResultMap"</span>&gt;</span></span><br><span class="line">  	select * from poll_clazz where id=#&#123;id&#125;;</span><br><span class="line">  <span class="tag">&lt;/<span class="name">select</span>&gt;</span></span><br><span class="line">   </span><br><span class="line"><span class="tag">&lt;/<span class="name">mapper</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h1 id="5-cherry-pick"><a href="#5-cherry-pick" class="headerlink" title="5. cherry-pick"></a>5. cherry-pick</h1><blockquote>
+<p>将其他提交，抓过来，放到此分支下面, <code>c2</code>，<code>c2</code>，<code>c7</code>是<code>git log</code>中的<code>commit id</code></p>
+</blockquote>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 切换到master分支</span></span><br><span class="line">git checkout master</span><br><span class="line"><span class="comment"># 将其他分支的提交，拿过来，放到master上，特别注意，这几个记录的顺序问题</span></span><br><span class="line">git cherry-pick c2 c4 c7</span><br><span class="line"><span class="comment"># 结果: HEAD——&gt; c7——&gt; c4——&gt; c2</span></span><br></pre></td></tr></table></figure>
 
-<h2 id="2-2-一对多"><a href="#2-2-一对多" class="headerlink" title="2.2 一对多"></a>2.2 一对多</h2><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">resultMap</span> <span class="attr">type</span>=<span class="string">"com.User"</span> <span class="attr">id</span>=<span class="string">"userAndItemsResultMap"</span>&gt;</span></span><br><span class="line">       <span class="comment">&lt;!-- 用户信息 --&gt;</span></span><br><span class="line">       <span class="tag">&lt;<span class="name">id</span> <span class="attr">column</span>=<span class="string">"user_id"</span> <span class="attr">property</span>=<span class="string">"id"</span>/&gt;</span></span><br><span class="line">       <span class="tag">&lt;<span class="name">result</span> <span class="attr">column</span>=<span class="string">"username"</span> <span class="attr">property</span>=<span class="string">"username"</span>/&gt;</span></span><br><span class="line">       <span class="tag">&lt;<span class="name">result</span> <span class="attr">column</span>=<span class="string">"sex"</span> <span class="attr">property</span>=<span class="string">"sex"</span>/&gt;</span></span><br><span class="line">       <span class="tag">&lt;<span class="name">result</span> <span class="attr">column</span>=<span class="string">"address"</span> <span class="attr">property</span>=<span class="string">"address"</span>/&gt;</span></span><br><span class="line">       <span class="comment">&lt;!-- 一个用户对应多个订单 --&gt;</span></span><br><span class="line">       <span class="tag">&lt;<span class="name">collection</span> <span class="attr">property</span>=<span class="string">"ordersList"</span> <span class="attr">ofType</span>=<span class="string">"com.Orders"</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">id</span> <span class="attr">column</span>=<span class="string">"id"</span> <span class="attr">property</span>=<span class="string">"id"</span>/&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">result</span> <span class="attr">column</span>=<span class="string">"user_id"</span> <span class="attr">property</span>=<span class="string">"userid"</span>/&gt;</span></span><br><span class="line">               <span class="tag">&lt;<span class="name">result</span> <span class="attr">column</span>=<span class="string">"number"</span> <span class="attr">property</span>=<span class="string">"number"</span>/&gt;</span></span><br><span class="line">               <span class="tag">&lt;<span class="name">result</span> <span class="attr">column</span>=<span class="string">"createtime"</span> <span class="attr">property</span>=<span class="string">"createTime"</span>/&gt;</span></span><br><span class="line">               <span class="tag">&lt;<span class="name">result</span> <span class="attr">column</span>=<span class="string">"note"</span> <span class="attr">property</span>=<span class="string">"note"</span>/&gt;</span></span><br><span class="line">               <span class="comment">&lt;!-- 一个订单对应多个订单明细 --&gt;</span></span><br><span class="line">               <span class="tag">&lt;<span class="name">collection</span> <span class="attr">property</span>=<span class="string">"orderdetails"</span> <span class="attr">ofType</span>=<span class="string">"com.OrderDetail"</span>&gt;</span></span><br><span class="line">                   <span class="tag">&lt;<span class="name">id</span> <span class="attr">column</span>=<span class="string">"orderdetail_id"</span> <span class="attr">property</span>=<span class="string">"id"</span>/&gt;</span></span><br><span class="line">                   <span class="tag">&lt;<span class="name">result</span> <span class="attr">column</span>=<span class="string">"items_id"</span>   <span class="attr">property</span>=<span class="string">"itemsId"</span>/&gt;</span></span><br><span class="line">                   <span class="tag">&lt;<span class="name">result</span> <span class="attr">column</span>=<span class="string">"items_num"</span>  <span class="attr">property</span>=<span class="string">"itemsNum"</span>/&gt;</span></span><br><span class="line">                   <span class="tag">&lt;<span class="name">result</span> <span class="attr">column</span>=<span class="string">"orders_id"</span>  <span class="attr">property</span>=<span class="string">"ordersId"</span>/&gt;</span></span><br><span class="line">                   <span class="comment">&lt;!-- 一个订单明细对应一个商品 --&gt;</span></span><br><span class="line">                   <span class="tag">&lt;<span class="name">association</span> <span class="attr">property</span>=<span class="string">"items"</span> <span class="attr">javaType</span>=<span class="string">"com.Items"</span>&gt;</span></span><br><span class="line">                       <span class="tag">&lt;<span class="name">id</span> <span class="attr">column</span>=<span class="string">"items_id"</span> <span class="attr">property</span>=<span class="string">"id"</span>/&gt;</span></span><br><span class="line">                       <span class="tag">&lt;<span class="name">result</span> <span class="attr">column</span>=<span class="string">"items_name"</span> <span class="attr">property</span>=<span class="string">"itemsName"</span>/&gt;</span></span><br><span class="line">                       <span class="tag">&lt;<span class="name">result</span> <span class="attr">column</span>=<span class="string">"items_detail"</span> <span class="attr">property</span>=<span class="string">"detail"</span>/&gt;</span></span><br><span class="line">                       <span class="tag">&lt;<span class="name">result</span> <span class="attr">column</span>=<span class="string">"items_price"</span> <span class="attr">property</span>=<span class="string">"price"</span>/&gt;</span></span><br><span class="line">                   <span class="tag">&lt;/<span class="name">association</span>&gt;</span></span><br><span class="line">               <span class="tag">&lt;/<span class="name">collection</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">collection</span>&gt;</span></span><br><span class="line">   <span class="tag">&lt;/<span class="name">resultMap</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h1 id="6-tag"><a href="#6-tag" class="headerlink" title="6. tag"></a>6. tag</h1><blockquote>
+<p>也就是做个锚点，因为分支是很容易被改变，为了防止以后不能返回，所以可以打个tag，做个回滚记录点</p>
+</blockquote>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># c1 为提交记录的id</span></span><br><span class="line">git tag tag名 c1</span><br></pre></td></tr></table></figure>
 
 
           
@@ -1811,6 +1530,296 @@
 
 
     
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://pibigstar.com/2019/09/29/Mybatis联表查询/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="派大星">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/qq.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="派大星的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/09/29/Mybatis联表查询/" itemprop="url">Untitled</a></h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-09-29T22:56:39+08:00">
+                2019-09-29
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>title: Mybatis联表查询<br>date: 2018-08-03 22:10:31<br>tags: [mybatis,联表查询,注解联表查询]<br>categories: Java,数据库,mybatis,SpringBoot技能大全</p>
+<h1 id="1-使用注解方式"><a href="#1-使用注解方式" class="headerlink" title="1 使用注解方式"></a>1 使用注解方式</h1><h2 id="1-1-一对一"><a href="#1-1-一对一" class="headerlink" title="1.1 一对一"></a>1.1 一对一</h2><p>ClazzModel.java （返回前端的模型）</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ClazzModel</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">private</span> Long id;</span><br><span class="line">    <span class="keyword">private</span> String name;</span><br><span class="line">    <span class="keyword">private</span> String description;</span><br><span class="line">    <span class="keyword">private</span> Grade grade; <span class="comment">//联表</span></span><br><span class="line">    <span class="keyword">private</span> User user;<span class="comment">// 联表</span></span><br><span class="line">	<span class="comment">//setter、getter</span></span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>ClazzMapper.java</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Select</span>(<span class="string">"select * from poll_clazz"</span>)</span><br><span class="line"><span class="meta">@Results</span>(&#123;</span><br><span class="line">	<span class="comment">//一对一  one = @One()</span></span><br><span class="line">	<span class="meta">@Result</span>(property=<span class="string">"id"</span>,column=<span class="string">"id"</span>),<span class="comment">//不加这个查出来的id会为null</span></span><br><span class="line">	<span class="meta">@Result</span>(property = <span class="string">"grade"</span>,column = <span class="string">"grade_id"</span>,one = <span class="meta">@One</span>(select=<span class="string">"com.pibigstar.dao.GradeMapper.selectByPrimaryKey"</span>)),</span><br><span class="line">	<span class="meta">@Result</span>(property = <span class="string">"user"</span>,column = <span class="string">"user_id"</span>,one = <span class="meta">@One</span>(select=<span class="string">"com.pibigstar.dao.UserMapper.selectByPrimaryKey"</span>))</span><br><span class="line">&#125;)</span><br><span class="line"><span class="function">List&lt;ClazzModel&gt; <span class="title">findAll</span><span class="params">()</span></span>;</span><br></pre></td></tr></table></figure>
+
+<h2 id="1-2-一对多"><a href="#1-2-一对多" class="headerlink" title="1.2 一对多"></a>1.2 一对多</h2><p>QuestionModel.java</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">QuestionModel</span></span>&#123;</span><br><span class="line">	<span class="keyword">private</span> Long id;</span><br><span class="line">    <span class="keyword">private</span> String name;</span><br><span class="line">    <span class="keyword">private</span> String questionType;</span><br><span class="line">    <span class="keyword">private</span> List&lt;Options&gt; options;</span><br><span class="line">    <span class="comment">//省略 setter、getter方法</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>QuestionMapper.java</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">    <span class="meta">@Select</span>(<span class="string">"select * from poll_questions"</span>)</span><br><span class="line">    <span class="meta">@Results</span>(&#123;</span><br><span class="line">    	 <span class="comment">// 一对多  many = @Many()</span></span><br><span class="line">    	 <span class="meta">@Result</span>(property=<span class="string">"id"</span>,column=<span class="string">"id"</span>),<span class="comment">//不加这个查出来的id会为null</span></span><br><span class="line"><span class="meta">@Result</span>(property=<span class="string">"options"</span>,column=<span class="string">"id"</span>,many=<span class="meta">@Many</span>(select=<span class="string">"com.pibigstar.dao.OptionsMapper.findAllByQuestionId"</span>))</span><br><span class="line">    &#125;)</span><br><span class="line">	<span class="function">List&lt;QuestionModel&gt; <span class="title">findAll</span><span class="params">()</span></span>;</span><br></pre></td></tr></table></figure>
+
+<h2 id="1-3-多对多"><a href="#1-3-多对多" class="headerlink" title="1.3 多对多"></a>1.3 多对多</h2><p>业务介绍： 有一张问卷表（questionnaire），一张题库表（question），一张问卷与题库的桥表（qq）</p>
+<p>希望能查出所有的问卷，每个问卷有对应的题</p>
+<p>思路：我们先查出所有的问卷，然后通过问卷id 在桥表中查找出此问卷中的所有问题</p>
+<p>QuestionnaireModel.java</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">QuestionnaireModel</span></span>&#123;</span><br><span class="line">	<span class="keyword">private</span> Long id;</span><br><span class="line">	<span class="keyword">private</span> String name;</span><br><span class="line">    <span class="keyword">private</span> String description;</span><br><span class="line">    <span class="keyword">private</span> List&lt;QuestionModel&gt; questions;</span><br><span class="line">    <span class="comment">//省略setter、getter方法</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>QuestionnaireMapper.java</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Select</span>(<span class="string">"select * from poll_questionnaire"</span>)</span><br><span class="line"><span class="meta">@Results</span>(&#123;</span><br><span class="line">	<span class="meta">@Result</span>(property=<span class="string">"id"</span>,column=<span class="string">"id"</span>),</span><br><span class="line">	  <span class="meta">@Result</span>(property=<span class="string">"questions"</span>,column=<span class="string">"id"</span>,many=<span class="meta">@Many</span>(select=<span class="string">"com.pibigstar.dao.QQMapper.selectAllQuestions"</span>)),</span><br><span class="line">&#125;)</span><br><span class="line"><span class="function">List&lt;QuestionnaireModel&gt; <span class="title">findAllModel</span><span class="params">()</span></span>;</span><br></pre></td></tr></table></figure>
+
+<p>QQMapper.java</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Select</span>(<span class="string">"select * from poll_questions where id in (select questions_id from poll_qq where questionnaire_id=#&#123;id&#125;)"</span>)</span><br><span class="line">  <span class="meta">@Results</span>(&#123;</span><br><span class="line">  	<span class="meta">@Result</span>(property=<span class="string">"id"</span>,column=<span class="string">"id"</span>),</span><br><span class="line">  	<span class="meta">@Result</span>(property=<span class="string">"options"</span>,column=<span class="string">"id"</span>,many=<span class="meta">@Many</span>(select=<span class="string">"com.pibigstar.dao.OptionsMapper.findAllByQuestionId"</span>))</span><br><span class="line">  &#125;)</span><br><span class="line">  <span class="function">List&lt;QuestionModel&gt; <span class="title">selectAllQuestions</span><span class="params">(Long id)</span></span>;</span><br></pre></td></tr></table></figure>
+
+<h2 id="1-4-注意："><a href="#1-4-注意：" class="headerlink" title="1.4 注意："></a>1.4 注意：</h2><p>分步查询有时候非常浪费数据库资源，我们可以采用懒加载方式，当有需要的时候才进行分步查询<br>使用：fetchType=FetchType.LAZY</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="meta">@Select</span>(<span class="string">"select * from poll_clazz"</span>)</span><br><span class="line"><span class="meta">@Results</span>(&#123;</span><br><span class="line">	<span class="comment">//一对一  one = @One()</span></span><br><span class="line">	<span class="meta">@Result</span>(property=<span class="string">"id"</span>,column=<span class="string">"id"</span>),<span class="comment">//不加这个查出来的id会为null</span></span><br><span class="line">	<span class="meta">@Result</span>(property = <span class="string">"grade"</span>,column = <span class="string">"grade_id"</span>,one = <span class="meta">@One</span>(fetchType=FetchType.LAZY,select=<span class="string">"com.pibigstar.dao.GradeMapper.selectByPrimaryKey"</span>)),</span><br><span class="line"></span><br><span class="line"><span class="function">List&lt;ClazzModel&gt; <span class="title">findAll</span><span class="params">()</span></span>;</span><br></pre></td></tr></table></figure>
+
+<h1 id="2-使用xml配置方式"><a href="#2-使用xml配置方式" class="headerlink" title="2 使用xml配置方式"></a>2 使用xml配置方式</h1><h2 id="2-1-一对一"><a href="#2-1-一对一" class="headerlink" title="2.1 一对一"></a>2.1 一对一</h2><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version="1.0" encoding="UTF-8"?&gt;</span></span><br><span class="line"><span class="meta">&lt;!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd"&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">mapper</span> <span class="attr">namespace</span>=<span class="string">"com.briup.apps.poll.dao.extend.ClazzVMMapper"</span>&gt;</span></span><br><span class="line">  </span><br><span class="line">  <span class="tag">&lt;<span class="name">resultMap</span> <span class="attr">id</span>=<span class="string">"clazzVMResultMap"</span> <span class="attr">type</span>=<span class="string">"com.briup.apps.poll.bean.extend.ClazzVM"</span>&gt;</span></span><br><span class="line">  	<span class="tag">&lt;<span class="name">id</span> <span class="attr">column</span>=<span class="string">"id"</span> <span class="attr">jdbcType</span>=<span class="string">"BIGINT"</span> <span class="attr">property</span>=<span class="string">"id"</span> /&gt;</span></span><br><span class="line">	<span class="comment">&lt;!-- 联表查询 association  --&gt;</span></span><br><span class="line"> 	<span class="tag">&lt;<span class="name">association</span> <span class="attr">column</span>=<span class="string">"grade_id"</span> <span class="attr">property</span>=<span class="string">"grade"</span> <span class="attr">select</span>=<span class="string">"com.briup.apps.poll.dao.GradeMapper.selectByPrimaryKey"</span>&gt;</span><span class="tag">&lt;/<span class="name">association</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">association</span> <span class="attr">column</span>=<span class="string">"charge_id"</span> <span class="attr">property</span>=<span class="string">"charge"</span> <span class="attr">select</span>=<span class="string">"com.briup.apps.poll.dao.UserMapper.selectByPrimaryKey"</span>&gt;</span><span class="tag">&lt;/<span class="name">association</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">resultMap</span>&gt;</span></span><br><span class="line">  </span><br><span class="line">   <span class="tag">&lt;<span class="name">select</span> <span class="attr">id</span>=<span class="string">"selectById"</span> <span class="attr">parameterType</span>=<span class="string">"java.lang.Long"</span> <span class="attr">resultMap</span>=<span class="string">"clazzVMResultMap"</span>&gt;</span></span><br><span class="line">  	select * from poll_clazz where id=#&#123;id&#125;;</span><br><span class="line">  <span class="tag">&lt;/<span class="name">select</span>&gt;</span></span><br><span class="line">   </span><br><span class="line"><span class="tag">&lt;/<span class="name">mapper</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="2-2-一对多"><a href="#2-2-一对多" class="headerlink" title="2.2 一对多"></a>2.2 一对多</h2><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">resultMap</span> <span class="attr">type</span>=<span class="string">"com.User"</span> <span class="attr">id</span>=<span class="string">"userAndItemsResultMap"</span>&gt;</span></span><br><span class="line">       <span class="comment">&lt;!-- 用户信息 --&gt;</span></span><br><span class="line">       <span class="tag">&lt;<span class="name">id</span> <span class="attr">column</span>=<span class="string">"user_id"</span> <span class="attr">property</span>=<span class="string">"id"</span>/&gt;</span></span><br><span class="line">       <span class="tag">&lt;<span class="name">result</span> <span class="attr">column</span>=<span class="string">"username"</span> <span class="attr">property</span>=<span class="string">"username"</span>/&gt;</span></span><br><span class="line">       <span class="tag">&lt;<span class="name">result</span> <span class="attr">column</span>=<span class="string">"sex"</span> <span class="attr">property</span>=<span class="string">"sex"</span>/&gt;</span></span><br><span class="line">       <span class="tag">&lt;<span class="name">result</span> <span class="attr">column</span>=<span class="string">"address"</span> <span class="attr">property</span>=<span class="string">"address"</span>/&gt;</span></span><br><span class="line">       <span class="comment">&lt;!-- 一个用户对应多个订单 --&gt;</span></span><br><span class="line">       <span class="tag">&lt;<span class="name">collection</span> <span class="attr">property</span>=<span class="string">"ordersList"</span> <span class="attr">ofType</span>=<span class="string">"com.Orders"</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">id</span> <span class="attr">column</span>=<span class="string">"id"</span> <span class="attr">property</span>=<span class="string">"id"</span>/&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">result</span> <span class="attr">column</span>=<span class="string">"user_id"</span> <span class="attr">property</span>=<span class="string">"userid"</span>/&gt;</span></span><br><span class="line">               <span class="tag">&lt;<span class="name">result</span> <span class="attr">column</span>=<span class="string">"number"</span> <span class="attr">property</span>=<span class="string">"number"</span>/&gt;</span></span><br><span class="line">               <span class="tag">&lt;<span class="name">result</span> <span class="attr">column</span>=<span class="string">"createtime"</span> <span class="attr">property</span>=<span class="string">"createTime"</span>/&gt;</span></span><br><span class="line">               <span class="tag">&lt;<span class="name">result</span> <span class="attr">column</span>=<span class="string">"note"</span> <span class="attr">property</span>=<span class="string">"note"</span>/&gt;</span></span><br><span class="line">               <span class="comment">&lt;!-- 一个订单对应多个订单明细 --&gt;</span></span><br><span class="line">               <span class="tag">&lt;<span class="name">collection</span> <span class="attr">property</span>=<span class="string">"orderdetails"</span> <span class="attr">ofType</span>=<span class="string">"com.OrderDetail"</span>&gt;</span></span><br><span class="line">                   <span class="tag">&lt;<span class="name">id</span> <span class="attr">column</span>=<span class="string">"orderdetail_id"</span> <span class="attr">property</span>=<span class="string">"id"</span>/&gt;</span></span><br><span class="line">                   <span class="tag">&lt;<span class="name">result</span> <span class="attr">column</span>=<span class="string">"items_id"</span>   <span class="attr">property</span>=<span class="string">"itemsId"</span>/&gt;</span></span><br><span class="line">                   <span class="tag">&lt;<span class="name">result</span> <span class="attr">column</span>=<span class="string">"items_num"</span>  <span class="attr">property</span>=<span class="string">"itemsNum"</span>/&gt;</span></span><br><span class="line">                   <span class="tag">&lt;<span class="name">result</span> <span class="attr">column</span>=<span class="string">"orders_id"</span>  <span class="attr">property</span>=<span class="string">"ordersId"</span>/&gt;</span></span><br><span class="line">                   <span class="comment">&lt;!-- 一个订单明细对应一个商品 --&gt;</span></span><br><span class="line">                   <span class="tag">&lt;<span class="name">association</span> <span class="attr">property</span>=<span class="string">"items"</span> <span class="attr">javaType</span>=<span class="string">"com.Items"</span>&gt;</span></span><br><span class="line">                       <span class="tag">&lt;<span class="name">id</span> <span class="attr">column</span>=<span class="string">"items_id"</span> <span class="attr">property</span>=<span class="string">"id"</span>/&gt;</span></span><br><span class="line">                       <span class="tag">&lt;<span class="name">result</span> <span class="attr">column</span>=<span class="string">"items_name"</span> <span class="attr">property</span>=<span class="string">"itemsName"</span>/&gt;</span></span><br><span class="line">                       <span class="tag">&lt;<span class="name">result</span> <span class="attr">column</span>=<span class="string">"items_detail"</span> <span class="attr">property</span>=<span class="string">"detail"</span>/&gt;</span></span><br><span class="line">                       <span class="tag">&lt;<span class="name">result</span> <span class="attr">column</span>=<span class="string">"items_price"</span> <span class="attr">property</span>=<span class="string">"price"</span>/&gt;</span></span><br><span class="line">                   <span class="tag">&lt;/<span class="name">association</span>&gt;</span></span><br><span class="line">               <span class="tag">&lt;/<span class="name">collection</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">collection</span>&gt;</span></span><br><span class="line">   <span class="tag">&lt;/<span class="name">resultMap</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    <div>
+      
+    </div>
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://pibigstar.com/2019/09/29/java使用poi反射读取写入Excel/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="派大星">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/qq.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="派大星的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/09/29/java使用poi反射读取写入Excel/" itemprop="url">Untitled</a></h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-09-29T22:56:39+08:00">
+                2019-09-29
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>title: java使用poi反射读取写入Excel<br>date: 2019-02-03 22:10:31<br>tags: [java,excel,poi]<br>categories: Java,java工具类,SpringBoot技能大全</p>
+<p>通过反射来读取写入Excel</p>
+<h2 id="添加依赖"><a href="#添加依赖" class="headerlink" title="添加依赖"></a>添加依赖</h2><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- excel操作 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.apache.poi<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>poi<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>4.0.1<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="注解"><a href="#注解" class="headerlink" title="注解"></a>注解</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@Author</span>:pibigstar</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@Description</span>: Excel注解</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="meta">@Target</span>(ElementType.FIELD)</span><br><span class="line"><span class="meta">@Retention</span>(RetentionPolicy.RUNTIME)</span><br><span class="line"><span class="keyword">public</span> <span class="meta">@interface</span> Excel &#123;</span><br><span class="line">    <span class="function">String <span class="title">value</span><span class="params">()</span> <span class="keyword">default</span> ""</span>;</span><br><span class="line">    <span class="function"><span class="keyword">boolean</span> <span class="title">ignore</span><span class="params">()</span> <span class="keyword">default</span> <span class="keyword">false</span></span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br><span class="line">192</span><br><span class="line">193</span><br><span class="line">194</span><br><span class="line">195</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.pibgstar.demo.utils;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> org.apache.poi.hssf.usermodel.HSSFDateUtil;</span><br><span class="line"><span class="keyword">import</span> org.apache.poi.hssf.usermodel.HSSFWorkbook;</span><br><span class="line"><span class="keyword">import</span> org.apache.poi.ss.usermodel.*;</span><br><span class="line"><span class="keyword">import</span> org.apache.poi.xssf.usermodel.XSSFWorkbook;</span><br><span class="line"><span class="keyword">import</span> javax.xml.crypto.Data;</span><br><span class="line"><span class="keyword">import</span> java.beans.PropertyDescriptor;</span><br><span class="line"><span class="keyword">import</span> java.io.FileInputStream;</span><br><span class="line"><span class="keyword">import</span> java.io.FileOutputStream;</span><br><span class="line"><span class="keyword">import</span> java.lang.reflect.Field;</span><br><span class="line"><span class="keyword">import</span> java.lang.reflect.Method;</span><br><span class="line"><span class="keyword">import</span> java.text.SimpleDateFormat;</span><br><span class="line"><span class="keyword">import</span> java.util.ArrayList;</span><br><span class="line"><span class="keyword">import</span> java.util.List;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> pibigstar</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@create</span> 2018-12-04 16:44</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@desc</span> Excel工具类</span></span><br><span class="line"><span class="comment"> **/</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ExcelUtil</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@Author</span>:pibigstar</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@Description</span>: 读取Excel数据到集合中</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> &lt;T&gt; <span class="function">List&lt;T&gt; <span class="title">readExcel</span><span class="params">(String filePath, Class&lt;T&gt; clazz)</span> </span>&#123;</span><br><span class="line">        List&lt;T&gt; list = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            FileInputStream fis = <span class="keyword">new</span> FileInputStream(filePath);</span><br><span class="line">            Field[] fields = clazz.getDeclaredFields();</span><br><span class="line"></span><br><span class="line">            Workbook workbook = <span class="keyword">null</span>;</span><br><span class="line">            <span class="keyword">if</span> (filePath.endsWith(<span class="string">".xlsx"</span>)) &#123;</span><br><span class="line">                workbook = <span class="keyword">new</span> XSSFWorkbook(fis);</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                workbook = <span class="keyword">new</span> HSSFWorkbook(fis);</span><br><span class="line">            &#125;</span><br><span class="line">            Sheet sheet = workbook.getSheetAt(<span class="number">0</span>);</span><br><span class="line">            <span class="keyword">int</span> startNum = sheet.getFirstRowNum() + <span class="number">1</span>;<span class="comment">//去掉表头</span></span><br><span class="line">            <span class="keyword">int</span> endNum = sheet.getLastRowNum();</span><br><span class="line">            <span class="keyword">int</span> colNum = fields.length; <span class="comment">// 列数</span></span><br><span class="line"></span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> i = startNum; i &lt;= endNum; i++) &#123;</span><br><span class="line">                Row row = sheet.getRow(i);</span><br><span class="line">                T t = clazz.newInstance();</span><br><span class="line">                <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; colNum; j++) &#123;</span><br><span class="line">                    Field field = fields[j];</span><br><span class="line">                    Cell cell = row.getCell(j);</span><br><span class="line">                    field.setAccessible(<span class="keyword">true</span>);</span><br><span class="line">                    String value = getValue(cell);</span><br><span class="line">                    setValue(t, field, value);</span><br><span class="line">                &#125;</span><br><span class="line">                list.add(t);</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">        &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> list;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@Author</span>:pibigstar</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@Description</span>: 为字段赋值</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> &lt;T&gt; <span class="function"><span class="keyword">void</span> <span class="title">setValue</span><span class="params">(T t, Field field, String value)</span> </span>&#123;</span><br><span class="line">        Class&lt;?&gt; type = field.getType();</span><br><span class="line">        Object fieldValue = <span class="keyword">null</span>;</span><br><span class="line">        <span class="keyword">if</span> (type.equals(String.class)) &#123;</span><br><span class="line">            fieldValue = value;</span><br><span class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (type.equals(Integer.class)) &#123;</span><br><span class="line">            fieldValue = Integer.parseInt(value);</span><br><span class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (type.equals(<span class="keyword">int</span>.class)) &#123;</span><br><span class="line">            fieldValue = Integer.parseInt(value);</span><br><span class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (type.equals(Boolean.class)) &#123;</span><br><span class="line">            fieldValue = Boolean.parseBoolean(value);</span><br><span class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (type.equals(<span class="keyword">boolean</span>.class)) &#123;</span><br><span class="line">            fieldValue = Boolean.parseBoolean(value);</span><br><span class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (type.equals(Float.class)) &#123;</span><br><span class="line">            fieldValue = Float.parseFloat(value);</span><br><span class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (type.equals(Double.class)) &#123;</span><br><span class="line">            fieldValue = Double.parseDouble(value);</span><br><span class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (type.equals(Data.class)) &#123;</span><br><span class="line">            fieldValue = DateUtil.parseYYYYMMDDDate(value);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            field.set(t, fieldValue);</span><br><span class="line">        &#125; <span class="keyword">catch</span> (IllegalAccessException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@Author</span>:pibigstar</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@Description</span>: 得到此格的值</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">static</span> String <span class="title">getValue</span><span class="params">(Cell cell)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (cell == <span class="keyword">null</span>) <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">        String result = <span class="string">""</span>;</span><br><span class="line">        CellType cellType = cell.getCellType();</span><br><span class="line">        <span class="keyword">switch</span> (cell.getCellType()) &#123;</span><br><span class="line">            <span class="keyword">case</span> NUMERIC:</span><br><span class="line">                <span class="keyword">if</span> (HSSFDateUtil.isCellDateFormatted(cell)) &#123;</span><br><span class="line">                    SimpleDateFormat format = <span class="keyword">new</span> SimpleDateFormat(<span class="string">"YYYY-MM-dd HH:mm:ss"</span>);</span><br><span class="line">                    result = format.format(cell.getNumericCellValue());</span><br><span class="line">                    <span class="keyword">return</span> result;</span><br><span class="line">                &#125;</span><br><span class="line">            <span class="keyword">case</span> BOOLEAN:</span><br><span class="line">                result = String.valueOf(cell.getBooleanCellValue());</span><br><span class="line">                <span class="keyword">return</span> result;</span><br><span class="line">            <span class="keyword">case</span> STRING:</span><br><span class="line">                <span class="keyword">return</span> cell.getStringCellValue();</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@Author</span>:pibigstar</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@Description</span>: 将集合中对象导入到Excel中</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> &lt;T&gt; <span class="function"><span class="keyword">void</span> <span class="title">writeExcel</span><span class="params">(List&lt;T&gt; list, String outPath)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> size = list.size();</span><br><span class="line">        <span class="keyword">if</span> (size == <span class="number">0</span>) <span class="keyword">return</span>;</span><br><span class="line">        T t = <span class="keyword">null</span>;</span><br><span class="line">        String fileName = <span class="string">""</span>;</span><br><span class="line">        FileOutputStream fos = <span class="keyword">null</span>;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            <span class="keyword">if</span> (outPath.contains(<span class="string">"/"</span>)) &#123;</span><br><span class="line">                fileName = outPath.substring(outPath.lastIndexOf(<span class="string">"/"</span>) + <span class="number">1</span>, outPath.lastIndexOf(<span class="string">"."</span>));</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                fileName = outPath.substring(<span class="number">0</span>, outPath.lastIndexOf(<span class="string">"."</span>));</span><br><span class="line">            &#125;</span><br><span class="line">            Workbook workbook = <span class="keyword">new</span> HSSFWorkbook();</span><br><span class="line">            <span class="comment">// 创建表单</span></span><br><span class="line">            Sheet sheet = workbook.createSheet(fileName);</span><br><span class="line">            <span class="comment">// 设置表头</span></span><br><span class="line">            t = list.get(<span class="number">0</span>);</span><br><span class="line">            Class&lt;?&gt; clazz = t.getClass();</span><br><span class="line">            setTitle(sheet, workbook, clazz);</span><br><span class="line"></span><br><span class="line">            <span class="comment">// 写入内容</span></span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; size; i++) &#123;</span><br><span class="line">                Row row = sheet.createRow(i + <span class="number">1</span>);</span><br><span class="line">                t = list.get(i);</span><br><span class="line">                Field[] fs = t.getClass().getDeclaredFields();</span><br><span class="line">                <span class="keyword">int</span> colNum = fs.length;</span><br><span class="line">                PropertyDescriptor pd = <span class="keyword">null</span>;</span><br><span class="line">                <span class="keyword">int</span> temp = <span class="number">0</span>;</span><br><span class="line">                <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; colNum; j++) &#123;</span><br><span class="line">                    Field field = fs[j];</span><br><span class="line">                    Excel annotation = field.getAnnotation(Excel.class);</span><br><span class="line">                    <span class="keyword">if</span>(annotation!=<span class="keyword">null</span> &amp;&amp; annotation.ignore())&#123;</span><br><span class="line">                        <span class="keyword">continue</span>;</span><br><span class="line">                    &#125;</span><br><span class="line">                    Cell cell = row.createCell(temp);</span><br><span class="line">                    String fieldName = field.getName();</span><br><span class="line">                    pd = <span class="keyword">new</span> PropertyDescriptor(fieldName, t.getClass());</span><br><span class="line">                    Method readMethod = pd.getReadMethod();</span><br><span class="line">                    Object result = readMethod.invoke(t);</span><br><span class="line">                    cell.setCellValue(result.toString());</span><br><span class="line">                    temp++;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            fos = <span class="keyword">new</span> FileOutputStream(outPath);</span><br><span class="line">            workbook.write(fos);</span><br><span class="line">            fos.close();</span><br><span class="line">        &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@Author</span>:pibigstar</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@Description</span>: 设置表头</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">setTitle</span><span class="params">(Sheet sheet, Workbook workbook, Class&lt;?&gt; clazz)</span> </span>&#123;</span><br><span class="line">        Row row = sheet.createRow(<span class="number">0</span>);<span class="comment">// 第一行为表头</span></span><br><span class="line">        <span class="comment">//设置为居中加粗</span></span><br><span class="line">        CellStyle style = workbook.createCellStyle();</span><br><span class="line">        Font font = workbook.createFont();</span><br><span class="line">        font.setBold(<span class="keyword">true</span>);</span><br><span class="line">        style.setFont(font);</span><br><span class="line">        Field[] fields = clazz.getDeclaredFields();</span><br><span class="line">        <span class="keyword">int</span> colNum = fields.length;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; colNum; i++) &#123;</span><br><span class="line">            sheet.setColumnWidth(i, <span class="number">20</span> * <span class="number">256</span>);</span><br><span class="line">            Cell cell = row.createCell(i);</span><br><span class="line">            Field field = fields[i];</span><br><span class="line">            cell.setCellValue(field.getName());</span><br><span class="line">            cell.setCellStyle(style);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="实体对象"><a href="#实体对象" class="headerlink" title="实体对象"></a>实体对象</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">User</span> </span>&#123;</span><br><span class="line">    <span class="meta">@Excel</span>(value = <span class="string">"我是ID"</span>,ignore = <span class="keyword">true</span>)</span><br><span class="line">    <span class="keyword">private</span> String id;</span><br><span class="line">    <span class="meta">@Excel</span>(value = <span class="string">"名字"</span>)</span><br><span class="line">    <span class="keyword">private</span> String name;</span><br><span class="line">    <span class="meta">@Excel</span>(value = <span class="string">"年龄"</span>,ignore = <span class="keyword">true</span>)</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> age;</span><br><span class="line">    <span class="comment">//setter,getter方法</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TestExcelUtil</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        List&lt;User&gt; users = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line">        User user1 = <span class="keyword">new</span> User();</span><br><span class="line">        user1.setId(<span class="string">"1"</span>);</span><br><span class="line">        user1.setName(<span class="string">"派大星"</span>);</span><br><span class="line">        user1.setAge(<span class="number">20</span>);</span><br><span class="line">        user1.setPassword(<span class="string">"1234556"</span>);</span><br><span class="line">        User user2 = <span class="keyword">new</span> User();</span><br><span class="line">        user2.setId(<span class="string">"2"</span>);</span><br><span class="line">        user2.setName(<span class="string">"海绵宝宝"</span>);</span><br><span class="line">        user2.setAge(<span class="number">18</span>);</span><br><span class="line">        user2.setPassword(<span class="string">"6666666"</span>);</span><br><span class="line">        users.add(user1);</span><br><span class="line">        users.add(user2);</span><br><span class="line">        ExcelUtil.writeExcel(users, <span class="string">"D://Document And Settings3//Admin//Desktop//test.xls"</span>);</span><br><span class="line">        System.out.println(<span class="string">"done"</span>);</span><br><span class="line">        List&lt;User&gt; list = ExcelUtil.readExcel(<span class="string">"D://Document And Settings3//Admin//Desktop//test.xls"</span>, User.class);</span><br><span class="line">        <span class="keyword">for</span> (User u:list) &#123;</span><br><span class="line">            System.out.println(u);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    <div>
+      
+    </div>
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
   </section>
 
   
@@ -1870,7 +1879,25 @@
             
 
             
+              
+              
+              <div class="site-state-item site-state-categories">
+                
+                  <span class="site-state-item-count">1</span>
+                  <span class="site-state-item-name">categories</span>
+                
+              </div>
+            
 
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                
+                  <span class="site-state-item-count">3</span>
+                  <span class="site-state-item-name">tags</span>
+                
+              </div>
             
 
           </nav>

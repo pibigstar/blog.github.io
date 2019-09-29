@@ -270,7 +270,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://pibigstar.com/2019/09/29/java使用poi反射读取写入Excel/">
+    <link itemprop="mainEntityOfPage" href="http://pibigstar.com/2019/09/29/Google搜索技巧/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="派大星">
@@ -289,7 +289,7 @@
         
           <h2 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2019/09/29/java使用poi反射读取写入Excel/" itemprop="url">Untitled</a></h2>
+                <a class="post-title-link" href="/2019/09/29/Google搜索技巧/" itemprop="url">Untitled</a></h2>
         
 
         <div class="post-meta">
@@ -341,18 +341,25 @@
       
         
           
-            <p>title: java使用poi反射读取写入Excel<br>date: 2019-02-03 22:10:31<br>tags: [java,excel,poi]<br>categories: Java,java工具类,SpringBoot技能大全</p>
-<p>通过反射来读取写入Excel</p>
-<h2 id="添加依赖"><a href="#添加依赖" class="headerlink" title="添加依赖"></a>添加依赖</h2><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- excel操作 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.apache.poi<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>poi<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>4.0.1<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
+            <p>title: Google搜索技巧<br>date: 2019-07-24 22:10:31<br>tags: [google,搜索技巧]<br>categories: 工具使用</p>
+<ul>
+<li><p>inurl：搜索URL网址中包含指定字符串</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">inurl:login.php</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>intitle：标题中包含指定的字符串</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">intitle:登录</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>intext： 内容中包含指定的字符串</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">intext:登录</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>site：指定网站，只会在指定网站中查找关键字</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">深入理解JVM虚拟机 site:baidu.com</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>filetype：指定文件类型</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">深入理解JVM虚拟机 filetype:pdf</span><br></pre></td></tr></table></figure>
 
-<h2 id="注解"><a href="#注解" class="headerlink" title="注解"></a>注解</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@Author</span>:pibigstar</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@Description</span>: Excel注解</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="meta">@Target</span>(ElementType.FIELD)</span><br><span class="line"><span class="meta">@Retention</span>(RetentionPolicy.RUNTIME)</span><br><span class="line"><span class="keyword">public</span> <span class="meta">@interface</span> Excel &#123;</span><br><span class="line">    <span class="function">String <span class="title">value</span><span class="params">()</span> <span class="keyword">default</span> ""</span>;</span><br><span class="line">    <span class="function"><span class="keyword">boolean</span> <span class="title">ignore</span><span class="params">()</span> <span class="keyword">default</span> <span class="keyword">false</span></span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br><span class="line">192</span><br><span class="line">193</span><br><span class="line">194</span><br><span class="line">195</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.pibgstar.demo.utils;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> org.apache.poi.hssf.usermodel.HSSFDateUtil;</span><br><span class="line"><span class="keyword">import</span> org.apache.poi.hssf.usermodel.HSSFWorkbook;</span><br><span class="line"><span class="keyword">import</span> org.apache.poi.ss.usermodel.*;</span><br><span class="line"><span class="keyword">import</span> org.apache.poi.xssf.usermodel.XSSFWorkbook;</span><br><span class="line"><span class="keyword">import</span> javax.xml.crypto.Data;</span><br><span class="line"><span class="keyword">import</span> java.beans.PropertyDescriptor;</span><br><span class="line"><span class="keyword">import</span> java.io.FileInputStream;</span><br><span class="line"><span class="keyword">import</span> java.io.FileOutputStream;</span><br><span class="line"><span class="keyword">import</span> java.lang.reflect.Field;</span><br><span class="line"><span class="keyword">import</span> java.lang.reflect.Method;</span><br><span class="line"><span class="keyword">import</span> java.text.SimpleDateFormat;</span><br><span class="line"><span class="keyword">import</span> java.util.ArrayList;</span><br><span class="line"><span class="keyword">import</span> java.util.List;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> pibigstar</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@create</span> 2018-12-04 16:44</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@desc</span> Excel工具类</span></span><br><span class="line"><span class="comment"> **/</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ExcelUtil</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@Author</span>:pibigstar</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@Description</span>: 读取Excel数据到集合中</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> &lt;T&gt; <span class="function">List&lt;T&gt; <span class="title">readExcel</span><span class="params">(String filePath, Class&lt;T&gt; clazz)</span> </span>&#123;</span><br><span class="line">        List&lt;T&gt; list = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            FileInputStream fis = <span class="keyword">new</span> FileInputStream(filePath);</span><br><span class="line">            Field[] fields = clazz.getDeclaredFields();</span><br><span class="line"></span><br><span class="line">            Workbook workbook = <span class="keyword">null</span>;</span><br><span class="line">            <span class="keyword">if</span> (filePath.endsWith(<span class="string">".xlsx"</span>)) &#123;</span><br><span class="line">                workbook = <span class="keyword">new</span> XSSFWorkbook(fis);</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                workbook = <span class="keyword">new</span> HSSFWorkbook(fis);</span><br><span class="line">            &#125;</span><br><span class="line">            Sheet sheet = workbook.getSheetAt(<span class="number">0</span>);</span><br><span class="line">            <span class="keyword">int</span> startNum = sheet.getFirstRowNum() + <span class="number">1</span>;<span class="comment">//去掉表头</span></span><br><span class="line">            <span class="keyword">int</span> endNum = sheet.getLastRowNum();</span><br><span class="line">            <span class="keyword">int</span> colNum = fields.length; <span class="comment">// 列数</span></span><br><span class="line"></span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> i = startNum; i &lt;= endNum; i++) &#123;</span><br><span class="line">                Row row = sheet.getRow(i);</span><br><span class="line">                T t = clazz.newInstance();</span><br><span class="line">                <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; colNum; j++) &#123;</span><br><span class="line">                    Field field = fields[j];</span><br><span class="line">                    Cell cell = row.getCell(j);</span><br><span class="line">                    field.setAccessible(<span class="keyword">true</span>);</span><br><span class="line">                    String value = getValue(cell);</span><br><span class="line">                    setValue(t, field, value);</span><br><span class="line">                &#125;</span><br><span class="line">                list.add(t);</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">        &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> list;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@Author</span>:pibigstar</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@Description</span>: 为字段赋值</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> &lt;T&gt; <span class="function"><span class="keyword">void</span> <span class="title">setValue</span><span class="params">(T t, Field field, String value)</span> </span>&#123;</span><br><span class="line">        Class&lt;?&gt; type = field.getType();</span><br><span class="line">        Object fieldValue = <span class="keyword">null</span>;</span><br><span class="line">        <span class="keyword">if</span> (type.equals(String.class)) &#123;</span><br><span class="line">            fieldValue = value;</span><br><span class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (type.equals(Integer.class)) &#123;</span><br><span class="line">            fieldValue = Integer.parseInt(value);</span><br><span class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (type.equals(<span class="keyword">int</span>.class)) &#123;</span><br><span class="line">            fieldValue = Integer.parseInt(value);</span><br><span class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (type.equals(Boolean.class)) &#123;</span><br><span class="line">            fieldValue = Boolean.parseBoolean(value);</span><br><span class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (type.equals(<span class="keyword">boolean</span>.class)) &#123;</span><br><span class="line">            fieldValue = Boolean.parseBoolean(value);</span><br><span class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (type.equals(Float.class)) &#123;</span><br><span class="line">            fieldValue = Float.parseFloat(value);</span><br><span class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (type.equals(Double.class)) &#123;</span><br><span class="line">            fieldValue = Double.parseDouble(value);</span><br><span class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (type.equals(Data.class)) &#123;</span><br><span class="line">            fieldValue = DateUtil.parseYYYYMMDDDate(value);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            field.set(t, fieldValue);</span><br><span class="line">        &#125; <span class="keyword">catch</span> (IllegalAccessException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@Author</span>:pibigstar</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@Description</span>: 得到此格的值</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">static</span> String <span class="title">getValue</span><span class="params">(Cell cell)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (cell == <span class="keyword">null</span>) <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">        String result = <span class="string">""</span>;</span><br><span class="line">        CellType cellType = cell.getCellType();</span><br><span class="line">        <span class="keyword">switch</span> (cell.getCellType()) &#123;</span><br><span class="line">            <span class="keyword">case</span> NUMERIC:</span><br><span class="line">                <span class="keyword">if</span> (HSSFDateUtil.isCellDateFormatted(cell)) &#123;</span><br><span class="line">                    SimpleDateFormat format = <span class="keyword">new</span> SimpleDateFormat(<span class="string">"YYYY-MM-dd HH:mm:ss"</span>);</span><br><span class="line">                    result = format.format(cell.getNumericCellValue());</span><br><span class="line">                    <span class="keyword">return</span> result;</span><br><span class="line">                &#125;</span><br><span class="line">            <span class="keyword">case</span> BOOLEAN:</span><br><span class="line">                result = String.valueOf(cell.getBooleanCellValue());</span><br><span class="line">                <span class="keyword">return</span> result;</span><br><span class="line">            <span class="keyword">case</span> STRING:</span><br><span class="line">                <span class="keyword">return</span> cell.getStringCellValue();</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@Author</span>:pibigstar</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@Description</span>: 将集合中对象导入到Excel中</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> &lt;T&gt; <span class="function"><span class="keyword">void</span> <span class="title">writeExcel</span><span class="params">(List&lt;T&gt; list, String outPath)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> size = list.size();</span><br><span class="line">        <span class="keyword">if</span> (size == <span class="number">0</span>) <span class="keyword">return</span>;</span><br><span class="line">        T t = <span class="keyword">null</span>;</span><br><span class="line">        String fileName = <span class="string">""</span>;</span><br><span class="line">        FileOutputStream fos = <span class="keyword">null</span>;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            <span class="keyword">if</span> (outPath.contains(<span class="string">"/"</span>)) &#123;</span><br><span class="line">                fileName = outPath.substring(outPath.lastIndexOf(<span class="string">"/"</span>) + <span class="number">1</span>, outPath.lastIndexOf(<span class="string">"."</span>));</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                fileName = outPath.substring(<span class="number">0</span>, outPath.lastIndexOf(<span class="string">"."</span>));</span><br><span class="line">            &#125;</span><br><span class="line">            Workbook workbook = <span class="keyword">new</span> HSSFWorkbook();</span><br><span class="line">            <span class="comment">// 创建表单</span></span><br><span class="line">            Sheet sheet = workbook.createSheet(fileName);</span><br><span class="line">            <span class="comment">// 设置表头</span></span><br><span class="line">            t = list.get(<span class="number">0</span>);</span><br><span class="line">            Class&lt;?&gt; clazz = t.getClass();</span><br><span class="line">            setTitle(sheet, workbook, clazz);</span><br><span class="line"></span><br><span class="line">            <span class="comment">// 写入内容</span></span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; size; i++) &#123;</span><br><span class="line">                Row row = sheet.createRow(i + <span class="number">1</span>);</span><br><span class="line">                t = list.get(i);</span><br><span class="line">                Field[] fs = t.getClass().getDeclaredFields();</span><br><span class="line">                <span class="keyword">int</span> colNum = fs.length;</span><br><span class="line">                PropertyDescriptor pd = <span class="keyword">null</span>;</span><br><span class="line">                <span class="keyword">int</span> temp = <span class="number">0</span>;</span><br><span class="line">                <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; colNum; j++) &#123;</span><br><span class="line">                    Field field = fs[j];</span><br><span class="line">                    Excel annotation = field.getAnnotation(Excel.class);</span><br><span class="line">                    <span class="keyword">if</span>(annotation!=<span class="keyword">null</span> &amp;&amp; annotation.ignore())&#123;</span><br><span class="line">                        <span class="keyword">continue</span>;</span><br><span class="line">                    &#125;</span><br><span class="line">                    Cell cell = row.createCell(temp);</span><br><span class="line">                    String fieldName = field.getName();</span><br><span class="line">                    pd = <span class="keyword">new</span> PropertyDescriptor(fieldName, t.getClass());</span><br><span class="line">                    Method readMethod = pd.getReadMethod();</span><br><span class="line">                    Object result = readMethod.invoke(t);</span><br><span class="line">                    cell.setCellValue(result.toString());</span><br><span class="line">                    temp++;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            fos = <span class="keyword">new</span> FileOutputStream(outPath);</span><br><span class="line">            workbook.write(fos);</span><br><span class="line">            fos.close();</span><br><span class="line">        &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@Author</span>:pibigstar</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@Description</span>: 设置表头</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">setTitle</span><span class="params">(Sheet sheet, Workbook workbook, Class&lt;?&gt; clazz)</span> </span>&#123;</span><br><span class="line">        Row row = sheet.createRow(<span class="number">0</span>);<span class="comment">// 第一行为表头</span></span><br><span class="line">        <span class="comment">//设置为居中加粗</span></span><br><span class="line">        CellStyle style = workbook.createCellStyle();</span><br><span class="line">        Font font = workbook.createFont();</span><br><span class="line">        font.setBold(<span class="keyword">true</span>);</span><br><span class="line">        style.setFont(font);</span><br><span class="line">        Field[] fields = clazz.getDeclaredFields();</span><br><span class="line">        <span class="keyword">int</span> colNum = fields.length;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; colNum; i++) &#123;</span><br><span class="line">            sheet.setColumnWidth(i, <span class="number">20</span> * <span class="number">256</span>);</span><br><span class="line">            Cell cell = row.createCell(i);</span><br><span class="line">            Field field = fields[i];</span><br><span class="line">            cell.setCellValue(field.getName());</span><br><span class="line">            cell.setCellStyle(style);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h2 id="实体对象"><a href="#实体对象" class="headerlink" title="实体对象"></a>实体对象</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">User</span> </span>&#123;</span><br><span class="line">    <span class="meta">@Excel</span>(value = <span class="string">"我是ID"</span>,ignore = <span class="keyword">true</span>)</span><br><span class="line">    <span class="keyword">private</span> String id;</span><br><span class="line">    <span class="meta">@Excel</span>(value = <span class="string">"名字"</span>)</span><br><span class="line">    <span class="keyword">private</span> String name;</span><br><span class="line">    <span class="meta">@Excel</span>(value = <span class="string">"年龄"</span>,ignore = <span class="keyword">true</span>)</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> age;</span><br><span class="line">    <span class="comment">//setter,getter方法</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h2 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TestExcelUtil</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        List&lt;User&gt; users = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line">        User user1 = <span class="keyword">new</span> User();</span><br><span class="line">        user1.setId(<span class="string">"1"</span>);</span><br><span class="line">        user1.setName(<span class="string">"派大星"</span>);</span><br><span class="line">        user1.setAge(<span class="number">20</span>);</span><br><span class="line">        user1.setPassword(<span class="string">"1234556"</span>);</span><br><span class="line">        User user2 = <span class="keyword">new</span> User();</span><br><span class="line">        user2.setId(<span class="string">"2"</span>);</span><br><span class="line">        user2.setName(<span class="string">"海绵宝宝"</span>);</span><br><span class="line">        user2.setAge(<span class="number">18</span>);</span><br><span class="line">        user2.setPassword(<span class="string">"6666666"</span>);</span><br><span class="line">        users.add(user1);</span><br><span class="line">        users.add(user2);</span><br><span class="line">        ExcelUtil.writeExcel(users, <span class="string">"D://Document And Settings3//Admin//Desktop//test.xls"</span>);</span><br><span class="line">        System.out.println(<span class="string">"done"</span>);</span><br><span class="line">        List&lt;User&gt; list = ExcelUtil.readExcel(<span class="string">"D://Document And Settings3//Admin//Desktop//test.xls"</span>, User.class);</span><br><span class="line">        <span class="keyword">for</span> (User u:list) &#123;</span><br><span class="line">            System.out.println(u);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
+</li>
+</ul>
 
           
         
@@ -529,148 +536,6 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://pibigstar.com/2019/09/29/Google搜索技巧/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="派大星">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/qq.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="派大星的博客">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/09/29/Google搜索技巧/" itemprop="url">Untitled</a></h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-09-29T22:56:39+08:00">
-                2019-09-29
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>title: Google搜索技巧<br>date: 2019-07-24 22:10:31<br>tags: [google,搜索技巧]<br>categories: 工具使用</p>
-<ul>
-<li><p>inurl：搜索URL网址中包含指定字符串</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">inurl:login.php</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>intitle：标题中包含指定的字符串</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">intitle:登录</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>intext： 内容中包含指定的字符串</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">intext:登录</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>site：指定网站，只会在指定网站中查找关键字</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">深入理解JVM虚拟机 site:baidu.com</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>filetype：指定文件类型</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">深入理解JVM虚拟机 filetype:pdf</span><br></pre></td></tr></table></figure>
-
-</li>
-</ul>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    <div>
-      
-    </div>
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://pibigstar.com/2019/09/29/JSP+servlet生成图表/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -795,130 +660,6 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://pibigstar.com/2019/09/29/JeePlus后台JSP页面编写指南/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="派大星">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/qq.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="派大星的博客">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/09/29/JeePlus后台JSP页面编写指南/" itemprop="url">Untitled</a></h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-09-29T22:56:39+08:00">
-                2019-09-29
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>title: JeePlus后台JSP页面编写指南<br>date: 2018-10-04 22:10:31<br>tags: [jeeplus,jeesite,jeeplus的JSP页面]<br>categories: 框架学习使用</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    <div>
-      
-    </div>
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://pibigstar.com/2019/09/29/Linux常用命令/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -991,6 +732,130 @@
         
           
             <p>title: Linux常用命令<br>date: 2019-04-24 22:10:31<br>tags: [linux]<br>categories: Linux</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    <div>
+      
+    </div>
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://pibigstar.com/2019/09/29/JeePlus后台JSP页面编写指南/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="派大星">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/qq.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="派大星的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/09/29/JeePlus后台JSP页面编写指南/" itemprop="url">Untitled</a></h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-09-29T22:56:39+08:00">
+                2019-09-29
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>title: JeePlus后台JSP页面编写指南<br>date: 2018-10-04 22:10:31<br>tags: [jeeplus,jeesite,jeeplus的JSP页面]<br>categories: 框架学习使用</p>
 
           
         
@@ -1415,6 +1280,142 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://pibigstar.com/2019/09/29/Go语言入门（1）Go语言的安装与配置/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="派大星">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/qq.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="派大星的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/09/29/Go语言入门（1）Go语言的安装与配置/" itemprop="url">Untitled</a></h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-09-29T22:56:39+08:00">
+                2019-09-29
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>title: Go语言入门（1）Go语言的安装与配置<br>date: 2019-09-22 22:10:31<br>tags: [go安装,go开发工具]<br>categories: go</p>
+<h1 id="1-下载Go语言"><a href="#1-下载Go语言" class="headerlink" title="1. 下载Go语言"></a>1. 下载Go语言</h1><p>GO安装包下载地址： <a href="https://studygolang.com/dl" target="_blank" rel="noopener">https://studygolang.com/dl</a></p>
+<h1 id="2-Windows下安装GO"><a href="#2-Windows下安装GO" class="headerlink" title="2. Windows下安装GO"></a>2. Windows下安装GO</h1><p>下载好之后，直接安装，下一步。。。。finsh</p>
+<p>测试是否安装成功：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">go version</span><br></pre></td></tr></table></figure>
+
+<h1 id="3-配置GOPATH"><a href="#3-配置GOPATH" class="headerlink" title="3. 配置GOPATH"></a>3. 配置GOPATH</h1><p>新建环境变量 GOPATH = D:/goWork</p>
+<p>GOPATH是你的工作目录，它包括三个目录：bin（存放编译好的可运行文件）、pkg（存放二进制文件）、src（存放源码文件）</p>
+<p>当通过 go get github.com/astaxie/beego 下载的库都会放到这个GOPATH里面</p>
+<h1 id="4-下载开发工具"><a href="#4-下载开发工具" class="headerlink" title="4. 下载开发工具"></a>4. 下载开发工具</h1><p>这里使用的开发工具为 goland</p>
+<p>下载地址：<a href="https://www.jetbrains.com/go/" target="_blank" rel="noopener">https://www.jetbrains.com/go/</a></p>
+<h1 id="5-配置goland"><a href="#5-配置goland" class="headerlink" title="5. 配置goland"></a>5. 配置goland</h1><p>主要配置 GOROOT 和 GOPATH</p>
+<p><img src="https://img-blog.csdn.net/2018080420560173?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2p1bm1veGk=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt></p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    <div>
+      
+    </div>
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://pibigstar.com/2019/09/29/JQuery插件实现下拉复选框和后台mybatis接受处理数据/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1585,7 +1586,25 @@
             
 
             
+              
+              
+              <div class="site-state-item site-state-categories">
+                
+                  <span class="site-state-item-count">1</span>
+                  <span class="site-state-item-name">categories</span>
+                
+              </div>
+            
 
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                
+                  <span class="site-state-item-count">3</span>
+                  <span class="site-state-item-name">tags</span>
+                
+              </div>
             
 
           </nav>
