@@ -1,0 +1,950 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/32x32.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/16x16.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="派大星, pibigstar,blog,go">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="title: 面试总结—编程语言部分（java）date: 2019-06-19 22:10:31tags: [面试java,编程语言]categories: 面试 [TOC] 1. java集合1.1 常用集合的导图 1.2 Collection和Mapjava集合类分为collection 和 map两类 Collection  List（有序、可重复）  ArrayList ：线程不安全，底">
+<meta name="keywords" content="派大星,pibigstar">
+<meta property="og:type" content="article">
+<meta property="og:title" content="派大星的博客">
+<meta property="og:url" content="http://pibigstar.com/2019/09/29/面试总结---编程语言部分（java）/index.html">
+<meta property="og:site_name" content="派大星的博客">
+<meta property="og:description" content="title: 面试总结—编程语言部分（java）date: 2019-06-19 22:10:31tags: [面试java,编程语言]categories: 面试 [TOC] 1. java集合1.1 常用集合的导图 1.2 Collection和Mapjava集合类分为collection 和 map两类 Collection  List（有序、可重复）  ArrayList ：线程不安全，底">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://img-blog.csdn.net/2018042816380980?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2p1bm1veGk=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70">
+<meta property="og:image" content="https://img-blog.csdn.net/20180428182119774?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2p1bm1veGk=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70">
+<meta property="og:image" content="https://img-blog.csdn.net/20180429210029433?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2p1bm1veGk=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70">
+<meta property="og:updated_time" content="2019-09-29T14:56:40.020Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="派大星的博客">
+<meta name="twitter:description" content="title: 面试总结—编程语言部分（java）date: 2019-06-19 22:10:31tags: [面试java,编程语言]categories: 面试 [TOC] 1. java集合1.1 常用集合的导图 1.2 Collection和Mapjava集合类分为collection 和 map两类 Collection  List（有序、可重复）  ArrayList ：线程不安全，底">
+<meta name="twitter:image" content="https://img-blog.csdn.net/2018042816380980?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2p1bm1veGk=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":true,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://pibigstar.com/2019/09/29/面试总结---编程语言部分（java）/">
+
+
+
+
+
+  <title> | 派大星的博客</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">派大星的博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <h1 class="site-subtitle" itemprop="description">很多事情不是会了才能做，而是做了才能学会</h1>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-schedule">
+          <a href="/schedule/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-calendar"></i> <br>
+            
+            Schedule
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-sitemap">
+          <a href="/sitemap.xml" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-sitemap"></i> <br>
+            
+            Sitemap
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            About
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://pibigstar.com/2019/09/29/面试总结---编程语言部分（java）/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="派大星">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/qq.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="派大星的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline"></h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-09-29T22:56:40+08:00">
+                2019-09-29
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>title: 面试总结—编程语言部分（java）<br>date: 2019-06-19 22:10:31<br>tags: [面试java,编程语言]<br>categories: 面试</p>
+<p>[TOC]</p>
+<h2 id="1-java集合"><a href="#1-java集合" class="headerlink" title="1. java集合"></a>1. java集合</h2><h3 id="1-1-常用集合的导图"><a href="#1-1-常用集合的导图" class="headerlink" title="1.1 常用集合的导图"></a>1.1 常用集合的导图</h3><p><img src="https://img-blog.csdn.net/2018042816380980?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2p1bm1veGk=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt="java集合导图"></p>
+<h3 id="1-2-Collection和Map"><a href="#1-2-Collection和Map" class="headerlink" title="1.2 Collection和Map"></a>1.2 Collection和Map</h3><p>java集合类分为collection 和 map两类</p>
+<p><strong>Collection</strong></p>
+<ul>
+<li><p>List（有序、可重复）</p>
+<ul>
+<li>ArrayList ：线程不安全，底层用数组实现，按插入先后排序，随机访问快，插入与删除慢。</li>
+<li>LinkedList ：线程不安全的，底层基于链表的数据结构实现，访问慢但插入元素与删除元素比较快。LinkedList类实现了Queue接口，可当做队列使用</li>
+<li>Vector ：线程安全的， 实现了Cloneable接口，即实现clone()函数。它能被克隆。Vector 实现Serializable接口，支持序列化。</li>
+</ul>
+</li>
+<li><p>Set（无序、不可重复）</p>
+<ul>
+<li>HashSet ：线程不安全的，值可以为null，层使用数据结构的hash算法实现的，因此具有很好的存取，查找的性能。在add对一个对象的添加要重写equals和hashcode，保证对象不重复性。</li>
+<li>TreeSet ：线程不安全的， 底层使用数据结构红黑树算法进行维护的。可通过实现compareTo(Object obj) 来进行来进行排序</li>
+<li>LinkedHashSet ：线程不安全的， 底层使用链表来进行维护的。里面的顺序是值插入的顺序，插入的时候性能不如hashSet而查询的时候性能会比hashSet更好。</li>
+</ul>
+</li>
+<li><p>Queue（队列，先进先出）</p>
+<ul>
+<li>PriorityQueue ：保存队列元素的顺序并不是按加入队列的顺序，而是按队列元素的大小进行重新排序</li>
+</ul>
+<p><strong>常用队列操作方法：</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">add</span><span class="params">(Object e)</span></span>;<span class="comment">//将指定元素加入此队列的尾部。</span></span><br><span class="line"><span class="function">Object <span class="title">element</span><span class="params">()</span></span>;<span class="comment">//获取队列头部的元素，但是不删除该元素。</span></span><br><span class="line"><span class="function"><span class="keyword">boolean</span> <span class="title">offer</span><span class="params">(Object e)</span></span>;<span class="comment">//将指定元素加入此队列的尾部。当使用有容量限制的队列时，此方法通常比add(Object e)方法更好。</span></span><br><span class="line"><span class="function">Object <span class="title">peek</span><span class="params">()</span></span>; <span class="comment">//获取队列头部的元素，但是不删除该元素，如果此队列为空，则返回null。</span></span><br><span class="line"><span class="function">Object <span class="title">poll</span><span class="params">()</span></span>;<span class="comment">//获取队列头部的元素，并删除该元素，如果此队列为空，则返回null。</span></span><br><span class="line"><span class="function">Object <span class="title">remove</span><span class="params">()</span></span>;<span class="comment">//获取队列头部的元素，并删除该元素。</span></span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<p><strong>Map</strong></p>
+<ul>
+<li>HashMap ：线程不安全的，基于哈希表实现。Key值和value值都可以为null</li>
+<li>HashTable ：线程安全的，基于哈希表实现。Key值和value值不能为null</li>
+<li>TreeMap ：线程不安全的，保存元素key-value不能为null，允许key-value重复；遍历元素时随机排列</li>
+</ul>
+<h2 id="2-java并发"><a href="#2-java并发" class="headerlink" title="2. java并发"></a>2. java并发</h2><ul>
+<li>并行：表示两个线程同时做事情。</li>
+<li>并发：表示一会做这个事情，一会做另一个事情，存在着调度。单核 CPU 不可能存在并行（微观上）。</li>
+</ul>
+<p><strong>java实现多线程的两种方式：继承 Thread 类和实现 Runnable 接口</strong></p>
+<h3 id="2-1-java多线程中名词的概念"><a href="#2-1-java多线程中名词的概念" class="headerlink" title="2.1 java多线程中名词的概念"></a>2.1 java多线程中名词的概念</h3><p><strong>多个进程或线程同时(或着说在同一段时间内)访问同一资源会产生并发问题。</strong><br><a href="https://mp.weixin.qq.com/s/rHnzqlzJusIVNO7X7mBDkA" target="_blank" rel="noopener">具体详细内容可点击这里查看</a></p>
+<ul>
+<li>临界区<blockquote>
+<p>临界区用来表示一种公共资源或者说是共享数据，可以被多个线程使用。但是每一次，只能有一个线程使用它，一旦临界区资源被占用，其他线程要想使用这个资源，就必须等待。</p>
+</blockquote>
+</li>
+</ul>
+<ul>
+<li>阻塞与非阻塞</li>
+</ul>
+<blockquote>
+<p>阻塞和非阻塞通常用来形容多线程间的相互影响。比如一个线程占用了临界区资源，那么其它所有需要这个资源的线程就必须在这个临界区中进行等待，等待会导致线程挂起。这种情况就是阻塞。<br>此时，如果占用资源的线程一直不愿意释放资源，那么其它所有阻塞在这个临界区上的线程都不能工作。阻塞是指线程在操作系统层面被挂起。阻塞一般性能不好，需大约8万个时钟周期来做调度。<br>非阻塞则允许多个线程同时进入临界区。</p>
+</blockquote>
+<ul>
+<li>死锁</li>
+</ul>
+<blockquote>
+<p>死锁是进程死锁的简称，是指多个进程循环等待他方占有的资源而无限的僵持下去的局面。</p>
+</blockquote>
+<ul>
+<li>活锁</li>
+</ul>
+<blockquote>
+<p>假设有两个线程1、2，它们都需要资源 A/B，假设1号线程占有了 A 资源，2号线程占有了 B 资源；由于两个线程都需要同时拥有这两个资源才可以工作，为了避免死锁，1号线程释放了 A 资源占有锁，2号线程释放了 B 资源占有锁；此时 AB 空闲，两个线程又同时抢锁，再次出现上述情况，此时发生了活锁。</p>
+</blockquote>
+<blockquote>
+<p>简单类比，电梯遇到人，一个进的一个出的，对面占路，两个人同时往一个方向让路，来回重复，还是堵着路。<br>如果线上应用遇到了活锁问题，恭喜你中奖了，这类问题比较难排查。</p>
+</blockquote>
+<ul>
+<li>饥饿</li>
+</ul>
+<blockquote>
+<p>饥饿是指某一个或者多个线程因为种种原因无法获得所需要的资源，导致一直无法执行。</p>
+</blockquote>
+<h3 id="2-2-java实现并发的方式"><a href="#2-2-java实现并发的方式" class="headerlink" title="2.2 java实现并发的方式"></a>2.2 java实现并发的方式</h3><p>一般都是通过加锁进行实现。</p>
+<h4 id="2-2-1-synchronize关键字"><a href="#2-2-1-synchronize关键字" class="headerlink" title="2.2.1 synchronize关键字"></a>2.2.1 synchronize关键字</h4><ul>
+<li>用法1</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">	<span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Test</span></span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">synchronized</span> <span class="keyword">void</span> <span class="title">print</span><span class="params">()</span></span>&#123;</span><br><span class="line">        ....;</span><br><span class="line">    &#125; </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>用法2</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Test</span></span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">print</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">synchronized</span>(<span class="keyword">this</span>)&#123;<span class="comment">//锁住本对象</span></span><br><span class="line">            ...;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>用法3</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Test</span></span>&#123;</span><br><span class="line">    <span class="keyword">private</span> String a = <span class="string">"test"</span>;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">print</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">synchronized</span>(a)&#123;<span class="comment">//锁住a对象</span></span><br><span class="line">            ...;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>静态方法的锁</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Test</span></span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">synchronized</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">execute</span><span class="params">()</span></span>&#123;</span><br><span class="line">        ...;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//效果同</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Test</span></span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">execute</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">synchronized</span>(Test.class)&#123;</span><br><span class="line">            ...;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="2-2-2-java-util-Lock的使用"><a href="#2-2-2-java-util-Lock的使用" class="headerlink" title="2.2.2 java.util.Lock的使用"></a>2.2.2 java.util.Lock的使用</h4><blockquote>
+<p>Lock能实现synchronized完成的所以功能，不同点是：Lock有比synchronize更精确的线程语义和更好的性能，synchronize会自动释放锁，而Lock一定要求程序员手工释放，并且必须在finally从句中释放。Lock还有更强大的功能，例如，它的tryLock方法可以非阻塞方式去拿锁。</p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">final</span> Lock lock = <span class="keyword">new</span> ReentrantLock();</span><br><span class="line"><span class="keyword">while</span>(<span class="keyword">true</span>)&#123;</span><br><span class="line">	lock.lock();<span class="comment">//加锁</span></span><br><span class="line">	<span class="keyword">try</span>&#123;</span><br><span class="line">		j--;</span><br><span class="line">	&#125;<span class="keyword">finally</span>&#123;</span><br><span class="line">		lock.unlock();<span class="comment">//释放锁</span></span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="2-2-3-使用线程池"><a href="#2-2-3-使用线程池" class="headerlink" title="2.2.3 使用线程池"></a>2.2.3 使用线程池</h4><p>通过上面的介绍，完全可以开发一个多线程的程序，为什么还要引入线程池呢。主要是因为上述单线程方式存在以下几个问题：</p>
+<ul>
+<li>线程的工作周期：线程创建所需时间为 T1，线程执行任务所需时间为 T2，线程销毁所需时间为 T3，往往是 T1+T3 大于 T2，所有如果频繁创建线程会损耗过多额外的时间；</li>
+<li>如果有任务来了，再去创建线程的话效率比较低，如果从一个池子中可以直接获取可用的线程，那效率会有所提高。所以线程池省去了任务过来，要先创建线程再去执行的过程，节省了时间，提升了效率；</li>
+<li>线程池可以管理和控制线程，因为线程是稀缺资源，如果无限制的创建，不仅会消耗系统资源，还会降低系统的稳定性，使用线程池可以进行统一的分配，调优和监控；</li>
+<li>线程池提供队列，存放缓冲等待执行的任务。</li>
+</ul>
+<p><strong>四种线程池的使用</strong></p>
+<ul>
+<li><p>newCachedThreadPool ：创建一个可缓存线程池，如果线程池长度超过处理需要，可灵活回收空闲线程，若无可回收，则新建线程</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">ExecutorService cachedThreadPool = Executors.newCachedThreadPool();  </span><br><span class="line">cachedThreadPool.execute(<span class="keyword">new</span> Runnable() &#123;  </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;  </span><br><span class="line">     System.out.println(index);  </span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>newFixedThreadPool ：创建一个定长线程池，可控制线程最大并发数，超出的线程会在队列中等待</p>
+</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ExecutorService fixedThreadPool = Executors.newFixedThreadPool(<span class="number">3</span>);</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p>newScheduledThreadPool：创建一个定长线程池，支持定时及周期性任务执行</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">ScheduledExecutorService scheduledThreadPool = Executors.newScheduledThreadPool(<span class="number">5</span>);  </span><br><span class="line">  scheduledThreadPool.schedule(<span class="keyword">new</span> Runnable() &#123;  </span><br><span class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;  </span><br><span class="line">    System.out.println(<span class="string">"delay 3 seconds"</span>);  </span><br><span class="line">   &#125;  </span><br><span class="line">  &#125;, <span class="number">3</span>, TimeUnit.SECONDS);  <span class="comment">//延迟3秒执行</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>newSingleThreadExecutor：创建一个单线程化的线程池，它只会用唯一的工作线程来执行任务，保证所有任务按照指定顺序(FIFO, LIFO, 优先级)执行</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ExecutorService singleThreadExecutor = Executors.newSingleThreadExecutor();</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<h4 id="2-2-4-wait-和-sleep-理解"><a href="#2-2-4-wait-和-sleep-理解" class="headerlink" title="2.2.4 wait 和 sleep 理解"></a>2.2.4 wait 和 sleep 理解</h4><blockquote>
+<p>对于sleep()方法，我们首先要知道该方法是属于Thread类中的。而wait()方法，则是属于Object<br>类中的。 sleep()方法导致了程序暂停执行指定的时间，让出cpu该其他线程，但是他的监控状态<br>依然保持者，当指定的时间到了又会自动恢复运行状态。<br><strong>在调用sleep()方法的过程中，线程不会释放对象锁。</strong><br><strong>而当调用wait()方法的时候，线程会放弃对象锁</strong>，进入等待此对象的等待锁定池，只有针对<br>此对象调用notify()方法或notifyAll()方法后本线程才进入对象锁定池准备获取对象锁进入运行状态。</p>
+</blockquote>
+<h2 id="3-java异常"><a href="#3-java异常" class="headerlink" title="3. java异常"></a>3. java异常</h2><h3 id="3-1-异常类导图"><a href="#3-1-异常类导图" class="headerlink" title="3.1 异常类导图"></a>3.1 异常类导图</h3><p><img src="https://img-blog.csdn.net/20180428182119774?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2p1bm1veGk=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt="异常导图"></p>
+<h3 id="3-2-异常的使用"><a href="#3-2-异常的使用" class="headerlink" title="3.2 异常的使用"></a>3.2 异常的使用</h3><p>一般都是通过try···catch···finally 进行处理</p>
+<h4 id="3-2-1-try、catch、finally"><a href="#3-2-1-try、catch、finally" class="headerlink" title="3.2.1 try、catch、finally"></a>3.2.1 try、catch、finally</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">try</span>&#123;</span><br><span class="line">     <span class="comment">//try块中放可能发生异常的代码。</span></span><br><span class="line">     <span class="comment">//如果执行完try且不发生异常，则接着去执行finally块和finally后面的代码（如果有的话）。</span></span><br><span class="line">     <span class="comment">//如果发生异常，则尝试去匹配catch块。</span></span><br><span class="line"> </span><br><span class="line">&#125;<span class="keyword">catch</span>(SQLException SQLexception)&#123;</span><br><span class="line">    <span class="comment">//每一个catch块用于捕获并处理一个特定的异常，或者这异常类型的子类。Java7中可以将多个异常声明在一个catch中。</span></span><br><span class="line">    <span class="comment">//catch后面的括号定义了异常类型和异常参数。如果异常与之匹配且是最先匹配到的，则虚拟机将使用这个catch块来处理异常。</span></span><br><span class="line">    <span class="comment">//在catch块中可以使用这个块的异常参数来获取异常的相关信息。异常参数是这个catch块中的局部变量，其它块不能访问。</span></span><br><span class="line">    <span class="comment">//如果当前try块中发生的异常在后续的所有catch中都没捕获到，则先去执行finally，然后到这个函数的外部caller中去匹配异常处理器。</span></span><br><span class="line">    <span class="comment">//如果try中没有发生异常，则所有的catch块将被忽略。</span></span><br><span class="line">&#125;<span class="keyword">catch</span>(Exception exception)&#123;</span><br><span class="line">    <span class="comment">//...</span></span><br><span class="line">&#125;<span class="keyword">finally</span>&#123;</span><br><span class="line">    <span class="comment">//finally块通常是可选的。</span></span><br><span class="line">   <span class="comment">//无论异常是否发生，异常是否匹配被处理，finally都会执行。</span></span><br><span class="line">   <span class="comment">//一个try至少要有一个catch块，否则， 至少要有1个finally块。但是finally不是用来处理异常的，finally不会捕获异常。</span></span><br><span class="line">  <span class="comment">//finally主要做一些清理工作，如流的关闭，数据库连接的关闭等。 </span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>需要注意的是：</strong></p>
+<ol>
+<li>try块中的局部变量和catch块中的局部变量（包括异常变量），以及finally中的局部变量，他们之间不可共享使用。</li>
+<li>每一个catch块用于处理一个异常。异常匹配是按照catch块的顺序从上往下寻找的，只有第一个匹配的catch会得到执行。</li>
+<li>try{}里有一个return语句，那么紧跟在这个try后的finally{}里代码会在return之前执行，更准确的说，是在return中间执行，看下面例子：<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">test</span><span class="params">()</span></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> x = <span class="number">1</span>;</span><br><span class="line">	<span class="keyword">try</span>&#123;</span><br><span class="line">		<span class="keyword">return</span> x;</span><br><span class="line">	&#125;<span class="keyword">finally</span>&#123;</span><br><span class="line">		System.out.print(<span class="string">"执行了"</span>);</span><br><span class="line">		++x;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//执行结果是 ：执行了  </span></span><br><span class="line"><span class="comment">//但是 x = 1</span></span><br></pre></td></tr></table></figure>
+
+</li>
+</ol>
+<h4 id="3-2-2-抛出异常"><a href="#3-2-2-抛出异常" class="headerlink" title="3.2.2 抛出异常"></a>3.2.2 抛出异常</h4><ol>
+<li><p>throws 抛到上一层（用在方法上）</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">foo</span><span class="params">()</span> <span class="keyword">throws</span> SQLException, IOException,ClassNotFloundException</span></span><br><span class="line"><span class="function"></span>&#123; </span><br><span class="line"><span class="comment">//foo内部可以抛出 SQLException, IOException,ClassNotFloundException 类的异常</span></span><br><span class="line"><span class="comment">//或者他们的子类的异常对象。</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>throw 抛出异常 （用在方法内部）</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">save</span><span class="params">(User user)</span></span>&#123;</span><br><span class="line">      <span class="keyword">if</span>(user  == <span class="keyword">null</span>) </span><br><span class="line">         <span class="keyword">throw</span> <span class="keyword">new</span> IllegalArgumentException(<span class="string">"User对象为空"</span>);   </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+</li>
+</ol>
+<h2 id="4-java反射"><a href="#4-java反射" class="headerlink" title="4. java反射"></a>4. java反射</h2><h3 id="4-1-反射的概述"><a href="#4-1-反射的概述" class="headerlink" title="4.1 反射的概述"></a>4.1 反射的概述</h3><p><strong>反射是框架设计的灵魂</strong></p>
+<blockquote>
+<p>JAVA反射机制是在运行状态中，对于任意一个类，都能够知道这个类的所有属性和方法；对于任意一个对象，都能够调用它的任意一个方法和属性；这种动态获取的信息以及动态调用对象的方法的功能称为java语言的反射机制。<br>要想解剖一个类,必须先要获取到该类的字节码文件对象。而解剖使用的就是Class类中的方法.所以先要获取到每一个字节码文件对应的Class类型的对象.</p>
+</blockquote>
+<p><strong>以上的总结就是什么是反射</strong><br>反射就是把java类中的各种成分映射成一个个的Java对象</p>
+<p>例如：一个类有：成员变量、方法、构造方法、包等等信息，利用反射技术可以对一个类进行解剖，把个个组成部分映射成一个个对象。<br>    （其实：一个类中这些成员方法、构造方法、在加入类中都有一个类来描述）<br>如图是类的正常加载过程：反射的原理在与class对象。<br>熟悉一下加载的时候：Class对象的由来是将class文件读入内存，并为之创建一个Class对象。<br><img src="https://img-blog.csdn.net/20180429210029433?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2p1bm1veGk=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt="这里写图片描述"></p>
+<h3 id="4-2-反射中常用的方法"><a href="#4-2-反射中常用的方法" class="headerlink" title="4.2 反射中常用的方法"></a>4.2 反射中常用的方法</h3><h4 id="4-2-1-获得Class对象"><a href="#4-2-1-获得Class对象" class="headerlink" title="4.2.1 获得Class对象"></a>4.2.1 获得Class对象</h4><ol>
+<li><p>Object ——&gt; getClass();</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Student stu1 = <span class="keyword">new</span> Student();<span class="comment">//产生一个Student对象，一个Class对象。  </span></span><br><span class="line">Class stuClass1 = stu1.getClass();<span class="comment">//获得Class对象</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>任何数据类型（包括基本数据类型）都有一个“静态”的class属性</p>
+</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Class stuClass2 = Student.class;</span><br></pre></td></tr></table></figure>
+
+<ol start="3">
+<li>通过Class类的静态方法：forName（String  className）(常用)<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Class stuClass3 = Class.forName(<span class="string">"fanshe.Student"</span>);</span><br></pre></td></tr></table></figure>
+
+</li>
+</ol>
+<h4 id="4-2-2-获得构造方法"><a href="#4-2-2-获得构造方法" class="headerlink" title="4.2.2 获得构造方法"></a>4.2.2 获得构造方法</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//1.加载Class对象  </span></span><br><span class="line">Class clazz = Class.forName(<span class="string">"fanshe.Student"</span>);  </span><br><span class="line">          </span><br><span class="line"><span class="comment">//可传递参数，根据参数的不同，获得的构造方法对象也不同</span></span><br><span class="line"><span class="comment">//2.获取所有公有构造方法  </span></span><br><span class="line">Constructor[] conArray = clazz.getConstructors();  </span><br><span class="line"><span class="comment">//获得所有构造方法，包括公有和私有</span></span><br><span class="line">conArray = clazz.getDeclaredConstructors();  </span><br><span class="line"><span class="comment">//Constructor con = clazz.getConstructors(char.Class);</span></span><br><span class="line"><span class="comment">//如果是私有构造，可通过下面设置，即可调用newInstance</span></span><br><span class="line"><span class="comment">//con.setAccessible(true);//暴力访问(忽略掉访问修饰符)  </span></span><br><span class="line"><span class="comment">//调用构造方法  </span></span><br><span class="line">Object obj = con.newInstance();</span><br></pre></td></tr></table></figure>
+
+<h4 id="4-2-3-获得成员属性并设值"><a href="#4-2-3-获得成员属性并设值" class="headerlink" title="4.2.3 获得成员属性并设值"></a>4.2.3 获得成员属性并设值</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//1.获取Class对象  </span></span><br><span class="line">Class stuClass = Class.forName(<span class="string">"fanshe.field.Student"</span>);  </span><br><span class="line"><span class="comment">//2.获取所有公有的属性</span></span><br><span class="line"><span class="comment">//Field[] fieldArray = stuClass.getFields();  </span></span><br><span class="line"><span class="comment">//获取所有的属性(包括私有、受保护、默认的)</span></span><br><span class="line"><span class="comment">//Field[] allFieldArray = stuClass.getDeclaredFields();  </span></span><br><span class="line"><span class="comment">//获取name属性</span></span><br><span class="line">Field f = stuClass.getField(<span class="string">"name"</span>);  </span><br><span class="line"><span class="comment">//获取构造方法并调用产生一个对象  </span></span><br><span class="line">Object obj = stuClass.getConstructor().newInstance();</span><br><span class="line"><span class="comment">//为obj对象的name属性设置值  </span></span><br><span class="line">f.set(obj, <span class="string">"刘德华"</span>);</span><br><span class="line">Student stu = (Student)obj;  </span><br><span class="line">System.out.println(<span class="string">"验证姓名："</span> + stu.name);  </span><br><span class="line"><span class="comment">//获取私有的属性</span></span><br><span class="line">f = stuClass.getDeclaredField(<span class="string">"phoneNum"</span>);  </span><br><span class="line">f.setAccessible(<span class="keyword">true</span>);<span class="comment">//暴力反射，解除私有限定  </span></span><br><span class="line">f.set(obj, <span class="string">"18888889999"</span>);  </span><br><span class="line">System.out.println(<span class="string">"验证电话："</span> + stu.phoneNum);</span><br></pre></td></tr></table></figure>
+
+<h4 id="4-2-4-获得成员方法并调用"><a href="#4-2-4-获得成员方法并调用" class="headerlink" title="4.2.4 获得成员方法并调用"></a>4.2.4 获得成员方法并调用</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//获取Class对象  </span></span><br><span class="line">Class stuClass = Class.forName(<span class="string">"fanshe.method.Student"</span>);  </span><br><span class="line"><span class="comment">//获取所有公有方法    </span></span><br><span class="line"><span class="comment">//Method[] methodArray = stuClass.getMethods();  </span></span><br><span class="line"><span class="comment">//获取所有的方法，包括私有的</span></span><br><span class="line"><span class="comment">//methodArray = stuClass.getDeclaredMethods();  </span></span><br><span class="line"><span class="comment">//获取公有的show()方法，它有一个参数，为String类型的</span></span><br><span class="line">Method m = stuClass.getMethod(<span class="string">"show"</span>, String.class);  </span><br><span class="line"><span class="comment">//实例化一个Student对象  </span></span><br><span class="line">Object obj = stuClass.getConstructor().newInstance();  </span><br><span class="line"><span class="comment">//调用show 方法，并传递一个参数</span></span><br><span class="line">m.invoke(obj, <span class="string">"刘德华"</span>);  </span><br><span class="line"><span class="comment">//获取私有的show()方法,它有一个参数为int类型的</span></span><br><span class="line">m = stuClass.getDeclaredMethod(<span class="string">"show"</span>, <span class="keyword">int</span>.class);  </span><br><span class="line">m.setAccessible(<span class="keyword">true</span>);<span class="comment">//解除私有限定  </span></span><br><span class="line"><span class="comment">//调用并得到返回值</span></span><br><span class="line">Object result = m.invoke(obj, <span class="number">20</span>); </span><br><span class="line">System.out.println(<span class="string">"返回值："</span> + result);</span><br></pre></td></tr></table></figure>
+
+<h4 id="4-2-5-获得main-方法"><a href="#4-2-5-获得main-方法" class="headerlink" title="4.2.5 获得main 方法"></a>4.2.5 获得main 方法</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//1.获取Student对象的字节码  </span></span><br><span class="line">Class clazz = Class.forName(<span class="string">"fanshe.main.Student"</span>);            </span><br><span class="line"><span class="comment">//2.获取main方法  </span></span><br><span class="line">Method methodMain = clazz.getMethod(<span class="string">"main"</span>, String[].class);  </span><br><span class="line"><span class="comment">//3.调用main方法</span></span><br><span class="line">methodMain.invoke(<span class="keyword">null</span>, (Object)<span class="keyword">new</span> String[]&#123;&#125;);</span><br></pre></td></tr></table></figure>
+
+<h2 id="5-java常用的设计模式"><a href="#5-java常用的设计模式" class="headerlink" title="5. java常用的设计模式"></a>5. java常用的设计模式</h2><h3 id="5-1-单例模式"><a href="#5-1-单例模式" class="headerlink" title="5.1 单例模式"></a>5.1 单例模式</h3><p><strong>单例模式可以保证系统中一个类只有一个实例。即一个类只有一个对象实例</strong></p>
+<ol>
+<li>饿汉模式<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Singleton</span></span>&#123;</span><br><span class="line">	<span class="keyword">private</span> <span class="keyword">static</span> Singleton instance = <span class="keyword">new</span> Singleton()&#123;&#125;</span><br><span class="line">	<span class="function"><span class="keyword">private</span> <span class="title">Singleton</span><span class="params">()</span></span>&#123;&#125;<span class="comment">//将构造私有化</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> Singleton <span class="title">getInstance</span><span class="params">()</span></span>&#123;</span><br><span class="line">		<span class="keyword">return</span> instance;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+</li>
+</ol>
+<blockquote>
+<p>对于饿汉模式来说，这种写法已经很‘perfect’了，<br>唯一的缺点就是，由于instance的初始化是在类加载时进行的，<br>类加载是由ClassLoader来实现的，如果初始化太早，就会造成资源浪费</p>
+</blockquote>
+<ol start="2">
+<li>懒汉模式<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Singleton</span></span>&#123;</span><br><span class="line">	<span class="keyword">private</span> <span class="keyword">static</span> Singleton instance = <span class="keyword">null</span>;</span><br><span class="line">	<span class="function"><span class="keyword">private</span> <span class="title">Singleton</span><span class="params">()</span></span>&#123;&#125;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> Singleton <span class="title">getInstance</span><span class="params">()</span></span>&#123;</span><br><span class="line">		<span class="keyword">if</span>(instance==<span class="keyword">null</span>)&#123;</span><br><span class="line">			<span class="keyword">return</span> <span class="keyword">new</span> Singleton();</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">return</span> instance;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+</li>
+</ol>
+<blockquote>
+<p>这种写法在单线程的时候是没问题的。<br>但是，当有多个线程一起工作的时候，如果有两个线程同时运行到 if (instance == null)，<br>都判断为null（第一个线程判断为空之后，并没有继续向下执行，当第二个线程判断的时候instance依然为空）<br>最终两个线程就各自会创建一个实例出来。这样就破环了单例模式 实例的唯一性，</p>
+</blockquote>
+<ol start="3">
+<li><p>双重检查模式</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Singleton</span></span>&#123;</span><br><span class="line">	<span class="comment">//volatile关键字的一个作用是禁止指令重排，</span></span><br><span class="line">	<span class="comment">//把instance声明为volatile之后，对它的写操作就会有一个内存屏障</span></span><br><span class="line">	<span class="comment">//这样，在它的赋值完成之前，就不用会调用读操作。</span></span><br><span class="line">	<span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">volatile</span> Singleton instance = <span class="keyword">null</span>;</span><br><span class="line">	<span class="function"><span class="keyword">private</span> <span class="title">Singleton</span><span class="params">()</span></span>&#123;&#125;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> Singleton <span class="title">getInstance</span><span class="params">()</span></span>&#123;</span><br><span class="line">		<span class="keyword">if</span>(instance==<span class="keyword">null</span>)&#123;</span><br><span class="line">			sysnchronized(Singleton.class)&#123;</span><br><span class="line">				<span class="keyword">if</span>(instance==<span class="keyword">null</span>)&#123;</span><br><span class="line">					<span class="keyword">return</span> <span class="keyword">new</span> Singleton();</span><br><span class="line">				&#125;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">return</span> instance;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>静态内部类实现</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Singleton</span> </span>&#123;</span><br><span class="line">  <span class="keyword">private</span> <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">SingletonHolder</span> </span>&#123;</span><br><span class="line">      <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> Singleton INSTANCE = <span class="keyword">new</span> Singleton();</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="function"><span class="keyword">private</span> <span class="title">Singleton</span> <span class="params">()</span></span>&#123;&#125;</span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> Singleton <span class="title">getInstance</span><span class="params">()</span> </span>&#123;</span><br><span class="line">      <span class="keyword">return</span> SingletonHolder.INSTANCE;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+</li>
+</ol>
+<blockquote>
+<p>它利用了ClassLoader来保证了同步，同时又能让开发者控制类加载的时机。从内部看是一个饿汉式的单例，但是从外部看来，又的确是懒汉式的实现</p>
+</blockquote>
+<h3 id="5-2-工厂模式"><a href="#5-2-工厂模式" class="headerlink" title="5.2 工厂模式"></a>5.2 工厂模式</h3><h3 id="5-3-代理模式"><a href="#5-3-代理模式" class="headerlink" title="5.3 代理模式"></a>5.3 代理模式</h3><h3 id="5-4-适配器模式"><a href="#5-4-适配器模式" class="headerlink" title="5.4 适配器模式"></a>5.4 适配器模式</h3><h3 id="5-5-状态模式"><a href="#5-5-状态模式" class="headerlink" title="5.5 状态模式"></a>5.5 状态模式</h3><h3 id="5-6-观察者模式"><a href="#5-6-观察者模式" class="headerlink" title="5.6 观察者模式"></a>5.6 观察者模式</h3><p><strong>具体内容请移步：</strong></p>
+<p><a href="https://mp.weixin.qq.com/s/vazjj_UMD2WqaQ4SG-yhCA" target="_blank" rel="noopener">java23中模式详解</a></p>
+<p><a href="https://github.com/pibigstar/design-mode" target="_blank" rel="noopener">java23中模式例子</a></p>
+
+      
+    </div>
+    
+    
+    
+
+    <div>
+      
+        <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
+    
+</div>
+
+      
+    </div>
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/09/29/Spring中自定义注解与使用/" rel="next" title>
+                <i class="fa fa-chevron-left"></i> 
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/09/29/十分钟学会Markdown语法/" rel="prev" title>
+                 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/qq.png" alt="派大星">
+            
+              <p class="site-author-name" itemprop="name">派大星</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives">
+              
+                  <span class="site-state-item-count">239</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/pibigstar" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://blog.csdn.net/junmoxi" target="_blank" title="CSDN">
+                      
+                        <i class="fa fa-fw fa-yelp"></i>CSDN</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-java集合"><span class="nav-number">1.</span> <span class="nav-text">1. java集合</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-1-常用集合的导图"><span class="nav-number">1.1.</span> <span class="nav-text">1.1 常用集合的导图</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-2-Collection和Map"><span class="nav-number">1.2.</span> <span class="nav-text">1.2 Collection和Map</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-java并发"><span class="nav-number">2.</span> <span class="nav-text">2. java并发</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1-java多线程中名词的概念"><span class="nav-number">2.1.</span> <span class="nav-text">2.1 java多线程中名词的概念</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-java实现并发的方式"><span class="nav-number">2.2.</span> <span class="nav-text">2.2 java实现并发的方式</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#2-2-1-synchronize关键字"><span class="nav-number">2.2.1.</span> <span class="nav-text">2.2.1 synchronize关键字</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-2-2-java-util-Lock的使用"><span class="nav-number">2.2.2.</span> <span class="nav-text">2.2.2 java.util.Lock的使用</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-2-3-使用线程池"><span class="nav-number">2.2.3.</span> <span class="nav-text">2.2.3 使用线程池</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-2-4-wait-和-sleep-理解"><span class="nav-number">2.2.4.</span> <span class="nav-text">2.2.4 wait 和 sleep 理解</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-java异常"><span class="nav-number">3.</span> <span class="nav-text">3. java异常</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#3-1-异常类导图"><span class="nav-number">3.1.</span> <span class="nav-text">3.1 异常类导图</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-2-异常的使用"><span class="nav-number">3.2.</span> <span class="nav-text">3.2 异常的使用</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#3-2-1-try、catch、finally"><span class="nav-number">3.2.1.</span> <span class="nav-text">3.2.1 try、catch、finally</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-2-2-抛出异常"><span class="nav-number">3.2.2.</span> <span class="nav-text">3.2.2 抛出异常</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-java反射"><span class="nav-number">4.</span> <span class="nav-text">4. java反射</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#4-1-反射的概述"><span class="nav-number">4.1.</span> <span class="nav-text">4.1 反射的概述</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-2-反射中常用的方法"><span class="nav-number">4.2.</span> <span class="nav-text">4.2 反射中常用的方法</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#4-2-1-获得Class对象"><span class="nav-number">4.2.1.</span> <span class="nav-text">4.2.1 获得Class对象</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-2-2-获得构造方法"><span class="nav-number">4.2.2.</span> <span class="nav-text">4.2.2 获得构造方法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-2-3-获得成员属性并设值"><span class="nav-number">4.2.3.</span> <span class="nav-text">4.2.3 获得成员属性并设值</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-2-4-获得成员方法并调用"><span class="nav-number">4.2.4.</span> <span class="nav-text">4.2.4 获得成员方法并调用</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-2-5-获得main-方法"><span class="nav-number">4.2.5.</span> <span class="nav-text">4.2.5 获得main 方法</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-java常用的设计模式"><span class="nav-number">5.</span> <span class="nav-text">5. java常用的设计模式</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#5-1-单例模式"><span class="nav-number">5.1.</span> <span class="nav-text">5.1 单例模式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-2-工厂模式"><span class="nav-number">5.2.</span> <span class="nav-text">5.2 工厂模式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-3-代理模式"><span class="nav-number">5.3.</span> <span class="nav-text">5.3 代理模式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-4-适配器模式"><span class="nav-number">5.4.</span> <span class="nav-text">5.4 适配器模式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-5-状态模式"><span class="nav-number">5.5.</span> <span class="nav-text">5.5 状态模式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-6-观察者模式"><span class="nav-number">5.6.</span> <span class="nav-text">5.6 观察者模式</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+        <div class="back-to-top">
+          <i class="fa fa-arrow-up"></i>
+          
+        </div>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-[object Object]"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">派大星</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+  <script type="text/javascript" src="/js/src/js.cookie.js?v=5.1.4"></script>
+  <script type="text/javascript" src="/js/src/scroll-cookie.js?v=5.1.4"></script>
+
+
+  
+
+</body>
+</html>
+<!-- 页面点击小红心 -->
+ <script type="text/javascript" src="/js/src/clicklove.js"></script>

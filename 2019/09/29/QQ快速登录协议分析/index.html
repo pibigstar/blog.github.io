@@ -1,0 +1,787 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/32x32.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/16x16.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="派大星, pibigstar,blog,go">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="title: QQ快速登录协议分析date: 2019-08-25 22:10:31tags: [qq,QQ快速登录,pskey,skey,g_tk]categories: 爬虫相关,渗透 1.获取pt_local_token请求  https://xui.ptlogin2.qq.com/cgi-bin/xlogin?s_url=https%3A%2F%2Fhuifu.qq.com%2Findex">
+<meta name="keywords" content="派大星,pibigstar">
+<meta property="og:type" content="article">
+<meta property="og:title" content="派大星的博客">
+<meta property="og:url" content="http://pibigstar.com/2019/09/29/QQ快速登录协议分析/index.html">
+<meta property="og:site_name" content="派大星的博客">
+<meta property="og:description" content="title: QQ快速登录协议分析date: 2019-08-25 22:10:31tags: [qq,QQ快速登录,pskey,skey,g_tk]categories: 爬虫相关,渗透 1.获取pt_local_token请求  https://xui.ptlogin2.qq.com/cgi-bin/xlogin?s_url=https%3A%2F%2Fhuifu.qq.com%2Findex">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20190317145730122.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2p1bm1veGk=,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/2019031715014094.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2p1bm1veGk=,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20190317150201965.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2p1bm1veGk=,size_16,color_FFFFFF,t_70">
+<meta property="og:updated_time" content="2019-09-29T14:56:39.860Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="派大星的博客">
+<meta name="twitter:description" content="title: QQ快速登录协议分析date: 2019-08-25 22:10:31tags: [qq,QQ快速登录,pskey,skey,g_tk]categories: 爬虫相关,渗透 1.获取pt_local_token请求  https://xui.ptlogin2.qq.com/cgi-bin/xlogin?s_url=https%3A%2F%2Fhuifu.qq.com%2Findex">
+<meta name="twitter:image" content="https://img-blog.csdnimg.cn/20190317145730122.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2p1bm1veGk=,size_16,color_FFFFFF,t_70">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":true,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://pibigstar.com/2019/09/29/QQ快速登录协议分析/">
+
+
+
+
+
+  <title> | 派大星的博客</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">派大星的博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <h1 class="site-subtitle" itemprop="description">很多事情不是会了才能做，而是做了才能学会</h1>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-schedule">
+          <a href="/schedule/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-calendar"></i> <br>
+            
+            Schedule
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-sitemap">
+          <a href="/sitemap.xml" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-sitemap"></i> <br>
+            
+            Sitemap
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            About
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://pibigstar.com/2019/09/29/QQ快速登录协议分析/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="派大星">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/qq.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="派大星的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline"></h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-09-29T22:56:39+08:00">
+                2019-09-29
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>title: QQ快速登录协议分析<br>date: 2019-08-25 22:10:31<br>tags: [qq,QQ快速登录,pskey,skey,g_tk]<br>categories: 爬虫相关,渗透</p>
+<h1 id="1-获取pt-local-token"><a href="#1-获取pt-local-token" class="headerlink" title="1.获取pt_local_token"></a>1.获取pt_local_token</h1><p>请求</p>
+<blockquote>
+<p><a href="https://xui.ptlogin2.qq.com/cgi-bin/xlogin?s_url=https%3A%2F%2Fhuifu.qq.com%2Findex.html&amp;style=20&amp;appid=715021417&amp;proxy_url=https%3A%2F%2Fhuifu.qq.com%2Fproxy.html" target="_blank" rel="noopener">https://xui.ptlogin2.qq.com/cgi-bin/xlogin?s_url=https%3A%2F%2Fhuifu.qq.com%2Findex.html&amp;style=20&amp;appid=715021417&amp;proxy_url=https%3A%2F%2Fhuifu.qq.com%2Fproxy.html</a></p>
+</blockquote>
+<p>在header的Set-Cookie中记录着该值</p>
+<h1 id="2-获取本机所登陆的QQ号码"><a href="#2-获取本机所登陆的QQ号码" class="headerlink" title="2. 获取本机所登陆的QQ号码"></a>2. 获取本机所登陆的QQ号码</h1><p>请求</p>
+<blockquote>
+<p><a href="https://localhost.ptlogin2.qq.com:4301/pt_get_uins?callback=ptui_getuins_CB&amp;r=0.6694805047494219&amp;pt_local_tk=`pt_local_tk`" target="_blank" rel="noopener">https://localhost.ptlogin2.qq.com:4301/pt_get_uins?callback=ptui_getuins_CB&amp;r=0.6694805047494219&amp;pt_local_tk=`pt_local_tk`</a></p>
+</blockquote>
+<p><strong>请求头带入Referer，Cookie带入pt_local_token=第一步得到的值</strong><br>端口是从4000~4008之间的，不确定哪一个</p>
+<p>referer：</p>
+<blockquote>
+<p><a href="https://xui.ptlogin2.qq.com/cgi-bin/xlogin?proxy_url=https%3A//qzs.qq.com/qzone/v6/portal/proxy.html&amp;daid=5&amp;&amp;hide_title_bar=1&amp;low_login=0&amp;qlogin_auto_login=1&amp;no_verifyimg=1&amp;link_target=blank&amp;appid=549000912&amp;style=22&amp;target=self&amp;s_url=https%3A%2F%2Fqzs.qzone.qq.com%2Fqzone%2Fv5%2Floginsucc.html%3Fpara%3Dizone&amp;pt_qr_app=%E6%89%8B%E6%9C%BAQQ%E7%A9%BA%E9%97%B4&amp;pt_qr_link=http%3A//z.qzone.com/download.html&amp;self_regurl=https%3A//qzs.qq.com/qzone/v6/reg/index.html&amp;pt_qr_help_link=http%3A//z.qzone.com/download.html&amp;pt_no_auth=1" target="_blank" rel="noopener">https://xui.ptlogin2.qq.com/cgi-bin/xlogin?proxy_url=https%3A//qzs.qq.com/qzone/v6/portal/proxy.html&amp;daid=5&amp;&amp;hide_title_bar=1&amp;low_login=0&amp;qlogin_auto_login=1&amp;no_verifyimg=1&amp;link_target=blank&amp;appid=549000912&amp;style=22&amp;target=self&amp;s_url=https%3A%2F%2Fqzs.qzone.qq.com%2Fqzone%2Fv5%2Floginsucc.html%3Fpara%3Dizone&amp;pt_qr_app=%E6%89%8B%E6%9C%BAQQ%E7%A9%BA%E9%97%B4&amp;pt_qr_link=http%3A//z.qzone.com/download.html&amp;self_regurl=https%3A//qzs.qq.com/qzone/v6/reg/index.html&amp;pt_qr_help_link=http%3A//z.qzone.com/download.html&amp;pt_no_auth=1</a></p>
+</blockquote>
+<p>返回数据</p>
+<blockquote>
+<p>var var_sso_uin_list=<br>[{“account”:”Q号”,”client_type”:65793,”face_index”:144,”gender”:1,”nickname”:”Blue”,”uin”:”QQ号”,”uin_flag”:4194822}];ptui_getuins_CB(var_sso_uin_list);</p>
+</blockquote>
+<h1 id="3-获取clientkey"><a href="#3-获取clientkey" class="headerlink" title="3. 获取clientkey"></a>3. 获取clientkey</h1><p>请求：</p>
+<blockquote>
+<p><a href="https://localhost.ptlogin2.qq.com:4301/pt_get_st?clientuin=`QQ号`&amp;callback=ptui_getst_CB&amp;r=0.7284667321181328&amp;pt_local_tk=-1806654417" target="_blank" rel="noopener">https://localhost.ptlogin2.qq.com:4301/pt_get_st?clientuin=`QQ号`&amp;callback=ptui_getst_CB&amp;r=0.7284667321181328&amp;pt_local_tk=-1806654417</a></p>
+</blockquote>
+<p><strong>请求头带入Referer，Cookie带入pt_local_token=第一步得到的值</strong></p>
+<p>clientkey还是在response中的header的Set-Cookie中</p>
+<h1 id="4-获取skey-uin"><a href="#4-获取skey-uin" class="headerlink" title="4. 获取skey,uin"></a>4. 获取skey,uin</h1><p>请求</p>
+<blockquote>
+<p><a href="https://ssl.ptlogin2.qq.com/jump?clientuin=`clientuin`&amp;keyindex=9&amp;pt_aid=715021417&amp;u1=https%3A%2F%2Fhuifu.qq.com%2Findex.html&amp;pt_local_tk=`pt_local_tk`&amp;pt_3rd_aid=0&amp;ptopt=1&amp;style=40" target="_blank" rel="noopener">https://ssl.ptlogin2.qq.com/jump?clientuin=`clientuin`&amp;keyindex=9&amp;pt_aid=715021417&amp;u1=https%3A%2F%2Fhuifu.qq.com%2Findex.html&amp;pt_local_tk=`pt_local_tk`&amp;pt_3rd_aid=0&amp;ptopt=1&amp;style=40</a></p>
+</blockquote>
+<p>请求头带入referer和cookie。<br>cookie需要带入<code>pt_local_token</code>、<code>clientuin</code>、<code>clientkey</code>等关键参数。</p>
+<p>skey，uin还是在response中的header的Set-Cookie中</p>
+<p>另外此请求返回数据中有一个URL，其实用这个URL就可以直接登录对方的QQ空间了。<br>URL 大概下面这样子</p>
+<blockquote>
+<p>ptui_qlogin_CB(‘0’, ‘<a href="https://ptlogin2.qzone.qq.com/check_sig?pttype=2&amp;uin=QQ号&amp;service=jump&amp;nodirect=0&amp;ptsigx=06bbcd374ab3c5df7d26d1493f9a6364895db2999b5cb25a3fcf208213a7211c3848716312355f3cb98c44626c6f3fda428d7e4e09f196e1ace0c26f3acd7620&amp;s_url=https%3A%2F%2Fqzs.qzone.qq.com%2Fqzone%2Fv5%2Floginsucc.html%3Fpara%3Dizone%26specifyurl%3Dhttp%253A%252F%252Fuser.qzone.qq.com%252FQ号&amp;f_url=&amp;ptlang=2052&amp;ptredirect=100&amp;aid=1000101&amp;daid=5&amp;j_later=0&amp;low_login_hour=0&#174;master=0&amp;pt_login_type=2&amp;pt_aid=549000912&amp;pt_aaid=0&amp;pt_light=0&amp;pt_3rd_aid=0&#39;" target="_blank" rel="noopener">https://ptlogin2.qzone.qq.com/check_sig?pttype=2&amp;uin=QQ号&amp;service=jump&amp;nodirect=0&amp;ptsigx=06bbcd374ab3c5df7d26d1493f9a6364895db2999b5cb25a3fcf208213a7211c3848716312355f3cb98c44626c6f3fda428d7e4e09f196e1ace0c26f3acd7620&amp;s_url=https%3A%2F%2Fqzs.qzone.qq.com%2Fqzone%2Fv5%2Floginsucc.html%3Fpara%3Dizone%26specifyurl%3Dhttp%253A%252F%252Fuser.qzone.qq.com%252FQ号&amp;f_url=&amp;ptlang=2052&amp;ptredirect=100&amp;aid=1000101&amp;daid=5&amp;j_later=0&amp;low_login_hour=0&#174;master=0&amp;pt_login_type=2&amp;pt_aid=549000912&amp;pt_aaid=0&amp;pt_light=0&amp;pt_3rd_aid=0&#39;</a>, ‘’)</p>
+</blockquote>
+<h1 id="5-获取p-skey"><a href="#5-获取p-skey" class="headerlink" title="5. 获取p_skey"></a>5. 获取p_skey</h1><p>请求</p>
+<blockquote>
+<p><a href="https://ssl.ptlogin2.qq.com/jump?clientuin=`clientuin`&amp;keyindex=9&amp;pt_aid=549000912&amp;daid=5&amp;u1=https%3A%2F%2Fqzs.qzone.qq.com%2Fqzone%2Fv5%2Floginsucc.html%3Fpara%3Dizone&amp;pt_local_tk=1543159096&amp;pt_3rd_aid=0&amp;ptopt=1&amp;style=40&amp;has_onekey=1" target="_blank" rel="noopener">https://ssl.ptlogin2.qq.com/jump?clientuin=`clientuin`&amp;keyindex=9&amp;pt_aid=549000912&amp;daid=5&amp;u1=https%3A%2F%2Fqzs.qzone.qq.com%2Fqzone%2Fv5%2Floginsucc.html%3Fpara%3Dizone&amp;pt_local_tk=1543159096&amp;pt_3rd_aid=0&amp;ptopt=1&amp;style=40&amp;has_onekey=1</a></p>
+</blockquote>
+<p>请求头带入referer和cookie。<br>cookie需要带入<code>pt_local_token</code></p>
+<p>特别注意：p_skey是在response的Request的Response的Header中</p>
+<h2 id="为防止别人恶意传播，此处就不贴代码了。"><a href="#为防止别人恶意传播，此处就不贴代码了。" class="headerlink" title="为防止别人恶意传播，此处就不贴代码了。"></a>为防止别人恶意传播，此处就不贴代码了。</h2><p>我把源码放我公众号上了，喜欢研究的朋友可以去取一下，回复： <code>QQ快速登录</code> 即可获取<br><img src="https://img-blog.csdnimg.cn/20190317145730122.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2p1bm1veGk=,size_16,color_FFFFFF,t_70" alt></p>
+<p>再放几个常用的接口：</p>
+<h3 id="1-获取QQ全部好友与分组"><a href="#1-获取QQ全部好友与分组" class="headerlink" title="1. 获取QQ全部好友与分组"></a>1. 获取QQ全部好友与分组</h3><p>接口：<a href="https://qun.qq.com/cgi-bin/qun_mgr/get_friend_list" target="_blank" rel="noopener">https://qun.qq.com/cgi-bin/qun_mgr/get_friend_list</a><br>POST请求<br>Header中加入cookie，cookie中带入这三个值：<code>uin=</code>; <code>skey=</code>;<code>p_skey=</code><br>Body中带入：bkn=g_tk<br>g_tk是通过skey经过算法计算出来了，源码中有这个算法<br><img src="https://img-blog.csdnimg.cn/2019031715014094.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2p1bm1veGk=,size_16,color_FFFFFF,t_70" alt><br><img src="https://img-blog.csdnimg.cn/20190317150201965.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2p1bm1veGk=,size_16,color_FFFFFF,t_70" alt></p>
+<h3 id="2-QQ群列表"><a href="#2-QQ群列表" class="headerlink" title="2. QQ群列表"></a>2. QQ群列表</h3><p>接口：<a href="https://qun.qq.com/cgi-bin/qun_mgr/get_group_list" target="_blank" rel="noopener">https://qun.qq.com/cgi-bin/qun_mgr/get_group_list</a><br>POST请求<br>Header中加入cookie，cookie中带入这三个值：<code>uin=</code>; <code>skey=</code>;<code>p_skey=</code><br>Body中带入：bkn=g_tk</p>
+<h3 id="3-获取某个群的群成员"><a href="#3-获取某个群的群成员" class="headerlink" title="3. 获取某个群的群成员"></a>3. 获取某个群的群成员</h3><p>接口：<a href="https://qun.qq.com/cgi-bin/qun_mgr/search_group_members" target="_blank" rel="noopener">https://qun.qq.com/cgi-bin/qun_mgr/search_group_members</a><br>POST请求</p>
+<p><strong>Header</strong>中加入cookie，cookie中带入这三个值：<code>uin=</code>; <code>skey=</code>;<code>p_skey=</code><br>POST参数：<code>bkn=</code>;<code>gc=群号</code>;<code>sort=0</code>;<code>st=起始位置</code>;<code>end=结束位置</code><br>其中end为要获取多少个，st为获取成员的起始位置</p>
+
+      
+    </div>
+    
+    
+    
+
+    <div>
+      
+        <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
+    
+</div>
+
+      
+    </div>
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/09/29/MySQL字段操作/" rel="next" title>
+                <i class="fa fa-chevron-left"></i> 
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/09/29/SpringBoot访问外部文件及默认路由/" rel="prev" title>
+                 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/qq.png" alt="派大星">
+            
+              <p class="site-author-name" itemprop="name">派大星</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives">
+              
+                  <span class="site-state-item-count">239</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/pibigstar" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://blog.csdn.net/junmoxi" target="_blank" title="CSDN">
+                      
+                        <i class="fa fa-fw fa-yelp"></i>CSDN</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#1-获取pt-local-token"><span class="nav-number">1.</span> <span class="nav-text">1.获取pt_local_token</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2-获取本机所登陆的QQ号码"><span class="nav-number">2.</span> <span class="nav-text">2. 获取本机所登陆的QQ号码</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#3-获取clientkey"><span class="nav-number">3.</span> <span class="nav-text">3. 获取clientkey</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#4-获取skey-uin"><span class="nav-number">4.</span> <span class="nav-text">4. 获取skey,uin</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#5-获取p-skey"><span class="nav-number">5.</span> <span class="nav-text">5. 获取p_skey</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#为防止别人恶意传播，此处就不贴代码了。"><span class="nav-number">5.1.</span> <span class="nav-text">为防止别人恶意传播，此处就不贴代码了。</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-获取QQ全部好友与分组"><span class="nav-number">5.1.1.</span> <span class="nav-text">1. 获取QQ全部好友与分组</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-QQ群列表"><span class="nav-number">5.1.2.</span> <span class="nav-text">2. QQ群列表</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-获取某个群的群成员"><span class="nav-number">5.1.3.</span> <span class="nav-text">3. 获取某个群的群成员</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+        <div class="back-to-top">
+          <i class="fa fa-arrow-up"></i>
+          
+        </div>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-[object Object]"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">派大星</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+  <script type="text/javascript" src="/js/src/js.cookie.js?v=5.1.4"></script>
+  <script type="text/javascript" src="/js/src/scroll-cookie.js?v=5.1.4"></script>
+
+
+  
+
+</body>
+</html>
+<!-- 页面点击小红心 -->
+ <script type="text/javascript" src="/js/src/clicklove.js"></script>

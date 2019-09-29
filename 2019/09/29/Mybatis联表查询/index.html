@@ -1,0 +1,768 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/32x32.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/16x16.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="派大星, pibigstar,blog,go">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="title: Mybatis联表查询date: 2018-08-03 22:10:31tags: [mybatis,联表查询,注解联表查询]categories: Java,数据库,mybatis,SpringBoot技能大全 1 使用注解方式1.1 一对一ClazzModel.java （返回前端的模型） 12345678910public class ClazzModel &amp;#123;	pri">
+<meta name="keywords" content="派大星,pibigstar">
+<meta property="og:type" content="article">
+<meta property="og:title" content="派大星的博客">
+<meta property="og:url" content="http://pibigstar.com/2019/09/29/Mybatis联表查询/index.html">
+<meta property="og:site_name" content="派大星的博客">
+<meta property="og:description" content="title: Mybatis联表查询date: 2018-08-03 22:10:31tags: [mybatis,联表查询,注解联表查询]categories: Java,数据库,mybatis,SpringBoot技能大全 1 使用注解方式1.1 一对一ClazzModel.java （返回前端的模型） 12345678910public class ClazzModel &amp;#123;	pri">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-09-29T14:56:39.716Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="派大星的博客">
+<meta name="twitter:description" content="title: Mybatis联表查询date: 2018-08-03 22:10:31tags: [mybatis,联表查询,注解联表查询]categories: Java,数据库,mybatis,SpringBoot技能大全 1 使用注解方式1.1 一对一ClazzModel.java （返回前端的模型） 12345678910public class ClazzModel &amp;#123;	pri">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":true,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://pibigstar.com/2019/09/29/Mybatis联表查询/">
+
+
+
+
+
+  <title> | 派大星的博客</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">派大星的博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <h1 class="site-subtitle" itemprop="description">很多事情不是会了才能做，而是做了才能学会</h1>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-schedule">
+          <a href="/schedule/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-calendar"></i> <br>
+            
+            Schedule
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-sitemap">
+          <a href="/sitemap.xml" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-sitemap"></i> <br>
+            
+            Sitemap
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            About
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://pibigstar.com/2019/09/29/Mybatis联表查询/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="派大星">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/qq.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="派大星的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline"></h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-09-29T22:56:39+08:00">
+                2019-09-29
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>title: Mybatis联表查询<br>date: 2018-08-03 22:10:31<br>tags: [mybatis,联表查询,注解联表查询]<br>categories: Java,数据库,mybatis,SpringBoot技能大全</p>
+<h1 id="1-使用注解方式"><a href="#1-使用注解方式" class="headerlink" title="1 使用注解方式"></a>1 使用注解方式</h1><h2 id="1-1-一对一"><a href="#1-1-一对一" class="headerlink" title="1.1 一对一"></a>1.1 一对一</h2><p>ClazzModel.java （返回前端的模型）</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ClazzModel</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">private</span> Long id;</span><br><span class="line">    <span class="keyword">private</span> String name;</span><br><span class="line">    <span class="keyword">private</span> String description;</span><br><span class="line">    <span class="keyword">private</span> Grade grade; <span class="comment">//联表</span></span><br><span class="line">    <span class="keyword">private</span> User user;<span class="comment">// 联表</span></span><br><span class="line">	<span class="comment">//setter、getter</span></span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>ClazzMapper.java</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Select</span>(<span class="string">"select * from poll_clazz"</span>)</span><br><span class="line"><span class="meta">@Results</span>(&#123;</span><br><span class="line">	<span class="comment">//一对一  one = @One()</span></span><br><span class="line">	<span class="meta">@Result</span>(property=<span class="string">"id"</span>,column=<span class="string">"id"</span>),<span class="comment">//不加这个查出来的id会为null</span></span><br><span class="line">	<span class="meta">@Result</span>(property = <span class="string">"grade"</span>,column = <span class="string">"grade_id"</span>,one = <span class="meta">@One</span>(select=<span class="string">"com.pibigstar.dao.GradeMapper.selectByPrimaryKey"</span>)),</span><br><span class="line">	<span class="meta">@Result</span>(property = <span class="string">"user"</span>,column = <span class="string">"user_id"</span>,one = <span class="meta">@One</span>(select=<span class="string">"com.pibigstar.dao.UserMapper.selectByPrimaryKey"</span>))</span><br><span class="line">&#125;)</span><br><span class="line"><span class="function">List&lt;ClazzModel&gt; <span class="title">findAll</span><span class="params">()</span></span>;</span><br></pre></td></tr></table></figure>
+
+<h2 id="1-2-一对多"><a href="#1-2-一对多" class="headerlink" title="1.2 一对多"></a>1.2 一对多</h2><p>QuestionModel.java</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">QuestionModel</span></span>&#123;</span><br><span class="line">	<span class="keyword">private</span> Long id;</span><br><span class="line">    <span class="keyword">private</span> String name;</span><br><span class="line">    <span class="keyword">private</span> String questionType;</span><br><span class="line">    <span class="keyword">private</span> List&lt;Options&gt; options;</span><br><span class="line">    <span class="comment">//省略 setter、getter方法</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>QuestionMapper.java</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">    <span class="meta">@Select</span>(<span class="string">"select * from poll_questions"</span>)</span><br><span class="line">    <span class="meta">@Results</span>(&#123;</span><br><span class="line">    	 <span class="comment">// 一对多  many = @Many()</span></span><br><span class="line">    	 <span class="meta">@Result</span>(property=<span class="string">"id"</span>,column=<span class="string">"id"</span>),<span class="comment">//不加这个查出来的id会为null</span></span><br><span class="line"><span class="meta">@Result</span>(property=<span class="string">"options"</span>,column=<span class="string">"id"</span>,many=<span class="meta">@Many</span>(select=<span class="string">"com.pibigstar.dao.OptionsMapper.findAllByQuestionId"</span>))</span><br><span class="line">    &#125;)</span><br><span class="line">	<span class="function">List&lt;QuestionModel&gt; <span class="title">findAll</span><span class="params">()</span></span>;</span><br></pre></td></tr></table></figure>
+
+<h2 id="1-3-多对多"><a href="#1-3-多对多" class="headerlink" title="1.3 多对多"></a>1.3 多对多</h2><p>业务介绍： 有一张问卷表（questionnaire），一张题库表（question），一张问卷与题库的桥表（qq）</p>
+<p>希望能查出所有的问卷，每个问卷有对应的题</p>
+<p>思路：我们先查出所有的问卷，然后通过问卷id 在桥表中查找出此问卷中的所有问题</p>
+<p>QuestionnaireModel.java</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">QuestionnaireModel</span></span>&#123;</span><br><span class="line">	<span class="keyword">private</span> Long id;</span><br><span class="line">	<span class="keyword">private</span> String name;</span><br><span class="line">    <span class="keyword">private</span> String description;</span><br><span class="line">    <span class="keyword">private</span> List&lt;QuestionModel&gt; questions;</span><br><span class="line">    <span class="comment">//省略setter、getter方法</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>QuestionnaireMapper.java</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Select</span>(<span class="string">"select * from poll_questionnaire"</span>)</span><br><span class="line"><span class="meta">@Results</span>(&#123;</span><br><span class="line">	<span class="meta">@Result</span>(property=<span class="string">"id"</span>,column=<span class="string">"id"</span>),</span><br><span class="line">	  <span class="meta">@Result</span>(property=<span class="string">"questions"</span>,column=<span class="string">"id"</span>,many=<span class="meta">@Many</span>(select=<span class="string">"com.pibigstar.dao.QQMapper.selectAllQuestions"</span>)),</span><br><span class="line">&#125;)</span><br><span class="line"><span class="function">List&lt;QuestionnaireModel&gt; <span class="title">findAllModel</span><span class="params">()</span></span>;</span><br></pre></td></tr></table></figure>
+
+<p>QQMapper.java</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Select</span>(<span class="string">"select * from poll_questions where id in (select questions_id from poll_qq where questionnaire_id=#&#123;id&#125;)"</span>)</span><br><span class="line">  <span class="meta">@Results</span>(&#123;</span><br><span class="line">  	<span class="meta">@Result</span>(property=<span class="string">"id"</span>,column=<span class="string">"id"</span>),</span><br><span class="line">  	<span class="meta">@Result</span>(property=<span class="string">"options"</span>,column=<span class="string">"id"</span>,many=<span class="meta">@Many</span>(select=<span class="string">"com.pibigstar.dao.OptionsMapper.findAllByQuestionId"</span>))</span><br><span class="line">  &#125;)</span><br><span class="line">  <span class="function">List&lt;QuestionModel&gt; <span class="title">selectAllQuestions</span><span class="params">(Long id)</span></span>;</span><br></pre></td></tr></table></figure>
+
+<h2 id="1-4-注意："><a href="#1-4-注意：" class="headerlink" title="1.4 注意："></a>1.4 注意：</h2><p>分步查询有时候非常浪费数据库资源，我们可以采用懒加载方式，当有需要的时候才进行分步查询<br>使用：fetchType=FetchType.LAZY</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="meta">@Select</span>(<span class="string">"select * from poll_clazz"</span>)</span><br><span class="line"><span class="meta">@Results</span>(&#123;</span><br><span class="line">	<span class="comment">//一对一  one = @One()</span></span><br><span class="line">	<span class="meta">@Result</span>(property=<span class="string">"id"</span>,column=<span class="string">"id"</span>),<span class="comment">//不加这个查出来的id会为null</span></span><br><span class="line">	<span class="meta">@Result</span>(property = <span class="string">"grade"</span>,column = <span class="string">"grade_id"</span>,one = <span class="meta">@One</span>(fetchType=FetchType.LAZY,select=<span class="string">"com.pibigstar.dao.GradeMapper.selectByPrimaryKey"</span>)),</span><br><span class="line"></span><br><span class="line"><span class="function">List&lt;ClazzModel&gt; <span class="title">findAll</span><span class="params">()</span></span>;</span><br></pre></td></tr></table></figure>
+
+<h1 id="2-使用xml配置方式"><a href="#2-使用xml配置方式" class="headerlink" title="2 使用xml配置方式"></a>2 使用xml配置方式</h1><h2 id="2-1-一对一"><a href="#2-1-一对一" class="headerlink" title="2.1 一对一"></a>2.1 一对一</h2><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version="1.0" encoding="UTF-8"?&gt;</span></span><br><span class="line"><span class="meta">&lt;!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd"&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">mapper</span> <span class="attr">namespace</span>=<span class="string">"com.briup.apps.poll.dao.extend.ClazzVMMapper"</span>&gt;</span></span><br><span class="line">  </span><br><span class="line">  <span class="tag">&lt;<span class="name">resultMap</span> <span class="attr">id</span>=<span class="string">"clazzVMResultMap"</span> <span class="attr">type</span>=<span class="string">"com.briup.apps.poll.bean.extend.ClazzVM"</span>&gt;</span></span><br><span class="line">  	<span class="tag">&lt;<span class="name">id</span> <span class="attr">column</span>=<span class="string">"id"</span> <span class="attr">jdbcType</span>=<span class="string">"BIGINT"</span> <span class="attr">property</span>=<span class="string">"id"</span> /&gt;</span></span><br><span class="line">	<span class="comment">&lt;!-- 联表查询 association  --&gt;</span></span><br><span class="line"> 	<span class="tag">&lt;<span class="name">association</span> <span class="attr">column</span>=<span class="string">"grade_id"</span> <span class="attr">property</span>=<span class="string">"grade"</span> <span class="attr">select</span>=<span class="string">"com.briup.apps.poll.dao.GradeMapper.selectByPrimaryKey"</span>&gt;</span><span class="tag">&lt;/<span class="name">association</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">association</span> <span class="attr">column</span>=<span class="string">"charge_id"</span> <span class="attr">property</span>=<span class="string">"charge"</span> <span class="attr">select</span>=<span class="string">"com.briup.apps.poll.dao.UserMapper.selectByPrimaryKey"</span>&gt;</span><span class="tag">&lt;/<span class="name">association</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">resultMap</span>&gt;</span></span><br><span class="line">  </span><br><span class="line">   <span class="tag">&lt;<span class="name">select</span> <span class="attr">id</span>=<span class="string">"selectById"</span> <span class="attr">parameterType</span>=<span class="string">"java.lang.Long"</span> <span class="attr">resultMap</span>=<span class="string">"clazzVMResultMap"</span>&gt;</span></span><br><span class="line">  	select * from poll_clazz where id=#&#123;id&#125;;</span><br><span class="line">  <span class="tag">&lt;/<span class="name">select</span>&gt;</span></span><br><span class="line">   </span><br><span class="line"><span class="tag">&lt;/<span class="name">mapper</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="2-2-一对多"><a href="#2-2-一对多" class="headerlink" title="2.2 一对多"></a>2.2 一对多</h2><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">resultMap</span> <span class="attr">type</span>=<span class="string">"com.User"</span> <span class="attr">id</span>=<span class="string">"userAndItemsResultMap"</span>&gt;</span></span><br><span class="line">       <span class="comment">&lt;!-- 用户信息 --&gt;</span></span><br><span class="line">       <span class="tag">&lt;<span class="name">id</span> <span class="attr">column</span>=<span class="string">"user_id"</span> <span class="attr">property</span>=<span class="string">"id"</span>/&gt;</span></span><br><span class="line">       <span class="tag">&lt;<span class="name">result</span> <span class="attr">column</span>=<span class="string">"username"</span> <span class="attr">property</span>=<span class="string">"username"</span>/&gt;</span></span><br><span class="line">       <span class="tag">&lt;<span class="name">result</span> <span class="attr">column</span>=<span class="string">"sex"</span> <span class="attr">property</span>=<span class="string">"sex"</span>/&gt;</span></span><br><span class="line">       <span class="tag">&lt;<span class="name">result</span> <span class="attr">column</span>=<span class="string">"address"</span> <span class="attr">property</span>=<span class="string">"address"</span>/&gt;</span></span><br><span class="line">       <span class="comment">&lt;!-- 一个用户对应多个订单 --&gt;</span></span><br><span class="line">       <span class="tag">&lt;<span class="name">collection</span> <span class="attr">property</span>=<span class="string">"ordersList"</span> <span class="attr">ofType</span>=<span class="string">"com.Orders"</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">id</span> <span class="attr">column</span>=<span class="string">"id"</span> <span class="attr">property</span>=<span class="string">"id"</span>/&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">result</span> <span class="attr">column</span>=<span class="string">"user_id"</span> <span class="attr">property</span>=<span class="string">"userid"</span>/&gt;</span></span><br><span class="line">               <span class="tag">&lt;<span class="name">result</span> <span class="attr">column</span>=<span class="string">"number"</span> <span class="attr">property</span>=<span class="string">"number"</span>/&gt;</span></span><br><span class="line">               <span class="tag">&lt;<span class="name">result</span> <span class="attr">column</span>=<span class="string">"createtime"</span> <span class="attr">property</span>=<span class="string">"createTime"</span>/&gt;</span></span><br><span class="line">               <span class="tag">&lt;<span class="name">result</span> <span class="attr">column</span>=<span class="string">"note"</span> <span class="attr">property</span>=<span class="string">"note"</span>/&gt;</span></span><br><span class="line">               <span class="comment">&lt;!-- 一个订单对应多个订单明细 --&gt;</span></span><br><span class="line">               <span class="tag">&lt;<span class="name">collection</span> <span class="attr">property</span>=<span class="string">"orderdetails"</span> <span class="attr">ofType</span>=<span class="string">"com.OrderDetail"</span>&gt;</span></span><br><span class="line">                   <span class="tag">&lt;<span class="name">id</span> <span class="attr">column</span>=<span class="string">"orderdetail_id"</span> <span class="attr">property</span>=<span class="string">"id"</span>/&gt;</span></span><br><span class="line">                   <span class="tag">&lt;<span class="name">result</span> <span class="attr">column</span>=<span class="string">"items_id"</span>   <span class="attr">property</span>=<span class="string">"itemsId"</span>/&gt;</span></span><br><span class="line">                   <span class="tag">&lt;<span class="name">result</span> <span class="attr">column</span>=<span class="string">"items_num"</span>  <span class="attr">property</span>=<span class="string">"itemsNum"</span>/&gt;</span></span><br><span class="line">                   <span class="tag">&lt;<span class="name">result</span> <span class="attr">column</span>=<span class="string">"orders_id"</span>  <span class="attr">property</span>=<span class="string">"ordersId"</span>/&gt;</span></span><br><span class="line">                   <span class="comment">&lt;!-- 一个订单明细对应一个商品 --&gt;</span></span><br><span class="line">                   <span class="tag">&lt;<span class="name">association</span> <span class="attr">property</span>=<span class="string">"items"</span> <span class="attr">javaType</span>=<span class="string">"com.Items"</span>&gt;</span></span><br><span class="line">                       <span class="tag">&lt;<span class="name">id</span> <span class="attr">column</span>=<span class="string">"items_id"</span> <span class="attr">property</span>=<span class="string">"id"</span>/&gt;</span></span><br><span class="line">                       <span class="tag">&lt;<span class="name">result</span> <span class="attr">column</span>=<span class="string">"items_name"</span> <span class="attr">property</span>=<span class="string">"itemsName"</span>/&gt;</span></span><br><span class="line">                       <span class="tag">&lt;<span class="name">result</span> <span class="attr">column</span>=<span class="string">"items_detail"</span> <span class="attr">property</span>=<span class="string">"detail"</span>/&gt;</span></span><br><span class="line">                       <span class="tag">&lt;<span class="name">result</span> <span class="attr">column</span>=<span class="string">"items_price"</span> <span class="attr">property</span>=<span class="string">"price"</span>/&gt;</span></span><br><span class="line">                   <span class="tag">&lt;/<span class="name">association</span>&gt;</span></span><br><span class="line">               <span class="tag">&lt;/<span class="name">collection</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">collection</span>&gt;</span></span><br><span class="line">   <span class="tag">&lt;/<span class="name">resultMap</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+    
+    
+    
+
+    <div>
+      
+        <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
+    
+</div>
+
+      
+    </div>
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/09/29/java使用poi反射读取写入Excel/" rel="next" title>
+                <i class="fa fa-chevron-left"></i> 
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/09/29/Python使用phantomJS实现自动登录/" rel="prev" title>
+                 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/qq.png" alt="派大星">
+            
+              <p class="site-author-name" itemprop="name">派大星</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives">
+              
+                  <span class="site-state-item-count">239</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/pibigstar" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://blog.csdn.net/junmoxi" target="_blank" title="CSDN">
+                      
+                        <i class="fa fa-fw fa-yelp"></i>CSDN</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#1-使用注解方式"><span class="nav-number">1.</span> <span class="nav-text">1 使用注解方式</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-1-一对一"><span class="nav-number">1.1.</span> <span class="nav-text">1.1 一对一</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-2-一对多"><span class="nav-number">1.2.</span> <span class="nav-text">1.2 一对多</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-3-多对多"><span class="nav-number">1.3.</span> <span class="nav-text">1.3 多对多</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-4-注意："><span class="nav-number">1.4.</span> <span class="nav-text">1.4 注意：</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2-使用xml配置方式"><span class="nav-number">2.</span> <span class="nav-text">2 使用xml配置方式</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#2-1-一对一"><span class="nav-number">2.1.</span> <span class="nav-text">2.1 一对一</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-2-一对多"><span class="nav-number">2.2.</span> <span class="nav-text">2.2 一对多</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+        <div class="back-to-top">
+          <i class="fa fa-arrow-up"></i>
+          
+        </div>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-[object Object]"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">派大星</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+  <script type="text/javascript" src="/js/src/js.cookie.js?v=5.1.4"></script>
+  <script type="text/javascript" src="/js/src/scroll-cookie.js?v=5.1.4"></script>
+
+
+  
+
+</body>
+</html>
+<!-- 页面点击小红心 -->
+ <script type="text/javascript" src="/js/src/clicklove.js"></script>

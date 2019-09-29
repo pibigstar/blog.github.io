@@ -1,0 +1,823 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/32x32.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/16x16.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="派大星, pibigstar,blog,go">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="title: sed和awk常用操作date: 2019-09-13 22:10:31tags: [sed,shell,linux,awk]categories: Linux,shell @[toc] 1. sed命令说明 sed是流式文本处理，它是对文本进行一行一行的处理，处理完一行之后，再读取下一行，sed默认不会修改源文件的  命令格式： 1sed 参数 &apos;动作&apos; 文本文件  参数有：  -">
+<meta name="keywords" content="派大星,pibigstar">
+<meta property="og:type" content="article">
+<meta property="og:title" content="派大星的博客">
+<meta property="og:url" content="http://pibigstar.com/2019/09/29/sed和awk常用操作/index.html">
+<meta property="og:site_name" content="派大星的博客">
+<meta property="og:description" content="title: sed和awk常用操作date: 2019-09-13 22:10:31tags: [sed,shell,linux,awk]categories: Linux,shell @[toc] 1. sed命令说明 sed是流式文本处理，它是对文本进行一行一行的处理，处理完一行之后，再读取下一行，sed默认不会修改源文件的  命令格式： 1sed 参数 &apos;动作&apos; 文本文件  参数有：  -">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-09-29T14:56:39.752Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="派大星的博客">
+<meta name="twitter:description" content="title: sed和awk常用操作date: 2019-09-13 22:10:31tags: [sed,shell,linux,awk]categories: Linux,shell @[toc] 1. sed命令说明 sed是流式文本处理，它是对文本进行一行一行的处理，处理完一行之后，再读取下一行，sed默认不会修改源文件的  命令格式： 1sed 参数 &apos;动作&apos; 文本文件  参数有：  -">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":true,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://pibigstar.com/2019/09/29/sed和awk常用操作/">
+
+
+
+
+
+  <title> | 派大星的博客</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">派大星的博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <h1 class="site-subtitle" itemprop="description">很多事情不是会了才能做，而是做了才能学会</h1>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-schedule">
+          <a href="/schedule/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-calendar"></i> <br>
+            
+            Schedule
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-sitemap">
+          <a href="/sitemap.xml" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-sitemap"></i> <br>
+            
+            Sitemap
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            About
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://pibigstar.com/2019/09/29/sed和awk常用操作/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="派大星">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/qq.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="派大星的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline"></h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-09-29T22:56:39+08:00">
+                2019-09-29
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>title: sed和awk常用操作<br>date: 2019-09-13 22:10:31<br>tags: [sed,shell,linux,awk]<br>categories: Linux,shell</p>
+<p>@[toc]</p>
+<h1 id="1-sed命令说明"><a href="#1-sed命令说明" class="headerlink" title="1. sed命令说明"></a>1. sed命令说明</h1><blockquote>
+<p>sed是流式文本处理，它是对文本进行一行一行的处理，处理完一行之后，再读取下一行，sed默认不会修改源文件的</p>
+</blockquote>
+<p>命令格式：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sed 参数 <span class="string">'动作'</span> 文本文件</span><br></pre></td></tr></table></figure>
+
+<p><strong>参数有：</strong></p>
+<ul>
+<li><code>-n</code> 仅显示sed处理后的结果。</li>
+<li><code>-i</code> 将修改保存到源文件中</li>
+<li><code>-e &lt;script&gt;</code> 以选项中指定的script来处理输入的文本文件。</li>
+<li><code>-f&lt;script文件&gt;</code> 以选项中指定的script文件来处理输入的文本文件。</li>
+</ul>
+<p><strong>动作有：</strong></p>
+<blockquote>
+<p>动静基本和 vim 中一样，a 是新增，i 是插入，d 是删除，s 是替换</p>
+</blockquote>
+<ul>
+<li><code>a:新增</code>， a 的后面可以接字串，而这些字串会在新的一行出现(目前的下一行)～</li>
+<li><code>i:插入</code>， i 的后面可以接字串，而这些字串会在新的一行出现(目前的上一行)；</li>
+<li><code>s:替换</code>，替换字符串，需要使用分隔符把新旧文本分开，分隔符可以为：<code>/</code> <code>,</code> <code>#</code></li>
+<li><code>d:删除</code>，因为是删除啊，所以 d 后面通常不接任何咚咚；</li>
+<li><code>c:取代</code>， c 的后面可以接字串，这些字串可以取代 n1,n2 之间的行！</li>
+<li><code>p:打印</code>，亦即将某个选择的数据印出。通常 p 会与参数<code>sed -n</code>一起运行</li>
+<li><code>q:退出</code>, 退出sed处理，一般用来找到第一个匹配项就退出处理了</li>
+</ul>
+<p><strong>eg</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 打印第10行，p 一般和 -n配合使用</span></span><br><span class="line">sed -n <span class="string">'10p'</span> test.txt</span><br><span class="line"></span><br><span class="line"><span class="comment"># 打印1到10行</span></span><br><span class="line">sed -n <span class="string">'1,10p'</span> test.txt</span><br><span class="line"></span><br><span class="line"><span class="comment"># 每隔2行查看，查看1,3,5....行</span></span><br><span class="line">sed -n <span class="string">'1~2p'</span> test.txt</span><br><span class="line"></span><br><span class="line"><span class="comment"># 新增,在第1行后新增 ========</span></span><br><span class="line">sed <span class="string">'1a ========'</span> test.txt</span><br><span class="line"></span><br><span class="line"><span class="comment"># 插入，在1行前面插入 =======</span></span><br><span class="line">sed <span class="string">'1i ======='</span> test.txt</span><br><span class="line"></span><br><span class="line"><span class="comment"># 删除, 删除最后一行,$表示最后一行</span></span><br><span class="line">sed <span class="string">'$d'</span> test.txt</span><br><span class="line"></span><br><span class="line"><span class="comment"># 退出,找到pibigstar就退出</span></span><br><span class="line">sed <span class="string">'/pibigstar/q'</span> test.txt</span><br><span class="line"></span><br><span class="line"><span class="comment"># 替换，一行只会替换第一个匹配的，后面的不会被替换</span></span><br><span class="line">sed <span class="string">'s/dev/prod/'</span> test.txt</span><br><span class="line"></span><br><span class="line"><span class="comment"># 全局替换，添加 -g，那么一行中如果符合将全部替换</span></span><br><span class="line">sed <span class="string">'s/dev/prod/g'</span> test.txt</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>一般先不用<code>-i</code>参数，当我们执行 <code>sed</code>之后会显示执行后的结果，如果结果是符合我们预期的，那么再加上 <code>-i</code> 参数来达到修改源文件的目的</p>
+</blockquote>
+<h2 id="1-2-Sed高级操作"><a href="#1-2-Sed高级操作" class="headerlink" title="1.2 Sed高级操作"></a>1.2 Sed高级操作</h2><ul>
+<li><code>{}:多个动作</code>，{}中可放多个sed动作，用 <code>;</code>分开</li>
+<li><code>&amp;:替换固定字符串</code>，主要是优化替换操作，&amp; 代表前面替换的字符</li>
+<li><code>\u\U:大小写转换</code>，<code>\u</code>将其转换为小写，<code>\U</code>将其转换为大写</li>
+<li><code>():取括号中的值</code>，替换时可根据<code>\1</code>来标识取那个<code>()</code>中的值，<code>\2</code>取第二个括号中的值,注意使用时都是需要用<code>\(</code>  <code>\)</code>，其实主要也是为了优化替换操作<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 多个动作,先删除第一行,然后将后面的 dev 替换为 prod</span></span><br><span class="line">sed <span class="string">'&#123;1d;s/dev/prod/g&#125;'</span> test.txt</span><br><span class="line"><span class="comment"># &amp; 操作,将 = 后面添加一个空格</span></span><br><span class="line">sed <span class="string">'s/=/&amp; /'</span> test.txt</span><br><span class="line"><span class="comment"># \u操作,将ROOT转换为root</span></span><br><span class="line">sed <span class="string">'s/ROOT/\u&amp;/'</span> test.txt</span><br><span class="line"><span class="comment"># ()操作，取出username</span></span><br><span class="line">sed <span class="string">'s/\([a-z_-]\+\):.*$/\1/'</span> passwd</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<h2 id="1-3-Sed常用命令"><a href="#1-3-Sed常用命令" class="headerlink" title="1.3 Sed常用命令"></a>1.3 Sed常用命令</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 配置文件尾添加配置</span></span><br><span class="line">sed  <span class="string">'$a port=8080 \nhost=127.0.0.1'</span> test.txt</span><br><span class="line"></span><br><span class="line"><span class="comment"># 删除文本空行</span></span><br><span class="line">sed <span class="string">'^$d'</span> test.txt</span><br></pre></td></tr></table></figure>
+
+<h1 id="2-awk命令说明"><a href="#2-awk命令说明" class="headerlink" title="2. awk命令说明"></a>2. awk命令说明</h1><p>awk的命令格式</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">awk -F <span class="string">'分隔符'</span> <span class="string">'命令'</span> file</span><br></pre></td></tr></table></figure>
+
+<p><strong>内置函数</strong><br><code>$0</code>: 代表所有域<br><code>$1</code>: 代码第一个域，下面依次类推 $2,就是第二个域<br><code>NR</code>: 行号<br><code>NF</code>: 字符数<br><code>print</code>: 打印<br><code>printf</code>: 格式化打印</p>
+<h2 id="2-1-切换分割符"><a href="#2-1-切换分割符" class="headerlink" title="2.1 切换分割符"></a>2.1 切换分割符</h2><blockquote>
+<p>-F 是可选参数，可以不写，不写的话，默认分隔符为<code>空格</code></p>
+</blockquote>
+<p><strong>以冒号<code>:</code>作为分隔符</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">awk -F <span class="string">':'</span> <span class="string">'&#123;print $1&#125;'</span> /etc/passwd</span><br></pre></td></tr></table></figure>
+
+<p><code>{}</code> 中可直接可以放代码块，if…else…</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">awk -F <span class="string">':'</span> <span class="string">'&#123;printf("user:%s Line:%s Col:%s \n",$1,NR,NF)&#125;'</span> /etc/passwd</span><br></pre></td></tr></table></figure>
+
+<h2 id="2-2-条件输出"><a href="#2-2-条件输出" class="headerlink" title="2.2 条件输出"></a>2.2 条件输出</h2><p>初次之外我们还可以有条件的将其输出</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 当$3 大于 100 才输出</span></span><br><span class="line">awk -F <span class="string">':'</span> <span class="string">'$3&gt;100&#123;print $1&#125;'</span> /etc/passwd</span><br></pre></td></tr></table></figure>
+
+<h2 id="2-3-BEGIN…END循环"><a href="#2-3-BEGIN…END循环" class="headerlink" title="2.3 BEGIN…END循环"></a>2.3 BEGIN…END循环</h2><p>统计文件夹下所有文件一共多大</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ls -l | awk <span class="string">'BEGIN&#123;size=0&#125;&#123;size+=$5&#125;END&#123;print "all size:"size/1024/1024"M"&#125;'</span></span><br></pre></td></tr></table></figure>
+
+<p>我们将一行文本按分隔符分隔之后，第一个就是 第一个域，下面依次类推<br><strong>举个栗子：</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">root     pts/1   192.168.1.100  Tue Feb 10 11:21   still logged in</span><br><span class="line">root     pts/1   192.168.1.100  Tue Feb 10 00:46 - 02:28  (01:41)</span><br><span class="line">root     pts/1   192.168.1.100  Mon Feb  9 11:41 - 18:30  (06:48)</span><br><span class="line">dmtsai   pts/1   192.168.1.100  Mon Feb  9 11:41 - 11:41  (00:00)</span><br><span class="line">root     tty1                   Fri Sep  5 14:09 - 14:10  (00:01)</span><br></pre></td></tr></table></figure>
+
+<p>将上面的信息保存为<code>test.txt</code>文件，我们执行下面命令</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">awk <span class="string">'&#123;print $1&#125;'</span> test.txt</span><br></pre></td></tr></table></figure>
+
+<p>我们没有指定分隔符，那么就是以 空格 进行分隔的，那么输出结果就会是</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">root</span><br><span class="line">root</span><br><span class="line">root</span><br><span class="line">dmtsai</span><br><span class="line">root</span><br></pre></td></tr></table></figure>
+
+<p>awk 是逐行进行分析，我们分析第一行就可以了</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">root     pts/1   192.168.1.100  Tue Feb 10 11:21   still logged in</span><br></pre></td></tr></table></figure>
+
+<p>按分隔符进行分隔，那么</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">域1       域2		    域3			域4				   域5</span><br><span class="line">root     pts/1   192.168.1.100  Tue Feb 10 11:21   still logged in</span><br></pre></td></tr></table></figure>
+
+<h2 id="2-4-实例"><a href="#2-4-实例" class="headerlink" title="2.4 实例"></a>2.4 实例</h2><p>查问某文件中的关键字</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">awk <span class="string">'/root/'</span> /etc/passwd</span><br></pre></td></tr></table></figure>
+
+<p>其中 / / 之间可以使用正则表达式</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">awk <span class="string">'/^root/'</span> /etc/passwd</span><br></pre></td></tr></table></figure>
+
+<p>查看本地所有运行的端口</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">netstat -na | grep LISTENING | awk <span class="string">'&#123;print $2&#125;'</span> | awk -F: <span class="string">'&#123;print $2&#125;'</span></span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+    
+    
+    
+
+    <div>
+      
+        <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
+    
+</div>
+
+      
+    </div>
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/09/29/Python使用phantomJS实现自动登录/" rel="next" title>
+                <i class="fa fa-chevron-left"></i> 
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/09/29/git高级使用/" rel="prev" title>
+                 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/qq.png" alt="派大星">
+            
+              <p class="site-author-name" itemprop="name">派大星</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives">
+              
+                  <span class="site-state-item-count">239</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/pibigstar" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://blog.csdn.net/junmoxi" target="_blank" title="CSDN">
+                      
+                        <i class="fa fa-fw fa-yelp"></i>CSDN</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#1-sed命令说明"><span class="nav-number">1.</span> <span class="nav-text">1. sed命令说明</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-2-Sed高级操作"><span class="nav-number">1.1.</span> <span class="nav-text">1.2 Sed高级操作</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-3-Sed常用命令"><span class="nav-number">1.2.</span> <span class="nav-text">1.3 Sed常用命令</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2-awk命令说明"><span class="nav-number">2.</span> <span class="nav-text">2. awk命令说明</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#2-1-切换分割符"><span class="nav-number">2.1.</span> <span class="nav-text">2.1 切换分割符</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-2-条件输出"><span class="nav-number">2.2.</span> <span class="nav-text">2.2 条件输出</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-3-BEGIN…END循环"><span class="nav-number">2.3.</span> <span class="nav-text">2.3 BEGIN…END循环</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-4-实例"><span class="nav-number">2.4.</span> <span class="nav-text">2.4 实例</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+        <div class="back-to-top">
+          <i class="fa fa-arrow-up"></i>
+          
+        </div>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-[object Object]"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">派大星</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+  <script type="text/javascript" src="/js/src/js.cookie.js?v=5.1.4"></script>
+  <script type="text/javascript" src="/js/src/scroll-cookie.js?v=5.1.4"></script>
+
+
+  
+
+</body>
+</html>
+<!-- 页面点击小红心 -->
+ <script type="text/javascript" src="/js/src/clicklove.js"></script>

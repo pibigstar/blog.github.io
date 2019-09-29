@@ -1,0 +1,833 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/32x32.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/16x16.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="派大星, pibigstar,blog,go">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="title: MySQL实战45讲学习笔记（8~15）date: 2018-06-27 22:10:31tags: [mysql]categories: 面试,mysql 本文为极客时间《MySQL实战45讲》的总结笔记，如有侵权，请通知我，将立马删除。建议大家去购买这套课程，真的是物有所值。 9. 选择普通索引还是唯一索引？9.1 查询过程 其实查询过程两者的时间差距是微乎其微的，普通索引要比唯">
+<meta name="keywords" content="派大星,pibigstar">
+<meta property="og:type" content="article">
+<meta property="og:title" content="派大星的博客">
+<meta property="og:url" content="http://pibigstar.com/2019/09/29/MySQL实战45讲学习笔记（8~15）/index.html">
+<meta property="og:site_name" content="派大星的博客">
+<meta property="og:description" content="title: MySQL实战45讲学习笔记（8~15）date: 2018-06-27 22:10:31tags: [mysql]categories: 面试,mysql 本文为极客时间《MySQL实战45讲》的总结笔记，如有侵权，请通知我，将立马删除。建议大家去购买这套课程，真的是物有所值。 9. 选择普通索引还是唯一索引？9.1 查询过程 其实查询过程两者的时间差距是微乎其微的，普通索引要比唯">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20190116094356143.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2p1bm1veGk=,size_16,color_FFFFFF,t_70">
+<meta property="og:updated_time" content="2019-09-29T14:56:40.740Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="派大星的博客">
+<meta name="twitter:description" content="title: MySQL实战45讲学习笔记（8~15）date: 2018-06-27 22:10:31tags: [mysql]categories: 面试,mysql 本文为极客时间《MySQL实战45讲》的总结笔记，如有侵权，请通知我，将立马删除。建议大家去购买这套课程，真的是物有所值。 9. 选择普通索引还是唯一索引？9.1 查询过程 其实查询过程两者的时间差距是微乎其微的，普通索引要比唯">
+<meta name="twitter:image" content="https://img-blog.csdnimg.cn/20190116094356143.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2p1bm1veGk=,size_16,color_FFFFFF,t_70">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":true,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://pibigstar.com/2019/09/29/MySQL实战45讲学习笔记（8~15）/">
+
+
+
+
+
+  <title> | 派大星的博客</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">派大星的博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <h1 class="site-subtitle" itemprop="description">很多事情不是会了才能做，而是做了才能学会</h1>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-schedule">
+          <a href="/schedule/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-calendar"></i> <br>
+            
+            Schedule
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-sitemap">
+          <a href="/sitemap.xml" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-sitemap"></i> <br>
+            
+            Sitemap
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            About
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://pibigstar.com/2019/09/29/MySQL实战45讲学习笔记（8~15）/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="派大星">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/qq.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="派大星的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline"></h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-09-29T22:56:40+08:00">
+                2019-09-29
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>title: MySQL实战45讲学习笔记（8~15）<br>date: 2018-06-27 22:10:31<br>tags: [mysql]<br>categories: 面试,mysql</p>
+<p>本文为极客时间《MySQL实战45讲》的总结笔记，如有侵权，请通知我，将立马删除。建议大家去购买这套课程，真的是物有所值。<br><img src="https://img-blog.csdnimg.cn/20190116094356143.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2p1bm1veGk=,size_16,color_FFFFFF,t_70" alt></p>
+<h2 id="9-选择普通索引还是唯一索引？"><a href="#9-选择普通索引还是唯一索引？" class="headerlink" title="9. 选择普通索引还是唯一索引？"></a>9. 选择普通索引还是唯一索引？</h2><h4 id="9-1-查询过程"><a href="#9-1-查询过程" class="headerlink" title="9.1 查询过程"></a>9.1 查询过程</h4><blockquote>
+<p>其实查询过程两者的时间差距是微乎其微的，普通索引要比唯一索引多一次判断下一条记录是否符合，但InnoDB 的数据是按数据页为单位来读写的，所以就算多读一次也占用不了多少时间</p>
+</blockquote>
+<h4 id="9-2-更新过程"><a href="#9-2-更新过程" class="headerlink" title="9.2 更新过程"></a>9.2 更新过程</h4><blockquote>
+<p>普通索引可以使用change buffer，可以将一系列的更新写到change buffer中，后期再一次性写入到磁盘中，极大的提高了更新的效率，而唯一索引没有办法使用change buffer</p>
+</blockquote>
+<h4 id="9-3-change-buffer-的使用场景"><a href="#9-3-change-buffer-的使用场景" class="headerlink" title="9.3 change buffer 的使用场景"></a>9.3 change buffer 的使用场景</h4><blockquote>
+<p>对于写多读少的业务来说，页面在写完以后马上被访问到的概率比小，此时 change buffer 的使用效果最好。这种业务模型常见的就是账单类、日志类的系统。反过来，如果所有的更新后面，都马上伴随着对这个记录的查询，那么你应该关闭change buffer</p>
+</blockquote>
+<h2 id="10-MySQL为什么有时候会选错索引"><a href="#10-MySQL为什么有时候会选错索引" class="headerlink" title="10. MySQL为什么有时候会选错索引?"></a>10. MySQL为什么有时候会选错索引?</h2><p>Mysql是根据扫描行数来判断选择哪个索引，扫描行数越少，则越容易被选择，查看扫描行数可以通过<code>explain</code>关键字来查看。</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">explain</span> <span class="keyword">select</span> * <span class="keyword">from</span> <span class="keyword">user</span> <span class="keyword">where</span> sex = <span class="number">1</span></span><br></pre></td></tr></table></figure>
+
+<p>既然Mysql是根据扫描行数来选择索引的，它选错索引肯定也是因为在判断扫描行数的时候出了问题，那Mysql又是怎么来判断扫描行数的呢？答案是：<code>采样统计</code><br>是的就是这么不靠谱的采样，Mysql官方也说了这个误差可能会达到30%~50%</p>
+<p>对于这种情况我们可以使用<code>analyze table 表名</code>来重新统计索引信息达到让Mysql选择正确的索引。或者使用<code>force index</code>来强制给它指定一个索引</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> * <span class="keyword">from</span> <span class="keyword">user</span> <span class="keyword">force</span> <span class="keyword">index</span>(sex) <span class="keyword">where</span> sex = <span class="number">1</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="11-怎么给字符串字段加索引？"><a href="#11-怎么给字符串字段加索引？" class="headerlink" title="11. 怎么给字符串字段加索引？"></a>11. 怎么给字符串字段加索引？</h2><h4 id="1-利用前缀索引"><a href="#1-利用前缀索引" class="headerlink" title="1. 利用前缀索引"></a>1. 利用前缀索引</h4><p>如果字符串过长，而前面几个字段可以确定一个唯一值，比如邮箱，前面都是几位数字<a href="mailto:+@qq.com" target="_blank" rel="noopener">+@qq.com</a>，我们不用给全部字段加上索引，而只需要索引前面几个数字即可，这样就极大的节省索引占的空间了。</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">alter</span> <span class="keyword">table</span> <span class="keyword">user</span> <span class="keyword">add</span> <span class="keyword">index</span> index_email(email,<span class="number">9</span>)</span><br></pre></td></tr></table></figure>
+
+<p>这个数字9怎么去确定呢，我们可以通过下面的语句，来尝试，如果查出来的值越少，就越好。</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> <span class="keyword">count</span>(<span class="keyword">distinct</span> <span class="keyword">left</span>(email,<span class="number">7</span>)) <span class="keyword">as</span> L7,</span><br><span class="line">	   <span class="keyword">count</span>(<span class="keyword">distinct</span> <span class="keyword">left</span>(email,<span class="number">8</span>)) <span class="keyword">as</span> L8,</span><br><span class="line">	   <span class="keyword">count</span>(<span class="keyword">distinct</span> <span class="keyword">left</span>(email,<span class="number">9</span>)) <span class="keyword">as</span> L9,</span><br><span class="line"><span class="keyword">from</span> <span class="keyword">user</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="2-反转字符串"><a href="#2-反转字符串" class="headerlink" title="2. 反转字符串"></a>2. 反转字符串</h4><p>有的时候字段前面都是一样，而后面是不一样的，比如身份证号，这时就不好利用前缀索引了，不过我们可以将身份证的倒序存储，这样就巧妙的再次利用前缀索引的优势了。</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> * <span class="keyword">from</span> t <span class="keyword">where</span> id_card = <span class="keyword">reverse</span>(<span class="string">'input_id_card'</span>);</span><br></pre></td></tr></table></figure>
+
+<h4 id="3-使用Hash"><a href="#3-使用Hash" class="headerlink" title="3. 使用Hash"></a>3. 使用Hash</h4><p>这种就是将字符串计算出一个hash值，然后给表新增一个字段将hash存储进去，下次查找时先将字符串换算为hash再去表中查找hash列，不过这种只适合等值查询，不能进行范围查询。</p>
+<h2 id="12-为什么我的MySQL会“抖”一下？"><a href="#12-为什么我的MySQL会“抖”一下？" class="headerlink" title="12. 为什么我的MySQL会“抖”一下？"></a>12. 为什么我的MySQL会“抖”一下？</h2><p>当Mysql执行过程中会突然慢下来，过一会又好了，而且不是随机的，持续时间很短，看起来就好像Mysql“抖”了一下。这个过程其实是Mysql在刷”脏页”的过程。</p>
+<blockquote>
+<p>当内存数据页跟磁盘数据页内容不一致的时候，我们称这个内存页为“”脏页”，当把内存中的数据更新到硬盘之后这个页也就变成了“干净页”</p>
+</blockquote>
+<p><strong>大概下面四种情况会发生刷“脏页”过程：</strong></p>
+<ol>
+<li>redo log 写满了。当redo log写满了之后，系统会停止所有更新操作，将redo log的checkpoint往前推进，让redo log可以留出空间继续写。</li>
+<li>系统内存不足，淘汰脏页时。当需要新的内存页，而内存不足时就需要淘汰一些数据页空出内存给别的数据页使用，如果淘汰的是“脏页”，那么就需要把“脏页”数据写入到磁盘中。</li>
+<li>当系统空闲时。当系统空闲时就会将一点一点的将脏页数据刷新到磁盘中</li>
+<li>当Mysql正常关闭时。Mysql正常关闭时会将内存中的脏页数据全部刷新到磁盘中。</li>
+</ol>
+<p>我们可以通过设置<code>innodb_io_capacity</code>参数来控制Mysql刷脏页的速度，如果你用的是SSD，那么建议你把这个参数设置大点。这个参数在<code>information_schema</code>数据库中的<code>GLOBAL_VARIABLES</code>表中设置。</p>
+<h2 id="13-为什么表数据删掉一半，表文件大小不变？"><a href="#13-为什么表数据删掉一半，表文件大小不变？" class="headerlink" title="13. 为什么表数据删掉一半，表文件大小不变？"></a>13. 为什么表数据删掉一半，表文件大小不变？</h2><p>当<code>innodb_file_per_table</code>的参数为OFF时，表的数据会放到共享内存中，也就是和数据字典放一块。而为ON时，表的数据存储在以<code>.ibd</code>为后缀的文件中，当我们使用<code>drop table</code>删除表时，会直接删除这个文件达到回收的目的，而如果数据是放到了共享内存中，那么即使表删除了，空间也是不会回收的。所以我们一般都将此参数设置为ON，MySQL5.5.6版本之后默认就是ON了。</p>
+<h4 id="13-1-删除流程"><a href="#13-1-删除流程" class="headerlink" title="13.1 删除流程"></a>13.1 删除流程</h4><p>当我们删除某一行记录时，其实MySQL只是把此行记录标记为了“可复用”，但磁盘大小是不会变的，所以通过<code>delete</code>表中记录是达不到回收表空间的。这些被标记为“可复用”而没有使用的空间看起来就像是“空洞”，其实不止删除会造成空洞，插入一样可以，如果我们不是按顺序插入，而是随机插入，那么就可能造成页分裂，而之前那一页末尾可能还有未使用的空间。</p>
+<h4 id="13-2-怎么回收表空间"><a href="#13-2-怎么回收表空间" class="headerlink" title="13.2 怎么回收表空间"></a>13.2 怎么回收表空间</h4><p>我们可以通过重建表来达到回收表空间，可以使用下面这个命令：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">alter</span> <span class="keyword">table</span> 表名 <span class="keyword">engine</span> = <span class="keyword">InnoDB</span></span><br></pre></td></tr></table></figure>
+
+<p>三种重建方式对比：</p>
+<ol>
+<li><p>recreate重建表</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">alter</span> <span class="keyword">table</span> 表名 <span class="keyword">engine</span> = <span class="keyword">InnoDB</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>重新统计索引信息</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">analyze</span> <span class="keyword">table</span> 表名</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>recreate + 重新统计索引信息</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">optimize</span> <span class="keyword">table</span> 表名</span><br></pre></td></tr></table></figure>
+
+</li>
+</ol>
+<h2 id="14-count-这么慢，我该怎么办？"><a href="#14-count-这么慢，我该怎么办？" class="headerlink" title="14. count(*)这么慢，我该怎么办？"></a>14. count(*)这么慢，我该怎么办？</h2><p>以下的讨论都是没有where条件判断的，如果有条件判断，则不适用。</p>
+<ul>
+<li>对于MyISAM引擎，它会将一个表的总行数存储在磁盘中，所以它的count(*)效率很高</li>
+<li>而对于InnoID引擎，由于MVCC多版本并发控制，它必须一行一行的去读取然后计算总数。</li>
+</ul>
+<h4 id="执行速度比较"><a href="#执行速度比较" class="headerlink" title="执行速度比较"></a>执行速度比较</h4><p>count(其他字段) &lt; count(主键) &lt; count(1) ≈ count(*)</p>
+<h4 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h4><ol>
+<li>将总数存储在Redis中（不推荐，可能会导致数据不一致）</li>
+<li>单独存储到MySQL一张表中（可使用事务，来避免数据不一致等情况）</li>
+</ol>
+<h2 id="15-日志和索引相关问题"><a href="#15-日志和索引相关问题" class="headerlink" title="15. 日志和索引相关问题"></a>15. 日志和索引相关问题</h2><h4 id="15-1-MySQL-怎么知道-binlog-是完整的"><a href="#15-1-MySQL-怎么知道-binlog-是完整的" class="headerlink" title="15.1 MySQL 怎么知道 binlog 是完整的?"></a>15.1 MySQL 怎么知道 binlog 是完整的?</h4><p><strong>答: 一个事务的 binlog 是有完整格式的</strong></p>
+<ul>
+<li>statement 格式的 binlog，最后会有 COMMIT； </li>
+<li>row 格式的 binlog，最后会有一个 XID event</li>
+</ul>
+<h4 id="15-2-redo-log-和-binlog-是怎么关联起来的"><a href="#15-2-redo-log-和-binlog-是怎么关联起来的" class="headerlink" title="15.2 redo log 和 binlog 是怎么关联起来的?"></a>15.2 redo log 和 binlog 是怎么关联起来的?</h4><p><strong>答：它们有一个共同的数据字段，叫 XID。崩溃恢复的时候，会按顺序扫描 redo log</strong></p>
+<ul>
+<li>如果碰到既有 prepare、又有 commit 的 redo log，就直接提交； </li>
+<li>如果碰到只有 parepare、而没有 commit 的 redo log，就拿着 XID 去 binlog 找对应的事务。</li>
+</ul>
+<h4 id="15-3-处于-prepare-阶段的-redo-log-加上完整-binlog，重启就能恢复，MySQL-为什么要这么设计"><a href="#15-3-处于-prepare-阶段的-redo-log-加上完整-binlog，重启就能恢复，MySQL-为什么要这么设计" class="headerlink" title="15.3 处于 prepare 阶段的 redo log 加上完整 binlog，重启就能恢复，MySQL 为什么要这么设计?"></a>15.3 处于 prepare 阶段的 redo log 加上完整 binlog，重启就能恢复，MySQL 为什么要这么设计?</h4><p>答：其实，这个问题还是跟我们在反证法中说到的数据与备份的一致性有关。在时刻 B，也就是 binlog 写完以后 MySQL 发生崩溃，这时候 binlog 已经写入了，之后就会被从库（或者用这个 binlog 恢复出来的库）使用。所以，在主库上也要提交这个事务。采用这个策略，主库和备库的数据就保证了一致性。</p>
+<h4 id="15-4-能不能只用redo-log，不要binlog？"><a href="#15-4-能不能只用redo-log，不要binlog？" class="headerlink" title="15.4 能不能只用redo log，不要binlog？"></a>15.4 能不能只用redo log，不要binlog？</h4><p>回答：如果只从崩溃恢复的角度来讲是可以的。你可以把<code>binlog</code>关掉，这样就没有两阶段提交了，但系统依然是<code>crash-safe</code>的。<br>但是，如果你了解一下业界各个公司的使用场景的话，就会发现在正式的生产库上，<code>binlog</code>都是开着的。因为binlog有着redo log无法替代的功能。</p>
+<ul>
+<li>一个是归档。<blockquote>
+<p>redo log是循环写，写到末尾是要回到开头继续写的。这样历史日志没法保留 ，redo log也就起不到归档的作用。</p>
+</blockquote>
+</li>
+<li>一个就是MySQL系统依赖于binlog。<blockquote>
+<p>binlog作为MySQL一开始就有的功能，被用在了很多地方。其中，MySQL系统高可用的基础，就是binlog复制。</p>
+</blockquote>
+</li>
+<li>还有很多公司有异构系统（比如一些数据分析系统）<blockquote>
+<p>这些系统就靠消费MySQL的binlog来更新自己的数据。关掉binlog的话，这些下游系统就没法输入了。</p>
+</blockquote>
+</li>
+</ul>
+<p>总之，由于现在包括MySQL+高可用在内的很多系统机制都依赖于binlog，所以“鸠占鹊巢”redo log还做不到。</p>
+
+      
+    </div>
+    
+    
+    
+
+    <div>
+      
+        <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
+    
+</div>
+
+      
+    </div>
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/09/29/Java匿名内部类实现总结/" rel="next" title>
+                <i class="fa fa-chevron-left"></i> 
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/09/29/油猴插件编写学习/" rel="prev" title>
+                 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/qq.png" alt="派大星">
+            
+              <p class="site-author-name" itemprop="name">派大星</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives">
+              
+                  <span class="site-state-item-count">239</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/pibigstar" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://blog.csdn.net/junmoxi" target="_blank" title="CSDN">
+                      
+                        <i class="fa fa-fw fa-yelp"></i>CSDN</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#9-选择普通索引还是唯一索引？"><span class="nav-number">1.</span> <span class="nav-text">9. 选择普通索引还是唯一索引？</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#9-1-查询过程"><span class="nav-number">1.0.1.</span> <span class="nav-text">9.1 查询过程</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#9-2-更新过程"><span class="nav-number">1.0.2.</span> <span class="nav-text">9.2 更新过程</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#9-3-change-buffer-的使用场景"><span class="nav-number">1.0.3.</span> <span class="nav-text">9.3 change buffer 的使用场景</span></a></li></ol></li></ol><li class="nav-item nav-level-2"><a class="nav-link" href="#10-MySQL为什么有时候会选错索引"><span class="nav-number">2.</span> <span class="nav-text">10. MySQL为什么有时候会选错索引?</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#11-怎么给字符串字段加索引？"><span class="nav-number">3.</span> <span class="nav-text">11. 怎么给字符串字段加索引？</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-利用前缀索引"><span class="nav-number">3.0.1.</span> <span class="nav-text">1. 利用前缀索引</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-反转字符串"><span class="nav-number">3.0.2.</span> <span class="nav-text">2. 反转字符串</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-使用Hash"><span class="nav-number">3.0.3.</span> <span class="nav-text">3. 使用Hash</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#12-为什么我的MySQL会“抖”一下？"><span class="nav-number">4.</span> <span class="nav-text">12. 为什么我的MySQL会“抖”一下？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#13-为什么表数据删掉一半，表文件大小不变？"><span class="nav-number">5.</span> <span class="nav-text">13. 为什么表数据删掉一半，表文件大小不变？</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#13-1-删除流程"><span class="nav-number">5.0.1.</span> <span class="nav-text">13.1 删除流程</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#13-2-怎么回收表空间"><span class="nav-number">5.0.2.</span> <span class="nav-text">13.2 怎么回收表空间</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#14-count-这么慢，我该怎么办？"><span class="nav-number">6.</span> <span class="nav-text">14. count(*)这么慢，我该怎么办？</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#执行速度比较"><span class="nav-number">6.0.1.</span> <span class="nav-text">执行速度比较</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#解决方案"><span class="nav-number">6.0.2.</span> <span class="nav-text">解决方案</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#15-日志和索引相关问题"><span class="nav-number">7.</span> <span class="nav-text">15. 日志和索引相关问题</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#15-1-MySQL-怎么知道-binlog-是完整的"><span class="nav-number">7.0.1.</span> <span class="nav-text">15.1 MySQL 怎么知道 binlog 是完整的?</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#15-2-redo-log-和-binlog-是怎么关联起来的"><span class="nav-number">7.0.2.</span> <span class="nav-text">15.2 redo log 和 binlog 是怎么关联起来的?</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#15-3-处于-prepare-阶段的-redo-log-加上完整-binlog，重启就能恢复，MySQL-为什么要这么设计"><span class="nav-number">7.0.3.</span> <span class="nav-text">15.3 处于 prepare 阶段的 redo log 加上完整 binlog，重启就能恢复，MySQL 为什么要这么设计?</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#15-4-能不能只用redo-log，不要binlog？"><span class="nav-number">7.0.4.</span> <span class="nav-text">15.4 能不能只用redo log，不要binlog？</span></a></li></ol></li></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+        <div class="back-to-top">
+          <i class="fa fa-arrow-up"></i>
+          
+        </div>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-[object Object]"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">派大星</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+  <script type="text/javascript" src="/js/src/js.cookie.js?v=5.1.4"></script>
+  <script type="text/javascript" src="/js/src/scroll-cookie.js?v=5.1.4"></script>
+
+
+  
+
+</body>
+</html>
+<!-- 页面点击小红心 -->
+ <script type="text/javascript" src="/js/src/clicklove.js"></script>

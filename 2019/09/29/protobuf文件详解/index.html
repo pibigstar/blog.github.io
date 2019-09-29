@@ -1,0 +1,832 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/32x32.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/16x16.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="派大星, pibigstar,blog,go">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="title: protobuf文件详解date: 2019-02-11 22:10:31tags: [protobuf,gRPC]categories: go,gRPC 通信方式 一个请求对象对应一个返回对象  1rpc Login(LoginRequest) returns (LoginResponse) &amp;#123;&amp;#125;  一个请求对象，服务器返回多个结果 1rpc Login(Log">
+<meta name="keywords" content="派大星,pibigstar">
+<meta property="og:type" content="article">
+<meta property="og:title" content="派大星的博客">
+<meta property="og:url" content="http://pibigstar.com/2019/09/29/protobuf文件详解/index.html">
+<meta property="og:site_name" content="派大星的博客">
+<meta property="og:description" content="title: protobuf文件详解date: 2019-02-11 22:10:31tags: [protobuf,gRPC]categories: go,gRPC 通信方式 一个请求对象对应一个返回对象  1rpc Login(LoginRequest) returns (LoginResponse) &amp;#123;&amp;#125;  一个请求对象，服务器返回多个结果 1rpc Login(Log">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-09-29T14:56:39.904Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="派大星的博客">
+<meta name="twitter:description" content="title: protobuf文件详解date: 2019-02-11 22:10:31tags: [protobuf,gRPC]categories: go,gRPC 通信方式 一个请求对象对应一个返回对象  1rpc Login(LoginRequest) returns (LoginResponse) &amp;#123;&amp;#125;  一个请求对象，服务器返回多个结果 1rpc Login(Log">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":true,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://pibigstar.com/2019/09/29/protobuf文件详解/">
+
+
+
+
+
+  <title> | 派大星的博客</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">派大星的博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <h1 class="site-subtitle" itemprop="description">很多事情不是会了才能做，而是做了才能学会</h1>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-schedule">
+          <a href="/schedule/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-calendar"></i> <br>
+            
+            Schedule
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-sitemap">
+          <a href="/sitemap.xml" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-sitemap"></i> <br>
+            
+            Sitemap
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            About
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://pibigstar.com/2019/09/29/protobuf文件详解/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="派大星">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/qq.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="派大星的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline"></h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-09-29T22:56:39+08:00">
+                2019-09-29
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>title: protobuf文件详解<br>date: 2019-02-11 22:10:31<br>tags: [protobuf,gRPC]<br>categories: go,gRPC</p>
+<h1 id="通信方式"><a href="#通信方式" class="headerlink" title="通信方式"></a>通信方式</h1><ol>
+<li><p>一个请求对象对应一个返回对象 </p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rpc Login(LoginRequest) returns (LoginResponse) &#123;&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>一个请求对象，服务器返回多个结果</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rpc Login(LoginRequest) returns (stream LoginResponse) &#123;&#125;</span><br></pre></td></tr></table></figure>
+
+</li>
+</ol>
+<p>3.多个请求对象，一个返回结果</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rpc Login(stream LoginRequest) returns (LoginResponse) &#123;&#125;</span><br></pre></td></tr></table></figure>
+
+<p>4.多个请求对象，服务器返回多个结果</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rpc Login(stream LoginRequest) returns (stream LoginResponse) &#123;&#125;</span><br></pre></td></tr></table></figure>
+
+<p>关键字 <code>stream</code> 表示多个值</p>
+<h1 id="Protobuf定义"><a href="#Protobuf定义" class="headerlink" title="Protobuf定义"></a>Protobuf定义</h1><ul>
+<li><p><strong>syntax=”proto3”;</strong></p>
+<blockquote>
+<p>文件的第一行指定了你使用的是proto3的语法：如果你不指定，protocol buffer 编译器就会认为你使用的是proto2的语法。这个语句必须出现在.proto文件的非空非注释的第一行。 </p>
+</blockquote>
+</li>
+<li><p><strong>package user;</strong></p>
+<blockquote>
+<p>编译完成之后，包名为user</p>
+</blockquote>
+</li>
+<li><p><strong>service 定义服务</strong></p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">service UserService &#123;</span><br><span class="line">  rpc Login(LoginRequest) returns (LoginResponse);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>message 定义结构体</strong></p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">message LoginRequest &#123;</span><br><span class="line">	<span class="keyword">string</span> username=<span class="number">1</span>;</span><br><span class="line">	<span class="keyword">string</span> password=<span class="number">2</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<h2 id="数据类型"><a href="#数据类型" class="headerlink" title="数据类型"></a>数据类型</h2><ul>
+<li><p>strings 默认值是空字符串</p>
+</li>
+<li><p>int32 默认是0（编译之后为go语言中的int类型）</p>
+</li>
+<li><p>int64 默认是0 （编译之后为go语言中的int64）</p>
+</li>
+<li><p>float 默认为0.0 （编译之后为go语言中的 float32）</p>
+</li>
+<li><p>double 默认为0.0 （编译之后为go语言中的 float64）</p>
+</li>
+<li><p>uint32 （编译之后为go语言中的 uint32）</p>
+</li>
+<li><p>uint64 （编译之后为go语言中的 uint64）</p>
+</li>
+<li><p>bytes 默认值是空bytes</p>
+</li>
+<li><p>bool 默认值是false </p>
+</li>
+<li><p>enum 默认值是第一个枚举值（value必须为0)</p>
+<h2 id="字段修饰符"><a href="#字段修饰符" class="headerlink" title="字段修饰符"></a>字段修饰符</h2></li>
+<li><p><code>repeated</code>：用来定义数组，一个字段可以重复出现一定次数（包括零次）</p>
+</li>
+<li><p><code>required</code>：值不可为空 (proto3中已删除)</p>
+</li>
+<li><p><code>optional</code>：可选字段 (proto3中已删除)</p>
+</li>
+<li><p><code>singular</code>：符合语法规则的消息包含零个或者一个这样的字段 (proto3中已删除)</p>
+</li>
+<li><p>默认值： <code>string code=2 [default=200];</code> (proto3中已删除)</p>
+<h2 id="其他类型"><a href="#其他类型" class="headerlink" title="其他类型"></a>其他类型</h2></li>
+</ul>
+<ol>
+<li>枚举定义</li>
+</ol>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//枚举类型，必须从0开始，序号可跨越。同一包下不能重名，所以加前缀来区别</span></span><br><span class="line">enum Role &#123;</span><br><span class="line">	Role_Admin=<span class="number">0</span>;</span><br><span class="line">	Role_Guest=<span class="number">1</span>;</span><br><span class="line">	Role_User=<span class="number">2</span>;</span><br><span class="line">	Role_Other=<span class="number">9</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li>Map类型<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">map</span>&lt;key_type, value_type&gt; map_field = N;</span><br></pre></td></tr></table></figure>
+
+</li>
+</ol>
+<blockquote>
+<p>其中key_type可以是任意Integer或者string类型（所以，除了floating和bytes的任意标量类型都是可以的）value_type可以是任意类型。 </p>
+</blockquote>
+<p>例如，如果你希望创建一个project的映射，每个Projecct使用一个string作为key</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">map</span>&lt;<span class="keyword">string</span>, Project&gt; projects = <span class="number">3</span>;</span><br></pre></td></tr></table></figure>
+
+<h1 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h1><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line">syntax=<span class="string">"proto3"</span>;</span><br><span class="line"><span class="keyword">package</span> user;</span><br><span class="line"></span><br><span class="line">service UserService&#123;</span><br><span class="line">	<span class="comment">// 注册</span></span><br><span class="line">	rpc Signup(SignupRequest) returns (SignupResponse);</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 定义错误枚举，必须从0开始</span></span><br><span class="line">enum LoginError &#123;</span><br><span class="line">	<span class="comment">//密码错误</span></span><br><span class="line">	Error_Password=<span class="number">0</span>;</span><br><span class="line">	<span class="comment">//用户名错误</span></span><br><span class="line">	Error_UserName=<span class="number">1</span>;</span><br><span class="line">	<span class="comment">//内部服务器错误</span></span><br><span class="line">	Error_Server=<span class="number">9</span>;</span><br><span class="line">&#125;</span><br><span class="line">message ID &#123;</span><br><span class="line">	<span class="keyword">int32</span> id=<span class="number">1</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 注册请求体</span></span><br><span class="line">message SignupRequest &#123;</span><br><span class="line">	<span class="keyword">string</span> username=<span class="number">1</span>;</span><br><span class="line">	<span class="keyword">string</span> password=<span class="number">2</span>;</span><br><span class="line">	<span class="keyword">int32</span> code=<span class="number">3</span>;</span><br><span class="line">	<span class="comment">// 数组</span></span><br><span class="line">	repeated <span class="keyword">string</span> hobby=<span class="number">4</span>;</span><br><span class="line">	<span class="comment">// map</span></span><br><span class="line">	<span class="keyword">map</span>&lt;<span class="keyword">string</span>,<span class="keyword">string</span>&gt; maps = <span class="number">5</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//注册响应体</span></span><br><span class="line">message SignupResponse &#123;</span><br><span class="line">	ID id=<span class="number">1</span>;</span><br><span class="line">	<span class="keyword">int32</span> code=<span class="number">2</span> [<span class="keyword">default</span>=<span class="number">200</span>];</span><br><span class="line">	<span class="keyword">string</span> msg=<span class="number">3</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="Google中提供的特殊类型"><a href="#Google中提供的特殊类型" class="headerlink" title="Google中提供的特殊类型"></a>Google中提供的特殊类型</h1><p>待定。。。</p>
+<h1 id="数据校验"><a href="#数据校验" class="headerlink" title="数据校验"></a>数据校验</h1><p>插件地址及文档：<a href="https://github.com/envoyproxy/protoc-gen-validate" target="_blank" rel="noopener">https://github.com/envoyproxy/protoc-gen-validate</a></p>
+<h1 id="流的使用"><a href="#流的使用" class="headerlink" title="流的使用"></a>流的使用</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rpc GetStatus (GetReq) return (stream GetResp);</span><br></pre></td></tr></table></figure>
+
+<p>service实现</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(HelloService)</span> <span class="title">GetStatus</span><span class="params">(req *pb.GetReq,stream pb.HelloService_GetStatusServer)</span> <span class="title">err</span></span> &#123;</span><br><span class="line">	<span class="keyword">for</span> i:=<span class="number">0</span>;i&lt;<span class="number">10</span>;i++&#123;</span><br><span class="line">		stream.Send(&amp;pb.GetResp&#123;</span><br><span class="line">			Status: i,</span><br><span class="line">		&#125;)</span><br><span class="line">		<span class="keyword">if</span> err:=stream.Context().Err();err!=<span class="literal">nil</span> &#123;</span><br><span class="line">			fmt.Println(<span class="string">"客户端关闭流..."</span>)</span><br><span class="line">			<span class="keyword">return</span> err</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="literal">nil</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>使用<code>grpc-web</code>访问流：<br>文档：<a href="https://github.com/grpc/grpc-web" target="_blank" rel="noopener">https://github.com/grpc/grpc-web</a></p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> helloService= <span class="built_in">new</span> proto.mypackage.HelloServiceClient(<span class="string">'http://localhost:8080'</span>);</span><br><span class="line"><span class="keyword">var</span> getReq= <span class="built_in">new</span> proto.mypackage.GetReq();</span><br><span class="line">getReq.setMessage(msg);</span><br><span class="line"><span class="keyword">var</span> metadata = &#123;<span class="string">'custom-header-1'</span>: <span class="string">'value1'</span>&#125;;</span><br><span class="line"><span class="keyword">var</span> stream = helloService.getStatus(getReq, metadata);</span><br><span class="line">stream.on(<span class="string">'data'</span>, function(response) &#123;</span><br><span class="line">  console.log(response.getStatus());</span><br><span class="line">&#125;);</span><br><span class="line">stream.on(<span class="string">'status'</span>, function(status) &#123;</span><br><span class="line">  console.log(status.code);</span><br><span class="line">  console.log(status.details);</span><br><span class="line">  console.log(status.metadata);</span><br><span class="line">&#125;);</span><br><span class="line">stream.on(<span class="string">'end'</span>, function(end) &#123;</span><br><span class="line">  <span class="comment">// stream end signal</span></span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+    
+    
+    
+
+    <div>
+      
+        <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
+    
+</div>
+
+      
+    </div>
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/09/29/spring+springMVC+mybatis整合/" rel="next" title>
+                <i class="fa fa-chevron-left"></i> 
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/09/29/MySQL中ignore,replace的使用/" rel="prev" title>
+                 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/qq.png" alt="派大星">
+            
+              <p class="site-author-name" itemprop="name">派大星</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives">
+              
+                  <span class="site-state-item-count">239</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/pibigstar" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://blog.csdn.net/junmoxi" target="_blank" title="CSDN">
+                      
+                        <i class="fa fa-fw fa-yelp"></i>CSDN</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#通信方式"><span class="nav-number">1.</span> <span class="nav-text">通信方式</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Protobuf定义"><span class="nav-number">2.</span> <span class="nav-text">Protobuf定义</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#数据类型"><span class="nav-number">2.1.</span> <span class="nav-text">数据类型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#字段修饰符"><span class="nav-number">2.2.</span> <span class="nav-text">字段修饰符</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#其他类型"><span class="nav-number">2.3.</span> <span class="nav-text">其他类型</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#示例"><span class="nav-number">3.</span> <span class="nav-text">示例</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Google中提供的特殊类型"><span class="nav-number">4.</span> <span class="nav-text">Google中提供的特殊类型</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#数据校验"><span class="nav-number">5.</span> <span class="nav-text">数据校验</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#流的使用"><span class="nav-number">6.</span> <span class="nav-text">流的使用</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+        <div class="back-to-top">
+          <i class="fa fa-arrow-up"></i>
+          
+        </div>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-[object Object]"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">派大星</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+  <script type="text/javascript" src="/js/src/js.cookie.js?v=5.1.4"></script>
+  <script type="text/javascript" src="/js/src/scroll-cookie.js?v=5.1.4"></script>
+
+
+  
+
+</body>
+</html>
+<!-- 页面点击小红心 -->
+ <script type="text/javascript" src="/js/src/clicklove.js"></script>

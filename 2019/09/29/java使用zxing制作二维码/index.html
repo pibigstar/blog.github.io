@@ -1,0 +1,751 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/32x32.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/16x16.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="派大星, pibigstar,blog,go">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="title: java使用zxing制作二维码date: 2019-02-14 22:10:31tags: [java,二维码,zxing]categories: Java,java工具类,SpringBoot技能大全 因为项目需要，我封装了三个不同的二维码构建，一个是制作普通的二维码，一个是带logo的，还有一个是带logo和文字的，不废话，直接上代码。 添加依赖12345&amp;lt;depende">
+<meta name="keywords" content="派大星,pibigstar">
+<meta property="og:type" content="article">
+<meta property="og:title" content="派大星的博客">
+<meta property="og:url" content="http://pibigstar.com/2019/09/29/java使用zxing制作二维码/index.html">
+<meta property="og:site_name" content="派大星的博客">
+<meta property="og:description" content="title: java使用zxing制作二维码date: 2019-02-14 22:10:31tags: [java,二维码,zxing]categories: Java,java工具类,SpringBoot技能大全 因为项目需要，我封装了三个不同的二维码构建，一个是制作普通的二维码，一个是带logo的，还有一个是带logo和文字的，不废话，直接上代码。 添加依赖12345&amp;lt;depende">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20181129183213975.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2p1bm1veGk=,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20181129183228330.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2p1bm1veGk=,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20181129183246138.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2p1bm1veGk=,size_16,color_FFFFFF,t_70">
+<meta property="og:updated_time" content="2019-09-29T14:56:39.932Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="派大星的博客">
+<meta name="twitter:description" content="title: java使用zxing制作二维码date: 2019-02-14 22:10:31tags: [java,二维码,zxing]categories: Java,java工具类,SpringBoot技能大全 因为项目需要，我封装了三个不同的二维码构建，一个是制作普通的二维码，一个是带logo的，还有一个是带logo和文字的，不废话，直接上代码。 添加依赖12345&amp;lt;depende">
+<meta name="twitter:image" content="https://img-blog.csdnimg.cn/20181129183213975.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2p1bm1veGk=,size_16,color_FFFFFF,t_70">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":true,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://pibigstar.com/2019/09/29/java使用zxing制作二维码/">
+
+
+
+
+
+  <title> | 派大星的博客</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">派大星的博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <h1 class="site-subtitle" itemprop="description">很多事情不是会了才能做，而是做了才能学会</h1>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-schedule">
+          <a href="/schedule/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-calendar"></i> <br>
+            
+            Schedule
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-sitemap">
+          <a href="/sitemap.xml" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-sitemap"></i> <br>
+            
+            Sitemap
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            About
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://pibigstar.com/2019/09/29/java使用zxing制作二维码/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="派大星">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/qq.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="派大星的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline"></h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-09-29T22:56:39+08:00">
+                2019-09-29
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>title: java使用zxing制作二维码<br>date: 2019-02-14 22:10:31<br>tags: [java,二维码,zxing]<br>categories: Java,java工具类,SpringBoot技能大全</p>
+<p>因为项目需要，我封装了三个不同的二维码构建，一个是制作普通的二维码，一个是带logo的，还有一个是带logo和文字的，不废话，直接上代码。</p>
+<h3 id="添加依赖"><a href="#添加依赖" class="headerlink" title="添加依赖"></a>添加依赖</h3><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>com.google.zxing<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>core<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>3.3.3<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br><span class="line">192</span><br><span class="line">193</span><br><span class="line">194</span><br><span class="line">195</span><br><span class="line">196</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.pibgstar.demo.utils;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> com.google.zxing.BarcodeFormat;</span><br><span class="line"><span class="keyword">import</span> com.google.zxing.EncodeHintType;</span><br><span class="line"><span class="keyword">import</span> com.google.zxing.MultiFormatWriter;</span><br><span class="line"><span class="keyword">import</span> com.google.zxing.WriterException;</span><br><span class="line"><span class="keyword">import</span> com.google.zxing.common.BitMatrix;</span><br><span class="line"><span class="keyword">import</span> com.google.zxing.qrcode.decoder.ErrorCorrectionLevel;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> javax.imageio.ImageIO;</span><br><span class="line"><span class="keyword">import</span> java.awt.*;</span><br><span class="line"><span class="keyword">import</span> java.awt.image.BufferedImage;</span><br><span class="line"><span class="keyword">import</span> java.io.File;</span><br><span class="line"><span class="keyword">import</span> java.util.HashMap;</span><br><span class="line"><span class="keyword">import</span> java.util.Map;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> pibigstar</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@create</span> 2018-11-29 10:17</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@desc</span> 二维码生成工具类</span></span><br><span class="line"><span class="comment"> **/</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ZXingCodeUtil</span> </span>&#123;</span><br><span class="line">    <span class="comment">// 二维码颜色</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> QRCOLOR = <span class="number">0xFF000000</span>;</span><br><span class="line">    <span class="comment">// 背景色</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> BGCOLOR = <span class="number">0xFFFFFFFF</span>;</span><br><span class="line">    <span class="comment">// 二维码宽度</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> width = <span class="number">400</span>;</span><br><span class="line">    <span class="comment">// 二维码高度</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> height = <span class="number">400</span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@Author</span>:pibigstar</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@Description</span>: 生成普通的二维码</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@Date</span>:</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> BufferedImage <span class="title">createCode</span><span class="params">(String qrUrl)</span> </span>&#123;</span><br><span class="line">        MultiFormatWriter multiFormatWriter = <span class="keyword">null</span>;</span><br><span class="line">        BitMatrix bm = <span class="keyword">null</span>;</span><br><span class="line">        BufferedImage image = <span class="keyword">null</span>;</span><br><span class="line">        Map&lt;EncodeHintType, Object&gt; hints = getDecodeHintType();</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            multiFormatWriter = <span class="keyword">new</span> MultiFormatWriter();</span><br><span class="line">            <span class="comment">// 参数顺序分别为：编码内容，编码类型，生成图片宽度，生成图片高度，设置参数</span></span><br><span class="line">            bm = multiFormatWriter.encode(qrUrl, BarcodeFormat.QR_CODE, width, height, hints);</span><br><span class="line">            <span class="keyword">int</span> w = bm.getWidth();</span><br><span class="line">            <span class="keyword">int</span> h = bm.getHeight();</span><br><span class="line">            image = <span class="keyword">new</span> BufferedImage(w, h, BufferedImage.TYPE_INT_RGB);</span><br><span class="line"></span><br><span class="line">            <span class="comment">// 开始利用二维码数据创建Bitmap图片，分别设为黑（0xFFFFFFFF）白（0xFF000000）两色</span></span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> x = <span class="number">0</span>; x &lt; w; x++) &#123;</span><br><span class="line">                <span class="keyword">for</span> (<span class="keyword">int</span> y = <span class="number">0</span>; y &lt; h; y++) &#123;</span><br><span class="line">                    image.setRGB(x, y, bm.get(x, y) ? QRCOLOR : BGCOLOR);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125; <span class="keyword">catch</span> (WriterException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> image;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@Author</span>:pibigstar</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@Description</span>: 生成带logo的二维码</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@Date</span>:</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> BufferedImage <span class="title">createCodeWithLogo</span><span class="params">(String qrUrl, String logoPath)</span> </span>&#123;</span><br><span class="line">        BufferedImage bim = createCode(qrUrl);</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            <span class="comment">// 读取二维码图片，并构建绘图对象</span></span><br><span class="line">            BufferedImage image = bim;</span><br><span class="line">            Graphics2D g = image.createGraphics();</span><br><span class="line"></span><br><span class="line">            <span class="comment">// 读取Logo图片</span></span><br><span class="line">            BufferedImage logo = ImageIO.read(<span class="keyword">new</span> File(logoPath));</span><br><span class="line">            <span class="comment">//设置logo的大小,这里设置为二维码图片的20%,过大会盖掉二维码</span></span><br><span class="line">            <span class="keyword">int</span> widthLogo = logo.getWidth(<span class="keyword">null</span>) &gt; image.getWidth() * <span class="number">3</span> / <span class="number">10</span> ? (image.getWidth() * <span class="number">3</span> / <span class="number">10</span>) : logo.getWidth(<span class="keyword">null</span>),</span><br><span class="line">                    heightLogo = logo.getHeight(<span class="keyword">null</span>) &gt; image.getHeight() * <span class="number">3</span> / <span class="number">10</span> ? (image.getHeight() * <span class="number">3</span> / <span class="number">10</span>) : logo.getWidth(<span class="keyword">null</span>);</span><br><span class="line"></span><br><span class="line">            <span class="comment">// logo放在中心</span></span><br><span class="line">            <span class="keyword">int</span> x = (image.getWidth() - widthLogo) / <span class="number">2</span>;</span><br><span class="line">            <span class="keyword">int</span> y = (image.getHeight() - heightLogo) / <span class="number">2</span>;</span><br><span class="line">            <span class="comment">// logo放在右下角</span></span><br><span class="line">            <span class="comment">// int x = (image.getWidth() - widthLogo);</span></span><br><span class="line">            <span class="comment">// int y = (image.getHeight() - heightLogo);</span></span><br><span class="line"></span><br><span class="line">            <span class="comment">//开始绘制图片</span></span><br><span class="line">            g.drawImage(logo, x, y, widthLogo, heightLogo, <span class="keyword">null</span>);</span><br><span class="line">            g.dispose();</span><br><span class="line">            logo.flush();</span><br><span class="line">            image.flush();</span><br><span class="line">            <span class="keyword">return</span> image;</span><br><span class="line">        &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@Author</span>:pibigstar</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@Description</span>: 生成带logo和文字的二维码</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@Date</span>:</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> BufferedImage <span class="title">createCodeWithLogoAndText</span><span class="params">(String qrUrl, String logoPath, String text)</span> </span>&#123;</span><br><span class="line">        BufferedImage image = createCodeWithLogo(qrUrl, logoPath);</span><br><span class="line">        <span class="comment">//把文字添加上去，文字不要太长，这里最多支持两行。太长就会自动截取啦</span></span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            <span class="keyword">if</span> (text != <span class="keyword">null</span> &amp;&amp; !text.equals(<span class="string">""</span>)) &#123;</span><br><span class="line">                <span class="comment">//新的图片，把带logo的二维码下面加上文字</span></span><br><span class="line">                BufferedImage outImage = <span class="keyword">new</span> BufferedImage(<span class="number">400</span>, <span class="number">445</span>, BufferedImage.TYPE_4BYTE_ABGR);</span><br><span class="line">                Graphics2D outg = outImage.createGraphics();</span><br><span class="line">                <span class="comment">//画二维码到新的面板</span></span><br><span class="line">                outg.drawImage(image, <span class="number">0</span>, <span class="number">0</span>, image.getWidth(), image.getHeight(), <span class="keyword">null</span>);</span><br><span class="line">                <span class="comment">//画文字到新的面板</span></span><br><span class="line">                outg.setColor(Color.BLACK);</span><br><span class="line">                outg.setFont(<span class="keyword">new</span> Font(<span class="string">"宋体"</span>, Font.BOLD, <span class="number">30</span>)); <span class="comment">//字体、字型、字号</span></span><br><span class="line">                <span class="keyword">int</span> strWidth = outg.getFontMetrics().stringWidth(text);</span><br><span class="line">                <span class="keyword">if</span> (strWidth &gt; <span class="number">399</span>) &#123;</span><br><span class="line"><span class="comment">//                  //长度过长就截取前面部分</span></span><br><span class="line"><span class="comment">//                  outg.drawString(productName, 0, image.getHeight() + (outImage.getHeight() - image.getHeight())/2 + 5 ); //画文字</span></span><br><span class="line">                    <span class="comment">//长度过长就换行</span></span><br><span class="line">                    String productName1 = text.substring(<span class="number">0</span>, text.length() / <span class="number">2</span>);</span><br><span class="line">                    String productName2 = text.substring(text.length() / <span class="number">2</span>, text.length());</span><br><span class="line">                    <span class="keyword">int</span> strWidth1 = outg.getFontMetrics().stringWidth(productName1);</span><br><span class="line">                    <span class="keyword">int</span> strWidth2 = outg.getFontMetrics().stringWidth(productName2);</span><br><span class="line">                    outg.drawString(productName1, <span class="number">200</span> - strWidth1 / <span class="number">2</span>, image.getHeight() + (outImage.getHeight() - image.getHeight()) / <span class="number">2</span> + <span class="number">12</span>);</span><br><span class="line">                    BufferedImage outImage2 = <span class="keyword">new</span> BufferedImage(<span class="number">400</span>, <span class="number">485</span>, BufferedImage.TYPE_4BYTE_ABGR);</span><br><span class="line">                    Graphics2D outg2 = outImage2.createGraphics();</span><br><span class="line">                    outg2.drawImage(outImage, <span class="number">0</span>, <span class="number">0</span>, outImage.getWidth(), outImage.getHeight(), <span class="keyword">null</span>);</span><br><span class="line">                    outg2.setColor(Color.BLACK);</span><br><span class="line">                    outg2.setFont(<span class="keyword">new</span> Font(<span class="string">"宋体"</span>, Font.BOLD, <span class="number">30</span>)); <span class="comment">//字体、字型、字号</span></span><br><span class="line">                    outg2.drawString(productName2, <span class="number">200</span> - strWidth2 / <span class="number">2</span>, outImage.getHeight() + (outImage2.getHeight() - outImage.getHeight()) / <span class="number">2</span> + <span class="number">5</span>);</span><br><span class="line">                    outg2.dispose();</span><br><span class="line">                    outImage2.flush();</span><br><span class="line">                    outImage = outImage2;</span><br><span class="line">                &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                    outg.drawString(text, <span class="number">200</span> - strWidth / <span class="number">2</span>, image.getHeight() + (outImage.getHeight() - image.getHeight()) / <span class="number">2</span> + <span class="number">12</span>); <span class="comment">//画文字</span></span><br><span class="line">                &#125;</span><br><span class="line">                outg.dispose();</span><br><span class="line">                outImage.flush();</span><br><span class="line">                image = outImage;</span><br><span class="line">                image.flush();</span><br><span class="line">            &#125;</span><br><span class="line">        &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> image;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@Author</span>:pibigstar</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@Description</span>: 构建二维码</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@Date</span>:</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">static</span> BufferedImage <span class="title">create</span><span class="params">(String qrUrl, String logoPath, String text)</span> </span>&#123;</span><br><span class="line">        MultiFormatWriter multiFormatWriter = <span class="keyword">null</span>;</span><br><span class="line">        BitMatrix bm = <span class="keyword">null</span>;</span><br><span class="line">        BufferedImage image = <span class="keyword">null</span>;</span><br><span class="line">        Map&lt;EncodeHintType, Object&gt; hints = getDecodeHintType();</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            multiFormatWriter = <span class="keyword">new</span> MultiFormatWriter();</span><br><span class="line">            <span class="comment">// 参数顺序分别为：编码内容，编码类型，生成图片宽度，生成图片高度，设置参数</span></span><br><span class="line">            bm = multiFormatWriter.encode(qrUrl, BarcodeFormat.QR_CODE, width, height, hints);</span><br><span class="line">            <span class="keyword">int</span> w = bm.getWidth();</span><br><span class="line">            <span class="keyword">int</span> h = bm.getHeight();</span><br><span class="line">            image = <span class="keyword">new</span> BufferedImage(w, h, BufferedImage.TYPE_INT_RGB);</span><br><span class="line"></span><br><span class="line">            <span class="comment">// 开始利用二维码数据创建Bitmap图片，分别设为黑（0xFFFFFFFF）白（0xFF000000）两色</span></span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> x = <span class="number">0</span>; x &lt; w; x++) &#123;</span><br><span class="line">                <span class="keyword">for</span> (<span class="keyword">int</span> y = <span class="number">0</span>; y &lt; h; y++) &#123;</span><br><span class="line">                    image.setRGB(x, y, bm.get(x, y) ? QRCOLOR : BGCOLOR);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125; <span class="keyword">catch</span> (WriterException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> image;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 设置二维码的格式参数</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span></span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">static</span> Map&lt;EncodeHintType, Object&gt; <span class="title">getDecodeHintType</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="comment">// 用于设置QR二维码参数</span></span><br><span class="line">        Map&lt;EncodeHintType, Object&gt; hints = <span class="keyword">new</span> HashMap&lt;EncodeHintType, Object&gt;();</span><br><span class="line">        <span class="comment">// 设置QR二维码的纠错级别（H为最高级别）具体级别信息</span></span><br><span class="line">        hints.put(EncodeHintType.ERROR_CORRECTION, ErrorCorrectionLevel.H);</span><br><span class="line">        <span class="comment">// 设置编码方式</span></span><br><span class="line">        hints.put(EncodeHintType.CHARACTER_SET, <span class="string">"utf-8"</span>);</span><br><span class="line">        hints.put(EncodeHintType.MARGIN, <span class="number">0</span>);</span><br><span class="line">        hints.put(EncodeHintType.MAX_SIZE, <span class="number">350</span>);</span><br><span class="line">        hints.put(EncodeHintType.MIN_SIZE, <span class="number">100</span>);</span><br><span class="line">        <span class="keyword">return</span> hints;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h1><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TestZxingCodeUtil</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> IOException </span>&#123;</span><br><span class="line">        BufferedImage bim = ZXingCodeUtil.createCode(<span class="string">"http://www.pibigstar.com"</span>);</span><br><span class="line">        ImageIO.write(bim, <span class="string">"png"</span>, <span class="keyword">new</span> File(<span class="string">"D:\\Document And Settings3\\Admin\\Desktop\\"</span> + <span class="keyword">new</span> Date().getTime() + <span class="string">".png"</span>));</span><br><span class="line"></span><br><span class="line">        bim = ZXingCodeUtil.createCodeWithLogo(<span class="string">"http://www.pibigstar.com"</span>,<span class="string">"D:\\Document And Settings3\\Admin\\Desktop\\文本资料\\网站\\qq.png"</span>);</span><br><span class="line">        ImageIO.write(bim, <span class="string">"png"</span>, <span class="keyword">new</span> File(<span class="string">"D:\\Document And Settings3\\Admin\\Desktop\\"</span> + <span class="keyword">new</span> Date().getTime() + <span class="string">".png"</span>));</span><br><span class="line"></span><br><span class="line">        bim = ZXingCodeUtil.createCodeWithLogoAndText(<span class="string">"http://www.pibigstar.com"</span>,<span class="string">"D:\\Document And Settings3\\Admin\\Desktop\\文本资料\\网站\\qq.png"</span>,<span class="string">"派大星博客"</span>);</span><br><span class="line">        ImageIO.write(bim, <span class="string">"png"</span>, <span class="keyword">new</span> File(<span class="string">"D:\\Document And Settings3\\Admin\\Desktop\\"</span> + <span class="keyword">new</span> Date().getTime() + <span class="string">".png"</span>));</span><br><span class="line"></span><br><span class="line">        System.out.println(<span class="string">"done"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="生成效果"><a href="#生成效果" class="headerlink" title="生成效果"></a>生成效果</h1><h3 id="1-普通二维码"><a href="#1-普通二维码" class="headerlink" title="1. 普通二维码"></a>1. 普通二维码</h3><p><img src="https://img-blog.csdnimg.cn/20181129183213975.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2p1bm1veGk=,size_16,color_FFFFFF,t_70" alt></p>
+<h3 id="2-带logo的二维码"><a href="#2-带logo的二维码" class="headerlink" title="2. 带logo的二维码"></a>2. 带logo的二维码</h3><p><img src="https://img-blog.csdnimg.cn/20181129183228330.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2p1bm1veGk=,size_16,color_FFFFFF,t_70" alt></p>
+<h3 id="3-带logo和文字的二维码"><a href="#3-带logo和文字的二维码" class="headerlink" title="3. 带logo和文字的二维码"></a>3. 带logo和文字的二维码</h3><p><img src="https://img-blog.csdnimg.cn/20181129183246138.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2p1bm1veGk=,size_16,color_FFFFFF,t_70" alt></p>
+
+      
+    </div>
+    
+    
+    
+
+    <div>
+      
+        <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
+    
+</div>
+
+      
+    </div>
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/09/29/SpringBoot导入导出Excel/" rel="next" title>
+                <i class="fa fa-chevron-left"></i> 
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/09/29/QQ每天定时领取群礼物/" rel="prev" title>
+                 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/qq.png" alt="派大星">
+            
+              <p class="site-author-name" itemprop="name">派大星</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives">
+              
+                  <span class="site-state-item-count">239</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/pibigstar" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://blog.csdn.net/junmoxi" target="_blank" title="CSDN">
+                      
+                        <i class="fa fa-fw fa-yelp"></i>CSDN</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#添加依赖"><span class="nav-number">1.</span> <span class="nav-text">添加依赖</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#代码"><span class="nav-number">2.</span> <span class="nav-text">代码</span></a></li></ol><li class="nav-item nav-level-1"><a class="nav-link" href="#测试"><span class="nav-number"></span> <span class="nav-text">测试</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#生成效果"><span class="nav-number"></span> <span class="nav-text">生成效果</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-普通二维码"><span class="nav-number">1.</span> <span class="nav-text">1. 普通二维码</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-带logo的二维码"><span class="nav-number">2.</span> <span class="nav-text">2. 带logo的二维码</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-带logo和文字的二维码"><span class="nav-number">3.</span> <span class="nav-text">3. 带logo和文字的二维码</span></a></li></ol></li></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+        <div class="back-to-top">
+          <i class="fa fa-arrow-up"></i>
+          
+        </div>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-[object Object]"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">派大星</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+  <script type="text/javascript" src="/js/src/js.cookie.js?v=5.1.4"></script>
+  <script type="text/javascript" src="/js/src/scroll-cookie.js?v=5.1.4"></script>
+
+
+  
+
+</body>
+</html>
+<!-- 页面点击小红心 -->
+ <script type="text/javascript" src="/js/src/clicklove.js"></script>

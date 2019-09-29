@@ -1,0 +1,830 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/32x32.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/16x16.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="派大星, pibigstar,blog,go">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="title: 深入理解Java虚拟机（1~8）date: 2018-07-16 22:10:31tags: [jvm,java虚拟机]categories: 面试,JVM 1. java代码是怎么运行的Java将运行时的内存区域划分为五个部分，如下图所示 从虚拟机的视角来看  执行java代码首先需要将它编译后的class文件加载到虚拟机中，加载后的Java类会被存放到方法区中，实际运行时，虚拟机">
+<meta name="keywords" content="派大星,pibigstar">
+<meta property="og:type" content="article">
+<meta property="og:title" content="派大星的博客">
+<meta property="og:url" content="http://pibigstar.com/2019/09/29/深入理解Java虚拟机（1~8）/index.html">
+<meta property="og:site_name" content="派大星的博客">
+<meta property="og:description" content="title: 深入理解Java虚拟机（1~8）date: 2018-07-16 22:10:31tags: [jvm,java虚拟机]categories: 面试,JVM 1. java代码是怎么运行的Java将运行时的内存区域划分为五个部分，如下图所示 从虚拟机的视角来看  执行java代码首先需要将它编译后的class文件加载到虚拟机中，加载后的Java类会被存放到方法区中，实际运行时，虚拟机">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20190322090843374.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2p1bm1veGk=,size_16,color_FFFFFF,t_70">
+<meta property="og:updated_time" content="2019-09-29T14:56:41.092Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="派大星的博客">
+<meta name="twitter:description" content="title: 深入理解Java虚拟机（1~8）date: 2018-07-16 22:10:31tags: [jvm,java虚拟机]categories: 面试,JVM 1. java代码是怎么运行的Java将运行时的内存区域划分为五个部分，如下图所示 从虚拟机的视角来看  执行java代码首先需要将它编译后的class文件加载到虚拟机中，加载后的Java类会被存放到方法区中，实际运行时，虚拟机">
+<meta name="twitter:image" content="https://img-blog.csdnimg.cn/20190322090843374.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2p1bm1veGk=,size_16,color_FFFFFF,t_70">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":true,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://pibigstar.com/2019/09/29/深入理解Java虚拟机（1~8）/">
+
+
+
+
+
+  <title> | 派大星的博客</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">派大星的博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <h1 class="site-subtitle" itemprop="description">很多事情不是会了才能做，而是做了才能学会</h1>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-schedule">
+          <a href="/schedule/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-calendar"></i> <br>
+            
+            Schedule
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-sitemap">
+          <a href="/sitemap.xml" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-sitemap"></i> <br>
+            
+            Sitemap
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            About
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://pibigstar.com/2019/09/29/深入理解Java虚拟机（1~8）/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="派大星">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/qq.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="派大星的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline"></h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-09-29T22:56:41+08:00">
+                2019-09-29
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>title: 深入理解Java虚拟机（1~8）<br>date: 2018-07-16 22:10:31<br>tags: [jvm,java虚拟机]<br>categories: 面试,JVM</p>
+<h1 id="1-java代码是怎么运行的"><a href="#1-java代码是怎么运行的" class="headerlink" title="1. java代码是怎么运行的"></a>1. java代码是怎么运行的</h1><p>Java将运行时的内存区域划分为五个部分，如下图所示<br><img src="https://img-blog.csdnimg.cn/20190322090843374.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2p1bm1veGk=,size_16,color_FFFFFF,t_70" alt></p>
+<p>从虚拟机的视角来看</p>
+<blockquote>
+<p>执行java代码首先需要将它编译后的class文件加载到虚拟机中，加载后的Java类会被存放到<code>方法区</code>中，实际运行时，虚拟机会执行方法区中的代码。在运行过程中，每当调用进入一个Java方法，java虚拟机就会在当前线程的Java方法栈中生成一个栈帧，用以存放该方法的局部变量和字节码操作数，当退出当前执行方法时，无论方法是正常返回还是异常返回，Java虚拟机均会弹出当前栈帧，并将之舍弃。</p>
+</blockquote>
+<p>从硬件的视角来看</p>
+<blockquote>
+<p>Java字节码无法直接执行，因此Java虚拟机需要将字节码翻译为机器码执行。在<code>Hotspot</code>虚拟机中，此翻译过程有两种方式：</p>
+</blockquote>
+<ol>
+<li>解释执行：逐条将字节码翻译为机器码并执行，优点：无需等待</li>
+<li>即时翻译：将一个方法中包含的字节码全部翻译成机器码后再执行。优点：实际运行速度快</li>
+</ol>
+<blockquote>
+<p><code>Hotspot</code>内置了多个即时编译器，C1，C2，Graal</p>
+</blockquote>
+<ol>
+<li>C1：又被叫做Client编译器，面向的是对启动性能有要求的GUI程序</li>
+<li>C2：又被叫做Server编译器，面向的是对峰值性能有要求的服务端程序</li>
+</ol>
+<blockquote>
+<p>从Java7之后，<code>Hotspot</code>采用了分层编译模式：热点代码会被C1进行编译，而热点中的热点代码会进一步被C2进行编译。<code>Hotspot</code>会根据CPU数量及编译线程数目，按1:2的比例配置给C1和C2。</p>
+</blockquote>
+<h2 id="2-类的加载过程"><a href="#2-类的加载过程" class="headerlink" title="2. 类的加载过程"></a>2. 类的加载过程</h2><blockquote>
+<p>java虚拟机将字节流转化为java类的过程分为三个部分：加载、链接、初始化。</p>
+</blockquote>
+<p><strong>加载</strong>：加载是指查找字节流并以此创建类的过程。加载需要借助类加载器，在java虚拟机中类加载器采用双亲委派模型，即受到类加载请求，会先将请求交给父加载器加载，如果父加载器不能加载才由自己进行加载。</p>
+<p><strong>链接</strong>：链接是指将创建的类合并至java虚拟机中，此过程分为三个部分：验证、准备、解析，其中解析过程是非必须的。</p>
+<p><strong>初始化</strong>：初始化则是为标记为常量值的字段赋值，以及执行<clinit>方法的过程，类的初始化仅会被执行一次。</clinit></p>
+<p><strong>类的初始化何时会被触发呢？JVM 规范枚举了下述多种触发情况</strong>： </p>
+<ol>
+<li>当虚拟机启动时，初始化用户指定的主类；</li>
+<li>当遇到用以新建目标类实例的 new 指令时，初始化 new 指令的目标类； </li>
+<li>当遇到调用静态方法的指令时，初始化该静态方法所在的类； </li>
+<li>当遇到访问静态字段的指令时，初始化该静态字段所在的类； </li>
+<li>子类的初始化会触发父类的初始化； </li>
+<li>如果一个接口定义了 default 方法，那么直接实现或者间接实现该接口的类的初始化，会触发该接    口的初始化； </li>
+<li>使用反射 API 对某个类进行反射调用时，初始化这个类； </li>
+<li>当初次调用 MethodHandle 实例时，初始化该 MethodHandle 指向的方法所在的类。</li>
+</ol>
+<p>根据这个特性，我们可以实现单例的延迟初始化</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Singleton</span> </span>&#123;</span><br><span class="line">  <span class="function"><span class="keyword">private</span> <span class="title">Singleton</span><span class="params">()</span> </span>&#123;&#125;</span><br><span class="line">  <span class="keyword">private</span> <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">LazyHolder</span> </span>&#123;</span><br><span class="line">    <span class="keyword">static</span> <span class="keyword">final</span> Singleton INSTANCE = <span class="keyword">new</span> Singleton();</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> Singleton <span class="title">getInstance</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> LazyHolder.INSTANCE;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>用命令查看类加载的先后顺序</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 编译</span></span><br><span class="line">javac Singleton.java</span><br><span class="line"><span class="comment">// 加入参数-verbose:class，查看类加载的先后顺序</span></span><br><span class="line">java -verbose:<span class="class"><span class="keyword">class</span> <span class="title">Singleton</span></span></span><br></pre></td></tr></table></figure>
+
+<h1 id="3-JVM是如何处理异常的"><a href="#3-JVM是如何处理异常的" class="headerlink" title="3. JVM是如何处理异常的"></a>3. JVM是如何处理异常的</h1><blockquote>
+<p>在编译生成的字节码中，都有一个异常表，异常表中每一个条目对应一个异常处理器，并且由from指针，to指针，target指针和type（异常捕获类型）组成。from和to指针标识了该异常的监控范围（也就是try代码块所覆盖的范围），而target指针则指向了异常处理器的起始位置（也就是catch代码块位置）</p>
+</blockquote>
+<p><strong>当程序触发异常时</strong></p>
+<blockquote>
+<p>当程序触发异常时，java虚拟机会从上至下遍历异常表中的条目，当触发异常的字节码索引在某个异常表条目的监控的范围之内，则会判断抛出的异常与该条目要捕获的异常是否匹配，如果匹配，Java虚拟机会将控制流转向该条目target指针所指向的字节码。如果遍历整个异常条目仍未匹配异常处理器，那么它会弹出当前方法对应的栈帧，并且在调用者用重复上诉操作，在最坏的情况，Java虚拟机需要遍历当前线程Java栈的上所有方法的异常表。</p>
+</blockquote>
+<p><strong>finally代码块如果保证必须执行的</strong></p>
+<blockquote>
+<p>Java编译器会复制finally块中的内容，分别放到try-catch块的正常执行路径和异常执行路径出口中。</p>
+</blockquote>
+<p><strong>为什么抛异常很耗费性能</strong></p>
+<blockquote>
+<p>JVM在构造异常实例时需要生成该异常的栈轨迹。这个操作会逐一访问当前线程的栈帧，并且记录下各种调试信息，包括栈帧所指向方法的名字，方法所在的类名、文件名，以及在代码中的第几行触发该异常等信息。</p>
+</blockquote>
+<p><strong>Supressed 异常</strong></p>
+<blockquote>
+<p>如果 catch 代码块捕获了异常，并且触发了另一个异常，那么 finally 捕获并且重抛的异常是哪个呢？答案是后者。也就是说原本的异常便会被忽略掉，这对于代码调试来说十分不利。为此Java 7 引入了 Supressed 异常来解决这个问题。这个新特性允许开发人员将一个异常附于另一个异常之上。因此，抛出的异常可以附带多个异常的信息。</p>
+</blockquote>
+<p><strong>try-with-resources</strong></p>
+<blockquote>
+<p>主要是为了精简资源打开关闭的用法。程序可以在 try 关键字后声明并实例化实现了 AutoCloseable 接口的类，编译器将自动添加对应的 close() 操作。在声明多个 AutoCloseable 实例的情况下，编译生成的字节码类似于上面手工编写代码的编译结果。与手工代码相比，try-with-resources 还会使用 Supressed 异常的功能，来避免原异常“被消失”</p>
+</blockquote>
+<h1 id="4-JVM是如何进行反射调用的"><a href="#4-JVM是如何进行反射调用的" class="headerlink" title="4. JVM是如何进行反射调用的"></a>4. JVM是如何进行反射调用的</h1><blockquote>
+<p>在默认情况下，方法的反射调用为委派实现，委派给本地实现来进行方法调用。在调用超过 15 次之后，委派实现便会将委派对象切换至动态实现。这个动态实现的字节码是自动生成的，它将直接使用 invoke 指令来调用目标方法。</p>
+</blockquote>
+<p><strong>反射调用的开销</strong></p>
+<ol>
+<li>避免返回数组<blockquote>
+<p>getMethod+为代表的查找方法操作，会返回查找得到结果的一份拷贝。因此，我们应当避免在热点代码中使用返回+Method+数组的+getMethods+或者+getDeclaredMethods+方法，以减少不必要的堆空间消耗。</p>
+</blockquote>
+</li>
+<li>避免自动拆箱装箱<blockquote>
+<p>由于变长参数会被编译器自动生成一个Object数组，而Object数据是不能存储基本数据类型的，所以这里就需要对int类型的进行自动装箱，默认int缓存范围为[-128~127]，当数值在这个范围之内就会返回缓存的Integer对象，避免新建Integer对象，所以我们可以将这个缓存的范围扩大至覆盖 128（对应参数 -Djava.lang.Integer.IntegerCache.high=128</p>
+</blockquote>
+</li>
+</ol>
+<p><strong>开销总结</strong></p>
+<blockquote>
+<p>方法的反射调用会带来不少性能开销，原因主要有三个：变长参数方法导致的 Object 数组，基本类型的自动装箱、拆箱，还有最重要的方法内联</p>
+</blockquote>
+<p><strong>方法内联</strong></p>
+<blockquote>
+<p>方法内联指的是编译器在编译一个方法时，将某个方法调用的目标方法也纳入编译范围内，并用其返回值替代原方法调用这么个过程。</p>
+</blockquote>
+
+      
+    </div>
+    
+    
+    
+
+    <div>
+      
+        <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
+    
+</div>
+
+      
+    </div>
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/09/29/NodeJs安装使用教程/" rel="next" title>
+                <i class="fa fa-chevron-left"></i> 
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/09/29/java定时执行任务--Timer的使用/" rel="prev" title>
+                 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/qq.png" alt="派大星">
+            
+              <p class="site-author-name" itemprop="name">派大星</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives">
+              
+                  <span class="site-state-item-count">239</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/pibigstar" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://blog.csdn.net/junmoxi" target="_blank" title="CSDN">
+                      
+                        <i class="fa fa-fw fa-yelp"></i>CSDN</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#1-java代码是怎么运行的"><span class="nav-number">1.</span> <span class="nav-text">1. java代码是怎么运行的</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#2-类的加载过程"><span class="nav-number">1.1.</span> <span class="nav-text">2. 类的加载过程</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#3-JVM是如何处理异常的"><span class="nav-number">2.</span> <span class="nav-text">3. JVM是如何处理异常的</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#4-JVM是如何进行反射调用的"><span class="nav-number">3.</span> <span class="nav-text">4. JVM是如何进行反射调用的</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+        <div class="back-to-top">
+          <i class="fa fa-arrow-up"></i>
+          
+        </div>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-[object Object]"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">派大星</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+  <script type="text/javascript" src="/js/src/js.cookie.js?v=5.1.4"></script>
+  <script type="text/javascript" src="/js/src/scroll-cookie.js?v=5.1.4"></script>
+
+
+  
+
+</body>
+</html>
+<!-- 页面点击小红心 -->
+ <script type="text/javascript" src="/js/src/clicklove.js"></script>
