@@ -412,202 +412,6 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://pibigstar.com/2019/03/30/Mysql中的SQL函数/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="派大星">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/qq.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="派大星的博客">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/03/30/Mysql中的SQL函数/" itemprop="url">Mysql中的SQL函数</a></h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-03-30T07:07:04+08:00">
-                2019-03-30
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/数据库/" itemprop="url" rel="index">
-                    <span itemprop="name">数据库</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h3 id="算术函数"><a href="#算术函数" class="headerlink" title="算术函数"></a>算术函数</h3><ul>
-<li>ABS ：取绝对值</li>
-<li>MOD：取余</li>
-<li>ROUND：四舍五入时指定小数点位数</li>
-</ul>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="keyword">ABS</span>(<span class="number">-1</span>);  <span class="comment"># 结果为 1</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">SELECT</span> <span class="keyword">MOD</span>(<span class="number">22</span>,<span class="number">5</span>);  <span class="comment"># 22%5 结果为 2</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">SELECT</span> <span class="keyword">ROUND</span>(<span class="number">15.43</span>,<span class="number">1</span>); <span class="comment"># 结果为 15.4</span></span><br></pre></td></tr></table></figure>
-
-<h3 id="字符串函数"><a href="#字符串函数" class="headerlink" title="字符串函数"></a>字符串函数</h3><ul>
-<li>CONCAT： 将多个字符串连接起来</li>
-<li>LENGTH： 计算字段的长度，一个汉字算三个字符，字母和数字算一个字符</li>
-<li>CHAR_LENGTH：所有都算做一个字符</li>
-<li>LOWER：全部转为小写</li>
-<li>UPPER：全部转为大写</li>
-<li>REPLACE：替换字符</li>
-<li>SUBSTRING：截取字符串（字符串, 开始截取位置, 截取长度）<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="keyword">CONCAT</span>(<span class="string">"%"</span>,<span class="string">"pibigstar"</span>); <span class="comment"># 结果为 %pibigstar</span></span><br><span class="line"><span class="keyword">SELECT</span> <span class="keyword">LENGTH</span>(<span class="string">"你好"</span>); <span class="comment"># 结果为 6</span></span><br><span class="line"><span class="keyword">SELECT</span> <span class="keyword">CHAR_LENGTH</span>(<span class="string">"你好"</span>); <span class="comment"># 结果为 2</span></span><br><span class="line"><span class="keyword">SELECT</span> <span class="keyword">LOWER</span>(<span class="string">"AB"</span>); <span class="comment"># 结果为 ab</span></span><br><span class="line"><span class="keyword">SELECT</span> <span class="keyword">UPPER</span>(<span class="string">"ab"</span>) <span class="comment"># 结果为 AB</span></span><br><span class="line"><span class="keyword">SELECT</span> <span class="keyword">REPLACE</span>(<span class="string">"abc"</span>,<span class="string">"a"</span>, <span class="string">"f"</span>); <span class="comment"># 结果为 fbc</span></span><br><span class="line"><span class="keyword">SELECT</span> <span class="keyword">SUBSTRING</span>(<span class="string">"abc"</span>, <span class="number">1</span>, <span class="number">2</span>); <span class="comment"># 结果为 ab</span></span><br></pre></td></tr></table></figure>
-
-</li>
-</ul>
-<h3 id="日期函数"><a href="#日期函数" class="headerlink" title="日期函数"></a>日期函数</h3><ul>
-<li>CURRENT_DATE：系统当前日期</li>
-<li>CURRENT_TIME：系统当前时间</li>
-<li>CURRENT_TIMESTAMP：系统当前时间（日期+时间）</li>
-<li>ECTRACT：抽取具体的年、月、日</li>
-<li>DATE：返回时间的日期部分</li>
-<li>YEAR：返回时间的年份部分</li>
-<li>MONTH：返回时间的月份部分</li>
-<li>DAY：返回时间的天数部分</li>
-<li>HOUR：返回时间的小时部分</li>
-<li>MINUTE：返回时间的分钟部分</li>
-<li>SECOND： 返回时间的秒部分<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="keyword">CURRENT_DATE</span>(); <span class="comment"># 2019-06-29</span></span><br><span class="line"><span class="keyword">SELECT</span> <span class="keyword">CURRENT_TIME</span>(); <span class="comment"># 21:44:33</span></span><br><span class="line"><span class="keyword">SELECT</span> <span class="keyword">CURRENT_TIMESTAMP</span>(); <span class="comment"># 2019-06-29 21:44:33</span></span><br><span class="line"><span class="keyword">SELECT</span> <span class="keyword">EXTRACT</span>(<span class="keyword">YEAR</span> <span class="keyword">FROM</span> <span class="string">'2019-06-29'</span>); <span class="comment"># 2019</span></span><br><span class="line"><span class="keyword">SELECT</span> <span class="built_in">DATE</span>(<span class="string">'2019-06-29 21:44:33'</span>); <span class="comment"># 2019-06-29</span></span><br><span class="line"><span class="keyword">SELECT</span> <span class="keyword">DAY</span>(<span class="string">'2019-06-29 21:44:33'</span>);  <span class="comment"># 29</span></span><br></pre></td></tr></table></figure>
-
-</li>
-</ul>
-<h3 id="转换函数"><a href="#转换函数" class="headerlink" title="转换函数"></a>转换函数</h3><ul>
-<li>CAST：强制数据类型转换</li>
-<li>COALESCE：返回第一个非空数值<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="keyword">CAST</span>(<span class="number">65.243</span> <span class="keyword">AS</span> <span class="built_in">DECIMAL</span>(<span class="number">8</span>,<span class="number">2</span>)); <span class="comment"># 65.24</span></span><br><span class="line"><span class="keyword">SELECT</span> <span class="keyword">COALESCE</span>(<span class="literal">null</span>,<span class="literal">null</span>,<span class="number">2</span>,<span class="number">3</span>); <span class="comment"># 2</span></span><br></pre></td></tr></table></figure>
-
-</li>
-</ul>
-<h3 id="聚合函数"><a href="#聚合函数" class="headerlink" title="聚合函数"></a>聚合函数</h3><ul>
-<li>SUM：求和</li>
-<li>AVG：求平均值</li>
-<li>MAX：找出最大值</li>
-<li>MIN：找出最小值</li>
-<li>COUNT：计数<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="keyword">SUM</span>(age) <span class="keyword">FROM</span> <span class="keyword">user</span>;</span><br><span class="line"><span class="keyword">SELECT</span> <span class="keyword">AVG</span>(age) <span class="keyword">FROM</span> <span class="keyword">user</span>;</span><br><span class="line"><span class="keyword">SELECT</span> <span class="keyword">MAX</span>(age) <span class="keyword">FROM</span> <span class="keyword">user</span>;</span><br><span class="line"><span class="keyword">SELECT</span> <span class="keyword">MIN</span>(age) <span class="keyword">FROM</span> <span class="keyword">user</span>;</span><br><span class="line"><span class="keyword">SELECT</span> <span class="keyword">COUNT</span>(*) <span class="keyword">FROM</span> <span class="keyword">user</span>; <span class="comment"># 计录全部行数，包括null</span></span><br><span class="line"><span class="keyword">SELECT</span> <span class="keyword">COUNT</span>(age) <span class="keyword">FROM</span> <span class="keyword">user</span>; <span class="comment"># 如果age为null，将过滤</span></span><br><span class="line"><span class="keyword">SELECT</span> <span class="keyword">COUNT</span>(*) <span class="keyword">FROM</span> <span class="keyword">user</span> <span class="keyword">GROUP</span> <span class="keyword">BY</span> age;</span><br></pre></td></tr></table></figure>
-
-</li>
-</ul>
-<p>在SELECT的查询中，关键字的顺序不能颠倒，它们的顺序为：</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SELECT...FROM...WHERE...GROUP BY...HAVING...ORDER BY...LIMIT...</span><br></pre></td></tr></table></figure>
-
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    <div>
-      
-    </div>
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://pibigstar.com/2019/03/30/protobuf文件详解/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -795,6 +599,202 @@
 
 <p>使用<code>grpc-web</code>访问流：<br>文档：<a href="https://github.com/grpc/grpc-web" target="_blank" rel="noopener">https://github.com/grpc/grpc-web</a></p>
 <figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> helloService= <span class="built_in">new</span> proto.mypackage.HelloServiceClient(<span class="string">'http://localhost:8080'</span>);</span><br><span class="line"><span class="keyword">var</span> getReq= <span class="built_in">new</span> proto.mypackage.GetReq();</span><br><span class="line">getReq.setMessage(msg);</span><br><span class="line"><span class="keyword">var</span> metadata = &#123;<span class="string">'custom-header-1'</span>: <span class="string">'value1'</span>&#125;;</span><br><span class="line"><span class="keyword">var</span> stream = helloService.getStatus(getReq, metadata);</span><br><span class="line">stream.on(<span class="string">'data'</span>, function(response) &#123;</span><br><span class="line">  console.log(response.getStatus());</span><br><span class="line">&#125;);</span><br><span class="line">stream.on(<span class="string">'status'</span>, function(status) &#123;</span><br><span class="line">  console.log(status.code);</span><br><span class="line">  console.log(status.details);</span><br><span class="line">  console.log(status.metadata);</span><br><span class="line">&#125;);</span><br><span class="line">stream.on(<span class="string">'end'</span>, function(end) &#123;</span><br><span class="line">  <span class="comment">// stream end signal</span></span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    <div>
+      
+    </div>
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://pibigstar.com/2019/03/30/Mysql中的SQL函数/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="派大星">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/qq.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="派大星的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/03/30/Mysql中的SQL函数/" itemprop="url">Mysql中的SQL函数</a></h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-03-30T07:07:04+08:00">
+                2019-03-30
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/数据库/" itemprop="url" rel="index">
+                    <span itemprop="name">数据库</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="算术函数"><a href="#算术函数" class="headerlink" title="算术函数"></a>算术函数</h3><ul>
+<li>ABS ：取绝对值</li>
+<li>MOD：取余</li>
+<li>ROUND：四舍五入时指定小数点位数</li>
+</ul>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="keyword">ABS</span>(<span class="number">-1</span>);  <span class="comment"># 结果为 1</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">SELECT</span> <span class="keyword">MOD</span>(<span class="number">22</span>,<span class="number">5</span>);  <span class="comment"># 22%5 结果为 2</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">SELECT</span> <span class="keyword">ROUND</span>(<span class="number">15.43</span>,<span class="number">1</span>); <span class="comment"># 结果为 15.4</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="字符串函数"><a href="#字符串函数" class="headerlink" title="字符串函数"></a>字符串函数</h3><ul>
+<li>CONCAT： 将多个字符串连接起来</li>
+<li>LENGTH： 计算字段的长度，一个汉字算三个字符，字母和数字算一个字符</li>
+<li>CHAR_LENGTH：所有都算做一个字符</li>
+<li>LOWER：全部转为小写</li>
+<li>UPPER：全部转为大写</li>
+<li>REPLACE：替换字符</li>
+<li>SUBSTRING：截取字符串（字符串, 开始截取位置, 截取长度）<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="keyword">CONCAT</span>(<span class="string">"%"</span>,<span class="string">"pibigstar"</span>); <span class="comment"># 结果为 %pibigstar</span></span><br><span class="line"><span class="keyword">SELECT</span> <span class="keyword">LENGTH</span>(<span class="string">"你好"</span>); <span class="comment"># 结果为 6</span></span><br><span class="line"><span class="keyword">SELECT</span> <span class="keyword">CHAR_LENGTH</span>(<span class="string">"你好"</span>); <span class="comment"># 结果为 2</span></span><br><span class="line"><span class="keyword">SELECT</span> <span class="keyword">LOWER</span>(<span class="string">"AB"</span>); <span class="comment"># 结果为 ab</span></span><br><span class="line"><span class="keyword">SELECT</span> <span class="keyword">UPPER</span>(<span class="string">"ab"</span>) <span class="comment"># 结果为 AB</span></span><br><span class="line"><span class="keyword">SELECT</span> <span class="keyword">REPLACE</span>(<span class="string">"abc"</span>,<span class="string">"a"</span>, <span class="string">"f"</span>); <span class="comment"># 结果为 fbc</span></span><br><span class="line"><span class="keyword">SELECT</span> <span class="keyword">SUBSTRING</span>(<span class="string">"abc"</span>, <span class="number">1</span>, <span class="number">2</span>); <span class="comment"># 结果为 ab</span></span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<h3 id="日期函数"><a href="#日期函数" class="headerlink" title="日期函数"></a>日期函数</h3><ul>
+<li>CURRENT_DATE：系统当前日期</li>
+<li>CURRENT_TIME：系统当前时间</li>
+<li>CURRENT_TIMESTAMP：系统当前时间（日期+时间）</li>
+<li>ECTRACT：抽取具体的年、月、日</li>
+<li>DATE：返回时间的日期部分</li>
+<li>YEAR：返回时间的年份部分</li>
+<li>MONTH：返回时间的月份部分</li>
+<li>DAY：返回时间的天数部分</li>
+<li>HOUR：返回时间的小时部分</li>
+<li>MINUTE：返回时间的分钟部分</li>
+<li>SECOND： 返回时间的秒部分<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="keyword">CURRENT_DATE</span>(); <span class="comment"># 2019-06-29</span></span><br><span class="line"><span class="keyword">SELECT</span> <span class="keyword">CURRENT_TIME</span>(); <span class="comment"># 21:44:33</span></span><br><span class="line"><span class="keyword">SELECT</span> <span class="keyword">CURRENT_TIMESTAMP</span>(); <span class="comment"># 2019-06-29 21:44:33</span></span><br><span class="line"><span class="keyword">SELECT</span> <span class="keyword">EXTRACT</span>(<span class="keyword">YEAR</span> <span class="keyword">FROM</span> <span class="string">'2019-06-29'</span>); <span class="comment"># 2019</span></span><br><span class="line"><span class="keyword">SELECT</span> <span class="built_in">DATE</span>(<span class="string">'2019-06-29 21:44:33'</span>); <span class="comment"># 2019-06-29</span></span><br><span class="line"><span class="keyword">SELECT</span> <span class="keyword">DAY</span>(<span class="string">'2019-06-29 21:44:33'</span>);  <span class="comment"># 29</span></span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<h3 id="转换函数"><a href="#转换函数" class="headerlink" title="转换函数"></a>转换函数</h3><ul>
+<li>CAST：强制数据类型转换</li>
+<li>COALESCE：返回第一个非空数值<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="keyword">CAST</span>(<span class="number">65.243</span> <span class="keyword">AS</span> <span class="built_in">DECIMAL</span>(<span class="number">8</span>,<span class="number">2</span>)); <span class="comment"># 65.24</span></span><br><span class="line"><span class="keyword">SELECT</span> <span class="keyword">COALESCE</span>(<span class="literal">null</span>,<span class="literal">null</span>,<span class="number">2</span>,<span class="number">3</span>); <span class="comment"># 2</span></span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<h3 id="聚合函数"><a href="#聚合函数" class="headerlink" title="聚合函数"></a>聚合函数</h3><ul>
+<li>SUM：求和</li>
+<li>AVG：求平均值</li>
+<li>MAX：找出最大值</li>
+<li>MIN：找出最小值</li>
+<li>COUNT：计数<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="keyword">SUM</span>(age) <span class="keyword">FROM</span> <span class="keyword">user</span>;</span><br><span class="line"><span class="keyword">SELECT</span> <span class="keyword">AVG</span>(age) <span class="keyword">FROM</span> <span class="keyword">user</span>;</span><br><span class="line"><span class="keyword">SELECT</span> <span class="keyword">MAX</span>(age) <span class="keyword">FROM</span> <span class="keyword">user</span>;</span><br><span class="line"><span class="keyword">SELECT</span> <span class="keyword">MIN</span>(age) <span class="keyword">FROM</span> <span class="keyword">user</span>;</span><br><span class="line"><span class="keyword">SELECT</span> <span class="keyword">COUNT</span>(*) <span class="keyword">FROM</span> <span class="keyword">user</span>; <span class="comment"># 计录全部行数，包括null</span></span><br><span class="line"><span class="keyword">SELECT</span> <span class="keyword">COUNT</span>(age) <span class="keyword">FROM</span> <span class="keyword">user</span>; <span class="comment"># 如果age为null，将过滤</span></span><br><span class="line"><span class="keyword">SELECT</span> <span class="keyword">COUNT</span>(*) <span class="keyword">FROM</span> <span class="keyword">user</span> <span class="keyword">GROUP</span> <span class="keyword">BY</span> age;</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<p>在SELECT的查询中，关键字的顺序不能颠倒，它们的顺序为：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SELECT...FROM...WHERE...GROUP BY...HAVING...ORDER BY...LIMIT...</span><br></pre></td></tr></table></figure>
 
 
           

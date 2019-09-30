@@ -250,6 +250,172 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://pibigstar.com/2019/02/23/Windows下交叉编译Go/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="派大星">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/qq.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="派大星的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/02/23/Windows下交叉编译Go/" itemprop="url">Windows下交叉编译Go</a></h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-02-23T02:02:04+08:00">
+                2019-02-23
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/go/" itemprop="url" rel="index">
+                    <span itemprop="name">go</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="1-Windows下"><a href="#1-Windows下" class="headerlink" title="1. Windows下"></a>1. Windows下</h2><p>编译为Linux可运行文件</p>
+<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">SET</span> CGO_ENABLED=<span class="number">0</span></span><br><span class="line"><span class="built_in">SET</span> GOOS=linux</span><br><span class="line"><span class="built_in">SET</span> GOARCH=amd64</span><br><span class="line">go build main.go</span><br></pre></td></tr></table></figure>
+
+<p>编译为MAC可运行文件</p>
+<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">SET</span> CGO_ENABLED=<span class="number">0</span></span><br><span class="line"><span class="built_in">SET</span> GOOS=darwin</span><br><span class="line"><span class="built_in">SET</span> GOARCH=amd64</span><br><span class="line">go build main.go</span><br></pre></td></tr></table></figure>
+
+<p>编译为Window可运行文件</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">SET GOOS=windows</span><br><span class="line">go build main.go</span><br></pre></td></tr></table></figure>
+
+<h2 id="2-MAC下"><a href="#2-MAC下" class="headerlink" title="2. MAC下"></a>2. MAC下</h2><p>编译为Windows可执行文件</p>
+<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">CGO_ENABLED=<span class="number">0</span> GOOS=windows GOARCH=amd64 go build main.go</span><br></pre></td></tr></table></figure>
+
+<p>编译为Linux可执行文件</p>
+<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">CGO_ENABLED=<span class="number">0</span> GOOS=linux GOARCH=amd64 go build main.go</span><br></pre></td></tr></table></figure>
+
+<h2 id="3-Linux下"><a href="#3-Linux下" class="headerlink" title="3. Linux下"></a>3. Linux下</h2><p>编译为Windows可执行文件</p>
+<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">CGO_ENABLED=<span class="number">0</span> GOOS=windows GOARCH=amd64 go build main.go</span><br></pre></td></tr></table></figure>
+
+<p>编译为MAC可执行文件</p>
+<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">CGO_ENABLED=<span class="number">0</span> GOOS=darwin GOARCH=amd64 go build main.go</span><br></pre></td></tr></table></figure>
+
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    <div>
+      
+    </div>
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://pibigstar.com/2019/02/23/GoLang module操作/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -430,172 +596,6 @@
 
 </li>
 </ol>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    <div>
-      
-    </div>
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://pibigstar.com/2019/02/23/Windows下交叉编译Go/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="派大星">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/qq.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="派大星的博客">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/02/23/Windows下交叉编译Go/" itemprop="url">Windows下交叉编译Go</a></h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-02-23T02:02:04+08:00">
-                2019-02-23
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/go/" itemprop="url" rel="index">
-                    <span itemprop="name">go</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h2 id="1-Windows下"><a href="#1-Windows下" class="headerlink" title="1. Windows下"></a>1. Windows下</h2><p>编译为Linux可运行文件</p>
-<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">SET</span> CGO_ENABLED=<span class="number">0</span></span><br><span class="line"><span class="built_in">SET</span> GOOS=linux</span><br><span class="line"><span class="built_in">SET</span> GOARCH=amd64</span><br><span class="line">go build main.go</span><br></pre></td></tr></table></figure>
-
-<p>编译为MAC可运行文件</p>
-<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">SET</span> CGO_ENABLED=<span class="number">0</span></span><br><span class="line"><span class="built_in">SET</span> GOOS=darwin</span><br><span class="line"><span class="built_in">SET</span> GOARCH=amd64</span><br><span class="line">go build main.go</span><br></pre></td></tr></table></figure>
-
-<p>编译为Window可运行文件</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">SET GOOS=windows</span><br><span class="line">go build main.go</span><br></pre></td></tr></table></figure>
-
-<h2 id="2-MAC下"><a href="#2-MAC下" class="headerlink" title="2. MAC下"></a>2. MAC下</h2><p>编译为Windows可执行文件</p>
-<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">CGO_ENABLED=<span class="number">0</span> GOOS=windows GOARCH=amd64 go build main.go</span><br></pre></td></tr></table></figure>
-
-<p>编译为Linux可执行文件</p>
-<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">CGO_ENABLED=<span class="number">0</span> GOOS=linux GOARCH=amd64 go build main.go</span><br></pre></td></tr></table></figure>
-
-<h2 id="3-Linux下"><a href="#3-Linux下" class="headerlink" title="3. Linux下"></a>3. Linux下</h2><p>编译为Windows可执行文件</p>
-<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">CGO_ENABLED=<span class="number">0</span> GOOS=windows GOARCH=amd64 go build main.go</span><br></pre></td></tr></table></figure>
-
-<p>编译为MAC可执行文件</p>
-<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">CGO_ENABLED=<span class="number">0</span> GOOS=darwin GOARCH=amd64 go build main.go</span><br></pre></td></tr></table></figure>
-
 
           
         
@@ -957,6 +957,155 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://pibigstar.com/2019/02/21/SpringBoot使用自定义拦截器/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="派大星">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/qq.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="派大星的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/02/21/SpringBoot使用自定义拦截器/" itemprop="url">SpringBoot使用自定义拦截器</a></h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-02-21T03:03:04+08:00">
+                2019-02-21
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/springboot-SpringBoot技能大全/" itemprop="url" rel="index">
+                    <span itemprop="name">springboot,SpringBoot技能大全</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="1-定义拦截器配置类"><a href="#1-定义拦截器配置类" class="headerlink" title="1. 定义拦截器配置类"></a>1. 定义拦截器配置类</h1><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.pibigstar.config;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> org.springframework.context.annotation.Configuration;</span><br><span class="line"><span class="keyword">import</span> org.springframework.web.servlet.config.annotation.InterceptorRegistry;</span><br><span class="line"><span class="keyword">import</span> org.springframework.web.servlet.config.annotation.WebMvcConfigurer;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Configuration</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">WebConfig</span> <span class="keyword">implements</span> <span class="title">WebMvcConfigurer</span></span>&#123;</span><br><span class="line"></span><br><span class="line">	<span class="comment">/**</span></span><br><span class="line"><span class="comment">	 * 拦截器配置</span></span><br><span class="line"><span class="comment">	 */</span></span><br><span class="line">	<span class="meta">@Override</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">addInterceptors</span><span class="params">(InterceptorRegistry registry)</span> </span>&#123;</span><br><span class="line">		<span class="comment">//只拦截 /admin/路径下的请求</span></span><br><span class="line">		registry.addInterceptor(<span class="keyword">new</span> AdminInterceptor()).addPathPatterns(<span class="string">"/admin/**"</span>);</span><br><span class="line">		WebMvcConfigurer.<span class="keyword">super</span>.addInterceptors(registry);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="2-定义拦截器"><a href="#2-定义拦截器" class="headerlink" title="2. 定义拦截器"></a>2. 定义拦截器</h1><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.pibigstar.config;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> <span class="keyword">static</span> org.springframework.test.web.client.match.MockRestRequestMatchers.queryParam;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> javax.servlet.http.HttpServletRequest;</span><br><span class="line"><span class="keyword">import</span> javax.servlet.http.HttpServletResponse;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> org.springframework.web.servlet.HandlerInterceptor;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 管理员拦截器</span></span><br><span class="line"><span class="comment"> * 如果不是管理员则不让其访问</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> pibigstar</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">AdminInterceptor</span> <span class="keyword">implements</span> <span class="title">HandlerInterceptor</span></span>&#123;</span><br><span class="line">	</span><br><span class="line">	<span class="comment">/**</span></span><br><span class="line"><span class="comment">	 * 在请求处理之前进行调用（controller方法调用之前）</span></span><br><span class="line"><span class="comment">	 */</span></span><br><span class="line">	<span class="meta">@Override</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">preHandle</span><span class="params">(HttpServletRequest request, HttpServletResponse response, Object handler)</span></span></span><br><span class="line"><span class="function">			<span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">		</span><br><span class="line">		<span class="keyword">if</span> (request.getAttribute(<span class="string">"userId"</span>).equals(<span class="string">"admin"</span>)) &#123;</span><br><span class="line">			<span class="comment">//放行</span></span><br><span class="line">			<span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="comment">//拦截</span></span><br><span class="line">		<span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	<span class="comment">/**</span></span><br><span class="line"><span class="comment">	 * 在整个请求结束之后被调用</span></span><br><span class="line"><span class="comment">	 * 主要用来进行资源清理 ，一些缓存什么的。</span></span><br><span class="line"><span class="comment">	 */</span></span><br><span class="line">	<span class="meta">@Override</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">afterCompletion</span><span class="params">(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex)</span></span></span><br><span class="line"><span class="function">			<span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">		HandlerInterceptor.<span class="keyword">super</span>.afterCompletion(request, response, handler, ex);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    <div>
+      
+    </div>
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://pibigstar.com/2019/02/21/使用Node构建桌面GUI/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1166,7 +1315,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://pibigstar.com/2019/02/21/SpringBoot使用自定义拦截器/">
+    <link itemprop="mainEntityOfPage" href="http://pibigstar.com/2019/02/21/SpringBoot导入导出Excel/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="派大星">
@@ -1185,7 +1334,7 @@
         
           <h2 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2019/02/21/SpringBoot使用自定义拦截器/" itemprop="url">SpringBoot使用自定义拦截器</a></h2>
+                <a class="post-title-link" href="/2019/02/21/SpringBoot导入导出Excel/" itemprop="url">SpringBoot导入导出Excel</a></h2>
         
 
         <div class="post-meta">
@@ -1259,10 +1408,15 @@
       
         
           
-            <h1 id="1-定义拦截器配置类"><a href="#1-定义拦截器配置类" class="headerlink" title="1. 定义拦截器配置类"></a>1. 定义拦截器配置类</h1><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.pibigstar.config;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> org.springframework.context.annotation.Configuration;</span><br><span class="line"><span class="keyword">import</span> org.springframework.web.servlet.config.annotation.InterceptorRegistry;</span><br><span class="line"><span class="keyword">import</span> org.springframework.web.servlet.config.annotation.WebMvcConfigurer;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Configuration</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">WebConfig</span> <span class="keyword">implements</span> <span class="title">WebMvcConfigurer</span></span>&#123;</span><br><span class="line"></span><br><span class="line">	<span class="comment">/**</span></span><br><span class="line"><span class="comment">	 * 拦截器配置</span></span><br><span class="line"><span class="comment">	 */</span></span><br><span class="line">	<span class="meta">@Override</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">addInterceptors</span><span class="params">(InterceptorRegistry registry)</span> </span>&#123;</span><br><span class="line">		<span class="comment">//只拦截 /admin/路径下的请求</span></span><br><span class="line">		registry.addInterceptor(<span class="keyword">new</span> AdminInterceptor()).addPathPatterns(<span class="string">"/admin/**"</span>);</span><br><span class="line">		WebMvcConfigurer.<span class="keyword">super</span>.addInterceptors(registry);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+            <h1 id="1-下载jar包"><a href="#1-下载jar包" class="headerlink" title="1 下载jar包"></a>1 下载jar包</h1><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- excel导出工具 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.apache.poi<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>poi<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">version</span>&gt;</span>3.17<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
 
-<h1 id="2-定义拦截器"><a href="#2-定义拦截器" class="headerlink" title="2. 定义拦截器"></a>2. 定义拦截器</h1><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.pibigstar.config;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> <span class="keyword">static</span> org.springframework.test.web.client.match.MockRestRequestMatchers.queryParam;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> javax.servlet.http.HttpServletRequest;</span><br><span class="line"><span class="keyword">import</span> javax.servlet.http.HttpServletResponse;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> org.springframework.web.servlet.HandlerInterceptor;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 管理员拦截器</span></span><br><span class="line"><span class="comment"> * 如果不是管理员则不让其访问</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> pibigstar</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">AdminInterceptor</span> <span class="keyword">implements</span> <span class="title">HandlerInterceptor</span></span>&#123;</span><br><span class="line">	</span><br><span class="line">	<span class="comment">/**</span></span><br><span class="line"><span class="comment">	 * 在请求处理之前进行调用（controller方法调用之前）</span></span><br><span class="line"><span class="comment">	 */</span></span><br><span class="line">	<span class="meta">@Override</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">preHandle</span><span class="params">(HttpServletRequest request, HttpServletResponse response, Object handler)</span></span></span><br><span class="line"><span class="function">			<span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">		</span><br><span class="line">		<span class="keyword">if</span> (request.getAttribute(<span class="string">"userId"</span>).equals(<span class="string">"admin"</span>)) &#123;</span><br><span class="line">			<span class="comment">//放行</span></span><br><span class="line">			<span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="comment">//拦截</span></span><br><span class="line">		<span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	<span class="comment">/**</span></span><br><span class="line"><span class="comment">	 * 在整个请求结束之后被调用</span></span><br><span class="line"><span class="comment">	 * 主要用来进行资源清理 ，一些缓存什么的。</span></span><br><span class="line"><span class="comment">	 */</span></span><br><span class="line">	<span class="meta">@Override</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">afterCompletion</span><span class="params">(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex)</span></span></span><br><span class="line"><span class="function">			<span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">		HandlerInterceptor.<span class="keyword">super</span>.afterCompletion(request, response, handler, ex);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="2-导出Excel"><a href="#2-导出Excel" class="headerlink" title="2 导出Excel"></a>2 导出Excel</h1><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.briup.apps.poll.web.controller;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.io.BufferedOutputStream;</span><br><span class="line"><span class="keyword">import</span> java.io.File;</span><br><span class="line"><span class="keyword">import</span> java.io.IOException;</span><br><span class="line"><span class="keyword">import</span> java.io.OutputStream;</span><br><span class="line"><span class="keyword">import</span> java.util.ArrayList;</span><br><span class="line"><span class="keyword">import</span> java.util.List;</span><br><span class="line"><span class="keyword">import</span> org.apache.poi.hssf.usermodel.HSSFCell;</span><br><span class="line"><span class="keyword">import</span> org.apache.poi.hssf.usermodel.HSSFCellStyle;</span><br><span class="line"><span class="keyword">import</span> org.apache.poi.hssf.usermodel.HSSFFont;</span><br><span class="line"><span class="keyword">import</span> org.apache.poi.hssf.usermodel.HSSFRow;</span><br><span class="line"><span class="keyword">import</span> org.apache.poi.hssf.usermodel.HSSFSheet;</span><br><span class="line"><span class="keyword">import</span> org.apache.poi.hssf.usermodel.HSSFWorkbook;</span><br><span class="line"><span class="keyword">import</span> org.apache.poi.poifs.filesystem.POIFSFileSystem;</span><br><span class="line"><span class="keyword">import</span> org.springframework.beans.factory.annotation.Autowired;</span><br><span class="line"><span class="keyword">import</span> org.springframework.stereotype.Controller;</span><br><span class="line"><span class="keyword">import</span> org.springframework.web.bind.annotation.GetMapping;</span><br><span class="line"><span class="keyword">import</span> org.springframework.web.bind.annotation.PostMapping;</span><br><span class="line"><span class="keyword">import</span> org.springframework.web.bind.annotation.RequestMapping;</span><br><span class="line"><span class="keyword">import</span> org.springframework.web.multipart.MultipartFile;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> com.briup.apps.poll.bean.Answer;</span><br><span class="line"><span class="keyword">import</span> com.briup.apps.poll.service.IAnswerService;</span><br><span class="line"><span class="keyword">import</span> com.briup.apps.poll.util.MsgResponse;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Controller</span></span><br><span class="line"><span class="meta">@RequestMapping</span>(<span class="string">"/excel"</span>)</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ExcelController</span> <span class="keyword">extends</span> <span class="title">BaseController</span></span>&#123;</span><br><span class="line"></span><br><span class="line">	<span class="meta">@Autowired</span></span><br><span class="line">	<span class="keyword">private</span> IAnswerService answerService;</span><br><span class="line"></span><br><span class="line">	<span class="comment">/***</span></span><br><span class="line"><span class="comment">	 * 下载Excel</span></span><br><span class="line"><span class="comment">	 * <span class="doctag">@throws</span> IOException</span></span><br><span class="line"><span class="comment">	 */</span></span><br><span class="line">	<span class="meta">@GetMapping</span>(<span class="string">"download"</span>)</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">download</span><span class="params">()</span> <span class="keyword">throws</span> IOException</span>&#123;</span><br><span class="line"></span><br><span class="line">		HSSFWorkbook workbook = <span class="keyword">new</span> HSSFWorkbook();</span><br><span class="line">		<span class="comment">//创建一个Excel表单,参数为sheet的名字</span></span><br><span class="line">		HSSFSheet sheet = workbook.createSheet(<span class="string">"课调答卷表"</span>);</span><br><span class="line"></span><br><span class="line">		<span class="comment">//创建表头</span></span><br><span class="line">		setTitle(workbook, sheet);</span><br><span class="line">		List&lt;Answer&gt; answers = answerService.findAll();</span><br><span class="line"></span><br><span class="line">		<span class="comment">//新增数据行，并且设置单元格数据</span></span><br><span class="line">		<span class="keyword">int</span> rowNum = <span class="number">1</span>;</span><br><span class="line">		<span class="keyword">for</span> (Answer answer:answers) &#123;</span><br><span class="line">			HSSFRow row = sheet.createRow(rowNum);</span><br><span class="line">			row.createCell(<span class="number">0</span>).setCellValue(answer.getId());</span><br><span class="line">			row.createCell(<span class="number">1</span>).setCellValue(answer.getSelections());</span><br><span class="line">			row.createCell(<span class="number">2</span>).setCellValue(answer.getCheckes());</span><br><span class="line">			row.createCell(<span class="number">3</span>).setCellValue(answer.getContent());</span><br><span class="line">			rowNum++;</span><br><span class="line">		&#125;</span><br><span class="line">		String fileName = <span class="string">"survey-answer.xlsx"</span>;</span><br><span class="line">	    <span class="comment">//清空response  </span></span><br><span class="line">        response.reset();  </span><br><span class="line">        <span class="comment">//设置response的Header  </span></span><br><span class="line">        response.addHeader(<span class="string">"Content-Disposition"</span>, <span class="string">"attachment;filename="</span>+ fileName);  </span><br><span class="line">        OutputStream os = <span class="keyword">new</span> BufferedOutputStream(response.getOutputStream());  </span><br><span class="line">        response.setContentType(<span class="string">"application/vnd.ms-excel;charset=gb2312"</span>); </span><br><span class="line">        <span class="comment">//将excel写入到输出流中</span></span><br><span class="line">        workbook.write(os);</span><br><span class="line">        os.flush();</span><br><span class="line">        os.close();</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	<span class="comment">/***</span></span><br><span class="line"><span class="comment">	 * 设置表头</span></span><br><span class="line"><span class="comment">	 * <span class="doctag">@param</span> workbook</span></span><br><span class="line"><span class="comment">	 * <span class="doctag">@param</span> sheet</span></span><br><span class="line"><span class="comment">	 */</span></span><br><span class="line">	<span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">setTitle</span><span class="params">(HSSFWorkbook workbook, HSSFSheet sheet)</span></span>&#123;</span><br><span class="line">		HSSFRow row = sheet.createRow(<span class="number">0</span>);</span><br><span class="line">		<span class="comment">//设置列宽，setColumnWidth的第二个参数要乘以256，这个参数的单位是1/256个字符宽度</span></span><br><span class="line">		sheet.setColumnWidth(<span class="number">0</span>, <span class="number">10</span>*<span class="number">256</span>);</span><br><span class="line">		sheet.setColumnWidth(<span class="number">1</span>, <span class="number">20</span>*<span class="number">256</span>);</span><br><span class="line">		sheet.setColumnWidth(<span class="number">2</span>, <span class="number">20</span>*<span class="number">256</span>);</span><br><span class="line">		sheet.setColumnWidth(<span class="number">3</span>, <span class="number">100</span>*<span class="number">256</span>);</span><br><span class="line"></span><br><span class="line">		<span class="comment">//设置为居中加粗</span></span><br><span class="line">		HSSFCellStyle style = workbook.createCellStyle();</span><br><span class="line">		HSSFFont font = workbook.createFont();</span><br><span class="line">		font.setBold(<span class="keyword">true</span>);</span><br><span class="line">		style.setFont(font);</span><br><span class="line"></span><br><span class="line">		HSSFCell cell;</span><br><span class="line">		cell = row.createCell(<span class="number">0</span>);</span><br><span class="line">		cell.setCellValue(<span class="string">"序号"</span>);</span><br><span class="line">		cell.setCellStyle(style);</span><br><span class="line"></span><br><span class="line">		cell = row.createCell(<span class="number">1</span>);</span><br><span class="line">		cell.setCellValue(<span class="string">"单选"</span>);</span><br><span class="line">		cell.setCellStyle(style);</span><br><span class="line"></span><br><span class="line">		cell = row.createCell(<span class="number">2</span>);</span><br><span class="line">		cell.setCellValue(<span class="string">"多选"</span>);</span><br><span class="line">		cell.setCellStyle(style);</span><br><span class="line"></span><br><span class="line">		cell = row.createCell(<span class="number">3</span>);</span><br><span class="line">		cell.setCellValue(<span class="string">"简答"</span>);</span><br><span class="line">		cell.setCellStyle(style);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
+<p>导出的结果<br><img src="https://img-blog.csdn.net/20180702172956974?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2p1bm1veGk=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt></p>
+<p>再将此Excel读取，代码如下：</p>
+<h1 id="3-导入Excel"><a href="#3-导入Excel" class="headerlink" title="3 导入Excel"></a>3 导入Excel</h1><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@PostMapping</span>(<span class="string">"upload"</span>)</span><br><span class="line">	<span class="function"><span class="keyword">public</span> MsgResponse <span class="title">upload</span><span class="params">(MultipartFile file)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">if</span> (file==<span class="keyword">null</span>) &#123;</span><br><span class="line">			<span class="keyword">return</span> error(<span class="string">"file不能为空"</span>);</span><br><span class="line">		&#125;</span><br><span class="line">		List&lt;Answer&gt; answers = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line">		<span class="keyword">try</span> &#123;</span><br><span class="line">			HSSFWorkbook workbook = <span class="keyword">new</span> HSSFWorkbook(<span class="keyword">new</span> POIFSFileSystem(file.getInputStream()));</span><br><span class="line">			<span class="comment">//有多少个sheet</span></span><br><span class="line">			<span class="keyword">int</span> sheets = workbook.getNumberOfSheets();</span><br><span class="line">			<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; sheets; i++) &#123;</span><br><span class="line">				HSSFSheet sheet = workbook.getSheetAt(i);</span><br><span class="line">				<span class="comment">//获取多少行</span></span><br><span class="line">				<span class="keyword">int</span> rows = sheet.getPhysicalNumberOfRows();</span><br><span class="line">				Answer answer = <span class="keyword">null</span>;</span><br><span class="line">				<span class="comment">//遍历每一行，注意：第 0 行为标题</span></span><br><span class="line">				<span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">1</span>; j &lt; rows; j++) &#123;</span><br><span class="line">					answer = <span class="keyword">new</span> Answer();</span><br><span class="line">					 <span class="comment">//获得第 j 行</span></span><br><span class="line">					HSSFRow row = sheet.getRow(j);</span><br><span class="line">					answer.setSelections(row.getCell(<span class="number">1</span>).getStringCellValue());<span class="comment">//单选</span></span><br><span class="line">					answer.setCheckes(row.getCell(<span class="number">2</span>).getStringCellValue());<span class="comment">//多选</span></span><br><span class="line">					answer.setContent(row.getCell(<span class="number">3</span>).getStringCellValue());<span class="comment">//简答</span></span><br><span class="line">					answers.add(answer);</span><br><span class="line">				&#125;</span><br><span class="line">			&#125;</span><br><span class="line">		</span><br><span class="line">		&#125; <span class="keyword">catch</span> (IOException e) &#123;</span><br><span class="line">			logger.error(e.getMessage(),e);</span><br><span class="line">			<span class="keyword">return</span> error(e.getMessage());</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">return</span> success(answers);</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="欢迎关注我的公众号"><a href="#欢迎关注我的公众号" class="headerlink" title="欢迎关注我的公众号"></a>欢迎关注我的公众号</h1><p><img src="https://img-blog.csdn.net/201809022126245?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2p1bm1veGk=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt></p>
 
           
         
@@ -1490,7 +1644,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://pibigstar.com/2019/02/21/SpringBoot导入导出Excel/">
+    <link itemprop="mainEntityOfPage" href="http://pibigstar.com/2019/02/20/使用docker部署SpringBoot项目/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="派大星">
@@ -1509,7 +1663,7 @@
         
           <h2 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2019/02/21/SpringBoot导入导出Excel/" itemprop="url">SpringBoot导入导出Excel</a></h2>
+                <a class="post-title-link" href="/2019/02/20/使用docker部署SpringBoot项目/" itemprop="url">使用docker部署SpringBoot项目</a></h2>
         
 
         <div class="post-meta">
@@ -1521,8 +1675,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-02-21T03:03:04+08:00">
-                2019-02-21
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-02-20T04:04:04+08:00">
+                2019-02-20
               </time>
             
 
@@ -1544,8 +1698,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/springboot-SpringBoot技能大全/" itemprop="url" rel="index">
-                    <span itemprop="name">springboot,SpringBoot技能大全</span>
+                  <a href="/categories/springboot-docker-SpringBoot技能大全/" itemprop="url" rel="index">
+                    <span itemprop="name">springboot,docker,SpringBoot技能大全</span>
                   </a>
                 </span>
 
@@ -1583,15 +1737,30 @@
       
         
           
-            <h1 id="1-下载jar包"><a href="#1-下载jar包" class="headerlink" title="1 下载jar包"></a>1 下载jar包</h1><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- excel导出工具 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.apache.poi<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>poi<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">version</span>&gt;</span>3.17<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
+            <h1 id="1-新建一个SpringBoot项目"><a href="#1-新建一个SpringBoot项目" class="headerlink" title="1.新建一个SpringBoot项目"></a>1.新建一个SpringBoot项目</h1><p>自己写吧。。。。我放个测试的</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.pibigstar.web;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> org.springframework.stereotype.Controller;</span><br><span class="line"><span class="keyword">import</span> org.springframework.web.bind.annotation.RequestMapping;</span><br><span class="line"><span class="keyword">import</span> org.springframework.web.bind.annotation.ResponseBody;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Controller</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">IndexController</span> </span>&#123;</span><br><span class="line">	</span><br><span class="line">	<span class="meta">@RequestMapping</span>(<span class="string">"/"</span>)</span><br><span class="line">	<span class="function"><span class="keyword">public</span> String <span class="title">toIndex</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		<span class="keyword">return</span> <span class="string">"index"</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	<span class="meta">@RequestMapping</span>(<span class="string">"/hello"</span>)</span><br><span class="line">	<span class="meta">@ResponseBody</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> String <span class="title">hello</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		<span class="keyword">return</span> <span class="string">"Hello pibigstar"</span>;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<h1 id="2-导出Excel"><a href="#2-导出Excel" class="headerlink" title="2 导出Excel"></a>2 导出Excel</h1><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.briup.apps.poll.web.controller;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.io.BufferedOutputStream;</span><br><span class="line"><span class="keyword">import</span> java.io.File;</span><br><span class="line"><span class="keyword">import</span> java.io.IOException;</span><br><span class="line"><span class="keyword">import</span> java.io.OutputStream;</span><br><span class="line"><span class="keyword">import</span> java.util.ArrayList;</span><br><span class="line"><span class="keyword">import</span> java.util.List;</span><br><span class="line"><span class="keyword">import</span> org.apache.poi.hssf.usermodel.HSSFCell;</span><br><span class="line"><span class="keyword">import</span> org.apache.poi.hssf.usermodel.HSSFCellStyle;</span><br><span class="line"><span class="keyword">import</span> org.apache.poi.hssf.usermodel.HSSFFont;</span><br><span class="line"><span class="keyword">import</span> org.apache.poi.hssf.usermodel.HSSFRow;</span><br><span class="line"><span class="keyword">import</span> org.apache.poi.hssf.usermodel.HSSFSheet;</span><br><span class="line"><span class="keyword">import</span> org.apache.poi.hssf.usermodel.HSSFWorkbook;</span><br><span class="line"><span class="keyword">import</span> org.apache.poi.poifs.filesystem.POIFSFileSystem;</span><br><span class="line"><span class="keyword">import</span> org.springframework.beans.factory.annotation.Autowired;</span><br><span class="line"><span class="keyword">import</span> org.springframework.stereotype.Controller;</span><br><span class="line"><span class="keyword">import</span> org.springframework.web.bind.annotation.GetMapping;</span><br><span class="line"><span class="keyword">import</span> org.springframework.web.bind.annotation.PostMapping;</span><br><span class="line"><span class="keyword">import</span> org.springframework.web.bind.annotation.RequestMapping;</span><br><span class="line"><span class="keyword">import</span> org.springframework.web.multipart.MultipartFile;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> com.briup.apps.poll.bean.Answer;</span><br><span class="line"><span class="keyword">import</span> com.briup.apps.poll.service.IAnswerService;</span><br><span class="line"><span class="keyword">import</span> com.briup.apps.poll.util.MsgResponse;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Controller</span></span><br><span class="line"><span class="meta">@RequestMapping</span>(<span class="string">"/excel"</span>)</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ExcelController</span> <span class="keyword">extends</span> <span class="title">BaseController</span></span>&#123;</span><br><span class="line"></span><br><span class="line">	<span class="meta">@Autowired</span></span><br><span class="line">	<span class="keyword">private</span> IAnswerService answerService;</span><br><span class="line"></span><br><span class="line">	<span class="comment">/***</span></span><br><span class="line"><span class="comment">	 * 下载Excel</span></span><br><span class="line"><span class="comment">	 * <span class="doctag">@throws</span> IOException</span></span><br><span class="line"><span class="comment">	 */</span></span><br><span class="line">	<span class="meta">@GetMapping</span>(<span class="string">"download"</span>)</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">download</span><span class="params">()</span> <span class="keyword">throws</span> IOException</span>&#123;</span><br><span class="line"></span><br><span class="line">		HSSFWorkbook workbook = <span class="keyword">new</span> HSSFWorkbook();</span><br><span class="line">		<span class="comment">//创建一个Excel表单,参数为sheet的名字</span></span><br><span class="line">		HSSFSheet sheet = workbook.createSheet(<span class="string">"课调答卷表"</span>);</span><br><span class="line"></span><br><span class="line">		<span class="comment">//创建表头</span></span><br><span class="line">		setTitle(workbook, sheet);</span><br><span class="line">		List&lt;Answer&gt; answers = answerService.findAll();</span><br><span class="line"></span><br><span class="line">		<span class="comment">//新增数据行，并且设置单元格数据</span></span><br><span class="line">		<span class="keyword">int</span> rowNum = <span class="number">1</span>;</span><br><span class="line">		<span class="keyword">for</span> (Answer answer:answers) &#123;</span><br><span class="line">			HSSFRow row = sheet.createRow(rowNum);</span><br><span class="line">			row.createCell(<span class="number">0</span>).setCellValue(answer.getId());</span><br><span class="line">			row.createCell(<span class="number">1</span>).setCellValue(answer.getSelections());</span><br><span class="line">			row.createCell(<span class="number">2</span>).setCellValue(answer.getCheckes());</span><br><span class="line">			row.createCell(<span class="number">3</span>).setCellValue(answer.getContent());</span><br><span class="line">			rowNum++;</span><br><span class="line">		&#125;</span><br><span class="line">		String fileName = <span class="string">"survey-answer.xlsx"</span>;</span><br><span class="line">	    <span class="comment">//清空response  </span></span><br><span class="line">        response.reset();  </span><br><span class="line">        <span class="comment">//设置response的Header  </span></span><br><span class="line">        response.addHeader(<span class="string">"Content-Disposition"</span>, <span class="string">"attachment;filename="</span>+ fileName);  </span><br><span class="line">        OutputStream os = <span class="keyword">new</span> BufferedOutputStream(response.getOutputStream());  </span><br><span class="line">        response.setContentType(<span class="string">"application/vnd.ms-excel;charset=gb2312"</span>); </span><br><span class="line">        <span class="comment">//将excel写入到输出流中</span></span><br><span class="line">        workbook.write(os);</span><br><span class="line">        os.flush();</span><br><span class="line">        os.close();</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	<span class="comment">/***</span></span><br><span class="line"><span class="comment">	 * 设置表头</span></span><br><span class="line"><span class="comment">	 * <span class="doctag">@param</span> workbook</span></span><br><span class="line"><span class="comment">	 * <span class="doctag">@param</span> sheet</span></span><br><span class="line"><span class="comment">	 */</span></span><br><span class="line">	<span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">setTitle</span><span class="params">(HSSFWorkbook workbook, HSSFSheet sheet)</span></span>&#123;</span><br><span class="line">		HSSFRow row = sheet.createRow(<span class="number">0</span>);</span><br><span class="line">		<span class="comment">//设置列宽，setColumnWidth的第二个参数要乘以256，这个参数的单位是1/256个字符宽度</span></span><br><span class="line">		sheet.setColumnWidth(<span class="number">0</span>, <span class="number">10</span>*<span class="number">256</span>);</span><br><span class="line">		sheet.setColumnWidth(<span class="number">1</span>, <span class="number">20</span>*<span class="number">256</span>);</span><br><span class="line">		sheet.setColumnWidth(<span class="number">2</span>, <span class="number">20</span>*<span class="number">256</span>);</span><br><span class="line">		sheet.setColumnWidth(<span class="number">3</span>, <span class="number">100</span>*<span class="number">256</span>);</span><br><span class="line"></span><br><span class="line">		<span class="comment">//设置为居中加粗</span></span><br><span class="line">		HSSFCellStyle style = workbook.createCellStyle();</span><br><span class="line">		HSSFFont font = workbook.createFont();</span><br><span class="line">		font.setBold(<span class="keyword">true</span>);</span><br><span class="line">		style.setFont(font);</span><br><span class="line"></span><br><span class="line">		HSSFCell cell;</span><br><span class="line">		cell = row.createCell(<span class="number">0</span>);</span><br><span class="line">		cell.setCellValue(<span class="string">"序号"</span>);</span><br><span class="line">		cell.setCellStyle(style);</span><br><span class="line"></span><br><span class="line">		cell = row.createCell(<span class="number">1</span>);</span><br><span class="line">		cell.setCellValue(<span class="string">"单选"</span>);</span><br><span class="line">		cell.setCellStyle(style);</span><br><span class="line"></span><br><span class="line">		cell = row.createCell(<span class="number">2</span>);</span><br><span class="line">		cell.setCellValue(<span class="string">"多选"</span>);</span><br><span class="line">		cell.setCellStyle(style);</span><br><span class="line"></span><br><span class="line">		cell = row.createCell(<span class="number">3</span>);</span><br><span class="line">		cell.setCellValue(<span class="string">"简答"</span>);</span><br><span class="line">		cell.setCellStyle(style);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="2-打包SpringBoot项目成jar包"><a href="#2-打包SpringBoot项目成jar包" class="headerlink" title="2. 打包SpringBoot项目成jar包"></a>2. 打包SpringBoot项目成jar包</h1><p><img src="https://img-blog.csdn.net/20180629193028355?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2p1bm1veGk=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt></p>
+<h1 id="3-编写Dockerfile文件"><a href="#3-编写Dockerfile文件" class="headerlink" title="3. 编写Dockerfile文件"></a>3. 编写Dockerfile文件</h1><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"># Docker image for springboot file run</span><br><span class="line"># VERSION 0.0.1</span><br><span class="line"># Author: pibigstar</span><br><span class="line"># 基础镜像使用java</span><br><span class="line">FROM java:8</span><br><span class="line"># 作者</span><br><span class="line">MAINTAINER pibigstar <span class="tag">&lt;<span class="name">741047261@qq.com</span>&gt;</span></span><br><span class="line"># VOLUME 指定了临时文件目录为/tmp。</span><br><span class="line"># 其效果是在主机 /var/lib/docker 目录下创建了一个临时文件，并链接到容器的/tmp</span><br><span class="line">VOLUME /tmp </span><br><span class="line"># 将jar包添加到容器中并更名为app.jar</span><br><span class="line">ADD onlineSpider-0.0.1-SNAPSHOT.jar app.jar </span><br><span class="line"># 运行jar包</span><br><span class="line">RUN bash -c 'touch /app.jar'</span><br><span class="line">ENTRYPOINT ["java","-Djava.security.egd=file:/dev/./urandom","-jar","/app.jar"]</span><br></pre></td></tr></table></figure>
 
-<p>导出的结果<br><img src="https://img-blog.csdn.net/20180702172956974?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2p1bm1veGk=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt></p>
-<p>再将此Excel读取，代码如下：</p>
-<h1 id="3-导入Excel"><a href="#3-导入Excel" class="headerlink" title="3 导入Excel"></a>3 导入Excel</h1><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@PostMapping</span>(<span class="string">"upload"</span>)</span><br><span class="line">	<span class="function"><span class="keyword">public</span> MsgResponse <span class="title">upload</span><span class="params">(MultipartFile file)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">if</span> (file==<span class="keyword">null</span>) &#123;</span><br><span class="line">			<span class="keyword">return</span> error(<span class="string">"file不能为空"</span>);</span><br><span class="line">		&#125;</span><br><span class="line">		List&lt;Answer&gt; answers = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line">		<span class="keyword">try</span> &#123;</span><br><span class="line">			HSSFWorkbook workbook = <span class="keyword">new</span> HSSFWorkbook(<span class="keyword">new</span> POIFSFileSystem(file.getInputStream()));</span><br><span class="line">			<span class="comment">//有多少个sheet</span></span><br><span class="line">			<span class="keyword">int</span> sheets = workbook.getNumberOfSheets();</span><br><span class="line">			<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; sheets; i++) &#123;</span><br><span class="line">				HSSFSheet sheet = workbook.getSheetAt(i);</span><br><span class="line">				<span class="comment">//获取多少行</span></span><br><span class="line">				<span class="keyword">int</span> rows = sheet.getPhysicalNumberOfRows();</span><br><span class="line">				Answer answer = <span class="keyword">null</span>;</span><br><span class="line">				<span class="comment">//遍历每一行，注意：第 0 行为标题</span></span><br><span class="line">				<span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">1</span>; j &lt; rows; j++) &#123;</span><br><span class="line">					answer = <span class="keyword">new</span> Answer();</span><br><span class="line">					 <span class="comment">//获得第 j 行</span></span><br><span class="line">					HSSFRow row = sheet.getRow(j);</span><br><span class="line">					answer.setSelections(row.getCell(<span class="number">1</span>).getStringCellValue());<span class="comment">//单选</span></span><br><span class="line">					answer.setCheckes(row.getCell(<span class="number">2</span>).getStringCellValue());<span class="comment">//多选</span></span><br><span class="line">					answer.setContent(row.getCell(<span class="number">3</span>).getStringCellValue());<span class="comment">//简答</span></span><br><span class="line">					answers.add(answer);</span><br><span class="line">				&#125;</span><br><span class="line">			&#125;</span><br><span class="line">		</span><br><span class="line">		&#125; <span class="keyword">catch</span> (IOException e) &#123;</span><br><span class="line">			logger.error(e.getMessage(),e);</span><br><span class="line">			<span class="keyword">return</span> error(e.getMessage());</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">return</span> success(answers);</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure>
+<p>如果是第一次打包，它会自动下载java 8的镜像作为基础镜像，以后再制作镜像的时候就不会再下载了。</p>
+<h1 id="4-部署文件"><a href="#4-部署文件" class="headerlink" title="4. 部署文件"></a>4. 部署文件</h1><p>如果不会安装docker的可以看我之前的博客。。。这里就不赘述了</p>
+<p>在服务器中新建一个文件夹用来存放我们的项目文件 <code>mkdir docker</code></p>
+<p>将打包好的jar包和Dockerfile文件上传到此文件夹中，然后进入此文件夹<code>cd docker</code></p>
+<h1 id="5-制作镜像"><a href="#5-制作镜像" class="headerlink" title="5. 制作镜像"></a>5. 制作镜像</h1><p>执行下面命令， 看好，最后面有个 <code>.</code> 点！</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker build -t springboot-demo .</span><br></pre></td></tr></table></figure>
 
-<h1 id="欢迎关注我的公众号"><a href="#欢迎关注我的公众号" class="headerlink" title="欢迎关注我的公众号"></a>欢迎关注我的公众号</h1><p><img src="https://img-blog.csdn.net/201809022126245?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2p1bm1veGk=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt></p>
+<p><code>-t</code> 参数是指定此镜像的tag名</p>
+<p>制作完成后通过下面命令查看我们制作的镜像</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker images</span><br></pre></td></tr></table></figure>
+
+<h1 id="5-启动容器"><a href="#5-启动容器" class="headerlink" title="5. 启动容器"></a>5. 启动容器</h1><p>有很多人搞不定镜像和容器的关系，其他他俩比较像java中的类与实例，镜像就好比类，而容器就是镜像的一个实例</p>
+<p>执行下面命令启动容器</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run -d -p <span class="number">8081</span>:<span class="number">8080</span> springboot-demo</span><br></pre></td></tr></table></figure>
+
+<p><code>-d</code>参数是让容器后台运行<br><code>-p</code> 是做端口映射，此时将服务器中的8081端口映射到容器中的8080端口</p>
+<h1 id="6-访问"><a href="#6-访问" class="headerlink" title="6. 访问"></a>6. 访问</h1><p>直接浏览器访问： http://你的服务器ip地址:8081/hello   即可查看效果</p>
+<p><img src="https://img-blog.csdn.net/20180629194101102?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2p1bm1veGk=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt></p>
 
           
         
@@ -1743,175 +1912,6 @@
 
 <h1 id="立体旋转图片"><a href="#立体旋转图片" class="headerlink" title="立体旋转图片"></a>立体旋转图片</h1><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE html&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span> <span class="attr">lang</span>=<span class="string">"zh-cn"</span>&gt;</span><span class="tag">&lt;<span class="name">head</span>&gt;</span><span class="tag">&lt;<span class="name">meta</span> <span class="attr">http-equiv</span>=<span class="string">"Content-Type"</span> <span class="attr">content</span>=<span class="string">"text/html; charset=UTF-8"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">title</span>&gt;</span>立体滚动图<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">style</span>&gt;</span></span><br><span class="line"><span class="css">	<span class="selector-class">.wrap</span>&#123;</span></span><br><span class="line">		width: 120px;</span><br><span class="line">		height: 200px;</span><br><span class="line">		margin: 20px;</span><br><span class="line">		position: fixed;</span><br><span class="line">		top: 15px;</span><br><span class="line">		right: 15px;</span><br><span class="line">		display: table-cell;</span><br><span class="line">		vertical-align: middle;</span><br><span class="line">		text-align: center;</span><br><span class="line">		z-index: 22;</span><br><span class="line">	&#125;</span><br><span class="line"><span class="css">	<span class="selector-class">.cube</span> &#123;</span></span><br><span class="line">		width: 120px;</span><br><span class="line">		height: 120px;</span><br><span class="line">		margin: 0 auto;</span><br><span class="line">		transform-style: preserve-3d;</span><br><span class="line">		transform: rotateX(-30deg) rotateY(-80deg);</span><br><span class="line">		animation: rotate linear 20s infinite;</span><br><span class="line">	&#125;</span><br><span class="line"><span class="css">	@-<span class="keyword">webkit</span>-<span class="keyword">keyframes</span> rotate &#123;</span></span><br><span class="line">		from &#123;</span><br><span class="line">			transform: rotateX(0deg) rotateY(0deg);</span><br><span class="line">		&#125;</span><br><span class="line">		to &#123;</span><br><span class="line">			transform: rotateX(360deg) rotateY(360deg);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line"><span class="css">	<span class="selector-class">.cube</span> <span class="selector-tag">div</span> &#123;</span></span><br><span class="line">		position: absolute;</span><br><span class="line">		width: 120px;</span><br><span class="line">		height: 120px;</span><br><span class="line"><span class="css">		<span class="selector-tag">opacity</span>: 0<span class="selector-class">.8</span>;</span></span><br><span class="line"><span class="css">		<span class="selector-tag">transition</span>: <span class="selector-tag">all</span> <span class="selector-class">.4s</span>;</span></span><br><span class="line">	&#125;</span><br><span class="line"><span class="css">	<span class="selector-class">.cube</span> <span class="selector-class">.out_front</span> &#123;</span></span><br><span class="line">		transform: rotateY(0deg) translateZ(60px);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line"><span class="css">	<span class="selector-class">.cube</span> <span class="selector-class">.out_back</span> &#123;</span></span><br><span class="line">		transform: translateZ(-60px) rotateY(180deg);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line"><span class="css">	<span class="selector-class">.cube</span> <span class="selector-class">.out_left</span> &#123;</span></span><br><span class="line">		transform: rotateY(-90deg) translateZ(60px);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line"><span class="css">	<span class="selector-class">.cube</span> <span class="selector-class">.out_right</span> &#123;</span></span><br><span class="line">		transform: rotateY(90deg) translateZ(60px);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line"><span class="css">	<span class="selector-class">.cube</span> <span class="selector-class">.out_top</span> &#123;</span></span><br><span class="line">		transform: rotateX(90deg) translateZ(60px);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line"><span class="css">	<span class="selector-class">.cube</span> <span class="selector-class">.out_bottom</span> &#123;</span></span><br><span class="line">		transform: rotateX(-90deg) translateZ(60px);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="tag">&lt;/<span class="name">style</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"wrap"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"cube"</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"out_front"</span>&gt;</span><span class="tag">&lt;<span class="name">img</span> <span class="attr">src</span>=<span class="string">"https://files-cdn.cnblogs.com/files/cjsblog/cube01.bmp"</span> <span class="attr">class</span>=<span class="string">"pic"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"out_back"</span>&gt;</span><span class="tag">&lt;<span class="name">img</span> <span class="attr">src</span>=<span class="string">"https://files-cdn.cnblogs.com/files/cjsblog/cube02.bmp"</span> <span class="attr">class</span>=<span class="string">"pic"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"out_left"</span>&gt;</span><span class="tag">&lt;<span class="name">img</span> <span class="attr">src</span>=<span class="string">"https://files-cdn.cnblogs.com/files/cjsblog/cube03.bmp"</span> <span class="attr">class</span>=<span class="string">"pic"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"out_right"</span>&gt;</span><span class="tag">&lt;<span class="name">img</span> <span class="attr">src</span>=<span class="string">"https://files-cdn.cnblogs.com/files/cjsblog/cube04.bmp"</span> <span class="attr">class</span>=<span class="string">"pic"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"out_top"</span>&gt;</span><span class="tag">&lt;<span class="name">img</span> <span class="attr">src</span>=<span class="string">"https://files-cdn.cnblogs.com/files/cjsblog/cube05.bmp"</span> <span class="attr">class</span>=<span class="string">"pic"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"out_bottom"</span>&gt;</span><span class="tag">&lt;<span class="name">img</span> <span class="attr">src</span>=<span class="string">"https://files-cdn.cnblogs.com/files/cjsblog/cube06.bmp"</span> <span class="attr">class</span>=<span class="string">"pic"</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
 
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    <div>
-      
-    </div>
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://pibigstar.com/2019/02/20/使用docker部署SpringBoot项目/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="派大星">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/qq.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="派大星的博客">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/02/20/使用docker部署SpringBoot项目/" itemprop="url">使用docker部署SpringBoot项目</a></h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-02-20T04:04:04+08:00">
-                2019-02-20
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/springboot-docker-SpringBoot技能大全/" itemprop="url" rel="index">
-                    <span itemprop="name">springboot,docker,SpringBoot技能大全</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="1-新建一个SpringBoot项目"><a href="#1-新建一个SpringBoot项目" class="headerlink" title="1.新建一个SpringBoot项目"></a>1.新建一个SpringBoot项目</h1><p>自己写吧。。。。我放个测试的</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.pibigstar.web;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> org.springframework.stereotype.Controller;</span><br><span class="line"><span class="keyword">import</span> org.springframework.web.bind.annotation.RequestMapping;</span><br><span class="line"><span class="keyword">import</span> org.springframework.web.bind.annotation.ResponseBody;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Controller</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">IndexController</span> </span>&#123;</span><br><span class="line">	</span><br><span class="line">	<span class="meta">@RequestMapping</span>(<span class="string">"/"</span>)</span><br><span class="line">	<span class="function"><span class="keyword">public</span> String <span class="title">toIndex</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		<span class="keyword">return</span> <span class="string">"index"</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	<span class="meta">@RequestMapping</span>(<span class="string">"/hello"</span>)</span><br><span class="line">	<span class="meta">@ResponseBody</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> String <span class="title">hello</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		<span class="keyword">return</span> <span class="string">"Hello pibigstar"</span>;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h1 id="2-打包SpringBoot项目成jar包"><a href="#2-打包SpringBoot项目成jar包" class="headerlink" title="2. 打包SpringBoot项目成jar包"></a>2. 打包SpringBoot项目成jar包</h1><p><img src="https://img-blog.csdn.net/20180629193028355?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2p1bm1veGk=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt></p>
-<h1 id="3-编写Dockerfile文件"><a href="#3-编写Dockerfile文件" class="headerlink" title="3. 编写Dockerfile文件"></a>3. 编写Dockerfile文件</h1><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"># Docker image for springboot file run</span><br><span class="line"># VERSION 0.0.1</span><br><span class="line"># Author: pibigstar</span><br><span class="line"># 基础镜像使用java</span><br><span class="line">FROM java:8</span><br><span class="line"># 作者</span><br><span class="line">MAINTAINER pibigstar <span class="tag">&lt;<span class="name">741047261@qq.com</span>&gt;</span></span><br><span class="line"># VOLUME 指定了临时文件目录为/tmp。</span><br><span class="line"># 其效果是在主机 /var/lib/docker 目录下创建了一个临时文件，并链接到容器的/tmp</span><br><span class="line">VOLUME /tmp </span><br><span class="line"># 将jar包添加到容器中并更名为app.jar</span><br><span class="line">ADD onlineSpider-0.0.1-SNAPSHOT.jar app.jar </span><br><span class="line"># 运行jar包</span><br><span class="line">RUN bash -c 'touch /app.jar'</span><br><span class="line">ENTRYPOINT ["java","-Djava.security.egd=file:/dev/./urandom","-jar","/app.jar"]</span><br></pre></td></tr></table></figure>
-
-<p>如果是第一次打包，它会自动下载java 8的镜像作为基础镜像，以后再制作镜像的时候就不会再下载了。</p>
-<h1 id="4-部署文件"><a href="#4-部署文件" class="headerlink" title="4. 部署文件"></a>4. 部署文件</h1><p>如果不会安装docker的可以看我之前的博客。。。这里就不赘述了</p>
-<p>在服务器中新建一个文件夹用来存放我们的项目文件 <code>mkdir docker</code></p>
-<p>将打包好的jar包和Dockerfile文件上传到此文件夹中，然后进入此文件夹<code>cd docker</code></p>
-<h1 id="5-制作镜像"><a href="#5-制作镜像" class="headerlink" title="5. 制作镜像"></a>5. 制作镜像</h1><p>执行下面命令， 看好，最后面有个 <code>.</code> 点！</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker build -t springboot-demo .</span><br></pre></td></tr></table></figure>
-
-<p><code>-t</code> 参数是指定此镜像的tag名</p>
-<p>制作完成后通过下面命令查看我们制作的镜像</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker images</span><br></pre></td></tr></table></figure>
-
-<h1 id="5-启动容器"><a href="#5-启动容器" class="headerlink" title="5. 启动容器"></a>5. 启动容器</h1><p>有很多人搞不定镜像和容器的关系，其他他俩比较像java中的类与实例，镜像就好比类，而容器就是镜像的一个实例</p>
-<p>执行下面命令启动容器</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run -d -p <span class="number">8081</span>:<span class="number">8080</span> springboot-demo</span><br></pre></td></tr></table></figure>
-
-<p><code>-d</code>参数是让容器后台运行<br><code>-p</code> 是做端口映射，此时将服务器中的8081端口映射到容器中的8080端口</p>
-<h1 id="6-访问"><a href="#6-访问" class="headerlink" title="6. 访问"></a>6. 访问</h1><p>直接浏览器访问： http://你的服务器ip地址:8081/hello   即可查看效果</p>
-<p><img src="https://img-blog.csdn.net/20180629194101102?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2p1bm1veGk=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt></p>
 
           
         

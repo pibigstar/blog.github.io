@@ -250,7 +250,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://pibigstar.com/2019/04/24/Go语言入门（5）安装第三方库/">
+    <link itemprop="mainEntityOfPage" href="http://pibigstar.com/2019/04/24/windows配置go-micro开发环境/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="派大星">
@@ -269,7 +269,7 @@
         
           <h2 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2019/04/24/Go语言入门（5）安装第三方库/" itemprop="url">Go语言入门（5）安装第三方库</a></h2>
+                <a class="post-title-link" href="/2019/04/24/windows配置go-micro开发环境/" itemprop="url">windows配置go-micro开发环境</a></h2>
         
 
         <div class="post-meta">
@@ -343,166 +343,19 @@
       
         
           
-            <p>通过go get 去获取github上的第三方库是没什么问题的，但是要获取google的就不行了，没办法，<br>所以我们通过gopm这个工具来获取Google的第三方库</p>
-<h1 id="1-安装gopm"><a href="#1-安装gopm" class="headerlink" title="1. 安装gopm"></a>1. 安装gopm</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">go get github.com/gpmgo/gopm</span><br></pre></td></tr></table></figure>
+            <h1 id="1-安装protobuf"><a href="#1-安装protobuf" class="headerlink" title="1. 安装protobuf"></a>1. 安装protobuf</h1><h4 id="下载protoc-exe"><a href="#下载protoc-exe" class="headerlink" title="下载protoc.exe"></a>下载protoc.exe</h4><p><a href="https://github.com/protocolbuffers/protobuf/releases/tag/v3.8.0-rc1" target="_blank" rel="noopener">点击下载</a><br>下载protoc-3.8.0-rc-1-win64.zip</p>
+<p>下载解压后，将路径配置到环境变量里。</p>
+<h4 id="安装插件"><a href="#安装插件" class="headerlink" title="安装插件"></a>安装插件</h4><p>以go get 方式安装</p>
+<p><strong>安装protoc-gen-go</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">go get -v github.com/golang/protobuf/proto</span><br><span class="line">go get -v github.com/golang/protobuf/protoc-gen-go</span><br></pre></td></tr></table></figure>
 
-<h1 id="2-通过gopm安装"><a href="#2-通过gopm安装" class="headerlink" title="2. 通过gopm安装"></a>2. 通过gopm安装</h1><p>我们安装一个go 的 import 工具</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gopm get -g -v golang.org/x/tools/cmd/goimports</span><br></pre></td></tr></table></figure>
+<p><strong>安装go-micro</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">go get -v github.com/micro/go-micro</span><br></pre></td></tr></table></figure>
 
-<p><code>-g</code> 参数是将包下载到 GOPATH 路径下<br><code>-v</code> 参数是显示下载过程</p>
-<h1 id="3-安装下载的库"><a href="#3-安装下载的库" class="headerlink" title="3. 安装下载的库"></a>3. 安装下载的库</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">go install golang.org/x/tools/cmd/goimports</span><br></pre></td></tr></table></figure>
+<h1 id="2-编译proto"><a href="#2-编译proto" class="headerlink" title="2.编译proto"></a>2.编译proto</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">E://protoc/bin/protoc.exe </span><br><span class="line">--plugin=protoc-gen-go=F://goWork/bin/protoc-gen-go.exe </span><br><span class="line">--proto_path=./ </span><br><span class="line">--go_out=./ </span><br><span class="line">--plugin=protoc-gen-micro=F://goWork/bin/protoc-gen-micro.exe </span><br><span class="line">--micro_out=./ </span><br><span class="line">user.proto</span><br></pre></td></tr></table></figure>
 
-<p>这个命令可以生成一个可执行文件到GOPATH/bin 路径下</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    <div>
-      
-    </div>
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://pibigstar.com/2019/04/21/SprintBoot任意处获取Request对象/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="派大星">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/qq.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="派大星的博客">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/04/21/SprintBoot任意处获取Request对象/" itemprop="url">SprintBoot任意处获取Request对象</a></h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-04-21T21:09:04+08:00">
-                2019-04-21
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/springboot/" itemprop="url" rel="index">
-                    <span itemprop="name">springboot</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>老样子，直接上代码</p>
-<h1 id="方式一（粗暴，推荐）"><a href="#方式一（粗暴，推荐）" class="headerlink" title="方式一（粗暴，推荐）"></a>方式一（粗暴，推荐）</h1><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.pibgstar.demo.utils;</span><br><span class="line"><span class="keyword">import</span> org.springframework.web.context.request.RequestAttributes;</span><br><span class="line"><span class="keyword">import</span> org.springframework.web.context.request.RequestContextHolder;</span><br><span class="line"><span class="keyword">import</span> org.springframework.web.context.request.ServletRequestAttributes;</span><br><span class="line"><span class="keyword">import</span> javax.servlet.http.HttpServletRequest;</span><br><span class="line"><span class="keyword">import</span> javax.servlet.http.HttpServletResponse;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> pibigstar</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@desc</span> 获取request和response对象</span></span><br><span class="line"><span class="comment"> **/</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">WebUtil</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/** 获取request对象 **/</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> HttpServletRequest <span class="title">getRequest</span><span class="params">()</span></span>&#123;</span><br><span class="line">        RequestAttributes requestAttributes = RequestContextHolder.getRequestAttributes();</span><br><span class="line">        <span class="keyword">if</span> (requestAttributes == <span class="keyword">null</span>)&#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> ((ServletRequestAttributes)requestAttributes).getRequest();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">/** 获取response对象 **/</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> HttpServletResponse <span class="title">getResponse</span><span class="params">()</span></span>&#123;</span><br><span class="line">        RequestAttributes requestAttributes = RequestContextHolder.getRequestAttributes();</span><br><span class="line">        <span class="keyword">if</span> (requestAttributes == <span class="keyword">null</span>)&#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> ((ServletRequestAttributes)requestAttributes).getResponse();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h1 id="方式二（简单）"><a href="#方式二（简单）" class="headerlink" title="方式二（简单）"></a>方式二（简单）</h1><p>在你需要的地方，注入即可</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Autowired</span></span><br><span class="line">HttpServletRequest request;</span><br><span class="line"><span class="meta">@Autowired</span></span><br><span class="line">HttpServletResponse response</span><br></pre></td></tr></table></figure>
+<h1 id="3-设置Consul注册中心"><a href="#3-设置Consul注册中心" class="headerlink" title="3. 设置Consul注册中心"></a>3. 设置Consul注册中心</h1><p>consul可以使用docker进行安装，可以看我之前的博客<a href="https://blog.csdn.net/junmoxi/article/details/90521818" target="_blank" rel="noopener">点击查看</a></p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 注册中心</span></span><br><span class="line">	reg := consul.NewRegistry(<span class="function"><span class="keyword">func</span><span class="params">(op *registry.Options)</span></span> &#123;</span><br><span class="line">		op.Addrs = []<span class="keyword">string</span>&#123;</span><br><span class="line">			<span class="string">"127.0.0.1:8500"</span>,</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;)</span><br><span class="line">	<span class="comment">//创建一个服务</span></span><br><span class="line">	service := micro.NewService(micro.Name(<span class="string">"micro.service.user"</span>),</span><br><span class="line">		micro.Registry(reg),</span><br><span class="line">		micro.RegisterTTL(time.Second*<span class="number">10</span>),     <span class="comment">//10s检查等待时间</span></span><br><span class="line">		micro.RegisterInterval(time.Second*<span class="number">5</span>), <span class="comment">// 服务每5s发一次心跳</span></span><br><span class="line">	)</span><br><span class="line">	proto.RegisterUserServiceHandler(service.Server(), <span class="built_in">new</span>(handler.User))</span><br><span class="line">	err := service.Run()</span><br><span class="line">	<span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">		log.Println(err.Error())</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure>
 
 
           
@@ -705,180 +558,6 @@
 <p>关于配置<code>noVNC</code>的，可以查看我之前的文章：<a href="https://blog.csdn.net/junmoxi/article/details/100977131" target="_blank" rel="noopener">https://blog.csdn.net/junmoxi/article/details/100977131</a></p>
 <h1 id="9-设置内网穿透"><a href="#9-设置内网穿透" class="headerlink" title="9. 设置内网穿透"></a>9. 设置内网穿透</h1><p>用的是 <code>ngrok</code> 比较方便，这是教程可以参考：<a href="https://www.jianshu.com/p/8702f55d57e3" target="_blank" rel="noopener">https://www.jianshu.com/p/8702f55d57e3</a></p>
 <p>ngrok 官网： <a href="https://www.ngrok.cc" target="_blank" rel="noopener">https://www.ngrok.cc</a></p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    <div>
-      
-    </div>
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://pibigstar.com/2019/04/21/Go语言入门（4）dep包管理/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="派大星">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/qq.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="派大星的博客">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/04/21/Go语言入门（4）dep包管理/" itemprop="url">Go语言入门（4）dep包管理</a></h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-04-21T21:09:04+08:00">
-                2019-04-21
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/go/" itemprop="url" rel="index">
-                    <span itemprop="name">go</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="1-什么是dep？"><a href="#1-什么是dep？" class="headerlink" title="1. 什么是dep？"></a>1. 什么是dep？</h1><blockquote>
-<p>dep和go，在一定程度上相当于maven之于Java，composer之于PHP，dep是go语言官方的一个包管理工具。<br>相比较go get而言，dep可以直接给引入的第三方包一个专门的目录，并且可以专门制定一个配置文件，控制go项目所引入的包，版本以及其他依赖关系。</p>
-</blockquote>
-<p>dep这个项目放在golang官方的github中：<a href="https://github.com/golang/dep" target="_blank" rel="noopener">https://github.com/golang/dep</a></p>
-<h1 id="2-安装"><a href="#2-安装" class="headerlink" title="2. 安装"></a>2. 安装</h1><ul>
-<li><p>Mac系统：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">brew install dep</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>Linux系统</p>
-</li>
-</ul>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl https://raw.githubusercontent.com/golang/dep/master/install.sh | sh</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>Windows系统</li>
-</ul>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">go get -u github.com/golang/dep/cmd/dep</span><br></pre></td></tr></table></figure>
-
-<h1 id="3-使用"><a href="#3-使用" class="headerlink" title="3. 使用"></a>3. 使用</h1><h2 id="3-1-初始化"><a href="#3-1-初始化" class="headerlink" title="3.1 初始化"></a>3.1 初始化</h2><p>在项目根目录下执行 <code>dep init</code> 即可完成初始化，此时会生成三个文件</p>
-<ul>
-<li>vendor文件夹存放我们项目需要的包文件</li>
-<li>Gopkg.lock文件</li>
-<li>Gopkg.toml 文件是我们可以编辑的文件，通过编辑这个文件，并运行<code>dep ensure</code>的命令可以达到引入包的目的：</li>
-</ul>
-<p>Gopkg.toml:</p>
-<figure class="highlight toml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 必需包</span></span><br><span class="line"><span class="attr">required</span> = [<span class="string">"github.com/gin-gonic/gin"</span>]</span><br><span class="line"><span class="comment"># 忽略包</span></span><br><span class="line"><span class="comment">#ignored = []没有可以不写</span></span><br><span class="line"><span class="comment"># 项目元数据</span></span><br><span class="line"><span class="comment">#[metadata]</span></span><br><span class="line"><span class="comment"># 约束条件</span></span><br><span class="line"><span class="section">[[constraint]]</span></span><br><span class="line">  <span class="comment"># name = </span></span><br><span class="line">  <span class="comment"># 可选：版本</span></span><br><span class="line">  <span class="comment"># version =</span></span><br><span class="line">  <span class="comment"># 分支</span></span><br><span class="line">  <span class="comment"># branch</span></span><br><span class="line">  <span class="comment"># 修订</span></span><br><span class="line">  <span class="comment"># revision</span></span><br><span class="line">  <span class="comment"># 可选：指定来源</span></span><br><span class="line">  <span class="comment"># source = "github.com/gin-gonic/gin"</span></span><br></pre></td></tr></table></figure>
-
-<h1 id="3-2-导包"><a href="#3-2-导包" class="headerlink" title="3.2 导包"></a>3.2 导包</h1><p>使用 <code>dep ensure</code> 即可引入当前项目所需要的包到vendor文件夹中</p>
-<h1 id="3-3-查看状态"><a href="#3-3-查看状态" class="headerlink" title="3.3 查看状态"></a>3.3 查看状态</h1><p>使用 <code>dep status</code>命令查看状态</p>
 
           
         
@@ -1269,6 +948,331 @@
 </li>
 </ul>
 <p>总之，由于现在包括MySQL+高可用在内的很多系统机制都依赖于binlog，所以“鸠占鹊巢”redo log还做不到。</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    <div>
+      
+    </div>
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://pibigstar.com/2019/04/21/Go语言入门（4）dep包管理/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="派大星">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/qq.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="派大星的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/04/21/Go语言入门（4）dep包管理/" itemprop="url">Go语言入门（4）dep包管理</a></h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-04-21T21:09:04+08:00">
+                2019-04-21
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/go/" itemprop="url" rel="index">
+                    <span itemprop="name">go</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="1-什么是dep？"><a href="#1-什么是dep？" class="headerlink" title="1. 什么是dep？"></a>1. 什么是dep？</h1><blockquote>
+<p>dep和go，在一定程度上相当于maven之于Java，composer之于PHP，dep是go语言官方的一个包管理工具。<br>相比较go get而言，dep可以直接给引入的第三方包一个专门的目录，并且可以专门制定一个配置文件，控制go项目所引入的包，版本以及其他依赖关系。</p>
+</blockquote>
+<p>dep这个项目放在golang官方的github中：<a href="https://github.com/golang/dep" target="_blank" rel="noopener">https://github.com/golang/dep</a></p>
+<h1 id="2-安装"><a href="#2-安装" class="headerlink" title="2. 安装"></a>2. 安装</h1><ul>
+<li><p>Mac系统：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">brew install dep</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>Linux系统</p>
+</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl https://raw.githubusercontent.com/golang/dep/master/install.sh | sh</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>Windows系统</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">go get -u github.com/golang/dep/cmd/dep</span><br></pre></td></tr></table></figure>
+
+<h1 id="3-使用"><a href="#3-使用" class="headerlink" title="3. 使用"></a>3. 使用</h1><h2 id="3-1-初始化"><a href="#3-1-初始化" class="headerlink" title="3.1 初始化"></a>3.1 初始化</h2><p>在项目根目录下执行 <code>dep init</code> 即可完成初始化，此时会生成三个文件</p>
+<ul>
+<li>vendor文件夹存放我们项目需要的包文件</li>
+<li>Gopkg.lock文件</li>
+<li>Gopkg.toml 文件是我们可以编辑的文件，通过编辑这个文件，并运行<code>dep ensure</code>的命令可以达到引入包的目的：</li>
+</ul>
+<p>Gopkg.toml:</p>
+<figure class="highlight toml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 必需包</span></span><br><span class="line"><span class="attr">required</span> = [<span class="string">"github.com/gin-gonic/gin"</span>]</span><br><span class="line"><span class="comment"># 忽略包</span></span><br><span class="line"><span class="comment">#ignored = []没有可以不写</span></span><br><span class="line"><span class="comment"># 项目元数据</span></span><br><span class="line"><span class="comment">#[metadata]</span></span><br><span class="line"><span class="comment"># 约束条件</span></span><br><span class="line"><span class="section">[[constraint]]</span></span><br><span class="line">  <span class="comment"># name = </span></span><br><span class="line">  <span class="comment"># 可选：版本</span></span><br><span class="line">  <span class="comment"># version =</span></span><br><span class="line">  <span class="comment"># 分支</span></span><br><span class="line">  <span class="comment"># branch</span></span><br><span class="line">  <span class="comment"># 修订</span></span><br><span class="line">  <span class="comment"># revision</span></span><br><span class="line">  <span class="comment"># 可选：指定来源</span></span><br><span class="line">  <span class="comment"># source = "github.com/gin-gonic/gin"</span></span><br></pre></td></tr></table></figure>
+
+<h1 id="3-2-导包"><a href="#3-2-导包" class="headerlink" title="3.2 导包"></a>3.2 导包</h1><p>使用 <code>dep ensure</code> 即可引入当前项目所需要的包到vendor文件夹中</p>
+<h1 id="3-3-查看状态"><a href="#3-3-查看状态" class="headerlink" title="3.3 查看状态"></a>3.3 查看状态</h1><p>使用 <code>dep status</code>命令查看状态</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    <div>
+      
+    </div>
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://pibigstar.com/2019/04/21/SprintBoot任意处获取Request对象/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="派大星">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/qq.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="派大星的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/04/21/SprintBoot任意处获取Request对象/" itemprop="url">SprintBoot任意处获取Request对象</a></h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-04-21T21:09:04+08:00">
+                2019-04-21
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/springboot/" itemprop="url" rel="index">
+                    <span itemprop="name">springboot</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>老样子，直接上代码</p>
+<h1 id="方式一（粗暴，推荐）"><a href="#方式一（粗暴，推荐）" class="headerlink" title="方式一（粗暴，推荐）"></a>方式一（粗暴，推荐）</h1><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.pibgstar.demo.utils;</span><br><span class="line"><span class="keyword">import</span> org.springframework.web.context.request.RequestAttributes;</span><br><span class="line"><span class="keyword">import</span> org.springframework.web.context.request.RequestContextHolder;</span><br><span class="line"><span class="keyword">import</span> org.springframework.web.context.request.ServletRequestAttributes;</span><br><span class="line"><span class="keyword">import</span> javax.servlet.http.HttpServletRequest;</span><br><span class="line"><span class="keyword">import</span> javax.servlet.http.HttpServletResponse;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> pibigstar</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@desc</span> 获取request和response对象</span></span><br><span class="line"><span class="comment"> **/</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">WebUtil</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/** 获取request对象 **/</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> HttpServletRequest <span class="title">getRequest</span><span class="params">()</span></span>&#123;</span><br><span class="line">        RequestAttributes requestAttributes = RequestContextHolder.getRequestAttributes();</span><br><span class="line">        <span class="keyword">if</span> (requestAttributes == <span class="keyword">null</span>)&#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> ((ServletRequestAttributes)requestAttributes).getRequest();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">/** 获取response对象 **/</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> HttpServletResponse <span class="title">getResponse</span><span class="params">()</span></span>&#123;</span><br><span class="line">        RequestAttributes requestAttributes = RequestContextHolder.getRequestAttributes();</span><br><span class="line">        <span class="keyword">if</span> (requestAttributes == <span class="keyword">null</span>)&#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> ((ServletRequestAttributes)requestAttributes).getResponse();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="方式二（简单）"><a href="#方式二（简单）" class="headerlink" title="方式二（简单）"></a>方式二（简单）</h1><p>在你需要的地方，注入即可</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Autowired</span></span><br><span class="line">HttpServletRequest request;</span><br><span class="line"><span class="meta">@Autowired</span></span><br><span class="line">HttpServletResponse response</span><br></pre></td></tr></table></figure>
+
 
           
         

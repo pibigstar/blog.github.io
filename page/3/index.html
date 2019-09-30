@@ -250,7 +250,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://pibigstar.com/2019/08/29/Linux防火墙操作/">
+    <link itemprop="mainEntityOfPage" href="http://pibigstar.com/2019/08/29/常用Shell方法集合/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="派大星">
@@ -269,7 +269,7 @@
         
           <h2 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2019/08/29/Linux防火墙操作/" itemprop="url">Linux防火墙操作</a></h2>
+                <a class="post-title-link" href="/2019/08/29/常用Shell方法集合/" itemprop="url">常用Shell方法集合</a></h2>
         
 
         <div class="post-meta">
@@ -304,8 +304,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Linux/" itemprop="url" rel="index">
-                    <span itemprop="name">Linux</span>
+                  <a href="/categories/shell/" itemprop="url" rel="index">
+                    <span itemprop="name">shell</span>
                   </a>
                 </span>
 
@@ -343,23 +343,15 @@
       
         
           
-            <h1 id="1-查看防火墙状态"><a href="#1-查看防火墙状态" class="headerlink" title="1. 查看防火墙状态"></a>1. 查看防火墙状态</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo firewall-cmd --state</span><br></pre></td></tr></table></figure>
+            <h1 id="判断是否是root用户"><a href="#判断是否是root用户" class="headerlink" title="判断是否是root用户"></a>判断是否是root用户</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="title">check_root</span></span>() &#123;</span><br><span class="line">	<span class="built_in">local</span> user=<span class="string">""</span></span><br><span class="line">	user=<span class="string">"<span class="variable">$(id -un 2&gt;/dev/null || true)</span>"</span></span><br><span class="line">	<span class="keyword">if</span> [ <span class="string">"<span class="variable">$user</span>"</span> != <span class="string">"root"</span> ]; <span class="keyword">then</span></span><br><span class="line">		cat &gt;&amp;2 &lt;&lt;-<span class="string">'EOF'</span></span><br><span class="line">		权限错误, 请使用 root 用户运行此脚本!</span><br><span class="line">		EOF</span><br><span class="line">		<span class="built_in">exit</span> 1</span><br><span class="line">	<span class="keyword">fi</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<blockquote>
-<p>如果是运行中则会输出 running，如果没有运行则会输出 not running</p>
-</blockquote>
-<h1 id="2-关闭防火墙"><a href="#2-关闭防火墙" class="headerlink" title="2. 关闭防火墙"></a>2. 关闭防火墙</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 关闭</span></span><br><span class="line">systemctl stop firewalld</span><br><span class="line"><span class="comment"># 关闭开机自启</span></span><br><span class="line">systemctl <span class="built_in">disable</span> firewalld</span><br></pre></td></tr></table></figure>
+<h1 id="判断命令是否存在"><a href="#判断命令是否存在" class="headerlink" title="判断命令是否存在"></a>判断命令是否存在</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="title">command_exists</span></span>() &#123;</span><br><span class="line">	<span class="built_in">command</span> -v <span class="string">"<span class="variable">$@</span>"</span> &gt;/dev/null 2&gt;&amp;1</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">if</span> command_exists ip;<span class="keyword">then</span></span><br><span class="line">	<span class="built_in">echo</span> <span class="string">"存在ip命令"</span></span><br><span class="line"><span class="keyword">elif</span> command_exists ifconfig; <span class="keyword">then</span></span><br><span class="line">	<span class="built_in">echo</span> <span class="string">"存在ifconfig命令"</span></span><br><span class="line"><span class="keyword">else</span></span><br><span class="line">	<span class="built_in">echo</span> <span class="string">"都不存在"</span></span><br><span class="line"><span class="keyword">fi</span></span><br></pre></td></tr></table></figure>
 
-<h1 id="3-开启防火墙"><a href="#3-开启防火墙" class="headerlink" title="3. 开启防火墙"></a>3. 开启防火墙</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">systemctl start firewalld</span><br></pre></td></tr></table></figure>
+<h1 id="判断参数是否为数字"><a href="#判断参数是否为数字" class="headerlink" title="判断参数是否为数字"></a>判断参数是否为数字</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="title">is_number</span></span>() &#123;</span><br><span class="line">	expr <span class="string">"<span class="variable">$1</span>"</span> + 1 &gt;/dev/null 2&gt;&amp;1</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">if</span> ! ( is_number <span class="string">"<span class="variable">$1</span>"</span> ); <span class="keyword">then</span></span><br><span class="line">cat &gt;&amp;2 &lt;&lt;-EOF</span><br><span class="line">请输入数字</span><br><span class="line">EOF</span><br><span class="line"><span class="built_in">exit</span> 1</span><br><span class="line"><span class="keyword">fi</span></span><br></pre></td></tr></table></figure>
 
-<h1 id="4-添加端口白名单"><a href="#4-添加端口白名单" class="headerlink" title="4. 添加端口白名单"></a>4. 添加端口白名单</h1><blockquote>
-<p>将 5901-5905端口添加到白名单中</p>
-</blockquote>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo firewall-cmd --permanent --zone=public --add-port=5901-5905/tcp</span><br></pre></td></tr></table></figure>
+<h1 id="获取服务器IP地址"><a href="#获取服务器IP地址" class="headerlink" title="获取服务器IP地址"></a>获取服务器IP地址</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="title">get_server_ip</span></span>() &#123;</span><br><span class="line">	<span class="built_in">local</span> server_ip=<span class="string">""</span></span><br><span class="line">	<span class="built_in">local</span> interface_info=<span class="string">""</span></span><br><span class="line"></span><br><span class="line">	<span class="keyword">if</span> command_exists ip; <span class="keyword">then</span></span><br><span class="line">		interface_info=<span class="string">"<span class="variable">$(ip addr)</span>"</span></span><br><span class="line">	<span class="keyword">elif</span> command_exists ifconfig; <span class="keyword">then</span></span><br><span class="line">		interface_info=<span class="string">"<span class="variable">$(ifconfig)</span>"</span></span><br><span class="line">	<span class="keyword">fi</span></span><br><span class="line"></span><br><span class="line">	server_ip=$(<span class="built_in">echo</span> <span class="string">"<span class="variable">$interface_info</span>"</span> | \</span><br><span class="line">		grep -oE <span class="string">"[0-9]&#123;1,3&#125;\.[0-9]&#123;1,3&#125;\.[0-9]&#123;1,3&#125;\.[0-9]&#123;1,3&#125;"</span> | \</span><br><span class="line">		grep -vE <span class="string">"^192\.168|^172\.1[6-9]\.|^172\.2[0-9]\.|^172\.3[0-2]\.|^10\.|^127\.|^255\.|^0\."</span> | \</span><br><span class="line">		head -n 1)</span><br><span class="line"></span><br><span class="line">	<span class="comment"># 自动获取失败时，通过网站提供的 API 获取外网地址</span></span><br><span class="line">	<span class="keyword">if</span> [ -z <span class="string">"<span class="variable">$server_ip</span>"</span> ]; <span class="keyword">then</span></span><br><span class="line">		 server_ip=<span class="string">"<span class="variable">$(wget -qO- --no-check-certificate https://ipv4.icanhazip.com)</span>"</span></span><br><span class="line">	<span class="keyword">fi</span></span><br><span class="line"></span><br><span class="line">	<span class="built_in">echo</span> <span class="string">"<span class="variable">$server_ip</span>"</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<h1 id="5-重新加载"><a href="#5-重新加载" class="headerlink" title="5. 重新加载"></a>5. 重新加载</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo firewall-cmd --reload</span><br></pre></td></tr></table></figure>
-
-<h1 id="6-查看白名单端口列表"><a href="#6-查看白名单端口列表" class="headerlink" title="6. 查看白名单端口列表"></a>6. 查看白名单端口列表</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo firewall-cmd --list-all-zones</span><br></pre></td></tr></table></figure>
+<h1 id="下载文件，重试3次"><a href="#下载文件，重试3次" class="headerlink" title="下载文件，重试3次"></a>下载文件，重试3次</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="title">download_file</span></span>() &#123;</span><br><span class="line">	<span class="comment"># 文件下载链接</span></span><br><span class="line">	<span class="built_in">local</span> url=<span class="string">"<span class="variable">$1</span>"</span></span><br><span class="line">	<span class="comment"># 文件下载后存放路径</span></span><br><span class="line">	<span class="built_in">local</span> file=<span class="string">"<span class="variable">$2</span>"</span></span><br><span class="line">	<span class="built_in">local</span> retry=0</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="title">download_file_to_path</span></span>() &#123;</span><br><span class="line">		<span class="keyword">if</span> [ <span class="variable">$retry</span> -ge 3 ]; <span class="keyword">then</span></span><br><span class="line">			rm -f <span class="string">"<span class="variable">$file</span>"</span></span><br><span class="line">			cat &gt;&amp;2 &lt;&lt;-EOF</span><br><span class="line">			文件下载失败! 请重试。</span><br><span class="line">			URL: <span class="variable">$&#123;url&#125;</span></span><br><span class="line">			EOF</span><br><span class="line">		<span class="keyword">fi</span></span><br><span class="line"></span><br><span class="line">		( <span class="built_in">set</span> -x; wget -O <span class="string">"<span class="variable">$file</span>"</span> --no-check-certificate <span class="string">"<span class="variable">$url</span>"</span> )</span><br><span class="line">		<span class="keyword">if</span> [ <span class="string">"$?"</span> != <span class="string">"0"</span> ] || [ -n <span class="string">"<span class="variable">$verify_cmd</span>"</span> ] &amp;&amp; ! verify_file; <span class="keyword">then</span></span><br><span class="line">			retry=$(expr <span class="variable">$retry</span> + 1)</span><br><span class="line">			download_file_to_path</span><br><span class="line">		<span class="keyword">fi</span></span><br><span class="line">	&#125;</span><br><span class="line">	download_file_to_path</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment"># 使用</span></span><br><span class="line">DOCKERFILE_DOWNLOAD_URL=<span class="string">"https://github.com/pibigstar/go-todo/blob/master/Dockerfile"</span></span><br><span class="line">download_file <span class="string">"<span class="variable">$DOCKERFILE_DOWNLOAD_URL</span>"</span> <span class="string">"/usr/local/todo"</span></span><br></pre></td></tr></table></figure>
 
 
           
@@ -1568,7 +1560,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://pibigstar.com/2019/08/11/sed和awk常用操作/">
+    <link itemprop="mainEntityOfPage" href="http://pibigstar.com/2019/08/11/go语言实现服务器与微信公众平台对接/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="派大星">
@@ -1587,7 +1579,7 @@
         
           <h2 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2019/08/11/sed和awk常用操作/" itemprop="url">sed和awk常用操作</a></h2>
+                <a class="post-title-link" href="/2019/08/11/go语言实现服务器与微信公众平台对接/" itemprop="url">go语言实现服务器与微信公众平台对接</a></h2>
         
 
         <div class="post-meta">
@@ -1622,8 +1614,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Linux-shell/" itemprop="url" rel="index">
-                    <span itemprop="name">Linux,shell</span>
+                  <a href="/categories/go-微信小程序/" itemprop="url" rel="index">
+                    <span itemprop="name">go,微信小程序</span>
                   </a>
                 </span>
 
@@ -1661,91 +1653,12 @@
       
         
           
-            <p>@[toc]</p>
-<h1 id="1-sed命令说明"><a href="#1-sed命令说明" class="headerlink" title="1. sed命令说明"></a>1. sed命令说明</h1><blockquote>
-<p>sed是流式文本处理，它是对文本进行一行一行的处理，处理完一行之后，再读取下一行，sed默认不会修改源文件的</p>
-</blockquote>
-<p>命令格式：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sed 参数 <span class="string">'动作'</span> 文本文件</span><br></pre></td></tr></table></figure>
+            <p>微信对接文档：<a href="https://developers.weixin.qq.com/miniprogram/dev/framework/open-ability/customer-message/customer-message.html" target="_blank" rel="noopener">点击查看</a></p>
+<p>在这不得不吐槽一下，写的什么玩意文档，给的例子真他么垃圾，文档说是返回echostr，例子给返回个true，false要不要这么误导人。</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">type</span> GetSignature <span class="keyword">struct</span> &#123;</span><br><span class="line">	Signature <span class="keyword">string</span> <span class="string">`json:"signature"`</span> <span class="comment">//微信加密签名，signature结合了开发者填写的token参数和请求中的timestamp参数、nonce参数。</span></span><br><span class="line">	Timestamp <span class="keyword">string</span> <span class="string">`json:"timestamp"`</span> <span class="comment">//时间戳</span></span><br><span class="line">	Nonce     <span class="keyword">string</span> <span class="string">`json:"nonce"`</span>     <span class="comment">//随机数</span></span><br><span class="line">	Echostr   <span class="keyword">string</span> <span class="string">`json:"echostr"`</span>   <span class="comment">//随机字符串</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">signature</span><span class="params">(r *ghttp.Request)</span></span> &#123;</span><br><span class="line">	getSignature := <span class="built_in">new</span>(GetSignature)</span><br><span class="line">	r.GetToStruct(getSignature)</span><br><span class="line">	sign := getSignature.Signature</span><br><span class="line">	nonce := getSignature.Nonce</span><br><span class="line">	timestamp := getSignature.Timestamp</span><br><span class="line">	echostr := getSignature.Echostr</span><br><span class="line">	strs := []<span class="keyword">string</span>&#123;token, timestamp, nonce&#125;</span><br><span class="line">	sort.Strings(strs)</span><br><span class="line"></span><br><span class="line">	tempStr := fmt.Sprintf(<span class="string">"%s%s%s"</span>, strs[<span class="number">0</span>], strs[<span class="number">1</span>], strs[<span class="number">2</span>])</span><br><span class="line">	h := sha1.New()</span><br><span class="line">	io.WriteString(h, tempStr)</span><br><span class="line">	result := fmt.Sprintf(<span class="string">"%x"</span>, h.Sum(<span class="literal">nil</span>))</span><br><span class="line">	<span class="keyword">if</span> result != sign &#123;</span><br><span class="line">		<span class="comment">// 等不等于都让它返回正确的结果，zz验证</span></span><br><span class="line">		r.Response.Write(echostr)</span><br><span class="line">		<span class="keyword">return</span></span><br><span class="line">	&#125;</span><br><span class="line">	r.Response.Write(echostr)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<p><strong>参数有：</strong></p>
-<ul>
-<li><code>-n</code> 仅显示sed处理后的结果。</li>
-<li><code>-i</code> 将修改保存到源文件中</li>
-<li><code>-e &lt;script&gt;</code> 以选项中指定的script来处理输入的文本文件。</li>
-<li><code>-f&lt;script文件&gt;</code> 以选项中指定的script文件来处理输入的文本文件。</li>
-</ul>
-<p><strong>动作有：</strong></p>
-<blockquote>
-<p>动静基本和 vim 中一样，a 是新增，i 是插入，d 是删除，s 是替换</p>
-</blockquote>
-<ul>
-<li><code>a:新增</code>， a 的后面可以接字串，而这些字串会在新的一行出现(目前的下一行)～</li>
-<li><code>i:插入</code>， i 的后面可以接字串，而这些字串会在新的一行出现(目前的上一行)；</li>
-<li><code>s:替换</code>，替换字符串，需要使用分隔符把新旧文本分开，分隔符可以为：<code>/</code> <code>,</code> <code>#</code></li>
-<li><code>d:删除</code>，因为是删除啊，所以 d 后面通常不接任何咚咚；</li>
-<li><code>c:取代</code>， c 的后面可以接字串，这些字串可以取代 n1,n2 之间的行！</li>
-<li><code>p:打印</code>，亦即将某个选择的数据印出。通常 p 会与参数<code>sed -n</code>一起运行</li>
-<li><code>q:退出</code>, 退出sed处理，一般用来找到第一个匹配项就退出处理了</li>
-</ul>
-<p><strong>eg</strong></p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 打印第10行，p 一般和 -n配合使用</span></span><br><span class="line">sed -n <span class="string">'10p'</span> test.txt</span><br><span class="line"></span><br><span class="line"><span class="comment"># 打印1到10行</span></span><br><span class="line">sed -n <span class="string">'1,10p'</span> test.txt</span><br><span class="line"></span><br><span class="line"><span class="comment"># 每隔2行查看，查看1,3,5....行</span></span><br><span class="line">sed -n <span class="string">'1~2p'</span> test.txt</span><br><span class="line"></span><br><span class="line"><span class="comment"># 新增,在第1行后新增 ========</span></span><br><span class="line">sed <span class="string">'1a ========'</span> test.txt</span><br><span class="line"></span><br><span class="line"><span class="comment"># 插入，在1行前面插入 =======</span></span><br><span class="line">sed <span class="string">'1i ======='</span> test.txt</span><br><span class="line"></span><br><span class="line"><span class="comment"># 删除, 删除最后一行,$表示最后一行</span></span><br><span class="line">sed <span class="string">'$d'</span> test.txt</span><br><span class="line"></span><br><span class="line"><span class="comment"># 退出,找到pibigstar就退出</span></span><br><span class="line">sed <span class="string">'/pibigstar/q'</span> test.txt</span><br><span class="line"></span><br><span class="line"><span class="comment"># 替换，一行只会替换第一个匹配的，后面的不会被替换</span></span><br><span class="line">sed <span class="string">'s/dev/prod/'</span> test.txt</span><br><span class="line"></span><br><span class="line"><span class="comment"># 全局替换，添加 -g，那么一行中如果符合将全部替换</span></span><br><span class="line">sed <span class="string">'s/dev/prod/g'</span> test.txt</span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p>一般先不用<code>-i</code>参数，当我们执行 <code>sed</code>之后会显示执行后的结果，如果结果是符合我们预期的，那么再加上 <code>-i</code> 参数来达到修改源文件的目的</p>
-</blockquote>
-<h2 id="1-2-Sed高级操作"><a href="#1-2-Sed高级操作" class="headerlink" title="1.2 Sed高级操作"></a>1.2 Sed高级操作</h2><ul>
-<li><code>{}:多个动作</code>，{}中可放多个sed动作，用 <code>;</code>分开</li>
-<li><code>&amp;:替换固定字符串</code>，主要是优化替换操作，&amp; 代表前面替换的字符</li>
-<li><code>\u\U:大小写转换</code>，<code>\u</code>将其转换为小写，<code>\U</code>将其转换为大写</li>
-<li><code>():取括号中的值</code>，替换时可根据<code>\1</code>来标识取那个<code>()</code>中的值，<code>\2</code>取第二个括号中的值,注意使用时都是需要用<code>\(</code>  <code>\)</code>，其实主要也是为了优化替换操作<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 多个动作,先删除第一行,然后将后面的 dev 替换为 prod</span></span><br><span class="line">sed <span class="string">'&#123;1d;s/dev/prod/g&#125;'</span> test.txt</span><br><span class="line"><span class="comment"># &amp; 操作,将 = 后面添加一个空格</span></span><br><span class="line">sed <span class="string">'s/=/&amp; /'</span> test.txt</span><br><span class="line"><span class="comment"># \u操作,将ROOT转换为root</span></span><br><span class="line">sed <span class="string">'s/ROOT/\u&amp;/'</span> test.txt</span><br><span class="line"><span class="comment"># ()操作，取出username</span></span><br><span class="line">sed <span class="string">'s/\([a-z_-]\+\):.*$/\1/'</span> passwd</span><br></pre></td></tr></table></figure>
-
-</li>
-</ul>
-<h2 id="1-3-Sed常用命令"><a href="#1-3-Sed常用命令" class="headerlink" title="1.3 Sed常用命令"></a>1.3 Sed常用命令</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 配置文件尾添加配置</span></span><br><span class="line">sed  <span class="string">'$a port=8080 \nhost=127.0.0.1'</span> test.txt</span><br><span class="line"></span><br><span class="line"><span class="comment"># 删除文本空行</span></span><br><span class="line">sed <span class="string">'^$d'</span> test.txt</span><br></pre></td></tr></table></figure>
-
-<h1 id="2-awk命令说明"><a href="#2-awk命令说明" class="headerlink" title="2. awk命令说明"></a>2. awk命令说明</h1><p>awk的命令格式</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">awk -F <span class="string">'分隔符'</span> <span class="string">'命令'</span> file</span><br></pre></td></tr></table></figure>
-
-<p><strong>内置函数</strong><br><code>$0</code>: 代表所有域<br><code>$1</code>: 代码第一个域，下面依次类推 $2,就是第二个域<br><code>NR</code>: 行号<br><code>NF</code>: 字符数<br><code>print</code>: 打印<br><code>printf</code>: 格式化打印</p>
-<h2 id="2-1-切换分割符"><a href="#2-1-切换分割符" class="headerlink" title="2.1 切换分割符"></a>2.1 切换分割符</h2><blockquote>
-<p>-F 是可选参数，可以不写，不写的话，默认分隔符为<code>空格</code></p>
-</blockquote>
-<p><strong>以冒号<code>:</code>作为分隔符</strong></p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">awk -F <span class="string">':'</span> <span class="string">'&#123;print $1&#125;'</span> /etc/passwd</span><br></pre></td></tr></table></figure>
-
-<p><code>{}</code> 中可直接可以放代码块，if…else…</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">awk -F <span class="string">':'</span> <span class="string">'&#123;printf("user:%s Line:%s Col:%s \n",$1,NR,NF)&#125;'</span> /etc/passwd</span><br></pre></td></tr></table></figure>
-
-<h2 id="2-2-条件输出"><a href="#2-2-条件输出" class="headerlink" title="2.2 条件输出"></a>2.2 条件输出</h2><p>初次之外我们还可以有条件的将其输出</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 当$3 大于 100 才输出</span></span><br><span class="line">awk -F <span class="string">':'</span> <span class="string">'$3&gt;100&#123;print $1&#125;'</span> /etc/passwd</span><br></pre></td></tr></table></figure>
-
-<h2 id="2-3-BEGIN…END循环"><a href="#2-3-BEGIN…END循环" class="headerlink" title="2.3 BEGIN…END循环"></a>2.3 BEGIN…END循环</h2><p>统计文件夹下所有文件一共多大</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ls -l | awk <span class="string">'BEGIN&#123;size=0&#125;&#123;size+=$5&#125;END&#123;print "all size:"size/1024/1024"M"&#125;'</span></span><br></pre></td></tr></table></figure>
-
-<p>我们将一行文本按分隔符分隔之后，第一个就是 第一个域，下面依次类推<br><strong>举个栗子：</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">root     pts/1   192.168.1.100  Tue Feb 10 11:21   still logged in</span><br><span class="line">root     pts/1   192.168.1.100  Tue Feb 10 00:46 - 02:28  (01:41)</span><br><span class="line">root     pts/1   192.168.1.100  Mon Feb  9 11:41 - 18:30  (06:48)</span><br><span class="line">dmtsai   pts/1   192.168.1.100  Mon Feb  9 11:41 - 11:41  (00:00)</span><br><span class="line">root     tty1                   Fri Sep  5 14:09 - 14:10  (00:01)</span><br></pre></td></tr></table></figure>
-
-<p>将上面的信息保存为<code>test.txt</code>文件，我们执行下面命令</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">awk <span class="string">'&#123;print $1&#125;'</span> test.txt</span><br></pre></td></tr></table></figure>
-
-<p>我们没有指定分隔符，那么就是以 空格 进行分隔的，那么输出结果就会是</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">root</span><br><span class="line">root</span><br><span class="line">root</span><br><span class="line">dmtsai</span><br><span class="line">root</span><br></pre></td></tr></table></figure>
-
-<p>awk 是逐行进行分析，我们分析第一行就可以了</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">root     pts/1   192.168.1.100  Tue Feb 10 11:21   still logged in</span><br></pre></td></tr></table></figure>
-
-<p>按分隔符进行分隔，那么</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">域1       域2		    域3			域4				   域5</span><br><span class="line">root     pts/1   192.168.1.100  Tue Feb 10 11:21   still logged in</span><br></pre></td></tr></table></figure>
-
-<h2 id="2-4-实例"><a href="#2-4-实例" class="headerlink" title="2.4 实例"></a>2.4 实例</h2><p>查问某文件中的关键字</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">awk <span class="string">'/root/'</span> /etc/passwd</span><br></pre></td></tr></table></figure>
-
-<p>其中 / / 之间可以使用正则表达式</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">awk <span class="string">'/^root/'</span> /etc/passwd</span><br></pre></td></tr></table></figure>
-
-<p>查看本地所有运行的端口</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">netstat -na | grep LISTENING | awk <span class="string">'&#123;print $2&#125;'</span> | awk -F: <span class="string">'&#123;print $2&#125;'</span></span><br></pre></td></tr></table></figure>
+<p>完全搞不懂微信他们到底要搞什么骚操作，这是什么垃圾验证，中间做了一大堆算法，其实一点屁用都没有，直接用下面这个粗暴的版本也可以：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">signature</span><span class="params">(r *ghttp.Request)</span></span> &#123;</span><br><span class="line">	getSignature := <span class="built_in">new</span>(GetSignature)</span><br><span class="line">	r.GetToStruct(getSignature)</span><br><span class="line">	echostr := getSignature.Echostr</span><br><span class="line">	<span class="comment">// 直接返回就可以了</span></span><br><span class="line">	r.Response.Write(echostr)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 
           
@@ -1956,7 +1869,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://pibigstar.com/2019/08/11/go语言实现服务器与微信公众平台对接/">
+    <link itemprop="mainEntityOfPage" href="http://pibigstar.com/2019/08/11/sed和awk常用操作/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="派大星">
@@ -1975,7 +1888,7 @@
         
           <h2 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2019/08/11/go语言实现服务器与微信公众平台对接/" itemprop="url">go语言实现服务器与微信公众平台对接</a></h2>
+                <a class="post-title-link" href="/2019/08/11/sed和awk常用操作/" itemprop="url">sed和awk常用操作</a></h2>
         
 
         <div class="post-meta">
@@ -2010,8 +1923,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/go-微信小程序/" itemprop="url" rel="index">
-                    <span itemprop="name">go,微信小程序</span>
+                  <a href="/categories/Linux-shell/" itemprop="url" rel="index">
+                    <span itemprop="name">Linux,shell</span>
                   </a>
                 </span>
 
@@ -2049,12 +1962,91 @@
       
         
           
-            <p>微信对接文档：<a href="https://developers.weixin.qq.com/miniprogram/dev/framework/open-ability/customer-message/customer-message.html" target="_blank" rel="noopener">点击查看</a></p>
-<p>在这不得不吐槽一下，写的什么玩意文档，给的例子真他么垃圾，文档说是返回echostr，例子给返回个true，false要不要这么误导人。</p>
-<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">type</span> GetSignature <span class="keyword">struct</span> &#123;</span><br><span class="line">	Signature <span class="keyword">string</span> <span class="string">`json:"signature"`</span> <span class="comment">//微信加密签名，signature结合了开发者填写的token参数和请求中的timestamp参数、nonce参数。</span></span><br><span class="line">	Timestamp <span class="keyword">string</span> <span class="string">`json:"timestamp"`</span> <span class="comment">//时间戳</span></span><br><span class="line">	Nonce     <span class="keyword">string</span> <span class="string">`json:"nonce"`</span>     <span class="comment">//随机数</span></span><br><span class="line">	Echostr   <span class="keyword">string</span> <span class="string">`json:"echostr"`</span>   <span class="comment">//随机字符串</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">signature</span><span class="params">(r *ghttp.Request)</span></span> &#123;</span><br><span class="line">	getSignature := <span class="built_in">new</span>(GetSignature)</span><br><span class="line">	r.GetToStruct(getSignature)</span><br><span class="line">	sign := getSignature.Signature</span><br><span class="line">	nonce := getSignature.Nonce</span><br><span class="line">	timestamp := getSignature.Timestamp</span><br><span class="line">	echostr := getSignature.Echostr</span><br><span class="line">	strs := []<span class="keyword">string</span>&#123;token, timestamp, nonce&#125;</span><br><span class="line">	sort.Strings(strs)</span><br><span class="line"></span><br><span class="line">	tempStr := fmt.Sprintf(<span class="string">"%s%s%s"</span>, strs[<span class="number">0</span>], strs[<span class="number">1</span>], strs[<span class="number">2</span>])</span><br><span class="line">	h := sha1.New()</span><br><span class="line">	io.WriteString(h, tempStr)</span><br><span class="line">	result := fmt.Sprintf(<span class="string">"%x"</span>, h.Sum(<span class="literal">nil</span>))</span><br><span class="line">	<span class="keyword">if</span> result != sign &#123;</span><br><span class="line">		<span class="comment">// 等不等于都让它返回正确的结果，zz验证</span></span><br><span class="line">		r.Response.Write(echostr)</span><br><span class="line">		<span class="keyword">return</span></span><br><span class="line">	&#125;</span><br><span class="line">	r.Response.Write(echostr)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+            <p>@[toc]</p>
+<h1 id="1-sed命令说明"><a href="#1-sed命令说明" class="headerlink" title="1. sed命令说明"></a>1. sed命令说明</h1><blockquote>
+<p>sed是流式文本处理，它是对文本进行一行一行的处理，处理完一行之后，再读取下一行，sed默认不会修改源文件的</p>
+</blockquote>
+<p>命令格式：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sed 参数 <span class="string">'动作'</span> 文本文件</span><br></pre></td></tr></table></figure>
 
-<p>完全搞不懂微信他们到底要搞什么骚操作，这是什么垃圾验证，中间做了一大堆算法，其实一点屁用都没有，直接用下面这个粗暴的版本也可以：</p>
-<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">signature</span><span class="params">(r *ghttp.Request)</span></span> &#123;</span><br><span class="line">	getSignature := <span class="built_in">new</span>(GetSignature)</span><br><span class="line">	r.GetToStruct(getSignature)</span><br><span class="line">	echostr := getSignature.Echostr</span><br><span class="line">	<span class="comment">// 直接返回就可以了</span></span><br><span class="line">	r.Response.Write(echostr)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>参数有：</strong></p>
+<ul>
+<li><code>-n</code> 仅显示sed处理后的结果。</li>
+<li><code>-i</code> 将修改保存到源文件中</li>
+<li><code>-e &lt;script&gt;</code> 以选项中指定的script来处理输入的文本文件。</li>
+<li><code>-f&lt;script文件&gt;</code> 以选项中指定的script文件来处理输入的文本文件。</li>
+</ul>
+<p><strong>动作有：</strong></p>
+<blockquote>
+<p>动静基本和 vim 中一样，a 是新增，i 是插入，d 是删除，s 是替换</p>
+</blockquote>
+<ul>
+<li><code>a:新增</code>， a 的后面可以接字串，而这些字串会在新的一行出现(目前的下一行)～</li>
+<li><code>i:插入</code>， i 的后面可以接字串，而这些字串会在新的一行出现(目前的上一行)；</li>
+<li><code>s:替换</code>，替换字符串，需要使用分隔符把新旧文本分开，分隔符可以为：<code>/</code> <code>,</code> <code>#</code></li>
+<li><code>d:删除</code>，因为是删除啊，所以 d 后面通常不接任何咚咚；</li>
+<li><code>c:取代</code>， c 的后面可以接字串，这些字串可以取代 n1,n2 之间的行！</li>
+<li><code>p:打印</code>，亦即将某个选择的数据印出。通常 p 会与参数<code>sed -n</code>一起运行</li>
+<li><code>q:退出</code>, 退出sed处理，一般用来找到第一个匹配项就退出处理了</li>
+</ul>
+<p><strong>eg</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 打印第10行，p 一般和 -n配合使用</span></span><br><span class="line">sed -n <span class="string">'10p'</span> test.txt</span><br><span class="line"></span><br><span class="line"><span class="comment"># 打印1到10行</span></span><br><span class="line">sed -n <span class="string">'1,10p'</span> test.txt</span><br><span class="line"></span><br><span class="line"><span class="comment"># 每隔2行查看，查看1,3,5....行</span></span><br><span class="line">sed -n <span class="string">'1~2p'</span> test.txt</span><br><span class="line"></span><br><span class="line"><span class="comment"># 新增,在第1行后新增 ========</span></span><br><span class="line">sed <span class="string">'1a ========'</span> test.txt</span><br><span class="line"></span><br><span class="line"><span class="comment"># 插入，在1行前面插入 =======</span></span><br><span class="line">sed <span class="string">'1i ======='</span> test.txt</span><br><span class="line"></span><br><span class="line"><span class="comment"># 删除, 删除最后一行,$表示最后一行</span></span><br><span class="line">sed <span class="string">'$d'</span> test.txt</span><br><span class="line"></span><br><span class="line"><span class="comment"># 退出,找到pibigstar就退出</span></span><br><span class="line">sed <span class="string">'/pibigstar/q'</span> test.txt</span><br><span class="line"></span><br><span class="line"><span class="comment"># 替换，一行只会替换第一个匹配的，后面的不会被替换</span></span><br><span class="line">sed <span class="string">'s/dev/prod/'</span> test.txt</span><br><span class="line"></span><br><span class="line"><span class="comment"># 全局替换，添加 -g，那么一行中如果符合将全部替换</span></span><br><span class="line">sed <span class="string">'s/dev/prod/g'</span> test.txt</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>一般先不用<code>-i</code>参数，当我们执行 <code>sed</code>之后会显示执行后的结果，如果结果是符合我们预期的，那么再加上 <code>-i</code> 参数来达到修改源文件的目的</p>
+</blockquote>
+<h2 id="1-2-Sed高级操作"><a href="#1-2-Sed高级操作" class="headerlink" title="1.2 Sed高级操作"></a>1.2 Sed高级操作</h2><ul>
+<li><code>{}:多个动作</code>，{}中可放多个sed动作，用 <code>;</code>分开</li>
+<li><code>&amp;:替换固定字符串</code>，主要是优化替换操作，&amp; 代表前面替换的字符</li>
+<li><code>\u\U:大小写转换</code>，<code>\u</code>将其转换为小写，<code>\U</code>将其转换为大写</li>
+<li><code>():取括号中的值</code>，替换时可根据<code>\1</code>来标识取那个<code>()</code>中的值，<code>\2</code>取第二个括号中的值,注意使用时都是需要用<code>\(</code>  <code>\)</code>，其实主要也是为了优化替换操作<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 多个动作,先删除第一行,然后将后面的 dev 替换为 prod</span></span><br><span class="line">sed <span class="string">'&#123;1d;s/dev/prod/g&#125;'</span> test.txt</span><br><span class="line"><span class="comment"># &amp; 操作,将 = 后面添加一个空格</span></span><br><span class="line">sed <span class="string">'s/=/&amp; /'</span> test.txt</span><br><span class="line"><span class="comment"># \u操作,将ROOT转换为root</span></span><br><span class="line">sed <span class="string">'s/ROOT/\u&amp;/'</span> test.txt</span><br><span class="line"><span class="comment"># ()操作，取出username</span></span><br><span class="line">sed <span class="string">'s/\([a-z_-]\+\):.*$/\1/'</span> passwd</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<h2 id="1-3-Sed常用命令"><a href="#1-3-Sed常用命令" class="headerlink" title="1.3 Sed常用命令"></a>1.3 Sed常用命令</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 配置文件尾添加配置</span></span><br><span class="line">sed  <span class="string">'$a port=8080 \nhost=127.0.0.1'</span> test.txt</span><br><span class="line"></span><br><span class="line"><span class="comment"># 删除文本空行</span></span><br><span class="line">sed <span class="string">'^$d'</span> test.txt</span><br></pre></td></tr></table></figure>
+
+<h1 id="2-awk命令说明"><a href="#2-awk命令说明" class="headerlink" title="2. awk命令说明"></a>2. awk命令说明</h1><p>awk的命令格式</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">awk -F <span class="string">'分隔符'</span> <span class="string">'命令'</span> file</span><br></pre></td></tr></table></figure>
+
+<p><strong>内置函数</strong><br><code>$0</code>: 代表所有域<br><code>$1</code>: 代码第一个域，下面依次类推 $2,就是第二个域<br><code>NR</code>: 行号<br><code>NF</code>: 字符数<br><code>print</code>: 打印<br><code>printf</code>: 格式化打印</p>
+<h2 id="2-1-切换分割符"><a href="#2-1-切换分割符" class="headerlink" title="2.1 切换分割符"></a>2.1 切换分割符</h2><blockquote>
+<p>-F 是可选参数，可以不写，不写的话，默认分隔符为<code>空格</code></p>
+</blockquote>
+<p><strong>以冒号<code>:</code>作为分隔符</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">awk -F <span class="string">':'</span> <span class="string">'&#123;print $1&#125;'</span> /etc/passwd</span><br></pre></td></tr></table></figure>
+
+<p><code>{}</code> 中可直接可以放代码块，if…else…</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">awk -F <span class="string">':'</span> <span class="string">'&#123;printf("user:%s Line:%s Col:%s \n",$1,NR,NF)&#125;'</span> /etc/passwd</span><br></pre></td></tr></table></figure>
+
+<h2 id="2-2-条件输出"><a href="#2-2-条件输出" class="headerlink" title="2.2 条件输出"></a>2.2 条件输出</h2><p>初次之外我们还可以有条件的将其输出</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 当$3 大于 100 才输出</span></span><br><span class="line">awk -F <span class="string">':'</span> <span class="string">'$3&gt;100&#123;print $1&#125;'</span> /etc/passwd</span><br></pre></td></tr></table></figure>
+
+<h2 id="2-3-BEGIN…END循环"><a href="#2-3-BEGIN…END循环" class="headerlink" title="2.3 BEGIN…END循环"></a>2.3 BEGIN…END循环</h2><p>统计文件夹下所有文件一共多大</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ls -l | awk <span class="string">'BEGIN&#123;size=0&#125;&#123;size+=$5&#125;END&#123;print "all size:"size/1024/1024"M"&#125;'</span></span><br></pre></td></tr></table></figure>
+
+<p>我们将一行文本按分隔符分隔之后，第一个就是 第一个域，下面依次类推<br><strong>举个栗子：</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">root     pts/1   192.168.1.100  Tue Feb 10 11:21   still logged in</span><br><span class="line">root     pts/1   192.168.1.100  Tue Feb 10 00:46 - 02:28  (01:41)</span><br><span class="line">root     pts/1   192.168.1.100  Mon Feb  9 11:41 - 18:30  (06:48)</span><br><span class="line">dmtsai   pts/1   192.168.1.100  Mon Feb  9 11:41 - 11:41  (00:00)</span><br><span class="line">root     tty1                   Fri Sep  5 14:09 - 14:10  (00:01)</span><br></pre></td></tr></table></figure>
+
+<p>将上面的信息保存为<code>test.txt</code>文件，我们执行下面命令</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">awk <span class="string">'&#123;print $1&#125;'</span> test.txt</span><br></pre></td></tr></table></figure>
+
+<p>我们没有指定分隔符，那么就是以 空格 进行分隔的，那么输出结果就会是</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">root</span><br><span class="line">root</span><br><span class="line">root</span><br><span class="line">dmtsai</span><br><span class="line">root</span><br></pre></td></tr></table></figure>
+
+<p>awk 是逐行进行分析，我们分析第一行就可以了</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">root     pts/1   192.168.1.100  Tue Feb 10 11:21   still logged in</span><br></pre></td></tr></table></figure>
+
+<p>按分隔符进行分隔，那么</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">域1       域2		    域3			域4				   域5</span><br><span class="line">root     pts/1   192.168.1.100  Tue Feb 10 11:21   still logged in</span><br></pre></td></tr></table></figure>
+
+<h2 id="2-4-实例"><a href="#2-4-实例" class="headerlink" title="2.4 实例"></a>2.4 实例</h2><p>查问某文件中的关键字</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">awk <span class="string">'/root/'</span> /etc/passwd</span><br></pre></td></tr></table></figure>
+
+<p>其中 / / 之间可以使用正则表达式</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">awk <span class="string">'/^root/'</span> /etc/passwd</span><br></pre></td></tr></table></figure>
+
+<p>查看本地所有运行的端口</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">netstat -na | grep LISTENING | awk <span class="string">'&#123;print $2&#125;'</span> | awk -F: <span class="string">'&#123;print $2&#125;'</span></span><br></pre></td></tr></table></figure>
 
 
           

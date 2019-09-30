@@ -250,204 +250,6 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://pibigstar.com/2019/09/12/MySQL中JSON类型使用/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="派大星">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/qq.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="派大星的博客">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/09/12/MySQL中JSON类型使用/" itemprop="url">MySQL中JSON类型使用</a></h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-09-12T21:09:04+08:00">
-                2019-09-12
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/数据库/" itemprop="url" rel="index">
-                    <span itemprop="name">数据库</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>@[toc]</p>
-<h1 id="1-结构"><a href="#1-结构" class="headerlink" title="1. 结构"></a>1. 结构</h1><h2 id="1-1-表结构"><a href="#1-1-表结构" class="headerlink" title="1.1 表结构"></a>1.1 表结构</h2><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> <span class="keyword">test</span></span><br><span class="line">(</span><br><span class="line">  <span class="keyword">id</span> <span class="built_in">int</span>(<span class="number">10</span>）<span class="keyword">NOT</span> <span class="literal">NULL</span> AUTO_INCREMENT,</span><br><span class="line">  <span class="keyword">content</span> <span class="keyword">JSON</span> <span class="keyword">default</span> <span class="literal">null</span>,</span><br><span class="line">  arrs <span class="keyword">JSON</span> <span class="keyword">default</span> <span class="literal">null</span>,</span><br><span class="line">  PRIMARY <span class="keyword">KEY</span> (<span class="keyword">id</span>)</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
-
-<h2 id="1-2-content-结构"><a href="#1-2-content-结构" class="headerlink" title="1.2 content 结构"></a>1.2 content 结构</h2><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">type</span> content <span class="keyword">struct</span> &#123;</span><br><span class="line">  name <span class="keyword">string</span></span><br><span class="line">  age <span class="keyword">int</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h2 id="1-3-arrs-结构"><a href="#1-3-arrs-结构" class="headerlink" title="1.3 arrs 结构"></a>1.3 arrs 结构</h2><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> arrs []<span class="keyword">int</span></span><br></pre></td></tr></table></figure>
-
-<h1 id="2-插入"><a href="#2-插入" class="headerlink" title="2. 插入"></a>2. 插入</h1><h2 id="2-1-字符串插入"><a href="#2-1-字符串插入" class="headerlink" title="2.1 字符串插入"></a>2.1 字符串插入</h2><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> <span class="keyword">test</span>(<span class="string">'id'</span>,<span class="string">'content'</span>, <span class="string">'arrs'</span>) <span class="keyword">VALUES</span> (<span class="number">1</span>,<span class="string">'&#123;"name": "pibigstar","age": 20&#125;'</span>, <span class="string">'[1,2,3]'</span> )</span><br></pre></td></tr></table></figure>
-
-<h2 id="2-2-JSON函数插入"><a href="#2-2-JSON函数插入" class="headerlink" title="2.2 JSON函数插入"></a>2.2 JSON函数插入</h2><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> <span class="keyword">test</span>(<span class="string">'id'</span>,<span class="string">'content'</span>, <span class="string">'arrs'</span>) <span class="keyword">VALUES</span> (<span class="number">1</span>, JSON_OBJECT(<span class="string">"name"</span>,<span class="string">"pibigstar"</span>,<span class="string">"age"</span>,<span class="number">20</span>), JSON_ARRAY(<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>))</span><br></pre></td></tr></table></figure>
-
-<h2 id="3-查询"><a href="#3-查询" class="headerlink" title="3. 查询"></a>3. 查询</h2><blockquote>
-<p>查询JSON中的数据用 column-&gt;path的形式，其中对象类型path的表示方式 .path</p>
-</blockquote>
-<h2 id="3-1-查询内容"><a href="#3-1-查询内容" class="headerlink" title="3.1 查询内容"></a>3.1 查询内容</h2><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="keyword">id</span>,<span class="keyword">content</span>-&gt;<span class="string">'$.name'</span> <span class="keyword">AS</span> <span class="keyword">name</span>, <span class="keyword">content</span>-&gt;<span class="string">'$.age'</span> <span class="keyword">AS</span> age, arrs-&gt;<span class="string">'$[0]'</span> <span class="keyword">AS</span> arr1,arrs-&gt;<span class="string">'$[1]'</span> <span class="keyword">AS</span> arr2 <span class="keyword">FROM</span> <span class="keyword">test</span>;</span><br></pre></td></tr></table></figure>
-
-<p>当JSON里面的字段为string时，使用上面的方式查出来内容的带 <code>“”</code>，可使用 -&gt;&gt; 方式去掉 <code>“”</code></p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="keyword">id</span>,<span class="keyword">content</span>-&gt;&gt;<span class="string">'$.name'</span> <span class="keyword">AS</span> <span class="keyword">name</span> <span class="keyword">FROM</span> <span class="keyword">test</span>;</span><br></pre></td></tr></table></figure>
-
-<h2 id="3-2-搜索条件"><a href="#3-2-搜索条件" class="headerlink" title="3.2 搜索条件"></a>3.2 搜索条件</h2><h3 id="3-2-1-全匹配"><a href="#3-2-1-全匹配" class="headerlink" title="3.2.1 全匹配"></a>3.2.1 全匹配</h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> * <span class="keyword">FROM</span> <span class="keyword">test</span> <span class="keyword">WHERE</span> <span class="keyword">content</span> = <span class="keyword">CAST</span>(<span class="string">'&#123;"name": "pibigstar","age": 20&#125;'</span> <span class="keyword">AS</span> <span class="keyword">JSON</span>);</span><br></pre></td></tr></table></figure>
-
-<h3 id="3-2-2-JSON某字段匹配"><a href="#3-2-2-JSON某字段匹配" class="headerlink" title="3.2.2 JSON某字段匹配"></a>3.2.2 JSON某字段匹配</h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">SELECT</span> * <span class="keyword">FROM</span> <span class="keyword">test</span> <span class="keyword">WHERE</span> <span class="keyword">content</span>-&gt;<span class="string">'$.name'</span> = <span class="string">'pibigstar'</span>;</span><br></pre></td></tr></table></figure>
-
-<p><strong>忽略类型</strong></p>
-<blockquote>
-<p>使用 <code>-&gt;&gt;</code>的方式会忽略其类型</p>
-</blockquote>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 查不到</span></span><br><span class="line"><span class="keyword">SELECT</span> * <span class="keyword">FROM</span> <span class="keyword">test</span> <span class="keyword">WHERE</span> <span class="keyword">category</span>-&gt;<span class="string">'$.age'</span> = <span class="string">'20'</span> </span><br><span class="line"></span><br><span class="line"><span class="comment"># 能查到</span></span><br><span class="line"><span class="keyword">SELECT</span> * <span class="keyword">FROM</span> <span class="keyword">test</span> <span class="keyword">WHERE</span> <span class="keyword">category</span>-&gt;&gt;<span class="string">'$.age'</span> = <span class="string">'20'</span></span><br></pre></td></tr></table></figure>
-
-<h3 id="3-2-2-使用JSON函数"><a href="#3-2-2-使用JSON函数" class="headerlink" title="3.2.2 使用JSON函数"></a>3.2.2 使用JSON函数</h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> * <span class="keyword">FROM</span> <span class="keyword">test</span> <span class="keyword">WHERE</span> JSON_CONTAINS(<span class="keyword">content</span>,<span class="string">'20'</span>,<span class="string">'$.age'</span>);</span><br></pre></td></tr></table></figure>
-
-<h1 id="4-更新"><a href="#4-更新" class="headerlink" title="4. 更新"></a>4. 更新</h1><h2 id="4-1-全量更新"><a href="#4-1-全量更新" class="headerlink" title="4.1 全量更新"></a>4.1 全量更新</h2><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">UPDATE</span> <span class="keyword">test</span></span><br><span class="line"><span class="keyword">SET</span> <span class="keyword">content</span> = JSON_OBJECT(<span class="string">"name"</span>,<span class="string">"haimian"</span>,<span class="string">"age"</span>,<span class="number">22</span>)</span><br><span class="line"><span class="keyword">WHERE</span> <span class="keyword">id</span> = <span class="number">1</span>;</span><br></pre></td></tr></table></figure>
-
-<h2 id="4-2-插入新值（不覆盖已存在值）"><a href="#4-2-插入新值（不覆盖已存在值）" class="headerlink" title="4.2 插入新值（不覆盖已存在值）"></a>4.2 插入新值（不覆盖已存在值）</h2><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">UPDATE</span> <span class="keyword">test</span></span><br><span class="line"><span class="keyword">SET</span> <span class="keyword">content</span> = JSON_INSERT(<span class="keyword">content</span>, <span class="string">'$.name'</span>, <span class="string">'haimian'</span>, <span class="string">'$.sex'</span>, <span class="string">'男'</span>)</span><br><span class="line"><span class="keyword">WHERE</span> <span class="keyword">id</span> = <span class="number">1</span>;</span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p>执行完之后，name值还是 pibigstar，但会新增加一个 sex字段</p>
-</blockquote>
-<h2 id="4-3-插入新值，并覆盖已存在的值"><a href="#4-3-插入新值，并覆盖已存在的值" class="headerlink" title="4.3 插入新值，并覆盖已存在的值"></a>4.3 插入新值，并覆盖已存在的值</h2><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">UPDATE</span> <span class="keyword">test</span></span><br><span class="line"><span class="keyword">SET</span> <span class="keyword">content</span> = JSON_SET(<span class="keyword">content</span>, <span class="string">'$.name'</span>, <span class="string">'haimian'</span>, <span class="string">'$.age'</span>, <span class="number">22</span>, <span class="string">'$.sex'</span>, <span class="string">'男'</span>)</span><br><span class="line"><span class="keyword">WHERE</span> <span class="keyword">id</span> = <span class="number">1</span></span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p> 执行完之后，name会改变，但会新增加一个 sex字段</p>
-</blockquote>
-<h2 id="4-4-替换某字段值"><a href="#4-4-替换某字段值" class="headerlink" title="4.4 替换某字段值"></a>4.4 替换某字段值</h2><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">UPDATE</span> <span class="keyword">test</span></span><br><span class="line"><span class="keyword">SET</span> <span class="keyword">content</span> = JSON_REPLACE(<span class="keyword">content</span>, <span class="string">'$.name'</span>, <span class="string">'haimian'</span>)</span><br><span class="line"><span class="keyword">WHERE</span> <span class="keyword">id</span> = <span class="number">1</span></span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p>将name从原先的 pibigstar 改为 haimian，它只会替换已存在的字段的值</p>
-</blockquote>
-<h2 id="4-5-删除某字段的值"><a href="#4-5-删除某字段的值" class="headerlink" title="4.5 删除某字段的值"></a>4.5 删除某字段的值</h2><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">UPDATE</span> <span class="keyword">test</span></span><br><span class="line"><span class="keyword">SET</span> <span class="keyword">content</span> = JSON_REMOVE(<span class="keyword">content</span>, <span class="string">'$.name'</span>, <span class="string">'$.age'</span>)</span><br><span class="line"><span class="keyword">WHERE</span> <span class="keyword">id</span> = <span class="number">1</span></span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p>删除 name 和 age 字段</p>
-</blockquote>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    <div>
-      
-    </div>
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://pibigstar.com/2019/09/12/git高级使用/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -601,6 +403,204 @@
 </blockquote>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># c1 为提交记录的id</span></span><br><span class="line">git tag tag名 c1</span><br></pre></td></tr></table></figure>
 
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    <div>
+      
+    </div>
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://pibigstar.com/2019/09/12/MySQL中JSON类型使用/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="派大星">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/qq.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="派大星的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/09/12/MySQL中JSON类型使用/" itemprop="url">MySQL中JSON类型使用</a></h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-09-12T21:09:04+08:00">
+                2019-09-12
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/数据库/" itemprop="url" rel="index">
+                    <span itemprop="name">数据库</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>@[toc]</p>
+<h1 id="1-结构"><a href="#1-结构" class="headerlink" title="1. 结构"></a>1. 结构</h1><h2 id="1-1-表结构"><a href="#1-1-表结构" class="headerlink" title="1.1 表结构"></a>1.1 表结构</h2><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> <span class="keyword">test</span></span><br><span class="line">(</span><br><span class="line">  <span class="keyword">id</span> <span class="built_in">int</span>(<span class="number">10</span>）<span class="keyword">NOT</span> <span class="literal">NULL</span> AUTO_INCREMENT,</span><br><span class="line">  <span class="keyword">content</span> <span class="keyword">JSON</span> <span class="keyword">default</span> <span class="literal">null</span>,</span><br><span class="line">  arrs <span class="keyword">JSON</span> <span class="keyword">default</span> <span class="literal">null</span>,</span><br><span class="line">  PRIMARY <span class="keyword">KEY</span> (<span class="keyword">id</span>)</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+
+<h2 id="1-2-content-结构"><a href="#1-2-content-结构" class="headerlink" title="1.2 content 结构"></a>1.2 content 结构</h2><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">type</span> content <span class="keyword">struct</span> &#123;</span><br><span class="line">  name <span class="keyword">string</span></span><br><span class="line">  age <span class="keyword">int</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="1-3-arrs-结构"><a href="#1-3-arrs-结构" class="headerlink" title="1.3 arrs 结构"></a>1.3 arrs 结构</h2><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> arrs []<span class="keyword">int</span></span><br></pre></td></tr></table></figure>
+
+<h1 id="2-插入"><a href="#2-插入" class="headerlink" title="2. 插入"></a>2. 插入</h1><h2 id="2-1-字符串插入"><a href="#2-1-字符串插入" class="headerlink" title="2.1 字符串插入"></a>2.1 字符串插入</h2><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> <span class="keyword">test</span>(<span class="string">'id'</span>,<span class="string">'content'</span>, <span class="string">'arrs'</span>) <span class="keyword">VALUES</span> (<span class="number">1</span>,<span class="string">'&#123;"name": "pibigstar","age": 20&#125;'</span>, <span class="string">'[1,2,3]'</span> )</span><br></pre></td></tr></table></figure>
+
+<h2 id="2-2-JSON函数插入"><a href="#2-2-JSON函数插入" class="headerlink" title="2.2 JSON函数插入"></a>2.2 JSON函数插入</h2><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> <span class="keyword">test</span>(<span class="string">'id'</span>,<span class="string">'content'</span>, <span class="string">'arrs'</span>) <span class="keyword">VALUES</span> (<span class="number">1</span>, JSON_OBJECT(<span class="string">"name"</span>,<span class="string">"pibigstar"</span>,<span class="string">"age"</span>,<span class="number">20</span>), JSON_ARRAY(<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>))</span><br></pre></td></tr></table></figure>
+
+<h2 id="3-查询"><a href="#3-查询" class="headerlink" title="3. 查询"></a>3. 查询</h2><blockquote>
+<p>查询JSON中的数据用 column-&gt;path的形式，其中对象类型path的表示方式 .path</p>
+</blockquote>
+<h2 id="3-1-查询内容"><a href="#3-1-查询内容" class="headerlink" title="3.1 查询内容"></a>3.1 查询内容</h2><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="keyword">id</span>,<span class="keyword">content</span>-&gt;<span class="string">'$.name'</span> <span class="keyword">AS</span> <span class="keyword">name</span>, <span class="keyword">content</span>-&gt;<span class="string">'$.age'</span> <span class="keyword">AS</span> age, arrs-&gt;<span class="string">'$[0]'</span> <span class="keyword">AS</span> arr1,arrs-&gt;<span class="string">'$[1]'</span> <span class="keyword">AS</span> arr2 <span class="keyword">FROM</span> <span class="keyword">test</span>;</span><br></pre></td></tr></table></figure>
+
+<p>当JSON里面的字段为string时，使用上面的方式查出来内容的带 <code>“”</code>，可使用 -&gt;&gt; 方式去掉 <code>“”</code></p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="keyword">id</span>,<span class="keyword">content</span>-&gt;&gt;<span class="string">'$.name'</span> <span class="keyword">AS</span> <span class="keyword">name</span> <span class="keyword">FROM</span> <span class="keyword">test</span>;</span><br></pre></td></tr></table></figure>
+
+<h2 id="3-2-搜索条件"><a href="#3-2-搜索条件" class="headerlink" title="3.2 搜索条件"></a>3.2 搜索条件</h2><h3 id="3-2-1-全匹配"><a href="#3-2-1-全匹配" class="headerlink" title="3.2.1 全匹配"></a>3.2.1 全匹配</h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> * <span class="keyword">FROM</span> <span class="keyword">test</span> <span class="keyword">WHERE</span> <span class="keyword">content</span> = <span class="keyword">CAST</span>(<span class="string">'&#123;"name": "pibigstar","age": 20&#125;'</span> <span class="keyword">AS</span> <span class="keyword">JSON</span>);</span><br></pre></td></tr></table></figure>
+
+<h3 id="3-2-2-JSON某字段匹配"><a href="#3-2-2-JSON某字段匹配" class="headerlink" title="3.2.2 JSON某字段匹配"></a>3.2.2 JSON某字段匹配</h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">SELECT</span> * <span class="keyword">FROM</span> <span class="keyword">test</span> <span class="keyword">WHERE</span> <span class="keyword">content</span>-&gt;<span class="string">'$.name'</span> = <span class="string">'pibigstar'</span>;</span><br></pre></td></tr></table></figure>
+
+<p><strong>忽略类型</strong></p>
+<blockquote>
+<p>使用 <code>-&gt;&gt;</code>的方式会忽略其类型</p>
+</blockquote>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 查不到</span></span><br><span class="line"><span class="keyword">SELECT</span> * <span class="keyword">FROM</span> <span class="keyword">test</span> <span class="keyword">WHERE</span> <span class="keyword">category</span>-&gt;<span class="string">'$.age'</span> = <span class="string">'20'</span> </span><br><span class="line"></span><br><span class="line"><span class="comment"># 能查到</span></span><br><span class="line"><span class="keyword">SELECT</span> * <span class="keyword">FROM</span> <span class="keyword">test</span> <span class="keyword">WHERE</span> <span class="keyword">category</span>-&gt;&gt;<span class="string">'$.age'</span> = <span class="string">'20'</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="3-2-2-使用JSON函数"><a href="#3-2-2-使用JSON函数" class="headerlink" title="3.2.2 使用JSON函数"></a>3.2.2 使用JSON函数</h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> * <span class="keyword">FROM</span> <span class="keyword">test</span> <span class="keyword">WHERE</span> JSON_CONTAINS(<span class="keyword">content</span>,<span class="string">'20'</span>,<span class="string">'$.age'</span>);</span><br></pre></td></tr></table></figure>
+
+<h1 id="4-更新"><a href="#4-更新" class="headerlink" title="4. 更新"></a>4. 更新</h1><h2 id="4-1-全量更新"><a href="#4-1-全量更新" class="headerlink" title="4.1 全量更新"></a>4.1 全量更新</h2><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">UPDATE</span> <span class="keyword">test</span></span><br><span class="line"><span class="keyword">SET</span> <span class="keyword">content</span> = JSON_OBJECT(<span class="string">"name"</span>,<span class="string">"haimian"</span>,<span class="string">"age"</span>,<span class="number">22</span>)</span><br><span class="line"><span class="keyword">WHERE</span> <span class="keyword">id</span> = <span class="number">1</span>;</span><br></pre></td></tr></table></figure>
+
+<h2 id="4-2-插入新值（不覆盖已存在值）"><a href="#4-2-插入新值（不覆盖已存在值）" class="headerlink" title="4.2 插入新值（不覆盖已存在值）"></a>4.2 插入新值（不覆盖已存在值）</h2><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">UPDATE</span> <span class="keyword">test</span></span><br><span class="line"><span class="keyword">SET</span> <span class="keyword">content</span> = JSON_INSERT(<span class="keyword">content</span>, <span class="string">'$.name'</span>, <span class="string">'haimian'</span>, <span class="string">'$.sex'</span>, <span class="string">'男'</span>)</span><br><span class="line"><span class="keyword">WHERE</span> <span class="keyword">id</span> = <span class="number">1</span>;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>执行完之后，name值还是 pibigstar，但会新增加一个 sex字段</p>
+</blockquote>
+<h2 id="4-3-插入新值，并覆盖已存在的值"><a href="#4-3-插入新值，并覆盖已存在的值" class="headerlink" title="4.3 插入新值，并覆盖已存在的值"></a>4.3 插入新值，并覆盖已存在的值</h2><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">UPDATE</span> <span class="keyword">test</span></span><br><span class="line"><span class="keyword">SET</span> <span class="keyword">content</span> = JSON_SET(<span class="keyword">content</span>, <span class="string">'$.name'</span>, <span class="string">'haimian'</span>, <span class="string">'$.age'</span>, <span class="number">22</span>, <span class="string">'$.sex'</span>, <span class="string">'男'</span>)</span><br><span class="line"><span class="keyword">WHERE</span> <span class="keyword">id</span> = <span class="number">1</span></span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p> 执行完之后，name会改变，但会新增加一个 sex字段</p>
+</blockquote>
+<h2 id="4-4-替换某字段值"><a href="#4-4-替换某字段值" class="headerlink" title="4.4 替换某字段值"></a>4.4 替换某字段值</h2><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">UPDATE</span> <span class="keyword">test</span></span><br><span class="line"><span class="keyword">SET</span> <span class="keyword">content</span> = JSON_REPLACE(<span class="keyword">content</span>, <span class="string">'$.name'</span>, <span class="string">'haimian'</span>)</span><br><span class="line"><span class="keyword">WHERE</span> <span class="keyword">id</span> = <span class="number">1</span></span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>将name从原先的 pibigstar 改为 haimian，它只会替换已存在的字段的值</p>
+</blockquote>
+<h2 id="4-5-删除某字段的值"><a href="#4-5-删除某字段的值" class="headerlink" title="4.5 删除某字段的值"></a>4.5 删除某字段的值</h2><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">UPDATE</span> <span class="keyword">test</span></span><br><span class="line"><span class="keyword">SET</span> <span class="keyword">content</span> = JSON_REMOVE(<span class="keyword">content</span>, <span class="string">'$.name'</span>, <span class="string">'$.age'</span>)</span><br><span class="line"><span class="keyword">WHERE</span> <span class="keyword">id</span> = <span class="number">1</span></span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>删除 name 和 age 字段</p>
+</blockquote>
 
           
         
@@ -1144,7 +1144,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://pibigstar.com/2019/09/04/SpringBoot使用redis做缓存机制/">
+    <link itemprop="mainEntityOfPage" href="http://pibigstar.com/2019/09/04/使用Java做ORC图片识别/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="派大星">
@@ -1163,7 +1163,7 @@
         
           <h2 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2019/09/04/SpringBoot使用redis做缓存机制/" itemprop="url">SpringBoot使用redis做缓存机制</a></h2>
+                <a class="post-title-link" href="/2019/09/04/使用Java做ORC图片识别/" itemprop="url">使用Java做ORC图片识别</a></h2>
         
 
         <div class="post-meta">
@@ -1198,8 +1198,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/springboot-SpringBoot技能大全/" itemprop="url" rel="index">
-                    <span itemprop="name">springboot,SpringBoot技能大全</span>
+                  <a href="/categories/java工具类/" itemprop="url" rel="index">
+                    <span itemprop="name">java工具类</span>
                   </a>
                 </span>
 
@@ -1237,38 +1237,15 @@
       
         
           
-            <p>SpringBoot 2.0.3 版本、redis3.2版本</p>
-<h1 id="1-加入jar包"><a href="#1-加入jar包" class="headerlink" title="1. 加入jar包"></a>1. 加入jar包</h1><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-starter-data-redis<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-starter-cache<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
+            <h1 id="1-下载训练库"><a href="#1-下载训练库" class="headerlink" title="1. 下载训练库"></a>1. 下载训练库</h1><p>下载地址：<a href="https://github.com/tesseract-ocr/tessdata" target="_blank" rel="noopener">https://github.com/tesseract-ocr/tessdata</a></p>
+<p>不用全部下载，中文识别下载那个<code>chi_sim.traineddata</code>即可。</p>
+<h1 id="2-添加依赖"><a href="#2-添加依赖" class="headerlink" title="2. 添加依赖"></a>2. 添加依赖</h1><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>net.sourceforge.tess4j<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>tess4j<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">version</span>&gt;</span>4.3.1<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
 
-<h1 id="2-编写RedisConfig类"><a href="#2-编写RedisConfig类" class="headerlink" title="2. 编写RedisConfig类"></a>2. 编写RedisConfig类</h1><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.pibigstar.common.config;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> org.springframework.cache.CacheManager;</span><br><span class="line"><span class="keyword">import</span> org.springframework.cache.annotation.CachingConfigurerSupport;</span><br><span class="line"><span class="keyword">import</span> org.springframework.cache.annotation.EnableCaching;</span><br><span class="line"><span class="keyword">import</span> org.springframework.cache.interceptor.KeyGenerator;</span><br><span class="line"><span class="keyword">import</span> org.springframework.context.annotation.Bean;</span><br><span class="line"><span class="keyword">import</span> org.springframework.context.annotation.Configuration;</span><br><span class="line"><span class="keyword">import</span> org.springframework.data.redis.cache.RedisCacheManager;</span><br><span class="line"><span class="keyword">import</span> org.springframework.data.redis.connection.RedisConnectionFactory;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="meta">@Configuration</span></span><br><span class="line"><span class="meta">@EnableCaching</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">RedisConfig</span> <span class="keyword">extends</span> <span class="title">CachingConfigurerSupport</span></span>&#123;</span><br><span class="line"></span><br><span class="line">	<span class="comment">//缓存管理器</span></span><br><span class="line">	<span class="meta">@Bean</span> </span><br><span class="line">	<span class="function"><span class="keyword">public</span> CacheManager <span class="title">cacheManager</span><span class="params">(RedisConnectionFactory factory)</span> </span>&#123;</span><br><span class="line">		RedisCacheManager cacheManager = RedisCacheManager.builder(factory).build();</span><br><span class="line">		<span class="keyword">return</span> cacheManager;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="comment">//自定义缓存key生成策略</span></span><br><span class="line">	  <span class="meta">@Bean</span></span><br><span class="line">	  <span class="function"><span class="keyword">public</span> KeyGenerator <span class="title">keyGenerator</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	      <span class="keyword">return</span> <span class="keyword">new</span> KeyGenerator()&#123;</span><br><span class="line">	          <span class="meta">@Override</span></span><br><span class="line">	          <span class="function"><span class="keyword">public</span> Object <span class="title">generate</span><span class="params">(Object target, java.lang.reflect.Method method, Object... params)</span> </span>&#123;</span><br><span class="line">	              StringBuffer sb = <span class="keyword">new</span> StringBuffer();</span><br><span class="line">	              sb.append(target.getClass().getName());</span><br><span class="line">	              sb.append(method.getName());</span><br><span class="line">	              <span class="keyword">for</span>(Object obj:params)&#123;</span><br><span class="line">	                  sb.append(obj.toString());</span><br><span class="line">	              &#125;</span><br><span class="line">	              System.out.println(<span class="string">"调用Redis生成key："</span>+sb.toString());</span><br><span class="line">	              <span class="keyword">return</span> sb.toString();</span><br><span class="line">	          &#125;</span><br><span class="line">	      &#125;;</span><br><span class="line">	  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="3-编写代码"><a href="#3-编写代码" class="headerlink" title="3. 编写代码"></a>3. 编写代码</h1><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> String <span class="title">getTextByImage</span><span class="params">(String imgPath)</span> <span class="keyword">throws</span> TesseractException </span>&#123;</span><br><span class="line">    File imageFile = <span class="keyword">new</span> File(imgPath);</span><br><span class="line">    <span class="keyword">if</span> (!imageFile.exists())&#123;</span><br><span class="line">        <span class="keyword">throw</span> <span class="keyword">new</span> RuntimeException(<span class="string">"图片不存在"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    Tesseract tesseract = <span class="keyword">new</span> Tesseract();</span><br><span class="line">    <span class="comment">// 设置训练库的位置,https://github.com/tesseract-ocr/tessdata</span></span><br><span class="line">    tesseract.setDatapath(<span class="string">"D://OCR/tessdata"</span>);</span><br><span class="line">    <span class="comment">// 设置识别语言为中文</span></span><br><span class="line">    tesseract.setLanguage(<span class="string">"chi_sim"</span>);</span><br><span class="line"></span><br><span class="line">    String result = tesseract.doOCR(imageFile);</span><br><span class="line">    <span class="keyword">return</span> result;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<h2 id="2-1-配置application-yml文件"><a href="#2-1-配置application-yml文件" class="headerlink" title="2.1 配置application.yml文件"></a>2.1 配置application.yml文件</h2><figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">spring:</span></span><br><span class="line"><span class="attr">  redis:</span></span><br><span class="line"><span class="attr">    host:</span> <span class="number">127.0</span><span class="number">.0</span><span class="number">.1</span></span><br><span class="line"><span class="attr">    port:</span> <span class="number">6379</span></span><br><span class="line"><span class="attr">    database:</span> <span class="number">0</span> <span class="comment"># 设置数据库索引为0 默认为0</span></span><br><span class="line"><span class="attr">    password:</span> <span class="comment"># 密码为空</span></span><br><span class="line"><span class="attr">    jedis:</span></span><br><span class="line"><span class="attr">      pool:</span></span><br><span class="line"><span class="attr">        max-active:</span> <span class="number">1000</span> <span class="comment"># 连接池最大连接数（使用负值表示没有限制）</span></span><br><span class="line"><span class="attr">        max-wait:</span> <span class="bullet">-1</span> <span class="comment"># 连接池最大阻塞等待时间（使用负值表示没有限制）</span></span><br><span class="line"><span class="attr">        max-idle:</span> <span class="number">10</span> <span class="comment"># 连接池中的最大空闲连接</span></span><br><span class="line"><span class="attr">        min-idle:</span> <span class="number">2</span> <span class="comment"># 连接池中的最小空闲连接</span></span><br><span class="line"><span class="attr">    timeout:</span> <span class="number">2000</span> <span class="comment"># 连接超时时间（毫秒）</span></span><br></pre></td></tr></table></figure>
+<h1 id="4-测试"><a href="#4-测试" class="headerlink" title="4. 测试"></a>4. 测试</h1><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> TesseractException </span>&#123;</span><br><span class="line">   System.out.println(getTextByImage(<span class="string">"D://OCR/img/test.png"</span>));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<h1 id="3-在-适当的地方加入缓存"><a href="#3-在-适当的地方加入缓存" class="headerlink" title="3. 在 适当的地方加入缓存"></a>3. 在 适当的地方加入缓存</h1><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.pibigstar.service.impl;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.util.List;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> javax.transaction.Transactional;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> org.springframework.beans.factory.annotation.Autowired;</span><br><span class="line"><span class="keyword">import</span> org.springframework.cache.annotation.CacheConfig;</span><br><span class="line"><span class="keyword">import</span> org.springframework.cache.annotation.Cacheable;</span><br><span class="line"><span class="keyword">import</span> org.springframework.stereotype.Service;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> com.pibigstar.dao.GradeMapper;</span><br><span class="line"><span class="keyword">import</span> com.pibigstar.domain.Grade;</span><br><span class="line"><span class="keyword">import</span> com.pibigstar.service.GradeService;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Service</span></span><br><span class="line"><span class="meta">@CacheConfig</span>(cacheNames=<span class="string">"grades"</span>)</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">GradeServiceImpl</span> <span class="keyword">implements</span> <span class="title">GradeService</span></span>&#123;</span><br><span class="line"></span><br><span class="line">	<span class="meta">@Autowired</span></span><br><span class="line">	<span class="keyword">private</span> GradeMapper gradeMapper;</span><br><span class="line">	</span><br><span class="line">	<span class="meta">@Override</span></span><br><span class="line">	<span class="meta">@Cacheable</span> <span class="comment">//开启缓存</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> Grade <span class="title">getOneById</span><span class="params">(Long id)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">return</span> gradeMapper.selectByPrimaryKey(id);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="meta">@Override</span></span><br><span class="line">	<span class="meta">@Cacheable</span> <span class="comment">//开启缓存</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> List&lt;Grade&gt; <span class="title">list</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		<span class="keyword">return</span> gradeMapper.findAll();</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>@Cacheable将查询结果缓存到redis中，（key=”#p0”）指定传入的第一个参数作为redis的key。</li>
-<li>@CachePut，指定key，将更新的结果同步到redis中</li>
-<li>@CacheEvict，指定key，删除缓存数据，allEntries=true,方法调用后将立即清除缓存</li>
-</ul>
-<h1 id="4-启动"><a href="#4-启动" class="headerlink" title="4. 启动"></a>4. 启动</h1><h2 id="4-1-启动redis"><a href="#4-1-启动redis" class="headerlink" title="4.1 启动redis"></a>4.1 启动redis</h2><p>下载： <a href="https://pan.baidu.com/s/1tTYcCRUF-qDikhPTkSiJTQ" target="_blank" rel="noopener">https://pan.baidu.com/s/1tTYcCRUF-qDikhPTkSiJTQ</a></p>
-<p>解压，双击 start.bat 即可</p>
-<p>RedisDesktopManager 文件夹放的是redis 可视化工具</p>
-<h2 id="4-2-启动项目"><a href="#4-2-启动项目" class="headerlink" title="4.2 启动项目"></a>4.2 启动项目</h2><p>调用 开启缓存的那两个方法，就可以看到控制台输出了：<br><img src="https://img-blog.csdn.net/20180704150026452?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2p1bm1veGk=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt></p>
-<p>通过redis 可视化工具可以看到：<br><img src="https://img-blog.csdn.net/20180704144013597?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2p1bm1veGk=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt></p>
-<p>已经有key值生成了，</p>
-<p>当再一次查询的时候就不会去从数据库中查询了，而是直接从我们的redis中查询，速度会非常快。</p>
-<p><strong>需要注意的是</strong>：当数据库中值改变了，因为它查询的是从缓存中查询，所以查出来的数据还是之前的数据，只有当key过期之后或者被删除之后才能查到最新的值</p>
-<h1 id="5-常用redis命令"><a href="#5-常用redis命令" class="headerlink" title="5. 常用redis命令"></a>5. 常用redis命令</h1><ul>
-<li>flushdb：清空当前数据库。</li>
-<li>select [index]：选择索引数据库，index为索引值名，如：select 1。</li>
-<li>keys *：查看数据库内所有的key。</li>
-<li>del [key]：删除一条指定key的值。</li>
-<li>get [key] : 获得 指定key的值</li>
-<li>flushall：清空所有数据库。</li>
-<li>quit：退出客户端连接</li>
-</ul>
-<h3 id="关注我的公众号，获取最新Java干货"><a href="#关注我的公众号，获取最新Java干货" class="headerlink" title="关注我的公众号，获取最新Java干货"></a>关注我的公众号，获取最新Java干货</h3><p><img src="https://img-blog.csdn.net/20180828171220662?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2p1bm1veGk=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt="欢迎关注我的公众号"></p>
+<p><img src="https://img-blog.csdnimg.cn/20190521205521722.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2p1bm1veGk=,size_16,color_FFFFFF,t_70" alt></p>
 
           
         
@@ -1499,7 +1476,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://pibigstar.com/2019/09/04/使用Java做ORC图片识别/">
+    <link itemprop="mainEntityOfPage" href="http://pibigstar.com/2019/09/04/SpringBoot使用redis做缓存机制/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="派大星">
@@ -1518,7 +1495,7 @@
         
           <h2 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2019/09/04/使用Java做ORC图片识别/" itemprop="url">使用Java做ORC图片识别</a></h2>
+                <a class="post-title-link" href="/2019/09/04/SpringBoot使用redis做缓存机制/" itemprop="url">SpringBoot使用redis做缓存机制</a></h2>
         
 
         <div class="post-meta">
@@ -1553,8 +1530,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/java工具类/" itemprop="url" rel="index">
-                    <span itemprop="name">java工具类</span>
+                  <a href="/categories/springboot-SpringBoot技能大全/" itemprop="url" rel="index">
+                    <span itemprop="name">springboot,SpringBoot技能大全</span>
                   </a>
                 </span>
 
@@ -1592,15 +1569,38 @@
       
         
           
-            <h1 id="1-下载训练库"><a href="#1-下载训练库" class="headerlink" title="1. 下载训练库"></a>1. 下载训练库</h1><p>下载地址：<a href="https://github.com/tesseract-ocr/tessdata" target="_blank" rel="noopener">https://github.com/tesseract-ocr/tessdata</a></p>
-<p>不用全部下载，中文识别下载那个<code>chi_sim.traineddata</code>即可。</p>
-<h1 id="2-添加依赖"><a href="#2-添加依赖" class="headerlink" title="2. 添加依赖"></a>2. 添加依赖</h1><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>net.sourceforge.tess4j<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>tess4j<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">version</span>&gt;</span>4.3.1<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
+            <p>SpringBoot 2.0.3 版本、redis3.2版本</p>
+<h1 id="1-加入jar包"><a href="#1-加入jar包" class="headerlink" title="1. 加入jar包"></a>1. 加入jar包</h1><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-starter-data-redis<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-starter-cache<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
 
-<h1 id="3-编写代码"><a href="#3-编写代码" class="headerlink" title="3. 编写代码"></a>3. 编写代码</h1><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> String <span class="title">getTextByImage</span><span class="params">(String imgPath)</span> <span class="keyword">throws</span> TesseractException </span>&#123;</span><br><span class="line">    File imageFile = <span class="keyword">new</span> File(imgPath);</span><br><span class="line">    <span class="keyword">if</span> (!imageFile.exists())&#123;</span><br><span class="line">        <span class="keyword">throw</span> <span class="keyword">new</span> RuntimeException(<span class="string">"图片不存在"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    Tesseract tesseract = <span class="keyword">new</span> Tesseract();</span><br><span class="line">    <span class="comment">// 设置训练库的位置,https://github.com/tesseract-ocr/tessdata</span></span><br><span class="line">    tesseract.setDatapath(<span class="string">"D://OCR/tessdata"</span>);</span><br><span class="line">    <span class="comment">// 设置识别语言为中文</span></span><br><span class="line">    tesseract.setLanguage(<span class="string">"chi_sim"</span>);</span><br><span class="line"></span><br><span class="line">    String result = tesseract.doOCR(imageFile);</span><br><span class="line">    <span class="keyword">return</span> result;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="2-编写RedisConfig类"><a href="#2-编写RedisConfig类" class="headerlink" title="2. 编写RedisConfig类"></a>2. 编写RedisConfig类</h1><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.pibigstar.common.config;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> org.springframework.cache.CacheManager;</span><br><span class="line"><span class="keyword">import</span> org.springframework.cache.annotation.CachingConfigurerSupport;</span><br><span class="line"><span class="keyword">import</span> org.springframework.cache.annotation.EnableCaching;</span><br><span class="line"><span class="keyword">import</span> org.springframework.cache.interceptor.KeyGenerator;</span><br><span class="line"><span class="keyword">import</span> org.springframework.context.annotation.Bean;</span><br><span class="line"><span class="keyword">import</span> org.springframework.context.annotation.Configuration;</span><br><span class="line"><span class="keyword">import</span> org.springframework.data.redis.cache.RedisCacheManager;</span><br><span class="line"><span class="keyword">import</span> org.springframework.data.redis.connection.RedisConnectionFactory;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="meta">@Configuration</span></span><br><span class="line"><span class="meta">@EnableCaching</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">RedisConfig</span> <span class="keyword">extends</span> <span class="title">CachingConfigurerSupport</span></span>&#123;</span><br><span class="line"></span><br><span class="line">	<span class="comment">//缓存管理器</span></span><br><span class="line">	<span class="meta">@Bean</span> </span><br><span class="line">	<span class="function"><span class="keyword">public</span> CacheManager <span class="title">cacheManager</span><span class="params">(RedisConnectionFactory factory)</span> </span>&#123;</span><br><span class="line">		RedisCacheManager cacheManager = RedisCacheManager.builder(factory).build();</span><br><span class="line">		<span class="keyword">return</span> cacheManager;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="comment">//自定义缓存key生成策略</span></span><br><span class="line">	  <span class="meta">@Bean</span></span><br><span class="line">	  <span class="function"><span class="keyword">public</span> KeyGenerator <span class="title">keyGenerator</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	      <span class="keyword">return</span> <span class="keyword">new</span> KeyGenerator()&#123;</span><br><span class="line">	          <span class="meta">@Override</span></span><br><span class="line">	          <span class="function"><span class="keyword">public</span> Object <span class="title">generate</span><span class="params">(Object target, java.lang.reflect.Method method, Object... params)</span> </span>&#123;</span><br><span class="line">	              StringBuffer sb = <span class="keyword">new</span> StringBuffer();</span><br><span class="line">	              sb.append(target.getClass().getName());</span><br><span class="line">	              sb.append(method.getName());</span><br><span class="line">	              <span class="keyword">for</span>(Object obj:params)&#123;</span><br><span class="line">	                  sb.append(obj.toString());</span><br><span class="line">	              &#125;</span><br><span class="line">	              System.out.println(<span class="string">"调用Redis生成key："</span>+sb.toString());</span><br><span class="line">	              <span class="keyword">return</span> sb.toString();</span><br><span class="line">	          &#125;</span><br><span class="line">	      &#125;;</span><br><span class="line">	  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<h1 id="4-测试"><a href="#4-测试" class="headerlink" title="4. 测试"></a>4. 测试</h1><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> TesseractException </span>&#123;</span><br><span class="line">   System.out.println(getTextByImage(<span class="string">"D://OCR/img/test.png"</span>));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="2-1-配置application-yml文件"><a href="#2-1-配置application-yml文件" class="headerlink" title="2.1 配置application.yml文件"></a>2.1 配置application.yml文件</h2><figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">spring:</span></span><br><span class="line"><span class="attr">  redis:</span></span><br><span class="line"><span class="attr">    host:</span> <span class="number">127.0</span><span class="number">.0</span><span class="number">.1</span></span><br><span class="line"><span class="attr">    port:</span> <span class="number">6379</span></span><br><span class="line"><span class="attr">    database:</span> <span class="number">0</span> <span class="comment"># 设置数据库索引为0 默认为0</span></span><br><span class="line"><span class="attr">    password:</span> <span class="comment"># 密码为空</span></span><br><span class="line"><span class="attr">    jedis:</span></span><br><span class="line"><span class="attr">      pool:</span></span><br><span class="line"><span class="attr">        max-active:</span> <span class="number">1000</span> <span class="comment"># 连接池最大连接数（使用负值表示没有限制）</span></span><br><span class="line"><span class="attr">        max-wait:</span> <span class="bullet">-1</span> <span class="comment"># 连接池最大阻塞等待时间（使用负值表示没有限制）</span></span><br><span class="line"><span class="attr">        max-idle:</span> <span class="number">10</span> <span class="comment"># 连接池中的最大空闲连接</span></span><br><span class="line"><span class="attr">        min-idle:</span> <span class="number">2</span> <span class="comment"># 连接池中的最小空闲连接</span></span><br><span class="line"><span class="attr">    timeout:</span> <span class="number">2000</span> <span class="comment"># 连接超时时间（毫秒）</span></span><br></pre></td></tr></table></figure>
 
-<p><img src="https://img-blog.csdnimg.cn/20190521205521722.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2p1bm1veGk=,size_16,color_FFFFFF,t_70" alt></p>
+<h1 id="3-在-适当的地方加入缓存"><a href="#3-在-适当的地方加入缓存" class="headerlink" title="3. 在 适当的地方加入缓存"></a>3. 在 适当的地方加入缓存</h1><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.pibigstar.service.impl;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.util.List;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> javax.transaction.Transactional;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> org.springframework.beans.factory.annotation.Autowired;</span><br><span class="line"><span class="keyword">import</span> org.springframework.cache.annotation.CacheConfig;</span><br><span class="line"><span class="keyword">import</span> org.springframework.cache.annotation.Cacheable;</span><br><span class="line"><span class="keyword">import</span> org.springframework.stereotype.Service;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> com.pibigstar.dao.GradeMapper;</span><br><span class="line"><span class="keyword">import</span> com.pibigstar.domain.Grade;</span><br><span class="line"><span class="keyword">import</span> com.pibigstar.service.GradeService;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Service</span></span><br><span class="line"><span class="meta">@CacheConfig</span>(cacheNames=<span class="string">"grades"</span>)</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">GradeServiceImpl</span> <span class="keyword">implements</span> <span class="title">GradeService</span></span>&#123;</span><br><span class="line"></span><br><span class="line">	<span class="meta">@Autowired</span></span><br><span class="line">	<span class="keyword">private</span> GradeMapper gradeMapper;</span><br><span class="line">	</span><br><span class="line">	<span class="meta">@Override</span></span><br><span class="line">	<span class="meta">@Cacheable</span> <span class="comment">//开启缓存</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> Grade <span class="title">getOneById</span><span class="params">(Long id)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">return</span> gradeMapper.selectByPrimaryKey(id);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="meta">@Override</span></span><br><span class="line">	<span class="meta">@Cacheable</span> <span class="comment">//开启缓存</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> List&lt;Grade&gt; <span class="title">list</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		<span class="keyword">return</span> gradeMapper.findAll();</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>@Cacheable将查询结果缓存到redis中，（key=”#p0”）指定传入的第一个参数作为redis的key。</li>
+<li>@CachePut，指定key，将更新的结果同步到redis中</li>
+<li>@CacheEvict，指定key，删除缓存数据，allEntries=true,方法调用后将立即清除缓存</li>
+</ul>
+<h1 id="4-启动"><a href="#4-启动" class="headerlink" title="4. 启动"></a>4. 启动</h1><h2 id="4-1-启动redis"><a href="#4-1-启动redis" class="headerlink" title="4.1 启动redis"></a>4.1 启动redis</h2><p>下载： <a href="https://pan.baidu.com/s/1tTYcCRUF-qDikhPTkSiJTQ" target="_blank" rel="noopener">https://pan.baidu.com/s/1tTYcCRUF-qDikhPTkSiJTQ</a></p>
+<p>解压，双击 start.bat 即可</p>
+<p>RedisDesktopManager 文件夹放的是redis 可视化工具</p>
+<h2 id="4-2-启动项目"><a href="#4-2-启动项目" class="headerlink" title="4.2 启动项目"></a>4.2 启动项目</h2><p>调用 开启缓存的那两个方法，就可以看到控制台输出了：<br><img src="https://img-blog.csdn.net/20180704150026452?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2p1bm1veGk=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt></p>
+<p>通过redis 可视化工具可以看到：<br><img src="https://img-blog.csdn.net/20180704144013597?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2p1bm1veGk=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt></p>
+<p>已经有key值生成了，</p>
+<p>当再一次查询的时候就不会去从数据库中查询了，而是直接从我们的redis中查询，速度会非常快。</p>
+<p><strong>需要注意的是</strong>：当数据库中值改变了，因为它查询的是从缓存中查询，所以查出来的数据还是之前的数据，只有当key过期之后或者被删除之后才能查到最新的值</p>
+<h1 id="5-常用redis命令"><a href="#5-常用redis命令" class="headerlink" title="5. 常用redis命令"></a>5. 常用redis命令</h1><ul>
+<li>flushdb：清空当前数据库。</li>
+<li>select [index]：选择索引数据库，index为索引值名，如：select 1。</li>
+<li>keys *：查看数据库内所有的key。</li>
+<li>del [key]：删除一条指定key的值。</li>
+<li>get [key] : 获得 指定key的值</li>
+<li>flushall：清空所有数据库。</li>
+<li>quit：退出客户端连接</li>
+</ul>
+<h3 id="关注我的公众号，获取最新Java干货"><a href="#关注我的公众号，获取最新Java干货" class="headerlink" title="关注我的公众号，获取最新Java干货"></a>关注我的公众号，获取最新Java干货</h3><p><img src="https://img-blog.csdn.net/20180828171220662?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2p1bm1veGk=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt="欢迎关注我的公众号"></p>
 
           
         
@@ -2038,7 +2038,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://pibigstar.com/2019/08/29/常用Shell方法集合/">
+    <link itemprop="mainEntityOfPage" href="http://pibigstar.com/2019/08/29/Linux防火墙操作/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="派大星">
@@ -2057,7 +2057,7 @@
         
           <h2 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2019/08/29/常用Shell方法集合/" itemprop="url">常用Shell方法集合</a></h2>
+                <a class="post-title-link" href="/2019/08/29/Linux防火墙操作/" itemprop="url">Linux防火墙操作</a></h2>
         
 
         <div class="post-meta">
@@ -2092,8 +2092,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/shell/" itemprop="url" rel="index">
-                    <span itemprop="name">shell</span>
+                  <a href="/categories/Linux/" itemprop="url" rel="index">
+                    <span itemprop="name">Linux</span>
                   </a>
                 </span>
 
@@ -2131,15 +2131,23 @@
       
         
           
-            <h1 id="判断是否是root用户"><a href="#判断是否是root用户" class="headerlink" title="判断是否是root用户"></a>判断是否是root用户</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="title">check_root</span></span>() &#123;</span><br><span class="line">	<span class="built_in">local</span> user=<span class="string">""</span></span><br><span class="line">	user=<span class="string">"<span class="variable">$(id -un 2&gt;/dev/null || true)</span>"</span></span><br><span class="line">	<span class="keyword">if</span> [ <span class="string">"<span class="variable">$user</span>"</span> != <span class="string">"root"</span> ]; <span class="keyword">then</span></span><br><span class="line">		cat &gt;&amp;2 &lt;&lt;-<span class="string">'EOF'</span></span><br><span class="line">		权限错误, 请使用 root 用户运行此脚本!</span><br><span class="line">		EOF</span><br><span class="line">		<span class="built_in">exit</span> 1</span><br><span class="line">	<span class="keyword">fi</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+            <h1 id="1-查看防火墙状态"><a href="#1-查看防火墙状态" class="headerlink" title="1. 查看防火墙状态"></a>1. 查看防火墙状态</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo firewall-cmd --state</span><br></pre></td></tr></table></figure>
 
-<h1 id="判断命令是否存在"><a href="#判断命令是否存在" class="headerlink" title="判断命令是否存在"></a>判断命令是否存在</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="title">command_exists</span></span>() &#123;</span><br><span class="line">	<span class="built_in">command</span> -v <span class="string">"<span class="variable">$@</span>"</span> &gt;/dev/null 2&gt;&amp;1</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">if</span> command_exists ip;<span class="keyword">then</span></span><br><span class="line">	<span class="built_in">echo</span> <span class="string">"存在ip命令"</span></span><br><span class="line"><span class="keyword">elif</span> command_exists ifconfig; <span class="keyword">then</span></span><br><span class="line">	<span class="built_in">echo</span> <span class="string">"存在ifconfig命令"</span></span><br><span class="line"><span class="keyword">else</span></span><br><span class="line">	<span class="built_in">echo</span> <span class="string">"都不存在"</span></span><br><span class="line"><span class="keyword">fi</span></span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>如果是运行中则会输出 running，如果没有运行则会输出 not running</p>
+</blockquote>
+<h1 id="2-关闭防火墙"><a href="#2-关闭防火墙" class="headerlink" title="2. 关闭防火墙"></a>2. 关闭防火墙</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 关闭</span></span><br><span class="line">systemctl stop firewalld</span><br><span class="line"><span class="comment"># 关闭开机自启</span></span><br><span class="line">systemctl <span class="built_in">disable</span> firewalld</span><br></pre></td></tr></table></figure>
 
-<h1 id="判断参数是否为数字"><a href="#判断参数是否为数字" class="headerlink" title="判断参数是否为数字"></a>判断参数是否为数字</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="title">is_number</span></span>() &#123;</span><br><span class="line">	expr <span class="string">"<span class="variable">$1</span>"</span> + 1 &gt;/dev/null 2&gt;&amp;1</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">if</span> ! ( is_number <span class="string">"<span class="variable">$1</span>"</span> ); <span class="keyword">then</span></span><br><span class="line">cat &gt;&amp;2 &lt;&lt;-EOF</span><br><span class="line">请输入数字</span><br><span class="line">EOF</span><br><span class="line"><span class="built_in">exit</span> 1</span><br><span class="line"><span class="keyword">fi</span></span><br></pre></td></tr></table></figure>
+<h1 id="3-开启防火墙"><a href="#3-开启防火墙" class="headerlink" title="3. 开启防火墙"></a>3. 开启防火墙</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">systemctl start firewalld</span><br></pre></td></tr></table></figure>
 
-<h1 id="获取服务器IP地址"><a href="#获取服务器IP地址" class="headerlink" title="获取服务器IP地址"></a>获取服务器IP地址</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="title">get_server_ip</span></span>() &#123;</span><br><span class="line">	<span class="built_in">local</span> server_ip=<span class="string">""</span></span><br><span class="line">	<span class="built_in">local</span> interface_info=<span class="string">""</span></span><br><span class="line"></span><br><span class="line">	<span class="keyword">if</span> command_exists ip; <span class="keyword">then</span></span><br><span class="line">		interface_info=<span class="string">"<span class="variable">$(ip addr)</span>"</span></span><br><span class="line">	<span class="keyword">elif</span> command_exists ifconfig; <span class="keyword">then</span></span><br><span class="line">		interface_info=<span class="string">"<span class="variable">$(ifconfig)</span>"</span></span><br><span class="line">	<span class="keyword">fi</span></span><br><span class="line"></span><br><span class="line">	server_ip=$(<span class="built_in">echo</span> <span class="string">"<span class="variable">$interface_info</span>"</span> | \</span><br><span class="line">		grep -oE <span class="string">"[0-9]&#123;1,3&#125;\.[0-9]&#123;1,3&#125;\.[0-9]&#123;1,3&#125;\.[0-9]&#123;1,3&#125;"</span> | \</span><br><span class="line">		grep -vE <span class="string">"^192\.168|^172\.1[6-9]\.|^172\.2[0-9]\.|^172\.3[0-2]\.|^10\.|^127\.|^255\.|^0\."</span> | \</span><br><span class="line">		head -n 1)</span><br><span class="line"></span><br><span class="line">	<span class="comment"># 自动获取失败时，通过网站提供的 API 获取外网地址</span></span><br><span class="line">	<span class="keyword">if</span> [ -z <span class="string">"<span class="variable">$server_ip</span>"</span> ]; <span class="keyword">then</span></span><br><span class="line">		 server_ip=<span class="string">"<span class="variable">$(wget -qO- --no-check-certificate https://ipv4.icanhazip.com)</span>"</span></span><br><span class="line">	<span class="keyword">fi</span></span><br><span class="line"></span><br><span class="line">	<span class="built_in">echo</span> <span class="string">"<span class="variable">$server_ip</span>"</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="4-添加端口白名单"><a href="#4-添加端口白名单" class="headerlink" title="4. 添加端口白名单"></a>4. 添加端口白名单</h1><blockquote>
+<p>将 5901-5905端口添加到白名单中</p>
+</blockquote>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo firewall-cmd --permanent --zone=public --add-port=5901-5905/tcp</span><br></pre></td></tr></table></figure>
 
-<h1 id="下载文件，重试3次"><a href="#下载文件，重试3次" class="headerlink" title="下载文件，重试3次"></a>下载文件，重试3次</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="title">download_file</span></span>() &#123;</span><br><span class="line">	<span class="comment"># 文件下载链接</span></span><br><span class="line">	<span class="built_in">local</span> url=<span class="string">"<span class="variable">$1</span>"</span></span><br><span class="line">	<span class="comment"># 文件下载后存放路径</span></span><br><span class="line">	<span class="built_in">local</span> file=<span class="string">"<span class="variable">$2</span>"</span></span><br><span class="line">	<span class="built_in">local</span> retry=0</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="title">download_file_to_path</span></span>() &#123;</span><br><span class="line">		<span class="keyword">if</span> [ <span class="variable">$retry</span> -ge 3 ]; <span class="keyword">then</span></span><br><span class="line">			rm -f <span class="string">"<span class="variable">$file</span>"</span></span><br><span class="line">			cat &gt;&amp;2 &lt;&lt;-EOF</span><br><span class="line">			文件下载失败! 请重试。</span><br><span class="line">			URL: <span class="variable">$&#123;url&#125;</span></span><br><span class="line">			EOF</span><br><span class="line">		<span class="keyword">fi</span></span><br><span class="line"></span><br><span class="line">		( <span class="built_in">set</span> -x; wget -O <span class="string">"<span class="variable">$file</span>"</span> --no-check-certificate <span class="string">"<span class="variable">$url</span>"</span> )</span><br><span class="line">		<span class="keyword">if</span> [ <span class="string">"$?"</span> != <span class="string">"0"</span> ] || [ -n <span class="string">"<span class="variable">$verify_cmd</span>"</span> ] &amp;&amp; ! verify_file; <span class="keyword">then</span></span><br><span class="line">			retry=$(expr <span class="variable">$retry</span> + 1)</span><br><span class="line">			download_file_to_path</span><br><span class="line">		<span class="keyword">fi</span></span><br><span class="line">	&#125;</span><br><span class="line">	download_file_to_path</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment"># 使用</span></span><br><span class="line">DOCKERFILE_DOWNLOAD_URL=<span class="string">"https://github.com/pibigstar/go-todo/blob/master/Dockerfile"</span></span><br><span class="line">download_file <span class="string">"<span class="variable">$DOCKERFILE_DOWNLOAD_URL</span>"</span> <span class="string">"/usr/local/todo"</span></span><br></pre></td></tr></table></figure>
+<h1 id="5-重新加载"><a href="#5-重新加载" class="headerlink" title="5. 重新加载"></a>5. 重新加载</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo firewall-cmd --reload</span><br></pre></td></tr></table></figure>
+
+<h1 id="6-查看白名单端口列表"><a href="#6-查看白名单端口列表" class="headerlink" title="6. 查看白名单端口列表"></a>6. 查看白名单端口列表</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo firewall-cmd --list-all-zones</span><br></pre></td></tr></table></figure>
 
 
           
