@@ -270,7 +270,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://pibigstar.com/2019/09/29/常用正则表达式实例/">
+    <link itemprop="mainEntityOfPage" href="http://pibigstar.com/2019/05/21/Java使用Jwt加密信息生成token/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="派大星">
@@ -289,7 +289,7 @@
         
           <h2 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2019/09/29/常用正则表达式实例/" itemprop="url">Untitled</a></h2>
+                <a class="post-title-link" href="/2019/05/21/Java使用Jwt加密信息生成token/" itemprop="url">Java使用Jwt加密信息生成token</a></h2>
         
 
         <div class="post-meta">
@@ -301,8 +301,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-09-29T22:56:40+08:00">
-                2019-09-29
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-05-21T08:08:04+08:00">
+                2019-05-21
               </time>
             
 
@@ -311,6 +311,28 @@
             
           </span>
 
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Java-java工具类-SpringBoot技能大全/" itemprop="url" rel="index">
+                    <span itemprop="name">Java,java工具类,SpringBoot技能大全</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
           
 
           
@@ -341,628 +363,11 @@
       
         
           
-            <p>title: 常用正则表达式实例<br>date: 2018-08-15 22:10:31<br>tags: [java,正则,正则表达式实例]<br>categories: 随笔小记</p>
+            <h1 id="1-添加依赖"><a href="#1-添加依赖" class="headerlink" title="1. 添加依赖"></a>1. 添加依赖</h1><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- jwt加密工具类 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>io.jsonwebtoken<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>jjwt<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>0.9.1<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
 
-          
-        
-      
-    </div>
-    
-    
-    
+<h1 id="2-java代码"><a href="#2-java代码" class="headerlink" title="2. java代码"></a>2. java代码</h1><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> io.jsonwebtoken.*;</span><br><span class="line"><span class="keyword">import</span> javax.crypto.spec.SecretKeySpec;</span><br><span class="line"><span class="keyword">import</span> javax.xml.bind.DatatypeConverter;</span><br><span class="line"><span class="keyword">import</span> java.security.Key;</span><br><span class="line"><span class="keyword">import</span> java.util.Date;</span><br><span class="line"><span class="keyword">import</span> java.util.HashMap;</span><br><span class="line"><span class="keyword">import</span> java.util.Map;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> pibigstar</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@create</span> 2018-12-13 15:32</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@desc</span> token工具类</span></span><br><span class="line"><span class="comment"> **/</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TokenUtil</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> String SECRET = <span class="string">"rgsnsm#ldyh*ws%l&amp;hdpmnmw@xyhndes"</span>;<span class="comment">//私密key</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> Long TTL_EXPIRATION = <span class="number">1000L</span> * <span class="number">60</span> * <span class="number">30</span>; <span class="comment">//过期时间30分钟</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> String ISSUER = <span class="string">"pibigstar"</span>;<span class="comment">//发行人</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 加密信息，生成token</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> String <span class="title">creatToken</span><span class="params">(Map&lt;String,Object&gt; params)</span> </span>&#123;</span><br><span class="line">        SignatureAlgorithm signature = SignatureAlgorithm.HS256;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">byte</span>[] secretBytes = DatatypeConverter.parseBase64Binary(SECRET);</span><br><span class="line">        Key secretKey = <span class="keyword">new</span> SecretKeySpec(secretBytes, signature.getJcaName());</span><br><span class="line">        Long expiration = System.currentTimeMillis() + TTL_EXPIRATION;</span><br><span class="line"></span><br><span class="line">        JwtBuilder builder = Jwts.builder()</span><br><span class="line">                .setIssuedAt(<span class="keyword">new</span> Date())</span><br><span class="line">                .setExpiration(<span class="keyword">new</span> Date(expiration))</span><br><span class="line">                .setIssuer(ISSUER)</span><br><span class="line">                .setClaims(params)</span><br><span class="line">                .signWith(signature,secretKey);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> builder.compact();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 解析token</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> Map&lt;String, Object&gt; <span class="title">parseToken</span><span class="params">(String token)</span> </span>&#123;</span><br><span class="line">        Claims claims = <span class="keyword">null</span>;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            claims = Jwts.parser().setSigningKey(DatatypeConverter.parseBase64Binary(SECRET))</span><br><span class="line">                    .parseClaimsJws(token).getBody();</span><br><span class="line">        &#125; <span class="keyword">catch</span> (SignatureException | MalformedJwtException e)&#123;</span><br><span class="line">            System.out.println(<span class="string">"token解析失败"</span>);</span><br><span class="line">        &#125; <span class="keyword">catch</span> (ExpiredJwtException e) &#123;</span><br><span class="line">            System.out.println(<span class="string">"token已过期"</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> claims;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-    <div>
-      
-    </div>
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://pibigstar.com/2019/09/29/HQL使用语法详细介绍/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="派大星">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/qq.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="派大星的博客">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/09/29/HQL使用语法详细介绍/" itemprop="url">Untitled</a></h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-09-29T22:56:40+08:00">
-                2019-09-29
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>title: HQL使用语法详细介绍<br>date: 2018-08-03 22:10:31<br>tags: [hql,hibernate]<br>categories: 随笔小记,数据库</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    <div>
-      
-    </div>
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://pibigstar.com/2019/09/29/SpringMVC 手动配置Bean和自动注册Bean/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="派大星">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/qq.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="派大星的博客">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/09/29/SpringMVC 手动配置Bean和自动注册Bean/" itemprop="url">Untitled</a></h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-09-29T22:56:40+08:00">
-                2019-09-29
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>title: SpringMVC 手动配置Bean和自动注册Bean<br>date: 2018-07-19 22:10:31<br>tags: [bean,spring,自动配置]<br>categories: Java,框架学习使用</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    <div>
-      
-    </div>
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://pibigstar.com/2019/09/29/java执行cmd命令/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="派大星">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/qq.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="派大星的博客">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/09/29/java执行cmd命令/" itemprop="url">Untitled</a></h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-09-29T22:56:40+08:00">
-                2019-09-29
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>title: java执行cmd命令<br>date: 2018-12-18 22:10:31<br>tags: [java,cmd]<br>categories: Java</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    <div>
-      
-    </div>
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://pibigstar.com/2019/09/29/Oracle数据库入门知识点总结/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="派大星">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/qq.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="派大星的博客">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/09/29/Oracle数据库入门知识点总结/" itemprop="url">Untitled</a></h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-09-29T22:56:40+08:00">
-                2019-09-29
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>title: Oracle数据库入门知识点总结<br>date: 2018-08-30 22:10:31<br>tags: [oracle常用命令,navicat链接oracle]<br>categories: 数据库</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    <div>
-      
-    </div>
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://pibigstar.com/2019/09/29/Shell脚本模板/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="派大星">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/qq.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="派大星的博客">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/09/29/Shell脚本模板/" itemprop="url">Untitled</a></h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-09-29T22:56:40+08:00">
-                2019-09-29
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>title: Shell脚本模板<br>date: 2018-10-02 22:10:31<br>tags: [shell]<br>categories: shell</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 打印帮助信息</span></span><br><span class="line"><span class="function"><span class="title">usage</span></span>() &#123;</span><br><span class="line">	cat &gt;&amp;1 &lt;&lt;-EOF</span><br><span class="line">	</span><br><span class="line">	请使用: <span class="variable">$0</span> &lt;option&gt;</span><br><span class="line"></span><br><span class="line">	可使用的参数 &lt;option&gt; 包括:</span><br><span class="line"></span><br><span class="line">	    install          安装</span><br><span class="line">	    uninstall        卸载</span><br><span class="line">	    update           检查更新</span><br><span class="line">	    <span class="built_in">help</span>             查看脚本使用说明</span><br><span class="line">	EOF</span><br><span class="line"></span><br><span class="line">	<span class="built_in">exit</span> $</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment"># 检查是否已安装</span></span><br><span class="line"><span class="function"><span class="title">is_installed</span></span>()&#123;</span><br><span class="line">	<span class="built_in">echo</span> <span class="string">"检查是否已安装..."</span></span><br><span class="line">	<span class="comment"># return 0表示已安装，1表示未安装</span></span><br><span class="line">	<span class="built_in">return</span> 0</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment"># 安装检查</span></span><br><span class="line"><span class="function"><span class="title">installed_check</span></span>() &#123;</span><br><span class="line">	<span class="keyword">if</span> is_installed; <span class="keyword">then</span></span><br><span class="line">		cat &gt;&amp;1 &lt;&lt;-EOF</span><br><span class="line">		检测到你已安装......</span><br><span class="line">		EOF</span><br><span class="line">		<span class="keyword">while</span> <span class="literal">true</span></span><br><span class="line">		<span class="keyword">do</span></span><br><span class="line">			cat &gt;&amp;1 &lt;&lt;-<span class="string">'EOF'</span></span><br><span class="line">			请选择你希望的操作:</span><br><span class="line">			(1) 覆盖安装</span><br><span class="line">			(2) 重新配置</span><br><span class="line">			(3) 检查更新</span><br><span class="line">			(4) 查看配置</span><br><span class="line">			(5) 完全卸载</span><br><span class="line">			(6) 退出脚本</span><br><span class="line">			EOF</span><br><span class="line">			<span class="built_in">read</span> -p <span class="string">"(默认: 1) 请选择 [1~6]: "</span> sel</span><br><span class="line">			[ -z <span class="string">"<span class="variable">$sel</span>"</span> ] &amp;&amp; sel=1</span><br><span class="line"></span><br><span class="line">			<span class="keyword">case</span> <span class="variable">$sel</span> <span class="keyword">in</span></span><br><span class="line">				1)</span><br><span class="line">					<span class="built_in">echo</span> <span class="string">"开始覆盖..."</span></span><br><span class="line">					<span class="comment"># return 0 之后会继续执行下面的函数</span></span><br><span class="line">					<span class="built_in">return</span> 0</span><br><span class="line">					;;</span><br><span class="line">				2)</span><br><span class="line">					<span class="built_in">echo</span> <span class="string">"重新配置..."</span></span><br><span class="line">					;;</span><br><span class="line">				3)</span><br><span class="line">					<span class="built_in">echo</span> <span class="string">"检查更新..."</span></span><br><span class="line">					do_update</span><br><span class="line">					;;</span><br><span class="line">				4)</span><br><span class="line">					<span class="built_in">echo</span> <span class="string">"查看配置.."</span></span><br><span class="line">					do_update</span><br><span class="line">					;;</span><br><span class="line">				5)</span><br><span class="line">					<span class="built_in">echo</span> <span class="string">"完全卸载.."</span></span><br><span class="line">					do_uninstall</span><br><span class="line">					;;</span><br><span class="line">				6)</span><br><span class="line">					<span class="built_in">echo</span> <span class="string">"退出脚本.."</span></span><br><span class="line">					;;</span><br><span class="line">				*)</span><br><span class="line">					<span class="built_in">echo</span> <span class="string">"输入有误, 请输入有效数字 1~6!"</span></span><br><span class="line">					<span class="built_in">continue</span></span><br><span class="line">					;;</span><br><span class="line">			<span class="keyword">esac</span></span><br><span class="line">			<span class="built_in">exit</span> 0</span><br><span class="line">		<span class="keyword">done</span></span><br><span class="line">	<span class="keyword">fi</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="comment"># 开始安装</span></span><br><span class="line"><span class="function"><span class="title">install_app</span></span>()&#123;</span><br><span class="line">	<span class="built_in">echo</span> <span class="string">"开始安装....."</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment"># 安装命令</span></span><br><span class="line"><span class="function"><span class="title">do_install</span></span>()&#123;</span><br><span class="line">	<span class="comment"># 检查root权限</span></span><br><span class="line">	check_root</span><br><span class="line">	<span class="comment"># 检查是否已安装</span></span><br><span class="line">	installed_check</span><br><span class="line">	<span class="comment"># 安装</span></span><br><span class="line">	install_app</span><br><span class="line">	</span><br><span class="line">	cat &gt;&amp;1 &lt;&lt;-EOF</span><br><span class="line">	恭喜! 服务端安装成功。</span><br><span class="line">	更多使用说明: <span class="variable">$&#123;0&#125;</span> <span class="built_in">help</span></span><br><span class="line"></span><br><span class="line">	如果这个脚本帮到了你，你可以请作者喝瓶可乐:</span><br><span class="line">	 https://blog.csdn.net/junmoxi/</span><br><span class="line">	EOF</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="title">do_uninstall</span></span>()&#123;</span><br><span class="line">	<span class="built_in">echo</span> <span class="string">"开始卸载....."</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="title">do_update</span></span>()&#123;</span><br><span class="line">	<span class="built_in">echo</span> <span class="string">"开始更新....."</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment"># 程序进入后的执行函数</span></span><br><span class="line">action=<span class="variable">$&#123;1:-"install"&#125;</span></span><br><span class="line"><span class="keyword">case</span> <span class="string">"<span class="variable">$action</span>"</span> <span class="keyword">in</span></span><br><span class="line">	install|uninstall|update)</span><br><span class="line">		do_<span class="variable">$&#123;action&#125;</span></span><br><span class="line">		;;</span><br><span class="line">	<span class="built_in">help</span>)</span><br><span class="line">		usage 0</span><br><span class="line">		;;</span><br><span class="line">	*)</span><br><span class="line">		usage 1</span><br><span class="line">		;;</span><br><span class="line"><span class="keyword">esac</span></span><br></pre></td></tr></table></figure>
+<h1 id="3-测试"><a href="#3-测试" class="headerlink" title="3. 测试"></a>3. 测试</h1><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span></span>&#123;</span><br><span class="line">    Map&lt;String,Object&gt; map = <span class="keyword">new</span> HashMap&lt;&gt;();</span><br><span class="line">    map.put(<span class="string">"pibigstar"</span>,<span class="string">"测试"</span>);</span><br><span class="line">    String token = creatToken(map);</span><br><span class="line">    System.out.println(<span class="string">"token:"</span> + token);</span><br><span class="line">    Map&lt;String, Object&gt; result = parseToken(token);</span><br><span class="line">    System.out.println(result.get(<span class="string">"pibigstar"</span>));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 
           
@@ -1016,7 +421,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://pibigstar.com/2019/09/29/Oracle操作实例总结/">
+    <link itemprop="mainEntityOfPage" href="http://pibigstar.com/2019/05/18/数据库批量备份与还原/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="派大星">
@@ -1035,7 +440,7 @@
         
           <h2 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2019/09/29/Oracle操作实例总结/" itemprop="url">Untitled</a></h2>
+                <a class="post-title-link" href="/2019/05/18/数据库批量备份与还原/" itemprop="url">数据库批量备份与还原</a></h2>
         
 
         <div class="post-meta">
@@ -1047,8 +452,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-09-29T22:56:40+08:00">
-                2019-09-29
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-05-18T09:09:04+08:00">
+                2019-05-18
               </time>
             
 
@@ -1057,6 +462,28 @@
             
           </span>
 
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/mysql/" itemprop="url" rel="index">
+                    <span itemprop="name">mysql</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
           
 
           
@@ -1087,7 +514,21 @@
       
         
           
-            <p>title: Oracle操作实例总结<br>date: 2018-11-27 22:10:31<br>tags: [oracle,oracle操作实例]<br>categories: 数据库</p>
+            <h1 id="备份某个数据库"><a href="#备份某个数据库" class="headerlink" title="备份某个数据库"></a>备份某个数据库</h1><p>备份<code>test</code>数据库</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysqldump -uroot -p123456 -P3306 test -t &gt; test.sql</span><br></pre></td></tr></table></figure>
+
+<h1 id="备份此链接下所有数据库"><a href="#备份此链接下所有数据库" class="headerlink" title="备份此链接下所有数据库"></a>备份此链接下所有数据库</h1><p>使用 <code>-A</code> 参数，表示备份所有数据库（结构和数据）</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysqldump -uroot -p123456 -A &gt; all.sql</span><br></pre></td></tr></table></figure>
+
+<h1 id="备份所有数据库（仅结构）"><a href="#备份所有数据库（仅结构）" class="headerlink" title="备份所有数据库（仅结构）"></a>备份所有数据库（仅结构）</h1><p>加入<code>-d</code> 参数表示只备份结构</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysqldump -uroot -p123456 -P3306 -A -d &gt; all.sql</span><br></pre></td></tr></table></figure>
+
+<h1 id="还原数据库"><a href="#还原数据库" class="headerlink" title="还原数据库"></a>还原数据库</h1><p>先登录进数据库中</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysql  -uroot -p123456</span><br></pre></td></tr></table></figure>
+
+<p>然后执行</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">source</span> all.sql</span><br></pre></td></tr></table></figure>
+
 
           
         
@@ -1140,7 +581,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://pibigstar.com/2019/09/29/渗透学习之网站渗透（1）-----信息收集/">
+    <link itemprop="mainEntityOfPage" href="http://pibigstar.com/2019/05/18/使用NetData对服务器性能进行监控/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="派大星">
@@ -1159,7 +600,7 @@
         
           <h2 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2019/09/29/渗透学习之网站渗透（1）-----信息收集/" itemprop="url">Untitled</a></h2>
+                <a class="post-title-link" href="/2019/05/18/使用NetData对服务器性能进行监控/" itemprop="url">使用NetData对服务器性能进行监控</a></h2>
         
 
         <div class="post-meta">
@@ -1171,8 +612,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-09-29T22:56:40+08:00">
-                2019-09-29
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-05-18T09:09:04+08:00">
+                2019-05-18
               </time>
             
 
@@ -1181,6 +622,28 @@
             
           </span>
 
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Linux/" itemprop="url" rel="index">
+                    <span itemprop="name">Linux</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
           
 
           
@@ -1211,7 +674,39 @@
       
         
           
-            <p>title: 渗透学习之网站渗透（1）—–信息收集<br>date: 2019-06-03 22:10:31<br>tags: [kali,linux,渗透]<br>categories: Linux</p>
+            <p>@[TOC]<br>服务器为：CentOS</p>
+<h1 id="1-安装NetData"><a href="#1-安装NetData" class="headerlink" title="1. 安装NetData"></a>1. 安装NetData</h1><p>1.安装Netdata需要的基本编译环境安装：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum install zlib-devel gcc make git autoconf autogen automake pkgconfig</span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li><p>下载NetData</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wget http://firehol.org/download/netdata/releases/v1.0.0/netdata-1.0.0.tar.gz</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>解压</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tar -xf netdata-1.0.0.tar.gz</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>进入到netdata</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> netdata-1.0.0</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>执行安装</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./netdata-installer.sh</span><br></pre></td></tr></table></figure>
+
+</li>
+</ol>
+<h1 id="2-查看界面"><a href="#2-查看界面" class="headerlink" title="2. 查看界面"></a>2. 查看界面</h1><p>浏览器打开：http://你的IP:19999</p>
+<p><img src="https://img-blog.csdnimg.cn/20190114100150994.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2p1bm1veGk=,size_16,color_FFFFFF,t_70" alt></p>
+<p><img src="https://img-blog.csdnimg.cn/20190114100229890.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2p1bm1veGk=,size_16,color_FFFFFF,t_70" alt></p>
+<h1 id="3-更改配置"><a href="#3-更改配置" class="headerlink" title="3. 更改配置"></a>3. 更改配置</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vim /etc/netdata/netdata.conf</span><br></pre></td></tr></table></figure>
+
+<h1 id="4-启动与关闭"><a href="#4-启动与关闭" class="headerlink" title="4. 启动与关闭"></a>4. 启动与关闭</h1><ol>
+<li><p>启动netdata服务</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/usr/sbin/netdata</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>关闭netdata服务</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">killall netdata</span><br></pre></td></tr></table></figure>
+
+</li>
+</ol>
 
           
         
@@ -1264,7 +759,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://pibigstar.com/2019/09/29/Linux执行定时任务/">
+    <link itemprop="mainEntityOfPage" href="http://pibigstar.com/2019/05/10/使用python做爬虫总结/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="派大星">
@@ -1283,7 +778,7 @@
         
           <h2 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2019/09/29/Linux执行定时任务/" itemprop="url">Untitled</a></h2>
+                <a class="post-title-link" href="/2019/05/10/使用python做爬虫总结/" itemprop="url">使用python做爬虫总结</a></h2>
         
 
         <div class="post-meta">
@@ -1295,8 +790,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-09-29T22:56:40+08:00">
-                2019-09-29
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-05-10T13:01:04+08:00">
+                2019-05-10
               </time>
             
 
@@ -1305,6 +800,28 @@
             
           </span>
 
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/爬虫相关-pyhton/" itemprop="url" rel="index">
+                    <span itemprop="name">爬虫相关,pyhton</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
           
 
           
@@ -1335,7 +852,63 @@
       
         
           
-            <p>title: Linux执行定时任务<br>date: 2019-08-08 22:10:31<br>tags: [Linux定时任务,crontab]<br>categories: 工具使用,Linux</p>
+            <p>[TOC]</p>
+<h2 id="1-最基本的抓站"><a href="#1-最基本的抓站" class="headerlink" title="1 最基本的抓站"></a>1 最基本的抓站</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> urllib2 </span><br><span class="line">content = urllib2.urlopen(<span class="string">'http://XXXX'</span>).read()</span><br></pre></td></tr></table></figure>
+
+<h2 id="2-使用代理服务器"><a href="#2-使用代理服务器" class="headerlink" title="2 使用代理服务器"></a>2 使用代理服务器</h2><p>这在某些情况下比较有用，比如IP被封了，或者比如IP访问的次数受到限制等等。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> urllib2 </span><br><span class="line"> </span><br><span class="line">proxy_support = urllib2.ProxyHandler(&#123;<span class="string">'http'</span>:<span class="string">'http://XX.XX.XX.XX:XXXX'</span>&#125;) </span><br><span class="line"> </span><br><span class="line">opener = urllib2.build_opener(proxy_support, urllib2.HTTPHandler) </span><br><span class="line"> </span><br><span class="line">urllib2.install_opener(opener) </span><br><span class="line"></span><br><span class="line">content = urllib2.urlopen(<span class="string">'http://XXXX'</span>).read()</span><br></pre></td></tr></table></figure>
+
+<h2 id="3-需要登录的情况"><a href="#3-需要登录的情况" class="headerlink" title="3 需要登录的情况"></a>3 需要登录的情况</h2><p>登录的情况比较麻烦我把问题拆分一下：</p>
+<h3 id="3-1-cookie的处理"><a href="#3-1-cookie的处理" class="headerlink" title="3.1 cookie的处理"></a>3.1 cookie的处理</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> urllib2, cookielib </span><br><span class="line">cookie_support= urllib2.HTTPCookieProcessor(cookielib.CookieJar()) </span><br><span class="line">opener = urllib2.build_opener(cookie_support, urllib2.HTTPHandler) </span><br><span class="line">urllib2.install_opener(opener) </span><br><span class="line">content = urllib2.urlopen(<span class="string">'http://XXXX'</span>).read()</span><br></pre></td></tr></table></figure>
+
+<p>是的没错，如果想同时用代理和cookie，那就加入proxy_support然后operner改为 </p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">opener = urllib2.build_opener(proxy_support, cookie_support, urllib2.HTTPHandler)</span><br></pre></td></tr></table></figure>
+
+<h3 id="3-2-表单的处理"><a href="#3-2-表单的处理" class="headerlink" title="3.2 表单的处理"></a>3.2 表单的处理</h3><p>登录必要填表，表单怎么填？首先利用工具截取所要填表的内容。<br>比如我一般用firefox+httpfox插件来看看自己到底发送了些什么包<br>这个我就举个例子好了，以verycd为例，先找到自己发的POST请求，以及POST表单项：<br><img src="https://img-blog.csdn.net/20180630203517408?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2p1bm1veGk=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt><br>可以看到verycd的话需要填username,password,continueURI,fk,login_submit这几项，其中fk是随机生成的（其实不太随机，看上去像是把epoch时间经过简单的编码生成的），需要从网页获取，也就是说得先访问一次网页，用正则表达式等工具截取返回数据中的fk项。continueURI顾名思义可以随便写，login_submit是固定的，这从源码可以看出。还有username，password那就很显然了。<br>好的，有了要填写的数据，我们就要生成postdata</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> urllib </span><br><span class="line">postdata=urllib.urlencode(&#123; </span><br><span class="line">    <span class="string">'username'</span>:<span class="string">'XXXXX'</span>, </span><br><span class="line">    <span class="string">'password'</span>:<span class="string">'XXXXX'</span>, </span><br><span class="line">    <span class="string">'continueURI'</span>:<span class="string">'http://www.verycd.com/'</span>, </span><br><span class="line">    <span class="string">'fk'</span>:fk, </span><br><span class="line">    <span class="string">'login_submit'</span>:<span class="string">'登录'</span> </span><br><span class="line">&#125;) </span><br><span class="line"><span class="comment"># 然后生成http请求，再发送请求：</span></span><br><span class="line">req = urllib2.Request( </span><br><span class="line">    url = <span class="string">'http://secure.verycd.com/signin/*/http://www.verycd.com/'</span>, </span><br><span class="line">    data = postdata </span><br><span class="line">)</span><br><span class="line"></span><br><span class="line">result = urllib2.urlopen(req).read()</span><br></pre></td></tr></table></figure>
+
+<h3 id="3-3-伪装成浏览器访问"><a href="#3-3-伪装成浏览器访问" class="headerlink" title="3.3 伪装成浏览器访问"></a>3.3 伪装成浏览器访问</h3><p>某些网站反感爬虫的到访，于是对爬虫一律拒绝请求。这时候我们需要伪装成浏览器，这可以通过修改http包中的header来实现：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">headers = &#123; </span><br><span class="line">    <span class="string">'User-Agent'</span>:<span class="string">'Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US; rv:1.9.1.6) Gecko/20091201 Firefox/3.5.6'</span> </span><br><span class="line">&#125; </span><br><span class="line">req = urllib2.Request( </span><br><span class="line">    url = <span class="string">'http://secure.verycd.com/signin/*/http://www.verycd.com/'</span>, </span><br><span class="line">    data = postdata, </span><br><span class="line">    headers = headers </span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+
+<h3 id="3-4-反-”反盗链”"><a href="#3-4-反-”反盗链”" class="headerlink" title="3.4 反 ”反盗链”"></a>3.4 反 ”反盗链”</h3><p>某些站点有所谓的反盗链设置，其实说穿了很简单，就是检查你发送请求的header里面，referer站点是不是他自己，所以我们只需要像3.3一样，把headers的referer改成该网站即可，以黑幕著称地cnbeta为例：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">headers = &#123; </span><br><span class="line">    <span class="string">'Referer'</span>:<span class="string">'http://www.cnbeta.com/articles'</span> </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>headers是一个dict数据结构，你可以放入任何想要的header，来做一些伪装。例如，有些自作聪明的网站总喜欢窥人隐私，别人通过代理访问，他偏偏要读取header中的X-Forwarded-For来看看人家的真实IP，没话说，那就直接把X-Forwarde-For改了吧，可以改成随便什么好玩的东东来欺负欺负他，呵呵。</p>
+<h3 id="3-5-终极绝招"><a href="#3-5-终极绝招" class="headerlink" title="3.5 终极绝招"></a>3.5 终极绝招</h3><p>有时候即使做了3.1-3.4，访问还是会被据，那么没办法，老老实实把httpfox中看到的headers全都写上，那一般也就行了。 再不行，那就只能用终极绝招了，selenium直接控制浏览器来进行访问，只要浏览器可以做到的，那么它也可以做到。类似的还有pamie，watir，等等等等。</p>
+<h2 id="4-多线程并发抓取"><a href="#4-多线程并发抓取" class="headerlink" title="4 多线程并发抓取"></a>4 多线程并发抓取</h2><p>单线程太慢的话，就需要多线程了，这里给个简单的线程池模板 这个程序只是简单地打印了1-10，但是可以看出是并发地。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> threading <span class="keyword">import</span> Thread </span><br><span class="line"><span class="keyword">from</span> Queue <span class="keyword">import</span> Queue </span><br><span class="line"><span class="keyword">from</span> time <span class="keyword">import</span> sleep </span><br><span class="line"> </span><br><span class="line"><span class="comment">#q是任务队列 </span></span><br><span class="line">q = Queue() </span><br><span class="line"><span class="comment">#NUM是并发线程总数 </span></span><br><span class="line">NUM = <span class="number">2</span> </span><br><span class="line"><span class="comment">#JOBS是有多少任务 </span></span><br><span class="line">JOBS = <span class="number">10</span> </span><br><span class="line"><span class="comment">#具体的处理函数，负责处理单个任务</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">do_somthing_using</span><span class="params">(arguments)</span>:</span> </span><br><span class="line">    <span class="keyword">print</span> arguments </span><br><span class="line"><span class="comment">#这个是工作进程，负责不断从队列取数据并处理 </span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">working</span><span class="params">()</span>:</span></span><br><span class="line">    <span class="keyword">while</span> <span class="literal">True</span>: </span><br><span class="line">        arguments = q.get() </span><br><span class="line">        do_somthing_using(arguments) </span><br><span class="line">        sleep(<span class="number">1</span>) </span><br><span class="line">        q.task_done() </span><br><span class="line"><span class="comment">#fork NUM个线程等待队列 </span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(NUM): </span><br><span class="line">    t = Thread(target=working) </span><br><span class="line">    t.setDaemon(<span class="literal">True</span>) </span><br><span class="line">    t.start() </span><br><span class="line"><span class="comment">#把JOBS排入队列 </span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(JOBS): </span><br><span class="line">    q.put(i) </span><br><span class="line"><span class="comment">#等待所有JOBS完成 </span></span><br><span class="line">q.join()</span><br></pre></td></tr></table></figure>
+
+<h2 id="5-验证码的处理"><a href="#5-验证码的处理" class="headerlink" title="5 验证码的处理"></a>5 验证码的处理</h2><p>碰到验证码咋办？这里分两种情况处理：</p>
+<ul>
+<li>google那种验证码，凉拌</li>
+<li>简单的验证码：字符个数有限，只使用了简单的平移或旋转加噪音而没有扭曲的，这种还是有可能可以处理的，一般思路是旋转的转回来，噪音去掉，然后划分单个字符，划分好了以后再通过特征提取的方法(例如PCA)降维并生成特征库，然后把验证码和特征库进行比较。这个比较复杂，一篇博文是说不完的，这里就不展开了，具体做法请弄本相关教科书好好研究一下。</li>
+<li>事实上有些验证码还是很弱的，这里就不点名了，反正我通过2的方法提取过准确度非常高的验证码，所以2事实上是可行的。<h2 id="6-gzip-deflate支持"><a href="#6-gzip-deflate支持" class="headerlink" title="6 gzip/deflate支持"></a>6 gzip/deflate支持</h2>现在的网页普遍支持gzip压缩，这往往可以解决大量传输时间，以VeryCD的主页为例，未压缩版本247K，压缩了以后45K，为原来的1/5。这就意味着抓取速度会快5倍。<br>然而python的urllib/urllib2默认都不支持压缩，要返回压缩格式，必须在request的header里面写明’accept-encoding’，然后读取response后更要检查header查看是否有’content-encoding’一项来判断是否需要解码，很繁琐琐碎。如何让urllib2自动支持gzip, defalte呢？<br>其实可以继承BaseHanlder类，然后build_opener的方式来处理：<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> urllib2 </span><br><span class="line"> </span><br><span class="line"><span class="keyword">from</span> gzip <span class="keyword">import</span> GzipFile </span><br><span class="line"><span class="keyword">from</span> StringIO <span class="keyword">import</span> StringIO </span><br><span class="line"> </span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">ContentEncodingProcessor</span><span class="params">(urllib2.BaseHandler)</span>:</span> </span><br><span class="line"></span><br><span class="line">  <span class="comment"># add headers to requests </span></span><br><span class="line">  <span class="function"><span class="keyword">def</span> <span class="title">http_request</span><span class="params">(self, req)</span>:</span> </span><br><span class="line">    req.add_header(<span class="string">"Accept-Encoding"</span>, <span class="string">"gzip, deflate"</span>) </span><br><span class="line">    <span class="keyword">return</span> req </span><br><span class="line"> </span><br><span class="line">  <span class="comment"># decode</span></span><br><span class="line">  <span class="function"><span class="keyword">def</span> <span class="title">http_response</span><span class="params">(self, req, resp)</span>:</span> </span><br><span class="line">    old_resp = resp </span><br><span class="line">    <span class="comment"># gzip </span></span><br><span class="line">    <span class="keyword">if</span> resp.headers.get(<span class="string">"content-encoding"</span>) == <span class="string">"gzip"</span>: </span><br><span class="line">        gz = GzipFile( </span><br><span class="line">                    fileobj=StringIO(resp.read()), </span><br><span class="line">                    mode=<span class="string">"r"</span> </span><br><span class="line">                  ) </span><br><span class="line">        resp = urllib2.addinfourl(gz, old_resp.headers, old_resp.url, old_resp.code) </span><br><span class="line">       resp.msg = old_resp.msg </span><br><span class="line">    <span class="comment"># deflate </span></span><br><span class="line">    <span class="keyword">if</span> resp.headers.get(<span class="string">"content-encoding"</span>) == <span class="string">"deflate"</span>: </span><br><span class="line">        gz = StringIO( deflate(resp.read()) ) </span><br><span class="line">        resp = urllib2.addinfourl(gz, old_resp.headers, old_resp.url, old_resp.code)  </span><br><span class="line">        resp.msg = old_resp.msg </span><br><span class="line">    <span class="keyword">return</span> resp </span><br><span class="line"> </span><br><span class="line"> </span><br><span class="line"><span class="keyword">import</span> zlib </span><br><span class="line"> </span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">deflate</span><span class="params">(data)</span>:</span>   </span><br><span class="line"> </span><br><span class="line">  <span class="keyword">try</span>:            </span><br><span class="line">	<span class="keyword">return</span> zlib.decompress(data, -zlib.MAX_WBITS) </span><br><span class="line">  <span class="keyword">except</span> zlib.error: </span><br><span class="line">	<span class="keyword">return</span> zlib.decompress(data) </span><br><span class="line"><span class="comment"># 然后就简单了，</span></span><br><span class="line">encoding_support = ContentEncodingProcessor </span><br><span class="line">opener = urllib2.build_opener( encoding_support, urllib2.HTTPHandler ) </span><br><span class="line"></span><br><span class="line"><span class="comment">#直接用opener打开网页，如果服务器支持gzip/defalte则自动解压缩 </span></span><br><span class="line"> content = opener.open(url).read()</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<h2 id="7-更方便地多线程"><a href="#7-更方便地多线程" class="headerlink" title="7 更方便地多线程"></a>7 更方便地多线程</h2><p>总结一文的确提及了一个简单的多线程模板，但是那个东东真正应用到程序里面去只会让程序变得支离破碎，不堪入目。在怎么更方便地进行多线程方面我也动了一番脑筋。先想想怎么进行多线程调用最方便呢？</p>
+<h3 id="7-1-用twisted进行异步I-O抓取"><a href="#7-1-用twisted进行异步I-O抓取" class="headerlink" title="7.1 用twisted进行异步I/O抓取"></a>7.1 用twisted进行异步I/O抓取</h3><p>事实上更高1效的抓取并非一定要用多线程，也可以使用异步I/O法：直接用twisted的getPage方法，然后分别加上异步I/O结束时的callback和errback方法即可。例如可以这么干：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> twisted.web.client <span class="keyword">import</span> getPage </span><br><span class="line"><span class="keyword">from</span> twisted.internet <span class="keyword">import</span> reactor  </span><br><span class="line"> </span><br><span class="line">links = [ <span class="string">'http://www.verycd.com/topics/%d/'</span>%i <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">5420</span>,<span class="number">5430</span>) ]  </span><br><span class="line"> </span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">parse_page</span><span class="params">(data,url)</span>:</span> </span><br><span class="line"> </span><br><span class="line">    <span class="keyword">print</span> len(data),url  </span><br><span class="line"> </span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">fetch_error</span><span class="params">(error,url)</span>:</span> </span><br><span class="line">    <span class="keyword">print</span> error.getErrorMessage(),url  </span><br><span class="line"> </span><br><span class="line"><span class="comment"># 批量抓取链接 </span></span><br><span class="line"> </span><br><span class="line"><span class="keyword">for</span> url <span class="keyword">in</span> links: </span><br><span class="line">    getPage(url,timeout=<span class="number">5</span>)</span><br><span class="line">        .addCallback(parse_page,url) <span class="comment">#成功则调用parse_page方法 </span></span><br><span class="line">        .addErrback(fetch_error,url) <span class="comment">#失败则调用fetch_error方法 </span></span><br><span class="line">        </span><br><span class="line">reactor.callLater(<span class="number">5</span>, reactor.stop) <span class="comment">#5秒钟后通知reactor结束程序</span></span><br><span class="line"> </span><br><span class="line">reactor.run()</span><br></pre></td></tr></table></figure>
+
+<p>twisted人如其名，写的代码实在是太扭曲了，非正常人所能接受，虽然这个简单的例子看上去还好；每次写twisted的程序整个人都扭曲了，累得不得了，文档等于没有，必须得看源码才知道怎么整，唉不提了。<br>如果要支持gzip/deflate，甚至做一些登陆的扩展，就得为twisted写个新的HTTPClientFactory类诸如此类，我这眉头真是大皱，遂放弃。有毅力者请自行尝试。<br>这篇讲怎么用twisted来进行批量网址处理的文章不错，由浅入深，深入浅出，可以一看。</p>
+<h3 id="7-2-设计一个简单的多线程抓取类"><a href="#7-2-设计一个简单的多线程抓取类" class="headerlink" title="7.2 设计一个简单的多线程抓取类"></a>7.2 设计一个简单的多线程抓取类</h3><p>还是觉得在urllib之类python“本土”的东东里面折腾起来更舒服。试想一下，如果有个Fetcher类，你可以这么调用</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">f = Fetcher(threads=<span class="number">10</span>) <span class="comment">#设定下载线程数为10 </span></span><br><span class="line"> </span><br><span class="line"><span class="keyword">for</span> url <span class="keyword">in</span> urls: </span><br><span class="line">   f.push(url)  <span class="comment">#把所有url推入下载队列 </span></span><br><span class="line"></span><br><span class="line"><span class="keyword">while</span> f.taskleft(): <span class="comment">#若还有未完成下载的线程 </span></span><br><span class="line">   content = f.pop()  <span class="comment">#从下载完成队列中取出结果 </span></span><br><span class="line">   do_with(content) <span class="comment"># 处理content内容</span></span><br></pre></td></tr></table></figure>
+
+<p>这么个多线程调用简单明了，那么就这么设计吧，首先要有两个队列，用Queue搞定，多线程的基本架构也和“技巧总结”一文类似，push方法和pop方法都比较好处理，都是直接用Queue的方法，taskleft则是如果有“正在运行的任务”或者”队列中的任务”则为是，也好办，于是代码如下：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> urllib2 </span><br><span class="line"><span class="keyword">from</span> threading <span class="keyword">import</span> Thread,Lock </span><br><span class="line"><span class="keyword">from</span> Queue <span class="keyword">import</span> Queue </span><br><span class="line"><span class="keyword">import</span> time </span><br><span class="line">  </span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Fetcher</span>:</span> </span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self,threads)</span>:</span> </span><br><span class="line">        self.opener = urllib2.build_opener(urllib2.HTTPHandler) </span><br><span class="line">        self.lock = Lock() <span class="comment">#线程锁 </span></span><br><span class="line">        self.q_req = Queue() <span class="comment">#任务队列 </span></span><br><span class="line">        self.q_ans = Queue() <span class="comment">#完成队列 </span></span><br><span class="line">        self.threads = threads </span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> range(threads): </span><br><span class="line">            t = Thread(target=self.threadget) </span><br><span class="line">            t.setDaemon(<span class="literal">True</span>) </span><br><span class="line">            t.start() </span><br><span class="line">        self.running = <span class="number">0</span> </span><br><span class="line">  </span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__del__</span><span class="params">(self)</span>:</span> <span class="comment">#解构时需等待两个队列完成 </span></span><br><span class="line">        time.sleep(<span class="number">0.5</span>) </span><br><span class="line">        self.q_req.join() </span><br><span class="line">        self.q_ans.join() </span><br><span class="line">  </span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">taskleft</span><span class="params">(self)</span>:</span> </span><br><span class="line">        <span class="keyword">return</span> self.q_req.qsize()+self.q_ans.qsize()+self.running </span><br><span class="line">  </span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">push</span><span class="params">(self,req)</span>:</span> </span><br><span class="line">        self.q_req.put(req) </span><br><span class="line">  </span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">pop</span><span class="params">(self)</span>:</span> </span><br><span class="line">        <span class="keyword">return</span> self.q_ans.get() </span><br><span class="line">  </span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">threadget</span><span class="params">(self)</span>:</span> </span><br><span class="line">        <span class="keyword">while</span> <span class="literal">True</span>: </span><br><span class="line">            req = self.q_req.get() </span><br><span class="line">            <span class="keyword">with</span> self.lock: <span class="comment">#要保证该操作的原子性，进入critical area </span></span><br><span class="line">                self.running += <span class="number">1</span> </span><br><span class="line">            <span class="keyword">try</span>: </span><br><span class="line">                ans = self.opener.open(req).read() </span><br><span class="line">            <span class="keyword">except</span> Exception, what: </span><br><span class="line">                ans = <span class="string">''</span> </span><br><span class="line">                <span class="keyword">print</span> what </span><br><span class="line">            self.q_ans.put((req,ans)) </span><br><span class="line">           <span class="keyword">with</span> self.lock: </span><br><span class="line">                self.running -= <span class="number">1</span> </span><br><span class="line">            self.q_req.task_done() </span><br><span class="line">            time.sleep(<span class="number">0.1</span>) <span class="comment"># don't spam </span></span><br><span class="line">  </span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">"__main__"</span>: </span><br><span class="line">    links = [ <span class="string">'http://www.verycd.com/topics/%d/'</span>%i <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">5420</span>,<span class="number">5430</span>) ] </span><br><span class="line">    f = Fetcher(threads=<span class="number">10</span>) </span><br><span class="line">   <span class="keyword">for</span> url <span class="keyword">in</span> links: </span><br><span class="line">        f.push(url) </span><br><span class="line">    <span class="keyword">while</span> f.taskleft(): </span><br><span class="line">        url,content = f.pop() </span><br><span class="line">       <span class="keyword">print</span> url,len(content)</span><br></pre></td></tr></table></figure>
+
+<h2 id="8-一些琐碎的经验"><a href="#8-一些琐碎的经验" class="headerlink" title="8 一些琐碎的经验"></a>8 一些琐碎的经验</h2><h3 id="8-1-连接池："><a href="#8-1-连接池：" class="headerlink" title="8.1 连接池："></a>8.1 连接池：</h3><p>opener.open和urllib2.urlopen一样，都会新建一个http请求。通常情况下这不是什么问题，因为线性环境下，一秒钟可能也就新生成一个请求；然而在多线程环境下，每秒钟可以是几十上百个请求，这么干只要几分钟，正常的有理智的服务器一定会封禁你的。<br>然而在正常的html请求时，保持同时和服务器几十个连接又是很正常的一件事，所以完全可以手动维护一个HttpConnection的池，然后每次抓取时从连接池里面选连接进行连接即可。<br>这里有一个取巧的方法，就是利用squid做代理服务器来进行抓取，则squid会自动为你维护连接池，还附带数据缓存功能，而且squid本来就是我每个服务器上面必装的东东，何必再自找麻烦写连接池呢。</p>
+<h3 id="8-2-设定线程的栈大小"><a href="#8-2-设定线程的栈大小" class="headerlink" title="8.2 设定线程的栈大小"></a>8.2 设定线程的栈大小</h3><p>栈大小的设定将非常显著地影响python的内存占用，python多线程不设置这个值会导致程序占用大量内存，这对openvz的vps来说非常致命。stack_size必须大于32768，实际上应该总要32768*2以上</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> threading <span class="keyword">import</span> stack_size </span><br><span class="line"></span><br><span class="line">stack_size(<span class="number">32768</span>*<span class="number">16</span>)</span><br></pre></td></tr></table></figure>
+
+<h3 id="8-3-设置失败后自动重试"><a href="#8-3-设置失败后自动重试" class="headerlink" title="8.3 设置失败后自动重试"></a>8.3 设置失败后自动重试</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">get</span><span class="params">(self,req,retries=<span class="number">3</span>)</span>:</span> </span><br><span class="line">        <span class="keyword">try</span>: </span><br><span class="line">           response = self.opener.open(req) </span><br><span class="line">           data = response.read() </span><br><span class="line">        <span class="keyword">except</span> Exception , what: </span><br><span class="line">            <span class="keyword">print</span> what,req </span><br><span class="line">            <span class="keyword">if</span> retries&amp;gt;<span class="number">0</span>: </span><br><span class="line">                <span class="keyword">return</span> self.get(req,retries<span class="number">-1</span>) </span><br><span class="line">            <span class="keyword">else</span>: </span><br><span class="line">                <span class="keyword">print</span> <span class="string">'GET Failed'</span>,req </span><br><span class="line">                <span class="keyword">return</span> <span class="string">''</span> </span><br><span class="line">       <span class="keyword">return</span> data</span><br></pre></td></tr></table></figure>
+
+<h3 id="8-4-设置超时"><a href="#8-4-设置超时" class="headerlink" title="8.4 设置超时"></a>8.4 设置超时</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> socket </span><br><span class="line"></span><br><span class="line">socket.setdefaulttimeout(<span class="number">10</span>) <span class="comment">#设置10秒后连接超时</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="8-5-登陆"><a href="#8-5-登陆" class="headerlink" title="8.5 登陆"></a>8.5 登陆</h3><p>登陆更加简化了，首先build_opener中要加入cookie支持，参考“总结”一文；如要登陆VeryCD，给Fetcher新增一个空方法login，并在init()中调用，然后继承Fetcher类并override login方法：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">login</span><span class="params">(self,username,password)</span>:</span> </span><br><span class="line">    <span class="keyword">import</span> urllib </span><br><span class="line">    data=urllib.urlencode(&#123;<span class="string">'username'</span>:username, </span><br><span class="line">                           <span class="string">'password'</span>:password, </span><br><span class="line">                           <span class="string">'continue'</span>:<span class="string">'http://www.verycd.com/'</span>, </span><br><span class="line">                           <span class="string">'login_submit'</span>:<span class="string">u'登录'</span>.encode(<span class="string">'utf-8'</span>), </span><br><span class="line">                           <span class="string">'save_cookie'</span>:<span class="number">1</span>,&#125;) </span><br><span class="line">    url = <span class="string">'http://www.verycd.com/signin'</span> </span><br><span class="line">    self.opener.open(url,data).read()</span><br></pre></td></tr></table></figure>
+
+<p>于是在Fetcher初始化时便会自动登录VeryCD网站。</p>
 
           
         
@@ -1388,7 +961,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://pibigstar.com/2019/09/29/油猴插件编写学习/">
+    <link itemprop="mainEntityOfPage" href="http://pibigstar.com/2019/05/10/Google搜索技巧/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="派大星">
@@ -1407,7 +980,7 @@
         
           <h2 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2019/09/29/油猴插件编写学习/" itemprop="url">Untitled</a></h2>
+                <a class="post-title-link" href="/2019/05/10/Google搜索技巧/" itemprop="url">Google搜索技巧</a></h2>
         
 
         <div class="post-meta">
@@ -1419,8 +992,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-09-29T22:56:40+08:00">
-                2019-09-29
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-05-10T13:01:04+08:00">
+                2019-05-10
               </time>
             
 
@@ -1429,6 +1002,28 @@
             
           </span>
 
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/工具使用/" itemprop="url" rel="index">
+                    <span itemprop="name">工具使用</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
           
 
           
@@ -1459,17 +1054,889 @@
       
         
           
-            <p>title: 油猴插件编写学习<br>date: 2019-09-10 22:10:31<br>tags: [油猴,脚本,浏览器插件]<br>categories: js</p>
-<p>油猴可以帮助我们在任意网页中镶嵌脚本来达到一些辅助我们的目的。</p>
-<p>油猴官网：<a href="https://tampermonkey.net/" target="_blank" rel="noopener">https://tampermonkey.net/</a></p>
-<h1 id="1-基本编写"><a href="#1-基本编写" class="headerlink" title="1. 基本编写"></a>1. 基本编写</h1><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// ==UserScript==</span></span><br><span class="line"><span class="comment">// @name         脚本的名称</span></span><br><span class="line"><span class="comment">// @namespace    可以写个人的网站什么的</span></span><br><span class="line"><span class="comment">// @version      版本号</span></span><br><span class="line"><span class="comment">// @description  脚本的描述</span></span><br><span class="line"><span class="comment">// @author       作者</span></span><br><span class="line"><span class="comment">// @match        匹配站点，在那个网页中启用该脚本，可使用正则进行匹配</span></span><br><span class="line"><span class="comment">// @match        http://119.36.55.224:6850/zentao/my/</span></span><br><span class="line"><span class="comment">// @match        http://www.iqiyi.com/v_*</span></span><br><span class="line"><span class="comment">// @grant        需要什么权限（GM_addStyle添加css样式权限）</span></span><br><span class="line"><span class="comment">// @grant        GM_addStyle</span></span><br><span class="line"><span class="comment">// @require		 引用外部js</span></span><br><span class="line"><span class="comment">// @require		 http://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js</span></span><br><span class="line"><span class="comment">// ==/UserScript==</span></span><br><span class="line">$(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="comment">//在这里编写我们的脚本</span></span><br><span class="line">&#125;)();</span><br></pre></td></tr></table></figure>
+            <ul>
+<li><p>inurl：搜索URL网址中包含指定字符串</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">inurl:login.php</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>intitle：标题中包含指定的字符串</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">intitle:登录</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>intext： 内容中包含指定的字符串</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">intext:登录</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>site：指定网站，只会在指定网站中查找关键字</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">深入理解JVM虚拟机 site:baidu.com</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>filetype：指定文件类型</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">深入理解JVM虚拟机 filetype:pdf</span><br></pre></td></tr></table></figure>
 
-<h1 id="2-写一个百度自动搜索小脚本"><a href="#2-写一个百度自动搜索小脚本" class="headerlink" title="2. 写一个百度自动搜索小脚本"></a>2. 写一个百度自动搜索小脚本</h1><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// ==UserScript==</span></span><br><span class="line"><span class="comment">// @name         自动输入</span></span><br><span class="line"><span class="comment">// @namespace    http://pibigstar.com/</span></span><br><span class="line"><span class="comment">// @version      0.1</span></span><br><span class="line"><span class="comment">// @description  百度框自动输入</span></span><br><span class="line"><span class="comment">// @author       派大星</span></span><br><span class="line"><span class="comment">// @match        https://www.baidu.com</span></span><br><span class="line"><span class="comment">// @require		 https://cdn.bootcss.com/jquery/2.2.1/jquery.js</span></span><br><span class="line"><span class="comment">// @grant        none</span></span><br><span class="line"><span class="comment">// ==/UserScript==</span></span><br><span class="line">(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    $(<span class="string">"#kw"</span>).val(<span class="string">"java派大星"</span>);</span><br><span class="line">    $(<span class="string">"#su"</span>).click();</span><br><span class="line">&#125;)();</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
 
-<h1 id="3-为百度新添加一个按钮"><a href="#3-为百度新添加一个按钮" class="headerlink" title="3. 为百度新添加一个按钮"></a>3. 为百度新添加一个按钮</h1><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// ==UserScript==</span></span><br><span class="line"><span class="comment">// @name         自动输入</span></span><br><span class="line"><span class="comment">// @namespace    http://pibigstar.com/</span></span><br><span class="line"><span class="comment">// @version      0.1</span></span><br><span class="line"><span class="comment">// @description  百度框自动输入</span></span><br><span class="line"><span class="comment">// @author       派大星</span></span><br><span class="line"><span class="comment">// @match        https://www.baidu.com</span></span><br><span class="line"><span class="comment">// @match        http://www.cnblogs.com/*</span></span><br><span class="line"><span class="comment">// @require		 https://cdn.bootcss.com/jquery/2.2.1/jquery.js</span></span><br><span class="line"><span class="comment">// @grant        GM_addStyle</span></span><br><span class="line"><span class="comment">// ==/UserScript==</span></span><br><span class="line">(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="comment">//与元数据块中的@grant值相对应，功能是生成一个style样式</span></span><br><span class="line">    GM_addStyle(<span class="string">'#myBtn&#123;color: white;position: absolute;left: 1100px;top: 243px;width: 100px;height: 36px;background: #3385ff;border-bottom: 1px solid #2d7'</span>);</span><br><span class="line">    <span class="keyword">var</span> html = <span class="string">"&lt;input type='button' id='myBtn' value='新增按钮' /&gt;"</span>;</span><br><span class="line">    $(<span class="string">"body"</span>).append(html);</span><br><span class="line">    <span class="comment">// 定义按钮事件</span></span><br><span class="line">    $(<span class="string">"#myBtn"</span>).click(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">      alert(<span class="string">"点击了新增按钮"</span>);</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;)();</span><br></pre></td></tr></table></figure>
+          
+        
+      
+    </div>
+    
+    
+    
 
-<h1 id="4-综合，写一个VIP视频解析脚本"><a href="#4-综合，写一个VIP视频解析脚本" class="headerlink" title="4. 综合，写一个VIP视频解析脚本"></a>4. 综合，写一个VIP视频解析脚本</h1><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="comment">// ==UserScript==</span></span><br><span class="line"><span class="comment">// @name         视频vip解析</span></span><br><span class="line"><span class="comment">// @namespace    http://mxspvip.cn</span></span><br><span class="line"><span class="comment">// @version      1.2</span></span><br><span class="line"><span class="comment">// @description  支持，优酷、爱奇艺、腾讯、乐视等vip视频播放</span></span><br><span class="line"><span class="comment">// @author       pibigstar</span></span><br><span class="line"><span class="comment">// @match        http://www.iqiyi.com/v_*</span></span><br><span class="line"><span class="comment">// @match        http://www.mgtv.com/v/*</span></span><br><span class="line"><span class="comment">// @match        http://www.le.com/ptv/*</span></span><br><span class="line"><span class="comment">// @match        http://v.youku.com/v_show/*</span></span><br><span class="line"><span class="comment">// @match        http://film.sohu.com/album/*</span></span><br><span class="line"><span class="comment">// @match        http://tv.sohu.com/*</span></span><br><span class="line"><span class="comment">// @match        https://v.qq.com/x/cover/*</span></span><br><span class="line"><span class="comment">// @grant        GM_addStyle</span></span><br><span class="line"><span class="comment">// @require      https://cdn.bootcss.com/jquery/2.2.1/jquery.js</span></span><br><span class="line"><span class="comment">// ==/UserScript==</span></span><br><span class="line"></span><br><span class="line">(<span class="function"><span class="keyword">function</span> (<span class="params"></span>)</span>&#123;</span><br><span class="line">GM_addStyle(<span class="string">'#floatDivBoxs&#123;width:170px;background:#fff;position:fixed;top:180px;right:0;z-index:999;&#125;'</span>)</span><br><span class="line">GM_addStyle(<span class="string">'#floatDivBoxs a&#123;color:#666;text-decoration:none;outline:none;&#125;'</span>)</span><br><span class="line">GM_addStyle(<span class="string">'#floatDivBoxs a:hover&#123;color:#e8431f;&#125;'</span>)</span><br><span class="line">GM_addStyle(<span class="string">'#floatDivBoxs .floatDtt&#123;width:100%;height:50px;line-height:50px; background:#f08326;color:#fff;font-size:20px;text-indent:22px;position:relative;&#125;'</span>)</span><br><span class="line">GM_addStyle(<span class="string">'#floatDivBoxs .floatDqq&#123;padding:0 14px;&#125;'</span>)</span><br><span class="line">GM_addStyle(<span class="string">'#floatDivBoxs .floatDqq li&#123;height:45px;line-height:45px;font-size:15px;border-bottom:1px solid #e3e3e3;&#125;'</span>)</span><br><span class="line">GM_addStyle(<span class="string">'#floatDivBoxs .floatDbg&#123;width:100%;height:20px;box-shadow:-2px 0 3px rgba(0,0,0,0.25);&#125;'</span>)</span><br><span class="line">GM_addStyle(<span class="string">'.floatShadow&#123;box-shadow:-2px 0 3px rgba(0,0,0,0.25);&#125;'</span>)</span><br><span class="line">GM_addStyle(<span class="string">'#rightArrow&#123;width:50px;height:45px;position:fixed;top:180px;right:170px;z-index:999;&#125;'</span>)</span><br><span class="line">GM_addStyle(<span class="string">'#rightArrow a&#123;background:#F08326;display:block;height:50px;&#125;'</span>)</span><br><span class="line">    GM_addStyle(<span class="string">'#rightArrow a img&#123;background:#F08326;display:block;height:50px;width:45px;&#125;'</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> html = <span class="string">'&lt;div id="rightArrow"&gt;&lt;a href="javascript:;" title=""&gt;&lt;img id="rightImg" src="http://pmyln8jkg.bkt.clouddn.com/youhou/right.png" /&gt;&lt;/a&gt;&lt;/div&gt;'</span></span><br><span class="line">  html += <span class="string">'&lt;div id="floatDivBoxs"&gt;'</span></span><br><span class="line">  html += <span class="string">'&lt;div class="floatDtt"&gt;vip通道&lt;/div&gt;'</span></span><br><span class="line">  html += <span class="string">'&lt;div class="floatShadow"&gt;'</span></span><br><span class="line">  html += <span class="string">'&lt;ul class="floatDqq"&gt;'</span></span><br><span class="line">       html += <span class="string">'&lt;li&gt;&lt;a href="#" name="vip" url="http://www.wmxz.wang/video.php?url="&gt; 无名小站&lt;/a&gt;&lt;/li&gt;'</span></span><br><span class="line">       html += <span class="string">'&lt;li&gt;&lt;a href="#" name="vip" url="https://cn.bjbanshan.cn/jiexi.php?url="&gt;1号接口&lt;/a&gt;&lt;/li&gt;'</span></span><br><span class="line">       html += <span class="string">'&lt;li&gt;&lt;a href="#" name="vip" url="https://aikan-tv.com/tong.php?url="&gt;2号接口&lt;/a&gt;&lt;/li&gt;'</span></span><br><span class="line">       html += <span class="string">'&lt;li&gt;&lt;a href="#" name="vip" url="http://api.51ckm.com/jx.php?url="&gt;3号接口&lt;/a&gt;&lt;/li&gt;'</span></span><br><span class="line">       html += <span class="string">'&lt;li&gt;&lt;a href="#" name="vip" url="http://api.nepian.com/ckparse/?url="&gt;4号接口&lt;/a&gt;&lt;/li&gt;'</span></span><br><span class="line">       html += <span class="string">'&lt;li&gt;&lt;a href="#" name="vip" url="http://jqaaa.com/jq3/?url="&gt;5号接口&lt;/a&gt;&lt;/li&gt;'</span></span><br><span class="line">       html += <span class="string">'&lt;li&gt;&lt;a href="#" name="vip" url="http://2gty.com/apiurl/yun.php?url="&gt;6号接口&lt;/a&gt;&lt;/li&gt;'</span></span><br><span class="line">       html += <span class="string">'&lt;li&gt;&lt;a href="#" name="vip" url="http://http://aikan-tv.com/?url="&gt;7号接口&lt;/a&gt;&lt;/li&gt;'</span></span><br><span class="line">       html += <span class="string">'&lt;li&gt;&lt;a href="#" name="vip" url="http://y.mt2t.com/lines?url="&gt;8号接口&lt;/a&gt;&lt;/li&gt;'</span></span><br><span class="line">   html += <span class="string">' &lt;/ul&gt;'</span></span><br><span class="line">  html += <span class="string">'&lt;/div&gt;'</span></span><br><span class="line">  html += <span class="string">'&lt;/div&gt;'</span></span><br><span class="line"><span class="comment">// 添加到页面上</span></span><br><span class="line">$(<span class="string">"body"</span>).append(html);</span><br><span class="line"><span class="comment">//浮动代码</span></span><br><span class="line"><span class="keyword">var</span> flag=<span class="number">1</span>;</span><br><span class="line">$(<span class="string">'#rightArrow'</span>).click(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">	<span class="keyword">if</span>(flag==<span class="number">1</span>)&#123;</span><br><span class="line">		$(<span class="string">"#floatDivBoxs"</span>).animate(&#123;<span class="attr">right</span>: <span class="string">'-175px'</span>&#125;,<span class="number">300</span>);</span><br><span class="line">		$(<span class="keyword">this</span>).animate(&#123;<span class="attr">right</span>: <span class="string">'-5px'</span>&#125;,<span class="number">300</span>);</span><br><span class="line">		$(<span class="keyword">this</span>).css(<span class="string">'background-position'</span>,<span class="string">'-50px 0'</span>);</span><br><span class="line">        $(<span class="string">"#rightImg"</span>).attr(<span class="string">"src"</span>,<span class="string">"http://pmyln8jkg.bkt.clouddn.com/youhou/left.png"</span>);</span><br><span class="line">		flag=<span class="number">0</span>;</span><br><span class="line">	&#125;<span class="keyword">else</span>&#123;</span><br><span class="line">		$(<span class="string">"#floatDivBoxs"</span>).animate(&#123;<span class="attr">right</span>: <span class="string">'0'</span>&#125;,<span class="number">300</span>);</span><br><span class="line">		$(<span class="keyword">this</span>).animate(&#123;<span class="attr">right</span>: <span class="string">'170px'</span>&#125;,<span class="number">300</span>);</span><br><span class="line">		$(<span class="keyword">this</span>).css(<span class="string">'background-position'</span>,<span class="string">'0px 0'</span>);</span><br><span class="line">        $(<span class="string">"#rightImg"</span>).attr(<span class="string">"src"</span>,<span class="string">"http://pmyln8jkg.bkt.clouddn.com/youhou/right.png"</span>);</span><br><span class="line">		flag=<span class="number">1</span>;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">&#125;)();</span><br><span class="line"><span class="comment">// 监听每一个接口点击事件</span></span><br><span class="line">$(<span class="string">"a[name='vip']"</span>).on(<span class="string">"click"</span>,<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="comment">//获取当前网址</span></span><br><span class="line">    <span class="keyword">var</span> url = <span class="built_in">window</span>.location;</span><br><span class="line">    <span class="keyword">var</span> api = $(<span class="keyword">this</span>).attr(<span class="string">"url"</span>);</span><br><span class="line">    <span class="built_in">window</span>.open(api+url,<span class="string">''</span>,<span class="string">'width=632,height=388,toolbar=no,location=no,status=no, menubar=no, resizable=yes, scrollbars=yes'</span>);</span><br><span class="line">	<span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+    <div>
+      
+    </div>
 
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://pibigstar.com/2019/05/05/Linux远程连接Mysql配置/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="派大星">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/qq.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="派大星的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/05/05/Linux远程连接Mysql配置/" itemprop="url">Linux远程连接Mysql配置</a></h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-05-05T15:03:04+08:00">
+                2019-05-05
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/数据库-Linux/" itemprop="url" rel="index">
+                    <span itemprop="name">数据库,Linux</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>Mysql默认root用户只能本地访问，不能远程连接管理mysql数据库，Linux如何开启mysql远程连接？设置步骤如下：</p>
+<h1 id="创建远程链接授权用户"><a href="#创建远程链接授权用户" class="headerlink" title="创建远程链接授权用户"></a>创建远程链接授权用户</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 进入mysql操作命令</span></span><br><span class="line">mysql -h localhost -u root -p</span><br></pre></td></tr></table></figure>
+
+<p>增加pibigstar用户授权访问，密码pibigstar</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">GRANT ALL PRIVILEGES ON *.* TO pibigstar@localhost IDENTIFIED BY <span class="string">'pibigstar'</span> WITH GRANT OPTION;</span><br></pre></td></tr></table></figure>
+
+<p>授与pibigstar用户从任何其它主机发起的访问（通配符％）</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">GRANT ALL PRIVILEGES ON *.* TO pibigstar@<span class="string">"%"</span> IDENTIFIED BY <span class="string">'pibigstar'</span> WITH GRANT OPTION;</span><br></pre></td></tr></table></figure>
+
+<p>上面的执性完成之后，基本上就可以通过用户名 pibigstar 密码 pibigstar 访问了，如果还是不行，查看下面方式来解决</p>
+<h3 id="设置防火墙允许3306端口"><a href="#设置防火墙允许3306端口" class="headerlink" title="设置防火墙允许3306端口"></a>设置防火墙允许3306端口</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vi /etc/sysconfig/IPtables</span><br></pre></td></tr></table></figure>
+
+<p>添加</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">-A RH-Firewall-1-INPUT -m state –state NEW -m tcp -p tcp –dport 3306 -j ACCEPT</span><br></pre></td></tr></table></figure>
+
+<p><strong>注意：</strong><br>添加在<code>-A RH-Firewall-1-INPUT -j REJECT –reject-with icmp-host-prohibited</code>之前，否则可能导致规则不生效</p>
+<p>重启防火墙</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">service iptables restart</span><br></pre></td></tr></table></figure>
+
+<h3 id="远程访问mysql速度很慢的解决方法"><a href="#远程访问mysql速度很慢的解决方法" class="headerlink" title="远程访问mysql速度很慢的解决方法"></a>远程访问mysql速度很慢的解决方法</h3><p>修改/etc/my.cnf或my.ini<br>[mysqld]下添加</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">skip-name-resolve</span><br><span class="line">skip-grant-tables</span><br></pre></td></tr></table></figure>
+
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    <div>
+      
+    </div>
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://pibigstar.com/2019/05/05/docker高级使用/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="派大星">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/qq.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="派大星的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/05/05/docker高级使用/" itemprop="url">docker高级使用</a></h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-05-05T15:03:04+08:00">
+                2019-05-05
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/docker/" itemprop="url" rel="index">
+                    <span itemprop="name">docker</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>PS: 你可以把镜像理解为一个Java类，而容器则是这个类创建的一个实例。</p>
+<p>查询镜像 </p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 搜索跟centos相关的镜像</span></span><br><span class="line">docker search centos</span><br></pre></td></tr></table></figure>
+
+<p>拉取镜像 </p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker pull centos</span><br></pre></td></tr></table></figure>
+
+<p>启动容器 </p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run -dit -name 容器名 镜像名 /bin/bash</span><br></pre></td></tr></table></figure>
+
+<p>端口映射 </p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"> <span class="comment">#本地端口:容器端口 </span></span><br><span class="line">docker run -dit -p 8080:8080 --name 容器名 镜像名 /bin/bash</span><br></pre></td></tr></table></figure>
+
+<p>进入容器 </p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker <span class="built_in">exec</span> -it 容器名 /bin/bash</span><br></pre></td></tr></table></figure>
+
+<p>查看容器日志 </p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker logs -f 容器名</span><br></pre></td></tr></table></figure>
+
+<p>查看容器的IP地址</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker inspect --format=<span class="string">'&#123;&#123;.NetworkSettings.IPAddress&#125;&#125;'</span> 容器名</span><br></pre></td></tr></table></figure>
+
+<p>推送镜像 </p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># username为你docker账号的用户名</span></span><br><span class="line">docker push username/ubuntu:17.10</span><br></pre></td></tr></table></figure>
+
+<p>查看容器信息 </p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker inspect 容器名</span><br></pre></td></tr></table></figure>
+
+<p>删除全部容器 </p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker stop $(docker ps -q) &amp; docker rm $(docker ps -aq)</span><br></pre></td></tr></table></figure>
+
+<p>删除镜像</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker rmi 镜像id</span><br></pre></td></tr></table></figure>
+
+<p>创建一个docker网络 </p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker network create -d bridge my-net</span><br></pre></td></tr></table></figure>
+
+<p>运行一个容器并连接到新建的网络 </p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run -it --name 容器名 --network my-net 镜像名 /bin/bash</span><br></pre></td></tr></table></figure>
+
+<p>挂载本地目录</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 将当前目录，挂载到容器的/app/demo目录中 </span></span><br><span class="line">docker run -it -d --name 容器名 -v ./:/app/demo 镜像名 /bin/bash</span><br></pre></td></tr></table></figure>
+
+<p>保存镜像 </p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker save alpine | gzip &gt; alpine-latest.tar.gz</span><br></pre></td></tr></table></figure>
+
+<p>加载保存的镜像 </p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker load -i alpine-latest.tar.gz</span><br></pre></td></tr></table></figure>
+
+<p>导出容器 </p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker <span class="built_in">export</span> 7691a814370e &gt; ubuntu.tar</span><br></pre></td></tr></table></figure>
+
+<p>从容器快照中导入为镜像 </p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cat ubuntu.tar | docker import - <span class="built_in">test</span>/ubuntu:v1.0</span><br></pre></td></tr></table></figure>
+
+<p>清理所有处于终止状态的容器 </p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker prune</span><br></pre></td></tr></table></figure>
+
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    <div>
+      
+    </div>
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://pibigstar.com/2019/05/02/以生活的例子来解释编程中的名词/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="派大星">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/qq.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="派大星的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/05/02/以生活的例子来解释编程中的名词/" itemprop="url">以生活的例子来解释编程中的名词</a></h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-05-02T16:04:04+08:00">
+                2019-05-02
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Java/" itemprop="url" rel="index">
+                    <span itemprop="name">Java</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="死锁"><a href="#死锁" class="headerlink" title="死锁"></a>死锁</h2><blockquote>
+<p>死锁就是两个或两个以上的线程争夺同一资源而形成的一种僵持状态，这种状态在没有外力的作用下将一直持续下去</p>
+</blockquote>
+<p>例子：比如馍夹菜这道菜，需要馒头和菜，A线程抢到了馒头，而B线程抢到了菜，这时A需要B的菜，而B需要A的馒头，他们都不愿放弃手中的资源而一直僵持下去，这种就叫做死锁</p>
+<h2 id="活锁"><a href="#活锁" class="headerlink" title="活锁"></a>活锁</h2><blockquote>
+<p>活锁简单来说就是同时释放，又同时拿，还是上面那个例子，A放弃了馒头，B也放弃了菜，可他们又同时拿了资源，又会造成僵持</p>
+</blockquote>
+<p>例子： 在路上走路的时候，迎面来了一个人，这时你想给他让路，所以你向左边移动，而他也想给你让路，所以他也向左边移动，此时你俩又是无法通过，又彼此让路，又无法通过。。。。就这样一直持续下去，这种就是活锁。</p>
+<h2 id="IOC"><a href="#IOC" class="headerlink" title="IOC"></a>IOC</h2><blockquote>
+<p>IOC(Inversion of Control) 控制反转，你要明白是什么被反转了，是对象的获取过程被反转了，之前是我们手动去new一个对象，不需要的时候在销毁对象，手动去管理对象之间的依赖关系，而现在是将对象托管给容器管理。。它有两种实现方式，一种是DI（Dependency Injection）依赖注入，也是最常见的方式，另一种是DL（Dependency Lookup）依赖查找</p>
+</blockquote>
+<p>例子：你去餐馆吃饭，服务员只需要把菜单给你，你点菜就可以了，而这里菜就是对象，你不需要知道这个菜是怎们做的，材料和菜谱什么的你都不需要关心，这种方式就是IOC，你无需关心</p>
+<h2 id="HTTPS"><a href="#HTTPS" class="headerlink" title="HTTPS"></a>HTTPS</h2><blockquote>
+<p>https是一种加密的网络传输协议，它不同于http，http是无状态的，并且信息是可篡改的。客户端在第一次是通过非对称加密拿到秘钥，客户端访问https服务器时会发送公钥，https服务器通过CA颁发的证书利用公钥对信息（秘钥）进行加密，客户端可以利用私钥拿到这个信息（秘钥），以后通信就可以用这个秘钥进行对称加密</p>
+</blockquote>
+<p>例子： http 就好比飞鸽传输，飞鸽把信息直接绑在腿上，任何人都可以截获这个飞鸽并且把信息更换掉，可见这种方式是极其不安全的，那怎么办了？我们可以把信息加密不就好了，比如字母每个都+1，这样 abc就变成了 bcd ，服务端在收到这个信息之后再把字母-1 就又变成了abc，可这个 +1 的信息怎么通知服务端呢，如果别人拿到了这个信息不是就可以轻易破解我们的信息并篡改他们了吗，这时就需要用到了非对称加密，通过公钥对信息加密，再通过私钥进行加密。而 https 就好比 客户端在飞鸽上绑了一个开着锁的盒子发给服务端，服务端将 加密秘钥 （+1信息）放到盒子里并锁上锁发给客户端，这样客户端就可以通过钥匙打开锁，并拿到这个秘钥，以后都通过这个秘钥对信息加密。在这里CA证书就充当了盒子的身份。</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    <div>
+      
+    </div>
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://pibigstar.com/2019/04/27/以生活的例子说明单线程和多线程/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="派大星">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/qq.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="派大星的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/04/27/以生活的例子说明单线程和多线程/" itemprop="url">以生活的例子说明单线程和多线程</a></h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-04-27T18:06:04+08:00">
+                2019-04-27
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Java/" itemprop="url" rel="index">
+                    <span itemprop="name">Java</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>以生活例子说明单线程与多线程</p>
+<p>转载自：<a href="https://mp.weixin.qq.com/s?__biz=MzI5MzIwNDI1MQ==&mid=2650111536&idx=2&sn=9a01602dd2c984f6a993e669ae3d183a&chksm=f4746644c303ef52a03183c84d1abe77d467180e8f77940164cfcab19bcda077218187fca745&scene=22&srcid=09173wMwlBL0KdlPT6cqiXum#rd" target="_blank" rel="noopener">书圈</a></p>
+<h1 id="1-程序设计的目标"><a href="#1-程序设计的目标" class="headerlink" title="1. 程序设计的目标"></a>1. 程序设计的目标</h1><p>在我看来单从程序的角度来看，一个好的程序的目标应该是性能与用户体验的平衡。当然一个程序是否能够满足用户的需求暂且不谈，这是业务层面的问题，我们仅仅讨论程序本身。围绕两点来展开，性能与用户体验。 </p>
+<p>性能：高性能的程序应该可以等同于CPU的利用率，CPU的利用率越高(一直在工作，没有闲下来的时候)，程序的性能越高。<br>体验：这里的体验不只是界面多么漂亮，功能多么顺手，这里的体验指程序的响应速度，响应速度越快，用户体验越好。 </p>
+<p>下面我们就这两点进行各种模型的讨论。 </p>
+<h1 id="2-单线程多任务无阻塞"><a href="#2-单线程多任务无阻塞" class="headerlink" title="2. 单线程多任务无阻塞"></a>2. 单线程多任务无阻塞</h1><p>以生活中食堂打饭的场景作为比喻，假设有这样的场景，小A，小B，小C 在窗口依次排队打饭。 假设窗口负责打饭的阿姨打一个菜需要耗时1秒。如果小A需要2个菜，小B需要3个菜，小C需要2个菜。如下： </p>
+<p>阿姨(CPU)：打一个菜需要1秒<br>小A：2个菜<br>小B：3个菜<br>小C：2个菜 </p>
+<p>那么在这种模型下将所有服Wu做完阿姨需要耗时 2 + 3 + 2 = 7秒<br>阿姨 = CPU<br>小A,小B,小C = 任务(这里是以任务为概念，表示需要做一些事情)<br>这种模型下CPU是满负荷不间断运转的，没有空闲，用户体验还不错。这种程序中每个任务的耗时都比较小，是非常理想的状态，一般情况下基本不太可能存在。 </p>
+<h1 id="3-单线程多任务IO阻塞"><a href="#3-单线程多任务IO阻塞" class="headerlink" title="3. 单线程多任务IO阻塞"></a>3. 单线程多任务IO阻塞</h1><p>将上面的场景稍微做改动：<br>阿姨：打一个菜需要1秒<br>小A：2个菜，但是忘记带钱了，要找同学送过来，估计需要等5分钟可以送到(可以理解为磁盘IO)<br>小B：3个菜<br>小C：2个菜 </p>
+<p>这种情况下小A这里发生了阻塞，实际上小A这里耗费了5分钟也就是 300秒+ 2个菜的时间，也就是302秒，而CPU则空闲了300秒，实际上工作2秒。 </p>
+<p>所有服Wu做完花费 302 + 3 + 2 = 307秒  CPU实际工作7秒，等待300秒。 极大浪费了CPU的时钟周期。 用户体验很差，因为小A阻塞的时候，后面的所有人都等着，而实际上此时CPU空闲。所以单线程中不要有阻塞出现。 </p>
+<h1 id="4-单线程多任务异步IO"><a href="#4-单线程多任务异步IO" class="headerlink" title="4. 单线程多任务异步IO"></a>4. 单线程多任务异步IO</h1><p>还是上面的模型，加入一个角色：值日生小哥，他负责事先询问每一个人是否带钱了，如果带钱了则允许打菜，否则把钱准备好了再说。 </p>
+<p>&lt;1&gt; 值日生小哥问小A准备好打菜了吗，小A说忘带钱了，值日生小哥说，你把钱准备好了再说，小A开始准备(需要300秒，从此刻开始记时)。<br>&lt;2&gt; 值日生小哥问小B准备好打菜了吗，小B说可以了，阿姨服务小B，耗时3秒<br>&lt;3&gt; 值日生小哥问小C准备好打菜了吗，小C说可以了，阿姨服务小C，耗时2秒<br>&lt;4&gt; 值日生小哥问小A准备好了没有，小A说还要等一会，阿姨由于没有人过来服务，处于空闲状态<br>&lt;5&gt; 300秒之后，小A准备好了，阿姨服务小A，耗时2秒 </p>
+<p>整个过程做完耗时 300 + 2 = 302秒  CPU工作7秒，空闲295秒 </p>
+<p>值日生小哥相当于select模型中的select功能，负责轮询任务是否可以工作，如果可以则直接工作，否则继续轮询。在小A阻塞的300秒里面，阿姨(CPU)没有傻等，而是在服务后面的人，也就是小B和小C，所以这里与模型3不同的是，这里有5秒CPU是工作的。 如果打饭的人越多，这种模型CPU的利用率越高，例如如果有小D，小E，小F…… 等需要服务，CPU可以在小A阻塞的300秒期间内继续服务其他人。实际上值日生小哥轮询也会耗时，这个耗时是很少的，几乎可以忽略不计，但是如果任务非常多，这个轮询还是会影响性能的，但是epoll模型已经不使用轮询的方式，相当于A，B，C会主动跟值日生小哥报告，说我准备好了，可以直接打菜了。 </p>
+<p>这种模式下用户体验好，CPU利用率高(任务越多利用率越高) </p>
+<h1 id="5-单线程多任务，有耗时计算"><a href="#5-单线程多任务，有耗时计算" class="headerlink" title="5. 单线程多任务，有耗时计算"></a>5. 单线程多任务，有耗时计算</h1><p>回到最开始的模型，如下：<br>阿姨：打一个菜需要1秒<br>小A：200个菜<br>小B：3个菜<br>小C：2个菜 </p>
+<p>顺序做完所有任务，需要耗时 200 + 3 + 2 = 205秒， CPU无空闲，但是用户体验却不是很好，因为显然后面的 B，C 需要等待小A 200秒的时间，这种情况下是没有IO阻塞的，但是任务A本身太耗CPU了，所以说如果单线程◇◇现了耗时的操作，一定会影响体验(IO操作或者是耗时的计算都属于耗时的操作，都会导致阻塞，但是这两种导致阻塞的性质是不一样的)。在所有的单线程模型中都不允许出现阻塞的情况，如果出现，那么用户体验是极差的，例如在UI编程中(QT,C# Winform)是不允许在UI线程中做耗时的操作的，否则会导致UI界面无响应。 编写Nodejs程序的时候，我们所写的代码实际上是在一个线程中执行的，所以也不允许有阻塞的操作(当然整个Nodejs框架实现异步，一定不止一个线程)。 </p>
+<p>出现阻塞的情况一般有2种，一种是IO阻塞，例如典型的如磁盘操作，这种情况下的阻塞会导致CPU空闲等待(当然现代操作系统中如果IO阻塞，操作系统一定会将导致IO阻塞的线程挂起)。这种阻塞的情况，可以通过异步IO的方法避免，这样就避免程序中仅有的单线程被操作系统挂起。另一种情况下是确实有非常多的计算操作，例如一个复杂的加密算法，确实需要消耗非常多的CPU时间，这种情况下CPU并不是空闲的，反而是全负荷工作的。这种CPU密集的工作不适合放在单线程中，虽然CPU的利用率很高，但是用户体验并不是很好。这种情况下使用多线程反而会更好，例如如果3个任务，每个任务都在一个线程中，也就是有3个线程，A任务在ThreadA中，B任务在ThreadB中，C任务在ThreadC中，那么即使A任务的计算量比较大，B，C两个任务所在的线程也不必等待A任务完成之后再工作，他们也有机会得到调度，这是由操作系统来完成的。这样就不会因为某一个任务计算量大，而导致阻塞其他任务而影响体验了。 </p>
+<h1 id="6-多线程程序"><a href="#6-多线程程序" class="headerlink" title="6. 多线程程序"></a>6. 多线程程序</h1><p>我们将上面的模型改造成多线程的模型是怎样的呢，我们在模型5的基础上添加一个角色，管理员大叔(操作系统的角色)：<br>阿姨：打一个菜需要1秒<br>小A：200个菜<br>小B：3个菜<br>小C：2个菜 </p>
+<p>加入管理员大叔之后变成这样的了，小A打两个菜之后，大叔说，你打的菜太多了，不能因为你要打200个菜，让后面的同学都没有机会打菜，你打两个菜之后等一会，让后面的同学也有机会。 </p>
+<p>大叔让小B打两个菜，然后让小C打两个菜(小C完成)，然后再让小A打两个菜(完成之后小A总共就有4个菜了)，再让小B打1个菜(此时小B总共打3个菜，完成)，然后小A打剩下的196个菜。 </p>
+<p>CPU的利用率：很高，阿姨在不断的工作 </p>
+<p>用户体验：不错，即使小A要打200个菜，小B，小C也有机会。 当然如果小A说我是帮校长打菜，要快一点(线程优先级高)，那也只能先把小A服务完 </p>
+<p>总耗时：   200 + 3 + 2 + (大叔指挥安排所消耗的时间，包括从小C切换回小A的时候，大叔要知道小A上次打的菜是哪两个，这次应该接着打什么菜，这相当于线程上下文切换的开销以及线程环境的保存与恢复)，所以并不是线程越多越好，线程非常多的时候大叔估计会焦头烂额吧，要记住这么状态，切换来切换去也耗时间。 </p>
+<p>这种模型下实际上是将小A的耗时任务，分成多份去执行而不是集中执行，所以小A要完成他的任务，可能需要更多的时间(期间他也需要等别人，阿姨不会一直为他一个人服务，但是阿姨为他服务的时间是没有变化的)，这种其实有点以时间换取用户体验(小B和小Ｃ的体验，小Ａ的体验可能就不会那么好了，但是小Ａ本来也非常耗时，所以多等一会是不是也没关系) </p>
+<p>那么IO阻塞和CPU计算耗时阻塞这两者有什么区别呢？ 区别在于IO阻塞是不使用CPU的，而CPU计算耗时导致的阻塞是会使用CPU的。 例如上面的例子中，小A说忘记带钱了需要同学送钱，于是小A等着同学送钱过来，这个过程中阿姨并没有为小A提供服务，这个过程中为小A提供服务的是他的同学(送钱过来)，实际上小A的同学相当于现代计算机系统中的DMA(直接内存操作)，小A同学送钱的过程相当于DMA从磁盘读取数据到内存的过程，这个过程基本不需要CPU干预。 </p>
+<p>当然在DMA技术还没有出现的年代，从磁盘读取文件也是需要CPU发送指令去读取的，也就是说需要CPU的计算，应用到这里的场景中，就是阿姨亲自跑一趟帮小A把钱拿过来。 </p>
+<h1 id="7-多CPU"><a href="#7-多CPU" class="headerlink" title="7. 多CPU"></a>7. 多CPU</h1><p>多CPU是一个更加复杂的问题，多CPU如何调度？ 小A在第一个窗口打两个菜，又跑到第二个窗口打两个菜这种情况如何处理。小A在第一个窗口，小B在第二个窗口他们要同一个菜，但是这个菜只够一个人，那么两个窗口阿姨如何分配这种需求(实际上应该是由操作系统也就是管理员大叔来决定如何分配，也就是多核下的线程同步与互斥)？ </p>
+<p>多核CPU情况下，多线程的调度，互斥，锁与同步相对来讲更加复杂，多核情况下是真正的并行，同一时刻有多个线程在同时运行，他们的竞争怎么处理，多个CPU之间如何同步(多CPU之间的缓存状态一致性)等等一系列的问题。 </p>
+<h1 id="8-多线程与多进程"><a href="#8-多线程与多进程" class="headerlink" title="8. 多线程与多进程"></a>8. 多线程与多进程</h1><p>上面描述的多线程实际上是讨论的是多线程的调度问题，这里我们说一说多线程与多进程与资源的分配问题。什么意思呢，一群人(多个线程)在一个桌子(进程)上吃饭，他们会涉及到一些问题，比如多个人可能会夹一个菜(竞争)，A和B同时看到盘子里面有一块肉，同时伸出筷子去夹，A先夹走，B迟了一点伸到盘子的时候已经没了，只能缩回来(临界资源，互斥)，有一个点心需要用馍夹肉一起吃。A夹了肉，B夹了馍，A需要B的馍，B需要A的肉，他们僵持不下谁都不让步(死锁)。 </p>
+<p>多线程之间的资源共享是非常方便的，因为他们共用进程的资源空间（在一个桌子上），但是需要注意一系列的问题，竞争，死锁，同步等。如果在旁边再开一个桌子(进程)。 那么桌子之间讲话，递东西又不方便(进程间通信)，而开一个桌子的开销比在一个桌子上多加一个人的开销要大。另外一个桌子上的人数不可能无限制增加，桌子的容量有限也坐不下这么多人(进程的线程句柄是有限制的)。一个桌子坏了不会影响到另一个桌子上面人的就餐情况(进程间相互DuLi，一个进程崩溃不会影响另一个)，而一个桌子上的某人喝挂了需要送医院，估计这一桌人都要散了(线程挂掉会导致整个进程也挂掉)。所以多线程与多进程是各有优缺点，不能一概而论。 </p>
+<p>说明：多线程桌子的比喻受到知乎用户［pansz］的启发，但是该比喻似乎说明不了线程同步的情况。 </p>
+<h1 id="9-总结"><a href="#9-总结" class="headerlink" title="9. 总结"></a>9. 总结</h1><p>单线程程序：适合IO异步，不能阻塞，不能有大量耗CPU的计算。典型如Nodejs，还有一些网络程序 </p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    <div>
+      
+    </div>
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://pibigstar.com/2019/04/24/Go语言入门（5）安装第三方库/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="派大星">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/qq.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="派大星的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/04/24/Go语言入门（5）安装第三方库/" itemprop="url">Go语言入门（5）安装第三方库</a></h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-04-24T19:07:04+08:00">
+                2019-04-24
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/go/" itemprop="url" rel="index">
+                    <span itemprop="name">go</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>通过go get 去获取github上的第三方库是没什么问题的，但是要获取google的就不行了，没办法，<br>所以我们通过gopm这个工具来获取Google的第三方库</p>
+<h1 id="1-安装gopm"><a href="#1-安装gopm" class="headerlink" title="1. 安装gopm"></a>1. 安装gopm</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">go get github.com/gpmgo/gopm</span><br></pre></td></tr></table></figure>
+
+<h1 id="2-通过gopm安装"><a href="#2-通过gopm安装" class="headerlink" title="2. 通过gopm安装"></a>2. 通过gopm安装</h1><p>我们安装一个go 的 import 工具</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gopm get -g -v golang.org/x/tools/cmd/goimports</span><br></pre></td></tr></table></figure>
+
+<p><code>-g</code> 参数是将包下载到 GOPATH 路径下<br><code>-v</code> 参数是显示下载过程</p>
+<h1 id="3-安装下载的库"><a href="#3-安装下载的库" class="headerlink" title="3. 安装下载的库"></a>3. 安装下载的库</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">go install golang.org/x/tools/cmd/goimports</span><br></pre></td></tr></table></figure>
+
+<p>这个命令可以生成一个可执行文件到GOPATH/bin 路径下</p>
 
           
         
@@ -1513,7 +1980,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/7/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/7/">7</a><span class="page-number current">8</span><a class="page-number" href="/page/9/">9</a><span class="space">&hellip;</span><a class="page-number" href="/page/24/">24</a><a class="extend next" rel="next" href="/page/9/"><i class="fa fa-angle-right"></i></a>
+    <a class="extend prev" rel="prev" href="/page/7/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/7/">7</a><span class="page-number current">8</span><a class="page-number" href="/page/9/">9</a><span class="space">&hellip;</span><a class="page-number" href="/page/14/">14</a><a class="extend next" rel="next" href="/page/9/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -1561,7 +2028,7 @@
               
                 <a href="/archives">
               
-                  <span class="site-state-item-count">239</span>
+                  <span class="site-state-item-count">137</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -1572,7 +2039,7 @@
               
               <div class="site-state-item site-state-categories">
                 
-                  <span class="site-state-item-count">1</span>
+                  <span class="site-state-item-count">64</span>
                   <span class="site-state-item-name">categories</span>
                 
               </div>
@@ -1583,7 +2050,7 @@
               
               <div class="site-state-item site-state-tags">
                 
-                  <span class="site-state-item-count">3</span>
+                  <span class="site-state-item-count">230</span>
                   <span class="site-state-item-name">tags</span>
                 
               </div>

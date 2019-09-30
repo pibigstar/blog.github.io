@@ -1,0 +1,860 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/32x32.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/16x16.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="派大星, pibigstar,blog,go">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="@[toc] 前期准备windows1.下载nginx， 点击下载  解压并启动nginx, 双击nginx.exe 测试是否启动，访问 http://127.0.0.1  下载tomcat8111（端口为8111的tomcat）点击 这里下载 下载tomcat8222（端口为8222的tomcat）点击这里下载  linux123456789101112# 安装Nginx源库yum instal">
+<meta name="keywords" content="派大星,pibigstar">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Nginx使用总结">
+<meta property="og:url" content="http://pibigstar.com/2019/05/24/Nginx使用总结/index.html">
+<meta property="og:site_name" content="派大星的博客">
+<meta property="og:description" content="@[toc] 前期准备windows1.下载nginx， 点击下载  解压并启动nginx, 双击nginx.exe 测试是否启动，访问 http://127.0.0.1  下载tomcat8111（端口为8111的tomcat）点击 这里下载 下载tomcat8222（端口为8222的tomcat）点击这里下载  linux123456789101112# 安装Nginx源库yum instal">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://img-blog.csdn.net/20180613191523893?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2p1bm1veGk=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70">
+<meta property="og:image" content="https://img-blog.csdn.net/20180613192941678?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2p1bm1veGk=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70">
+<meta property="og:image" content="https://img-blog.csdn.net/20180613193040732?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2p1bm1veGk=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70">
+<meta property="og:image" content="https://img-blog.csdn.net/20180613192055883?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2p1bm1veGk=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70">
+<meta property="og:image" content="https://img-blog.csdn.net/20180613193142716?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2p1bm1veGk=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70">
+<meta property="og:image" content="https://img-blog.csdn.net/20180613193717659?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2p1bm1veGk=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70">
+<meta property="og:updated_time" content="2019-09-30T03:12:59.156Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Nginx使用总结">
+<meta name="twitter:description" content="@[toc] 前期准备windows1.下载nginx， 点击下载  解压并启动nginx, 双击nginx.exe 测试是否启动，访问 http://127.0.0.1  下载tomcat8111（端口为8111的tomcat）点击 这里下载 下载tomcat8222（端口为8222的tomcat）点击这里下载  linux123456789101112# 安装Nginx源库yum instal">
+<meta name="twitter:image" content="https://img-blog.csdn.net/20180613191523893?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2p1bm1veGk=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":true,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://pibigstar.com/2019/05/24/Nginx使用总结/">
+
+
+
+
+
+  <title>Nginx使用总结 | 派大星的博客</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">派大星的博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <h1 class="site-subtitle" itemprop="description">很多事情不是会了才能做，而是做了才能学会</h1>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-schedule">
+          <a href="/schedule/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-calendar"></i> <br>
+            
+            Schedule
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-sitemap">
+          <a href="/sitemap.xml" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-sitemap"></i> <br>
+            
+            Sitemap
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            About
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://pibigstar.com/2019/05/24/Nginx使用总结/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="派大星">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/qq.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="派大星的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">Nginx使用总结</h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-05-24T06:06:04+08:00">
+                2019-05-24
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Java-nginx/" itemprop="url" rel="index">
+                    <span itemprop="name">Java,nginx</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>@[toc]</p>
+<h1 id="前期准备"><a href="#前期准备" class="headerlink" title="前期准备"></a>前期准备</h1><h2 id="windows"><a href="#windows" class="headerlink" title="windows"></a>windows</h2><p>1.下载nginx， 点击<a href="https://pan.baidu.com/s/1ielgBUDrXq3_ixt7lvb4xw" target="_blank" rel="noopener">下载</a></p>
+<ol start="2">
+<li>解压并启动nginx, 双击nginx.exe</li>
+<li>测试是否启动，访问 <a href="http://127.0.0.1" target="_blank" rel="noopener">http://127.0.0.1</a> </li>
+<li>下载tomcat8111（端口为8111的tomcat）点击 <a href="https://pan.baidu.com/s/1EpfoW2-jPKGyqcV_3X2o8w" target="_blank" rel="noopener">这里下载</a></li>
+<li>下载tomcat8222（端口为8222的tomcat）点击<a href="https://pan.baidu.com/s/1tR9vPkeAjN1iHhqYoAgwnA" target="_blank" rel="noopener">这里下载</a></li>
+</ol>
+<h2 id="linux"><a href="#linux" class="headerlink" title="linux"></a>linux</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 安装Nginx源库</span></span><br><span class="line">yum install epel-release</span><br><span class="line"><span class="comment"># 安装Nginx</span></span><br><span class="line">yum install nginx</span><br><span class="line"><span class="comment"># 查看是否安装成功</span></span><br><span class="line">nginx -v</span><br><span class="line"><span class="comment"># 查看配置文件地址</span></span><br><span class="line">nginx -t </span><br><span class="line"><span class="comment"># 启动</span></span><br><span class="line">nginx</span><br><span class="line"><span class="comment"># 停止</span></span><br><span class="line">nginx -s stop</span><br></pre></td></tr></table></figure>
+
+<h1 id="1-反向代理"><a href="#1-反向代理" class="headerlink" title="1. 反向代理"></a>1. 反向代理</h1><h2 id="1-1-概念"><a href="#1-1-概念" class="headerlink" title="1.1 概念"></a>1.1 概念</h2><blockquote>
+<p>先说正向代理，比如要访问youtube,但是不能直接访问，只能先找个翻墙软件，通过翻墙软件才能访问youtube. 翻墙软件就叫做正向代理。<br>所谓的反向代理，指的是用户要访问youtube,但是youtube悄悄地把这个请求交给bilibili来做，那么bilibili就是反向代理了。<br>在当前教程指的就是访问nginx,但是nginx把请求交给tomcat来做。</p>
+</blockquote>
+<h2 id="1-2-实现"><a href="#1-2-实现" class="headerlink" title="1.2 实现"></a>1.2 实现</h2><p>修改 nginx.conf 文件</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">location / &#123;</span><br><span class="line">        proxy_pass http://<span class="number">127.0</span><span class="number">.0</span><span class="number">.1</span>:<span class="number">8111</span>;</span><br><span class="line">      &#125;</span><br></pre></td></tr></table></figure>
+
+<p>location / 表示处理所有请求<br>proxy_pass <a href="http://127.0.0.1:8111" target="_blank" rel="noopener">http://127.0.0.1:8111</a>  表示把请求都交给：<a href="http://127.0.0.1:8111" target="_blank" rel="noopener">http://127.0.0.1:8111</a> （tomcat的访问地址）来处理</p>
+<h2 id="1-3-访问"><a href="#1-3-访问" class="headerlink" title="1.3 访问"></a>1.3 访问</h2><p>1、启动tomcat （端口为8111）<br>2、 重启nginx </p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nginx -s reload</span><br></pre></td></tr></table></figure>
+
+<p>3、 访问地址<br><a href="http://127.0.0.1" target="_blank" rel="noopener">http://127.0.0.1</a> 就会发现已经反向代理到：<a href="http://127.0.0.1:8111" target="_blank" rel="noopener">http://127.0.0.1:8111</a></p>
+<h1 id="2-动静分离"><a href="#2-动静分离" class="headerlink" title="2. 动静分离"></a>2. 动静分离</h1><h2 id="2-1-概念"><a href="#2-1-概念" class="headerlink" title="2.1 概念"></a>2.1 概念</h2><blockquote>
+<p>所谓的动静分离就是指图片，css, js之类的都交给nginx来处理，nginx处理不了的，比如jsp 就交给tomcat来处理~</p>
+</blockquote>
+<p><strong>好处是nginx处理静态内容的吞吐量很高，比tomcat高多了，这样无形中提升了性能。</strong><br><img src="https://img-blog.csdn.net/20180613191523893?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2p1bm1veGk=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt></p>
+<h2 id="2-2-实现"><a href="#2-2-实现" class="headerlink" title="2.2 实现"></a>2.2 实现</h2><p><strong>修改nginx.conf文件</strong></p>
+<p>在locaction下面添加一个新的location:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">   location ~\.(css|js|png)$ &#123;</span><br><span class="line">       	root D:/tomcat_8111/webapps/ROOT;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>这表示所有的css js png访问都由nginx来做，访问的地址是:<br>D:/tomcat_8111/webapps/ROOT<br><img src="https://img-blog.csdn.net/20180613192941678?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2p1bm1veGk=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt></p>
+<p><strong>jsp中：</strong><br><img src="https://img-blog.csdn.net/20180613193040732?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2p1bm1veGk=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt></p>
+<h1 id="3-负载均衡"><a href="#3-负载均衡" class="headerlink" title="3. 负载均衡"></a>3. 负载均衡</h1><h2 id="3-1-概念"><a href="#3-1-概念" class="headerlink" title="3.1 概念"></a>3.1 概念</h2><blockquote>
+<p>负载均衡的概念就是当访问量很大的时候，一个 Tomcat 吃不消了，这时候就准备多个 Tomcat，由Nginx按照权重来对请求进行分配，从而缓解单独一个Tomcat受到的压力</p>
+</blockquote>
+<p><img src="https://img-blog.csdn.net/20180613192055883?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2p1bm1veGk=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt></p>
+<h2 id="3-2-启动两个tomcat"><a href="#3-2-启动两个tomcat" class="headerlink" title="3.2 启动两个tomcat"></a>3.2 启动两个tomcat</h2><p>记得要修改两个tomcat的端口，两个tomcat的端口不能一样，<br>这里我们使用8111端口和8222端口</p>
+<h2 id="3-3-修改nginx-conf文件"><a href="#3-3-修改nginx-conf文件" class="headerlink" title="3.3 修改nginx.conf文件"></a>3.3 修改nginx.conf文件</h2><p><strong>首先增加一个upstream ，用来指向这两个tomcat</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">upstream tomcat_8111_8222&#123;</span><br><span class="line">server	<span class="number">127.0</span><span class="number">.0</span><span class="number">.1</span>:<span class="number">8111</span> weight=<span class="number">1</span>;</span><br><span class="line">server	<span class="number">127.0</span><span class="number">.0</span><span class="number">.1</span>:<span class="number">8222</span> weight=<span class="number">2</span>;</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>然后修改location，反向代理到上述配置。</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">     location / &#123;</span><br><span class="line">       	proxy_pass http://tomcat_8111_8222;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>weight表示权重，值越大，被分配到的几率越大。</strong></p>
+<h2 id="3-4-重启nginx并访问"><a href="#3-4-重启nginx并访问" class="headerlink" title="3.4 重启nginx并访问"></a>3.4 重启nginx并访问</h2><h1 id="4-session共享"><a href="#4-session共享" class="headerlink" title="4. session共享"></a>4. session共享</h1><h2 id="4-1-概念"><a href="#4-1-概念" class="headerlink" title="4.1 概念"></a>4.1 概念</h2><blockquote>
+<p>通过负载均衡课程，我们可以把请求分发到不同的 Tomcat 来缓解服务器的压力，但是这里存在一个问题： 当同一个用户第一次访问tomcat_8111 并且登录成功， 而第二次访问却被分配到了tomcat_8222， 这里并没有记录他的登陆状态，那么就会呈现未登录状态了，严重伤害了用户体验。</p>
+</blockquote>
+<p><img src="https://img-blog.csdn.net/20180613193142716?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2p1bm1veGk=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt></p>
+<h2 id="4-2-解决办法（一）"><a href="#4-2-解决办法（一）" class="headerlink" title="4.2 解决办法（一）"></a>4.2 解决办法（一）</h2><blockquote>
+<p>通过ip地址标记用户，如果多次请求都是从同一个ip来的，那么就都分配到同一个tomcat.<br>这样就不会出现负载均衡 session问题了. 处理手段也很简单，在nginx.conf 文件中修改upstream结点。如图所示在upstream最后加上ip_hash;就行了。</p>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">upstream tomcat_8111_8222&#123;</span><br><span class="line">server	<span class="number">127.0</span><span class="number">.0</span><span class="number">.1</span>:<span class="number">8111</span> weight=<span class="number">1</span>;</span><br><span class="line">server	<span class="number">127.0</span><span class="number">.0</span><span class="number">.1</span>:<span class="number">8222</span> weight=<span class="number">2</span>;</span><br><span class="line">   ip_hash;</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>不过这种方案并不完美，当如下几种情况发生时就有问题：</strong></p>
+<ol>
+<li>大量请求来之某个局域网，那么相当于就没有负载均衡了</li>
+<li>如果tomcat_8111 挂了，那么此时nginx只能把请求交给tomcat_8222,但是这里却没有记录session,用户体验依然受影响。</li>
+</ol>
+<h2 id="4-3-解决方法（二）"><a href="#4-3-解决方法（二）" class="headerlink" title="4.3 解决方法（二）"></a>4.3 解决方法（二）</h2><p><strong>用Redis来存取session.</strong></p>
+<blockquote>
+<p>Redis是什么呢？说简单点就是个独立的Hashmap，用来存放键值对的。<br>这样当tomcat1需要保存session值的时候，就可以把它放在Redis上，需要取的时候，也从Redis上取。</p>
+</blockquote>
+<p>那么考虑这个情景： </p>
+<ol>
+<li>用户提交账号密码的行为被分配在了tomcat8111上，登陆信息被存放在redis里。 </li>
+<li>当用户第二次访问的时候，被分配到了tomcat8222上</li>
+<li>那么此时tomcat8222就会从redis去获取相关信息，一看有对应信息，那么就会呈现登陆状态。</li>
+</ol>
+<p><strong>这样就规避了解决办法一: ip_hash里会出现的两种问题了。</strong></p>
+<p><img src="https://img-blog.csdn.net/20180613193717659?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2p1bm1veGk=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt></p>
+<h3 id="4-3-1-启动redis"><a href="#4-3-1-启动redis" class="headerlink" title="4.3.1 启动redis"></a>4.3.1 启动redis</h3><p>1.点击<a href="https://pan.baidu.com/s/1bJTb1G-JwuqBpSwj-e-pxA" target="_blank" rel="noopener">下载</a><br>2.解压<br>3.双击 start.bat 启动</p>
+<h3 id="4-3-2-下载jar包"><a href="#4-3-2-下载jar包" class="headerlink" title="4.3.2 下载jar包"></a>4.3.2 下载jar包</h3><p>Tomcat需要链接 redis，所以需要专门的jar包,这些包都放在了右上角的tomcat-redis.rar里。 一共<br>有3个jar包：<br>jedis-2.5.2.jar，<br>commons-pool2-2.0.jar，<br>tomcat-redis-session-manager1.2.jar。<br>点击 <a href="https://pan.baidu.com/s/1WeRwe2NCAeqm5pj2XxhqtA" target="_blank" rel="noopener">这里下载</a><br>下载解压后，放在tomat8111的lib目录下。注：不要放在webapp里面去了<br>下载解压后，放在tomat8222的lib目录下。注：不要放在webapp里面去了<br>两个tomcat都要放</p>
+<h3 id="4-3-3-修改context-xml文件"><a href="#4-3-3-修改context-xml文件" class="headerlink" title="4.3.3 修改context.xml文件"></a>4.3.3 修改context.xml文件</h3><p>修改tomcat/conf/context.xml ，增加下面内容</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">Valve</span> <span class="attr">className</span>=<span class="string">"com.orangefunction.tomcat.redissessions.RedisSessionHandlerValve"</span> /&gt;</span>  </span><br><span class="line"><span class="tag">&lt;<span class="name">Manager</span> <span class="attr">className</span>=<span class="string">"com.orangefunction.tomcat.redissessions.RedisSessionManager"</span>  </span></span><br><span class="line"><span class="tag"> <span class="attr">host</span>=<span class="string">"127.0.0.1"</span>  </span></span><br><span class="line"><span class="tag"> <span class="attr">port</span>=<span class="string">"6379"</span>  </span></span><br><span class="line"><span class="tag"> <span class="attr">database</span>=<span class="string">"0"</span>  </span></span><br><span class="line"><span class="tag"> <span class="attr">maxInactiveInterval</span>=<span class="string">"60"</span> /&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>两个tomcat都要改</strong></p>
+<h3 id="4-3-4-重启tomcat"><a href="#4-3-4-重启tomcat" class="headerlink" title="4.3.4 重启tomcat"></a>4.3.4 重启tomcat</h3><p><strong>两个tomcat都要重启</strong></p>
+<p>启动完就大功告成了</p>
+
+      
+    </div>
+    
+    
+    
+
+    <div>
+      
+        <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
+    
+</div>
+
+      
+    </div>
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/05/24/Centos和Ubuntu安装kubeadm/" rel="next" title="Centos和Ubuntu安装kubeadm">
+                <i class="fa fa-chevron-left"></i> Centos和Ubuntu安装kubeadm
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/05/24/JS操作表格常用操作及事件委派/" rel="prev" title="JS操作表格常用操作及事件委派">
+                JS操作表格常用操作及事件委派 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/qq.png" alt="派大星">
+            
+              <p class="site-author-name" itemprop="name">派大星</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives">
+              
+                  <span class="site-state-item-count">137</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                
+                  <span class="site-state-item-count">64</span>
+                  <span class="site-state-item-name">categories</span>
+                
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                
+                  <span class="site-state-item-count">230</span>
+                  <span class="site-state-item-name">tags</span>
+                
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/pibigstar" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://blog.csdn.net/junmoxi" target="_blank" title="CSDN">
+                      
+                        <i class="fa fa-fw fa-yelp"></i>CSDN</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#前期准备"><span class="nav-number">1.</span> <span class="nav-text">前期准备</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#windows"><span class="nav-number">1.1.</span> <span class="nav-text">windows</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#linux"><span class="nav-number">1.2.</span> <span class="nav-text">linux</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#1-反向代理"><span class="nav-number">2.</span> <span class="nav-text">1. 反向代理</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-1-概念"><span class="nav-number">2.1.</span> <span class="nav-text">1.1 概念</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-2-实现"><span class="nav-number">2.2.</span> <span class="nav-text">1.2 实现</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-3-访问"><span class="nav-number">2.3.</span> <span class="nav-text">1.3 访问</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2-动静分离"><span class="nav-number">3.</span> <span class="nav-text">2. 动静分离</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#2-1-概念"><span class="nav-number">3.1.</span> <span class="nav-text">2.1 概念</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-2-实现"><span class="nav-number">3.2.</span> <span class="nav-text">2.2 实现</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#3-负载均衡"><span class="nav-number">4.</span> <span class="nav-text">3. 负载均衡</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#3-1-概念"><span class="nav-number">4.1.</span> <span class="nav-text">3.1 概念</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-2-启动两个tomcat"><span class="nav-number">4.2.</span> <span class="nav-text">3.2 启动两个tomcat</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-3-修改nginx-conf文件"><span class="nav-number">4.3.</span> <span class="nav-text">3.3 修改nginx.conf文件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-4-重启nginx并访问"><span class="nav-number">4.4.</span> <span class="nav-text">3.4 重启nginx并访问</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#4-session共享"><span class="nav-number">5.</span> <span class="nav-text">4. session共享</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#4-1-概念"><span class="nav-number">5.1.</span> <span class="nav-text">4.1 概念</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-2-解决办法（一）"><span class="nav-number">5.2.</span> <span class="nav-text">4.2 解决办法（一）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-3-解决方法（二）"><span class="nav-number">5.3.</span> <span class="nav-text">4.3 解决方法（二）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#4-3-1-启动redis"><span class="nav-number">5.3.1.</span> <span class="nav-text">4.3.1 启动redis</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-3-2-下载jar包"><span class="nav-number">5.3.2.</span> <span class="nav-text">4.3.2 下载jar包</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-3-3-修改context-xml文件"><span class="nav-number">5.3.3.</span> <span class="nav-text">4.3.3 修改context.xml文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-3-4-重启tomcat"><span class="nav-number">5.3.4.</span> <span class="nav-text">4.3.4 重启tomcat</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+        <div class="back-to-top">
+          <i class="fa fa-arrow-up"></i>
+          
+        </div>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-[object Object]"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">派大星</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+  <script type="text/javascript" src="/js/src/js.cookie.js?v=5.1.4"></script>
+  <script type="text/javascript" src="/js/src/scroll-cookie.js?v=5.1.4"></script>
+
+
+  
+
+</body>
+</html>
+<!-- 页面点击小红心 -->
+ <script type="text/javascript" src="/js/src/clicklove.js"></script>

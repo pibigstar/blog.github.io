@@ -270,7 +270,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://pibigstar.com/2019/09/29/SpringBoot使用redis/">
+    <link itemprop="mainEntityOfPage" href="http://pibigstar.com/2019/02/23/Windows下交叉编译Go/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="派大星">
@@ -289,7 +289,7 @@
         
           <h2 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2019/09/29/SpringBoot使用redis/" itemprop="url">Untitled</a></h2>
+                <a class="post-title-link" href="/2019/02/23/Windows下交叉编译Go/" itemprop="url">Windows下交叉编译Go</a></h2>
         
 
         <div class="post-meta">
@@ -301,8 +301,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-09-29T22:56:40+08:00">
-                2019-09-29
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-02-23T02:02:04+08:00">
+                2019-02-23
               </time>
             
 
@@ -311,6 +311,28 @@
             
           </span>
 
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/go/" itemprop="url" rel="index">
+                    <span itemprop="name">go</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
           
 
           
@@ -341,153 +363,27 @@
       
         
           
-            <p>title: SpringBoot使用redis<br>date: 2019-06-17 22:10:31<br>tags: [java,redis,springboot]<br>categories: Java,springboot,redis,SpringBoot技能大全</p>
-<p>[TOC]</p>
-<h1 id="1-下载redis和工具"><a href="#1-下载redis和工具" class="headerlink" title="1. 下载redis和工具"></a>1. 下载redis和工具</h1><ol>
-<li>redis服务器下载： <a href="https://pan.baidu.com/s/1bJTb1G-JwuqBpSwj-e-pxA" target="_blank" rel="noopener">点击这里</a></li>
-<li>解压，双击start.bat启动服务</li>
-<li>下载redis桌面管理程序：<a href="https://github.com/uglide/RedisDesktopManager/releases/download/0.9.3/redis-desktop-manager-0.9.3.817.exe" target="_blank" rel="noopener">点击这里</a></li>
-<li>安装即可</li>
-</ol>
-<h1 id="2-加载redis的jar包"><a href="#2-加载redis的jar包" class="headerlink" title="2. 加载redis的jar包"></a>2. 加载redis的jar包</h1><p>在SpringBoot的pom.xml文件中加入下列内容</p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-starter-redis<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
+            <h2 id="1-Windows下"><a href="#1-Windows下" class="headerlink" title="1. Windows下"></a>1. Windows下</h2><p>编译为Linux可运行文件</p>
+<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">SET</span> CGO_ENABLED=<span class="number">0</span></span><br><span class="line"><span class="built_in">SET</span> GOOS=linux</span><br><span class="line"><span class="built_in">SET</span> GOARCH=amd64</span><br><span class="line">go build main.go</span><br></pre></td></tr></table></figure>
 
-<h1 id="3-添加配置文件"><a href="#3-添加配置文件" class="headerlink" title="3. 添加配置文件"></a>3. 添加配置文件</h1><p>在application.yml文件中加入下列内容</p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">spring:</span><br><span class="line">   redis:</span><br><span class="line">    host: 127.0.0.1</span><br><span class="line">    port: 6379</span><br><span class="line">    database: 1 # 设置数据库索引为1 默认为0</span><br><span class="line">    password: # 密码为空</span><br><span class="line">    jedis:</span><br><span class="line">      pool:</span><br><span class="line">        max-active: 1000 # 连接池最大连接数（使用负值表示没有限制）</span><br><span class="line">        max-wait: -1 # 连接池最大阻塞等待时间（使用负值表示没有限制）</span><br><span class="line">        max-idle: 10 # 连接池中的最大空闲连接</span><br><span class="line">        min-idle: 2 # 连接池中的最小空闲连接</span><br><span class="line">    timeout: 5000 # 连接超时时间（毫秒）</span><br></pre></td></tr></table></figure>
+<p>编译为MAC可运行文件</p>
+<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">SET</span> CGO_ENABLED=<span class="number">0</span></span><br><span class="line"><span class="built_in">SET</span> GOOS=darwin</span><br><span class="line"><span class="built_in">SET</span> GOARCH=amd64</span><br><span class="line">go build main.go</span><br></pre></td></tr></table></figure>
 
-<h1 id="4-使用"><a href="#4-使用" class="headerlink" title="4. 使用"></a>4. 使用</h1><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Autowired</span></span><br><span class="line"><span class="keyword">private</span> RedisService redisService;</span><br><span class="line">	</span><br><span class="line"><span class="meta">@GetMapping</span>(<span class="string">"test"</span>)</span><br><span class="line"><span class="function"><span class="keyword">public</span> String <span class="title">test</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	User user = <span class="keyword">new</span> User();</span><br><span class="line">	user.setId(<span class="number">1001</span>);</span><br><span class="line">	user.setName(<span class="string">"pibigstar"</span>);</span><br><span class="line">	user.setPassword(<span class="string">"123456"</span>);</span><br><span class="line">	<span class="comment">//存数据</span></span><br><span class="line">	redisService.setObject(<span class="string">"my:user"</span>,JSON.toJSONString(user));</span><br><span class="line">	<span class="comment">//取数据</span></span><br><span class="line">	String json = redisService.getObject(<span class="string">"my:user"</span>);</span><br><span class="line">	JSONObject parseObject = JSON.parseObject(json);</span><br><span class="line">	User myUser = JSON.toJavaObject(parseObject, User.class);</span><br><span class="line">	<span class="keyword">return</span> myUser.toString();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>编译为Window可运行文件</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">SET GOOS=windows</span><br><span class="line">go build main.go</span><br></pre></td></tr></table></figure>
 
-<p>使用的JSON工具为fastjson</p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">groupId</span>&gt;</span>com.alibaba<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>fastjson<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">version</span>&gt;</span>1.2.47<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h2 id="2-MAC下"><a href="#2-MAC下" class="headerlink" title="2. MAC下"></a>2. MAC下</h2><p>编译为Windows可执行文件</p>
+<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">CGO_ENABLED=<span class="number">0</span> GOOS=windows GOARCH=amd64 go build main.go</span><br></pre></td></tr></table></figure>
 
-<h1 id="5-在redis工具中查看数据"><a href="#5-在redis工具中查看数据" class="headerlink" title="5. 在redis工具中查看数据"></a>5. 在redis工具中查看数据</h1><p><img src="https://img-blog.csdn.net/20180614153333990?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2p1bm1veGk=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt></p>
-<h1 id="6-封装工具类"><a href="#6-封装工具类" class="headerlink" title="6. 封装工具类"></a>6. 封装工具类</h1><h2 id="6-1-JSON工具类"><a href="#6-1-JSON工具类" class="headerlink" title="6.1 JSON工具类"></a>6.1 JSON工具类</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.pibigstar.utils;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.util.List;</span><br><span class="line"><span class="keyword">import</span> com.alibaba.fastjson.JSON;</span><br><span class="line"><span class="keyword">import</span> com.alibaba.fastjson.JSONArray;</span><br><span class="line"><span class="keyword">import</span> com.alibaba.fastjson.JSONObject;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * JSON工具类</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> pibigstar</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">JSONUtil</span> </span>&#123;</span><br><span class="line">	</span><br><span class="line">	<span class="comment">/**</span></span><br><span class="line"><span class="comment">	 * java对象转换为JSON字符串</span></span><br><span class="line"><span class="comment">	 * <span class="doctag">@param</span> object</span></span><br><span class="line"><span class="comment">	 * <span class="doctag">@return</span></span></span><br><span class="line"><span class="comment">	 */</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> String <span class="title">ObjectToJSON</span><span class="params">(Object object)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">return</span> JSON.toJSONString(object);</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	<span class="comment">/**</span></span><br><span class="line"><span class="comment">	 * JSON字符串转换为Java对象</span></span><br><span class="line"><span class="comment">	 * <span class="doctag">@param</span> json</span></span><br><span class="line"><span class="comment">	 * <span class="doctag">@param</span> obj</span></span><br><span class="line"><span class="comment">	 * <span class="doctag">@return</span></span></span><br><span class="line"><span class="comment">	 */</span></span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">static</span> &lt;T&gt; <span class="function">T <span class="title">jSONToObject</span><span class="params">(String json, Class&lt;T&gt; obj)</span> </span>&#123;</span><br><span class="line">		JSONObject jsonObject = JSON.parseObject(json);</span><br><span class="line">		<span class="keyword">return</span> (T) JSON.toJavaObject(jsonObject, obj);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="comment">/**</span></span><br><span class="line"><span class="comment">	 * List集合转换为JSON字符串</span></span><br><span class="line"><span class="comment">	 * <span class="doctag">@param</span> list</span></span><br><span class="line"><span class="comment">	 * <span class="doctag">@return</span></span></span><br><span class="line"><span class="comment">	 */</span></span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">static</span> &lt;T&gt; <span class="function">String <span class="title">listToJSON</span><span class="params">(List&lt;T&gt; list)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">return</span> JSONArray.toJSONString(list);</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	<span class="comment">/**</span></span><br><span class="line"><span class="comment">	 * 将JSON字符串转换为List集合</span></span><br><span class="line"><span class="comment">	 * <span class="doctag">@param</span> json</span></span><br><span class="line"><span class="comment">	 * <span class="doctag">@param</span> obj</span></span><br><span class="line"><span class="comment">	 * <span class="doctag">@return</span></span></span><br><span class="line"><span class="comment">	 */</span></span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">static</span> &lt;T&gt; <span class="function">List&lt;T&gt; <span class="title">JSONToList</span><span class="params">(String json,Class&lt;T&gt; obj)</span></span>&#123;</span><br><span class="line">		<span class="keyword">return</span> JSON.parseArray(json, obj);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>编译为Linux可执行文件</p>
+<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">CGO_ENABLED=<span class="number">0</span> GOOS=linux GOARCH=amd64 go build main.go</span><br></pre></td></tr></table></figure>
 
-<h2 id="6-2-redis操作工具类"><a href="#6-2-redis操作工具类" class="headerlink" title="6.2 redis操作工具类"></a>6.2 redis操作工具类</h2><p>简单的封装一下。。。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.pibigstar.springboot.service;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.util.concurrent.TimeUnit;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> org.springframework.beans.factory.annotation.Autowired;</span><br><span class="line"><span class="keyword">import</span> org.springframework.data.redis.core.RedisTemplate;</span><br><span class="line"><span class="keyword">import</span> org.springframework.data.redis.core.StringRedisTemplate;</span><br><span class="line"><span class="keyword">import</span> org.springframework.stereotype.Component;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Component</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">RedisService</span> </span>&#123;</span><br><span class="line">	<span class="meta">@Autowired</span></span><br><span class="line">	<span class="keyword">private</span> StringRedisTemplate stringRedisTemplate;</span><br><span class="line">	<span class="meta">@Autowired</span> </span><br><span class="line">	<span class="keyword">private</span> RedisTemplate&lt;String, Object&gt; redisTemplate; </span><br><span class="line"></span><br><span class="line">	<span class="comment">/**</span></span><br><span class="line"><span class="comment">	 * 存储String类型数据</span></span><br><span class="line"><span class="comment">	 * <span class="doctag">@param</span> key</span></span><br><span class="line"><span class="comment">	 * <span class="doctag">@param</span> value</span></span><br><span class="line"><span class="comment">	 */</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">set</span><span class="params">(String key,String value)</span> </span>&#123;</span><br><span class="line">		stringRedisTemplate.opsForValue().set(key, value);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="comment">/**</span></span><br><span class="line"><span class="comment">	 * 存储String类型数据</span></span><br><span class="line"><span class="comment">	 * <span class="doctag">@param</span> key</span></span><br><span class="line"><span class="comment">	 * <span class="doctag">@param</span> value</span></span><br><span class="line"><span class="comment">	 * <span class="doctag">@param</span> timeout 过期时间，单位：秒</span></span><br><span class="line"><span class="comment">	 */</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">set</span><span class="params">(String key,String value,<span class="keyword">long</span> timeout)</span> </span>&#123;</span><br><span class="line">		stringRedisTemplate.opsForValue().set(key, value,timeout,TimeUnit.SECONDS);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="comment">/**</span></span><br><span class="line"><span class="comment">	 * 得到String类型数据</span></span><br><span class="line"><span class="comment">	 * <span class="doctag">@param</span> key</span></span><br><span class="line"><span class="comment">	 * <span class="doctag">@return</span></span></span><br><span class="line"><span class="comment">	 */</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> String <span class="title">get</span><span class="params">(String key)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">return</span> stringRedisTemplate.opsForValue().get(key);</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	<span class="comment">/**</span></span><br><span class="line"><span class="comment">	 * 存储object对象</span></span><br><span class="line"><span class="comment">	 * <span class="doctag">@param</span> key</span></span><br><span class="line"><span class="comment">	 * <span class="doctag">@param</span> value</span></span><br><span class="line"><span class="comment">	 */</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setObject</span><span class="params">(String key,Object value)</span> </span>&#123;</span><br><span class="line">		redisTemplate.opsForValue().set(key, value);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="comment">/**</span></span><br><span class="line"><span class="comment">	 * 存储object对象</span></span><br><span class="line"><span class="comment">	 * <span class="doctag">@param</span> key</span></span><br><span class="line"><span class="comment">	 * <span class="doctag">@param</span> value</span></span><br><span class="line"><span class="comment">	 * <span class="doctag">@param</span> timeout 过期时间，单位：秒</span></span><br><span class="line"><span class="comment">	 */</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setObject</span><span class="params">(String key,Object value,<span class="keyword">long</span> timeout)</span> </span>&#123;</span><br><span class="line">		redisTemplate.opsForValue().set(key, value,timeout,TimeUnit.SECONDS);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="comment">/**</span></span><br><span class="line"><span class="comment">	 * 得到Object对象</span></span><br><span class="line"><span class="comment">	 * <span class="doctag">@param</span> key</span></span><br><span class="line"><span class="comment">	 * <span class="doctag">@return</span></span></span><br><span class="line"><span class="comment">	 */</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> Object <span class="title">getObject</span><span class="params">(String key)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">return</span> redisTemplate.boundValueOps(key).get();</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-          
-        
-      
-    </div>
-    
-    
-    
+<h2 id="3-Linux下"><a href="#3-Linux下" class="headerlink" title="3. Linux下"></a>3. Linux下</h2><p>编译为Windows可执行文件</p>
+<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">CGO_ENABLED=<span class="number">0</span> GOOS=windows GOARCH=amd64 go build main.go</span><br></pre></td></tr></table></figure>
 
-    <div>
-      
-    </div>
+<p>编译为MAC可执行文件</p>
+<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">CGO_ENABLED=<span class="number">0</span> GOOS=darwin GOARCH=amd64 go build main.go</span><br></pre></td></tr></table></figure>
 
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://pibigstar.com/2019/09/29/如何判断 Linux 服务器是否被入侵？/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="派大星">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/qq.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="派大星的博客">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/09/29/如何判断 Linux 服务器是否被入侵？/" itemprop="url">Untitled</a></h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-09-29T22:56:40+08:00">
-                2019-09-29
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>title: 如何判断 Linux 服务器是否被入侵？<br>date: 2019-06-03 22:10:31<br>tags: [Linux,检测linux入侵]<br>categories: Linux</p>
 
           
         
@@ -540,7 +436,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://pibigstar.com/2019/09/29/springboot使用定时任务/">
+    <link itemprop="mainEntityOfPage" href="http://pibigstar.com/2019/02/23/GoLang module操作/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="派大星">
@@ -559,7 +455,7 @@
         
           <h2 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2019/09/29/springboot使用定时任务/" itemprop="url">Untitled</a></h2>
+                <a class="post-title-link" href="/2019/02/23/GoLang module操作/" itemprop="url">GoLang module操作</a></h2>
         
 
         <div class="post-meta">
@@ -571,8 +467,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-09-29T22:56:40+08:00">
-                2019-09-29
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-02-23T02:02:04+08:00">
+                2019-02-23
               </time>
             
 
@@ -581,6 +477,28 @@
             
           </span>
 
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/go/" itemprop="url" rel="index">
+                    <span itemprop="name">go</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
           
 
           
@@ -611,153 +529,93 @@
       
         
           
-            <p>title: springboot使用定时任务<br>date: 2019-01-14 22:10:31<br>tags: [springboot定时任务]<br>categories: springboot,SpringBoot技能大全</p>
-<h1 id="1、pom包配置"><a href="#1、pom包配置" class="headerlink" title="1、pom包配置"></a>1、pom包配置</h1><p>pom包里面只需要引入springboot starter包即可</p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependencies</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-starter<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-starter-test<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">scope</span>&gt;</span>test<span class="tag">&lt;/<span class="name">scope</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line">     <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-devtools<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">optional</span>&gt;</span>true<span class="tag">&lt;/<span class="name">optional</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependencies</span>&gt;</span></span><br></pre></td></tr></table></figure>
+            <p>@[toc]</p>
+<h1 id="环境"><a href="#环境" class="headerlink" title="环境"></a>环境</h1><p><strong>Windows10</strong><br><strong>GO：1.13</strong></p>
+<h1 id="前期设置"><a href="#前期设置" class="headerlink" title="前期设置"></a>前期设置</h1><h2 id="不同版本开启GO-module"><a href="#不同版本开启GO-module" class="headerlink" title="不同版本开启GO module"></a>不同版本开启GO module</h2><h3 id="1-11和1-12版本"><a href="#1-11和1-12版本" class="headerlink" title="1.11和1.12版本"></a>1.11和1.12版本</h3><p>将下面两个设置添加到系统的环境变量中</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">GO111MODULE=on</span><br><span class="line">GOPROXY=https://goproxy.io</span><br></pre></td></tr></table></figure>
 
-<h1 id="2、启动类启用定时"><a href="#2、启动类启用定时" class="headerlink" title="2、启动类启用定时"></a>2、启动类启用定时</h1><p>在启动类上面加上@EnableScheduling即可开启定时</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@SpringBootApplication</span></span><br><span class="line"><span class="meta">@EnableScheduling</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Application</span> </span>&#123;    </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        SpringApplication.run(Application.class, args);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="1-13版本之后"><a href="#1-13版本之后" class="headerlink" title="1.13版本之后"></a>1.13版本之后</h3><blockquote>
+<p>需要注意的是这种方式并不会覆盖之前的配置，有点坑，你需要先把之前的给删掉再设置</p>
+</blockquote>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">go env -w GO111MODULE=on</span><br><span class="line">go env -w GOPROXY=https://goproxy.io,direct</span><br></pre></td></tr></table></figure>
 
-<h1 id="3、创建定时任务实现类"><a href="#3、创建定时任务实现类" class="headerlink" title="3、创建定时任务实现类"></a>3、创建定时任务实现类</h1><ul>
-<li><p>定时任务1：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Component</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SchedulerTask</span> </span>&#123;    </span><br><span class="line">        <span class="keyword">private</span> <span class="keyword">int</span> count=<span class="number">0</span>;    </span><br><span class="line">		<span class="comment">/**</span></span><br><span class="line"><span class="comment">		* 分 时 日 月 周</span></span><br><span class="line"><span class="comment">		* 每隔一分钟执行一次（1 * * * *）</span></span><br><span class="line"><span class="comment">		* 每星期五则每小时执行一次（* 1 * * 5）</span></span><br><span class="line"><span class="comment">		**/</span></span><br><span class="line">        <span class="meta">@Scheduled</span>(cron=<span class="string">"1 * * * * ?"</span>)    </span><br><span class="line">        <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">process</span><span class="params">()</span></span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"this is scheduler task runing  "</span>+(count++));</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="goLand开启-go-mod"><a href="#goLand开启-go-mod" class="headerlink" title="goLand开启 go mod"></a>goLand开启 go mod</h2><p><img src="https://img-blog.csdnimg.cn/20190929113735835.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2p1bm1veGk=,size_16,color_FFFFFF,t_70" alt></p>
+<h1 id="go-get使用"><a href="#go-get使用" class="headerlink" title="go get使用"></a>go get使用</h1><blockquote>
+<p>使用go module之后，go get 拉取依赖的方式就发生了变化</p>
+</blockquote>
+<ul>
+<li><p>拉取最新的版本(优先择取 tag)</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">go</span> get golang.org/x/text@latest</span><br></pre></td></tr></table></figure>
 </li>
-<li><p>定时任务2：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Component</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Scheduler2Task</span> </span>&#123;    </span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> SimpleDateFormat dateFormat = <span class="keyword">new</span> SimpleDateFormat(<span class="string">"HH:mm:ss"</span>);    </span><br><span class="line"></span><br><span class="line">    <span class="meta">@Scheduled</span>(fixedRate = <span class="number">6000</span>)    </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">reportCurrentTime</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"现在时间："</span> + dateFormat.format(<span class="keyword">new</span> Date()));</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<li><p>拉取 master 分支的最新 commit</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">go</span> get golang.org/x/text@master</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>拉取 tag 为 v0.3.2 的 commit</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">go</span> get golang.org/x/text@v0<span class="number">.3</span><span class="number">.2</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>拉取 hash 为 342b231 的 commit，最终会被转换为 v0.3.2：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">go</span> get golang.org/x/text@<span class="number">342</span>b2e</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>更新</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">go</span> get -u</span><br></pre></td></tr></table></figure>
 
 </li>
 </ul>
-<p>结果如下：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">this</span> is scheduler task runing  <span class="number">0</span></span><br><span class="line">现在时间：<span class="number">09</span>:<span class="number">44</span>:<span class="number">17</span></span><br><span class="line"><span class="keyword">this</span> is scheduler task runing  <span class="number">1</span></span><br><span class="line">现在时间：<span class="number">09</span>:<span class="number">44</span>:<span class="number">23</span></span><br><span class="line"><span class="keyword">this</span> is scheduler task runing  <span class="number">2</span></span><br><span class="line">现在时间：<span class="number">09</span>:<span class="number">44</span>:<span class="number">29</span></span><br><span class="line"><span class="keyword">this</span> is scheduler task runing  <span class="number">3</span></span><br><span class="line">现在时间：<span class="number">09</span>:<span class="number">44</span>:<span class="number">35</span></span><br></pre></td></tr></table></figure>
+<h1 id="其它基本操作"><a href="#其它基本操作" class="headerlink" title="其它基本操作"></a>其它基本操作</h1><ol>
+<li><p>初始化一个moudle，模块名为你项目名</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">go</span> mod init 模块名</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>下载modules到本地cache</p>
+<blockquote>
+<p>目前所有模块版本数据均缓存在 <code>$GOPATH/pkg/mod</code>和 ​<code>$GOPATH/pkg/sum</code> 下</p>
+</blockquote>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">go</span> mod download</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>编辑go.mod文件<br>选项有<code>-json</code>、<code>-require</code>和<code>-exclude</code>，可以使用帮助go help mod edit</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">go</span> mod edit</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>以文本模式打印模块需求图</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">go</span> mod graph</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>删除错误或者不使用的modules</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">go</span> mod tidy</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>生成vendor目录</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">go</span> mod vendor</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>验证依赖是否正确</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">go</span> mod verify</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>查找依赖</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">go</span> mod why</span><br></pre></td></tr></table></figure>
 
-<p>参数说明</p>
-<p><code>@Scheduled</code>参数可以接受两种定时的设置，一种是我们常用的cron=”*/6 * * * * ?”<br>,另一种是 fixedRate = 6000，两种都表示每隔六秒打印一下内容。</p>
-<p>fixedRate 说明</p>
-<p>@Scheduled(fixedRate = 6000) ：上一次开始执行时间点之后6秒再执行<br>@Scheduled(fixedDelay = 6000) ：上一次执行完毕时间点之后6秒再执行<br>@Scheduled(initialDelay=1000, fixedRate=6000) ：第一次延迟1秒后执行，之后按fixedRate的规则每6秒执行一次</p>
+</li>
+</ol>
+<h1 id="高级操作"><a href="#高级操作" class="headerlink" title="高级操作"></a>高级操作</h1><ol>
+<li>更新到最新版本<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">go</span> get github.com/gogf/gf@version</span><br></pre></td></tr></table></figure>
 
-          
-        
-      
-    </div>
-    
-    
-    
+</li>
+</ol>
+<blockquote>
+<p>如果没有指明 version 的情况下，则默认先下载打了 tag 的 release 版本，比如 v0.4.5 或者 v1.2.3；如果没有 release 版本，则下载最新的 pre release 版本，比如 v0.0.1-pre1。如果还没有则下载最新的 commit</p>
+<ol start="2">
+<li>更新到最新的修订版（只改bug的版本）</li>
+</ol>
+</blockquote>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">go</span> get -u=patch github.com/gogf/gf</span><br></pre></td></tr></table></figure>
 
-    <div>
-      
-    </div>
+<ol start="3">
+<li><p>替代只能翻墙下载的库</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">go mod edit -replace=golang.org/x/crypto@v0.0.0=github.com/golang/crypto@latest</span><br><span class="line">go mod edit -replace=golang.org/x/sys@v0.0.0=github.com/golang/sys@latest</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>清理moudle 缓存</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">go</span> clean -modcache</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>查看可下载版本</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">go</span> list -m -versions github.com/gogf/gf</span><br></pre></td></tr></table></figure>
 
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://pibigstar.com/2019/09/29/使用java自带的库下载网页源码和头部信息/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="派大星">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/qq.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="派大星的博客">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/09/29/使用java自带的库下载网页源码和头部信息/" itemprop="url">Untitled</a></h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-09-29T22:56:40+08:00">
-                2019-09-29
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>title: 使用java自带的库下载网页源码和头部信息<br>date: 2019-05-07 22:10:31<br>tags: [java,url,下载网页源码]<br>categories: 爬虫相关</p>
+</li>
+</ol>
 
           
         
@@ -810,7 +668,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://pibigstar.com/2019/09/29/渗透学习之网站渗透（2）-----漏洞扫描/">
+    <link itemprop="mainEntityOfPage" href="http://pibigstar.com/2019/02/21/将redis和mongodb服务安装到系统服务中/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="派大星">
@@ -829,7 +687,7 @@
         
           <h2 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2019/09/29/渗透学习之网站渗透（2）-----漏洞扫描/" itemprop="url">Untitled</a></h2>
+                <a class="post-title-link" href="/2019/02/21/将redis和mongodb服务安装到系统服务中/" itemprop="url">将redis和mongodb服务安装到系统服务中</a></h2>
         
 
         <div class="post-meta">
@@ -841,8 +699,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-09-29T22:56:40+08:00">
-                2019-09-29
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-02-21T03:03:04+08:00">
+                2019-02-21
               </time>
             
 
@@ -851,6 +709,28 @@
             
           </span>
 
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/数据库-redis/" itemprop="url" rel="index">
+                    <span itemprop="name">数据库,redis</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
           
 
           
@@ -881,7 +761,183 @@
       
         
           
-            <p>title: 渗透学习之网站渗透（2）—–漏洞扫描<br>date: 2019-09-22 22:10:31<br>tags: [kali,渗透,nmap]<br>categories: Linux,渗透</p>
+            <h1 id="安装mongodb服务"><a href="#安装mongodb服务" class="headerlink" title="安装mongodb服务"></a>安装mongodb服务</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">mongod --logpath E:\MongoDB\logs\mongodb.log --logappend --dbpath E:\MongoDB\data --directoryperdb --</span><br><span class="line"></span><br><span class="line">serviceName MongoDB --install</span><br></pre></td></tr></table></figure>
+
+<h1 id="安装redis服务"><a href="#安装redis服务" class="headerlink" title="安装redis服务"></a>安装redis服务</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">redis-server.exe --service-install redis.windows.conf --loglevel verbose</span><br></pre></td></tr></table></figure>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    <div>
+      
+    </div>
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://pibigstar.com/2019/02/21/MySQL中ignore,replace的使用/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="派大星">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/qq.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="派大星的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/02/21/MySQL中ignore,replace的使用/" itemprop="url">MySQL中ignore,replace的使用</a></h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-02-21T03:03:04+08:00">
+                2019-02-21
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/mysql/" itemprop="url" rel="index">
+                    <span itemprop="name">mysql</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="insert-ignore"><a href="#insert-ignore" class="headerlink" title="insert ignore"></a>insert ignore</h1><blockquote>
+<p>当出现主键或唯一索引重复之后，插入会失败，但不会报错，会忽略此次插入</p>
+</blockquote>
+<p>用法：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#id为主键</span></span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> <span class="keyword">user</span>(<span class="keyword">id</span>,<span class="keyword">name</span>,age)<span class="keyword">values</span>(<span class="number">1</span>,<span class="string">"小华"</span>,<span class="number">21</span>)</span><br><span class="line"><span class="comment">#由于主键冲突，这个插入将会被忽略</span></span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">ignore</span> <span class="keyword">into</span> <span class="keyword">user</span>(<span class="keyword">id</span>,<span class="keyword">name</span>,age)<span class="keyword">values</span>(<span class="number">1</span>,<span class="string">"小明"</span>,<span class="number">21</span>)</span><br></pre></td></tr></table></figure>
+
+<h1 id="replace-to"><a href="#replace-to" class="headerlink" title="replace to"></a>replace to</h1><blockquote>
+<p>当出现主键或唯一索引重复之后，会删除原先的数据，并将这个新的记录插入进去</p>
+</blockquote>
+<p>用法：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 由于主键冲突，它会删除原先的记录，再把这个记录插入进来</span></span><br><span class="line"><span class="keyword">replace</span> <span class="keyword">into</span> <span class="keyword">user</span>(<span class="keyword">id</span>,<span class="keyword">name</span>,age)<span class="keyword">values</span>(<span class="number">1</span>,<span class="string">"小花"</span>,<span class="number">23</span>);</span><br></pre></td></tr></table></figure>
+
+<h1 id="on-duplicate-key-update"><a href="#on-duplicate-key-update" class="headerlink" title="on duplicate key update"></a>on duplicate key update</h1><blockquote>
+<p>当出现主键或唯一索引重复之后，则执行UPDATE语句</p>
+</blockquote>
+<p>用法：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 由于主键冲突，它只会执行 Update语句</span></span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> <span class="keyword">user</span>(<span class="keyword">id</span>,<span class="keyword">name</span>,age)<span class="keyword">values</span>(<span class="number">1</span>,<span class="string">'杰克'</span>, <span class="number">22</span>) <span class="keyword">ON</span> <span class="keyword">DUPLICATE</span> <span class="keyword">KEY</span> <span class="keyword">UPDATE</span> <span class="keyword">name</span>=<span class="string">'杰克'</span>,age=<span class="number">22</span>;</span><br></pre></td></tr></table></figure>
+
+<p>下面列举几个常用的场景</p>
+<h2 id="获取记录或初始化记录"><a href="#获取记录或初始化记录" class="headerlink" title="获取记录或初始化记录"></a>获取记录或初始化记录</h2><blockquote>
+<p>当记录存在时则获取此条记录，当记录不存在时，则插入记录</p>
+</blockquote>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 1.先插入数据，如果有记录将会忽略此次插入，如果没有则插入</span></span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">ignore</span> <span class="keyword">into</span> <span class="keyword">user</span>(<span class="keyword">id</span>,<span class="keyword">name</span>,age)<span class="keyword">values</span>(<span class="number">1</span>,<span class="string">"小明"</span>,<span class="number">21</span>)</span><br><span class="line"><span class="comment"># 2. 再获取数据</span></span><br><span class="line"><span class="keyword">select</span> * <span class="keyword">from</span> <span class="keyword">user</span> <span class="keyword">where</span> <span class="keyword">id</span> = <span class="number">1</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="插入记录或更新记录"><a href="#插入记录或更新记录" class="headerlink" title="插入记录或更新记录"></a>插入记录或更新记录</h2><p>直接使用<code>on duplicate key update</code>语法就OK了</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> <span class="keyword">user</span>(<span class="keyword">id</span>,<span class="keyword">name</span>,age)<span class="keyword">values</span>(<span class="number">1</span>,<span class="string">'杰克'</span>, <span class="number">22</span>) <span class="keyword">ON</span> <span class="keyword">DUPLICATE</span> <span class="keyword">KEY</span> <span class="keyword">UPDATE</span> <span class="keyword">name</span>=<span class="string">'杰克'</span>,age=<span class="number">22</span>;</span><br></pre></td></tr></table></figure>
+
+<h2 id="新数据更新原始数据"><a href="#新数据更新原始数据" class="headerlink" title="新数据更新原始数据"></a>新数据更新原始数据</h2><p>使用<code>replace into</code>语法，当新的数据产生时，用新的去替换老的，这样数据库中关于此主键只会是最新的数据</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">replace</span> <span class="keyword">into</span> <span class="keyword">user</span>(<span class="keyword">id</span>,<span class="keyword">name</span>,age)<span class="keyword">values</span>(<span class="number">1</span>,<span class="string">"小花"</span>,<span class="number">23</span>);</span><br></pre></td></tr></table></figure>
+
 
           
         
@@ -934,7 +990,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://pibigstar.com/2019/09/29/Java虚拟机常用命令参数/">
+    <link itemprop="mainEntityOfPage" href="http://pibigstar.com/2019/02/21/使用docker安装rabbitmq/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="派大星">
@@ -953,7 +1009,7 @@
         
           <h2 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2019/09/29/Java虚拟机常用命令参数/" itemprop="url">Untitled</a></h2>
+                <a class="post-title-link" href="/2019/02/21/使用docker安装rabbitmq/" itemprop="url">使用docker安装rabbitmq</a></h2>
         
 
         <div class="post-meta">
@@ -965,8 +1021,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-09-29T22:56:40+08:00">
-                2019-09-29
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-02-21T03:03:04+08:00">
+                2019-02-21
               </time>
             
 
@@ -975,6 +1031,28 @@
             
           </span>
 
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/工具使用-docker/" itemprop="url" rel="index">
+                    <span itemprop="name">工具使用,docker</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
           
 
           
@@ -1005,293 +1083,23 @@
       
         
           
-            <p>title: Java虚拟机常用命令参数<br>date: 2018-09-06 22:10:31<br>tags: [jvm]<br>categories: JVM</p>
-<h2 id="1-打印某个类的常量池"><a href="#1-打印某个类的常量池" class="headerlink" title="1. 打印某个类的常量池"></a>1. 打印某个类的常量池</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">javap -v Test.class</span><br></pre></td></tr></table></figure>
+            <h1 id="1-拉取镜像"><a href="#1-拉取镜像" class="headerlink" title="1. 拉取镜像"></a>1. 拉取镜像</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker pull rabbitmq:management</span><br></pre></td></tr></table></figure>
 
-<h2 id="2-查看类的加载顺序"><a href="#2-查看类的加载顺序" class="headerlink" title="2. 查看类的加载顺序"></a>2. 查看类的加载顺序</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">java -verbose:class Test</span><br></pre></td></tr></table></figure>
-
-<h2 id="3-反编译字节码"><a href="#3-反编译字节码" class="headerlink" title="3. 反编译字节码"></a>3. 反编译字节码</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">javap -v -c Test</span><br></pre></td></tr></table></figure>
-
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    <div>
-      
-    </div>
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://pibigstar.com/2019/09/29/Java枚举知识点/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="派大星">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/qq.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="派大星的博客">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/09/29/Java枚举知识点/" itemprop="url">Untitled</a></h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-09-29T22:56:40+08:00">
-                2019-09-29
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>title: Java枚举知识点<br>date: 2018-08-23 22:10:31<br>tags: [java,枚举]<br>categories: Java</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    <div>
-      
-    </div>
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://pibigstar.com/2019/09/29/SpringBoot使用redis做缓存机制/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="派大星">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/qq.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="派大星的博客">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/09/29/SpringBoot使用redis做缓存机制/" itemprop="url">Untitled</a></h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-09-29T22:56:40+08:00">
-                2019-09-29
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>title: SpringBoot使用redis做缓存机制<br>date: 2019-09-22 22:10:31<br>tags: [springboot,redis缓存]<br>categories: springboot,SpringBoot技能大全</p>
-<p>SpringBoot 2.0.3 版本、redis3.2版本</p>
-<h1 id="1-加入jar包"><a href="#1-加入jar包" class="headerlink" title="1. 加入jar包"></a>1. 加入jar包</h1><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-starter-data-redis<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-starter-cache<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<h1 id="2-编写RedisConfig类"><a href="#2-编写RedisConfig类" class="headerlink" title="2. 编写RedisConfig类"></a>2. 编写RedisConfig类</h1><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.pibigstar.common.config;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> org.springframework.cache.CacheManager;</span><br><span class="line"><span class="keyword">import</span> org.springframework.cache.annotation.CachingConfigurerSupport;</span><br><span class="line"><span class="keyword">import</span> org.springframework.cache.annotation.EnableCaching;</span><br><span class="line"><span class="keyword">import</span> org.springframework.cache.interceptor.KeyGenerator;</span><br><span class="line"><span class="keyword">import</span> org.springframework.context.annotation.Bean;</span><br><span class="line"><span class="keyword">import</span> org.springframework.context.annotation.Configuration;</span><br><span class="line"><span class="keyword">import</span> org.springframework.data.redis.cache.RedisCacheManager;</span><br><span class="line"><span class="keyword">import</span> org.springframework.data.redis.connection.RedisConnectionFactory;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="meta">@Configuration</span></span><br><span class="line"><span class="meta">@EnableCaching</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">RedisConfig</span> <span class="keyword">extends</span> <span class="title">CachingConfigurerSupport</span></span>&#123;</span><br><span class="line"></span><br><span class="line">	<span class="comment">//缓存管理器</span></span><br><span class="line">	<span class="meta">@Bean</span> </span><br><span class="line">	<span class="function"><span class="keyword">public</span> CacheManager <span class="title">cacheManager</span><span class="params">(RedisConnectionFactory factory)</span> </span>&#123;</span><br><span class="line">		RedisCacheManager cacheManager = RedisCacheManager.builder(factory).build();</span><br><span class="line">		<span class="keyword">return</span> cacheManager;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="comment">//自定义缓存key生成策略</span></span><br><span class="line">	  <span class="meta">@Bean</span></span><br><span class="line">	  <span class="function"><span class="keyword">public</span> KeyGenerator <span class="title">keyGenerator</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	      <span class="keyword">return</span> <span class="keyword">new</span> KeyGenerator()&#123;</span><br><span class="line">	          <span class="meta">@Override</span></span><br><span class="line">	          <span class="function"><span class="keyword">public</span> Object <span class="title">generate</span><span class="params">(Object target, java.lang.reflect.Method method, Object... params)</span> </span>&#123;</span><br><span class="line">	              StringBuffer sb = <span class="keyword">new</span> StringBuffer();</span><br><span class="line">	              sb.append(target.getClass().getName());</span><br><span class="line">	              sb.append(method.getName());</span><br><span class="line">	              <span class="keyword">for</span>(Object obj:params)&#123;</span><br><span class="line">	                  sb.append(obj.toString());</span><br><span class="line">	              &#125;</span><br><span class="line">	              System.out.println(<span class="string">"调用Redis生成key："</span>+sb.toString());</span><br><span class="line">	              <span class="keyword">return</span> sb.toString();</span><br><span class="line">	          &#125;</span><br><span class="line">	      &#125;;</span><br><span class="line">	  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h2 id="2-1-配置application-yml文件"><a href="#2-1-配置application-yml文件" class="headerlink" title="2.1 配置application.yml文件"></a>2.1 配置application.yml文件</h2><figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">spring:</span></span><br><span class="line"><span class="attr">  redis:</span></span><br><span class="line"><span class="attr">    host:</span> <span class="number">127.0</span><span class="number">.0</span><span class="number">.1</span></span><br><span class="line"><span class="attr">    port:</span> <span class="number">6379</span></span><br><span class="line"><span class="attr">    database:</span> <span class="number">0</span> <span class="comment"># 设置数据库索引为0 默认为0</span></span><br><span class="line"><span class="attr">    password:</span> <span class="comment"># 密码为空</span></span><br><span class="line"><span class="attr">    jedis:</span></span><br><span class="line"><span class="attr">      pool:</span></span><br><span class="line"><span class="attr">        max-active:</span> <span class="number">1000</span> <span class="comment"># 连接池最大连接数（使用负值表示没有限制）</span></span><br><span class="line"><span class="attr">        max-wait:</span> <span class="bullet">-1</span> <span class="comment"># 连接池最大阻塞等待时间（使用负值表示没有限制）</span></span><br><span class="line"><span class="attr">        max-idle:</span> <span class="number">10</span> <span class="comment"># 连接池中的最大空闲连接</span></span><br><span class="line"><span class="attr">        min-idle:</span> <span class="number">2</span> <span class="comment"># 连接池中的最小空闲连接</span></span><br><span class="line"><span class="attr">    timeout:</span> <span class="number">2000</span> <span class="comment"># 连接超时时间（毫秒）</span></span><br></pre></td></tr></table></figure>
-
-<h1 id="3-在-适当的地方加入缓存"><a href="#3-在-适当的地方加入缓存" class="headerlink" title="3. 在 适当的地方加入缓存"></a>3. 在 适当的地方加入缓存</h1><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.pibigstar.service.impl;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.util.List;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> javax.transaction.Transactional;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> org.springframework.beans.factory.annotation.Autowired;</span><br><span class="line"><span class="keyword">import</span> org.springframework.cache.annotation.CacheConfig;</span><br><span class="line"><span class="keyword">import</span> org.springframework.cache.annotation.Cacheable;</span><br><span class="line"><span class="keyword">import</span> org.springframework.stereotype.Service;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> com.pibigstar.dao.GradeMapper;</span><br><span class="line"><span class="keyword">import</span> com.pibigstar.domain.Grade;</span><br><span class="line"><span class="keyword">import</span> com.pibigstar.service.GradeService;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Service</span></span><br><span class="line"><span class="meta">@CacheConfig</span>(cacheNames=<span class="string">"grades"</span>)</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">GradeServiceImpl</span> <span class="keyword">implements</span> <span class="title">GradeService</span></span>&#123;</span><br><span class="line"></span><br><span class="line">	<span class="meta">@Autowired</span></span><br><span class="line">	<span class="keyword">private</span> GradeMapper gradeMapper;</span><br><span class="line">	</span><br><span class="line">	<span class="meta">@Override</span></span><br><span class="line">	<span class="meta">@Cacheable</span> <span class="comment">//开启缓存</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> Grade <span class="title">getOneById</span><span class="params">(Long id)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">return</span> gradeMapper.selectByPrimaryKey(id);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="meta">@Override</span></span><br><span class="line">	<span class="meta">@Cacheable</span> <span class="comment">//开启缓存</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> List&lt;Grade&gt; <span class="title">list</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		<span class="keyword">return</span> gradeMapper.findAll();</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>带有<code>mangement</code>的是包含web管理页面的</p>
+<h1 id="2-启动容器"><a href="#2-启动容器" class="headerlink" title="2. 启动容器"></a>2. 启动容器</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run -d --hostname rabbitmq --name rabbitmq -p 5672:5672 -p 15672:15672 -v D://www/rabbitmq:/var/lib/rabbitmq rabbitmq:management</span><br></pre></td></tr></table></figure>
 
 <ul>
-<li>@Cacheable将查询结果缓存到redis中，（key=”#p0”）指定传入的第一个参数作为redis的key。</li>
-<li>@CachePut，指定key，将更新的结果同步到redis中</li>
-<li>@CacheEvict，指定key，删除缓存数据，allEntries=true,方法调用后将立即清除缓存</li>
+<li><code>-d</code> 后台运行容器；</li>
+<li><code>--name</code> 指定容器名；</li>
+<li><code>-p</code> 指定服务运行的端口（5672：应用访问端口；15672：控制台Web端口号）；</li>
+<li><code>-v</code> 映射目录或文件；将D判断 www下的rabbitmq 文件夹映射到docker中</li>
+<li><code>--hostname</code>  主机名（RabbitMQ的一个重要注意事项是它根据所谓的 “节点名称” 存储数据，默认为主机名）；</li>
 </ul>
-<h1 id="4-启动"><a href="#4-启动" class="headerlink" title="4. 启动"></a>4. 启动</h1><h2 id="4-1-启动redis"><a href="#4-1-启动redis" class="headerlink" title="4.1 启动redis"></a>4.1 启动redis</h2><p>下载： <a href="https://pan.baidu.com/s/1tTYcCRUF-qDikhPTkSiJTQ" target="_blank" rel="noopener">https://pan.baidu.com/s/1tTYcCRUF-qDikhPTkSiJTQ</a></p>
-<p>解压，双击 start.bat 即可</p>
-<p>RedisDesktopManager 文件夹放的是redis 可视化工具</p>
-<h2 id="4-2-启动项目"><a href="#4-2-启动项目" class="headerlink" title="4.2 启动项目"></a>4.2 启动项目</h2><p>调用 开启缓存的那两个方法，就可以看到控制台输出了：<br><img src="https://img-blog.csdn.net/20180704150026452?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2p1bm1veGk=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt></p>
-<p>通过redis 可视化工具可以看到：<br><img src="https://img-blog.csdn.net/20180704144013597?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2p1bm1veGk=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt></p>
-<p>已经有key值生成了，</p>
-<p>当再一次查询的时候就不会去从数据库中查询了，而是直接从我们的redis中查询，速度会非常快。</p>
-<p><strong>需要注意的是</strong>：当数据库中值改变了，因为它查询的是从缓存中查询，所以查出来的数据还是之前的数据，只有当key过期之后或者被删除之后才能查到最新的值</p>
-<h1 id="5-常用redis命令"><a href="#5-常用redis命令" class="headerlink" title="5. 常用redis命令"></a>5. 常用redis命令</h1><ul>
-<li>flushdb：清空当前数据库。</li>
-<li>select [index]：选择索引数据库，index为索引值名，如：select 1。</li>
-<li>keys *：查看数据库内所有的key。</li>
-<li>del [key]：删除一条指定key的值。</li>
-<li>get [key] : 获得 指定key的值</li>
-<li>flushall：清空所有数据库。</li>
-<li>quit：退出客户端连接</li>
-</ul>
-<h3 id="关注我的公众号，获取最新Java干货"><a href="#关注我的公众号，获取最新Java干货" class="headerlink" title="关注我的公众号，获取最新Java干货"></a>关注我的公众号，获取最新Java干货</h3><p><img src="https://img-blog.csdn.net/20180828171220662?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2p1bm1veGk=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt="欢迎关注我的公众号"></p>
+<p><strong>注意</strong><br>如果无法访问web，或rabbitmq容器自动退出，请将映射端口 15672改为 8080尝试一下！<br>还有，有时候Windows的映射会出现问题，如果上面命令无法打开web页面，请尝试使用下面的命令开启容器：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run -d --hostname rabbitmq --name rabbitmq -p 5672:5672 -p 15672:15672 rabbitmq:management</span><br></pre></td></tr></table></figure>
+
+<h1 id="3-访问Web页面"><a href="#3-访问Web页面" class="headerlink" title="3. 访问Web页面"></a>3. 访问Web页面</h1><p>打开浏览器： <a href="http://localhost:15672" target="_blank" rel="noopener">http://localhost:15672</a> 即可看到rabbitmq页面</p>
+<p>默认的登录账户和密码都是：guest</p>
 
           
         
@@ -1344,7 +1152,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://pibigstar.com/2019/09/29/Java自定义注解知识点总结/">
+    <link itemprop="mainEntityOfPage" href="http://pibigstar.com/2019/02/21/使用Node构建桌面GUI/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="派大星">
@@ -1363,7 +1171,7 @@
         
           <h2 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2019/09/29/Java自定义注解知识点总结/" itemprop="url">Untitled</a></h2>
+                <a class="post-title-link" href="/2019/02/21/使用Node构建桌面GUI/" itemprop="url">使用Node构建桌面GUI</a></h2>
         
 
         <div class="post-meta">
@@ -1375,8 +1183,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-09-29T22:56:40+08:00">
-                2019-09-29
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-02-21T03:03:04+08:00">
+                2019-02-21
               </time>
             
 
@@ -1385,6 +1193,28 @@
             
           </span>
 
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/nodejs/" itemprop="url" rel="index">
+                    <span itemprop="name">nodejs</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
           
 
           
@@ -1415,7 +1245,70 @@
       
         
           
-            <p>title: Java自定义注解知识点总结<br>date: 2019-08-08 22:10:31<br>tags: [java,注解,自定义注解,注解处理器]<br>categories: Java</p>
+            <h1 id="1-安装-NVM"><a href="#1-安装-NVM" class="headerlink" title="1. 安装 NVM"></a>1. 安装 NVM</h1><blockquote>
+<p>它是Node.js的版本管理工具，使用它可以很方便的安装各个版本的Node.js<br>下载地址： <a href="https://github.com/coreybutler/nvm-windows/releases" target="_blank" rel="noopener">https://github.com/coreybutler/nvm-windows/releases</a></p>
+</blockquote>
+<p>简单使用：</p>
+<ol>
+<li>安装Node.js<blockquote>
+<p>使用<code>nvm install  version  arch</code>命令下载需要的版本。arch参数表示系统位数，默认是64位，如果是32位操作系统，需要执行命令：nvm install v10.16.1 32</p>
+</blockquote>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nvm install v10.16.1</span><br></pre></td></tr></table></figure>
+
+</li>
+</ol>
+<p>查看最新版本：<a href="https://nodejs.org/en/" target="_blank" rel="noopener">https://nodejs.org/en/</a></p>
+<ol start="2">
+<li><p>切换版本</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nvm use v10.16.1</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>查看本机安装了那些版本</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nvm list</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>换源（淘宝镜像）</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm config <span class="built_in">set</span> registry https://registry.npm.taobao.org</span><br></pre></td></tr></table></figure>
+
+</li>
+</ol>
+<h1 id="2-安装electron"><a href="#2-安装electron" class="headerlink" title="2. 安装electron"></a>2. 安装electron</h1><p>electron 安装文档：<a href="https://electronjs.org/docs" target="_blank" rel="noopener">https://electronjs.org/docs</a></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install -g electron</span><br></pre></td></tr></table></figure>
+
+<h1 id="3-使用electron"><a href="#3-使用electron" class="headerlink" title="3. 使用electron"></a>3. 使用electron</h1><ol>
+<li>初始化一个Node项目<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm init</span><br></pre></td></tr></table></figure>
+
+</li>
+</ol>
+<p>这里输入一些项目基本信息就OK了，可以一路回车，最后会生成一个<code>package.json</code>文件</p>
+<ol start="2">
+<li><p>添加electron到项目中</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 将electron添加到项目中</span></span><br><span class="line">npm install --save-dev electron</span><br><span class="line"><span class="comment"># 安装</span></span><br><span class="line">npm install</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>修改package.json</p>
+<blockquote>
+<p>将 <code>test</code> 那块修改为 <code>&quot;start&quot;: &quot;electron .&quot;</code></p>
+</blockquote>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="attr">"name"</span>: <span class="string">"electron"</span>,</span><br><span class="line">  <span class="attr">"version"</span>: <span class="string">"1.0.0"</span>,</span><br><span class="line">  <span class="attr">"description"</span>: <span class="string">""</span>,</span><br><span class="line">  <span class="attr">"main"</span>: <span class="string">"index.js"</span>,</span><br><span class="line">  <span class="attr">"scripts"</span>: &#123;</span><br><span class="line">    <span class="attr">"start"</span>: <span class="string">"electron ."</span></span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="attr">"author"</span>: <span class="string">""</span>,</span><br><span class="line">  <span class="attr">"license"</span>: <span class="string">"ISC"</span>,</span><br><span class="line">  <span class="attr">"devDependencies"</span>: &#123;</span><br><span class="line">    <span class="attr">"electron"</span>: <span class="string">"^6.0.0"</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>新增入口<code>index.js</code>文件</p>
+<blockquote>
+<p>在项目根目录下新建index.js文件，文件里面的内容直接用electron提供的示例了。<a href="https://electronjs.org/docs/tutorial/first-app#electron-development-in-a-nutshell" target="_blank" rel="noopener">点击查看</a></p>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> &#123; app, BrowserWindow &#125; = <span class="built_in">require</span>(<span class="string">'electron'</span>)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">createWindow</span> (<span class="params"></span>) </span>&#123;   </span><br><span class="line">  <span class="comment">// 创建浏览器窗口</span></span><br><span class="line">  <span class="keyword">let</span> win = <span class="keyword">new</span> BrowserWindow(&#123;</span><br><span class="line">    width: <span class="number">800</span>,</span><br><span class="line">    height: <span class="number">600</span>,</span><br><span class="line">    webPreferences: &#123;</span><br><span class="line">      nodeIntegration: <span class="literal">true</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;)</span><br><span class="line">  <span class="comment">// 加载index.html文件</span></span><br><span class="line">  win.loadFile(<span class="string">'index.html'</span>)</span><br><span class="line">&#125;</span><br><span class="line">app.on(<span class="string">'ready'</span>, createWindow)</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>新建<code>index.html</code>文件</p>
+<blockquote>
+<p>通过上面的js我们可以看到，它其实是加载的index.html文件，我们创建它，简单的写个HelloWorld</p>
+</blockquote>
+</li>
+</ol>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">h1</span>&gt;</span>Hello World<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<ol start="6">
+<li>运行程序<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm start</span><br></pre></td></tr></table></figure>
+
+</li>
+</ol>
+<p>这时我们就会弹出了一个GUI界面，如下图所示<br><img src="https://img-blog.csdnimg.cn/20190802232133475.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2p1bm1veGk=,size_16,color_FFFFFF,t_70" alt></p>
 
           
         
@@ -1468,7 +1361,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://pibigstar.com/2019/09/29/java上传文件到七牛云中/">
+    <link itemprop="mainEntityOfPage" href="http://pibigstar.com/2019/02/21/SpringBoot使用自定义拦截器/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="派大星">
@@ -1487,7 +1380,7 @@
         
           <h2 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2019/09/29/java上传文件到七牛云中/" itemprop="url">Untitled</a></h2>
+                <a class="post-title-link" href="/2019/02/21/SpringBoot使用自定义拦截器/" itemprop="url">SpringBoot使用自定义拦截器</a></h2>
         
 
         <div class="post-meta">
@@ -1499,8 +1392,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-09-29T22:56:40+08:00">
-                2019-09-29
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-02-21T03:03:04+08:00">
+                2019-02-21
               </time>
             
 
@@ -1509,6 +1402,28 @@
             
           </span>
 
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/springboot-SpringBoot技能大全/" itemprop="url" rel="index">
+                    <span itemprop="name">springboot,SpringBoot技能大全</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
           
 
           
@@ -1539,7 +1454,484 @@
       
         
           
-            <p>title: java上传文件到七牛云中<br>date: 2019-02-07 22:10:31<br>tags: [java,七牛云,上传文件,云端文件]<br>categories: 工具使用,Java</p>
+            <h1 id="1-定义拦截器配置类"><a href="#1-定义拦截器配置类" class="headerlink" title="1. 定义拦截器配置类"></a>1. 定义拦截器配置类</h1><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.pibigstar.config;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> org.springframework.context.annotation.Configuration;</span><br><span class="line"><span class="keyword">import</span> org.springframework.web.servlet.config.annotation.InterceptorRegistry;</span><br><span class="line"><span class="keyword">import</span> org.springframework.web.servlet.config.annotation.WebMvcConfigurer;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Configuration</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">WebConfig</span> <span class="keyword">implements</span> <span class="title">WebMvcConfigurer</span></span>&#123;</span><br><span class="line"></span><br><span class="line">	<span class="comment">/**</span></span><br><span class="line"><span class="comment">	 * 拦截器配置</span></span><br><span class="line"><span class="comment">	 */</span></span><br><span class="line">	<span class="meta">@Override</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">addInterceptors</span><span class="params">(InterceptorRegistry registry)</span> </span>&#123;</span><br><span class="line">		<span class="comment">//只拦截 /admin/路径下的请求</span></span><br><span class="line">		registry.addInterceptor(<span class="keyword">new</span> AdminInterceptor()).addPathPatterns(<span class="string">"/admin/**"</span>);</span><br><span class="line">		WebMvcConfigurer.<span class="keyword">super</span>.addInterceptors(registry);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="2-定义拦截器"><a href="#2-定义拦截器" class="headerlink" title="2. 定义拦截器"></a>2. 定义拦截器</h1><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.pibigstar.config;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> <span class="keyword">static</span> org.springframework.test.web.client.match.MockRestRequestMatchers.queryParam;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> javax.servlet.http.HttpServletRequest;</span><br><span class="line"><span class="keyword">import</span> javax.servlet.http.HttpServletResponse;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> org.springframework.web.servlet.HandlerInterceptor;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 管理员拦截器</span></span><br><span class="line"><span class="comment"> * 如果不是管理员则不让其访问</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> pibigstar</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">AdminInterceptor</span> <span class="keyword">implements</span> <span class="title">HandlerInterceptor</span></span>&#123;</span><br><span class="line">	</span><br><span class="line">	<span class="comment">/**</span></span><br><span class="line"><span class="comment">	 * 在请求处理之前进行调用（controller方法调用之前）</span></span><br><span class="line"><span class="comment">	 */</span></span><br><span class="line">	<span class="meta">@Override</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">preHandle</span><span class="params">(HttpServletRequest request, HttpServletResponse response, Object handler)</span></span></span><br><span class="line"><span class="function">			<span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">		</span><br><span class="line">		<span class="keyword">if</span> (request.getAttribute(<span class="string">"userId"</span>).equals(<span class="string">"admin"</span>)) &#123;</span><br><span class="line">			<span class="comment">//放行</span></span><br><span class="line">			<span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="comment">//拦截</span></span><br><span class="line">		<span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	<span class="comment">/**</span></span><br><span class="line"><span class="comment">	 * 在整个请求结束之后被调用</span></span><br><span class="line"><span class="comment">	 * 主要用来进行资源清理 ，一些缓存什么的。</span></span><br><span class="line"><span class="comment">	 */</span></span><br><span class="line">	<span class="meta">@Override</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">afterCompletion</span><span class="params">(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex)</span></span></span><br><span class="line"><span class="function">			<span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">		HandlerInterceptor.<span class="keyword">super</span>.afterCompletion(request, response, handler, ex);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    <div>
+      
+    </div>
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://pibigstar.com/2019/02/21/SpringBoot导入导出Excel/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="派大星">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/qq.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="派大星的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/02/21/SpringBoot导入导出Excel/" itemprop="url">SpringBoot导入导出Excel</a></h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-02-21T03:03:04+08:00">
+                2019-02-21
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/springboot-SpringBoot技能大全/" itemprop="url" rel="index">
+                    <span itemprop="name">springboot,SpringBoot技能大全</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="1-下载jar包"><a href="#1-下载jar包" class="headerlink" title="1 下载jar包"></a>1 下载jar包</h1><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- excel导出工具 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.apache.poi<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>poi<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">version</span>&gt;</span>3.17<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h1 id="2-导出Excel"><a href="#2-导出Excel" class="headerlink" title="2 导出Excel"></a>2 导出Excel</h1><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.briup.apps.poll.web.controller;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.io.BufferedOutputStream;</span><br><span class="line"><span class="keyword">import</span> java.io.File;</span><br><span class="line"><span class="keyword">import</span> java.io.IOException;</span><br><span class="line"><span class="keyword">import</span> java.io.OutputStream;</span><br><span class="line"><span class="keyword">import</span> java.util.ArrayList;</span><br><span class="line"><span class="keyword">import</span> java.util.List;</span><br><span class="line"><span class="keyword">import</span> org.apache.poi.hssf.usermodel.HSSFCell;</span><br><span class="line"><span class="keyword">import</span> org.apache.poi.hssf.usermodel.HSSFCellStyle;</span><br><span class="line"><span class="keyword">import</span> org.apache.poi.hssf.usermodel.HSSFFont;</span><br><span class="line"><span class="keyword">import</span> org.apache.poi.hssf.usermodel.HSSFRow;</span><br><span class="line"><span class="keyword">import</span> org.apache.poi.hssf.usermodel.HSSFSheet;</span><br><span class="line"><span class="keyword">import</span> org.apache.poi.hssf.usermodel.HSSFWorkbook;</span><br><span class="line"><span class="keyword">import</span> org.apache.poi.poifs.filesystem.POIFSFileSystem;</span><br><span class="line"><span class="keyword">import</span> org.springframework.beans.factory.annotation.Autowired;</span><br><span class="line"><span class="keyword">import</span> org.springframework.stereotype.Controller;</span><br><span class="line"><span class="keyword">import</span> org.springframework.web.bind.annotation.GetMapping;</span><br><span class="line"><span class="keyword">import</span> org.springframework.web.bind.annotation.PostMapping;</span><br><span class="line"><span class="keyword">import</span> org.springframework.web.bind.annotation.RequestMapping;</span><br><span class="line"><span class="keyword">import</span> org.springframework.web.multipart.MultipartFile;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> com.briup.apps.poll.bean.Answer;</span><br><span class="line"><span class="keyword">import</span> com.briup.apps.poll.service.IAnswerService;</span><br><span class="line"><span class="keyword">import</span> com.briup.apps.poll.util.MsgResponse;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Controller</span></span><br><span class="line"><span class="meta">@RequestMapping</span>(<span class="string">"/excel"</span>)</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ExcelController</span> <span class="keyword">extends</span> <span class="title">BaseController</span></span>&#123;</span><br><span class="line"></span><br><span class="line">	<span class="meta">@Autowired</span></span><br><span class="line">	<span class="keyword">private</span> IAnswerService answerService;</span><br><span class="line"></span><br><span class="line">	<span class="comment">/***</span></span><br><span class="line"><span class="comment">	 * 下载Excel</span></span><br><span class="line"><span class="comment">	 * <span class="doctag">@throws</span> IOException</span></span><br><span class="line"><span class="comment">	 */</span></span><br><span class="line">	<span class="meta">@GetMapping</span>(<span class="string">"download"</span>)</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">download</span><span class="params">()</span> <span class="keyword">throws</span> IOException</span>&#123;</span><br><span class="line"></span><br><span class="line">		HSSFWorkbook workbook = <span class="keyword">new</span> HSSFWorkbook();</span><br><span class="line">		<span class="comment">//创建一个Excel表单,参数为sheet的名字</span></span><br><span class="line">		HSSFSheet sheet = workbook.createSheet(<span class="string">"课调答卷表"</span>);</span><br><span class="line"></span><br><span class="line">		<span class="comment">//创建表头</span></span><br><span class="line">		setTitle(workbook, sheet);</span><br><span class="line">		List&lt;Answer&gt; answers = answerService.findAll();</span><br><span class="line"></span><br><span class="line">		<span class="comment">//新增数据行，并且设置单元格数据</span></span><br><span class="line">		<span class="keyword">int</span> rowNum = <span class="number">1</span>;</span><br><span class="line">		<span class="keyword">for</span> (Answer answer:answers) &#123;</span><br><span class="line">			HSSFRow row = sheet.createRow(rowNum);</span><br><span class="line">			row.createCell(<span class="number">0</span>).setCellValue(answer.getId());</span><br><span class="line">			row.createCell(<span class="number">1</span>).setCellValue(answer.getSelections());</span><br><span class="line">			row.createCell(<span class="number">2</span>).setCellValue(answer.getCheckes());</span><br><span class="line">			row.createCell(<span class="number">3</span>).setCellValue(answer.getContent());</span><br><span class="line">			rowNum++;</span><br><span class="line">		&#125;</span><br><span class="line">		String fileName = <span class="string">"survey-answer.xlsx"</span>;</span><br><span class="line">	    <span class="comment">//清空response  </span></span><br><span class="line">        response.reset();  </span><br><span class="line">        <span class="comment">//设置response的Header  </span></span><br><span class="line">        response.addHeader(<span class="string">"Content-Disposition"</span>, <span class="string">"attachment;filename="</span>+ fileName);  </span><br><span class="line">        OutputStream os = <span class="keyword">new</span> BufferedOutputStream(response.getOutputStream());  </span><br><span class="line">        response.setContentType(<span class="string">"application/vnd.ms-excel;charset=gb2312"</span>); </span><br><span class="line">        <span class="comment">//将excel写入到输出流中</span></span><br><span class="line">        workbook.write(os);</span><br><span class="line">        os.flush();</span><br><span class="line">        os.close();</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	<span class="comment">/***</span></span><br><span class="line"><span class="comment">	 * 设置表头</span></span><br><span class="line"><span class="comment">	 * <span class="doctag">@param</span> workbook</span></span><br><span class="line"><span class="comment">	 * <span class="doctag">@param</span> sheet</span></span><br><span class="line"><span class="comment">	 */</span></span><br><span class="line">	<span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">setTitle</span><span class="params">(HSSFWorkbook workbook, HSSFSheet sheet)</span></span>&#123;</span><br><span class="line">		HSSFRow row = sheet.createRow(<span class="number">0</span>);</span><br><span class="line">		<span class="comment">//设置列宽，setColumnWidth的第二个参数要乘以256，这个参数的单位是1/256个字符宽度</span></span><br><span class="line">		sheet.setColumnWidth(<span class="number">0</span>, <span class="number">10</span>*<span class="number">256</span>);</span><br><span class="line">		sheet.setColumnWidth(<span class="number">1</span>, <span class="number">20</span>*<span class="number">256</span>);</span><br><span class="line">		sheet.setColumnWidth(<span class="number">2</span>, <span class="number">20</span>*<span class="number">256</span>);</span><br><span class="line">		sheet.setColumnWidth(<span class="number">3</span>, <span class="number">100</span>*<span class="number">256</span>);</span><br><span class="line"></span><br><span class="line">		<span class="comment">//设置为居中加粗</span></span><br><span class="line">		HSSFCellStyle style = workbook.createCellStyle();</span><br><span class="line">		HSSFFont font = workbook.createFont();</span><br><span class="line">		font.setBold(<span class="keyword">true</span>);</span><br><span class="line">		style.setFont(font);</span><br><span class="line"></span><br><span class="line">		HSSFCell cell;</span><br><span class="line">		cell = row.createCell(<span class="number">0</span>);</span><br><span class="line">		cell.setCellValue(<span class="string">"序号"</span>);</span><br><span class="line">		cell.setCellStyle(style);</span><br><span class="line"></span><br><span class="line">		cell = row.createCell(<span class="number">1</span>);</span><br><span class="line">		cell.setCellValue(<span class="string">"单选"</span>);</span><br><span class="line">		cell.setCellStyle(style);</span><br><span class="line"></span><br><span class="line">		cell = row.createCell(<span class="number">2</span>);</span><br><span class="line">		cell.setCellValue(<span class="string">"多选"</span>);</span><br><span class="line">		cell.setCellStyle(style);</span><br><span class="line"></span><br><span class="line">		cell = row.createCell(<span class="number">3</span>);</span><br><span class="line">		cell.setCellValue(<span class="string">"简答"</span>);</span><br><span class="line">		cell.setCellStyle(style);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>导出的结果<br><img src="https://img-blog.csdn.net/20180702172956974?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2p1bm1veGk=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt></p>
+<p>再将此Excel读取，代码如下：</p>
+<h1 id="3-导入Excel"><a href="#3-导入Excel" class="headerlink" title="3 导入Excel"></a>3 导入Excel</h1><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@PostMapping</span>(<span class="string">"upload"</span>)</span><br><span class="line">	<span class="function"><span class="keyword">public</span> MsgResponse <span class="title">upload</span><span class="params">(MultipartFile file)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">if</span> (file==<span class="keyword">null</span>) &#123;</span><br><span class="line">			<span class="keyword">return</span> error(<span class="string">"file不能为空"</span>);</span><br><span class="line">		&#125;</span><br><span class="line">		List&lt;Answer&gt; answers = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line">		<span class="keyword">try</span> &#123;</span><br><span class="line">			HSSFWorkbook workbook = <span class="keyword">new</span> HSSFWorkbook(<span class="keyword">new</span> POIFSFileSystem(file.getInputStream()));</span><br><span class="line">			<span class="comment">//有多少个sheet</span></span><br><span class="line">			<span class="keyword">int</span> sheets = workbook.getNumberOfSheets();</span><br><span class="line">			<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; sheets; i++) &#123;</span><br><span class="line">				HSSFSheet sheet = workbook.getSheetAt(i);</span><br><span class="line">				<span class="comment">//获取多少行</span></span><br><span class="line">				<span class="keyword">int</span> rows = sheet.getPhysicalNumberOfRows();</span><br><span class="line">				Answer answer = <span class="keyword">null</span>;</span><br><span class="line">				<span class="comment">//遍历每一行，注意：第 0 行为标题</span></span><br><span class="line">				<span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">1</span>; j &lt; rows; j++) &#123;</span><br><span class="line">					answer = <span class="keyword">new</span> Answer();</span><br><span class="line">					 <span class="comment">//获得第 j 行</span></span><br><span class="line">					HSSFRow row = sheet.getRow(j);</span><br><span class="line">					answer.setSelections(row.getCell(<span class="number">1</span>).getStringCellValue());<span class="comment">//单选</span></span><br><span class="line">					answer.setCheckes(row.getCell(<span class="number">2</span>).getStringCellValue());<span class="comment">//多选</span></span><br><span class="line">					answer.setContent(row.getCell(<span class="number">3</span>).getStringCellValue());<span class="comment">//简答</span></span><br><span class="line">					answers.add(answer);</span><br><span class="line">				&#125;</span><br><span class="line">			&#125;</span><br><span class="line">		</span><br><span class="line">		&#125; <span class="keyword">catch</span> (IOException e) &#123;</span><br><span class="line">			logger.error(e.getMessage(),e);</span><br><span class="line">			<span class="keyword">return</span> error(e.getMessage());</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">return</span> success(answers);</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="欢迎关注我的公众号"><a href="#欢迎关注我的公众号" class="headerlink" title="欢迎关注我的公众号"></a>欢迎关注我的公众号</h1><p><img src="https://img-blog.csdn.net/201809022126245?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2p1bm1veGk=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt></p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    <div>
+      
+    </div>
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://pibigstar.com/2019/02/20/使用docker部署SpringBoot项目/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="派大星">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/qq.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="派大星的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/02/20/使用docker部署SpringBoot项目/" itemprop="url">使用docker部署SpringBoot项目</a></h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-02-20T04:04:04+08:00">
+                2019-02-20
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/springboot-docker-SpringBoot技能大全/" itemprop="url" rel="index">
+                    <span itemprop="name">springboot,docker,SpringBoot技能大全</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="1-新建一个SpringBoot项目"><a href="#1-新建一个SpringBoot项目" class="headerlink" title="1.新建一个SpringBoot项目"></a>1.新建一个SpringBoot项目</h1><p>自己写吧。。。。我放个测试的</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.pibigstar.web;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> org.springframework.stereotype.Controller;</span><br><span class="line"><span class="keyword">import</span> org.springframework.web.bind.annotation.RequestMapping;</span><br><span class="line"><span class="keyword">import</span> org.springframework.web.bind.annotation.ResponseBody;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Controller</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">IndexController</span> </span>&#123;</span><br><span class="line">	</span><br><span class="line">	<span class="meta">@RequestMapping</span>(<span class="string">"/"</span>)</span><br><span class="line">	<span class="function"><span class="keyword">public</span> String <span class="title">toIndex</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		<span class="keyword">return</span> <span class="string">"index"</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	<span class="meta">@RequestMapping</span>(<span class="string">"/hello"</span>)</span><br><span class="line">	<span class="meta">@ResponseBody</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> String <span class="title">hello</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		<span class="keyword">return</span> <span class="string">"Hello pibigstar"</span>;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="2-打包SpringBoot项目成jar包"><a href="#2-打包SpringBoot项目成jar包" class="headerlink" title="2. 打包SpringBoot项目成jar包"></a>2. 打包SpringBoot项目成jar包</h1><p><img src="https://img-blog.csdn.net/20180629193028355?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2p1bm1veGk=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt></p>
+<h1 id="3-编写Dockerfile文件"><a href="#3-编写Dockerfile文件" class="headerlink" title="3. 编写Dockerfile文件"></a>3. 编写Dockerfile文件</h1><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"># Docker image for springboot file run</span><br><span class="line"># VERSION 0.0.1</span><br><span class="line"># Author: pibigstar</span><br><span class="line"># 基础镜像使用java</span><br><span class="line">FROM java:8</span><br><span class="line"># 作者</span><br><span class="line">MAINTAINER pibigstar <span class="tag">&lt;<span class="name">741047261@qq.com</span>&gt;</span></span><br><span class="line"># VOLUME 指定了临时文件目录为/tmp。</span><br><span class="line"># 其效果是在主机 /var/lib/docker 目录下创建了一个临时文件，并链接到容器的/tmp</span><br><span class="line">VOLUME /tmp </span><br><span class="line"># 将jar包添加到容器中并更名为app.jar</span><br><span class="line">ADD onlineSpider-0.0.1-SNAPSHOT.jar app.jar </span><br><span class="line"># 运行jar包</span><br><span class="line">RUN bash -c 'touch /app.jar'</span><br><span class="line">ENTRYPOINT ["java","-Djava.security.egd=file:/dev/./urandom","-jar","/app.jar"]</span><br></pre></td></tr></table></figure>
+
+<p>如果是第一次打包，它会自动下载java 8的镜像作为基础镜像，以后再制作镜像的时候就不会再下载了。</p>
+<h1 id="4-部署文件"><a href="#4-部署文件" class="headerlink" title="4. 部署文件"></a>4. 部署文件</h1><p>如果不会安装docker的可以看我之前的博客。。。这里就不赘述了</p>
+<p>在服务器中新建一个文件夹用来存放我们的项目文件 <code>mkdir docker</code></p>
+<p>将打包好的jar包和Dockerfile文件上传到此文件夹中，然后进入此文件夹<code>cd docker</code></p>
+<h1 id="5-制作镜像"><a href="#5-制作镜像" class="headerlink" title="5. 制作镜像"></a>5. 制作镜像</h1><p>执行下面命令， 看好，最后面有个 <code>.</code> 点！</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker build -t springboot-demo .</span><br></pre></td></tr></table></figure>
+
+<p><code>-t</code> 参数是指定此镜像的tag名</p>
+<p>制作完成后通过下面命令查看我们制作的镜像</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker images</span><br></pre></td></tr></table></figure>
+
+<h1 id="5-启动容器"><a href="#5-启动容器" class="headerlink" title="5. 启动容器"></a>5. 启动容器</h1><p>有很多人搞不定镜像和容器的关系，其他他俩比较像java中的类与实例，镜像就好比类，而容器就是镜像的一个实例</p>
+<p>执行下面命令启动容器</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run -d -p <span class="number">8081</span>:<span class="number">8080</span> springboot-demo</span><br></pre></td></tr></table></figure>
+
+<p><code>-d</code>参数是让容器后台运行<br><code>-p</code> 是做端口映射，此时将服务器中的8081端口映射到容器中的8080端口</p>
+<h1 id="6-访问"><a href="#6-访问" class="headerlink" title="6. 访问"></a>6. 访问</h1><p>直接浏览器访问： http://你的服务器ip地址:8081/hello   即可查看效果</p>
+<p><img src="https://img-blog.csdn.net/20180629194101102?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2p1bm1veGk=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt></p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    <div>
+      
+    </div>
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://pibigstar.com/2019/02/20/css随笔记/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="派大星">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/qq.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="派大星的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/02/20/css随笔记/" itemprop="url">css随笔记</a></h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-02-20T04:04:04+08:00">
+                2019-02-20
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/前端/" itemprop="url" rel="index">
+                    <span itemprop="name">前端</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="div下加一条分割线"><a href="#div下加一条分割线" class="headerlink" title="div下加一条分割线"></a>div下加一条分割线</h2><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">border-bottom</span><span class="selector-pseudo">:1px</span> <span class="selector-tag">solid</span>  <span class="selector-id">#D7D8D9</span>;</span><br></pre></td></tr></table></figure>
+
+<h1 id="头像圆角并旋转"><a href="#头像圆角并旋转" class="headerlink" title="头像圆角并旋转"></a>头像圆角并旋转</h1><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.site-author-image</span> &#123;</span><br><span class="line">  <span class="attribute">display</span>: block;</span><br><span class="line">  <span class="attribute">margin</span>: <span class="number">0</span> auto;</span><br><span class="line">  <span class="attribute">padding</span>: $site-author-image-padding;</span><br><span class="line">  <span class="attribute">max-width</span>: $site-author-image-width;</span><br><span class="line">  <span class="attribute">height</span>: $site-author-image-height;</span><br><span class="line">  <span class="attribute">border</span>: $site-author-image-border-width solid $site-author-image-border-color;</span><br><span class="line">  <span class="attribute">border-radius</span>: <span class="number">60%</span>;</span><br><span class="line">  <span class="attribute">transition</span>: <span class="number">2.5s</span> all;  </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.site-author-image</span><span class="selector-pseudo">:hover</span> &#123;</span><br><span class="line">    <span class="attribute">transform</span>: <span class="built_in">rotate</span>(360deg);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="selector-class">.site-author-name</span> &#123;</span><br><span class="line">  <span class="attribute">margin</span>: $site-author-name-margin;</span><br><span class="line">  <span class="attribute">text-align</span>: $site-author-name-align;</span><br><span class="line">  <span class="attribute">color</span>: $site-author-name-color;</span><br><span class="line">  <span class="attribute">font-weight</span>: $site-author-name-weight;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.site-description</span> &#123;</span><br><span class="line">  <span class="attribute">margin-top</span>: $site-description-margin-top;</span><br><span class="line">  <span class="attribute">text-align</span>: $site-description-align;</span><br><span class="line">  <span class="attribute">font-size</span>: $site-description-font-size;</span><br><span class="line">  <span class="attribute">color</span>: $site-description-color;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="立体旋转图片"><a href="#立体旋转图片" class="headerlink" title="立体旋转图片"></a>立体旋转图片</h1><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE html&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span> <span class="attr">lang</span>=<span class="string">"zh-cn"</span>&gt;</span><span class="tag">&lt;<span class="name">head</span>&gt;</span><span class="tag">&lt;<span class="name">meta</span> <span class="attr">http-equiv</span>=<span class="string">"Content-Type"</span> <span class="attr">content</span>=<span class="string">"text/html; charset=UTF-8"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">title</span>&gt;</span>立体滚动图<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">style</span>&gt;</span></span><br><span class="line"><span class="css">	<span class="selector-class">.wrap</span>&#123;</span></span><br><span class="line">		width: 120px;</span><br><span class="line">		height: 200px;</span><br><span class="line">		margin: 20px;</span><br><span class="line">		position: fixed;</span><br><span class="line">		top: 15px;</span><br><span class="line">		right: 15px;</span><br><span class="line">		display: table-cell;</span><br><span class="line">		vertical-align: middle;</span><br><span class="line">		text-align: center;</span><br><span class="line">		z-index: 22;</span><br><span class="line">	&#125;</span><br><span class="line"><span class="css">	<span class="selector-class">.cube</span> &#123;</span></span><br><span class="line">		width: 120px;</span><br><span class="line">		height: 120px;</span><br><span class="line">		margin: 0 auto;</span><br><span class="line">		transform-style: preserve-3d;</span><br><span class="line">		transform: rotateX(-30deg) rotateY(-80deg);</span><br><span class="line">		animation: rotate linear 20s infinite;</span><br><span class="line">	&#125;</span><br><span class="line"><span class="css">	@-<span class="keyword">webkit</span>-<span class="keyword">keyframes</span> rotate &#123;</span></span><br><span class="line">		from &#123;</span><br><span class="line">			transform: rotateX(0deg) rotateY(0deg);</span><br><span class="line">		&#125;</span><br><span class="line">		to &#123;</span><br><span class="line">			transform: rotateX(360deg) rotateY(360deg);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line"><span class="css">	<span class="selector-class">.cube</span> <span class="selector-tag">div</span> &#123;</span></span><br><span class="line">		position: absolute;</span><br><span class="line">		width: 120px;</span><br><span class="line">		height: 120px;</span><br><span class="line"><span class="css">		<span class="selector-tag">opacity</span>: 0<span class="selector-class">.8</span>;</span></span><br><span class="line"><span class="css">		<span class="selector-tag">transition</span>: <span class="selector-tag">all</span> <span class="selector-class">.4s</span>;</span></span><br><span class="line">	&#125;</span><br><span class="line"><span class="css">	<span class="selector-class">.cube</span> <span class="selector-class">.out_front</span> &#123;</span></span><br><span class="line">		transform: rotateY(0deg) translateZ(60px);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line"><span class="css">	<span class="selector-class">.cube</span> <span class="selector-class">.out_back</span> &#123;</span></span><br><span class="line">		transform: translateZ(-60px) rotateY(180deg);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line"><span class="css">	<span class="selector-class">.cube</span> <span class="selector-class">.out_left</span> &#123;</span></span><br><span class="line">		transform: rotateY(-90deg) translateZ(60px);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line"><span class="css">	<span class="selector-class">.cube</span> <span class="selector-class">.out_right</span> &#123;</span></span><br><span class="line">		transform: rotateY(90deg) translateZ(60px);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line"><span class="css">	<span class="selector-class">.cube</span> <span class="selector-class">.out_top</span> &#123;</span></span><br><span class="line">		transform: rotateX(90deg) translateZ(60px);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line"><span class="css">	<span class="selector-class">.cube</span> <span class="selector-class">.out_bottom</span> &#123;</span></span><br><span class="line">		transform: rotateX(-90deg) translateZ(60px);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="tag">&lt;/<span class="name">style</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"wrap"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"cube"</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"out_front"</span>&gt;</span><span class="tag">&lt;<span class="name">img</span> <span class="attr">src</span>=<span class="string">"https://files-cdn.cnblogs.com/files/cjsblog/cube01.bmp"</span> <span class="attr">class</span>=<span class="string">"pic"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"out_back"</span>&gt;</span><span class="tag">&lt;<span class="name">img</span> <span class="attr">src</span>=<span class="string">"https://files-cdn.cnblogs.com/files/cjsblog/cube02.bmp"</span> <span class="attr">class</span>=<span class="string">"pic"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"out_left"</span>&gt;</span><span class="tag">&lt;<span class="name">img</span> <span class="attr">src</span>=<span class="string">"https://files-cdn.cnblogs.com/files/cjsblog/cube03.bmp"</span> <span class="attr">class</span>=<span class="string">"pic"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"out_right"</span>&gt;</span><span class="tag">&lt;<span class="name">img</span> <span class="attr">src</span>=<span class="string">"https://files-cdn.cnblogs.com/files/cjsblog/cube04.bmp"</span> <span class="attr">class</span>=<span class="string">"pic"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"out_top"</span>&gt;</span><span class="tag">&lt;<span class="name">img</span> <span class="attr">src</span>=<span class="string">"https://files-cdn.cnblogs.com/files/cjsblog/cube05.bmp"</span> <span class="attr">class</span>=<span class="string">"pic"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"out_bottom"</span>&gt;</span><span class="tag">&lt;<span class="name">img</span> <span class="attr">src</span>=<span class="string">"https://files-cdn.cnblogs.com/files/cjsblog/cube06.bmp"</span> <span class="attr">class</span>=<span class="string">"pic"</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
 
           
         
@@ -1583,7 +1975,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/11/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/11/">11</a><span class="page-number current">12</span><a class="page-number" href="/page/13/">13</a><span class="space">&hellip;</span><a class="page-number" href="/page/24/">24</a><a class="extend next" rel="next" href="/page/13/"><i class="fa fa-angle-right"></i></a>
+    <a class="extend prev" rel="prev" href="/page/11/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/11/">11</a><span class="page-number current">12</span><a class="page-number" href="/page/13/">13</a><a class="page-number" href="/page/14/">14</a><a class="extend next" rel="next" href="/page/13/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -1631,7 +2023,7 @@
               
                 <a href="/archives">
               
-                  <span class="site-state-item-count">239</span>
+                  <span class="site-state-item-count">137</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -1642,7 +2034,7 @@
               
               <div class="site-state-item site-state-categories">
                 
-                  <span class="site-state-item-count">1</span>
+                  <span class="site-state-item-count">64</span>
                   <span class="site-state-item-name">categories</span>
                 
               </div>
@@ -1653,7 +2045,7 @@
               
               <div class="site-state-item site-state-tags">
                 
-                  <span class="site-state-item-count">3</span>
+                  <span class="site-state-item-count">230</span>
                   <span class="site-state-item-name">tags</span>
                 
               </div>

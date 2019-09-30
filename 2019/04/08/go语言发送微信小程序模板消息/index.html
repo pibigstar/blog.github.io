@@ -1,0 +1,835 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/32x32.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/16x16.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="go,模板消息,微信小程序,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="PS：开发微信的东西是真的心累，一大堆坑！文档写的乱七八糟的，找个东西都得半天。 为了发一条模板消息翻了无数个博客，很多都是把代码一放，其实代码这块很好弄，不就组装个数据调一下API吗，主要是前期工作。我把我遇到的坑给大家总结一下，希望后来人可以少走一些弯路。 微信发送模板消息文档：点击查看  超级大坑！发送接口问题  文档上是这个接口： 1https://api.weixin.qq.com/cg">
+<meta name="keywords" content="go,模板消息,微信小程序">
+<meta property="og:type" content="article">
+<meta property="og:title" content="go语言发送微信小程序模板消息">
+<meta property="og:url" content="http://pibigstar.com/2019/04/08/go语言发送微信小程序模板消息/index.html">
+<meta property="og:site_name" content="派大星的博客">
+<meta property="og:description" content="PS：开发微信的东西是真的心累，一大堆坑！文档写的乱七八糟的，找个东西都得半天。 为了发一条模板消息翻了无数个博客，很多都是把代码一放，其实代码这块很好弄，不就组装个数据调一下API吗，主要是前期工作。我把我遇到的坑给大家总结一下，希望后来人可以少走一些弯路。 微信发送模板消息文档：点击查看  超级大坑！发送接口问题  文档上是这个接口： 1https://api.weixin.qq.com/cg">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20181231161752921.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2p1bm1veGk=,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20181231162223421.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2p1bm1veGk=,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20181231162351913.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20181231163533531.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2p1bm1veGk=,size_16,color_FFFFFF,t_70">
+<meta property="og:updated_time" content="2019-09-30T03:12:58.752Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="go语言发送微信小程序模板消息">
+<meta name="twitter:description" content="PS：开发微信的东西是真的心累，一大堆坑！文档写的乱七八糟的，找个东西都得半天。 为了发一条模板消息翻了无数个博客，很多都是把代码一放，其实代码这块很好弄，不就组装个数据调一下API吗，主要是前期工作。我把我遇到的坑给大家总结一下，希望后来人可以少走一些弯路。 微信发送模板消息文档：点击查看  超级大坑！发送接口问题  文档上是这个接口： 1https://api.weixin.qq.com/cg">
+<meta name="twitter:image" content="https://img-blog.csdnimg.cn/20181231161752921.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2p1bm1veGk=,size_16,color_FFFFFF,t_70">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":true,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://pibigstar.com/2019/04/08/go语言发送微信小程序模板消息/">
+
+
+
+
+
+  <title>go语言发送微信小程序模板消息 | 派大星的博客</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">派大星的博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <h1 class="site-subtitle" itemprop="description">很多事情不是会了才能做，而是做了才能学会</h1>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-schedule">
+          <a href="/schedule/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-calendar"></i> <br>
+            
+            Schedule
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-sitemap">
+          <a href="/sitemap.xml" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-sitemap"></i> <br>
+            
+            Sitemap
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            About
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://pibigstar.com/2019/04/08/go语言发送微信小程序模板消息/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="派大星">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/qq.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="派大星的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">go语言发送微信小程序模板消息</h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-04-08T03:03:04+08:00">
+                2019-04-08
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/go-微信小程序/" itemprop="url" rel="index">
+                    <span itemprop="name">go,微信小程序</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>PS：开发微信的东西是真的心累，一大堆坑！文档写的乱七八糟的，找个东西都得半天。</p>
+<p>为了发一条模板消息翻了无数个博客，很多都是把代码一放，其实代码这块很好弄，不就组装个数据调一下API吗，主要是前期工作。我把我遇到的坑给大家总结一下，希望后来人可以少走一些弯路。</p>
+<p>微信发送模板消息文档：<a href="https://mp.weixin.qq.com/wiki?t=resource/res_main&id=mp1433751277" target="_blank" rel="noopener">点击查看</a></p>
+<ol>
+<li>超级大坑！发送接口问题</li>
+</ol>
+<p>文档上是这个接口：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">https://api.weixin.qq.com/cgi-bin/message/template/send?access_token=ACCESS_TOKEN</span><br></pre></td></tr></table></figure>
+
+<p>实际不是的！！！！！是下面这个，看见没，多了一个wxopen，如果你碰到 48001 返回码，看看是不是这出问题了。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">https://api.weixin.qq.com/cgi-bin/message/wxopen/template/send?access_token=ACCESS_TOKEN</span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li>域名问题<blockquote>
+<p>他们这个必须要配置合法域名，必须是https的，要有SSL证书的，在微信开发工具上可以看到你目前配置的合法域名</p>
+</blockquote>
+</li>
+</ol>
+<p><img src="https://img-blog.csdnimg.cn/20181231161752921.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2p1bm1veGk=,size_16,color_FFFFFF,t_70" alt></p>
+<ol start="3">
+<li>内网穿透问题<blockquote>
+<p>因为formID必须要在真机上才可以获取，所以你最好设置一个内网穿透，让手机能访问到你本地的服务。</p>
+</blockquote>
+</li>
+</ol>
+<p>内网穿透工具可以去下面网站上下载，有免费的<br><a href="https://www.ngrok.cc/" target="_blank" rel="noopener">https://www.ngrok.cc</a></p>
+<ol start="4">
+<li>证书问题<br>在腾讯云上下载的证书是下面这个样子的：<br><img src="https://img-blog.csdnimg.cn/20181231162223421.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2p1bm1veGk=,size_16,color_FFFFFF,t_70" alt></li>
+</ol>
+<p>这时你在go语言就不知道用哪个里面的证书了。。。我用的gofram框架，可以这样搞，<br>将Apache里面的<br><img src="https://img-blog.csdnimg.cn/20181231162351913.png" alt><br>这两个东西，通过下面网站生成一个 <code>.pem</code>证书然后再用到go语言中就好使了。<br><a href="https://www.myssl.cn/tools/merge-pem-cert.html" target="_blank" rel="noopener">https://www.myssl.cn/tools/merge-pem-cert.html</a><br>go语言中这样用</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">s.EnableHTTPS(<span class="string">"https/ssl.pem"</span>, <span class="string">"https/3_pibigstar.com.key"</span>)</span><br><span class="line">s.SetHTTPSPort(<span class="number">7777</span>)</span><br></pre></td></tr></table></figure>
+
+<p>还有一个坑就是，端口不能是443，可能是我本机是Windows，把443端口屏蔽了，如果你一直出现404情况，换个端口！</p>
+<p>大概就些坑，如果你碰到其他的坑可以给我留言，或关注我的微信公众号，希望可以帮到你。</p>
+<p><img src="https://img-blog.csdnimg.cn/20181231163533531.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2p1bm1veGk=,size_16,color_FFFFFF,t_70" alt></p>
+<h2 id="放代码"><a href="#放代码" class="headerlink" title="放代码"></a>放代码</h2><h4 id="go后端"><a href="#go后端" class="headerlink" title="go后端"></a>go后端</h4><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> (</span><br><span class="line">	<span class="string">"bytes"</span></span><br><span class="line">	<span class="string">"encoding/json"</span></span><br><span class="line">	<span class="string">"fmt"</span></span><br><span class="line">	<span class="string">"io/ioutil"</span></span><br><span class="line">	<span class="string">"net/http"</span></span><br><span class="line">	<span class="string">"time"</span></span><br><span class="line"></span><br><span class="line">	<span class="string">"github.com/pibigstar/go-todo/config"</span></span><br><span class="line">	<span class="string">"github.com/pibigstar/go-todo/constant"</span></span><br><span class="line">	<span class="string">"github.com/pibigstar/go-todo/models/db"</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 发送模板消息</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> (</span><br><span class="line">	send_template_url    = <span class="string">"https://api.weixin.qq.com/cgi-bin/message/wxopen/template/send?access_token=%s"</span></span><br><span class="line">	get_access_token_url = <span class="string">"https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&amp;appid=%s&amp;secret=%s"</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="comment">// SendTemplate 发送模板消息</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">SendTemplate</span><span class="params">(msg *TemplateMsg)</span> <span class="params">(*SendTemplateResponse, error)</span></span> &#123;</span><br><span class="line">	msg.Miniprogram.AppID = config.ServerConfig.Appid</span><br><span class="line">	accessToken, err := getAccessToken(msg.Touser)</span><br><span class="line">	<span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">		log.Error(<span class="string">"获取accessToken失败"</span>)</span><br><span class="line">		<span class="keyword">return</span> <span class="literal">nil</span>, err</span><br><span class="line">	&#125;</span><br><span class="line">	url := fmt.Sprintf(send_template_url, accessToken.AccessToken)</span><br><span class="line">	data, err := json.Marshal(msg)</span><br><span class="line">	<span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">		log.Error(<span class="string">"模板消息JSON格式错误"</span>, <span class="string">"err"</span>, err.Error())</span><br><span class="line">		<span class="keyword">return</span> <span class="literal">nil</span>, err</span><br><span class="line">	&#125;</span><br><span class="line">	client := http.Client&#123;&#125;</span><br><span class="line">	resp, err := client.Post(url, <span class="string">"application/json"</span>, bytes.NewBuffer(data))</span><br><span class="line">	<span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">		log.Error(<span class="string">"网络错误，发送模板消息失败"</span>, <span class="string">"err"</span>, err.Error())</span><br><span class="line">		<span class="keyword">return</span> <span class="literal">nil</span>, err</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">defer</span> resp.Body.Close()</span><br><span class="line">	body, _ := ioutil.ReadAll(resp.Body)</span><br><span class="line">	<span class="keyword">var</span> templateResponse SendTemplateResponse</span><br><span class="line">	err = json.Unmarshal(body, &amp;templateResponse)</span><br><span class="line">	<span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">		log.Error(<span class="string">"解析responseBody错误"</span>, <span class="string">"err"</span>, err.Error())</span><br><span class="line">		<span class="keyword">return</span> <span class="literal">nil</span>, err</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> &amp;templateResponse, <span class="literal">nil</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">getAccessToken</span><span class="params">(openID <span class="keyword">string</span>)</span> <span class="params">(*GetAccessTokenResponse, error)</span></span> &#123;</span><br><span class="line">	<span class="keyword">var</span> accessTokenResponse GetAccessTokenResponse</span><br><span class="line">	<span class="comment">// 先从redis中拿</span></span><br><span class="line">	accessToken, err := getAccessTokenFromRedis(openID)</span><br><span class="line">	<span class="keyword">if</span> accessToken != <span class="string">""</span> &amp;&amp; err == <span class="literal">nil</span> &#123;</span><br><span class="line">		accessTokenResponse = GetAccessTokenResponse&#123;AccessToken: accessToken&#125;</span><br><span class="line">		log.Info(<span class="string">"从redis中获取到access_token"</span>, <span class="string">"access_token"</span>, accessToken)</span><br><span class="line">		<span class="keyword">return</span> &amp;accessTokenResponse, <span class="literal">nil</span></span><br><span class="line">	&#125;</span><br><span class="line">	appID := config.ServerConfig.Appid</span><br><span class="line">	secret := config.ServerConfig.Secret</span><br><span class="line">	url := fmt.Sprintf(get_access_token_url, appID, secret)</span><br><span class="line">	client := http.Client&#123;&#125;</span><br><span class="line">	resp, err := client.Get(url)</span><br><span class="line">	<span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">		log.Error(<span class="string">"获取access_toke网络异常"</span>, <span class="string">"err"</span>, err.Error())</span><br><span class="line">		<span class="keyword">return</span> <span class="literal">nil</span>, err</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">defer</span> resp.Body.Close()</span><br><span class="line">	body, _ := ioutil.ReadAll(resp.Body)</span><br><span class="line">	err = json.Unmarshal(body, &amp;accessTokenResponse)</span><br><span class="line">	<span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">		log.Error(<span class="string">"解析AccessToken失败"</span>, <span class="string">"err"</span>, err.Error())</span><br><span class="line">		<span class="keyword">return</span> <span class="literal">nil</span>, err</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="comment">// 存到redis中</span></span><br><span class="line">	<span class="keyword">if</span> _, err := setAccessTokenToRedis(openID, accessTokenResponse.AccessToken); err != <span class="literal">nil</span> &#123;</span><br><span class="line">		log.Error(<span class="string">"将access_token存储到redis中失败"</span>, <span class="string">"err"</span>, err.Error())</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> &amp;accessTokenResponse, <span class="literal">nil</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 从redis中取access_token</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">getAccessTokenFromRedis</span><span class="params">(openID <span class="keyword">string</span>)</span> <span class="params">(<span class="keyword">string</span>, error)</span></span> &#123;</span><br><span class="line">	key := fmt.Sprintf(constant.Access_Token_Redis_Prefix, openID)</span><br><span class="line">	accessToken, err := db.Redis.Get(key).Result()</span><br><span class="line">	<span class="keyword">return</span> accessToken, err</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 将access_token存储到redis中</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">setAccessTokenToRedis</span><span class="params">(openID, token <span class="keyword">string</span>)</span> <span class="params">(<span class="keyword">string</span>, error)</span></span> &#123;</span><br><span class="line">	key := fmt.Sprintf(constant.Access_Token_Redis_Prefix, openID)</span><br><span class="line">	b, err := db.Redis.Set(key, token, <span class="number">7200</span>*time.Second).Result()</span><br><span class="line">	<span class="keyword">return</span> b, err</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> TemplateMsg <span class="keyword">struct</span> &#123;</span><br><span class="line">	Touser      <span class="keyword">string</span>        <span class="string">`json:"touser"`</span>      <span class="comment">//接收者的OpenID</span></span><br><span class="line">	TemplateID  <span class="keyword">string</span>        <span class="string">`json:"template_id"`</span> <span class="comment">//模板消息ID</span></span><br><span class="line">	FormID      <span class="keyword">string</span>        <span class="string">`json:"form_id"`</span></span><br><span class="line">	URL         <span class="keyword">string</span>        <span class="string">`json:"url"`</span>         <span class="comment">//点击后跳转链接</span></span><br><span class="line">	Miniprogram Miniprogram   <span class="string">`json:"miniprogram"`</span> <span class="comment">//点击跳转小程序</span></span><br><span class="line">	Data        *TemplateData <span class="string">`json:"data"`</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">type</span> Miniprogram <span class="keyword">struct</span> &#123;</span><br><span class="line">	AppID    <span class="keyword">string</span> <span class="string">`json:"appid"`</span></span><br><span class="line">	Pagepath <span class="keyword">string</span> <span class="string">`json:"pagepath"`</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> TemplateData <span class="keyword">struct</span> &#123;</span><br><span class="line">	First    KeyWordData <span class="string">`json:"first,omitempty"`</span></span><br><span class="line">	Keyword1 KeyWordData <span class="string">`json:"keyword1,omitempty"`</span></span><br><span class="line">	Keyword2 KeyWordData <span class="string">`json:"keyword2,omitempty"`</span></span><br><span class="line">	Keyword3 KeyWordData <span class="string">`json:"keyword3,omitempty"`</span></span><br><span class="line">	Keyword4 KeyWordData <span class="string">`json:"keyword4,omitempty"`</span></span><br><span class="line">	Keyword5 KeyWordData <span class="string">`json:"keyword5,omitempty"`</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> KeyWordData <span class="keyword">struct</span> &#123;</span><br><span class="line">	Value <span class="keyword">string</span> <span class="string">`json:"value"`</span></span><br><span class="line">	Color <span class="keyword">string</span> <span class="string">`json:"color,omitempty"`</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> SendTemplateResponse <span class="keyword">struct</span> &#123;</span><br><span class="line">	Errcode <span class="keyword">int</span>    <span class="string">`json:"errcode"`</span></span><br><span class="line">	Errmsg  <span class="keyword">string</span> <span class="string">`json:"errmsg"`</span></span><br><span class="line">	MsgID   <span class="keyword">string</span> <span class="string">`json:"msgid"`</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> GetAccessTokenResponse <span class="keyword">struct</span> &#123;</span><br><span class="line">	AccessToken <span class="keyword">string</span> <span class="string">`json:"access_token"`</span></span><br><span class="line">	ExpiresIn   <span class="keyword">int</span>    <span class="string">`json:"expires_in"`</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="controller例子"><a href="#controller例子" class="headerlink" title="controller例子"></a>controller例子</h4><p>仅仅是个例子，供大家参考</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">init</span><span class="params">()</span></span> &#123;</span><br><span class="line">	s := g.Server()</span><br><span class="line">	s.BindHandler(<span class="string">"/send"</span>, sendTemplate)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">sendTemplate</span><span class="params">(r *ghttp.Request)</span></span> &#123;</span><br><span class="line">	templateMsg := &amp;utils.TemplateMsg&#123;&#125;</span><br><span class="line">	tempData := &amp;utils.TemplateData&#123;&#125;</span><br><span class="line">	tempData.First.Value = <span class="string">"测试模板消息"</span></span><br><span class="line">	tempData.Keyword1.Value = <span class="string">"大家记得买票啊"</span></span><br><span class="line">	tempData.Keyword2.Value = <span class="string">"马上就要放假了，大家记得买回家的票啊"</span></span><br><span class="line">	tempData.Keyword3.Value = <span class="string">"2018-12-30 15:59"</span></span><br><span class="line">	tempData.Keyword4.Value = <span class="string">"派大星"</span></span><br><span class="line">	tempData.Keyword5.Value = <span class="string">"记得按时完成"</span></span><br><span class="line">	templateMsg.Data = tempData</span><br><span class="line">	formID := r.GetString(<span class="string">"formID"</span>)</span><br><span class="line">	log.Info(<span class="string">"formID"</span>, <span class="string">"formID"</span>, formID)</span><br><span class="line">	templateMsg.FormID = formID</span><br><span class="line">	openID, _ := middleware.GetOpenID(r)</span><br><span class="line">	templateMsg.Touser = openID</span><br><span class="line">	templateMsg.TemplateID = constant.Tmeplate_Receive_Task_ID</span><br><span class="line">	response, err := utils.SendTemplate(templateMsg)</span><br><span class="line">	<span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">		fmt.Println(<span class="string">"发送模板消息失败"</span>, err.Error())</span><br><span class="line">	&#125;</span><br><span class="line">	r.Response.WriteJson(response)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="小程序端"><a href="#小程序端" class="headerlink" title="小程序端"></a>小程序端</h4><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">view</span>&gt;</span></span><br><span class="line"> <span class="tag">&lt;<span class="name">form</span> <span class="attr">bindsubmit</span>=<span class="string">"templateSend"</span> <span class="attr">report-submit</span>=<span class="string">"true"</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">button</span> <span class="attr">type</span>=<span class="string">'primary'</span> <span class="attr">formType</span>=<span class="string">"submit"</span> <span class="attr">size</span>=<span class="string">'mini'</span>&gt;</span>发送模板消息<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">form</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">view</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">templateSend: function (e) &#123;</span><br><span class="line">  // 表单需设置report-submit=&quot;true&quot;</span><br><span class="line">  var formId = e.detail.formId;</span><br><span class="line">  // 发送随机模板消息</span><br><span class="line">  util.apiRequest(&quot;send&quot;,&quot;get&quot;,&#123;</span><br><span class="line">    formID: formId,</span><br><span class="line">    &#125;).then(data =&gt; &#123;</span><br><span class="line">       console.log(data)</span><br><span class="line">    &#125;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+    
+    
+    
+
+    <div>
+      
+        <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
+    
+</div>
+
+      
+    </div>
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/go/" rel="tag"><i class="fa fa-tag"></i> go</a>
+          
+            <a href="/tags/模板消息/" rel="tag"><i class="fa fa-tag"></i> 模板消息</a>
+          
+            <a href="/tags/微信小程序/" rel="tag"><i class="fa fa-tag"></i> 微信小程序</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/04/05/SpringBoot整合dubbo/" rel="next" title="SpringBoot整合dubbo">
+                <i class="fa fa-chevron-left"></i> SpringBoot整合dubbo
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/04/16/分布式Id自增生成器/" rel="prev" title="分布式Id自增生成器">
+                分布式Id自增生成器 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/qq.png" alt="派大星">
+            
+              <p class="site-author-name" itemprop="name">派大星</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives">
+              
+                  <span class="site-state-item-count">137</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                
+                  <span class="site-state-item-count">64</span>
+                  <span class="site-state-item-name">categories</span>
+                
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                
+                  <span class="site-state-item-count">230</span>
+                  <span class="site-state-item-name">tags</span>
+                
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/pibigstar" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://blog.csdn.net/junmoxi" target="_blank" title="CSDN">
+                      
+                        <i class="fa fa-fw fa-yelp"></i>CSDN</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#放代码"><span class="nav-number">1.</span> <span class="nav-text">放代码</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#go后端"><span class="nav-number">1.0.1.</span> <span class="nav-text">go后端</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#controller例子"><span class="nav-number">1.0.2.</span> <span class="nav-text">controller例子</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#小程序端"><span class="nav-number">1.0.3.</span> <span class="nav-text">小程序端</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+        <div class="back-to-top">
+          <i class="fa fa-arrow-up"></i>
+          
+        </div>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-[object Object]"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">派大星</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+  <script type="text/javascript" src="/js/src/js.cookie.js?v=5.1.4"></script>
+  <script type="text/javascript" src="/js/src/scroll-cookie.js?v=5.1.4"></script>
+
+
+  
+
+</body>
+</html>
+<!-- 页面点击小红心 -->
+ <script type="text/javascript" src="/js/src/clicklove.js"></script>

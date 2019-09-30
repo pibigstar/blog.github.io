@@ -1,0 +1,818 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/32x32.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/16x16.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="单线程,多线程,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="以生活例子说明单线程与多线程 转载自：书圈 1. 程序设计的目标在我看来单从程序的角度来看，一个好的程序的目标应该是性能与用户体验的平衡。当然一个程序是否能够满足用户的需求暂且不谈，这是业务层面的问题，我们仅仅讨论程序本身。围绕两点来展开，性能与用户体验。  性能：高性能的程序应该可以等同于CPU的利用率，CPU的利用率越高(一直在工作，没有闲下来的时候)，程序的性能越高。体验：这里的体验不只是界">
+<meta name="keywords" content="单线程,多线程">
+<meta property="og:type" content="article">
+<meta property="og:title" content="以生活的例子说明单线程和多线程">
+<meta property="og:url" content="http://pibigstar.com/2019/04/27/以生活的例子说明单线程和多线程/index.html">
+<meta property="og:site_name" content="派大星的博客">
+<meta property="og:description" content="以生活例子说明单线程与多线程 转载自：书圈 1. 程序设计的目标在我看来单从程序的角度来看，一个好的程序的目标应该是性能与用户体验的平衡。当然一个程序是否能够满足用户的需求暂且不谈，这是业务层面的问题，我们仅仅讨论程序本身。围绕两点来展开，性能与用户体验。  性能：高性能的程序应该可以等同于CPU的利用率，CPU的利用率越高(一直在工作，没有闲下来的时候)，程序的性能越高。体验：这里的体验不只是界">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-09-30T03:12:59.260Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="以生活的例子说明单线程和多线程">
+<meta name="twitter:description" content="以生活例子说明单线程与多线程 转载自：书圈 1. 程序设计的目标在我看来单从程序的角度来看，一个好的程序的目标应该是性能与用户体验的平衡。当然一个程序是否能够满足用户的需求暂且不谈，这是业务层面的问题，我们仅仅讨论程序本身。围绕两点来展开，性能与用户体验。  性能：高性能的程序应该可以等同于CPU的利用率，CPU的利用率越高(一直在工作，没有闲下来的时候)，程序的性能越高。体验：这里的体验不只是界">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":true,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://pibigstar.com/2019/04/27/以生活的例子说明单线程和多线程/">
+
+
+
+
+
+  <title>以生活的例子说明单线程和多线程 | 派大星的博客</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">派大星的博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <h1 class="site-subtitle" itemprop="description">很多事情不是会了才能做，而是做了才能学会</h1>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-schedule">
+          <a href="/schedule/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-calendar"></i> <br>
+            
+            Schedule
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-sitemap">
+          <a href="/sitemap.xml" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-sitemap"></i> <br>
+            
+            Sitemap
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            About
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://pibigstar.com/2019/04/27/以生活的例子说明单线程和多线程/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="派大星">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/qq.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="派大星的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">以生活的例子说明单线程和多线程</h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-04-27T18:06:04+08:00">
+                2019-04-27
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Java/" itemprop="url" rel="index">
+                    <span itemprop="name">Java</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>以生活例子说明单线程与多线程</p>
+<p>转载自：<a href="https://mp.weixin.qq.com/s?__biz=MzI5MzIwNDI1MQ==&mid=2650111536&idx=2&sn=9a01602dd2c984f6a993e669ae3d183a&chksm=f4746644c303ef52a03183c84d1abe77d467180e8f77940164cfcab19bcda077218187fca745&scene=22&srcid=09173wMwlBL0KdlPT6cqiXum#rd" target="_blank" rel="noopener">书圈</a></p>
+<h1 id="1-程序设计的目标"><a href="#1-程序设计的目标" class="headerlink" title="1. 程序设计的目标"></a>1. 程序设计的目标</h1><p>在我看来单从程序的角度来看，一个好的程序的目标应该是性能与用户体验的平衡。当然一个程序是否能够满足用户的需求暂且不谈，这是业务层面的问题，我们仅仅讨论程序本身。围绕两点来展开，性能与用户体验。 </p>
+<p>性能：高性能的程序应该可以等同于CPU的利用率，CPU的利用率越高(一直在工作，没有闲下来的时候)，程序的性能越高。<br>体验：这里的体验不只是界面多么漂亮，功能多么顺手，这里的体验指程序的响应速度，响应速度越快，用户体验越好。 </p>
+<p>下面我们就这两点进行各种模型的讨论。 </p>
+<h1 id="2-单线程多任务无阻塞"><a href="#2-单线程多任务无阻塞" class="headerlink" title="2. 单线程多任务无阻塞"></a>2. 单线程多任务无阻塞</h1><p>以生活中食堂打饭的场景作为比喻，假设有这样的场景，小A，小B，小C 在窗口依次排队打饭。 假设窗口负责打饭的阿姨打一个菜需要耗时1秒。如果小A需要2个菜，小B需要3个菜，小C需要2个菜。如下： </p>
+<p>阿姨(CPU)：打一个菜需要1秒<br>小A：2个菜<br>小B：3个菜<br>小C：2个菜 </p>
+<p>那么在这种模型下将所有服Wu做完阿姨需要耗时 2 + 3 + 2 = 7秒<br>阿姨 = CPU<br>小A,小B,小C = 任务(这里是以任务为概念，表示需要做一些事情)<br>这种模型下CPU是满负荷不间断运转的，没有空闲，用户体验还不错。这种程序中每个任务的耗时都比较小，是非常理想的状态，一般情况下基本不太可能存在。 </p>
+<h1 id="3-单线程多任务IO阻塞"><a href="#3-单线程多任务IO阻塞" class="headerlink" title="3. 单线程多任务IO阻塞"></a>3. 单线程多任务IO阻塞</h1><p>将上面的场景稍微做改动：<br>阿姨：打一个菜需要1秒<br>小A：2个菜，但是忘记带钱了，要找同学送过来，估计需要等5分钟可以送到(可以理解为磁盘IO)<br>小B：3个菜<br>小C：2个菜 </p>
+<p>这种情况下小A这里发生了阻塞，实际上小A这里耗费了5分钟也就是 300秒+ 2个菜的时间，也就是302秒，而CPU则空闲了300秒，实际上工作2秒。 </p>
+<p>所有服Wu做完花费 302 + 3 + 2 = 307秒  CPU实际工作7秒，等待300秒。 极大浪费了CPU的时钟周期。 用户体验很差，因为小A阻塞的时候，后面的所有人都等着，而实际上此时CPU空闲。所以单线程中不要有阻塞出现。 </p>
+<h1 id="4-单线程多任务异步IO"><a href="#4-单线程多任务异步IO" class="headerlink" title="4. 单线程多任务异步IO"></a>4. 单线程多任务异步IO</h1><p>还是上面的模型，加入一个角色：值日生小哥，他负责事先询问每一个人是否带钱了，如果带钱了则允许打菜，否则把钱准备好了再说。 </p>
+<p>&lt;1&gt; 值日生小哥问小A准备好打菜了吗，小A说忘带钱了，值日生小哥说，你把钱准备好了再说，小A开始准备(需要300秒，从此刻开始记时)。<br>&lt;2&gt; 值日生小哥问小B准备好打菜了吗，小B说可以了，阿姨服务小B，耗时3秒<br>&lt;3&gt; 值日生小哥问小C准备好打菜了吗，小C说可以了，阿姨服务小C，耗时2秒<br>&lt;4&gt; 值日生小哥问小A准备好了没有，小A说还要等一会，阿姨由于没有人过来服务，处于空闲状态<br>&lt;5&gt; 300秒之后，小A准备好了，阿姨服务小A，耗时2秒 </p>
+<p>整个过程做完耗时 300 + 2 = 302秒  CPU工作7秒，空闲295秒 </p>
+<p>值日生小哥相当于select模型中的select功能，负责轮询任务是否可以工作，如果可以则直接工作，否则继续轮询。在小A阻塞的300秒里面，阿姨(CPU)没有傻等，而是在服务后面的人，也就是小B和小C，所以这里与模型3不同的是，这里有5秒CPU是工作的。 如果打饭的人越多，这种模型CPU的利用率越高，例如如果有小D，小E，小F…… 等需要服务，CPU可以在小A阻塞的300秒期间内继续服务其他人。实际上值日生小哥轮询也会耗时，这个耗时是很少的，几乎可以忽略不计，但是如果任务非常多，这个轮询还是会影响性能的，但是epoll模型已经不使用轮询的方式，相当于A，B，C会主动跟值日生小哥报告，说我准备好了，可以直接打菜了。 </p>
+<p>这种模式下用户体验好，CPU利用率高(任务越多利用率越高) </p>
+<h1 id="5-单线程多任务，有耗时计算"><a href="#5-单线程多任务，有耗时计算" class="headerlink" title="5. 单线程多任务，有耗时计算"></a>5. 单线程多任务，有耗时计算</h1><p>回到最开始的模型，如下：<br>阿姨：打一个菜需要1秒<br>小A：200个菜<br>小B：3个菜<br>小C：2个菜 </p>
+<p>顺序做完所有任务，需要耗时 200 + 3 + 2 = 205秒， CPU无空闲，但是用户体验却不是很好，因为显然后面的 B，C 需要等待小A 200秒的时间，这种情况下是没有IO阻塞的，但是任务A本身太耗CPU了，所以说如果单线程◇◇现了耗时的操作，一定会影响体验(IO操作或者是耗时的计算都属于耗时的操作，都会导致阻塞，但是这两种导致阻塞的性质是不一样的)。在所有的单线程模型中都不允许出现阻塞的情况，如果出现，那么用户体验是极差的，例如在UI编程中(QT,C# Winform)是不允许在UI线程中做耗时的操作的，否则会导致UI界面无响应。 编写Nodejs程序的时候，我们所写的代码实际上是在一个线程中执行的，所以也不允许有阻塞的操作(当然整个Nodejs框架实现异步，一定不止一个线程)。 </p>
+<p>出现阻塞的情况一般有2种，一种是IO阻塞，例如典型的如磁盘操作，这种情况下的阻塞会导致CPU空闲等待(当然现代操作系统中如果IO阻塞，操作系统一定会将导致IO阻塞的线程挂起)。这种阻塞的情况，可以通过异步IO的方法避免，这样就避免程序中仅有的单线程被操作系统挂起。另一种情况下是确实有非常多的计算操作，例如一个复杂的加密算法，确实需要消耗非常多的CPU时间，这种情况下CPU并不是空闲的，反而是全负荷工作的。这种CPU密集的工作不适合放在单线程中，虽然CPU的利用率很高，但是用户体验并不是很好。这种情况下使用多线程反而会更好，例如如果3个任务，每个任务都在一个线程中，也就是有3个线程，A任务在ThreadA中，B任务在ThreadB中，C任务在ThreadC中，那么即使A任务的计算量比较大，B，C两个任务所在的线程也不必等待A任务完成之后再工作，他们也有机会得到调度，这是由操作系统来完成的。这样就不会因为某一个任务计算量大，而导致阻塞其他任务而影响体验了。 </p>
+<h1 id="6-多线程程序"><a href="#6-多线程程序" class="headerlink" title="6. 多线程程序"></a>6. 多线程程序</h1><p>我们将上面的模型改造成多线程的模型是怎样的呢，我们在模型5的基础上添加一个角色，管理员大叔(操作系统的角色)：<br>阿姨：打一个菜需要1秒<br>小A：200个菜<br>小B：3个菜<br>小C：2个菜 </p>
+<p>加入管理员大叔之后变成这样的了，小A打两个菜之后，大叔说，你打的菜太多了，不能因为你要打200个菜，让后面的同学都没有机会打菜，你打两个菜之后等一会，让后面的同学也有机会。 </p>
+<p>大叔让小B打两个菜，然后让小C打两个菜(小C完成)，然后再让小A打两个菜(完成之后小A总共就有4个菜了)，再让小B打1个菜(此时小B总共打3个菜，完成)，然后小A打剩下的196个菜。 </p>
+<p>CPU的利用率：很高，阿姨在不断的工作 </p>
+<p>用户体验：不错，即使小A要打200个菜，小B，小C也有机会。 当然如果小A说我是帮校长打菜，要快一点(线程优先级高)，那也只能先把小A服务完 </p>
+<p>总耗时：   200 + 3 + 2 + (大叔指挥安排所消耗的时间，包括从小C切换回小A的时候，大叔要知道小A上次打的菜是哪两个，这次应该接着打什么菜，这相当于线程上下文切换的开销以及线程环境的保存与恢复)，所以并不是线程越多越好，线程非常多的时候大叔估计会焦头烂额吧，要记住这么状态，切换来切换去也耗时间。 </p>
+<p>这种模型下实际上是将小A的耗时任务，分成多份去执行而不是集中执行，所以小A要完成他的任务，可能需要更多的时间(期间他也需要等别人，阿姨不会一直为他一个人服务，但是阿姨为他服务的时间是没有变化的)，这种其实有点以时间换取用户体验(小B和小Ｃ的体验，小Ａ的体验可能就不会那么好了，但是小Ａ本来也非常耗时，所以多等一会是不是也没关系) </p>
+<p>那么IO阻塞和CPU计算耗时阻塞这两者有什么区别呢？ 区别在于IO阻塞是不使用CPU的，而CPU计算耗时导致的阻塞是会使用CPU的。 例如上面的例子中，小A说忘记带钱了需要同学送钱，于是小A等着同学送钱过来，这个过程中阿姨并没有为小A提供服务，这个过程中为小A提供服务的是他的同学(送钱过来)，实际上小A的同学相当于现代计算机系统中的DMA(直接内存操作)，小A同学送钱的过程相当于DMA从磁盘读取数据到内存的过程，这个过程基本不需要CPU干预。 </p>
+<p>当然在DMA技术还没有出现的年代，从磁盘读取文件也是需要CPU发送指令去读取的，也就是说需要CPU的计算，应用到这里的场景中，就是阿姨亲自跑一趟帮小A把钱拿过来。 </p>
+<h1 id="7-多CPU"><a href="#7-多CPU" class="headerlink" title="7. 多CPU"></a>7. 多CPU</h1><p>多CPU是一个更加复杂的问题，多CPU如何调度？ 小A在第一个窗口打两个菜，又跑到第二个窗口打两个菜这种情况如何处理。小A在第一个窗口，小B在第二个窗口他们要同一个菜，但是这个菜只够一个人，那么两个窗口阿姨如何分配这种需求(实际上应该是由操作系统也就是管理员大叔来决定如何分配，也就是多核下的线程同步与互斥)？ </p>
+<p>多核CPU情况下，多线程的调度，互斥，锁与同步相对来讲更加复杂，多核情况下是真正的并行，同一时刻有多个线程在同时运行，他们的竞争怎么处理，多个CPU之间如何同步(多CPU之间的缓存状态一致性)等等一系列的问题。 </p>
+<h1 id="8-多线程与多进程"><a href="#8-多线程与多进程" class="headerlink" title="8. 多线程与多进程"></a>8. 多线程与多进程</h1><p>上面描述的多线程实际上是讨论的是多线程的调度问题，这里我们说一说多线程与多进程与资源的分配问题。什么意思呢，一群人(多个线程)在一个桌子(进程)上吃饭，他们会涉及到一些问题，比如多个人可能会夹一个菜(竞争)，A和B同时看到盘子里面有一块肉，同时伸出筷子去夹，A先夹走，B迟了一点伸到盘子的时候已经没了，只能缩回来(临界资源，互斥)，有一个点心需要用馍夹肉一起吃。A夹了肉，B夹了馍，A需要B的馍，B需要A的肉，他们僵持不下谁都不让步(死锁)。 </p>
+<p>多线程之间的资源共享是非常方便的，因为他们共用进程的资源空间（在一个桌子上），但是需要注意一系列的问题，竞争，死锁，同步等。如果在旁边再开一个桌子(进程)。 那么桌子之间讲话，递东西又不方便(进程间通信)，而开一个桌子的开销比在一个桌子上多加一个人的开销要大。另外一个桌子上的人数不可能无限制增加，桌子的容量有限也坐不下这么多人(进程的线程句柄是有限制的)。一个桌子坏了不会影响到另一个桌子上面人的就餐情况(进程间相互DuLi，一个进程崩溃不会影响另一个)，而一个桌子上的某人喝挂了需要送医院，估计这一桌人都要散了(线程挂掉会导致整个进程也挂掉)。所以多线程与多进程是各有优缺点，不能一概而论。 </p>
+<p>说明：多线程桌子的比喻受到知乎用户［pansz］的启发，但是该比喻似乎说明不了线程同步的情况。 </p>
+<h1 id="9-总结"><a href="#9-总结" class="headerlink" title="9. 总结"></a>9. 总结</h1><p>单线程程序：适合IO异步，不能阻塞，不能有大量耗CPU的计算。典型如Nodejs，还有一些网络程序 </p>
+
+      
+    </div>
+    
+    
+    
+
+    <div>
+      
+        <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
+    
+</div>
+
+      
+    </div>
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/单线程/" rel="tag"><i class="fa fa-tag"></i> 单线程</a>
+          
+            <a href="/tags/多线程/" rel="tag"><i class="fa fa-tag"></i> 多线程</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/04/24/Go语言入门（5）安装第三方库/" rel="next" title="Go语言入门（5）安装第三方库">
+                <i class="fa fa-chevron-left"></i> Go语言入门（5）安装第三方库
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/05/02/以生活的例子来解释编程中的名词/" rel="prev" title="以生活的例子来解释编程中的名词">
+                以生活的例子来解释编程中的名词 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/qq.png" alt="派大星">
+            
+              <p class="site-author-name" itemprop="name">派大星</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives">
+              
+                  <span class="site-state-item-count">137</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                
+                  <span class="site-state-item-count">64</span>
+                  <span class="site-state-item-name">categories</span>
+                
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                
+                  <span class="site-state-item-count">230</span>
+                  <span class="site-state-item-name">tags</span>
+                
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/pibigstar" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://blog.csdn.net/junmoxi" target="_blank" title="CSDN">
+                      
+                        <i class="fa fa-fw fa-yelp"></i>CSDN</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#1-程序设计的目标"><span class="nav-number">1.</span> <span class="nav-text">1. 程序设计的目标</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2-单线程多任务无阻塞"><span class="nav-number">2.</span> <span class="nav-text">2. 单线程多任务无阻塞</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#3-单线程多任务IO阻塞"><span class="nav-number">3.</span> <span class="nav-text">3. 单线程多任务IO阻塞</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#4-单线程多任务异步IO"><span class="nav-number">4.</span> <span class="nav-text">4. 单线程多任务异步IO</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#5-单线程多任务，有耗时计算"><span class="nav-number">5.</span> <span class="nav-text">5. 单线程多任务，有耗时计算</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#6-多线程程序"><span class="nav-number">6.</span> <span class="nav-text">6. 多线程程序</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#7-多CPU"><span class="nav-number">7.</span> <span class="nav-text">7. 多CPU</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#8-多线程与多进程"><span class="nav-number">8.</span> <span class="nav-text">8. 多线程与多进程</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#9-总结"><span class="nav-number">9.</span> <span class="nav-text">9. 总结</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+        <div class="back-to-top">
+          <i class="fa fa-arrow-up"></i>
+          
+        </div>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-[object Object]"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">派大星</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+  <script type="text/javascript" src="/js/src/js.cookie.js?v=5.1.4"></script>
+  <script type="text/javascript" src="/js/src/scroll-cookie.js?v=5.1.4"></script>
+
+
+  
+
+</body>
+</html>
+<!-- 页面点击小红心 -->
+ <script type="text/javascript" src="/js/src/clicklove.js"></script>

@@ -1,0 +1,824 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/32x32.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/16x16.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="java,jvm,内存区域,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="1. java中内存区域的划分上节谈了Java中的垃圾回收机制，今天我们聊聊Java中内存区域的划分。总得来说Java中内存分为四块：栈、堆、数据域、代码域 1. 栈 栈中主要存放基本类型的数据和对象的引用也就是存放变量。  Java虚拟机会为每一个方法申请一个栈空间，在这个方法中声明的变量都是放到此栈中的，他们会随此方法的调用结束而回收掉。 如果存放的是基本类型数据（普通变量非静态变量），则直接">
+<meta name="keywords" content="java,jvm,内存区域">
+<meta property="og:type" content="article">
+<meta property="og:title" content="浅谈Java中的内存区域划分">
+<meta property="og:url" content="http://pibigstar.com/2019/09/12/浅谈Java中的内存区域划分/index.html">
+<meta property="og:site_name" content="派大星的博客">
+<meta property="og:description" content="1. java中内存区域的划分上节谈了Java中的垃圾回收机制，今天我们聊聊Java中内存区域的划分。总得来说Java中内存分为四块：栈、堆、数据域、代码域 1. 栈 栈中主要存放基本类型的数据和对象的引用也就是存放变量。  Java虚拟机会为每一个方法申请一个栈空间，在这个方法中声明的变量都是放到此栈中的，他们会随此方法的调用结束而回收掉。 如果存放的是基本类型数据（普通变量非静态变量），则直接">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20181123195304578.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2p1bm1veGk=,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20181123195319214.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2p1bm1veGk=,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20181123195331597.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2p1bm1veGk=,size_16,color_FFFFFF,t_70">
+<meta property="og:updated_time" content="2019-09-30T03:12:59.280Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="浅谈Java中的内存区域划分">
+<meta name="twitter:description" content="1. java中内存区域的划分上节谈了Java中的垃圾回收机制，今天我们聊聊Java中内存区域的划分。总得来说Java中内存分为四块：栈、堆、数据域、代码域 1. 栈 栈中主要存放基本类型的数据和对象的引用也就是存放变量。  Java虚拟机会为每一个方法申请一个栈空间，在这个方法中声明的变量都是放到此栈中的，他们会随此方法的调用结束而回收掉。 如果存放的是基本类型数据（普通变量非静态变量），则直接">
+<meta name="twitter:image" content="https://img-blog.csdnimg.cn/20181123195304578.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2p1bm1veGk=,size_16,color_FFFFFF,t_70">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":true,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://pibigstar.com/2019/09/12/浅谈Java中的内存区域划分/">
+
+
+
+
+
+  <title>浅谈Java中的内存区域划分 | 派大星的博客</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">派大星的博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <h1 class="site-subtitle" itemprop="description">很多事情不是会了才能做，而是做了才能学会</h1>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-schedule">
+          <a href="/schedule/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-calendar"></i> <br>
+            
+            Schedule
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-sitemap">
+          <a href="/sitemap.xml" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-sitemap"></i> <br>
+            
+            Sitemap
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            About
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://pibigstar.com/2019/09/12/浅谈Java中的内存区域划分/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="派大星">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/qq.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="派大星的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">浅谈Java中的内存区域划分</h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-09-12T21:09:04+08:00">
+                2019-09-12
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Java/" itemprop="url" rel="index">
+                    <span itemprop="name">Java</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="1-java中内存区域的划分"><a href="#1-java中内存区域的划分" class="headerlink" title="1. java中内存区域的划分"></a>1. java中内存区域的划分</h1><p>上节谈了Java中的垃圾回收机制，今天我们聊聊Java中内存区域的划分。<br>总得来说Java中内存分为四块：栈、堆、数据域、代码域</p>
+<h2 id="1-栈"><a href="#1-栈" class="headerlink" title="1. 栈"></a>1. 栈</h2><blockquote>
+<p>栈中主要存放基本类型的数据和对象的引用也就是存放变量。</p>
+</blockquote>
+<p>Java虚拟机会为每一个方法申请一个栈空间，在这个方法中声明的变量都是放到此栈中的，他们会随此方法的调用结束而回收掉。</p>
+<p>如果存放的是基本类型数据（普通变量非静态变量），则直接将变量名和值存入栈中的内存中；</p>
+<p>如果是引用类型，则将变量名存入栈，然后指向它new出的对象（存放在堆中）。</p>
+<h2 id="2-堆"><a href="#2-堆" class="headerlink" title="2. 堆"></a>2. 堆</h2><blockquote>
+<p>简单来说就是存放通过关键字new创造出来的对象</p>
+</blockquote>
+<h2 id="3-数据域"><a href="#3-数据域" class="headerlink" title="3. 数据域"></a>3. 数据域</h2><p>数据域分为两块：静态域和常量池</p>
+<p>1.静态域</p>
+<blockquote>
+<p>存放被关键字static修饰的变量也就是静态变量<br>如果该静态变量是基本类型则将变量名和值存入静态域，如果是引用类型则指向new出的对象。</p>
+</blockquote>
+<p>2.常量池<br>通俗来讲就是存放那些被final修饰的变量的值</p>
+<blockquote>
+<p>常量池指的是在编译期被确定，并被保存在已编译的.class文件中的一些数据。除了包含代码中所定义的各种基本类型（如int、long等）和对象型（如String及数组）的<code>常量值</code>还包含一些以文本形式出现的符号引用，比如：类和接口的全限定名；字段的名称和描述符；方法和名称和描述符。</p>
+</blockquote>
+<h2 id="4-代码域"><a href="#4-代码域" class="headerlink" title="4. 代码域"></a>4. 代码域</h2><blockquote>
+<p>就是放代码的区域</p>
+</blockquote>
+<h1 id="2-用图来表示"><a href="#2-用图来表示" class="headerlink" title="2. 用图来表示"></a>2. 用图来表示</h1><h4 id="例1-普通变量和静态变量的创建"><a href="#例1-普通变量和静态变量的创建" class="headerlink" title="例1 普通变量和静态变量的创建"></a>例1 普通变量和静态变量的创建</h4><p>代码：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">String str = <span class="string">"hello"</span>;  </span><br><span class="line"><span class="keyword">static</span> <span class="keyword">int</span> a = <span class="number">1</span>;</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://img-blog.csdnimg.cn/20181123195304578.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2p1bm1veGk=,size_16,color_FFFFFF,t_70" alt><br>这里的str是非静态变量所以将其放入到栈中，而静态变量a则需要放入静态域中，对于变量值”abc”和10则都应该放入到常量池当中</p>
+<h4 id="例2-对象的创建"><a href="#例2-对象的创建" class="headerlink" title="例2 对象的创建"></a>例2 对象的创建</h4><p>代码：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">String str=<span class="keyword">new</span> String(<span class="string">"hello"</span>);</span><br></pre></td></tr></table></figure>
+
+<p>这里的str是String类型的对象，所以放入栈中，而new出来的东西则放入到堆中，对于初始值”hello”则放入到常量池中。<br><img src="https://img-blog.csdnimg.cn/20181123195319214.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2p1bm1veGk=,size_16,color_FFFFFF,t_70" alt></p>
+<h4 id="例3-数组的创建"><a href="#例3-数组的创建" class="headerlink" title="例3 数组的创建"></a>例3 数组的创建</h4><p>代码：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> s[] = <span class="keyword">new</span> <span class="keyword">int</span>[<span class="number">3</span>];</span><br><span class="line">s[<span class="number">0</span>]=<span class="number">1</span>;s[<span class="number">1</span>]=<span class="number">2</span>;s[<span class="number">2</span>]=<span class="number">3</span>;</span><br></pre></td></tr></table></figure>
+
+<p>这里的s[]是一个数组变量，所以放入到栈中，new出来的东西还是放入到堆中，最后的每个元素的值则放入到常量池当中<br><img src="https://img-blog.csdnimg.cn/20181123195331597.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2p1bm1veGk=,size_16,color_FFFFFF,t_70" alt></p>
+
+      
+    </div>
+    
+    
+    
+
+    <div>
+      
+        <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
+    
+</div>
+
+      
+    </div>
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/java/" rel="tag"><i class="fa fa-tag"></i> java</a>
+          
+            <a href="/tags/jvm/" rel="tag"><i class="fa fa-tag"></i> jvm</a>
+          
+            <a href="/tags/内存区域/" rel="tag"><i class="fa fa-tag"></i> 内存区域</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/09/06/面试总结---数据库部分/" rel="next" title="面试总结---数据库部分">
+                <i class="fa fa-chevron-left"></i> 面试总结---数据库部分
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/09/12/MySQL中JSON类型使用/" rel="prev" title="MySQL中JSON类型使用">
+                MySQL中JSON类型使用 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/qq.png" alt="派大星">
+            
+              <p class="site-author-name" itemprop="name">派大星</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives">
+              
+                  <span class="site-state-item-count">137</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                
+                  <span class="site-state-item-count">64</span>
+                  <span class="site-state-item-name">categories</span>
+                
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                
+                  <span class="site-state-item-count">230</span>
+                  <span class="site-state-item-name">tags</span>
+                
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/pibigstar" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://blog.csdn.net/junmoxi" target="_blank" title="CSDN">
+                      
+                        <i class="fa fa-fw fa-yelp"></i>CSDN</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#1-java中内存区域的划分"><span class="nav-number">1.</span> <span class="nav-text">1. java中内存区域的划分</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-栈"><span class="nav-number">1.1.</span> <span class="nav-text">1. 栈</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-堆"><span class="nav-number">1.2.</span> <span class="nav-text">2. 堆</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-数据域"><span class="nav-number">1.3.</span> <span class="nav-text">3. 数据域</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-代码域"><span class="nav-number">1.4.</span> <span class="nav-text">4. 代码域</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2-用图来表示"><span class="nav-number">2.</span> <span class="nav-text">2. 用图来表示</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#例1-普通变量和静态变量的创建"><span class="nav-number">2.0.0.1.</span> <span class="nav-text">例1 普通变量和静态变量的创建</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#例2-对象的创建"><span class="nav-number">2.0.0.2.</span> <span class="nav-text">例2 对象的创建</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#例3-数组的创建"><span class="nav-number">2.0.0.3.</span> <span class="nav-text">例3 数组的创建</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+        <div class="back-to-top">
+          <i class="fa fa-arrow-up"></i>
+          
+        </div>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-[object Object]"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">派大星</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+  <script type="text/javascript" src="/js/src/js.cookie.js?v=5.1.4"></script>
+  <script type="text/javascript" src="/js/src/scroll-cookie.js?v=5.1.4"></script>
+
+
+  
+
+</body>
+</html>
+<!-- 页面点击小红心 -->
+ <script type="text/javascript" src="/js/src/clicklove.js"></script>

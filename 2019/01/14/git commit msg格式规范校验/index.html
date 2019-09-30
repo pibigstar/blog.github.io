@@ -1,0 +1,819 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/32x32.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/16x16.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="git,git hooks,commit,gitlab,ci,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="@[toc] 1. commit规范每个公司的规范都是不同的，这里讲下我常用的规范type(模块): message type 用于说明 commit的类别，只允许使用下面7个标识。  feat：新功能（feature） fix：修补bug hotfix：紧急修复bug test：增加测试 docs：文档（documentation） style： 格式（不影响代码运行的变动） refactor：">
+<meta name="keywords" content="git,git hooks,commit,gitlab,ci">
+<meta property="og:type" content="article">
+<meta property="og:title" content="git commit msg格式规范校验">
+<meta property="og:url" content="http://pibigstar.com/2019/01/14/git commit msg格式规范校验/index.html">
+<meta property="og:site_name" content="派大星的博客">
+<meta property="og:description" content="@[toc] 1. commit规范每个公司的规范都是不同的，这里讲下我常用的规范type(模块): message type 用于说明 commit的类别，只允许使用下面7个标识。  feat：新功能（feature） fix：修补bug hotfix：紧急修复bug test：增加测试 docs：文档（documentation） style： 格式（不影响代码运行的变动） refactor：">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20190412161927662.png">
+<meta property="og:updated_time" content="2019-09-30T03:12:58.732Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="git commit msg格式规范校验">
+<meta name="twitter:description" content="@[toc] 1. commit规范每个公司的规范都是不同的，这里讲下我常用的规范type(模块): message type 用于说明 commit的类别，只允许使用下面7个标识。  feat：新功能（feature） fix：修补bug hotfix：紧急修复bug test：增加测试 docs：文档（documentation） style： 格式（不影响代码运行的变动） refactor：">
+<meta name="twitter:image" content="https://img-blog.csdnimg.cn/20190412161927662.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":true,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://pibigstar.com/2019/01/14/git commit msg格式规范校验/">
+
+
+
+
+
+  <title>git commit msg格式规范校验 | 派大星的博客</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">派大星的博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <h1 class="site-subtitle" itemprop="description">很多事情不是会了才能做，而是做了才能学会</h1>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-schedule">
+          <a href="/schedule/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-calendar"></i> <br>
+            
+            Schedule
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-sitemap">
+          <a href="/sitemap.xml" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-sitemap"></i> <br>
+            
+            Sitemap
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            About
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://pibigstar.com/2019/01/14/git commit msg格式规范校验/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="派大星">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/qq.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="派大星的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">git commit msg格式规范校验</h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-01-14T18:06:04+08:00">
+                2019-01-14
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/工具使用-git/" itemprop="url" rel="index">
+                    <span itemprop="name">工具使用,git</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>@[toc]</p>
+<h1 id="1-commit规范"><a href="#1-commit规范" class="headerlink" title="1. commit规范"></a>1. commit规范</h1><p>每个公司的规范都是不同的，这里讲下我常用的规范<br><code>type(模块): message</code></p>
+<p><strong>type</strong></p>
+<p>用于说明 <code>commit</code>的类别，只允许使用下面7个标识。</p>
+<ul>
+<li><code>feat</code>：新功能（feature）</li>
+<li><code>fix</code>：修补bug</li>
+<li><code>hotfix</code>：紧急修复bug</li>
+<li><code>test</code>：增加测试</li>
+<li><code>docs</code>：文档（documentation）</li>
+<li><code>style</code>： 格式（不影响代码运行的变动）</li>
+<li><code>refactor</code>：重构（即不是新增功能，也不是修改bug的代码变动）</li>
+<li><code>chore</code>：构建过程或辅助工具的变动</li>
+</ul>
+<hr>
+<p>举个例子，我新增了用户登录功能，那么提交信息应该这样写：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git commit -m <span class="string">"feat(user): add the user login"</span></span><br></pre></td></tr></table></figure>
+
+<h1 id="2-使用git-hooks校验"><a href="#2-使用git-hooks校验" class="headerlink" title="2. 使用git hooks校验"></a>2. 使用git hooks校验</h1><p>在<code>.git/hooks</code>目录下有很多钩子，我们可以根据需要自定义不同的内容，这里我们只需要修改<code>commit-msg</code>即可。</p>
+<p>首先将<code>commit-msg.sample</code> 改为 <code>commit-msg</code>，也就是去掉后缀。<br>将里面的内容修改为下面内容</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#!/bin/bash</span></span><br><span class="line">MSG=`awk <span class="string">'&#123;printf("%s",$0)&#125;'</span> <span class="variable">$1</span>`</span><br><span class="line"><span class="keyword">if</span> [[ <span class="variable">$MSG</span> =~ ^(feat|fix|<span class="built_in">test</span>|refactor|docs|style|chroe)\(.*\):.*$ ]]</span><br><span class="line"><span class="keyword">then</span></span><br><span class="line">	<span class="built_in">echo</span> -e <span class="string">"\033[32m commit success! \033[0m"</span></span><br><span class="line"><span class="keyword">else</span></span><br><span class="line">    <span class="built_in">echo</span> -e <span class="string">"\033[31m Error: the commit message is irregular \033[m"</span></span><br><span class="line">	<span class="built_in">echo</span> -e <span class="string">"\033[31m Error: type must be one of [feat,fix,docs,style,refactor,test,chore] \033[m"</span></span><br><span class="line">    <span class="built_in">echo</span> -e <span class="string">"\033[31m eg: feat(user): add the user login \033[m"</span></span><br><span class="line">	<span class="built_in">exit</span> 1</span><br><span class="line"><span class="keyword">fi</span></span><br></pre></td></tr></table></figure>
+
+<p>当我们提交不规范的commit信息时就会提醒用户，并终止此提交<br><img src="https://img-blog.csdnimg.cn/20190412161927662.png" alt></p>
+<h1 id="3-gitlab-ci-中校验"><a href="#3-gitlab-ci-中校验" class="headerlink" title="3. gitlab ci 中校验"></a>3. gitlab ci 中校验</h1><h2 id="3-1-gitlab-ci-yml"><a href="#3-1-gitlab-ci-yml" class="headerlink" title="3.1 .gitlab-ci.yml"></a>3.1 .gitlab-ci.yml</h2><figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">stages:</span></span><br><span class="line"><span class="bullet">-</span> <span class="string">lint</span></span><br><span class="line"></span><br><span class="line"><span class="attr">commit_msg:</span></span><br><span class="line"><span class="attr">  stage:</span> <span class="string">lint</span></span><br><span class="line"><span class="attr">  script:</span></span><br><span class="line"><span class="bullet">  -</span> <span class="string">/bin/bash</span> <span class="string">commit-msg.sh</span></span><br><span class="line"><span class="attr">  only:</span></span><br><span class="line"><span class="bullet">  -</span> <span class="string">pushes</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="3-2-commit-msg-sh"><a href="#3-2-commit-msg-sh" class="headerlink" title="3.2 commit-msg.sh"></a>3.2 commit-msg.sh</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#! /bin/bash</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># get commit msg</span></span><br><span class="line"><span class="keyword">if</span> [[ <span class="variable">$CI_COMMIT_MESSAGE</span> ]]; <span class="keyword">then</span></span><br><span class="line">    msg=<span class="variable">$CI_COMMIT_MESSAGE</span></span><br><span class="line"><span class="keyword">else</span></span><br><span class="line">    <span class="built_in">read</span> msg &lt; .git/COMMIT_EDITMSG</span><br><span class="line"><span class="keyword">fi</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">echo</span> -e <span class="string">"\033[33m The commit msg: \033[0m <span class="variable">$msg</span>"</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># if the msg is merge then skip it</span></span><br><span class="line">mergePattern=<span class="string">'^Merge '</span></span><br><span class="line"><span class="keyword">if</span> [[ <span class="variable">$msg</span> =~ <span class="variable">$mergeCommitPattern</span> ]]; <span class="keyword">then</span></span><br><span class="line">    <span class="built_in">echo</span> -e <span class="string">"\033[32m skip the merge, commit success! \033[0m"</span></span><br><span class="line">    <span class="built_in">exit</span> 0</span><br><span class="line"><span class="keyword">fi</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># check the commit msg</span></span><br><span class="line">maxLength=50</span><br><span class="line">length=<span class="variable">$&#123;#msg&#125;</span></span><br><span class="line">pattern=<span class="string">'^(feat|fix|hotfix|test|refactor|docs|style|chroe)\(.*\):.*$'</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> [[ <span class="variable">$msg</span> =~ <span class="variable">$pattern</span> ]]; <span class="keyword">then</span></span><br><span class="line">    <span class="keyword">if</span> [[ <span class="variable">$length</span> -gt <span class="variable">$maxLength</span> ]]; <span class="keyword">then</span></span><br><span class="line">        <span class="built_in">echo</span> -e <span class="string">"\033[31m Error: the msg over max length \033[m"</span></span><br><span class="line">        <span class="built_in">exit</span> 1</span><br><span class="line">    <span class="keyword">fi</span></span><br><span class="line">    <span class="built_in">echo</span> -e <span class="string">"\033[32m commit success! \033[0m"</span></span><br><span class="line"><span class="keyword">else</span></span><br><span class="line">    <span class="built_in">echo</span> -e <span class="string">"\033[31m Error: the commit message is irregular \033[m"</span></span><br><span class="line">	<span class="built_in">echo</span> -e <span class="string">"\033[31m Error: type must be one of [feat,fix,hotfix,docs,style,refactor,test,chore] \033[m"</span></span><br><span class="line">    <span class="built_in">echo</span> -e <span class="string">"\033[31m eg: feat(user): add the user login \033[m"</span></span><br><span class="line">    <span class="built_in">exit</span> 1</span><br><span class="line"><span class="keyword">fi</span></span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+    
+    
+    
+
+    <div>
+      
+        <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
+    
+</div>
+
+      
+    </div>
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/git/" rel="tag"><i class="fa fa-tag"></i> git</a>
+          
+            <a href="/tags/git-hooks/" rel="tag"><i class="fa fa-tag"></i> git hooks</a>
+          
+            <a href="/tags/commit/" rel="tag"><i class="fa fa-tag"></i> commit</a>
+          
+            <a href="/tags/gitlab/" rel="tag"><i class="fa fa-tag"></i> gitlab</a>
+          
+            <a href="/tags/ci/" rel="tag"><i class="fa fa-tag"></i> ci</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/01/02/docker打包springboot项目成镜像/" rel="next" title="docker打包springboot项目成镜像">
+                <i class="fa fa-chevron-left"></i> docker打包springboot项目成镜像
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/01/16/常用工具学习之curl/" rel="prev" title="常用工具学习之curl">
+                常用工具学习之curl <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/qq.png" alt="派大星">
+            
+              <p class="site-author-name" itemprop="name">派大星</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives">
+              
+                  <span class="site-state-item-count">137</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                
+                  <span class="site-state-item-count">64</span>
+                  <span class="site-state-item-name">categories</span>
+                
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                
+                  <span class="site-state-item-count">230</span>
+                  <span class="site-state-item-name">tags</span>
+                
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/pibigstar" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://blog.csdn.net/junmoxi" target="_blank" title="CSDN">
+                      
+                        <i class="fa fa-fw fa-yelp"></i>CSDN</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#1-commit规范"><span class="nav-number">1.</span> <span class="nav-text">1. commit规范</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2-使用git-hooks校验"><span class="nav-number">2.</span> <span class="nav-text">2. 使用git hooks校验</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#3-gitlab-ci-中校验"><span class="nav-number">3.</span> <span class="nav-text">3. gitlab ci 中校验</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#3-1-gitlab-ci-yml"><span class="nav-number">3.1.</span> <span class="nav-text">3.1 .gitlab-ci.yml</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-2-commit-msg-sh"><span class="nav-number">3.2.</span> <span class="nav-text">3.2 commit-msg.sh</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+        <div class="back-to-top">
+          <i class="fa fa-arrow-up"></i>
+          
+        </div>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-[object Object]"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">派大星</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+  <script type="text/javascript" src="/js/src/js.cookie.js?v=5.1.4"></script>
+  <script type="text/javascript" src="/js/src/scroll-cookie.js?v=5.1.4"></script>
+
+
+  
+
+</body>
+</html>
+<!-- 页面点击小红心 -->
+ <script type="text/javascript" src="/js/src/clicklove.js"></script>

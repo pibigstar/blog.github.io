@@ -1,0 +1,850 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/32x32.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/16x16.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="novnc,vncserver,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="@[toc] 1. 关闭防火墙123setenforce 0systemctl stop firewalldsystemctl disable firewalld  2. 安装tigervnc2.1 锁定配置1chattr +i /etc/resolv.conf  2.2 安装tigervnc1yum install -y tigervnc tigervnc-server  2.3 安装桌面查看支">
+<meta name="keywords" content="novnc,vncserver">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Centos安装可视化桌面（noVNC）">
+<meta property="og:url" content="http://pibigstar.com/2019/06/20/Centos安装可视化桌面（noVNC）/index.html">
+<meta property="og:site_name" content="派大星的博客">
+<meta property="og:description" content="@[toc] 1. 关闭防火墙123setenforce 0systemctl stop firewalldsystemctl disable firewalld  2. 安装tigervnc2.1 锁定配置1chattr +i /etc/resolv.conf  2.2 安装tigervnc1yum install -y tigervnc tigervnc-server  2.3 安装桌面查看支">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20190918223222168.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20190918223321627.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20190918223500217.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2p1bm1veGk=,size%E9%A2%9D_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20190918223710404.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2p1bm1veGk=,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20190918113718735.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2p1bm1veGk=,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20190918224132159.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2p1bm1veGk=,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/2019091822420146.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2p1bm1veGk=,size_16,color_FFFFFF,t_70">
+<meta property="og:updated_time" content="2019-09-30T03:12:58.652Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Centos安装可视化桌面（noVNC）">
+<meta name="twitter:description" content="@[toc] 1. 关闭防火墙123setenforce 0systemctl stop firewalldsystemctl disable firewalld  2. 安装tigervnc2.1 锁定配置1chattr +i /etc/resolv.conf  2.2 安装tigervnc1yum install -y tigervnc tigervnc-server  2.3 安装桌面查看支">
+<meta name="twitter:image" content="https://img-blog.csdnimg.cn/20190918223222168.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":true,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://pibigstar.com/2019/06/20/Centos安装可视化桌面（noVNC）/">
+
+
+
+
+
+  <title>Centos安装可视化桌面（noVNC） | 派大星的博客</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">派大星的博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <h1 class="site-subtitle" itemprop="description">很多事情不是会了才能做，而是做了才能学会</h1>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-schedule">
+          <a href="/schedule/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-calendar"></i> <br>
+            
+            Schedule
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-sitemap">
+          <a href="/sitemap.xml" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-sitemap"></i> <br>
+            
+            Sitemap
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            About
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://pibigstar.com/2019/06/20/Centos安装可视化桌面（noVNC）/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="派大星">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/qq.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="派大星的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">Centos安装可视化桌面（noVNC）</h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-06-20T15:03:04+08:00">
+                2019-06-20
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Linux/" itemprop="url" rel="index">
+                    <span itemprop="name">Linux</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>@[toc]</p>
+<h1 id="1-关闭防火墙"><a href="#1-关闭防火墙" class="headerlink" title="1. 关闭防火墙"></a>1. 关闭防火墙</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">setenforce 0</span><br><span class="line">systemctl stop firewalld</span><br><span class="line">systemctl <span class="built_in">disable</span> firewalld</span><br></pre></td></tr></table></figure>
+
+<h1 id="2-安装tigervnc"><a href="#2-安装tigervnc" class="headerlink" title="2. 安装tigervnc"></a>2. 安装tigervnc</h1><h2 id="2-1-锁定配置"><a href="#2-1-锁定配置" class="headerlink" title="2.1 锁定配置"></a>2.1 锁定配置</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">chattr +i /etc/resolv.conf</span><br></pre></td></tr></table></figure>
+
+<h2 id="2-2-安装tigervnc"><a href="#2-2-安装tigervnc" class="headerlink" title="2.2 安装tigervnc"></a>2.2 安装tigervnc</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum install -y tigervnc tigervnc-server</span><br></pre></td></tr></table></figure>
+
+<h2 id="2-3-安装桌面"><a href="#2-3-安装桌面" class="headerlink" title="2.3 安装桌面"></a>2.3 安装桌面</h2><p><strong>查看支持的桌面</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum grouplist</span><br></pre></td></tr></table></figure>
+
+<p><strong>安装桌面</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum groupinstall -y <span class="string">"GNOME Desktop"</span></span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>这个过程会很慢，耐心等待</p>
+</blockquote>
+<h2 id="2-4-安装桌面插件"><a href="#2-4-安装桌面插件" class="headerlink" title="2.4 安装桌面插件"></a>2.4 安装桌面插件</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum install gnome-panel</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>安装结束之后会报 <code>Error：Nothing to do</code>，不用管，没事</p>
+</blockquote>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum install nautilus</span><br></pre></td></tr></table></figure>
+
+<h2 id="2-5-更换显示模式"><a href="#2-5-更换显示模式" class="headerlink" title="2.5 更换显示模式"></a>2.5 更换显示模式</h2><blockquote>
+<p>默认是图形界面的模式，你可以修改为命令行模式</p>
+</blockquote>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 设置成命令模式</span></span><br><span class="line">systemctl <span class="built_in">set</span>-default multi-user.target  </span><br><span class="line"></span><br><span class="line"><span class="comment"># 设置成图形模式</span></span><br><span class="line">systemctl <span class="built_in">set</span>-default graphical.target</span><br></pre></td></tr></table></figure>
+
+<h1 id="3-配置tigervnc"><a href="#3-配置tigervnc" class="headerlink" title="3. 配置tigervnc"></a>3. 配置tigervnc</h1><h2 id="3-1-设置密码"><a href="#3-1-设置密码" class="headerlink" title="3.1 设置密码"></a>3.1 设置密码</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vncpasswd</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://img-blog.csdnimg.cn/20190918223222168.png" alt></p>
+<h2 id="3-2-启动vnc"><a href="#3-2-启动vnc" class="headerlink" title="3.2 启动vnc"></a>3.2 启动vnc</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vncserver :1</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p><code>:</code> 后面是端口号，0-99  不指定默认为1，第一次会提示输入密码，前两次是可读可写的密码，输入y之后，输入只读的密码，当用只读密码进来时，只能看不能操作，以后可以使用<code>vncpasswd</code>命令修改密码。</p>
+</blockquote>
+<p><img src="https://img-blog.csdnimg.cn/20190918223321627.png" alt></p>
+<h1 id="4-登录vnc"><a href="#4-登录vnc" class="headerlink" title="4. 登录vnc"></a>4. 登录vnc</h1><h2 id="4-1-下载VNC-Viewer"><a href="#4-1-下载VNC-Viewer" class="headerlink" title="4.1 下载VNC Viewer"></a>4.1 下载VNC Viewer</h2><p>下载地址：<a href="https://www.realvnc.com/en/connect/download/viewer/windows/" target="_blank" rel="noopener">https://www.realvnc.com/en/connect/download/viewer/windows/</a></p>
+<h2 id="4-2-登录"><a href="#4-2-登录" class="headerlink" title="4.2 登录"></a>4.2 登录</h2><p><img src="https://img-blog.csdnimg.cn/20190918223500217.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2p1bm1veGk=,size%E9%A2%9D_16,color_FFFFFF,t_70" alt></p>
+<blockquote>
+<p><code>VNC Server</code> 为 <code>你的IP:1</code>  这个1 是我们前面启动<code>vncserver</code>后面的1，如果你写的2，这里也要写2</p>
+</blockquote>
+<h2 id="4-3-登录效果"><a href="#4-3-登录效果" class="headerlink" title="4.3 登录效果"></a>4.3 登录效果</h2><p><img src="https://img-blog.csdnimg.cn/20190918223710404.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2p1bm1veGk=,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<h1 id="5-安装noVnc"><a href="#5-安装noVnc" class="headerlink" title="5. 安装noVnc"></a>5. 安装noVnc</h1><h2 id="5-1-下载"><a href="#5-1-下载" class="headerlink" title="5.1 下载"></a>5.1 下载</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 下载</span></span><br><span class="line">wget https://github.com/novnc/noVNC/archive/master.zip</span><br><span class="line"><span class="comment"># 解压</span></span><br><span class="line">unzip master.zip</span><br></pre></td></tr></table></figure>
+
+<h2 id="5-2-生成证书"><a href="#5-2-生成证书" class="headerlink" title="5.2 生成证书"></a>5.2 生成证书</h2><blockquote>
+<p>证书要放到<code>utils</code>文件夹下面</p>
+</blockquote>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> noVNC-master/utils</span><br><span class="line"><span class="comment"># 生成证书</span></span><br><span class="line">openssl req -new -x509 -days 365 -nodes -out self.pem -keyout self.pem</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>前面都不用写，只需要填写<code>Common Name (e.g. server FQDN or YOUR name) []:</code>这个字段，填写的内容是本机的<code>hostname</code>，可通过下面命令查看本机的hostname</p>
+</blockquote>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hostname</span><br></pre></td></tr></table></figure>
+
+<h2 id="5-3-安装noVnc"><a href="#5-3-安装noVnc" class="headerlink" title="5.3 安装noVnc"></a>5.3 安装noVnc</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 安装</span></span><br><span class="line">./utils/launch.sh --vnc localhost:5901</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://img-blog.csdnimg.cn/20190918113718735.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2p1bm1veGk=,size_16,color_FFFFFF,t_70" alt><br>浏览器打开：<code>http://你的IP:6080/vnc.html</code> 即可看到效果<br><img src="https://img-blog.csdnimg.cn/20190918224132159.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2p1bm1veGk=,size_16,color_FFFFFF,t_70" alt><br>输入我们前面设置的密码，即可进入桌面<br><img src="https://img-blog.csdnimg.cn/2019091822420146.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2p1bm1veGk=,size_16,color_FFFFFF,t_70" alt></p>
+
+      
+    </div>
+    
+    
+    
+
+    <div>
+      
+        <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
+    
+</div>
+
+      
+    </div>
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/novnc/" rel="tag"><i class="fa fa-tag"></i> novnc</a>
+          
+            <a href="/tags/vncserver/" rel="tag"><i class="fa fa-tag"></i> vncserver</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/06/18/Java使用itexpdf创建pdf文件并添加水印/" rel="next" title="Java使用itexpdf创建pdf文件并添加水印">
+                <i class="fa fa-chevron-left"></i> Java使用itexpdf创建pdf文件并添加水印
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/06/22/SpringBoot整合Druid和MyBatis/" rel="prev" title="SpringBoot整合Druid和MyBatis">
+                SpringBoot整合Druid和MyBatis <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/qq.png" alt="派大星">
+            
+              <p class="site-author-name" itemprop="name">派大星</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives">
+              
+                  <span class="site-state-item-count">137</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                
+                  <span class="site-state-item-count">64</span>
+                  <span class="site-state-item-name">categories</span>
+                
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                
+                  <span class="site-state-item-count">230</span>
+                  <span class="site-state-item-name">tags</span>
+                
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/pibigstar" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://blog.csdn.net/junmoxi" target="_blank" title="CSDN">
+                      
+                        <i class="fa fa-fw fa-yelp"></i>CSDN</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#1-关闭防火墙"><span class="nav-number">1.</span> <span class="nav-text">1. 关闭防火墙</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2-安装tigervnc"><span class="nav-number">2.</span> <span class="nav-text">2. 安装tigervnc</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#2-1-锁定配置"><span class="nav-number">2.1.</span> <span class="nav-text">2.1 锁定配置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-2-安装tigervnc"><span class="nav-number">2.2.</span> <span class="nav-text">2.2 安装tigervnc</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-3-安装桌面"><span class="nav-number">2.3.</span> <span class="nav-text">2.3 安装桌面</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-4-安装桌面插件"><span class="nav-number">2.4.</span> <span class="nav-text">2.4 安装桌面插件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-5-更换显示模式"><span class="nav-number">2.5.</span> <span class="nav-text">2.5 更换显示模式</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#3-配置tigervnc"><span class="nav-number">3.</span> <span class="nav-text">3. 配置tigervnc</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#3-1-设置密码"><span class="nav-number">3.1.</span> <span class="nav-text">3.1 设置密码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-2-启动vnc"><span class="nav-number">3.2.</span> <span class="nav-text">3.2 启动vnc</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#4-登录vnc"><span class="nav-number">4.</span> <span class="nav-text">4. 登录vnc</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#4-1-下载VNC-Viewer"><span class="nav-number">4.1.</span> <span class="nav-text">4.1 下载VNC Viewer</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-2-登录"><span class="nav-number">4.2.</span> <span class="nav-text">4.2 登录</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-3-登录效果"><span class="nav-number">4.3.</span> <span class="nav-text">4.3 登录效果</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#5-安装noVnc"><span class="nav-number">5.</span> <span class="nav-text">5. 安装noVnc</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#5-1-下载"><span class="nav-number">5.1.</span> <span class="nav-text">5.1 下载</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-2-生成证书"><span class="nav-number">5.2.</span> <span class="nav-text">5.2 生成证书</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-3-安装noVnc"><span class="nav-number">5.3.</span> <span class="nav-text">5.3 安装noVnc</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+        <div class="back-to-top">
+          <i class="fa fa-arrow-up"></i>
+          
+        </div>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-[object Object]"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">派大星</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+  <script type="text/javascript" src="/js/src/js.cookie.js?v=5.1.4"></script>
+  <script type="text/javascript" src="/js/src/scroll-cookie.js?v=5.1.4"></script>
+
+
+  
+
+</body>
+</html>
+<!-- 页面点击小红心 -->
+ <script type="text/javascript" src="/js/src/clicklove.js"></script>

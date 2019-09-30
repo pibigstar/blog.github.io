@@ -270,7 +270,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://pibigstar.com/2019/09/29/用java写一个简单的区块链（下）/">
+    <link itemprop="mainEntityOfPage" href="http://pibigstar.com/2019/03/17/SpringBoot安全验证之Referer拦截器/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="派大星">
@@ -289,7 +289,7 @@
         
           <h2 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2019/09/29/用java写一个简单的区块链（下）/" itemprop="url">Untitled</a></h2>
+                <a class="post-title-link" href="/2019/03/17/SpringBoot安全验证之Referer拦截器/" itemprop="url">SpringBoot安全验证之Referer拦截器</a></h2>
         
 
         <div class="post-meta">
@@ -301,8 +301,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-09-29T22:56:40+08:00">
-                2019-09-29
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-03-17T15:03:04+08:00">
+                2019-03-17
               </time>
             
 
@@ -311,6 +311,28 @@
             
           </span>
 
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/springboot/" itemprop="url" rel="index">
+                    <span itemprop="name">springboot</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
           
 
           
@@ -341,7 +363,12 @@
       
         
           
-            <p>title: 用java写一个简单的区块链（下）<br>date: 2018-06-16 22:10:31<br>tags: [区块链,java]<br>categories: 区块链</p>
+            <h1 id="自定义Referer拦截器"><a href="#自定义Referer拦截器" class="headerlink" title="自定义Referer拦截器"></a>自定义Referer拦截器</h1><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">RefererInterceptor</span> <span class="keyword">extends</span> <span class="title">HandlerInterceptorAdapter</span> </span>&#123;</span><br><span class="line">    <span class="comment">// URL匹配器</span></span><br><span class="line">    <span class="keyword">private</span> AntPathMatcher matcher = <span class="keyword">new</span> AntPathMatcher();</span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    <span class="keyword">private</span> RefererProperties properties;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">preHandle</span><span class="params">(HttpServletRequest req, HttpServletResponse resp, Object handler)</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">        String referer = req.getHeader(<span class="string">"referer"</span>);</span><br><span class="line">        String host = req.getServerName();</span><br><span class="line">        <span class="comment">// 只验证POST请求</span></span><br><span class="line">        <span class="keyword">if</span> (<span class="string">"POST"</span>.equals(req.getMethod())) &#123;</span><br><span class="line">            <span class="keyword">if</span> (referer == <span class="keyword">null</span>) &#123;</span><br><span class="line">                <span class="comment">// 状态置为404</span></span><br><span class="line">                resp.setStatus(HttpServletResponse.SC_NOT_FOUND);</span><br><span class="line">                <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">            &#125; </span><br><span class="line">            java.net.URL url = <span class="keyword">null</span>;</span><br><span class="line">            <span class="keyword">try</span> &#123;</span><br><span class="line">                url = <span class="keyword">new</span> java.net.URL(referer);</span><br><span class="line">            &#125; <span class="keyword">catch</span> (MalformedURLException e) &#123;</span><br><span class="line">                <span class="comment">// URL解析异常，也置为404</span></span><br><span class="line">                resp.setStatus(HttpServletResponse.SC_NOT_FOUND);</span><br><span class="line">                <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="comment">// 首先判断请求域名和referer域名是否相同</span></span><br><span class="line">            <span class="keyword">if</span> (!host.equals(url.getHost())) &#123;</span><br><span class="line">                <span class="comment">// 如果不等，判断是否在白名单中</span></span><br><span class="line">                <span class="keyword">if</span> (properties.getRefererDomain() != <span class="keyword">null</span>) &#123;</span><br><span class="line">                    <span class="keyword">for</span> (String s : properties.getRefererDomain()) &#123;</span><br><span class="line">                        <span class="keyword">if</span> (s.equals(url.getHost())) &#123;</span><br><span class="line">                            <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">                        &#125;</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">           &#125;</span><br><span class="line">        &#125;</span><br><span class="line">      <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">   &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="配置白名单Referer域名"><a href="#配置白名单Referer域名" class="headerlink" title="配置白名单Referer域名"></a>配置白名单Referer域名</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Component</span></span><br><span class="line"><span class="meta">@ConfigurationProperties</span>(prefix = <span class="string">"referer"</span>)</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">RefererProperties</span> </span>&#123;</span><br><span class="line">	<span class="comment">// 白名单域名</span></span><br><span class="line">    <span class="keyword">private</span> List&lt;String&gt; refererDomain;</span><br><span class="line">	<span class="comment">//setter,getter方法</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="yml配置"><a href="#yml配置" class="headerlink" title="yml配置"></a>yml配置</h2><figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">referer:</span></span><br><span class="line">	<span class="attr">refererDomain:</span></span><br><span class="line">	  <span class="bullet">-</span> <span class="string">baidu.com</span></span><br><span class="line">	  <span class="bullet">-</span> <span class="string">pibigstar.com</span></span><br><span class="line">	  <span class="bullet">-</span> <span class="string">mxspvip.cn</span></span><br></pre></td></tr></table></figure>
+
 
           
         
@@ -394,7 +421,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://pibigstar.com/2019/09/29/使用NetData对服务器性能进行监控/">
+    <link itemprop="mainEntityOfPage" href="http://pibigstar.com/2019/03/13/使用docker安装consul服务发现/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="派大星">
@@ -413,7 +440,7 @@
         
           <h2 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2019/09/29/使用NetData对服务器性能进行监控/" itemprop="url">Untitled</a></h2>
+                <a class="post-title-link" href="/2019/03/13/使用docker安装consul服务发现/" itemprop="url">使用docker安装consul服务发现</a></h2>
         
 
         <div class="post-meta">
@@ -425,8 +452,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-09-29T22:56:40+08:00">
-                2019-09-29
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-03-13T17:05:04+08:00">
+                2019-03-13
               </time>
             
 
@@ -435,6 +462,28 @@
             
           </span>
 
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/工具使用-docker/" itemprop="url" rel="index">
+                    <span itemprop="name">工具使用,docker</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
           
 
           
@@ -465,180 +514,52 @@
       
         
           
-            <p>title: 使用NetData对服务器性能进行监控<br>date: 2018-11-08 22:10:31<br>tags: [netdata,centos,性能监控]<br>categories: Linux</p>
-<p>@[TOC]<br>服务器为：CentOS</p>
-<h1 id="1-安装NetData"><a href="#1-安装NetData" class="headerlink" title="1. 安装NetData"></a>1. 安装NetData</h1><p>1.安装Netdata需要的基本编译环境安装：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum install zlib-devel gcc make git autoconf autogen automake pkgconfig</span><br></pre></td></tr></table></figure>
+            <h1 id="1-拉取consul镜像"><a href="#1-拉取consul镜像" class="headerlink" title="1. 拉取consul镜像"></a>1. 拉取consul镜像</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker pull consul:latest</span><br></pre></td></tr></table></figure>
 
-<ol start="2">
-<li><p>下载NetData</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wget http://firehol.org/download/netdata/releases/v1.0.0/netdata-1.0.0.tar.gz</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>解压</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tar -xf netdata-1.0.0.tar.gz</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>进入到netdata</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> netdata-1.0.0</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>执行安装</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./netdata-installer.sh</span><br></pre></td></tr></table></figure>
-
-</li>
-</ol>
-<h1 id="2-查看界面"><a href="#2-查看界面" class="headerlink" title="2. 查看界面"></a>2. 查看界面</h1><p>浏览器打开：http://你的IP:19999</p>
-<p><img src="https://img-blog.csdnimg.cn/20190114100150994.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2p1bm1veGk=,size_16,color_FFFFFF,t_70" alt></p>
-<p><img src="https://img-blog.csdnimg.cn/20190114100229890.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2p1bm1veGk=,size_16,color_FFFFFF,t_70" alt></p>
-<h1 id="3-更改配置"><a href="#3-更改配置" class="headerlink" title="3. 更改配置"></a>3. 更改配置</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vim /etc/netdata/netdata.conf</span><br></pre></td></tr></table></figure>
-
-<h1 id="4-启动与关闭"><a href="#4-启动与关闭" class="headerlink" title="4. 启动与关闭"></a>4. 启动与关闭</h1><ol>
-<li><p>启动netdata服务</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/usr/sbin/netdata</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>关闭netdata服务</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">killall netdata</span><br></pre></td></tr></table></figure>
-
-</li>
-</ol>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    <div>
-      
-    </div>
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://pibigstar.com/2019/09/29/以生活的例子来解释编程中的名词/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="派大星">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/qq.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="派大星的博客">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/09/29/以生活的例子来解释编程中的名词/" itemprop="url">Untitled</a></h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-09-29T22:56:40+08:00">
-                2019-09-29
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>title: 以生活的例子来解释编程中的名词<br>date: 2018-08-03 22:10:31<br>tags: [java]<br>categories: Java</p>
-<h2 id="死锁"><a href="#死锁" class="headerlink" title="死锁"></a>死锁</h2><blockquote>
-<p>死锁就是两个或两个以上的线程争夺同一资源而形成的一种僵持状态，这种状态在没有外力的作用下将一直持续下去</p>
+<h1 id="2-consul参数详解"><a href="#2-consul参数详解" class="headerlink" title="2. consul参数详解"></a>2. consul参数详解</h1><blockquote>
+<ul>
+<li>–net=host docker参数, 使得docker容器越过了net namespace的隔离，免去手动指定端口映射的步骤</li>
+<li>-server consul支持以server或client的模式运行, server是服务发现模块的核心, client主要用于转发请求</li>
+<li>-advertise 将本机私有IP传递到consul</li>
+<li>-retry-join 指定要加入的consul节点地址，失败后会重试, 可多次指定不同的地址</li>
+<li>-client 指定consul绑定在哪个client地址上，这个地址可提供HTTP、DNS、RPC等服务，默认是&gt;127.0.0.1</li>
+<li>-bind 绑定服务器的ip地址；该地址用来在集群内部的通讯，集群内的所有节点到地址必须是可达的，&gt;默认是0.0.0.0<br>allow_stale 设置为true则表明可从consul集群的任一server节点获取dns信息, false则表明每次请求都会&gt;经过consul的server leader</li>
+<li>-bootstrap-expect 数据中心中预期的服务器数。指定后，Consul将等待指定数量的服务器可用，然后&gt;启动群集。允许自动选举leader，但不能与传统-bootstrap标志一起使用, 需要在server模式下运行。</li>
+<li>-data-dir 数据存放的位置，用于持久化保存集群状态</li>
+<li>-node 群集中此节点的名称，这在群集中必须是唯一的，默认情况下是节点的主机名。</li>
+<li>-config-dir 指定配置文件，当这个目录下有 .json 结尾的文件就会被加载，详细可参考<a href="https://www.consul.io/docs/agent/options.html#configuration_files" target="_blank" rel="noopener">https://www.consul.io/docs/agent/options.html#configuration_files</a></li>
+<li>-enable-script-checks 检查服务是否处于活动状态，类似开启心跳</li>
+<li>-datacenter 数据中心名称</li>
+<li>-ui 开启ui界面</li>
+<li>-join 指定ip, 加入到已有的集群中</li>
+</ul>
 </blockquote>
-<p>例子：比如馍夹菜这道菜，需要馒头和菜，A线程抢到了馒头，而B线程抢到了菜，这时A需要B的菜，而B需要A的馒头，他们都不愿放弃手中的资源而一直僵持下去，这种就叫做死锁</p>
-<h2 id="活锁"><a href="#活锁" class="headerlink" title="活锁"></a>活锁</h2><blockquote>
-<p>活锁简单来说就是同时释放，又同时拿，还是上面那个例子，A放弃了馒头，B也放弃了菜，可他们又同时拿了资源，又会造成僵持</p>
-</blockquote>
-<p>例子： 在路上走路的时候，迎面来了一个人，这时你想给他让路，所以你向左边移动，而他也想给你让路，所以他也向左边移动，此时你俩又是无法通过，又彼此让路，又无法通过。。。。就这样一直持续下去，这种就是活锁。</p>
-<h2 id="IOC"><a href="#IOC" class="headerlink" title="IOC"></a>IOC</h2><blockquote>
-<p>IOC(Inversion of Control) 控制反转，你要明白是什么被反转了，是对象的获取过程被反转了，之前是我们手动去new一个对象，不需要的时候在销毁对象，手动去管理对象之间的依赖关系，而现在是将对象托管给容器管理。。它有两种实现方式，一种是DI（Dependency Injection）依赖注入，也是最常见的方式，另一种是DL（Dependency Lookup）依赖查找</p>
-</blockquote>
-<p>例子：你去餐馆吃饭，服务员只需要把菜单给你，你点菜就可以了，而这里菜就是对象，你不需要知道这个菜是怎们做的，材料和菜谱什么的你都不需要关心，这种方式就是IOC，你无需关心</p>
-<h2 id="HTTPS"><a href="#HTTPS" class="headerlink" title="HTTPS"></a>HTTPS</h2><blockquote>
-<p>https是一种加密的网络传输协议，它不同于http，http是无状态的，并且信息是可篡改的。客户端在第一次是通过非对称加密拿到秘钥，客户端访问https服务器时会发送公钥，https服务器通过CA颁发的证书利用公钥对信息（秘钥）进行加密，客户端可以利用私钥拿到这个信息（秘钥），以后通信就可以用这个秘钥进行对称加密</p>
-</blockquote>
-<p>例子： http 就好比飞鸽传输，飞鸽把信息直接绑在腿上，任何人都可以截获这个飞鸽并且把信息更换掉，可见这种方式是极其不安全的，那怎么办了？我们可以把信息加密不就好了，比如字母每个都+1，这样 abc就变成了 bcd ，服务端在收到这个信息之后再把字母-1 就又变成了abc，可这个 +1 的信息怎么通知服务端呢，如果别人拿到了这个信息不是就可以轻易破解我们的信息并篡改他们了吗，这时就需要用到了非对称加密，通过公钥对信息加密，再通过私钥进行加密。而 https 就好比 客户端在飞鸽上绑了一个开着锁的盒子发给服务端，服务端将 加密秘钥 （+1信息）放到盒子里并锁上锁发给客户端，这样客户端就可以通过钥匙打开锁，并拿到这个秘钥，以后都通过这个秘钥对信息加密。在这里CA证书就充当了盒子的身份。</p>
+<h1 id="3-简单使用"><a href="#3-简单使用" class="headerlink" title="3. 简单使用"></a>3. 简单使用</h1><h4 id="启动第一个节点，叫-consul1"><a href="#启动第一个节点，叫-consul1" class="headerlink" title="启动第一个节点，叫 consul1"></a>启动第一个节点，叫 <code>consul1</code></h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run --name consul1 -d -p 8500:8500 -p 8300:8300 -p 8301:8301 -p 8302:8302 -p 8600:8600 consul agent -server -bootstrap-expect 2 -ui -<span class="built_in">bind</span>=0.0.0.0 -client=0 .0.0.0</span><br></pre></td></tr></table></figure>
+
+<p><strong>端口详解</strong></p>
+<ul>
+<li>8500 : http 端口，用于 http 接口和 web ui访问；</li>
+<li>8300 : server rpc 端口，同一数据中心 consul server 之间通过该端口通信； </li>
+<li>8301 : serf lan 端口，同一数据中心 consul client 通过该端口通信; 用于处理当前datacenter中LAN的gossip通信； <ul>
+<li>8302 : serf wan 端口，不同数据中心 consul server 通过该端口通信; agent Server使用，处理与其他datacenter的gossip通信； </li>
+<li>8600 : dns 端口，用于已注册的服务发现；</li>
+</ul>
+</li>
+</ul>
+<h4 id="启动第二个节点，加入到-consul1"><a href="#启动第二个节点，加入到-consul1" class="headerlink" title="启动第二个节点，加入到 consul1"></a>启动第二个节点，加入到 <code>consul1</code></h4><p>查看<code>consul1</code>的ip地址</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker inspect --format=<span class="string">'&#123;&#123;.NetworkSettings.IPAddress&#125;&#125;'</span> consul1</span><br></pre></td></tr></table></figure>
+
+<p>开启第二个节点（端口8501），并加入到 <code>consul1</code></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run --name consul2 -d -p 8501:8500 consul agent -server -ui -<span class="built_in">bind</span>=0.0.0.0 -client=0.0.0.0 -join 172.17.0.4</span><br></pre></td></tr></table></figure>
+
+<p>开启第三个节点（端口8502），并加入到<code>consul1</code>‘</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run --name consul3 -d -p 8502:8500 consul agent -server -ui -<span class="built_in">bind</span>=0.0.0.0 -client=0.0.0.0 -join 172.17.0.4</span><br></pre></td></tr></table></figure>
+
+<h4 id="查看consul集群信息"><a href="#查看consul集群信息" class="headerlink" title="查看consul集群信息"></a>查看consul集群信息</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker <span class="built_in">exec</span> -it consul1 consul members</span><br></pre></td></tr></table></figure>
+
+<p>我们看到集群里有三个节点<br><img src="https://img-blog.csdnimg.cn/20190524191530856.png" alt></p>
+<h1 id="4-查看集群信息"><a href="#4-查看集群信息" class="headerlink" title="4. 查看集群信息"></a>4. 查看集群信息</h1><p>我们可以打开浏览器： <a href="http://localhost:8500" target="_blank" rel="noopener">http://localhost:8500</a> 来查看整个集群的信息</p>
+<p><img src="https://img-blog.csdnimg.cn/20190524191724205.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2p1bm1veGk=,size_16,color_FFFFFF,t_70" alt></p>
 
           
         
@@ -691,7 +612,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://pibigstar.com/2019/09/29/使用Hibernate Tools 反向生成POJO/">
+    <link itemprop="mainEntityOfPage" href="http://pibigstar.com/2019/03/13/Go语言入门（2）Go语言基础/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="派大星">
@@ -710,7 +631,7 @@
         
           <h2 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2019/09/29/使用Hibernate Tools 反向生成POJO/" itemprop="url">Untitled</a></h2>
+                <a class="post-title-link" href="/2019/03/13/Go语言入门（2）Go语言基础/" itemprop="url">Go语言入门（2）Go语言基础</a></h2>
         
 
         <div class="post-meta">
@@ -722,8 +643,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-09-29T22:56:40+08:00">
-                2019-09-29
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-03-13T17:05:04+08:00">
+                2019-03-13
               </time>
             
 
@@ -732,6 +653,28 @@
             
           </span>
 
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/go/" itemprop="url" rel="index">
+                    <span itemprop="name">go</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
           
 
           
@@ -762,7 +705,73 @@
       
         
           
-            <p>title: 使用Hibernate Tools 反向生成POJO<br>date: 2019-07-24 22:10:31<br>tags: []<br>categories: 工具使用</p>
+            <h1 id="1-基础数据类型"><a href="#1-基础数据类型" class="headerlink" title="1. 基础数据类型"></a>1. 基础数据类型</h1><ul>
+<li>数字类型： 整型 int 和浮点型 float32、float64，Go 语言支持整型和浮点型数字，并且原生支持复数</li>
+<li>布尔型： true、false</li>
+<li>派生类型:<br>(a) 指针类型（Pointer）<br>(b) 数组类型<br>(c) 结构化类型(struct)<br>(d) Channel 类型<br>(e) 函数类型<br>(f) 切片类型<br>(g) 接口类型（interface）<br>(h) Map 类型</li>
+</ul>
+<h1 id="2-基础语法"><a href="#2-基础语法" class="headerlink" title="2. 基础语法"></a>2. 基础语法</h1><h2 id="2-1-循环"><a href="#2-1-循环" class="headerlink" title="2.1 循环"></a>2.1 循环</h2><p>go语言里面没有while，所以实现循环都是使用for</p>
+<p>无限循环</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> &#123;</span><br><span class="line">	</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>条件循环</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> i:=<span class="number">0</span>; i &lt;<span class="number">10</span> ; i++&#123;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="2-2-判断"><a href="#2-2-判断" class="headerlink" title="2.2 判断"></a>2.2 判断</h2><p>跟其他语言一样，判断有大于（&gt;） 、小于（&lt;） 、等于（==)、不等于（！=）、大于等于（&gt;=）、小于等于（&lt;=） </p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> i&gt;<span class="number">10</span> &#123;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="3-3-选择"><a href="#3-3-选择" class="headerlink" title="3.3 选择"></a>3.3 选择</h2><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">switch</span> a &#123;</span><br><span class="line"></span><br><span class="line"><span class="keyword">case</span> <span class="number">1</span>: fmt.Println(<span class="string">"a为1"</span>)</span><br><span class="line"><span class="keyword">case</span> <span class="number">2</span>:	fmt.Println(<span class="string">"a为2"</span>)</span><br><span class="line"><span class="keyword">default</span>:</span><br><span class="line">	fmt.Println(<span class="string">"a不确定"</span>)</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="3-基本语法"><a href="#3-基本语法" class="headerlink" title="3. 基本语法"></a>3. 基本语法</h1><h2 id="3-1-定义常量、全局变量、局部变量"><a href="#3-1-定义常量、全局变量、局部变量" class="headerlink" title="3.1 定义常量、全局变量、局部变量"></a>3.1 定义常量、全局变量、局部变量</h2><p>定义常量使用 <code>const</code> 关键字</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> a <span class="keyword">int</span> = <span class="number">1</span> <span class="comment">//必须要赋初值</span></span><br></pre></td></tr></table></figure>
+
+<p>全局变量，全局变量是在函数外定义并且必须要有<code>var</code>关键字</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> b <span class="keyword">int</span> = <span class="number">10</span> <span class="comment">//可以不用赋初值</span></span><br></pre></td></tr></table></figure>
+
+<p>局部变量，也就是在函数中定义的变量，可以省略 <code>var</code>关键字</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> c <span class="keyword">int</span> = <span class="number">1</span> <span class="comment">//最保守的写法</span></span><br><span class="line"><span class="keyword">var</span> c = <span class="number">1</span> <span class="comment">// 省略类型，让编译器自己判断</span></span><br><span class="line">c := <span class="number">1</span> <span class="comment">//省略var关键字和类型，比较方便</span></span><br></pre></td></tr></table></figure>
+
+<p>注意：在go中 <code>_</code> 这个小下划线被称为废弃数，如果某个值赋值给它则此值就被废弃不再使用了</p>
+<h2 id="3-2-定义数组、切片、map"><a href="#3-2-定义数组、切片、map" class="headerlink" title="3.2 定义数组、切片、map"></a>3.2 定义数组、切片、map</h2><ul>
+<li><p>定义数组,</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 定义了一个大小为10的数组</span></span><br><span class="line"><span class="keyword">var</span> ids [<span class="number">10</span>]<span class="keyword">int</span> <span class="comment">// 初始全为 0</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>定义切片</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//切片与数组最大的不同就是，切片是变长的，它的容量可以自动扩充</span></span><br><span class="line"><span class="keyword">var</span> splice = <span class="built_in">make</span>([]<span class="keyword">int</span>，<span class="number">3</span>) <span class="comment">// 指定切片大小</span></span><br><span class="line"><span class="keyword">var</span> splice = <span class="built_in">make</span>([]<span class="keyword">int</span>,<span class="number">3</span>,<span class="number">10</span>) <span class="comment">// 指定切片大小和容量</span></span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<p>len 是这个切片初始化时的大小<br>cap 是这个切片的容量，当len大于cap时，此切片就会扩容，扩容为此时的cap的2倍</p>
+<ul>
+<li>定义 map</li>
+</ul>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 定义一个map，key为string类型，value为int类型</span></span><br><span class="line"><span class="keyword">var</span> m = <span class="built_in">make</span>(<span class="keyword">map</span>[<span class="keyword">string</span>]<span class="keyword">int</span>)</span><br><span class="line"><span class="comment">// 使用</span></span><br><span class="line">m[<span class="string">"age"</span>] = <span class="number">18</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="3-3-定义派生类型"><a href="#3-3-定义派生类型" class="headerlink" title="3.3 定义派生类型"></a>3.3 定义派生类型</h2><ul>
+<li>定义结构体，也就是java中的bean对象</li>
+</ul>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">type</span> person <span class="keyword">struct</span>&#123;</span><br><span class="line">	id <span class="keyword">int</span></span><br><span class="line">	name <span class="keyword">string</span></span><br><span class="line">	age <span class="keyword">int</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>定义接口</li>
+</ul>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">type</span> Ising <span class="keyword">interface</span> &#123;</span><br><span class="line">	sing()</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>实现接口</li>
+</ul>
+<p>go语言中只要一个实体实现了接口中的所有方法，那么这个实体就是实现了这个接口</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">type</span> person <span class="keyword">struct</span> &#123;</span><br><span class="line">	<span class="keyword">string</span> name</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 让person 实现 Ising 接口</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(p *person)</span> <span class="title">sing</span><span class="params">()</span></span>&#123;</span><br><span class="line">	fmt.Println(p.name+<span class="string">"在唱歌"</span>)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 使用</span></span><br><span class="line">p := <span class="built_in">new</span>(person)</span><br><span class="line">p.name = <span class="string">"pibigstar"</span></span><br><span class="line">p.sing()</span><br></pre></td></tr></table></figure>
+
+<h1 id="4-异常"><a href="#4-异常" class="headerlink" title="4. 异常"></a>4. 异常</h1><h2 id="4-1-异常处理"><a href="#4-1-异常处理" class="headerlink" title="4.1 异常处理"></a>4.1 异常处理</h2><p>go语言中一般都是把错误当成返回值给调用的函数</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">test</span><span class="params">(name <span class="keyword">string</span>)</span><span class="params">(<span class="keyword">int</span>,error)</span></span>&#123;</span><br><span class="line">	<span class="keyword">if</span> <span class="keyword">string</span>==<span class="string">""</span> &#123;</span><br><span class="line">		<span class="keyword">return</span> <span class="number">0</span>,eroors.New(<span class="string">"name cannot is null"</span>)</span><br><span class="line">	&#125;<span class="keyword">else</span> &#123;</span><br><span class="line">		<span class="keyword">return</span> m[name],<span class="literal">nil</span></span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="4-2-中断程序"><a href="#4-2-中断程序" class="headerlink" title="4.2 中断程序"></a>4.2 中断程序</h2><p>当调用panic() 函数，该出错线程就会停止，而有的时候我们不想让它停止，我们可以 使用recover() 来恢复它</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">	<span class="comment">// 不让线程终止</span></span><br><span class="line">	<span class="keyword">defer</span> <span class="function"><span class="keyword">func</span><span class="params">()</span></span> &#123;</span><br><span class="line">		<span class="keyword">if</span> r :=<span class="built_in">recover</span>(); r!=<span class="literal">nil</span>&#123;</span><br><span class="line">			log.Println(<span class="string">"hava a error"</span>)</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;()</span><br><span class="line"></span><br><span class="line"><span class="built_in">panic</span>(err)</span><br></pre></td></tr></table></figure>
+
+<h2 id="4-3-defer-函数"><a href="#4-3-defer-函数" class="headerlink" title="4.3 defer 函数"></a>4.3 defer 函数</h2><p>这个函数有点类似于java中的finally，都是在函数执行返回值之前做一些操作，一般都是执行一些关闭流的操作</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">defer</span> reader.<span class="built_in">close</span>()</span><br></pre></td></tr></table></figure>
+
 
           
         
@@ -815,7 +824,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://pibigstar.com/2019/09/29/渗透学习-------局域网攻击/">
+    <link itemprop="mainEntityOfPage" href="http://pibigstar.com/2019/03/11/Fiddler高级使用——规则编写/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="派大星">
@@ -834,7 +843,7 @@
         
           <h2 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2019/09/29/渗透学习-------局域网攻击/" itemprop="url">Untitled</a></h2>
+                <a class="post-title-link" href="/2019/03/11/Fiddler高级使用——规则编写/" itemprop="url">Fiddler高级使用——规则编写</a></h2>
         
 
         <div class="post-meta">
@@ -846,8 +855,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-09-29T22:56:40+08:00">
-                2019-09-29
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-03-11T18:06:04+08:00">
+                2019-03-11
               </time>
             
 
@@ -856,6 +865,28 @@
             
           </span>
 
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/工具使用/" itemprop="url" rel="index">
+                    <span itemprop="name">工具使用</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
           
 
           
@@ -886,7 +917,18 @@
       
         
           
-            <p>title: 渗透学习——-局域网攻击<br>date: 2019-09-25 22:10:31<br>tags: [kail,linux,渗透]<br>categories: 工具使用,Linux</p>
+            <h4 id="打开规则脚本编写"><a href="#打开规则脚本编写" class="headerlink" title="打开规则脚本编写"></a>打开规则脚本编写</h4><p><img src="https://img-blog.csdnimg.cn/20190127130212401.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2p1bm1veGk=,size_16,color_FFFFFF,t_70" alt></p>
+<h4 id="在此函数下面编写"><a href="#在此函数下面编写" class="headerlink" title="在此函数下面编写"></a>在此函数下面编写</h4><p><img src="https://img-blog.csdnimg.cn/20190127130300398.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2p1bm1veGk=,size_16,color_FFFFFF,t_70" alt></p>
+<h1 id="1-替换json里面部分参数，然后返回给客户端"><a href="#1-替换json里面部分参数，然后返回给客户端" class="headerlink" title="1. 替换json里面部分参数，然后返回给客户端"></a>1. 替换json里面部分参数，然后返回给客户端</h1><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (oSession.fullUrl.Contains(<span class="string">"http://www.baidu.com"</span>))</span><br><span class="line"> &#123;</span><br><span class="line">	<span class="comment">// 获取Response Body、Request Body中JSON字符串，转换为可编辑的JSONObject变量</span></span><br><span class="line">	<span class="keyword">var</span> responseStringOriginal =  oSession.GetResponseBodyAsString();</span><br><span class="line">	<span class="keyword">var</span> responseJSON = Fiddler.WebFormats.JSON.JsonDecode(responseStringOriginal);</span><br><span class="line">	<span class="keyword">var</span> requestStringOriginal=oSession.GetRequestBodyAsString();</span><br><span class="line">	<span class="keyword">var</span> requestJSON = Fiddler.WebFormats.JSON.JsonDecode(requestStringOriginal);</span><br><span class="line">	<span class="comment">//请求参数中，若type为1，对返回值做如下修改</span></span><br><span class="line">	responseJSON.JSONObject[<span class="string">'付费'</span>] = <span class="string">"true"</span>;</span><br><span class="line">	<span class="comment">// 重新设置Response Body</span></span><br><span class="line">	<span class="keyword">var</span> responseStringDestinal = Fiddler.WebFormats.JSON.JsonEncode(responseJSON.JSONObject);</span><br><span class="line">	oSession.utilSetResponseBody(responseStringDestinal);</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="2-修改request的Body里面的部分参数"><a href="#2-修改request的Body里面的部分参数" class="headerlink" title="2. 修改request的Body里面的部分参数"></a>2. 修改request的Body里面的部分参数</h1><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span>(oSession.uriContains(<span class="string">"http://www.baidu.com"</span>))</span><br><span class="line">&#123;</span><br><span class="line">	<span class="comment">// 获取Request 中的body字符串</span></span><br><span class="line">	<span class="keyword">var</span> strBody=oSession.GetRequestBodyAsString();</span><br><span class="line">	<span class="comment">// 用正则表达式或者replace方法去修改string，将false改为true</span></span><br><span class="line">	strBody=strBody.replace(<span class="string">"false"</span>,<span class="string">"true"</span>);</span><br><span class="line">	<span class="comment">// 弹个对话框检查下修改后的body </span></span><br><span class="line">	FiddlerObject.alert(strBody);</span><br><span class="line">	<span class="comment">// 将修改后的body，重新写回Request中</span></span><br><span class="line">	oSession.utilSetRequestBody(strBody);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="3-修改cookie"><a href="#3-修改cookie" class="headerlink" title="3. 修改cookie"></a>3. 修改cookie</h1><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span>(oSession.HostnameIs(<span class="string">'www.baidu.com'</span>) &amp;&amp; oSession.uriContains(<span class="string">'pagewithCookie'</span>) &amp;&amp; oSession.oRequest.headers.Contains(<span class="string">"Cookie"</span>))</span><br><span class="line">&#123; </span><br><span class="line">	<span class="keyword">var</span> sCookie = oSession.oRequest[<span class="string">"Cookie"</span>]; </span><br><span class="line">	<span class="comment">//  用replace方法或者正则表达式的方法去操作cookie的string</span></span><br><span class="line">	sCookie = sCookie.Replace(<span class="string">"付费=false"</span>, <span class="string">"付费=true"</span>); </span><br><span class="line">	oSession.oRequest[<span class="string">"Cookie"</span>] = sCookie;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="4-查看是否访问了某个网站"><a href="#4-查看是否访问了某个网站" class="headerlink" title="4. 查看是否访问了某个网站"></a>4. 查看是否访问了某个网站</h1><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span>(oSession.HostnameIs(<span class="string">"www.baidu.com"</span>)) </span><br><span class="line">&#123;</span><br><span class="line">	oSession[<span class="string">"ui-color"</span>] = <span class="string">"red"</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="5-自动保存某个接口的数据到本地"><a href="#5-自动保存某个接口的数据到本地" class="headerlink" title="5. 自动保存某个接口的数据到本地"></a>5. 自动保存某个接口的数据到本地</h1><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (oSession.fullUrl.Contains(<span class="string">"www.baidu.com/playurl/v1/"</span>) )</span><br><span class="line">&#123;  </span><br><span class="line">	<span class="comment">//消除保存的请求可能存在乱码的情况</span></span><br><span class="line">	oSession.utilDecodeResponse();</span><br><span class="line">	<span class="keyword">var</span> fso;</span><br><span class="line">	<span class="keyword">var</span> file;</span><br><span class="line">	fso = <span class="keyword">new</span> ActiveXObject(<span class="string">"Scripting.FileSystemObject"</span>);</span><br><span class="line">	<span class="comment">//文件保存路径，可自定义</span></span><br><span class="line">	file = fso.OpenTextFile(<span class="string">"D:\\Sessions.txt"</span>,<span class="number">8</span> ,<span class="literal">true</span>, <span class="literal">true</span>);</span><br><span class="line">	<span class="comment">//file.writeLine("Response code: " + oSession.responseCode);</span></span><br><span class="line">	file.writeLine(<span class="string">"Response body: "</span> + oSession.GetResponseBodyAsString());</span><br><span class="line">	file.writeLine(<span class="string">"\n"</span>);</span><br><span class="line">	file.close();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
 
           
         
@@ -939,7 +981,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://pibigstar.com/2019/09/29/用java写一个简单的区块链（上）/">
+    <link itemprop="mainEntityOfPage" href="http://pibigstar.com/2019/03/11/Shell脚本模板/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="派大星">
@@ -958,7 +1000,7 @@
         
           <h2 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2019/09/29/用java写一个简单的区块链（上）/" itemprop="url">Untitled</a></h2>
+                <a class="post-title-link" href="/2019/03/11/Shell脚本模板/" itemprop="url">Shell脚本模板</a></h2>
         
 
         <div class="post-meta">
@@ -970,8 +1012,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-09-29T22:56:40+08:00">
-                2019-09-29
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-03-11T18:06:04+08:00">
+                2019-03-11
               </time>
             
 
@@ -980,6 +1022,28 @@
             
           </span>
 
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/shell/" itemprop="url" rel="index">
+                    <span itemprop="name">shell</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
           
 
           
@@ -1010,7 +1074,8 @@
       
         
           
-            <p>title: 用java写一个简单的区块链（上）<br>date: 2018-11-14 22:10:31<br>tags: [java区块链,区块链]<br>categories: 区块链</p>
+            <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 打印帮助信息</span></span><br><span class="line"><span class="function"><span class="title">usage</span></span>() &#123;</span><br><span class="line">	cat &gt;&amp;1 &lt;&lt;-EOF</span><br><span class="line">	</span><br><span class="line">	请使用: <span class="variable">$0</span> &lt;option&gt;</span><br><span class="line"></span><br><span class="line">	可使用的参数 &lt;option&gt; 包括:</span><br><span class="line"></span><br><span class="line">	    install          安装</span><br><span class="line">	    uninstall        卸载</span><br><span class="line">	    update           检查更新</span><br><span class="line">	    <span class="built_in">help</span>             查看脚本使用说明</span><br><span class="line">	EOF</span><br><span class="line"></span><br><span class="line">	<span class="built_in">exit</span> $</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment"># 检查是否已安装</span></span><br><span class="line"><span class="function"><span class="title">is_installed</span></span>()&#123;</span><br><span class="line">	<span class="built_in">echo</span> <span class="string">"检查是否已安装..."</span></span><br><span class="line">	<span class="comment"># return 0表示已安装，1表示未安装</span></span><br><span class="line">	<span class="built_in">return</span> 0</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment"># 安装检查</span></span><br><span class="line"><span class="function"><span class="title">installed_check</span></span>() &#123;</span><br><span class="line">	<span class="keyword">if</span> is_installed; <span class="keyword">then</span></span><br><span class="line">		cat &gt;&amp;1 &lt;&lt;-EOF</span><br><span class="line">		检测到你已安装......</span><br><span class="line">		EOF</span><br><span class="line">		<span class="keyword">while</span> <span class="literal">true</span></span><br><span class="line">		<span class="keyword">do</span></span><br><span class="line">			cat &gt;&amp;1 &lt;&lt;-<span class="string">'EOF'</span></span><br><span class="line">			请选择你希望的操作:</span><br><span class="line">			(1) 覆盖安装</span><br><span class="line">			(2) 重新配置</span><br><span class="line">			(3) 检查更新</span><br><span class="line">			(4) 查看配置</span><br><span class="line">			(5) 完全卸载</span><br><span class="line">			(6) 退出脚本</span><br><span class="line">			EOF</span><br><span class="line">			<span class="built_in">read</span> -p <span class="string">"(默认: 1) 请选择 [1~6]: "</span> sel</span><br><span class="line">			[ -z <span class="string">"<span class="variable">$sel</span>"</span> ] &amp;&amp; sel=1</span><br><span class="line"></span><br><span class="line">			<span class="keyword">case</span> <span class="variable">$sel</span> <span class="keyword">in</span></span><br><span class="line">				1)</span><br><span class="line">					<span class="built_in">echo</span> <span class="string">"开始覆盖..."</span></span><br><span class="line">					<span class="comment"># return 0 之后会继续执行下面的函数</span></span><br><span class="line">					<span class="built_in">return</span> 0</span><br><span class="line">					;;</span><br><span class="line">				2)</span><br><span class="line">					<span class="built_in">echo</span> <span class="string">"重新配置..."</span></span><br><span class="line">					;;</span><br><span class="line">				3)</span><br><span class="line">					<span class="built_in">echo</span> <span class="string">"检查更新..."</span></span><br><span class="line">					do_update</span><br><span class="line">					;;</span><br><span class="line">				4)</span><br><span class="line">					<span class="built_in">echo</span> <span class="string">"查看配置.."</span></span><br><span class="line">					do_update</span><br><span class="line">					;;</span><br><span class="line">				5)</span><br><span class="line">					<span class="built_in">echo</span> <span class="string">"完全卸载.."</span></span><br><span class="line">					do_uninstall</span><br><span class="line">					;;</span><br><span class="line">				6)</span><br><span class="line">					<span class="built_in">echo</span> <span class="string">"退出脚本.."</span></span><br><span class="line">					;;</span><br><span class="line">				*)</span><br><span class="line">					<span class="built_in">echo</span> <span class="string">"输入有误, 请输入有效数字 1~6!"</span></span><br><span class="line">					<span class="built_in">continue</span></span><br><span class="line">					;;</span><br><span class="line">			<span class="keyword">esac</span></span><br><span class="line">			<span class="built_in">exit</span> 0</span><br><span class="line">		<span class="keyword">done</span></span><br><span class="line">	<span class="keyword">fi</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="comment"># 开始安装</span></span><br><span class="line"><span class="function"><span class="title">install_app</span></span>()&#123;</span><br><span class="line">	<span class="built_in">echo</span> <span class="string">"开始安装....."</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment"># 安装命令</span></span><br><span class="line"><span class="function"><span class="title">do_install</span></span>()&#123;</span><br><span class="line">	<span class="comment"># 检查root权限</span></span><br><span class="line">	check_root</span><br><span class="line">	<span class="comment"># 检查是否已安装</span></span><br><span class="line">	installed_check</span><br><span class="line">	<span class="comment"># 安装</span></span><br><span class="line">	install_app</span><br><span class="line">	</span><br><span class="line">	cat &gt;&amp;1 &lt;&lt;-EOF</span><br><span class="line">	恭喜! 服务端安装成功。</span><br><span class="line">	更多使用说明: <span class="variable">$&#123;0&#125;</span> <span class="built_in">help</span></span><br><span class="line"></span><br><span class="line">	如果这个脚本帮到了你，你可以请作者喝瓶可乐:</span><br><span class="line">	 https://blog.csdn.net/junmoxi/</span><br><span class="line">	EOF</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="title">do_uninstall</span></span>()&#123;</span><br><span class="line">	<span class="built_in">echo</span> <span class="string">"开始卸载....."</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="title">do_update</span></span>()&#123;</span><br><span class="line">	<span class="built_in">echo</span> <span class="string">"开始更新....."</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment"># 程序进入后的执行函数</span></span><br><span class="line">action=<span class="variable">$&#123;1:-"install"&#125;</span></span><br><span class="line"><span class="keyword">case</span> <span class="string">"<span class="variable">$action</span>"</span> <span class="keyword">in</span></span><br><span class="line">	install|uninstall|update)</span><br><span class="line">		do_<span class="variable">$&#123;action&#125;</span></span><br><span class="line">		;;</span><br><span class="line">	<span class="built_in">help</span>)</span><br><span class="line">		usage 0</span><br><span class="line">		;;</span><br><span class="line">	*)</span><br><span class="line">		usage 1</span><br><span class="line">		;;</span><br><span class="line"><span class="keyword">esac</span></span><br></pre></td></tr></table></figure>
+
 
           
         
@@ -1063,7 +1128,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://pibigstar.com/2019/09/29/使用Node构建桌面GUI/">
+    <link itemprop="mainEntityOfPage" href="http://pibigstar.com/2019/03/05/Nsq搭建与使用/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="派大星">
@@ -1082,7 +1147,7 @@
         
           <h2 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2019/09/29/使用Node构建桌面GUI/" itemprop="url">Untitled</a></h2>
+                <a class="post-title-link" href="/2019/03/05/Nsq搭建与使用/" itemprop="url">Nsq搭建与使用</a></h2>
         
 
         <div class="post-meta">
@@ -1094,8 +1159,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-09-29T22:56:40+08:00">
-                2019-09-29
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-03-05T21:09:04+08:00">
+                2019-03-05
               </time>
             
 
@@ -1104,6 +1169,28 @@
             
           </span>
 
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/go-消息队列/" itemprop="url" rel="index">
+                    <span itemprop="name">go,消息队列</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
           
 
           
@@ -1134,446 +1221,1010 @@
       
         
           
-            <p>title: 使用Node构建桌面GUI<br>date: 2019-04-04 22:10:31<br>tags: [nodejs,nvm,electron,gui]<br>categories: nodejs</p>
-<h1 id="1-安装-NVM"><a href="#1-安装-NVM" class="headerlink" title="1. 安装 NVM"></a>1. 安装 NVM</h1><blockquote>
-<p>它是Node.js的版本管理工具，使用它可以很方便的安装各个版本的Node.js<br>下载地址： <a href="https://github.com/coreybutler/nvm-windows/releases" target="_blank" rel="noopener">https://github.com/coreybutler/nvm-windows/releases</a></p>
+            <h1 id="1-下载"><a href="#1-下载" class="headerlink" title="1. 下载"></a>1. 下载</h1><blockquote>
+<p>下载之后解压，并将其bin路径添加到环境变量当中</p>
 </blockquote>
-<p>简单使用：</p>
+<p>github地址： <a href="https://github.com/nsqio/nsq/releases" target="_blank" rel="noopener">https://github.com/nsqio/nsq/releases</a></p>
+<p>文档： <a href="https://nsq.io/overview/quick_start.html" target="_blank" rel="noopener">https://nsq.io/overview/quick_start.html</a></p>
+<h1 id="2-使用说明"><a href="#2-使用说明" class="headerlink" title="2. 使用说明"></a>2. 使用说明</h1><h3 id="2-1-启动nsqlookupd"><a href="#2-1-启动nsqlookupd" class="headerlink" title="2.1 启动nsqlookupd"></a>2.1 启动nsqlookupd</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nsqlookupd</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>它会监听两个端口： <code>http: 4161</code> 客户端用它来发现和管理。 <code>tcp: 4160</code> nsqd 用它来广播</p>
+</blockquote>
+<p>可选参数：</p>
+<ul>
+<li><code>http-address=&quot;127.0.0.1:4161&quot;</code> : 监听 HTTP 客户端地址</li>
+<li><code>inactive-producer-timeout=5m0s</code>: 从上次 ping 之后，生产者驻留在活跃列表中的时长 </li>
+<li><code>tcp-address=&quot;0.0.0.0:4160&quot;</code>: TCP 客户端监听的地址</li>
+<li><code>broadcast-address</code>: 这个 lookupd 节点的外部地址, (默认主机名) </li>
+<li><code>tombstone-lifetime=45s</code>: 生产者保持 tombstoned 的时长 </li>
+<li><code>verbose=false</code>: 允许输出日志 </li>
+<li><code>version=false</code>: 打印版本信息</li>
+</ul>
+<h3 id="2-2-启动nsqd"><a href="#2-2-启动nsqd" class="headerlink" title="2.2 启动nsqd"></a>2.2 启动nsqd</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nsqd --lookupd-tcp-address=127.0.0.1:4160</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>它是一个守护进程，负责接收消息，传递消息给客户端，排队。 会监听两个端口： <code>http: 4151</code>, <code>tcp: 4150</code></p>
+</blockquote>
+<h3 id="3-3-启动nsqadmin"><a href="#3-3-启动nsqadmin" class="headerlink" title="3.3 启动nsqadmin"></a>3.3 启动nsqadmin</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nsqadmin --lookupd-http-address=127.0.0.1:4161</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>它是一个Web页面，负责管理我们的消息队列， 它后面的地址即是我们在 nsqlookupd 里面<code>http-address</code>参数配置的地址，nsqadmin的监听地址为<code>4171</code>，通过<code>127.0.0.1:4171</code>地址可打开NSQ的Web管理页面</p>
+</blockquote>
+<h1 id="3-基本使用"><a href="#3-基本使用" class="headerlink" title="3. 基本使用"></a>3. 基本使用</h1><blockquote>
+<p>Channel是消费者订阅特定Topic的一种抽象。对于发往Topic的消息，nsqd向该Topic下的所有Channel投递消息，而同一个Channel只投递一次，Channel下如果存在多个消费者，则随机选择一个消费者做投递。这种投递方式可以被用作消费者负载均衡。和Topic一样，Channel同样有永久和临时之分，永久的Channel只能通过显式删除销毁，临时的Channel在最后一个消费者断开连接的时候被销毁</p>
+</blockquote>
+<ul>
+<li><code>Topic</code> 就是一个通道，我们可以往这个Topic里面发送消息</li>
+<li><code>Channel</code>起到一个负载均衡的作用，我们可以在一个Topic中建立多个Channel来共同消费这个Topic里面的消息。<br><img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly9mLmNsb3VkLmdpdGh1Yi5jb20vYXNzZXRzLzE4NzQ0MS8xNzAwNjk2L2YxNDM0ZGM4LTYwMjktMTFlMy04YTY2LTE4Y2E0ZWExMGFjYS5naWY" alt><br><img src="https://img-blog.csdnimg.cn/20190727121930736.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2p1bm1veGk=,size_16,color_FFFFFF,t_70" alt><br>我们建立了一个叫 <code>test-dev</code>的Topic，Channel为<code>default</code></li>
+</ul>
+<p>往通道里面发送消息</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl -d <span class="string">'hello world'</span> <span class="string">'http://127.0.0.1:4151/pub?topic=test-dev'</span></span><br></pre></td></tr></table></figure>
+
+<p>从通道中消费消息，这里我们要指定从哪个Channel里消费，</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nsq_to_file --topic=<span class="built_in">test</span>-dev -channel=default --output-dir=<span class="built_in">log</span> --lookupd-http-address=127.0.0.1:4161</span><br></pre></td></tr></table></figure>
+
+<p>此时就会在当前目前下生成一个 log 文件夹，里面存放的就是我们这个Channel里的消息<br><img src="https://img-blog.csdnimg.cn/20190727124017156.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2p1bm1veGk=,size_16,color_FFFFFF,t_70" alt><br><img src="https://img-blog.csdnimg.cn/20190727124033534.png" alt></p>
+<h1 id="4-封装代码"><a href="#4-封装代码" class="headerlink" title="4. 封装代码"></a>4. 封装代码</h1><p>安装第三方库</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">go</span> get -u github.com/youzan/<span class="keyword">go</span>-nsq</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> nsq</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> (</span><br><span class="line">	<span class="string">"flag"</span></span><br><span class="line">	<span class="string">"fmt"</span></span><br><span class="line">	<span class="string">"sync"</span></span><br><span class="line">	<span class="string">"time"</span></span><br><span class="line">	</span><br><span class="line">	<span class="string">"github.com/youzan/go-nsq"</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">init</span><span class="params">()</span></span> &#123;</span><br><span class="line">	flag.StringVar(&amp;env,<span class="string">"env"</span>,<span class="string">"dev"</span>,<span class="string">"the nsq environment"</span>)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> (</span><br><span class="line">	env <span class="keyword">string</span></span><br><span class="line">	pubMu = &amp;sync.RWMutex&#123;&#125;</span><br><span class="line">	pubMgrs = <span class="built_in">make</span>(<span class="keyword">map</span>[<span class="keyword">string</span>]*nsq.TopicProducerMgr)</span><br><span class="line">	consumers = &amp;sync.Map&#123;&#125;</span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> Config <span class="keyword">struct</span> &#123;</span><br><span class="line">	config *nsq.Config</span><br><span class="line">	lookAddr <span class="keyword">string</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> DefaultConfig = <span class="function"><span class="keyword">func</span><span class="params">()</span> *<span class="title">Config</span></span> &#123;</span><br><span class="line">	cfg := nsq.NewConfig()</span><br><span class="line">	<span class="keyword">return</span> &amp;Config&#123;</span><br><span class="line">		config: cfg,</span><br><span class="line">		lookAddr: <span class="string">"127.0.0.1:4161"</span>,</span><br><span class="line">	&#125;</span><br><span class="line">&#125;()</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">getPubMgr</span><span class="params">(topic <span class="keyword">string</span>)</span><span class="params">(*nsq.TopicProducerMgr,error)</span></span>&#123;</span><br><span class="line">	pubMu.RLock()</span><br><span class="line">	<span class="keyword">if</span> pubMgr,ok := pubMgrs[topic];ok &#123;</span><br><span class="line">		pubMu.RUnlock()</span><br><span class="line">		<span class="keyword">return</span> pubMgr,<span class="literal">nil</span></span><br><span class="line">	&#125;</span><br><span class="line">	pubMu.RUnlock()</span><br><span class="line"></span><br><span class="line">	pubMu.Lock()</span><br><span class="line">	<span class="keyword">defer</span> pubMu.Unlock()</span><br><span class="line"></span><br><span class="line">	pubMgr,err := nsq.NewTopicProducerMgr([]<span class="keyword">string</span>&#123;topic&#125;,DefaultConfig.config)</span><br><span class="line">	<span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">		<span class="keyword">return</span> <span class="literal">nil</span>,err</span><br><span class="line">	&#125;</span><br><span class="line">	err = pubMgr.ConnectToNSQLookupd(DefaultConfig.lookAddr)</span><br><span class="line">	<span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">		<span class="keyword">return</span> <span class="literal">nil</span>,err</span><br><span class="line">	&#125;</span><br><span class="line">	pubMgrs[topic] = pubMgr</span><br><span class="line"></span><br><span class="line">	<span class="keyword">return</span> pubMgr,<span class="literal">nil</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">wrapTopic</span><span class="params">(topic <span class="keyword">string</span>)</span> <span class="title">string</span></span> &#123;</span><br><span class="line">	<span class="keyword">return</span> fmt.Sprintf(<span class="string">"%s-%s"</span>,topic,env)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">Publish</span><span class="params">(topic <span class="keyword">string</span>, data []<span class="keyword">byte</span>)</span> <span class="title">error</span></span> &#123;</span><br><span class="line">	topic = wrapTopic(topic)</span><br><span class="line">	pubMgr, err := getPubMgr(topic)</span><br><span class="line">	<span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">		<span class="keyword">return</span> err</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> pubMgr.Publish(topic,data)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">Consume</span><span class="params">(topic,channel <span class="keyword">string</span>, handlerFunc nsq.HandlerFunc,concurrency <span class="keyword">int</span>)</span> <span class="title">error</span></span> &#123;</span><br><span class="line">	topic = wrapTopic(topic)</span><br><span class="line">	consumer, err := nsq.NewConsumer(topic, channel, DefaultConfig.config)</span><br><span class="line">	<span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">		<span class="keyword">return</span> err</span><br><span class="line">	&#125;</span><br><span class="line">	consumer.AddConcurrentHandlers(handlerFunc,concurrency)</span><br><span class="line">	<span class="comment">// set the consumer to map for close</span></span><br><span class="line">	key := topic+<span class="string">":"</span>+channel</span><br><span class="line">	consumers.Store(key,consumer)</span><br><span class="line"></span><br><span class="line">	<span class="keyword">return</span> consumer.ConnectToNSQLookupd(DefaultConfig.lookAddr)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">Close</span><span class="params">()</span></span> &#123;</span><br><span class="line">	<span class="comment">// 记录关闭过得mgr，每个pubMgr仅可被关闭一次</span></span><br><span class="line">	closedPubMgrs := &amp;sync.Map&#123;&#125;</span><br><span class="line">	pubMu.RLock()</span><br><span class="line">	<span class="keyword">for</span> _,pubMgr := <span class="keyword">range</span> pubMgrs&#123;</span><br><span class="line">		<span class="keyword">if</span> _,ok := closedPubMgrs.Load(pubMgr);ok &#123;</span><br><span class="line">			<span class="keyword">continue</span></span><br><span class="line">		&#125;</span><br><span class="line">		closedPubMgrs.Store(pubMgr, <span class="keyword">struct</span>&#123;&#125;&#123;&#125;)</span><br><span class="line">		pubMgr.Stop()</span><br><span class="line">	&#125;</span><br><span class="line">	pubMu.RUnlock()</span><br><span class="line"></span><br><span class="line">	<span class="comment">// close the consumer</span></span><br><span class="line">	consumers.Range(<span class="function"><span class="keyword">func</span><span class="params">(key, value <span class="keyword">interface</span>&#123;&#125;)</span> <span class="title">bool</span></span> &#123;</span><br><span class="line">		<span class="keyword">if</span> consumer,ok := value.(*nsq.Consumer);ok&#123;</span><br><span class="line">			consumer.Stop()</span><br><span class="line">			<span class="keyword">select</span> &#123;</span><br><span class="line">				<span class="keyword">case</span> &lt;-consumer.StopChan:</span><br><span class="line">				<span class="keyword">case</span> &lt;-time.After(time.Second * <span class="number">60</span>):</span><br><span class="line">					<span class="comment">//等待一分钟让其关闭handler</span></span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		consumers.Delete(key)</span><br><span class="line">		<span class="keyword">return</span> <span class="literal">true</span></span><br><span class="line">	&#125;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>测试</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> nsq</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> (</span><br><span class="line">	<span class="string">"github.com/youzan/go-nsq"</span></span><br><span class="line">	<span class="string">"testing"</span></span><br><span class="line">)</span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">TestPublish</span><span class="params">(t *testing.T)</span></span> &#123;</span><br><span class="line">	err := Publish(<span class="string">"test"</span>, []<span class="keyword">byte</span>(<span class="string">"Hello Pibigstar"</span>))</span><br><span class="line">	<span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">		t.Fatal(err)</span><br><span class="line">	&#125;</span><br><span class="line">	c := <span class="built_in">make</span>(<span class="keyword">chan</span> <span class="keyword">struct</span>&#123;&#125;)</span><br><span class="line"></span><br><span class="line">	Consume(<span class="string">"test"</span>, <span class="string">"default"</span>, <span class="function"><span class="keyword">func</span><span class="params">(msg *nsq.Message)</span> <span class="title">error</span></span> &#123;</span><br><span class="line">		t.Log(<span class="keyword">string</span>(msg.Body))</span><br><span class="line">		<span class="keyword">select</span> &#123;</span><br><span class="line">		<span class="keyword">case</span> &lt;-c:</span><br><span class="line">		<span class="keyword">default</span>:</span><br><span class="line">			<span class="built_in">close</span>(c)</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">return</span> <span class="literal">nil</span></span><br><span class="line">	&#125;, <span class="number">5</span>)</span><br><span class="line">	&lt;-c</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>如果你不想使用有赞的第三方库，你可以使用下面这个：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">go</span> get -u github.com/nsqio/<span class="keyword">go</span>-nsq</span><br></pre></td></tr></table></figure>
+
+<p>代码</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> (</span><br><span class="line">	<span class="string">"fmt"</span></span><br><span class="line">	<span class="string">"github.com/nsqio/go-nsq"</span></span><br><span class="line">	<span class="string">"time"</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> (</span><br><span class="line">	addr = <span class="string">"127.0.0.1:4150"</span></span><br><span class="line">	defaultConfig = nsq.NewConfig()</span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">	Producer(<span class="string">"test-dev"</span>,[]<span class="keyword">byte</span>(<span class="string">"Hello Pibigstar"</span>))</span><br><span class="line">	Consumer(<span class="string">"test-dev"</span>,<span class="string">"default"</span>,HandleMessage)</span><br><span class="line">	time.Sleep(time.Second * <span class="number">3</span>)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">HandleMessage</span><span class="params">(msg *nsq.Message)</span> <span class="title">error</span></span> &#123;</span><br><span class="line">	fmt.Println(<span class="keyword">string</span>(msg.Body))</span><br><span class="line">	<span class="keyword">return</span> <span class="literal">nil</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// nsq发布消息</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">Producer</span><span class="params">(topic <span class="keyword">string</span>,data []<span class="keyword">byte</span>)</span> <span class="title">error</span></span> &#123;</span><br><span class="line">	<span class="comment">// 新建生产者</span></span><br><span class="line">	p, err := nsq.NewProducer(addr, defaultConfig)</span><br><span class="line">	<span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">		<span class="built_in">panic</span>(err)</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="comment">// 发布消息</span></span><br><span class="line">	<span class="keyword">return</span> p.Publish(topic, data)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 消费消息</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">Consumer</span><span class="params">(topic,channel <span class="keyword">string</span>,handlerFunc nsq.HandlerFunc)</span> <span class="title">error</span></span> &#123;</span><br><span class="line">	<span class="comment">//新建一个消费者</span></span><br><span class="line">	c, err := nsq.NewConsumer(topic, channel, defaultConfig)</span><br><span class="line">	<span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">		<span class="built_in">panic</span>(err)</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="comment">//添加消息处理</span></span><br><span class="line">	c.AddHandler(handlerFunc)</span><br><span class="line">	<span class="comment">//建立连接</span></span><br><span class="line">	<span class="keyword">return</span> c.ConnectToNSQD(addr)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    <div>
+      
+    </div>
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://pibigstar.com/2019/03/05/AOP使用总结/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="派大星">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/qq.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="派大星的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/03/05/AOP使用总结/" itemprop="url">AOP使用总结</a></h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-03-05T21:09:04+08:00">
+                2019-03-05
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Java/" itemprop="url" rel="index">
+                    <span itemprop="name">Java</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>[TOC]</p>
+<h1 id="1-AOP简介"><a href="#1-AOP简介" class="headerlink" title="1. AOP简介"></a>1. AOP简介</h1><blockquote>
+<p>AOP是一种编程范式，它主要是为了将非功能模块与业务模块分离开来，让我们更好的管理这些非功能模块。</p>
+</blockquote>
+<p>它的使用场景有：权限控制、日志打印、事务控制、缓存控制、异常处理</p>
+<h1 id="2-AOP使用"><a href="#2-AOP使用" class="headerlink" title="2. AOP使用"></a>2. AOP使用</h1><blockquote>
 <ol>
-<li>安装Node.js<blockquote>
-<p>使用<code>nvm install  version  arch</code>命令下载需要的版本。arch参数表示系统位数，默认是64位，如果是32位操作系统，需要执行命令：nvm install v10.16.1 32</p>
+<li>在类上注解 @Aspect</li>
+<li>如果想在方法执行前做操作，那么注解@Before注解</li>
+<li>如果想在方法执行后做操作，那么注解@After注解</li>
+</ol>
 </blockquote>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nvm install v10.16.1</span><br></pre></td></tr></table></figure>
+<p><strong>五大Advice注解：</strong></p>
+<ul>
+<li>@Before  方法执行前执行该切面方法</li>
+<li>@After 方法执行后执行该切面方法</li>
+<li>@AfterThrowing 方法抛出异常后执行该切面方法</li>
+<li>@AfterReturning  方法返回值后执行该切面方法</li>
+<li>@Around 环绕注解，集合前面四大注解</li>
+</ul>
+<h2 id="2-1-Aspect"><a href="#2-1-Aspect" class="headerlink" title="2.1 @Aspect"></a>2.1 @Aspect</h2><blockquote>
+<p>注解在类上，表明此类是一个面向切面的类，同时也要记得在类上注解<code>@Component</code>或者<code>@Service</code> 将此类交给Spring管理</p>
+</blockquote>
+<h2 id="2-2-Poincut"><a href="#2-2-Poincut" class="headerlink" title="2.2 @Poincut"></a>2.2 @Poincut</h2><blockquote>
+<p>用来注解在方法上，表明此方法为切面方法</p>
+</blockquote>
+<p><strong>常用表达式有：</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Poincut</span>(<span class="string">"@annotation(myLogger)"</span>) <span class="comment">//只拦截有注解为@myLogger的方法</span></span><br><span class="line"></span><br><span class="line"><span class="meta">@Poincut</span>(<span class="string">"within(com.pibigstar.service.*) "</span>) <span class="comment">//只拦截com.pibigstar.service包下的方法</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//拦截public修饰符，返回值为任意类型，com.pibigstar.servce包下以Service结尾的类的所有方法，方法参数为任意</span></span><br><span class="line"><span class="meta">@Poincut</span>(<span class="string">"execution("</span><span class="keyword">public</span> * com.pibigstar.service.*Service.*(..)<span class="string">") </span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">@Poincut("</span>bean(*service)<span class="string">") //只拦截所有bean中已service结尾的bean中的方法</span></span><br></pre></td></tr></table></figure>
+
+<p><img src="https://img-blog.csdn.net/20180612141551279?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2p1bm1veGk=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt="Poincut表达式"></p>
+<p><strong>designators（指示器）常用的表达式</strong></p>
+<p><img src="https://img-blog.csdn.net/20180612141859339?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2p1bm1veGk=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt></p>
+<h2 id="2-3-Before"><a href="#2-3-Before" class="headerlink" title="2.3 @Before"></a>2.3 @Before</h2><blockquote>
+<p>在方法执行下执行该切面方法，其用法与@Poincut类似</p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//只拦截com.pibigstar包下，并且注解为myLogger的方法</span></span><br><span class="line"><span class="meta">@Before</span>(<span class="string">"within(com.pibigstar..*) &amp;&amp; @annotation(myLogger)"</span>)</span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">printBeforeLog</span><span class="params">(MyLogger myLogger)</span> </span>&#123;</span><br><span class="line">	String host = IPUtil.getIPAddr(request);</span><br><span class="line">	log.info(<span class="string">"====IP:"</span>+host+<span class="string">":开始执行:"</span>+myLogger.description()+<span class="string">"======="</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="2-4-After"><a href="#2-4-After" class="headerlink" title="2.4 @After"></a>2.4 @After</h2><blockquote>
+<p>在方法执行后执行该切面方法</p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//方法结束后</span></span><br><span class="line"><span class="meta">@After</span>(<span class="string">"within(com.pibigstar..*) &amp;&amp; @annotation(myLogger)"</span>)</span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">printAfterLog</span><span class="params">(MyLogger myLogger)</span> </span>&#123;</span><br><span class="line">	log.info(<span class="string">"=====结束执行："</span>+myLogger.description()+<span class="string">"====="</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="2-5-AfterThrowing"><a href="#2-5-AfterThrowing" class="headerlink" title="2.5 @AfterThrowing"></a>2.5 @AfterThrowing</h2><blockquote>
+<p>当方法抛出异常后执行该切面方法</p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@AfterThrowing</span>(<span class="meta">@annotation</span>(myLogger)<span class="string">",throwing = "</span>e<span class="string">")</span></span><br><span class="line"><span class="string">public void printExceptionLog(MyLogger myLogger,Exception e) &#123;</span></span><br><span class="line"><span class="string">	log.info("</span>======执行：<span class="string">"+myLogger.description()+"</span>异常：<span class="string">"+ e +"</span>=====<span class="string">");</span></span><br><span class="line"><span class="string">&#125;</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="2-6-AfterReturning"><a href="#2-6-AfterReturning" class="headerlink" title="2.6 @AfterReturning"></a>2.6 @AfterReturning</h2><blockquote>
+<p>方法有返回值，打印出方法的返回值</p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//方法有返回值</span></span><br><span class="line"><span class="meta">@AfterReturning</span>(value = <span class="string">"@annotation(myLogger)"</span>,returning=<span class="string">"result"</span>)</span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">printReturn</span><span class="params">(Object result)</span> </span>&#123;</span><br><span class="line">	log.info(<span class="string">"======方法的返回值："</span>+result+<span class="string">"========"</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="2-7-Around"><a href="#2-7-Around" class="headerlink" title="2.7 @Around"></a>2.7 @Around</h2><blockquote>
+<p>集合@Before，@After，@AfterReturning，@AfterThrowing 四大注解</p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//集合前面四大注解</span></span><br><span class="line">	<span class="meta">@Around</span>(<span class="string">"@annotation(myLogger)"</span>)</span><br><span class="line">	<span class="function"><span class="keyword">public</span> Object <span class="title">printAround</span><span class="params">(ProceedingJoinPoint joinPoint,MyLogger myLogger)</span> </span>&#123;</span><br><span class="line">		Object result = <span class="keyword">null</span>;</span><br><span class="line">		<span class="keyword">try</span> &#123;</span><br><span class="line">			log.info(<span class="string">"======开始执行:"</span>+myLogger.description()+<span class="string">"======="</span>);</span><br><span class="line">			result = joinPoint.proceed(joinPoint.getArgs());</span><br><span class="line">			log.info(<span class="string">"======方法的返回值："</span>+result+<span class="string">"========"</span>);</span><br><span class="line">		&#125; <span class="keyword">catch</span> (Throwable e) &#123;</span><br><span class="line">			e.printStackTrace();</span><br><span class="line">			log.info(<span class="string">"======执行异常"</span>+ e +<span class="string">"======="</span>);</span><br><span class="line">		&#125;<span class="keyword">finally</span> &#123;</span><br><span class="line">			log.info(<span class="string">"======结束执行："</span>+myLogger.description()+<span class="string">"======="</span>);</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">return</span> result;</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    <div>
+      
+    </div>
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://pibigstar.com/2019/03/05/springboot使用定时任务/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="派大星">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/qq.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="派大星的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/03/05/springboot使用定时任务/" itemprop="url">springboot使用定时任务</a></h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-03-05T21:09:04+08:00">
+                2019-03-05
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/springboot-SpringBoot技能大全/" itemprop="url" rel="index">
+                    <span itemprop="name">springboot,SpringBoot技能大全</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="1、pom包配置"><a href="#1、pom包配置" class="headerlink" title="1、pom包配置"></a>1、pom包配置</h1><p>pom包里面只需要引入springboot starter包即可</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependencies</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-starter<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-starter-test<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">scope</span>&gt;</span>test<span class="tag">&lt;/<span class="name">scope</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line">     <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-devtools<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">optional</span>&gt;</span>true<span class="tag">&lt;/<span class="name">optional</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependencies</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h1 id="2、启动类启用定时"><a href="#2、启动类启用定时" class="headerlink" title="2、启动类启用定时"></a>2、启动类启用定时</h1><p>在启动类上面加上@EnableScheduling即可开启定时</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@SpringBootApplication</span></span><br><span class="line"><span class="meta">@EnableScheduling</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Application</span> </span>&#123;    </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        SpringApplication.run(Application.class, args);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="3、创建定时任务实现类"><a href="#3、创建定时任务实现类" class="headerlink" title="3、创建定时任务实现类"></a>3、创建定时任务实现类</h1><ul>
+<li><p>定时任务1：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Component</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SchedulerTask</span> </span>&#123;    </span><br><span class="line">        <span class="keyword">private</span> <span class="keyword">int</span> count=<span class="number">0</span>;    </span><br><span class="line">		<span class="comment">/**</span></span><br><span class="line"><span class="comment">		* 分 时 日 月 周</span></span><br><span class="line"><span class="comment">		* 每隔一分钟执行一次（1 * * * *）</span></span><br><span class="line"><span class="comment">		* 每星期五则每小时执行一次（* 1 * * 5）</span></span><br><span class="line"><span class="comment">		**/</span></span><br><span class="line">        <span class="meta">@Scheduled</span>(cron=<span class="string">"1 * * * * ?"</span>)    </span><br><span class="line">        <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">process</span><span class="params">()</span></span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"this is scheduler task runing  "</span>+(count++));</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>定时任务2：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Component</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Scheduler2Task</span> </span>&#123;    </span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> SimpleDateFormat dateFormat = <span class="keyword">new</span> SimpleDateFormat(<span class="string">"HH:mm:ss"</span>);    </span><br><span class="line"></span><br><span class="line">    <span class="meta">@Scheduled</span>(fixedRate = <span class="number">6000</span>)    </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">reportCurrentTime</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"现在时间："</span> + dateFormat.format(<span class="keyword">new</span> Date()));</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<p>结果如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">this</span> is scheduler task runing  <span class="number">0</span></span><br><span class="line">现在时间：<span class="number">09</span>:<span class="number">44</span>:<span class="number">17</span></span><br><span class="line"><span class="keyword">this</span> is scheduler task runing  <span class="number">1</span></span><br><span class="line">现在时间：<span class="number">09</span>:<span class="number">44</span>:<span class="number">23</span></span><br><span class="line"><span class="keyword">this</span> is scheduler task runing  <span class="number">2</span></span><br><span class="line">现在时间：<span class="number">09</span>:<span class="number">44</span>:<span class="number">29</span></span><br><span class="line"><span class="keyword">this</span> is scheduler task runing  <span class="number">3</span></span><br><span class="line">现在时间：<span class="number">09</span>:<span class="number">44</span>:<span class="number">35</span></span><br></pre></td></tr></table></figure>
+
+<p>参数说明</p>
+<p><code>@Scheduled</code>参数可以接受两种定时的设置，一种是我们常用的cron=”*/6 * * * * ?”<br>,另一种是 fixedRate = 6000，两种都表示每隔六秒打印一下内容。</p>
+<p>fixedRate 说明</p>
+<p>@Scheduled(fixedRate = 6000) ：上一次开始执行时间点之后6秒再执行<br>@Scheduled(fixedDelay = 6000) ：上一次执行完毕时间点之后6秒再执行<br>@Scheduled(initialDelay=1000, fixedRate=6000) ：第一次延迟1秒后执行，之后按fixedRate的规则每6秒执行一次</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    <div>
+      
+    </div>
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://pibigstar.com/2019/02/28/使用frp进行内网穿透/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="派大星">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/qq.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="派大星的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/02/28/使用frp进行内网穿透/" itemprop="url">使用frp进行内网穿透</a></h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-02-28T00:12:04+08:00">
+                2019-02-28
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/工具使用-树莓派/" itemprop="url" rel="index">
+                    <span itemprop="name">工具使用,树莓派</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>环境：</p>
+<ul>
+<li>具有公网IP的服务器</li>
+<li>Centos7</li>
+<li>需要内网穿透的客户端</li>
+</ul>
+<h2 id="文档"><a href="#文档" class="headerlink" title="文档"></a>文档</h2><p><a href="https://github.com/fatedier/frp/blob/master/README_zh.md" target="_blank" rel="noopener">https://github.com/fatedier/frp/blob/master/README_zh.md</a></p>
+<ul>
+<li><p>将 frps、frps.ini 及 frps.service 放到具有公网 IP 的机器上。</p>
+</li>
+<li><p>将 frpc 、frpc.ini 及 frpc.service 放到处于内网环境的机器上。</p>
+</li>
+</ul>
+<h3 id="文件位置："><a href="#文件位置：" class="headerlink" title="文件位置："></a>文件位置：</h3><h4 id="公网机器："><a href="#公网机器：" class="headerlink" title="公网机器："></a>公网机器：</h4><ul>
+<li><code>frps</code>  /usr/bin/frps</li>
+<li><code>frps.ini</code> /etc/frp/frps.ini</li>
+<li><code>frps.service</code> /lib/systemd/system/frps.service<h3 id="内网机器"><a href="#内网机器" class="headerlink" title="内网机器"></a>内网机器</h3></li>
+<li><code>frpc</code>  /usr/bin/frpc</li>
+<li><code>frpc.ini</code> /etc/frp/frpc.ini</li>
+<li><code>frpc.service</code> /lib/systemd/system/frpc.service</li>
+</ul>
+<h1 id="1-服务端"><a href="#1-服务端" class="headerlink" title="1. 服务端"></a>1. 服务端</h1><p>下载</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">https://github.com/fatedier/frp/releases</span><br></pre></td></tr></table></figure>
+
+<p>解压</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tar -zxvf frp_0.28.2_linux_amd64.tar.gz</span><br></pre></td></tr></table></figure>
+
+<p>移动位置</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mv frps /usr/bin/frps</span><br></pre></td></tr></table></figure>
+
+<p>修改配置</p>
+<ul>
+<li>frps.ini<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">[common]</span><br><span class="line">bind_addr = 0.0.0.0</span><br><span class="line">bind_port = 9800</span><br><span class="line"><span class="comment"># 将8080端口作为内网访问端口</span></span><br><span class="line">vhost_http_port = 8080</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<p>移动位置</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mkdir -p /etc/frp &amp; mv frps.ini /etc/frp/frps.ini</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>systemd/frps.service<br>主要修改<code>ExecStart</code><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">[Unit]</span><br><span class="line">Description=Frp Server Service</span><br><span class="line">After=network.target</span><br><span class="line"></span><br><span class="line">[Service]</span><br><span class="line">Type=simple</span><br><span class="line">User=nobody</span><br><span class="line">Restart=on-failure</span><br><span class="line">RestartSec=5s</span><br><span class="line">ExecStart=/usr/bin/frps -c /etc/frp/frps.ini</span><br><span class="line"></span><br><span class="line">[Install]</span><br><span class="line">WantedBy=multi-user.target</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<p>移动位置</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mv frps.service /lib/systemd/system/frps.service</span><br></pre></td></tr></table></figure>
+
+<p>启动</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 注册系统服务</span></span><br><span class="line">systemctl <span class="built_in">enable</span> frps.service</span><br><span class="line"><span class="comment"># 开启</span></span><br><span class="line">systemctl start frps.service</span><br><span class="line"><span class="comment"># 查看状态</span></span><br><span class="line">systemctl status frps.service</span><br><span class="line"><span class="comment"># 关闭</span></span><br><span class="line">systemctl stop frps.service</span><br></pre></td></tr></table></figure>
+
+<h1 id="2-客户端"><a href="#2-客户端" class="headerlink" title="2. 客户端"></a>2. 客户端</h1><p>下载</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">https://github.com/fatedier/frp/releases</span><br></pre></td></tr></table></figure>
+
+<p>移动文件</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mv frpc /usr/bin/frpc</span><br></pre></td></tr></table></figure>
+
+<p>修改配置文件</p>
+<ul>
+<li>frpc.ini<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">[common]</span><br><span class="line">server_addr = 139.189.64.253   <span class="comment"># 公网服务器地址</span></span><br><span class="line">server_port = 9800             <span class="comment"># frps.ini 中定义的 bind_port</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># ssh连接</span></span><br><span class="line">[ssh]</span><br><span class="line"><span class="built_in">type</span> = tcp</span><br><span class="line">local_ip = 127.0.0.1</span><br><span class="line">local_port = 22</span><br><span class="line">remote_port = 6000</span><br><span class="line"><span class="comment"># 内网web服务暴露于</span></span><br><span class="line">[web]</span><br><span class="line"><span class="built_in">type</span> = http</span><br><span class="line">local_port = 80</span><br><span class="line">custom_domains = blog.pibigstar.com</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<blockquote>
+<p>将 blog.pibigstar.com的域名 A 记录解析到 我们公网IP地址： x.x.x.x<br>通过浏览器访问 <a href="http://blog.pibigstar.com:8080" target="_blank" rel="noopener">http://blog.pibigstar.com:8080</a> 即可访问到处于内网机器上的 web 服务。</p>
+</blockquote>
+<p>ssh连接<br><code>ssh -oPort=6000 root@139.189.65.203</code></p>
+<p>移动位置</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mkdir -p /etc/frp &amp; mv frpc.ini /etc/frp/frpc.ini</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>frpc.service<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">[Unit]</span><br><span class="line">Description=Frp Client Service</span><br><span class="line">After=network.target</span><br><span class="line"></span><br><span class="line">[Service]</span><br><span class="line">Type=simple</span><br><span class="line">User=nobody</span><br><span class="line">Restart=on-failure</span><br><span class="line">RestartSec=5s</span><br><span class="line">ExecStart=/usr/bin/frpc -c /etc/frp/frpc.ini</span><br><span class="line">ExecReload=/usr/bin/frpc reload -c /etc/frp/frpc.ini</span><br><span class="line"></span><br><span class="line">[Install]</span><br><span class="line">WantedBy=multi-user.target</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<p>移动位置</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mv frpc.service /lib/systemd/system/frpc.service</span><br></pre></td></tr></table></figure>
+
+<p>启动</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 注册系统服务</span></span><br><span class="line">systemctl <span class="built_in">enable</span> frpc.service</span><br><span class="line"><span class="comment"># 开启</span></span><br><span class="line">systemctl start frpc.service</span><br><span class="line"><span class="comment"># 查看状态</span></span><br><span class="line">systemctl status frpc.service</span><br><span class="line"><span class="comment"># 关闭</span></span><br><span class="line">systemctl stop frpc.service</span><br></pre></td></tr></table></figure>
+
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    <div>
+      
+    </div>
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://pibigstar.com/2019/02/26/面试总结---编程语言部分（java）/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="派大星">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/qq.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="派大星的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/02/26/面试总结---编程语言部分（java）/" itemprop="url">面试总结---编程语言部分（java）</a></h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-02-26T01:01:04+08:00">
+                2019-02-26
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/面试/" itemprop="url" rel="index">
+                    <span itemprop="name">面试</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>[TOC]</p>
+<h2 id="1-java集合"><a href="#1-java集合" class="headerlink" title="1. java集合"></a>1. java集合</h2><h3 id="1-1-常用集合的导图"><a href="#1-1-常用集合的导图" class="headerlink" title="1.1 常用集合的导图"></a>1.1 常用集合的导图</h3><p><img src="https://img-blog.csdn.net/2018042816380980?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2p1bm1veGk=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt="java集合导图"></p>
+<h3 id="1-2-Collection和Map"><a href="#1-2-Collection和Map" class="headerlink" title="1.2 Collection和Map"></a>1.2 Collection和Map</h3><p>java集合类分为collection 和 map两类</p>
+<p><strong>Collection</strong></p>
+<ul>
+<li><p>List（有序、可重复）</p>
+<ul>
+<li>ArrayList ：线程不安全，底层用数组实现，按插入先后排序，随机访问快，插入与删除慢。</li>
+<li>LinkedList ：线程不安全的，底层基于链表的数据结构实现，访问慢但插入元素与删除元素比较快。LinkedList类实现了Queue接口，可当做队列使用</li>
+<li>Vector ：线程安全的， 实现了Cloneable接口，即实现clone()函数。它能被克隆。Vector 实现Serializable接口，支持序列化。</li>
+</ul>
+</li>
+<li><p>Set（无序、不可重复）</p>
+<ul>
+<li>HashSet ：线程不安全的，值可以为null，层使用数据结构的hash算法实现的，因此具有很好的存取，查找的性能。在add对一个对象的添加要重写equals和hashcode，保证对象不重复性。</li>
+<li>TreeSet ：线程不安全的， 底层使用数据结构红黑树算法进行维护的。可通过实现compareTo(Object obj) 来进行来进行排序</li>
+<li>LinkedHashSet ：线程不安全的， 底层使用链表来进行维护的。里面的顺序是值插入的顺序，插入的时候性能不如hashSet而查询的时候性能会比hashSet更好。</li>
+</ul>
+</li>
+<li><p>Queue（队列，先进先出）</p>
+<ul>
+<li>PriorityQueue ：保存队列元素的顺序并不是按加入队列的顺序，而是按队列元素的大小进行重新排序</li>
+</ul>
+<p><strong>常用队列操作方法：</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">add</span><span class="params">(Object e)</span></span>;<span class="comment">//将指定元素加入此队列的尾部。</span></span><br><span class="line"><span class="function">Object <span class="title">element</span><span class="params">()</span></span>;<span class="comment">//获取队列头部的元素，但是不删除该元素。</span></span><br><span class="line"><span class="function"><span class="keyword">boolean</span> <span class="title">offer</span><span class="params">(Object e)</span></span>;<span class="comment">//将指定元素加入此队列的尾部。当使用有容量限制的队列时，此方法通常比add(Object e)方法更好。</span></span><br><span class="line"><span class="function">Object <span class="title">peek</span><span class="params">()</span></span>; <span class="comment">//获取队列头部的元素，但是不删除该元素，如果此队列为空，则返回null。</span></span><br><span class="line"><span class="function">Object <span class="title">poll</span><span class="params">()</span></span>;<span class="comment">//获取队列头部的元素，并删除该元素，如果此队列为空，则返回null。</span></span><br><span class="line"><span class="function">Object <span class="title">remove</span><span class="params">()</span></span>;<span class="comment">//获取队列头部的元素，并删除该元素。</span></span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<p><strong>Map</strong></p>
+<ul>
+<li>HashMap ：线程不安全的，基于哈希表实现。Key值和value值都可以为null</li>
+<li>HashTable ：线程安全的，基于哈希表实现。Key值和value值不能为null</li>
+<li>TreeMap ：线程不安全的，保存元素key-value不能为null，允许key-value重复；遍历元素时随机排列</li>
+</ul>
+<h2 id="2-java并发"><a href="#2-java并发" class="headerlink" title="2. java并发"></a>2. java并发</h2><ul>
+<li>并行：表示两个线程同时做事情。</li>
+<li>并发：表示一会做这个事情，一会做另一个事情，存在着调度。单核 CPU 不可能存在并行（微观上）。</li>
+</ul>
+<p><strong>java实现多线程的两种方式：继承 Thread 类和实现 Runnable 接口</strong></p>
+<h3 id="2-1-java多线程中名词的概念"><a href="#2-1-java多线程中名词的概念" class="headerlink" title="2.1 java多线程中名词的概念"></a>2.1 java多线程中名词的概念</h3><p><strong>多个进程或线程同时(或着说在同一段时间内)访问同一资源会产生并发问题。</strong><br><a href="https://mp.weixin.qq.com/s/rHnzqlzJusIVNO7X7mBDkA" target="_blank" rel="noopener">具体详细内容可点击这里查看</a></p>
+<ul>
+<li>临界区<blockquote>
+<p>临界区用来表示一种公共资源或者说是共享数据，可以被多个线程使用。但是每一次，只能有一个线程使用它，一旦临界区资源被占用，其他线程要想使用这个资源，就必须等待。</p>
+</blockquote>
+</li>
+</ul>
+<ul>
+<li>阻塞与非阻塞</li>
+</ul>
+<blockquote>
+<p>阻塞和非阻塞通常用来形容多线程间的相互影响。比如一个线程占用了临界区资源，那么其它所有需要这个资源的线程就必须在这个临界区中进行等待，等待会导致线程挂起。这种情况就是阻塞。<br>此时，如果占用资源的线程一直不愿意释放资源，那么其它所有阻塞在这个临界区上的线程都不能工作。阻塞是指线程在操作系统层面被挂起。阻塞一般性能不好，需大约8万个时钟周期来做调度。<br>非阻塞则允许多个线程同时进入临界区。</p>
+</blockquote>
+<ul>
+<li>死锁</li>
+</ul>
+<blockquote>
+<p>死锁是进程死锁的简称，是指多个进程循环等待他方占有的资源而无限的僵持下去的局面。</p>
+</blockquote>
+<ul>
+<li>活锁</li>
+</ul>
+<blockquote>
+<p>假设有两个线程1、2，它们都需要资源 A/B，假设1号线程占有了 A 资源，2号线程占有了 B 资源；由于两个线程都需要同时拥有这两个资源才可以工作，为了避免死锁，1号线程释放了 A 资源占有锁，2号线程释放了 B 资源占有锁；此时 AB 空闲，两个线程又同时抢锁，再次出现上述情况，此时发生了活锁。</p>
+</blockquote>
+<blockquote>
+<p>简单类比，电梯遇到人，一个进的一个出的，对面占路，两个人同时往一个方向让路，来回重复，还是堵着路。<br>如果线上应用遇到了活锁问题，恭喜你中奖了，这类问题比较难排查。</p>
+</blockquote>
+<ul>
+<li>饥饿</li>
+</ul>
+<blockquote>
+<p>饥饿是指某一个或者多个线程因为种种原因无法获得所需要的资源，导致一直无法执行。</p>
+</blockquote>
+<h3 id="2-2-java实现并发的方式"><a href="#2-2-java实现并发的方式" class="headerlink" title="2.2 java实现并发的方式"></a>2.2 java实现并发的方式</h3><p>一般都是通过加锁进行实现。</p>
+<h4 id="2-2-1-synchronize关键字"><a href="#2-2-1-synchronize关键字" class="headerlink" title="2.2.1 synchronize关键字"></a>2.2.1 synchronize关键字</h4><ul>
+<li>用法1</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">	<span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Test</span></span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">synchronized</span> <span class="keyword">void</span> <span class="title">print</span><span class="params">()</span></span>&#123;</span><br><span class="line">        ....;</span><br><span class="line">    &#125; </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>用法2</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Test</span></span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">print</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">synchronized</span>(<span class="keyword">this</span>)&#123;<span class="comment">//锁住本对象</span></span><br><span class="line">            ...;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>用法3</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Test</span></span>&#123;</span><br><span class="line">    <span class="keyword">private</span> String a = <span class="string">"test"</span>;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">print</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">synchronized</span>(a)&#123;<span class="comment">//锁住a对象</span></span><br><span class="line">            ...;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>静态方法的锁</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Test</span></span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">synchronized</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">execute</span><span class="params">()</span></span>&#123;</span><br><span class="line">        ...;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//效果同</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Test</span></span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">execute</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">synchronized</span>(Test.class)&#123;</span><br><span class="line">            ...;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="2-2-2-java-util-Lock的使用"><a href="#2-2-2-java-util-Lock的使用" class="headerlink" title="2.2.2 java.util.Lock的使用"></a>2.2.2 java.util.Lock的使用</h4><blockquote>
+<p>Lock能实现synchronized完成的所以功能，不同点是：Lock有比synchronize更精确的线程语义和更好的性能，synchronize会自动释放锁，而Lock一定要求程序员手工释放，并且必须在finally从句中释放。Lock还有更强大的功能，例如，它的tryLock方法可以非阻塞方式去拿锁。</p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">final</span> Lock lock = <span class="keyword">new</span> ReentrantLock();</span><br><span class="line"><span class="keyword">while</span>(<span class="keyword">true</span>)&#123;</span><br><span class="line">	lock.lock();<span class="comment">//加锁</span></span><br><span class="line">	<span class="keyword">try</span>&#123;</span><br><span class="line">		j--;</span><br><span class="line">	&#125;<span class="keyword">finally</span>&#123;</span><br><span class="line">		lock.unlock();<span class="comment">//释放锁</span></span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="2-2-3-使用线程池"><a href="#2-2-3-使用线程池" class="headerlink" title="2.2.3 使用线程池"></a>2.2.3 使用线程池</h4><p>通过上面的介绍，完全可以开发一个多线程的程序，为什么还要引入线程池呢。主要是因为上述单线程方式存在以下几个问题：</p>
+<ul>
+<li>线程的工作周期：线程创建所需时间为 T1，线程执行任务所需时间为 T2，线程销毁所需时间为 T3，往往是 T1+T3 大于 T2，所有如果频繁创建线程会损耗过多额外的时间；</li>
+<li>如果有任务来了，再去创建线程的话效率比较低，如果从一个池子中可以直接获取可用的线程，那效率会有所提高。所以线程池省去了任务过来，要先创建线程再去执行的过程，节省了时间，提升了效率；</li>
+<li>线程池可以管理和控制线程，因为线程是稀缺资源，如果无限制的创建，不仅会消耗系统资源，还会降低系统的稳定性，使用线程池可以进行统一的分配，调优和监控；</li>
+<li>线程池提供队列，存放缓冲等待执行的任务。</li>
+</ul>
+<p><strong>四种线程池的使用</strong></p>
+<ul>
+<li><p>newCachedThreadPool ：创建一个可缓存线程池，如果线程池长度超过处理需要，可灵活回收空闲线程，若无可回收，则新建线程</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">ExecutorService cachedThreadPool = Executors.newCachedThreadPool();  </span><br><span class="line">cachedThreadPool.execute(<span class="keyword">new</span> Runnable() &#123;  </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;  </span><br><span class="line">     System.out.println(index);  </span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>newFixedThreadPool ：创建一个定长线程池，可控制线程最大并发数，超出的线程会在队列中等待</p>
+</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ExecutorService fixedThreadPool = Executors.newFixedThreadPool(<span class="number">3</span>);</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p>newScheduledThreadPool：创建一个定长线程池，支持定时及周期性任务执行</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">ScheduledExecutorService scheduledThreadPool = Executors.newScheduledThreadPool(<span class="number">5</span>);  </span><br><span class="line">  scheduledThreadPool.schedule(<span class="keyword">new</span> Runnable() &#123;  </span><br><span class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;  </span><br><span class="line">    System.out.println(<span class="string">"delay 3 seconds"</span>);  </span><br><span class="line">   &#125;  </span><br><span class="line">  &#125;, <span class="number">3</span>, TimeUnit.SECONDS);  <span class="comment">//延迟3秒执行</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>newSingleThreadExecutor：创建一个单线程化的线程池，它只会用唯一的工作线程来执行任务，保证所有任务按照指定顺序(FIFO, LIFO, 优先级)执行</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ExecutorService singleThreadExecutor = Executors.newSingleThreadExecutor();</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<h4 id="2-2-4-wait-和-sleep-理解"><a href="#2-2-4-wait-和-sleep-理解" class="headerlink" title="2.2.4 wait 和 sleep 理解"></a>2.2.4 wait 和 sleep 理解</h4><blockquote>
+<p>对于sleep()方法，我们首先要知道该方法是属于Thread类中的。而wait()方法，则是属于Object<br>类中的。 sleep()方法导致了程序暂停执行指定的时间，让出cpu该其他线程，但是他的监控状态<br>依然保持者，当指定的时间到了又会自动恢复运行状态。<br><strong>在调用sleep()方法的过程中，线程不会释放对象锁。</strong><br><strong>而当调用wait()方法的时候，线程会放弃对象锁</strong>，进入等待此对象的等待锁定池，只有针对<br>此对象调用notify()方法或notifyAll()方法后本线程才进入对象锁定池准备获取对象锁进入运行状态。</p>
+</blockquote>
+<h2 id="3-java异常"><a href="#3-java异常" class="headerlink" title="3. java异常"></a>3. java异常</h2><h3 id="3-1-异常类导图"><a href="#3-1-异常类导图" class="headerlink" title="3.1 异常类导图"></a>3.1 异常类导图</h3><p><img src="https://img-blog.csdn.net/20180428182119774?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2p1bm1veGk=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt="异常导图"></p>
+<h3 id="3-2-异常的使用"><a href="#3-2-异常的使用" class="headerlink" title="3.2 异常的使用"></a>3.2 异常的使用</h3><p>一般都是通过try···catch···finally 进行处理</p>
+<h4 id="3-2-1-try、catch、finally"><a href="#3-2-1-try、catch、finally" class="headerlink" title="3.2.1 try、catch、finally"></a>3.2.1 try、catch、finally</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">try</span>&#123;</span><br><span class="line">     <span class="comment">//try块中放可能发生异常的代码。</span></span><br><span class="line">     <span class="comment">//如果执行完try且不发生异常，则接着去执行finally块和finally后面的代码（如果有的话）。</span></span><br><span class="line">     <span class="comment">//如果发生异常，则尝试去匹配catch块。</span></span><br><span class="line"> </span><br><span class="line">&#125;<span class="keyword">catch</span>(SQLException SQLexception)&#123;</span><br><span class="line">    <span class="comment">//每一个catch块用于捕获并处理一个特定的异常，或者这异常类型的子类。Java7中可以将多个异常声明在一个catch中。</span></span><br><span class="line">    <span class="comment">//catch后面的括号定义了异常类型和异常参数。如果异常与之匹配且是最先匹配到的，则虚拟机将使用这个catch块来处理异常。</span></span><br><span class="line">    <span class="comment">//在catch块中可以使用这个块的异常参数来获取异常的相关信息。异常参数是这个catch块中的局部变量，其它块不能访问。</span></span><br><span class="line">    <span class="comment">//如果当前try块中发生的异常在后续的所有catch中都没捕获到，则先去执行finally，然后到这个函数的外部caller中去匹配异常处理器。</span></span><br><span class="line">    <span class="comment">//如果try中没有发生异常，则所有的catch块将被忽略。</span></span><br><span class="line">&#125;<span class="keyword">catch</span>(Exception exception)&#123;</span><br><span class="line">    <span class="comment">//...</span></span><br><span class="line">&#125;<span class="keyword">finally</span>&#123;</span><br><span class="line">    <span class="comment">//finally块通常是可选的。</span></span><br><span class="line">   <span class="comment">//无论异常是否发生，异常是否匹配被处理，finally都会执行。</span></span><br><span class="line">   <span class="comment">//一个try至少要有一个catch块，否则， 至少要有1个finally块。但是finally不是用来处理异常的，finally不会捕获异常。</span></span><br><span class="line">  <span class="comment">//finally主要做一些清理工作，如流的关闭，数据库连接的关闭等。 </span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>需要注意的是：</strong></p>
+<ol>
+<li>try块中的局部变量和catch块中的局部变量（包括异常变量），以及finally中的局部变量，他们之间不可共享使用。</li>
+<li>每一个catch块用于处理一个异常。异常匹配是按照catch块的顺序从上往下寻找的，只有第一个匹配的catch会得到执行。</li>
+<li>try{}里有一个return语句，那么紧跟在这个try后的finally{}里代码会在return之前执行，更准确的说，是在return中间执行，看下面例子：<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">test</span><span class="params">()</span></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> x = <span class="number">1</span>;</span><br><span class="line">	<span class="keyword">try</span>&#123;</span><br><span class="line">		<span class="keyword">return</span> x;</span><br><span class="line">	&#125;<span class="keyword">finally</span>&#123;</span><br><span class="line">		System.out.print(<span class="string">"执行了"</span>);</span><br><span class="line">		++x;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//执行结果是 ：执行了  </span></span><br><span class="line"><span class="comment">//但是 x = 1</span></span><br></pre></td></tr></table></figure>
 
 </li>
 </ol>
-<p>查看最新版本：<a href="https://nodejs.org/en/" target="_blank" rel="noopener">https://nodejs.org/en/</a></p>
+<h4 id="3-2-2-抛出异常"><a href="#3-2-2-抛出异常" class="headerlink" title="3.2.2 抛出异常"></a>3.2.2 抛出异常</h4><ol>
+<li><p>throws 抛到上一层（用在方法上）</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">foo</span><span class="params">()</span> <span class="keyword">throws</span> SQLException, IOException,ClassNotFloundException</span></span><br><span class="line"><span class="function"></span>&#123; </span><br><span class="line"><span class="comment">//foo内部可以抛出 SQLException, IOException,ClassNotFloundException 类的异常</span></span><br><span class="line"><span class="comment">//或者他们的子类的异常对象。</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>throw 抛出异常 （用在方法内部）</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">save</span><span class="params">(User user)</span></span>&#123;</span><br><span class="line">      <span class="keyword">if</span>(user  == <span class="keyword">null</span>) </span><br><span class="line">         <span class="keyword">throw</span> <span class="keyword">new</span> IllegalArgumentException(<span class="string">"User对象为空"</span>);   </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+</li>
+</ol>
+<h2 id="4-java反射"><a href="#4-java反射" class="headerlink" title="4. java反射"></a>4. java反射</h2><h3 id="4-1-反射的概述"><a href="#4-1-反射的概述" class="headerlink" title="4.1 反射的概述"></a>4.1 反射的概述</h3><p><strong>反射是框架设计的灵魂</strong></p>
+<blockquote>
+<p>JAVA反射机制是在运行状态中，对于任意一个类，都能够知道这个类的所有属性和方法；对于任意一个对象，都能够调用它的任意一个方法和属性；这种动态获取的信息以及动态调用对象的方法的功能称为java语言的反射机制。<br>要想解剖一个类,必须先要获取到该类的字节码文件对象。而解剖使用的就是Class类中的方法.所以先要获取到每一个字节码文件对应的Class类型的对象.</p>
+</blockquote>
+<p><strong>以上的总结就是什么是反射</strong><br>反射就是把java类中的各种成分映射成一个个的Java对象</p>
+<p>例如：一个类有：成员变量、方法、构造方法、包等等信息，利用反射技术可以对一个类进行解剖，把个个组成部分映射成一个个对象。<br>    （其实：一个类中这些成员方法、构造方法、在加入类中都有一个类来描述）<br>如图是类的正常加载过程：反射的原理在与class对象。<br>熟悉一下加载的时候：Class对象的由来是将class文件读入内存，并为之创建一个Class对象。<br><img src="https://img-blog.csdn.net/20180429210029433?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2p1bm1veGk=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt="这里写图片描述"></p>
+<h3 id="4-2-反射中常用的方法"><a href="#4-2-反射中常用的方法" class="headerlink" title="4.2 反射中常用的方法"></a>4.2 反射中常用的方法</h3><h4 id="4-2-1-获得Class对象"><a href="#4-2-1-获得Class对象" class="headerlink" title="4.2.1 获得Class对象"></a>4.2.1 获得Class对象</h4><ol>
+<li><p>Object ——&gt; getClass();</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Student stu1 = <span class="keyword">new</span> Student();<span class="comment">//产生一个Student对象，一个Class对象。  </span></span><br><span class="line">Class stuClass1 = stu1.getClass();<span class="comment">//获得Class对象</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>任何数据类型（包括基本数据类型）都有一个“静态”的class属性</p>
+</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Class stuClass2 = Student.class;</span><br></pre></td></tr></table></figure>
+
+<ol start="3">
+<li>通过Class类的静态方法：forName（String  className）(常用)<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Class stuClass3 = Class.forName(<span class="string">"fanshe.Student"</span>);</span><br></pre></td></tr></table></figure>
+
+</li>
+</ol>
+<h4 id="4-2-2-获得构造方法"><a href="#4-2-2-获得构造方法" class="headerlink" title="4.2.2 获得构造方法"></a>4.2.2 获得构造方法</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//1.加载Class对象  </span></span><br><span class="line">Class clazz = Class.forName(<span class="string">"fanshe.Student"</span>);  </span><br><span class="line">          </span><br><span class="line"><span class="comment">//可传递参数，根据参数的不同，获得的构造方法对象也不同</span></span><br><span class="line"><span class="comment">//2.获取所有公有构造方法  </span></span><br><span class="line">Constructor[] conArray = clazz.getConstructors();  </span><br><span class="line"><span class="comment">//获得所有构造方法，包括公有和私有</span></span><br><span class="line">conArray = clazz.getDeclaredConstructors();  </span><br><span class="line"><span class="comment">//Constructor con = clazz.getConstructors(char.Class);</span></span><br><span class="line"><span class="comment">//如果是私有构造，可通过下面设置，即可调用newInstance</span></span><br><span class="line"><span class="comment">//con.setAccessible(true);//暴力访问(忽略掉访问修饰符)  </span></span><br><span class="line"><span class="comment">//调用构造方法  </span></span><br><span class="line">Object obj = con.newInstance();</span><br></pre></td></tr></table></figure>
+
+<h4 id="4-2-3-获得成员属性并设值"><a href="#4-2-3-获得成员属性并设值" class="headerlink" title="4.2.3 获得成员属性并设值"></a>4.2.3 获得成员属性并设值</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//1.获取Class对象  </span></span><br><span class="line">Class stuClass = Class.forName(<span class="string">"fanshe.field.Student"</span>);  </span><br><span class="line"><span class="comment">//2.获取所有公有的属性</span></span><br><span class="line"><span class="comment">//Field[] fieldArray = stuClass.getFields();  </span></span><br><span class="line"><span class="comment">//获取所有的属性(包括私有、受保护、默认的)</span></span><br><span class="line"><span class="comment">//Field[] allFieldArray = stuClass.getDeclaredFields();  </span></span><br><span class="line"><span class="comment">//获取name属性</span></span><br><span class="line">Field f = stuClass.getField(<span class="string">"name"</span>);  </span><br><span class="line"><span class="comment">//获取构造方法并调用产生一个对象  </span></span><br><span class="line">Object obj = stuClass.getConstructor().newInstance();</span><br><span class="line"><span class="comment">//为obj对象的name属性设置值  </span></span><br><span class="line">f.set(obj, <span class="string">"刘德华"</span>);</span><br><span class="line">Student stu = (Student)obj;  </span><br><span class="line">System.out.println(<span class="string">"验证姓名："</span> + stu.name);  </span><br><span class="line"><span class="comment">//获取私有的属性</span></span><br><span class="line">f = stuClass.getDeclaredField(<span class="string">"phoneNum"</span>);  </span><br><span class="line">f.setAccessible(<span class="keyword">true</span>);<span class="comment">//暴力反射，解除私有限定  </span></span><br><span class="line">f.set(obj, <span class="string">"18888889999"</span>);  </span><br><span class="line">System.out.println(<span class="string">"验证电话："</span> + stu.phoneNum);</span><br></pre></td></tr></table></figure>
+
+<h4 id="4-2-4-获得成员方法并调用"><a href="#4-2-4-获得成员方法并调用" class="headerlink" title="4.2.4 获得成员方法并调用"></a>4.2.4 获得成员方法并调用</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//获取Class对象  </span></span><br><span class="line">Class stuClass = Class.forName(<span class="string">"fanshe.method.Student"</span>);  </span><br><span class="line"><span class="comment">//获取所有公有方法    </span></span><br><span class="line"><span class="comment">//Method[] methodArray = stuClass.getMethods();  </span></span><br><span class="line"><span class="comment">//获取所有的方法，包括私有的</span></span><br><span class="line"><span class="comment">//methodArray = stuClass.getDeclaredMethods();  </span></span><br><span class="line"><span class="comment">//获取公有的show()方法，它有一个参数，为String类型的</span></span><br><span class="line">Method m = stuClass.getMethod(<span class="string">"show"</span>, String.class);  </span><br><span class="line"><span class="comment">//实例化一个Student对象  </span></span><br><span class="line">Object obj = stuClass.getConstructor().newInstance();  </span><br><span class="line"><span class="comment">//调用show 方法，并传递一个参数</span></span><br><span class="line">m.invoke(obj, <span class="string">"刘德华"</span>);  </span><br><span class="line"><span class="comment">//获取私有的show()方法,它有一个参数为int类型的</span></span><br><span class="line">m = stuClass.getDeclaredMethod(<span class="string">"show"</span>, <span class="keyword">int</span>.class);  </span><br><span class="line">m.setAccessible(<span class="keyword">true</span>);<span class="comment">//解除私有限定  </span></span><br><span class="line"><span class="comment">//调用并得到返回值</span></span><br><span class="line">Object result = m.invoke(obj, <span class="number">20</span>); </span><br><span class="line">System.out.println(<span class="string">"返回值："</span> + result);</span><br></pre></td></tr></table></figure>
+
+<h4 id="4-2-5-获得main-方法"><a href="#4-2-5-获得main-方法" class="headerlink" title="4.2.5 获得main 方法"></a>4.2.5 获得main 方法</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//1.获取Student对象的字节码  </span></span><br><span class="line">Class clazz = Class.forName(<span class="string">"fanshe.main.Student"</span>);            </span><br><span class="line"><span class="comment">//2.获取main方法  </span></span><br><span class="line">Method methodMain = clazz.getMethod(<span class="string">"main"</span>, String[].class);  </span><br><span class="line"><span class="comment">//3.调用main方法</span></span><br><span class="line">methodMain.invoke(<span class="keyword">null</span>, (Object)<span class="keyword">new</span> String[]&#123;&#125;);</span><br></pre></td></tr></table></figure>
+
+<h2 id="5-java常用的设计模式"><a href="#5-java常用的设计模式" class="headerlink" title="5. java常用的设计模式"></a>5. java常用的设计模式</h2><h3 id="5-1-单例模式"><a href="#5-1-单例模式" class="headerlink" title="5.1 单例模式"></a>5.1 单例模式</h3><p><strong>单例模式可以保证系统中一个类只有一个实例。即一个类只有一个对象实例</strong></p>
+<ol>
+<li>饿汉模式<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Singleton</span></span>&#123;</span><br><span class="line">	<span class="keyword">private</span> <span class="keyword">static</span> Singleton instance = <span class="keyword">new</span> Singleton()&#123;&#125;</span><br><span class="line">	<span class="function"><span class="keyword">private</span> <span class="title">Singleton</span><span class="params">()</span></span>&#123;&#125;<span class="comment">//将构造私有化</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> Singleton <span class="title">getInstance</span><span class="params">()</span></span>&#123;</span><br><span class="line">		<span class="keyword">return</span> instance;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+</li>
+</ol>
+<blockquote>
+<p>对于饿汉模式来说，这种写法已经很‘perfect’了，<br>唯一的缺点就是，由于instance的初始化是在类加载时进行的，<br>类加载是由ClassLoader来实现的，如果初始化太早，就会造成资源浪费</p>
+</blockquote>
 <ol start="2">
-<li><p>切换版本</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nvm use v10.16.1</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>查看本机安装了那些版本</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nvm list</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>换源（淘宝镜像）</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm config <span class="built_in">set</span> registry https://registry.npm.taobao.org</span><br></pre></td></tr></table></figure>
+<li>懒汉模式<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Singleton</span></span>&#123;</span><br><span class="line">	<span class="keyword">private</span> <span class="keyword">static</span> Singleton instance = <span class="keyword">null</span>;</span><br><span class="line">	<span class="function"><span class="keyword">private</span> <span class="title">Singleton</span><span class="params">()</span></span>&#123;&#125;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> Singleton <span class="title">getInstance</span><span class="params">()</span></span>&#123;</span><br><span class="line">		<span class="keyword">if</span>(instance==<span class="keyword">null</span>)&#123;</span><br><span class="line">			<span class="keyword">return</span> <span class="keyword">new</span> Singleton();</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">return</span> instance;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 </li>
 </ol>
-<h1 id="2-安装electron"><a href="#2-安装electron" class="headerlink" title="2. 安装electron"></a>2. 安装electron</h1><p>electron 安装文档：<a href="https://electronjs.org/docs" target="_blank" rel="noopener">https://electronjs.org/docs</a></p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install -g electron</span><br></pre></td></tr></table></figure>
-
-<h1 id="3-使用electron"><a href="#3-使用electron" class="headerlink" title="3. 使用electron"></a>3. 使用electron</h1><ol>
-<li>初始化一个Node项目<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm init</span><br></pre></td></tr></table></figure>
-
-</li>
-</ol>
-<p>这里输入一些项目基本信息就OK了，可以一路回车，最后会生成一个<code>package.json</code>文件</p>
-<ol start="2">
-<li><p>添加electron到项目中</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 将electron添加到项目中</span></span><br><span class="line">npm install --save-dev electron</span><br><span class="line"><span class="comment"># 安装</span></span><br><span class="line">npm install</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>修改package.json</p>
 <blockquote>
-<p>将 <code>test</code> 那块修改为 <code>&quot;start&quot;: &quot;electron .&quot;</code></p>
+<p>这种写法在单线程的时候是没问题的。<br>但是，当有多个线程一起工作的时候，如果有两个线程同时运行到 if (instance == null)，<br>都判断为null（第一个线程判断为空之后，并没有继续向下执行，当第二个线程判断的时候instance依然为空）<br>最终两个线程就各自会创建一个实例出来。这样就破环了单例模式 实例的唯一性，</p>
 </blockquote>
-<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="attr">"name"</span>: <span class="string">"electron"</span>,</span><br><span class="line">  <span class="attr">"version"</span>: <span class="string">"1.0.0"</span>,</span><br><span class="line">  <span class="attr">"description"</span>: <span class="string">""</span>,</span><br><span class="line">  <span class="attr">"main"</span>: <span class="string">"index.js"</span>,</span><br><span class="line">  <span class="attr">"scripts"</span>: &#123;</span><br><span class="line">    <span class="attr">"start"</span>: <span class="string">"electron ."</span></span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="attr">"author"</span>: <span class="string">""</span>,</span><br><span class="line">  <span class="attr">"license"</span>: <span class="string">"ISC"</span>,</span><br><span class="line">  <span class="attr">"devDependencies"</span>: &#123;</span><br><span class="line">    <span class="attr">"electron"</span>: <span class="string">"^6.0.0"</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ol start="3">
+<li><p>双重检查模式</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Singleton</span></span>&#123;</span><br><span class="line">	<span class="comment">//volatile关键字的一个作用是禁止指令重排，</span></span><br><span class="line">	<span class="comment">//把instance声明为volatile之后，对它的写操作就会有一个内存屏障</span></span><br><span class="line">	<span class="comment">//这样，在它的赋值完成之前，就不用会调用读操作。</span></span><br><span class="line">	<span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">volatile</span> Singleton instance = <span class="keyword">null</span>;</span><br><span class="line">	<span class="function"><span class="keyword">private</span> <span class="title">Singleton</span><span class="params">()</span></span>&#123;&#125;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> Singleton <span class="title">getInstance</span><span class="params">()</span></span>&#123;</span><br><span class="line">		<span class="keyword">if</span>(instance==<span class="keyword">null</span>)&#123;</span><br><span class="line">			sysnchronized(Singleton.class)&#123;</span><br><span class="line">				<span class="keyword">if</span>(instance==<span class="keyword">null</span>)&#123;</span><br><span class="line">					<span class="keyword">return</span> <span class="keyword">new</span> Singleton();</span><br><span class="line">				&#125;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">return</span> instance;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 </li>
-<li><p>新增入口<code>index.js</code>文件</p>
-<blockquote>
-<p>在项目根目录下新建index.js文件，文件里面的内容直接用electron提供的示例了。<a href="https://electronjs.org/docs/tutorial/first-app#electron-development-in-a-nutshell" target="_blank" rel="noopener">点击查看</a></p>
-</blockquote>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> &#123; app, BrowserWindow &#125; = <span class="built_in">require</span>(<span class="string">'electron'</span>)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">createWindow</span> (<span class="params"></span>) </span>&#123;   </span><br><span class="line">  <span class="comment">// 创建浏览器窗口</span></span><br><span class="line">  <span class="keyword">let</span> win = <span class="keyword">new</span> BrowserWindow(&#123;</span><br><span class="line">    width: <span class="number">800</span>,</span><br><span class="line">    height: <span class="number">600</span>,</span><br><span class="line">    webPreferences: &#123;</span><br><span class="line">      nodeIntegration: <span class="literal">true</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;)</span><br><span class="line">  <span class="comment">// 加载index.html文件</span></span><br><span class="line">  win.loadFile(<span class="string">'index.html'</span>)</span><br><span class="line">&#125;</span><br><span class="line">app.on(<span class="string">'ready'</span>, createWindow)</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>新建<code>index.html</code>文件</p>
-<blockquote>
-<p>通过上面的js我们可以看到，它其实是加载的index.html文件，我们创建它，简单的写个HelloWorld</p>
-</blockquote>
-</li>
-</ol>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">h1</span>&gt;</span>Hello World<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<ol start="6">
-<li>运行程序<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm start</span><br></pre></td></tr></table></figure>
+<li><p>静态内部类实现</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Singleton</span> </span>&#123;</span><br><span class="line">  <span class="keyword">private</span> <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">SingletonHolder</span> </span>&#123;</span><br><span class="line">      <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> Singleton INSTANCE = <span class="keyword">new</span> Singleton();</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="function"><span class="keyword">private</span> <span class="title">Singleton</span> <span class="params">()</span></span>&#123;&#125;</span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> Singleton <span class="title">getInstance</span><span class="params">()</span> </span>&#123;</span><br><span class="line">      <span class="keyword">return</span> SingletonHolder.INSTANCE;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 </li>
 </ol>
-<p>这时我们就会弹出了一个GUI界面，如下图所示<br><img src="https://img-blog.csdnimg.cn/20190802232133475.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2p1bm1veGk=,size_16,color_FFFFFF,t_70" alt></p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    <div>
-      
-    </div>
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://pibigstar.com/2019/09/29/常用正则表达式/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="派大星">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/qq.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="派大星的博客">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/09/29/常用正则表达式/" itemprop="url">Untitled</a></h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-09-29T22:56:40+08:00">
-                2019-09-29
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>title: 常用正则表达式<br>date: 2018-09-20 22:10:31<br>tags: [正则,常用,java,匹配]<br>categories: 工具使用,Java</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    <div>
-      
-    </div>
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://pibigstar.com/2019/09/29/安装python的虚拟环境/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="派大星">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/qq.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="派大星的博客">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/09/29/安装python的虚拟环境/" itemprop="url">Untitled</a></h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-09-29T22:56:40+08:00">
-                2019-09-29
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>title: 安装python的虚拟环境<br>date: 2019-08-18 22:10:31<br>tags: [virtualenv]<br>categories: 工具使用,pyhton</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    <div>
-      
-    </div>
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://pibigstar.com/2019/09/29/使用java打开网页并截图/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="派大星">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/qq.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="派大星的博客">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/09/29/使用java打开网页并截图/" itemprop="url">Untitled</a></h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-09-29T22:56:40+08:00">
-                2019-09-29
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>title: 使用java打开网页并截图<br>date: 2019-08-18 22:10:31<br>tags: [打开网页,网页截图,截屏,robot]<br>categories: Java,java工具类</p>
-<p>控制浏览器打开网页只适用于JDK1.6之上的</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.pibgstar.demo.utils;</span><br><span class="line"><span class="keyword">import</span> javax.imageio.ImageIO;</span><br><span class="line"><span class="keyword">import</span> java.awt.*;</span><br><span class="line"><span class="keyword">import</span> java.awt.event.KeyEvent;</span><br><span class="line"><span class="keyword">import</span> java.awt.image.BufferedImage;</span><br><span class="line"><span class="keyword">import</span> java.io.File;</span><br><span class="line"><span class="keyword">import</span> java.io.IOException;</span><br><span class="line"><span class="keyword">import</span> java.net.URISyntaxException;</span><br><span class="line"><span class="keyword">import</span> java.net.URL;</span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> pibigstar</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@desc</span> 网页截图工具类</span></span><br><span class="line"><span class="comment"> **/</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">CutPictureUtil</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> IOException, URISyntaxException, AWTException </span>&#123;</span><br><span class="line">        <span class="comment">// 控制浏览器打开网页，仅适用于JdK1.6及以上版本</span></span><br><span class="line">        Desktop.getDesktop().browse(<span class="keyword">new</span> URL(<span class="string">"https://blog.csdn.net/junmoxi"</span>).toURI());</span><br><span class="line">        Robot robot = <span class="keyword">new</span> Robot();</span><br><span class="line">        <span class="comment">// 延迟一秒</span></span><br><span class="line">        robot.delay(<span class="number">1000</span>);</span><br><span class="line">        <span class="comment">// 获取屏幕宽度和高度</span></span><br><span class="line">        Dimension d = <span class="keyword">new</span> Dimension(Toolkit.getDefaultToolkit().getScreenSize());</span><br><span class="line">        <span class="keyword">int</span> width = (<span class="keyword">int</span>) d.getWidth();</span><br><span class="line">        <span class="keyword">int</span> height = (<span class="keyword">int</span>) d.getHeight();</span><br><span class="line">        <span class="comment">// 最大化浏览器</span></span><br><span class="line">        robot.keyRelease(KeyEvent.VK_F11);</span><br><span class="line">        robot.delay(<span class="number">1000</span>);</span><br><span class="line">        <span class="comment">// 对屏幕进行截图</span></span><br><span class="line">        Image image = robot.createScreenCapture(<span class="keyword">new</span> Rectangle(<span class="number">0</span>, <span class="number">0</span>, width, height));</span><br><span class="line">        <span class="comment">// 通过图形绘制工具类将截图保存</span></span><br><span class="line">        BufferedImage img = <span class="keyword">new</span> BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);</span><br><span class="line">        Graphics g = img.createGraphics();</span><br><span class="line">        g.drawImage(image, <span class="number">0</span>, <span class="number">0</span>, width, height, <span class="keyword">null</span>);</span><br><span class="line">        <span class="comment">// 保存图片</span></span><br><span class="line">        ImageIO.write(img, <span class="string">"jpg"</span>, <span class="keyword">new</span> File(<span class="string">"D:/tmp/"</span>+System.currentTimeMillis()+<span class="string">".jpg"</span>));</span><br><span class="line">        System.out.println(<span class="string">"done!"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
+<blockquote>
+<p>它利用了ClassLoader来保证了同步，同时又能让开发者控制类加载的时机。从内部看是一个饿汉式的单例，但是从外部看来，又的确是懒汉式的实现</p>
+</blockquote>
+<h3 id="5-2-工厂模式"><a href="#5-2-工厂模式" class="headerlink" title="5.2 工厂模式"></a>5.2 工厂模式</h3><h3 id="5-3-代理模式"><a href="#5-3-代理模式" class="headerlink" title="5.3 代理模式"></a>5.3 代理模式</h3><h3 id="5-4-适配器模式"><a href="#5-4-适配器模式" class="headerlink" title="5.4 适配器模式"></a>5.4 适配器模式</h3><h3 id="5-5-状态模式"><a href="#5-5-状态模式" class="headerlink" title="5.5 状态模式"></a>5.5 状态模式</h3><h3 id="5-6-观察者模式"><a href="#5-6-观察者模式" class="headerlink" title="5.6 观察者模式"></a>5.6 观察者模式</h3><p><strong>具体内容请移步：</strong></p>
+<p><a href="https://mp.weixin.qq.com/s/vazjj_UMD2WqaQ4SG-yhCA" target="_blank" rel="noopener">java23中模式详解</a></p>
+<p><a href="https://github.com/pibigstar/design-mode" target="_blank" rel="noopener">java23中模式例子</a></p>
 
           
         
@@ -1617,7 +2268,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/10/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/10/">10</a><span class="page-number current">11</span><a class="page-number" href="/page/12/">12</a><span class="space">&hellip;</span><a class="page-number" href="/page/24/">24</a><a class="extend next" rel="next" href="/page/12/"><i class="fa fa-angle-right"></i></a>
+    <a class="extend prev" rel="prev" href="/page/10/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/10/">10</a><span class="page-number current">11</span><a class="page-number" href="/page/12/">12</a><span class="space">&hellip;</span><a class="page-number" href="/page/14/">14</a><a class="extend next" rel="next" href="/page/12/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -1665,7 +2316,7 @@
               
                 <a href="/archives">
               
-                  <span class="site-state-item-count">239</span>
+                  <span class="site-state-item-count">137</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -1676,7 +2327,7 @@
               
               <div class="site-state-item site-state-categories">
                 
-                  <span class="site-state-item-count">1</span>
+                  <span class="site-state-item-count">64</span>
                   <span class="site-state-item-name">categories</span>
                 
               </div>
@@ -1687,7 +2338,7 @@
               
               <div class="site-state-item site-state-tags">
                 
-                  <span class="site-state-item-count">3</span>
+                  <span class="site-state-item-count">230</span>
                   <span class="site-state-item-name">tags</span>
                 
               </div>

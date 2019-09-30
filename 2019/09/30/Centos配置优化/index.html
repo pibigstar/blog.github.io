@@ -1,0 +1,854 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/32x32.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/16x16.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="centos,优化,linux,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="1. 升级内核 目前默认的内核都是 3.10的，我们需要升级到4.4  查看内核版本   1uname -r   升级 123456rpm --import https://www.elrepo.org/RPM-GPG-KEY-elrepo.org  rpm -Uvh http://www.elrepo.org/elrepo-release-7.0-3.el7.elrepo.noarch.rpm">
+<meta name="keywords" content="centos,优化,linux">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Centos配置优化">
+<meta property="og:url" content="http://pibigstar.com/2019/09/30/Centos配置优化/index.html">
+<meta property="og:site_name" content="派大星的博客">
+<meta property="og:description" content="1. 升级内核 目前默认的内核都是 3.10的，我们需要升级到4.4  查看内核版本   1uname -r   升级 123456rpm --import https://www.elrepo.org/RPM-GPG-KEY-elrepo.org  rpm -Uvh http://www.elrepo.org/elrepo-release-7.0-3.el7.elrepo.noarch.rpm">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-09-30T03:12:58.700Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Centos配置优化">
+<meta name="twitter:description" content="1. 升级内核 目前默认的内核都是 3.10的，我们需要升级到4.4  查看内核版本   1uname -r   升级 123456rpm --import https://www.elrepo.org/RPM-GPG-KEY-elrepo.org  rpm -Uvh http://www.elrepo.org/elrepo-release-7.0-3.el7.elrepo.noarch.rpm">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":true,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://pibigstar.com/2019/09/30/Centos配置优化/">
+
+
+
+
+
+  <title>Centos配置优化 | 派大星的博客</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">派大星的博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <h1 class="site-subtitle" itemprop="description">很多事情不是会了才能做，而是做了才能学会</h1>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-schedule">
+          <a href="/schedule/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-calendar"></i> <br>
+            
+            Schedule
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-sitemap">
+          <a href="/sitemap.xml" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-sitemap"></i> <br>
+            
+            Sitemap
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            About
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://pibigstar.com/2019/09/30/Centos配置优化/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="派大星">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/qq.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="派大星的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">Centos配置优化</h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-09-30T11:11:04+08:00">
+                2019-09-30
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Linux/" itemprop="url" rel="index">
+                    <span itemprop="name">Linux</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="1-升级内核"><a href="#1-升级内核" class="headerlink" title="1. 升级内核"></a>1. 升级内核</h1><blockquote>
+<p>目前默认的内核都是 3.10的，我们需要升级到4.4</p>
+<ol>
+<li>查看内核版本</li>
+</ol>
+</blockquote>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">uname -r</span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li><p>升级</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">rpm --import https://www.elrepo.org/RPM-GPG-KEY-elrepo.org  </span><br><span class="line">rpm -Uvh http://www.elrepo.org/elrepo-release-7.0-3.el7.elrepo.noarch.rpm  </span><br><span class="line">yum --enablerepo=elrepo-kernel install kernel<span class="_">-lt</span> -y  </span><br><span class="line">cat /boot/grub2/grub.cfg |grep menuentry  </span><br><span class="line">grub2-set-default <span class="string">'CentOS Linux (4.4.177-1.el7.elrepo.x86_64) 7 (Core)'</span>  </span><br><span class="line">reboot</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>再次查看当前内核</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">uname -r</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>移除无用内核</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">yum remove -y kernel*</span><br><span class="line"></span><br><span class="line">yum remove -y kernel-tools-libs  </span><br><span class="line"></span><br><span class="line">yum --enablerepo=elrepo-kernel install --skip-broken -y kernel<span class="_">-lt</span>-headers kernel<span class="_">-lt</span>-tools kernel<span class="_">-lt</span>-devel</span><br><span class="line"></span><br><span class="line">yum --enablerepo=elrepo-kernel install -y perf python-perf</span><br></pre></td></tr></table></figure>
+
+</li>
+</ol>
+<h1 id="2-字体优化"><a href="#2-字体优化" class="headerlink" title="2. 字体优化"></a>2. 字体优化</h1><p>有时候可能中文显示会出现问题，这里我们将字体编码改为UTF-8</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">cat &gt;&gt; /etc/profile &lt;&lt;EOF</span><br><span class="line"><span class="built_in">export</span> LC_ALL=en_US.UTF-8</span><br><span class="line"><span class="built_in">export</span> LC_CTYPE=en_US.UTF-8</span><br><span class="line">EOF</span><br><span class="line"></span><br><span class="line">cat &gt;&gt; /etc/environment &lt;&lt;EOF</span><br><span class="line">LANG=en_US.utf-8</span><br><span class="line">LC_ALL=en_US.utf-8</span><br><span class="line">EOF</span><br></pre></td></tr></table></figure>
+
+<p>刷新生效</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">source</span> /ect/profile</span><br><span class="line"><span class="built_in">source</span> /etc/environment</span><br></pre></td></tr></table></figure>
+
+<h1 id="3-进程限制优化"><a href="#3-进程限制优化" class="headerlink" title="3. 进程限制优化"></a>3. 进程限制优化</h1><ol>
+<li><p>查看进行限制</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cat /etc/security/limits.d/20-nproc.conf_bk</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>修改限制</p>
+<blockquote>
+<p>你可以加大限制，也可以改为 <code>unlimited</code>,让其不限制进程</p>
+</blockquote>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vim /etc/security/limits.d/20-nproc.conf_bk</span><br></pre></td></tr></table></figure>
+
+</li>
+</ol>
+<h1 id="4-时区优化"><a href="#4-时区优化" class="headerlink" title="4. 时区优化"></a>4. 时区优化</h1><ol>
+<li><p>查看当前使用时区</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">timedatectl | grep <span class="string">"Time zone"</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>修改时区<br>这里我们修改为上海的时区</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime</span><br></pre></td></tr></table></figure>
+
+</li>
+</ol>
+<h1 id="5-文件打开数优化"><a href="#5-文件打开数优化" class="headerlink" title="5. 文件打开数优化"></a>5. 文件打开数优化</h1><blockquote>
+<p>我们可以增大或减小文件的打开数，来优化我们系统的运行效率</p>
+</blockquote>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vim /etc/serurity/limits.conf</span><br></pre></td></tr></table></figure>
+
+<h1 id="6-增加用户的操作日志记录"><a href="#6-增加用户的操作日志记录" class="headerlink" title="6. 增加用户的操作日志记录"></a>6. 增加用户的操作日志记录</h1><ol>
+<li><p>将文件添加到<code>/etc/profile</code>中</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">cat &gt;&gt; /etc/profile &lt;&lt;EOF</span><br><span class="line"><span class="built_in">history</span></span><br><span class="line">USER=`whoami`</span><br><span class="line">USER_IP=`who -u am i 2&gt;/dev/null| awk <span class="string">'&#123;print $NF&#125;'</span>|sed -e <span class="string">'s/[()]//g'</span>`</span><br><span class="line"><span class="keyword">if</span> [ <span class="string">"<span class="variable">$USER_IP</span>"</span> = <span class="string">""</span> ]; <span class="keyword">then</span></span><br><span class="line">USER_IP=`hostname`</span><br><span class="line"><span class="keyword">fi</span></span><br><span class="line"><span class="keyword">if</span> [ ! -d /var/<span class="built_in">log</span>/<span class="built_in">history</span> ]; <span class="keyword">then</span></span><br><span class="line">mkdir /var/<span class="built_in">log</span>/<span class="built_in">history</span></span><br><span class="line">chmod 777 /var/<span class="built_in">log</span>/<span class="built_in">history</span></span><br><span class="line"><span class="keyword">fi</span></span><br><span class="line"><span class="keyword">if</span> [ ! -d /var/<span class="built_in">log</span>/<span class="built_in">history</span>/<span class="variable">$&#123;LOGNAME&#125;</span> ]; <span class="keyword">then</span></span><br><span class="line">mkdir /var/<span class="built_in">log</span>/<span class="built_in">history</span>/<span class="variable">$&#123;LOGNAME&#125;</span></span><br><span class="line">chmod 300 /var/<span class="built_in">log</span>/<span class="built_in">history</span>/<span class="variable">$&#123;LOGNAME&#125;</span></span><br><span class="line"><span class="keyword">fi</span></span><br><span class="line"><span class="built_in">export</span> HISTSIZE=4096</span><br><span class="line">DT=`date +<span class="string">"%Y%m%d_%H:%M:%S"</span>`</span><br><span class="line"><span class="built_in">export</span> HISTFILE=<span class="string">"/var/log/history/<span class="variable">$&#123;LOGNAME&#125;</span>/<span class="variable">$&#123;USER&#125;</span>@<span class="variable">$&#123;USER_IP&#125;</span>_<span class="variable">$DT</span>"</span></span><br><span class="line">chmod 600 /var/<span class="built_in">log</span>/<span class="built_in">history</span>/<span class="variable">$&#123;LOGNAME&#125;</span>/*<span class="built_in">history</span>* 2&gt;/dev/null</span><br><span class="line">EOF</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>使命令生效</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">source</span> /etc/profile</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>查看日志</p>
+<blockquote>
+<p>登录，登出之后在 <code>/var/log/history</code>中就可以看到以用户命名的文件夹，进入之后就会显示所有的日志操作</p>
+</blockquote>
+</li>
+</ol>
+<h1 id="7-日志优化"><a href="#7-日志优化" class="headerlink" title="7. 日志优化"></a>7. 日志优化</h1><p>压缩日志，将<code>compress</code>的注释删掉</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vim /etc/logrotate.conf</span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+    
+    
+    
+
+    <div>
+      
+        <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
+    
+</div>
+
+      
+    </div>
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/centos/" rel="tag"><i class="fa fa-tag"></i> centos</a>
+          
+            <a href="/tags/优化/" rel="tag"><i class="fa fa-tag"></i> 优化</a>
+          
+            <a href="/tags/linux/" rel="tag"><i class="fa fa-tag"></i> linux</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/09/30/MySQL字段操作/" rel="next" title="MySQL字段操作">
+                <i class="fa fa-chevron-left"></i> MySQL字段操作
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/09/30/Linux释放内存/" rel="prev" title="Linux释放内存">
+                Linux释放内存 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/qq.png" alt="派大星">
+            
+              <p class="site-author-name" itemprop="name">派大星</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives">
+              
+                  <span class="site-state-item-count">137</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                
+                  <span class="site-state-item-count">64</span>
+                  <span class="site-state-item-name">categories</span>
+                
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                
+                  <span class="site-state-item-count">230</span>
+                  <span class="site-state-item-name">tags</span>
+                
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/pibigstar" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://blog.csdn.net/junmoxi" target="_blank" title="CSDN">
+                      
+                        <i class="fa fa-fw fa-yelp"></i>CSDN</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#1-升级内核"><span class="nav-number">1.</span> <span class="nav-text">1. 升级内核</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2-字体优化"><span class="nav-number">2.</span> <span class="nav-text">2. 字体优化</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#3-进程限制优化"><span class="nav-number">3.</span> <span class="nav-text">3. 进程限制优化</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#4-时区优化"><span class="nav-number">4.</span> <span class="nav-text">4. 时区优化</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#5-文件打开数优化"><span class="nav-number">5.</span> <span class="nav-text">5. 文件打开数优化</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#6-增加用户的操作日志记录"><span class="nav-number">6.</span> <span class="nav-text">6. 增加用户的操作日志记录</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#7-日志优化"><span class="nav-number">7.</span> <span class="nav-text">7. 日志优化</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+        <div class="back-to-top">
+          <i class="fa fa-arrow-up"></i>
+          
+        </div>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-[object Object]"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">派大星</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+  <script type="text/javascript" src="/js/src/js.cookie.js?v=5.1.4"></script>
+  <script type="text/javascript" src="/js/src/scroll-cookie.js?v=5.1.4"></script>
+
+
+  
+
+</body>
+</html>
+<!-- 页面点击小红心 -->
+ <script type="text/javascript" src="/js/src/clicklove.js"></script>

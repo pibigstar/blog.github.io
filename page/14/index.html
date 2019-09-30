@@ -270,7 +270,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://pibigstar.com/2019/09/29/在Java中操作redis/">
+    <link itemprop="mainEntityOfPage" href="http://pibigstar.com/2019/01/16/自定义类加载器实现代码热替换/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="派大星">
@@ -289,7 +289,7 @@
         
           <h2 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2019/09/29/在Java中操作redis/" itemprop="url">Untitled</a></h2>
+                <a class="post-title-link" href="/2019/01/16/自定义类加载器实现代码热替换/" itemprop="url">自定义类加载器实现代码热替换</a></h2>
         
 
         <div class="post-meta">
@@ -301,8 +301,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-09-29T22:56:40+08:00">
-                2019-09-29
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-01-16T17:05:04+08:00">
+                2019-01-16
               </time>
             
 
@@ -311,6 +311,28 @@
             
           </span>
 
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Java/" itemprop="url" rel="index">
+                    <span itemprop="name">Java</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
           
 
           
@@ -341,386 +363,7 @@
       
         
           
-            <p>title: 在Java中操作redis<br>date: 2018-10-12 22:10:31<br>tags: [redis,java,数据库,分布式]<br>categories: 工具使用,Java</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    <div>
-      
-    </div>
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://pibigstar.com/2019/09/29/注解防止表单重复提交/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="派大星">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/qq.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="派大星的博客">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/09/29/注解防止表单重复提交/" itemprop="url">Untitled</a></h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-09-29T22:56:40+08:00">
-                2019-09-29
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>title: 注解防止表单重复提交<br>date: 2018-10-17 22:10:31<br>tags: [注解,重复提交]<br>categories: Java,SpringBoot技能大全</p>
-<h1 id="1-注解"><a href="#1-注解" class="headerlink" title="1. 注解"></a>1. 注解</h1><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Target</span>(ElementType.METHOD)</span><br><span class="line"><span class="meta">@Retention</span>(RetentionPolicy.RUNTIME)</span><br><span class="line"><span class="keyword">public</span> <span class="meta">@interface</span> StopRepeatSubmit &#123;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h1 id="2-拦截处理器"><a href="#2-拦截处理器" class="headerlink" title="2. 拦截处理器"></a>2. 拦截处理器</h1><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> pibigstar</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@desc</span> 防止表单重复提交拦截处理器</span></span><br><span class="line"><span class="comment"> **/</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">StopRepeatSubmitHandlerInterceptor</span> <span class="keyword">extends</span> <span class="title">HandlerInterceptorAdapter</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">preHandle</span><span class="params">(HttpServletRequest request, HttpServletResponse response, Object handler)</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (handler <span class="keyword">instanceof</span> HandlerMethod) &#123;</span><br><span class="line">            HandlerMethod handlerMethod = (HandlerMethod) handler;</span><br><span class="line">            Method method = handlerMethod.getMethod();</span><br><span class="line">            StopRepeatSubmit annotation = method.getAnnotation(StopRepeatSubmit.class);</span><br><span class="line">            <span class="keyword">if</span> (annotation!=<span class="keyword">null</span>) &#123;</span><br><span class="line">                <span class="comment">// 判断是否已经提交过了</span></span><br><span class="line">                String paramter = request.getParameterMap().toString();</span><br><span class="line">                String url = request.getRequestURL().toString();</span><br><span class="line">                String token = url+paramter;</span><br><span class="line">                Object attrToken = request.getSession().getAttribute(<span class="string">"token"</span>);</span><br><span class="line">                <span class="keyword">if</span> (attrToken == <span class="keyword">null</span>) &#123;</span><br><span class="line">                    <span class="comment">// 第一次请求</span></span><br><span class="line">                    request.getSession().setAttribute(<span class="string">"token"</span>,token);</span><br><span class="line">                    <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="keyword">if</span> (attrToken.toString().equals(token))&#123;</span><br><span class="line">                    <span class="comment">// 重复提交了</span></span><br><span class="line">                    <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">                &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                    <span class="comment">// 第一次提交</span></span><br><span class="line">                    request.getSession().setAttribute(<span class="string">"token"</span>,token);</span><br><span class="line">                    <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">super</span>.preHandle(request, response, handler);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h1 id="3-使用"><a href="#3-使用" class="headerlink" title="3. 使用"></a>3. 使用</h1><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@PostMapping</span>(<span class="string">"/submit"</span>)</span><br><span class="line"><span class="meta">@StopRepeatSubmit</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">submit</span><span class="params">()</span></span>&#123;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    <div>
-      
-    </div>
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://pibigstar.com/2019/09/29/在Window下安装Scrapy/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="派大星">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/qq.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="派大星的博客">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/09/29/在Window下安装Scrapy/" itemprop="url">Untitled</a></h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-09-29T22:56:40+08:00">
-                2019-09-29
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>title: 在Window下安装Scrapy<br>date: 2019-07-24 22:10:31<br>tags: [爬虫,Scrapy,window,Python,分布式爬虫]<br>categories: 工具使用,pyhton</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    <div>
-      
-    </div>
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://pibigstar.com/2019/09/29/自定义类加载器实现代码热替换/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="派大星">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/qq.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="派大星的博客">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/09/29/自定义类加载器实现代码热替换/" itemprop="url">Untitled</a></h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-09-29T22:56:40+08:00">
-                2019-09-29
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>title: 自定义类加载器实现代码热替换<br>date: 2019-05-04 22:10:31<br>tags: [自定义类加载器,代码热替换]<br>categories: Java</p>
-<p>代码热替换，在不重启服务器的情况下可以修改类的代码并使之生效</p>
+            <p>代码热替换，在不重启服务器的情况下可以修改类的代码并使之生效</p>
 <h1 id="1-自定义类加载器"><a href="#1-自定义类加载器" class="headerlink" title="1. 自定义类加载器"></a>1. 自定义类加载器</h1><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.pibgstar.demo.java;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.io.ByteArrayOutputStream;</span><br><span class="line"><span class="keyword">import</span> java.io.FileInputStream;</span><br><span class="line"><span class="keyword">import</span> java.io.IOException;</span><br><span class="line"><span class="keyword">import</span> java.util.Set;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> pibigstar</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@desc</span> 代码热替换，在不重启服务器的情况下可以修改类的代码并使之生效</span></span><br><span class="line"><span class="comment"> **/</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MyClassLoader</span> <span class="keyword">extends</span> <span class="title">ClassLoader</span></span>&#123;</span><br><span class="line">    <span class="comment">// 定义.class路径</span></span><br><span class="line">    <span class="keyword">private</span> String swapPath;</span><br><span class="line">    <span class="comment">// 存储哪些类需要我自身去加载</span></span><br><span class="line">    <span class="keyword">private</span> Set&lt;String&gt; myselfLoader;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">MyClassLoader</span><span class="params">(String swapPath, Set&lt;String&gt; myselfLoader)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.swapPath = swapPath;</span><br><span class="line">        <span class="keyword">this</span>.myselfLoader = myselfLoader;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">protected</span> Class&lt;?&gt; loadClass(String name, <span class="keyword">boolean</span> resolve) <span class="keyword">throws</span> ClassNotFoundException &#123;</span><br><span class="line">        Class&lt;?&gt; loadedClass = findLoadedClass(name);</span><br><span class="line">        <span class="comment">// 需要我自己去加载</span></span><br><span class="line">        <span class="keyword">if</span> (loadedClass==<span class="keyword">null</span> &amp;&amp; myselfLoader.contains(name)) &#123;</span><br><span class="line">            loadedClass = findClass(name);</span><br><span class="line">            <span class="keyword">if</span> (loadedClass!=<span class="keyword">null</span>)&#123;</span><br><span class="line">                <span class="keyword">return</span> loadedClass;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">super</span>.loadClass(name, resolve);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">protected</span> Class&lt;?&gt; findClass(String name) <span class="keyword">throws</span> ClassNotFoundException &#123;</span><br><span class="line">        <span class="comment">// 根据文件系统路径加载class文件，并返回byte数组</span></span><br><span class="line">        <span class="keyword">byte</span>[] b = getClassByte(name);</span><br><span class="line">        <span class="comment">// 调用ClassLoader提供的方法，将二进制数组转换成Class类的实例</span></span><br><span class="line">        <span class="keyword">return</span> defineClass(name,b,<span class="number">0</span>,b.length);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">byte</span>[] getClassByte(String name) &#123;</span><br><span class="line">        String className = name.substring(name.lastIndexOf(<span class="string">"."</span>)+<span class="number">1</span>,</span><br><span class="line">        				name.length()) + <span class="string">".class"</span>;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            FileInputStream fis = <span class="keyword">new</span> FileInputStream(swapPath + className);</span><br><span class="line"></span><br><span class="line">            ByteArrayOutputStream baos = <span class="keyword">new</span> ByteArrayOutputStream();</span><br><span class="line">            <span class="keyword">byte</span>[] buff = <span class="keyword">new</span> <span class="keyword">byte</span>[<span class="number">1024</span>];</span><br><span class="line">            <span class="keyword">int</span> length = <span class="number">0</span>;</span><br><span class="line">            <span class="keyword">while</span> ((length=fis.read(buff))&gt;<span class="number">0</span>)&#123;</span><br><span class="line">                baos.write(buff,<span class="number">0</span>,length);</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">return</span> baos.toByteArray();</span><br><span class="line">        &#125; <span class="keyword">catch</span> (IOException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> <span class="keyword">byte</span>[]&#123;&#125;;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <h1 id="2-测试"><a href="#2-测试" class="headerlink" title="2. 测试"></a>2. 测试</h1><p>自定义一个每2秒打印调用一次方法打印版本号，先编译一次版本号为2的 MyClassLoaderTest .class类，然后启动版本号为1的，在运行过程中，我们把版本号为1的MyClassLoaderTest .class类替换成版本号为2的MyClassLoaderTest .class类，我们发现控制台立马输出了版本号2</p>
@@ -779,7 +422,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://pibigstar.com/2019/09/29/批处理脚本启动多个应用/">
+    <link itemprop="mainEntityOfPage" href="http://pibigstar.com/2019/01/16/常用工具学习之curl/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="派大星">
@@ -798,7 +441,7 @@
         
           <h2 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2019/09/29/批处理脚本启动多个应用/" itemprop="url">Untitled</a></h2>
+                <a class="post-title-link" href="/2019/01/16/常用工具学习之curl/" itemprop="url">常用工具学习之curl</a></h2>
         
 
         <div class="post-meta">
@@ -810,8 +453,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-09-29T22:56:40+08:00">
-                2019-09-29
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-01-16T17:05:04+08:00">
+                2019-01-16
               </time>
             
 
@@ -820,6 +463,28 @@
             
           </span>
 
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/tools/" itemprop="url" rel="index">
+                    <span itemprop="name">tools</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
           
 
           
@@ -850,415 +515,579 @@
       
         
           
-            <p>title: 批处理脚本启动多个应用<br>date: 2019-01-14 22:10:31<br>tags: [bat,自启]<br>categories: 工具使用</p>
-<p>将其保存为 SSR.bat 即可</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">@<span class="built_in">echo</span> off</span><br><span class="line">start  /d <span class="string">"D:\SSR\" SSR4.0.exe</span></span><br><span class="line"><span class="string">start /d "</span>D:\SSR\kcptun\" run.vbs</span><br><span class="line"><span class="built_in">echo</span> successfully open the SSR</span><br><span class="line"><span class="built_in">exit</span></span><br></pre></td></tr></table></figure>
-
-<p>如果想让它开机自启，那么将这个脚本放到下面这个位置即可</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">C:\ProgramData\Microsoft\Windows\Start Menu\Programs\StartUp</span><br></pre></td></tr></table></figure>
-
-<p>如果想在cmd中快速启动，那么将这个脚本放到下面这个位置即可：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">C:\Windows</span><br></pre></td></tr></table></figure>
-
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    <div>
-      
-    </div>
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://pibigstar.com/2019/09/29/制作springboot项目运行的docker镜像/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="派大星">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/qq.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="派大星的博客">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/09/29/制作springboot项目运行的docker镜像/" itemprop="url">Untitled</a></h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-09-29T22:56:40+08:00">
-                2019-09-29
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>title: 制作springboot项目运行的docker镜像<br>date: 2019-04-08 22:10:31<br>tags: [springboot,docker]<br>categories: 工具使用,springboot,docker,SpringBoot技能大全</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    <div>
-      
-    </div>
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://pibigstar.com/2019/09/29/Java反射知识点总结/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="派大星">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/qq.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="派大星的博客">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/09/29/Java反射知识点总结/" itemprop="url">Untitled</a></h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-09-29T22:56:40+08:00">
-                2019-09-29
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>title: Java反射知识点总结<br>date: 2018-07-03 22:10:31<br>tags: [java,反射,反射实例,反射例子]<br>categories: Java</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    <div>
-      
-    </div>
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://pibigstar.com/2019/09/29/Linux下搭建ftp服务器/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="派大星">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/qq.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="派大星的博客">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/09/29/Linux下搭建ftp服务器/" itemprop="url">Untitled</a></h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-09-29T22:56:40+08:00">
-                2019-09-29
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>title: Linux下搭建ftp服务器<br>date: 2018-07-03 22:10:31<br>tags: [ftp,Linux搭建ftp,centos]<br>categories: Linux</p>
-<p>[TOC]</p>
-<h2 id="1-安装vsftpd"><a href="#1-安装vsftpd" class="headerlink" title="1. 安装vsftpd"></a>1. 安装vsftpd</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum install vsftpd -y</span><br></pre></td></tr></table></figure>
-
-<h2 id="2-启动服务"><a href="#2-启动服务" class="headerlink" title="2. 启动服务"></a>2. 启动服务</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">service vsftpd start</span><br></pre></td></tr></table></figure>
-
-<h3 id="3-vsftpd的配置"><a href="#3-vsftpd的配置" class="headerlink" title="3. vsftpd的配置"></a>3. vsftpd的配置</h3><p> <strong>ftp的配置文件主要有三个，位于/etc/vsftpd/目录下，分别是：</strong></p>
-<ul>
-<li>ftpusers 该文件用来指定那些用户不能访问ftp服务器。</li>
-<li>user_list 该文件用来指示的默认账户在默认情况下也不能访问ftp</li>
-<li>vsftpd.conf vsftpd的主配置文件</li>
+            <p>@[toc]</p>
+<h1 id="1-下载安装"><a href="#1-下载安装" class="headerlink" title="1. 下载安装"></a>1. 下载安装</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum install -y curl</span><br></pre></td></tr></table></figure>
+
+<h2 id="1-1-查看文档"><a href="#1-1-查看文档" class="headerlink" title="1.1 查看文档"></a>1.1 查看文档</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl --<span class="built_in">help</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="1-2-参数说明"><a href="#1-2-参数说明" class="headerlink" title="1.2 参数说明"></a>1.2 参数说明</h2><ul>
+<li><code>-X</code> 更换请求</li>
+<li><code>-o</code> 保存网页</li>
+<li><code>-i</code> 显示response信息</li>
+<li><code>-L</code> 302跳转网页</li>
+<li><code>--header</code> 设置header</li>
+<li><code>--user-agent</code> 设置userAgent</li>
+<li><code>--cookie</code> 设置cookie</li>
 </ul>
-<h3 id="4-修改登录方式"><a href="#4-修改登录方式" class="headerlink" title="4. 修改登录方式"></a>4. 修改登录方式</h3><p>默认是匿名登录的，如果你想通过账户去登录则修改vsftpd.conf文件</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 允许匿名登录 </span></span><br><span class="line">anonymous_enable=YES</span><br><span class="line"><span class="comment"># 设置匿名用户的登录目录</span></span><br><span class="line">anon_root=/var/ftp/pub</span><br><span class="line"><span class="comment"># 打开匿名用户的上传权限</span></span><br><span class="line">anon_upload_enable=YES</span><br><span class="line"><span class="comment"># 开启匿名用户的下载权限</span></span><br><span class="line">anon_world_readable_only=no</span><br><span class="line"><span class="comment"># 打开匿名用户创建目录的权限</span></span><br><span class="line">anon_mkdir_write_enable=YES</span><br><span class="line"><span class="comment"># 打开匿名用户删除和重命名的权限</span></span><br><span class="line">anon_other_write_enable=YES</span><br></pre></td></tr></table></figure>
+<h1 id="2-常用操作"><a href="#2-常用操作" class="headerlink" title="2. 常用操作"></a>2. 常用操作</h1><h2 id="2-1-更换请求类型"><a href="#2-1-更换请求类型" class="headerlink" title="2.1 更换请求类型"></a>2.1 更换请求类型</h2><blockquote>
+<p>默认是GET请求，通过 <code>-X</code> 参数 来更换其他请求</p>
+</blockquote>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl -X POST www.baidu.com</span><br></pre></td></tr></table></figure>
+
+<h2 id="2-2-POST数据"><a href="#2-2-POST数据" class="headerlink" title="2.2 POST数据"></a>2.2 POST数据</h2><blockquote>
+<p>通过 <code>--data</code>参数来设置请求参数</p>
+</blockquote>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl -X POST --data <span class="string">"username=123&amp;password=456"</span> www.baidu.com</span><br></pre></td></tr></table></figure>
+
+<p>对数据进行URL编码</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl -X POST --data-urlencode <span class="string">"username=123&amp;password=456"</span> www.baidu.com</span><br></pre></td></tr></table></figure>
+
+<h2 id="2-3-设置userAgent"><a href="#2-3-设置userAgent" class="headerlink" title="2.3 设置userAgent"></a>2.3 设置userAgent</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl --user-agent <span class="string">"Mozilla/5.0 (Windows NT 10.0; WOW64) ..."</span> www.baidu.com</span><br></pre></td></tr></table></figure>
+
+<h2 id="2-4-设置cookie"><a href="#2-4-设置cookie" class="headerlink" title="2.4 设置cookie"></a>2.4 设置cookie</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl --cookie <span class="string">"token=xxx&amp;skey=123"</span> www.baidu.com</span><br></pre></td></tr></table></figure>
+
+<h2 id="2-5-设置header"><a href="#2-5-设置header" class="headerlink" title="2.5 设置header"></a>2.5 设置header</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl --header <span class="string">"Content-Type:application/json"</span> www.baidu.com</span><br></pre></td></tr></table></figure>
+
+<h2 id="2-6-保存网页内容"><a href="#2-6-保存网页内容" class="headerlink" title="2.6 保存网页内容"></a>2.6 保存网页内容</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl -o www.baidu.com</span><br></pre></td></tr></table></figure>
+
+<h2 id="2-7-显示Response头信息"><a href="#2-7-显示Response头信息" class="headerlink" title="2.7 显示Response头信息"></a>2.7 显示Response头信息</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl -i www.baidu.com</span><br></pre></td></tr></table></figure>
+
+<h2 id="2-8-跳转网页"><a href="#2-8-跳转网页" class="headerlink" title="2.8 跳转网页"></a>2.8 跳转网页</h2><blockquote>
+<p>如果目标地址为302，则跳转到新地址</p>
+</blockquote>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl -L www.baidu.com</span><br></pre></td></tr></table></figure>
+
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    <div>
+      
+    </div>
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://pibigstar.com/2019/01/14/git commit msg格式规范校验/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="派大星">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/qq.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="派大星的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/01/14/git commit msg格式规范校验/" itemprop="url">git commit msg格式规范校验</a></h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-01-14T18:06:04+08:00">
+                2019-01-14
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/工具使用-git/" itemprop="url" rel="index">
+                    <span itemprop="name">工具使用,git</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>@[toc]</p>
+<h1 id="1-commit规范"><a href="#1-commit规范" class="headerlink" title="1. commit规范"></a>1. commit规范</h1><p>每个公司的规范都是不同的，这里讲下我常用的规范<br><code>type(模块): message</code></p>
+<p><strong>type</strong></p>
+<p>用于说明 <code>commit</code>的类别，只允许使用下面7个标识。</p>
+<ul>
+<li><code>feat</code>：新功能（feature）</li>
+<li><code>fix</code>：修补bug</li>
+<li><code>hotfix</code>：紧急修复bug</li>
+<li><code>test</code>：增加测试</li>
+<li><code>docs</code>：文档（documentation）</li>
+<li><code>style</code>： 格式（不影响代码运行的变动）</li>
+<li><code>refactor</code>：重构（即不是新增功能，也不是修改bug的代码变动）</li>
+<li><code>chore</code>：构建过程或辅助工具的变动</li>
+</ul>
+<hr>
+<p>举个例子，我新增了用户登录功能，那么提交信息应该这样写：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git commit -m <span class="string">"feat(user): add the user login"</span></span><br></pre></td></tr></table></figure>
+
+<h1 id="2-使用git-hooks校验"><a href="#2-使用git-hooks校验" class="headerlink" title="2. 使用git hooks校验"></a>2. 使用git hooks校验</h1><p>在<code>.git/hooks</code>目录下有很多钩子，我们可以根据需要自定义不同的内容，这里我们只需要修改<code>commit-msg</code>即可。</p>
+<p>首先将<code>commit-msg.sample</code> 改为 <code>commit-msg</code>，也就是去掉后缀。<br>将里面的内容修改为下面内容</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#!/bin/bash</span></span><br><span class="line">MSG=`awk <span class="string">'&#123;printf("%s",$0)&#125;'</span> <span class="variable">$1</span>`</span><br><span class="line"><span class="keyword">if</span> [[ <span class="variable">$MSG</span> =~ ^(feat|fix|<span class="built_in">test</span>|refactor|docs|style|chroe)\(.*\):.*$ ]]</span><br><span class="line"><span class="keyword">then</span></span><br><span class="line">	<span class="built_in">echo</span> -e <span class="string">"\033[32m commit success! \033[0m"</span></span><br><span class="line"><span class="keyword">else</span></span><br><span class="line">    <span class="built_in">echo</span> -e <span class="string">"\033[31m Error: the commit message is irregular \033[m"</span></span><br><span class="line">	<span class="built_in">echo</span> -e <span class="string">"\033[31m Error: type must be one of [feat,fix,docs,style,refactor,test,chore] \033[m"</span></span><br><span class="line">    <span class="built_in">echo</span> -e <span class="string">"\033[31m eg: feat(user): add the user login \033[m"</span></span><br><span class="line">	<span class="built_in">exit</span> 1</span><br><span class="line"><span class="keyword">fi</span></span><br></pre></td></tr></table></figure>
+
+<p>当我们提交不规范的commit信息时就会提醒用户，并终止此提交<br><img src="https://img-blog.csdnimg.cn/20190412161927662.png" alt></p>
+<h1 id="3-gitlab-ci-中校验"><a href="#3-gitlab-ci-中校验" class="headerlink" title="3. gitlab ci 中校验"></a>3. gitlab ci 中校验</h1><h2 id="3-1-gitlab-ci-yml"><a href="#3-1-gitlab-ci-yml" class="headerlink" title="3.1 .gitlab-ci.yml"></a>3.1 .gitlab-ci.yml</h2><figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">stages:</span></span><br><span class="line"><span class="bullet">-</span> <span class="string">lint</span></span><br><span class="line"></span><br><span class="line"><span class="attr">commit_msg:</span></span><br><span class="line"><span class="attr">  stage:</span> <span class="string">lint</span></span><br><span class="line"><span class="attr">  script:</span></span><br><span class="line"><span class="bullet">  -</span> <span class="string">/bin/bash</span> <span class="string">commit-msg.sh</span></span><br><span class="line"><span class="attr">  only:</span></span><br><span class="line"><span class="bullet">  -</span> <span class="string">pushes</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="3-2-commit-msg-sh"><a href="#3-2-commit-msg-sh" class="headerlink" title="3.2 commit-msg.sh"></a>3.2 commit-msg.sh</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#! /bin/bash</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># get commit msg</span></span><br><span class="line"><span class="keyword">if</span> [[ <span class="variable">$CI_COMMIT_MESSAGE</span> ]]; <span class="keyword">then</span></span><br><span class="line">    msg=<span class="variable">$CI_COMMIT_MESSAGE</span></span><br><span class="line"><span class="keyword">else</span></span><br><span class="line">    <span class="built_in">read</span> msg &lt; .git/COMMIT_EDITMSG</span><br><span class="line"><span class="keyword">fi</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">echo</span> -e <span class="string">"\033[33m The commit msg: \033[0m <span class="variable">$msg</span>"</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># if the msg is merge then skip it</span></span><br><span class="line">mergePattern=<span class="string">'^Merge '</span></span><br><span class="line"><span class="keyword">if</span> [[ <span class="variable">$msg</span> =~ <span class="variable">$mergeCommitPattern</span> ]]; <span class="keyword">then</span></span><br><span class="line">    <span class="built_in">echo</span> -e <span class="string">"\033[32m skip the merge, commit success! \033[0m"</span></span><br><span class="line">    <span class="built_in">exit</span> 0</span><br><span class="line"><span class="keyword">fi</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># check the commit msg</span></span><br><span class="line">maxLength=50</span><br><span class="line">length=<span class="variable">$&#123;#msg&#125;</span></span><br><span class="line">pattern=<span class="string">'^(feat|fix|hotfix|test|refactor|docs|style|chroe)\(.*\):.*$'</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> [[ <span class="variable">$msg</span> =~ <span class="variable">$pattern</span> ]]; <span class="keyword">then</span></span><br><span class="line">    <span class="keyword">if</span> [[ <span class="variable">$length</span> -gt <span class="variable">$maxLength</span> ]]; <span class="keyword">then</span></span><br><span class="line">        <span class="built_in">echo</span> -e <span class="string">"\033[31m Error: the msg over max length \033[m"</span></span><br><span class="line">        <span class="built_in">exit</span> 1</span><br><span class="line">    <span class="keyword">fi</span></span><br><span class="line">    <span class="built_in">echo</span> -e <span class="string">"\033[32m commit success! \033[0m"</span></span><br><span class="line"><span class="keyword">else</span></span><br><span class="line">    <span class="built_in">echo</span> -e <span class="string">"\033[31m Error: the commit message is irregular \033[m"</span></span><br><span class="line">	<span class="built_in">echo</span> -e <span class="string">"\033[31m Error: type must be one of [feat,fix,hotfix,docs,style,refactor,test,chore] \033[m"</span></span><br><span class="line">    <span class="built_in">echo</span> -e <span class="string">"\033[31m eg: feat(user): add the user login \033[m"</span></span><br><span class="line">    <span class="built_in">exit</span> 1</span><br><span class="line"><span class="keyword">fi</span></span><br></pre></td></tr></table></figure>
+
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    <div>
+      
+    </div>
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://pibigstar.com/2019/01/02/docker打包springboot项目成镜像/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="派大星">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/qq.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="派大星的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/01/02/docker打包springboot项目成镜像/" itemprop="url">docker打包springboot项目成镜像</a></h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-01-02T01:01:04+08:00">
+                2019-01-02
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/工具使用-docker/" itemprop="url" rel="index">
+                    <span itemprop="name">工具使用,docker</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>[TOC]</p>
+<h2 id="1-项目结构"><a href="#1-项目结构" class="headerlink" title="1. 项目结构"></a>1. 项目结构</h2><p><img src="https://img-blog.csdn.net/20180419170548718?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2p1bm1veGk=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt="项目结构"></p>
+<h2 id="2-创建Dockerfile文件"><a href="#2-创建Dockerfile文件" class="headerlink" title="2. 创建Dockerfile文件"></a>2. 创建Dockerfile文件</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 拉取基础镜像</span></span><br><span class="line">FROM <span class="number">139.199</span><span class="number">.64</span><span class="number">.253</span>:<span class="number">5000</span>/java</span><br><span class="line"><span class="comment"># 维者信息</span></span><br><span class="line">MAINTAINER pibigstar</span><br><span class="line"></span><br><span class="line"><span class="comment"># 将JDK复制到镜像中，如果镜像已经有了JDK环境则无需配置此项和下面的运行环境</span></span><br><span class="line"><span class="comment"># COPY jdk1.7.0_79 /usr/local/jdk1.7.0_79</span></span><br><span class="line"><span class="comment"># 配置运行环境</span></span><br><span class="line"><span class="comment"># ENV JAVA_HOME=/usr/local/jdk1.7.0_79</span></span><br><span class="line"><span class="comment"># ENV PATH=$JAVA_HOME/bin:$PATH</span></span><br><span class="line"><span class="comment"># ENV CLASSPATH=.:$JAVA_HOME/lib/dt.jar:$JAVA_HOME/lib/tools.jar</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 添加springboot项目到镜像中的home目录，并重命名为app.jar</span></span><br><span class="line">ADD parsevip<span class="number">-0.0</span><span class="number">.1</span>-SNAPSHOT.jar ~/app.jar</span><br><span class="line"></span><br><span class="line"><span class="comment"># 告诉Docker服务端暴露的端口，在容器启动时需要通过 -p 做端口映射</span></span><br><span class="line">EXPOSE <span class="number">8080</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 容器启动后执行的命令</span></span><br><span class="line">ENTRYPOINT [<span class="string">"java"</span>,<span class="string">"-jar"</span>,<span class="string">"~/app.jar"</span>]</span><br></pre></td></tr></table></figure>
+
+<p>##3. 编译镜像</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker build -t 镜像名 .</span><br></pre></td></tr></table></figure>
+
+<p><strong><code>.</code>代表为当前路径</strong><br><img src="https://img-blog.csdn.net/20180419170935861?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2p1bm1veGk=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt="这里写图片描述"></p>
+<p>##4. 运行镜像</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run -d -p <span class="number">139.199</span><span class="number">.64</span><span class="number">.253</span>:<span class="number">8080</span>:<span class="number">8080</span> --name 容器名 镜像名</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://img-blog.csdn.net/20180419171225802?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2p1bm1veGk=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt="这里写图片描述"></p>
+<p>##5. 查看容器运行日志</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker logs -f parsevip</span><br></pre></td></tr></table></figure>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    <div>
+      
+    </div>
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://pibigstar.com/2018/12/31/docker搭建本地仓库并制作自己的镜像/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="派大星">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/qq.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="派大星的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/12/31/docker搭建本地仓库并制作自己的镜像/" itemprop="url">docker搭建本地仓库并制作自己的镜像</a></h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-12-31T02:02:04+08:00">
+                2018-12-31
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/工具使用-Linux-docker/" itemprop="url" rel="index">
+                    <span itemprop="name">工具使用,Linux,docker</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p> [TOC]</p>
+<h2 id="1-搭建本地仓库"><a href="#1-搭建本地仓库" class="headerlink" title="1. 搭建本地仓库"></a>1. 搭建本地仓库</h2><h3 id="1-1-下载仓库镜像"><a href="#1-1-下载仓库镜像" class="headerlink" title="1.1 下载仓库镜像"></a>1.1 下载仓库镜像</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker pull registry</span><br></pre></td></tr></table></figure>
+
+<h3 id="1-2-启动仓库容器"><a href="#1-2-启动仓库容器" class="headerlink" title="1.2 启动仓库容器"></a>1.2 启动仓库容器</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run -d -p <span class="number">5000</span>:<span class="number">5000</span> -v /home/registry/:/tmp/registry registry</span><br></pre></td></tr></table></figure>
 
 <blockquote>
-<p>注意：里面有的配置可能vsftpd.conf 里面没有，则需要你手动添加</p>
+<p>第一个5000是本地的端口，第二个5000是docker里面的端口，将本地5000的端口映射到<br>docker里面的5000端口</p>
 </blockquote>
-<h3 id="5-创建匿名用户可上传文件夹"><a href="#5-创建匿名用户可上传文件夹" class="headerlink" title="5. 创建匿名用户可上传文件夹"></a>5. 创建匿名用户可上传文件夹</h3><blockquote>
-<p>默认情况下，ftp的根目录为/var/ftp，为了安全，这个目录默认不允许设置为777权限，否则ftp将无法访问。但是我们要匿名上传文件，需要“other”用户的写权限，正确的做法：<br>在/var/ftp中建立一个upload（名子自己起吧）文件夹，将个文件夹权限设置为777（视具体需要自己设），在upload这个文件夹中，匿名用户可以上传文件、创建文件夹、删除文件等。</p>
-</blockquote>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">cd /var/ftp/pub</span><br><span class="line">mkdir upload</span><br><span class="line">chmod <span class="number">777</span> upload</span><br></pre></td></tr></table></figure>
+<h2 id="2-在CentOS容器中安装JDK"><a href="#2-在CentOS容器中安装JDK" class="headerlink" title="2. 在CentOS容器中安装JDK"></a>2. 在CentOS容器中安装JDK</h2><h3 id="2-1-下载CentOS容器"><a href="#2-1-下载CentOS容器" class="headerlink" title="2.1 下载CentOS容器"></a>2.1 下载CentOS容器</h3><p>镜像仓库地址：<a href="https://dashboard.daocloud.io/packages/explore" target="_blank" rel="noopener">https://dashboard.daocloud.io/packages/explore</a></p>
+<p><img src="https://img-blog.csdn.net/20180615152618861?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2p1bm1veGk=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker pull daocloud.io/library/centos:latest</span><br></pre></td></tr></table></figure>
 
-<h3 id="6-非匿名账户的创建与使用"><a href="#6-非匿名账户的创建与使用" class="headerlink" title="6. 非匿名账户的创建与使用"></a>6. 非匿名账户的创建与使用</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">useradd pibigstar</span><br><span class="line">passwd pibigstar <span class="comment">#为pibigstar用户创建密码</span></span><br></pre></td></tr></table></figure>
+<h3 id="2-2-运行Linux容器："><a href="#2-2-运行Linux容器：" class="headerlink" title="2.2 运行Linux容器："></a>2.2 运行Linux容器：</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run -d -it --name myCentos 镜像ID /bin/bash</span><br></pre></td></tr></table></figure>
 
-<h3 id="7-访问"><a href="#7-访问" class="headerlink" title="7. 访问"></a>7. 访问</h3><p>浏览器或者计算机文件管理系统中输入<br>ftp://你服务器的IP地址</p>
+<ul>
+<li>*<em>-d 后台运行 *</em></li>
+<li><strong>–name 容器名</strong></li>
+</ul>
+<h3 id="2-3-将JDK复制到myCentos容器中"><a href="#2-3-将JDK复制到myCentos容器中" class="headerlink" title="2.3 将JDK复制到myCentos容器中"></a>2.3 将JDK复制到myCentos容器中</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker cp jdk<span class="number">-10.0</span><span class="number">.1</span>_linux-x64_bin.tar.gz myCentos:/usr/local</span><br></pre></td></tr></table></figure>
+
+<h3 id="2-4-进入容器"><a href="#2-4-进入容器" class="headerlink" title="2.4 进入容器"></a>2.4 进入容器</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker <span class="keyword">exec</span> -it myCentos /bin/bash</span><br></pre></td></tr></table></figure>
+
+<h3 id="2-5-解压JDK"><a href="#2-5-解压JDK" class="headerlink" title="2.5 解压JDK"></a>2.5 解压JDK</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tar -zxvf jdk<span class="number">-10.0</span><span class="number">.1</span>_linux-x64_bin.tar.gz</span><br></pre></td></tr></table></figure>
+
+<h3 id="2-6-配置环境变量"><a href="#2-6-配置环境变量" class="headerlink" title="2.6 配置环境变量"></a>2.6 配置环境变量</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vi /etc/profile</span><br></pre></td></tr></table></figure>
+
 <blockquote>
-<p>注意：这里默认访问的是 /var/ftp/pub 文件夹下</p>
+<p>在文件末尾添加：<br>export JAVA_HOME=/usr/local/jdk1.8.0_152<br>export PATH=<code>$</code>JAVA_HOME/bin:<code>$</code>PATH<br>export CLASSPATH=.:<code>$</code>JAVA_HOME/lib/dt.jar:$JAVA_HOME/lib/tools.jar</p>
+</blockquote>
+<h4 id="2-6-1-刷新环境变量"><a href="#2-6-1-刷新环境变量" class="headerlink" title="2.6.1 刷新环境变量"></a>2.6.1 刷新环境变量</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">source /etc/profile</span><br></pre></td></tr></table></figure>
+
+<h4 id="2-6-2-设置开机自动执行source"><a href="#2-6-2-设置开机自动执行source" class="headerlink" title="2.6.2 设置开机自动执行source"></a>2.6.2 设置开机自动执行source</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vi ~/.bashrc</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>在第一行添加 source /etc/profile</p>
+</blockquote>
+<h4 id="2-6-3-重启容器"><a href="#2-6-3-重启容器" class="headerlink" title="2.6.3 重启容器"></a>2.6.3 重启容器</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">docker stop myCentos</span><br><span class="line">docker start myCentos</span><br></pre></td></tr></table></figure>
+
+<h3 id="2-7-将容器提交到镜像里"><a href="#2-7-将容器提交到镜像里" class="headerlink" title="2.7 将容器提交到镜像里"></a>2.7 将容器提交到镜像里</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker commit &lt;CONTAINERID&gt; &lt;IMAGE&gt;</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://img-blog.csdn.net/20180419152414991?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2p1bm1veGk=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt="将容器提交到镜像中"></p>
+<h2 id="3-将新制作的镜像推送到仓库中"><a href="#3-将新制作的镜像推送到仓库中" class="headerlink" title="3. 将新制作的镜像推送到仓库中"></a>3. 将新制作的镜像推送到仓库中</h2><h3 id="3-1-修改tag"><a href="#3-1-修改tag" class="headerlink" title="3.1 修改tag"></a>3.1 修改tag</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker tag &lt;REPOSITORY&gt;  仓库IP地址:端口/镜像名</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>tag名应该为 ip:端口/镜像名 的形式，它会将此镜像推送到此IP地址下的仓库，并且定义此镜像名</p>
+</blockquote>
+<p><img src="https://img-blog.csdn.net/20180419153148947?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2p1bm1veGk=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt></p>
+<h3 id="3-2-将镜像推送到仓库中"><a href="#3-2-将镜像推送到仓库中" class="headerlink" title="3.2 将镜像推送到仓库中"></a>3.2 将镜像推送到仓库中</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker push tag名</span><br></pre></td></tr></table></figure>
+
+<p>可通过<a href="http://139.199.64.253:5000/v2/_catalog地址访问你上传的结果" target="_blank" rel="noopener">http://139.199.64.253:5000/v2/_catalog地址访问你上传的结果</a></p>
+<blockquote>
+<p> 注意：如果push报错：The push refers to a repository [139.199.64.253:5000/java]<br>Get <a href="https://139.199.64.253:5000/v1/_ping" target="_blank" rel="noopener">https://139.199.64.253:5000/v1/_ping</a>: http: server gave HTTP response to HTTPS client<br>则修改 /etc/docker 路径下的 daemon.json 文件，如果没有则手动创建，在文件中写入：<br>{ “insecure-registries”:[“139.199.64.253:5000”] }<br>然后重启docker： service docker restart<br>重新启动仓库：docker run -d -p 5000:5000 -v /home/registry/:/tmp/registry registry</p>
+</blockquote>
+<p><img src="https://img-blog.csdn.net/20180419154840508?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2p1bm1veGk=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt></p>
+<blockquote>
+<p>如果想推送到docker的中央仓库则 tag名改为 ： docker.io/java  然后再推送即可</p>
 </blockquote>
 
           
@@ -1312,7 +1141,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://pibigstar.com/2019/09/29/程序员开发必备工具（二）之浏览器插件/">
+    <link itemprop="mainEntityOfPage" href="http://pibigstar.com/2018/12/31/Java生成MD5的两种方式/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="派大星">
@@ -1331,7 +1160,7 @@
         
           <h2 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2019/09/29/程序员开发必备工具（二）之浏览器插件/" itemprop="url">Untitled</a></h2>
+                <a class="post-title-link" href="/2018/12/31/Java生成MD5的两种方式/" itemprop="url">Java生成MD5的两种方式</a></h2>
         
 
         <div class="post-meta">
@@ -1343,8 +1172,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-09-29T22:56:40+08:00">
-                2019-09-29
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-12-31T02:02:04+08:00">
+                2018-12-31
               </time>
             
 
@@ -1353,6 +1182,28 @@
             
           </span>
 
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/工具使用-Java-java工具类/" itemprop="url" rel="index">
+                    <span itemprop="name">工具使用,Java,java工具类</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
           
 
           
@@ -1383,16 +1234,10 @@
       
         
           
-            <p>title: 程序员开发必备工具（二）之浏览器插件<br>date: 2019-08-31 22:10:31<br>tags: [浏览器插件,octotree,油猴,前端助手]<br>categories: 工具使用</p>
-<p>@[TOC]</p>
-<h1 id="2-浏览器插件"><a href="#2-浏览器插件" class="headerlink" title="2. 浏览器插件"></a>2. 浏览器插件</h1><p>所有插件我都放到了我的微信公众号上面了，关注我微信公众号，发送【浏览器插件】就可以获取了。<br><img src="https://img-blog.csdnimg.cn/20190120141011616.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2p1bm1veGk=,size_16,color_FFFFFF,t_70" alt></p>
-<h2 id="2-1-插件扩展管理器（Extension-Manager）"><a href="#2-1-插件扩展管理器（Extension-Manager）" class="headerlink" title="2.1 插件扩展管理器（Extension Manager）"></a>2.1 插件扩展管理器（Extension Manager）</h2><p>快速启动和关闭插件，非常好用。<br><img src="https://img-blog.csdnimg.cn/20190120140127890.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2p1bm1veGk=,size_16,color_FFFFFF,t_70" alt></p>
-<h2 id="2-2-web前端访问助手（FeHelper）"><a href="#2-2-web前端访问助手（FeHelper）" class="headerlink" title="2.2 web前端访问助手（FeHelper）"></a>2.2 web前端访问助手（FeHelper）</h2><p>自动格式化JSON数据，网页取色，字符串加解密，JS正则<br><img src="https://img-blog.csdnimg.cn/20190120135319592.png" alt></p>
-<h2 id="2-3-油猴插件"><a href="#2-3-油猴插件" class="headerlink" title="2.3 油猴插件"></a>2.3 油猴插件</h2><p>这是一个运行脚本的插件，你可以自己写一下小脚本放到油猴上面。我目前用的有VIP视频破解，百度下载助手等等。你可以在点击<a href="https://greasyfork.org/zh-CN/scripts" target="_blank" rel="noopener">这里</a>下载一些好玩使用的脚本。<br><img src="https://img-blog.csdnimg.cn/20190120140430619.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2p1bm1veGk=,size_16,color_FFFFFF,t_70" alt></p>
-<h2 id="2-4-西瓜插件"><a href="#2-4-西瓜插件" class="headerlink" title="2.4 西瓜插件"></a>2.4 西瓜插件</h2><p>运营微信公众号必不可少的插件！！！非常好用，可以采集别人的文字，采集平时的图片，同时还可以订阅其他公众号来进行采集。<br><img src="https://img-blog.csdnimg.cn/2019012014084649.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2p1bm1veGk=,size_16,color_FFFFFF,t_70" alt></p>
-<h2 id="2-5-Octotree"><a href="#2-5-Octotree" class="headerlink" title="2.5 Octotree"></a>2.5 Octotree</h2><p>这个是程序员必备的，可以将GitHub中的项目进行树结构化，非常方便浏览GitHub上的项目。<br><img src="https://img-blog.csdnimg.cn/20190120141154654.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2p1bm1veGk=,size_16,color_FFFFFF,t_70" alt></p>
-<h2 id="2-6-Infinity（标签页）"><a href="#2-6-Infinity（标签页）" class="headerlink" title="2.6 Infinity（标签页）"></a>2.6 Infinity（标签页）</h2><p>一个非常漂亮的标签页。<br><img src="https://img-blog.csdnimg.cn/20190120141433198.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2p1bm1veGk=,size_16,color_FFFFFF,t_70" alt></p>
-<h2 id="2-7-掘金插件"><a href="#2-7-掘金插件" class="headerlink" title="2.7 掘金插件"></a>2.7 掘金插件</h2><p>掘金开发的一款插件，当你打开新的标签页时，显示的是掘金中优秀的文章。<br><img src="https://img-blog.csdnimg.cn/20190120141622558.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2p1bm1veGk=,size_16,color_FFFFFF,t_70" alt></p>
+            <h1 id="1-原生的"><a href="#1-原生的" class="headerlink" title="1 原生的"></a>1 原生的</h1><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.pibigstar.common.utils;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.security.MessageDigest;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * MD5加密工具类</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> pibigstar</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MyMD5Util</span> </span>&#123;</span><br><span class="line">	<span class="comment">//盐，用于混交md5</span></span><br><span class="line">	<span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> String slat = <span class="string">"&amp;%5123***&amp;&amp;%%$$#@"</span>;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> String <span class="title">encrypt</span><span class="params">(String dataStr)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">try</span> &#123;</span><br><span class="line">			dataStr = dataStr + slat;</span><br><span class="line">			MessageDigest m = MessageDigest.getInstance(<span class="string">"MD5"</span>);</span><br><span class="line">			m.update(dataStr.getBytes(<span class="string">"UTF8"</span>));</span><br><span class="line">			<span class="keyword">byte</span> s[] = m.digest();</span><br><span class="line">			String result = <span class="string">""</span>;</span><br><span class="line">			<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; s.length; i++) &#123;</span><br><span class="line">				result += Integer.toHexString((<span class="number">0x000000FF</span> &amp; s[i]) | <span class="number">0xFFFFFF00</span>).substring(<span class="number">6</span>);</span><br><span class="line">			&#125;</span><br><span class="line">			<span class="keyword">return</span> result;</span><br><span class="line">		&#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">			e.printStackTrace();</span><br><span class="line">		&#125;</span><br><span class="line"></span><br><span class="line">		<span class="keyword">return</span> <span class="string">""</span>;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="2-使用Spring中的工具类"><a href="#2-使用Spring中的工具类" class="headerlink" title="2 使用Spring中的工具类"></a>2 使用Spring中的工具类</h1><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.pibigstar.common.utils;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> org.springframework.util.DigestUtils;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> com.pibigstar.common.Constant;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * MD5工具类</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> pibigstar</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MD5Util</span> </span>&#123;</span><br><span class="line">	<span class="comment">//盐，用于混交md5</span></span><br><span class="line">	<span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> String slat = <span class="string">"&amp;%5123***&amp;&amp;%%$$#@"</span>;</span><br><span class="line">	<span class="comment">/**</span></span><br><span class="line"><span class="comment">	 * 生成md5</span></span><br><span class="line"><span class="comment">	 * <span class="doctag">@param</span> seckillId</span></span><br><span class="line"><span class="comment">	 * <span class="doctag">@return</span></span></span><br><span class="line"><span class="comment">	 */</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> String <span class="title">getMD5</span><span class="params">(String str)</span> </span>&#123;</span><br><span class="line">		String base = str +<span class="string">"/"</span>+slat;</span><br><span class="line">		String md5 = DigestUtils.md5DigestAsHex(base.getBytes());</span><br><span class="line">		<span class="keyword">return</span> md5;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
 
           
         
@@ -1445,7 +1290,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://pibigstar.com/2019/09/29/java工厂模式实例讲解/">
+    <link itemprop="mainEntityOfPage" href="http://pibigstar.com/2018/12/31/获取所有QQ好友列表以及好友信息/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="派大星">
@@ -1464,7 +1309,7 @@
         
           <h2 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2019/09/29/java工厂模式实例讲解/" itemprop="url">Untitled</a></h2>
+                <a class="post-title-link" href="/2018/12/31/获取所有QQ好友列表以及好友信息/" itemprop="url">获取所有QQ好友列表以及好友信息</a></h2>
         
 
         <div class="post-meta">
@@ -1476,8 +1321,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-09-29T22:56:40+08:00">
-                2019-09-29
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-12-31T02:02:04+08:00">
+                2018-12-31
               </time>
             
 
@@ -1486,6 +1331,28 @@
             
           </span>
 
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/爬虫相关-Java/" itemprop="url" rel="index">
+                    <span itemprop="name">爬虫相关,Java</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
           
 
           
@@ -1516,7 +1383,25 @@
       
         
           
-            <p>title: java工厂模式实例讲解<br>date: 2018-10-22 22:10:31<br>tags: [工厂,java,工厂模式]<br>categories: Java,随笔小记</p>
+            <h2 id="完整源码下载"><a href="#完整源码下载" class="headerlink" title="完整源码下载"></a>完整源码下载</h2><p><a href="https://github.com/pibigstar/QQSpider" target="_blank" rel="noopener">点击下载完整源码</a><br>如果对你有用，请给个Star，你的支持，是我最大的动力</p>
+<h2 id="1-获取所有QQ"><a href="#1-获取所有QQ" class="headerlink" title="1 获取所有QQ"></a>1 获取所有QQ</h2><p>这里主要通过抓包，抓取QQ空间中的数据<br>记得将访问空间权限改为QQ好友<br><img src="https://img-blog.csdn.net/20180625151313548?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2p1bm1veGk=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt></p>
+<p>接口地址：<br><a href="https://h5.qzone.qq.com/proxy/domain/base.qzone.qq.com/cgi-bin/right/get_entryuinlist.cgi?uin=741047261&amp;fupdate=1&amp;action=1&amp;offset=0&amp;g_tk=847821819&amp;qzonetoken=24dd9cbc92e1ba657addcd982f7f4d0fa1a9ee8ba7b8d52863703a10274f08f9325d1298e5afac11" target="_blank" rel="noopener">https://h5.qzone.qq.com/proxy/domain/base.qzone.qq.com/cgi-bin/right/get_entryuinlist.cgi?uin=741047261&amp;fupdate=1&amp;action=1&amp;offset=0&amp;g_tk=847821819&amp;qzonetoken=24dd9cbc92e1ba657addcd982f7f4d0fa1a9ee8ba7b8d52863703a10274f08f9325d1298e5afac11</a></p>
+<p>这里uin 为你的QQ号<br>offset  偏移量 ，每次增加 50 即可<br>g_tk是从cookie中获取的 p_skey 再通过算法获得；</p>
+<p>java版实现此算法：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">GetTk</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> String <span class="title">getTk</span><span class="params">(String skey)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">int</span> hash = <span class="number">5381</span>;  </span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>, len = skey.length(); i &lt; len; ++i)&#123;  </span><br><span class="line">			hash += (hash &lt;&lt; <span class="number">5</span>) + (<span class="keyword">int</span>)(<span class="keyword">char</span>)skey.charAt(i);  </span><br><span class="line">		&#125;  </span><br><span class="line">		<span class="keyword">return</span> (hash &amp; <span class="number">0x7fffffff</span>)+<span class="string">""</span>;  </span><br><span class="line">	&#125;  </span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>完整版java实现：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.pibigstar.qq.main;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.io.IOException;</span><br><span class="line"><span class="keyword">import</span> java.util.ArrayList;</span><br><span class="line"><span class="keyword">import</span> java.util.List;</span><br><span class="line"><span class="keyword">import</span> java.util.Map;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> org.json.JSONObject;</span><br><span class="line"><span class="keyword">import</span> org.jsoup.Jsoup;</span><br><span class="line"><span class="keyword">import</span> org.jsoup.nodes.Document;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> com.pibigstar.qq.domain.User;</span><br><span class="line"><span class="keyword">import</span> com.pibigstar.qq.utils.GetCookies;</span><br><span class="line"><span class="keyword">import</span> com.pibigstar.qq.utils.GetTk;</span><br><span class="line"><span class="keyword">import</span> com.pibigstar.qq.utils.JSONUtil;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 获取所有的QQ用户列表</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> pibigstar</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">GetAllUser</span> </span>&#123;</span><br><span class="line">	</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> List&lt;User&gt; <span class="title">getAll</span><span class="params">(Map&lt;String, String&gt; cookies)</span> <span class="keyword">throws</span> IOException</span>&#123;</span><br><span class="line">		List&lt;User&gt; allUser = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line">		String qq = cookies.get(<span class="string">"o_cookie"</span>);</span><br><span class="line">		String pskey = cookies.get(<span class="string">"p_skey"</span>);</span><br><span class="line">		</span><br><span class="line">		String g_tk = GetTk.getTk(pskey);</span><br><span class="line">		</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;;) &#123;</span><br><span class="line">			Document document = Jsoup.connect(<span class="string">"https://h5.qzone.qq.com/proxy/domain/base.qzone.qq.com/cgi-bin/right/get_entryuinlist.cgi?uin=741047261&amp;fupdate=1&amp;action=1&amp;offset="</span>+i+<span class="string">"&amp;g_tk="</span>+g_tk).cookies(cookies).header(<span class="string">"user-agent"</span>, <span class="string">"Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/55.0.2883.87 Safari/537.36"</span>).timeout(<span class="number">10000</span>).ignoreContentType(<span class="keyword">true</span>).get();</span><br><span class="line">			String strJson = document.getElementsByTag(<span class="string">"body"</span>).text().replace(<span class="string">"_Callback("</span>, <span class="string">""</span>).replace(<span class="string">");"</span>, <span class="string">""</span>);</span><br><span class="line">			JSONObject jsonObject = <span class="keyword">new</span> JSONObject(strJson);</span><br><span class="line">			String jsonData =((JSONObject) jsonObject.get(<span class="string">"data"</span>)).get(<span class="string">"uinlist"</span>).toString();</span><br><span class="line">			List&lt;User&gt; users = JSONUtil.JSONToList(jsonData, User.class);</span><br><span class="line">			<span class="keyword">if</span> (users==<span class="keyword">null</span>||users.size()==<span class="number">0</span>) &#123;</span><br><span class="line">				<span class="keyword">break</span>;</span><br><span class="line">			&#125;</span><br><span class="line">			allUser.addAll(users);</span><br><span class="line">			i+=<span class="number">50</span>;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">return</span> allUser;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="2-获得QQ信息"><a href="#2-获得QQ信息" class="headerlink" title="2 获得QQ信息"></a>2 获得QQ信息</h2><p>接口地址：<br><a href="http://cgi.find.qq.com/qqfind/buddy/search_v3" target="_blank" rel="noopener">http://cgi.find.qq.com/qqfind/buddy/search_v3</a>  </p>
+<p>post请求，需要两个参数：<br>keyword ： 你要查询的QQ号码<br>lwd : g_tk 值</p>
+<p>注意：此g_tk 的值为 cookie中 skey 计算得来的 而不是 p_skey </p>
+<p>java实现</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.pibigstar.qq.main;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.io.IOException;</span><br><span class="line"><span class="keyword">import</span> java.util.Calendar;</span><br><span class="line"><span class="keyword">import</span> java.util.HashMap;</span><br><span class="line"><span class="keyword">import</span> java.util.Map;</span><br><span class="line"><span class="keyword">import</span> org.json.JSONArray;</span><br><span class="line"><span class="keyword">import</span> org.json.JSONObject;</span><br><span class="line"><span class="keyword">import</span> org.jsoup.Jsoup;</span><br><span class="line"><span class="keyword">import</span> org.jsoup.nodes.Document;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> com.pibigstar.qq.domain.User;</span><br><span class="line"><span class="keyword">import</span> com.pibigstar.qq.utils.GetTk;</span><br><span class="line"><span class="keyword">import</span> com.pibigstar.qq.utils.JSONUtil;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">GetInfo</span></span>&#123;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> User <span class="title">getInfo</span><span class="params">(String qq,Map&lt;String, String&gt; cookies)</span> </span>&#123;</span><br><span class="line">		</span><br><span class="line">		User user = <span class="keyword">new</span> User();</span><br><span class="line">		Map&lt;String, String&gt; data = <span class="keyword">new</span> HashMap&lt;&gt;();</span><br><span class="line">		<span class="comment">//注意这里，获得信息是用的skey 而获得全部好友使用的为p_skey</span></span><br><span class="line">		String skey = cookies.get(<span class="string">"skey"</span>);</span><br><span class="line">		String g_tk = GetTk.getTk(skey);</span><br><span class="line">		</span><br><span class="line">		data.put(<span class="string">"keyword"</span>, qq);</span><br><span class="line">		data.put(<span class="string">"ldw"</span>, g_tk);</span><br><span class="line">		</span><br><span class="line">		Document document;</span><br><span class="line">		<span class="keyword">try</span> &#123;</span><br><span class="line">			document = Jsoup.connect(<span class="string">"http://cgi.find.qq.com/qqfind/buddy/search_v3"</span>).cookies(cookies).header(<span class="string">"user-agent"</span>, <span class="string">"Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/55.0.2883.87 Safari/537.36"</span>).ignoreContentType(<span class="keyword">true</span>).data(data).timeout(<span class="number">10000</span>).post();</span><br><span class="line">			String allJson = document.getElementsByTag(<span class="string">"body"</span>).text();</span><br><span class="line">			System.out.println(allJson);</span><br><span class="line">			JSONObject result = (JSONObject) <span class="keyword">new</span> JSONObject(allJson).get(<span class="string">"result"</span>);</span><br><span class="line">			JSONObject buddy = (JSONObject) result.get(<span class="string">"buddy"</span>);</span><br><span class="line">			JSONArray jsonArray = buddy.getJSONArray(<span class="string">"info_list"</span>);</span><br><span class="line">			</span><br><span class="line">			JSONObject dataJson = (JSONObject) jsonArray.get(<span class="number">0</span>);</span><br><span class="line">			user = JSONUtil.jSONToObject(dataJson.toString(), User.class);</span><br><span class="line">			JSONObject birthdayJson = (JSONObject) dataJson.get(<span class="string">"birthday"</span>);</span><br><span class="line">			String year = birthdayJson.get(<span class="string">"year"</span>).toString();</span><br><span class="line">			String month = birthdayJson.get(<span class="string">"month"</span>).toString();</span><br><span class="line">			String day = birthdayJson.get(<span class="string">"day"</span>).toString();</span><br><span class="line">			String birthday = year+<span class="string">"-"</span>+month+<span class="string">"-"</span>+day;</span><br><span class="line">			user.setBirthday(birthday);</span><br><span class="line">			</span><br><span class="line">			Calendar calendar = Calendar.getInstance();</span><br><span class="line">			<span class="keyword">int</span> now = calendar.get(Calendar.YEAR);</span><br><span class="line">			</span><br><span class="line">			<span class="keyword">if</span> (year!=<span class="keyword">null</span>&amp;&amp;year.length()&gt;<span class="number">0</span>) &#123;</span><br><span class="line">				<span class="keyword">int</span> age = now - Integer.parseInt(year);</span><br><span class="line">				user.setAge(age);</span><br><span class="line">			&#125;</span><br><span class="line">		&#125; <span class="keyword">catch</span> (IOException e) &#123;</span><br><span class="line">			e.printStackTrace();</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">return</span> user;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>把user的bean也放一下</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.pibigstar.qq.domain;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">User</span> </span>&#123;</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">private</span> String data;<span class="comment">//QQ号</span></span><br><span class="line">	</span><br><span class="line">	<span class="keyword">private</span> String label;<span class="comment">//用户名/备注名</span></span><br><span class="line">	</span><br><span class="line">	<span class="keyword">private</span> String nick;<span class="comment">//昵称</span></span><br><span class="line">	</span><br><span class="line">	<span class="keyword">private</span> String gender;<span class="comment">//性别 1为男  2为女</span></span><br><span class="line">	</span><br><span class="line">	<span class="keyword">private</span> String city;<span class="comment">//城市</span></span><br><span class="line">	</span><br><span class="line">	<span class="keyword">private</span> String country;<span class="comment">//国家</span></span><br><span class="line">	</span><br><span class="line">	<span class="keyword">private</span> String lnick;<span class="comment">//个性签名</span></span><br><span class="line">	</span><br><span class="line">	<span class="keyword">private</span> String personal;<span class="comment">//个人说明</span></span><br><span class="line">	</span><br><span class="line">	<span class="keyword">private</span> String college;<span class="comment">//学校</span></span><br><span class="line">	</span><br><span class="line">	<span class="keyword">private</span> String birthday;<span class="comment">//生日</span></span><br><span class="line">	</span><br><span class="line">	<span class="keyword">private</span> String email;<span class="comment">//邮箱</span></span><br><span class="line">	</span><br><span class="line">	<span class="keyword">private</span> String phone;<span class="comment">//手机</span></span><br><span class="line">	</span><br><span class="line">	<span class="keyword">private</span> String uin;<span class="comment">//qq号</span></span><br><span class="line">	</span><br><span class="line">	<span class="keyword">private</span> <span class="keyword">int</span> age;</span><br><span class="line">	</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">getAge</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		<span class="keyword">return</span> age;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setAge</span><span class="params">(<span class="keyword">int</span> age)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">this</span>.age = age;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> String <span class="title">getUin</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		<span class="keyword">return</span> uin;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setUin</span><span class="params">(String uin)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">this</span>.uin = uin;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> String <span class="title">getData</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		<span class="keyword">return</span> data;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setData</span><span class="params">(String data)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">this</span>.data = data;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> String <span class="title">getLabel</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		<span class="keyword">return</span> label;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setLabel</span><span class="params">(String label)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">this</span>.label = label;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> String <span class="title">getNick</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		<span class="keyword">return</span> nick;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setNick</span><span class="params">(String nick)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">this</span>.nick = nick;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> String <span class="title">getGender</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		<span class="keyword">return</span> gender;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setGender</span><span class="params">(String gender)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">this</span>.gender = gender;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> String <span class="title">getCity</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		<span class="keyword">return</span> city;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setCity</span><span class="params">(String city)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">this</span>.city = city;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> String <span class="title">getCountry</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		<span class="keyword">return</span> country;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setCountry</span><span class="params">(String country)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">this</span>.country = country;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> String <span class="title">getLnick</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		<span class="keyword">return</span> lnick;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setLnick</span><span class="params">(String lnick)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">this</span>.lnick = lnick;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> String <span class="title">getPersonal</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		<span class="keyword">return</span> personal;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setPersonal</span><span class="params">(String personal)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">this</span>.personal = personal;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> String <span class="title">getCollege</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		<span class="keyword">return</span> college;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setCollege</span><span class="params">(String college)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">this</span>.college = college;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> String <span class="title">getBirthday</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		<span class="keyword">return</span> birthday;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setBirthday</span><span class="params">(String birthday)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">this</span>.birthday = birthday;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> String <span class="title">getEmail</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		<span class="keyword">return</span> email;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setEmail</span><span class="params">(String email)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">this</span>.email = email;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> String <span class="title">getPhone</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		<span class="keyword">return</span> phone;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setPhone</span><span class="params">(String phone)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">this</span>.phone = phone;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="meta">@Override</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> String <span class="title">toString</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		<span class="keyword">return</span> <span class="string">"User [data="</span> + data + <span class="string">", label="</span> + label + <span class="string">", nick="</span> + nick + <span class="string">", gender="</span> + gender + <span class="string">", city="</span> + city</span><br><span class="line">				+ <span class="string">", country="</span> + country + <span class="string">", lnick="</span> + lnick + <span class="string">", personal="</span> + personal + <span class="string">", college="</span> + college</span><br><span class="line">				+ <span class="string">", birthday="</span> + birthday + <span class="string">", email="</span> + email + <span class="string">", phone="</span> + phone + <span class="string">"]"</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
 
           
         
@@ -1560,7 +1445,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/13/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/13/">13</a><span class="page-number current">14</span><a class="page-number" href="/page/15/">15</a><span class="space">&hellip;</span><a class="page-number" href="/page/24/">24</a><a class="extend next" rel="next" href="/page/15/"><i class="fa fa-angle-right"></i></a>
+    <a class="extend prev" rel="prev" href="/page/13/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/13/">13</a><span class="page-number current">14</span>
   </nav>
 
 
@@ -1608,7 +1493,7 @@
               
                 <a href="/archives">
               
-                  <span class="site-state-item-count">239</span>
+                  <span class="site-state-item-count">137</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -1619,7 +1504,7 @@
               
               <div class="site-state-item site-state-categories">
                 
-                  <span class="site-state-item-count">1</span>
+                  <span class="site-state-item-count">64</span>
                   <span class="site-state-item-name">categories</span>
                 
               </div>
@@ -1630,7 +1515,7 @@
               
               <div class="site-state-item site-state-tags">
                 
-                  <span class="site-state-item-count">3</span>
+                  <span class="site-state-item-count">230</span>
                   <span class="site-state-item-name">tags</span>
                 
               </div>

@@ -1,0 +1,820 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/32x32.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/16x16.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="javscript,jquer,添加表格,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="JS操作表格常用操作及事件委派1. 点击添加一行表格12345678910111213141516171819202122232425function addRow() &amp;#123;     // 获取当前有多少行(查找第一列序号值)     last_num = $(&quot;#myTabletr:last-child&quot;).children(&quot;td&quot;).find(&quot;input&quot;).val();">
+<meta name="keywords" content="javscript,jquer,添加表格">
+<meta property="og:type" content="article">
+<meta property="og:title" content="JS操作表格常用操作及事件委派">
+<meta property="og:url" content="http://pibigstar.com/2019/05/24/JS操作表格常用操作及事件委派/index.html">
+<meta property="og:site_name" content="派大星的博客">
+<meta property="og:description" content="JS操作表格常用操作及事件委派1. 点击添加一行表格12345678910111213141516171819202122232425function addRow() &amp;#123;     // 获取当前有多少行(查找第一列序号值)     last_num = $(&quot;#myTabletr:last-child&quot;).children(&quot;td&quot;).find(&quot;input&quot;).val();">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-09-30T03:12:58.932Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="JS操作表格常用操作及事件委派">
+<meta name="twitter:description" content="JS操作表格常用操作及事件委派1. 点击添加一行表格12345678910111213141516171819202122232425function addRow() &amp;#123;     // 获取当前有多少行(查找第一列序号值)     last_num = $(&quot;#myTabletr:last-child&quot;).children(&quot;td&quot;).find(&quot;input&quot;).val();">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":true,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://pibigstar.com/2019/05/24/JS操作表格常用操作及事件委派/">
+
+
+
+
+
+  <title>JS操作表格常用操作及事件委派 | 派大星的博客</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">派大星的博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <h1 class="site-subtitle" itemprop="description">很多事情不是会了才能做，而是做了才能学会</h1>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-schedule">
+          <a href="/schedule/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-calendar"></i> <br>
+            
+            Schedule
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-sitemap">
+          <a href="/sitemap.xml" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-sitemap"></i> <br>
+            
+            Sitemap
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            About
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://pibigstar.com/2019/05/24/JS操作表格常用操作及事件委派/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="派大星">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/qq.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="派大星的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">JS操作表格常用操作及事件委派</h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-05-24T06:06:04+08:00">
+                2019-05-24
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/js/" itemprop="url" rel="index">
+                    <span itemprop="name">js</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="JS操作表格常用操作及事件委派"><a href="#JS操作表格常用操作及事件委派" class="headerlink" title="JS操作表格常用操作及事件委派"></a>JS操作表格常用操作及事件委派</h1><h2 id="1-点击添加一行表格"><a href="#1-点击添加一行表格" class="headerlink" title="1. 点击添加一行表格"></a>1. 点击添加一行表格</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">addRow</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">     <span class="comment">// 获取当前有多少行(查找第一列序号值)</span></span><br><span class="line">     last_num = $(<span class="string">"#myTabletr:last-child"</span>).children(<span class="string">"td"</span>).find(<span class="string">"input"</span>).val();</span><br><span class="line">     <span class="keyword">if</span> (last_num == <span class="literal">null</span>) &#123;</span><br><span class="line">         last_num = <span class="number">1</span>;</span><br><span class="line">     &#125;</span><br><span class="line">     <span class="keyword">else</span> &#123;</span><br><span class="line">         last_num = <span class="built_in">parseInt</span>(last_num);</span><br><span class="line">         last_num += <span class="number">1</span>;</span><br><span class="line">     &#125;</span><br><span class="line">     <span class="comment">// 获取表格对象</span></span><br><span class="line">     <span class="keyword">let</span> table = <span class="built_in">document</span>.getElementById(<span class="string">"myTable"</span>);</span><br><span class="line">     <span class="comment">// 插入一行</span></span><br><span class="line">     <span class="keyword">let</span> row = table.insertRow();</span><br><span class="line">     <span class="comment">// 插入四列</span></span><br><span class="line">     <span class="keyword">let</span> cell0 = row.insertCell();<span class="comment">//序号</span></span><br><span class="line">     <span class="keyword">let</span> cell1= row.insertCell(); <span class="comment">//名称</span></span><br><span class="line">     <span class="keyword">let</span> cell2 = row.insertCell();<span class="comment">//年龄</span></span><br><span class="line">     <span class="keyword">let</span> cell3 = row.insertCell();<span class="comment">//操作</span></span><br><span class="line">     <span class="comment">// 插入列的内容</span></span><br><span class="line">     cell0.innerHTML = <span class="string">'&lt;input readonly="true" value='</span>+ last_num +<span class="string">'&gt;'</span>;</span><br><span class="line">     cell1.innerHTML = <span class="string">'&lt;input name="username"placeholder="输名称"&gt;'</span>;</span><br><span class="line">     cell2.innerHTML = <span class="string">'&lt;input name="age" placeholder="输入年龄"&gt;'</span>;</span><br><span class="line">     cell3.innerHTML = <span class="string">'&lt;a class="btn-link deleteRowInfo"&gt;删除&lt;/a&gt;'</span>;</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="2-删除一行"><a href="#2-删除一行" class="headerlink" title="2. 删除一行"></a>2. 删除一行</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"> $(<span class="built_in">document</span>).on(<span class="string">'click'</span>,<span class="string">'.deleteRowInfo'</span>,<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">   <span class="comment">// 获取当前点击的哪一行</span></span><br><span class="line">   <span class="keyword">let</span> currentTrIndex = $(<span class="keyword">this</span>).parent().parent().index();</span><br><span class="line">   <span class="comment">// 获取表格对象</span></span><br><span class="line">   <span class="keyword">let</span> table = <span class="built_in">document</span>.getElementById(<span class="string">"myTable"</span>);</span><br><span class="line">   <span class="comment">// 删除行</span></span><br><span class="line">   table.deleteRow(index);</span><br><span class="line">   <span class="comment">// 更新序号</span></span><br><span class="line">   $(<span class="string">"#myTable"</span>).find(<span class="string">"tr"</span>).each(<span class="function"><span class="keyword">function</span>(<span class="params">index,item</span>)</span>&#123;</span><br><span class="line">      <span class="keyword">let</span> tdArr = $(<span class="keyword">this</span>).children();</span><br><span class="line">      tdArr.eq(<span class="number">0</span>).find(<span class="string">"input"</span>).val(index + <span class="number">1</span>);</span><br><span class="line">   &#125;);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<h2 id="3-获取表格中的值转为JSON字符串"><a href="#3-获取表格中的值转为JSON字符串" class="headerlink" title="3. 获取表格中的值转为JSON字符串"></a>3. 获取表格中的值转为JSON字符串</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"> <span class="function"><span class="keyword">function</span> <span class="title">getData</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">let</span> data = [];</span><br><span class="line">    $(<span class="string">"#myTable"</span>).find(<span class="string">"tr"</span>).each(<span class="function"><span class="keyword">function</span> (<span class="params">i</span>) </span>&#123;</span><br><span class="line">        data[i] = <span class="keyword">new</span> <span class="built_in">Object</span>();</span><br><span class="line">        data[i].username= $(<span class="keyword">this</span>).find(<span class="string">"input[name='username']"</span>).val()</span><br><span class="line">        data[i].age= $(<span class="keyword">this</span>).find(<span class="string">"input[name='age']"</span>).val()</span><br><span class="line">    &#125;);</span><br><span class="line">    <span class="comment">// 转为json字符串</span></span><br><span class="line">    <span class="keyword">let</span> strData = <span class="built_in">JSON</span>.stringify(data);</span><br><span class="line">    <span class="keyword">return</span> strData;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="4-添加一列"><a href="#4-添加一列" class="headerlink" title="4. 添加一列"></a>4. 添加一列</h2><table>
+<thead>
+<tr>
+<th align="left">姓名</th>
+<th align="left">派大星</th>
+<th align="left">海绵宝宝</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">年龄</td>
+<td align="left">22</td>
+<td align="left">25</td>
+</tr>
+<tr>
+<td align="left"><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"> $(<span class="string">".addBtn"</span>).click(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">   <span class="comment">// 获取模态框中输入值</span></span><br><span class="line">   <span class="keyword">let</span> username= $(<span class="string">".username"</span>).val();</span><br><span class="line">   <span class="keyword">let</span> age= $(<span class="string">".age"</span>).val();</span><br><span class="line">   <span class="comment">// 第一行添加一列</span></span><br><span class="line">   $(<span class="string">"#usernameTr"</span>).append(<span class="string">'&lt;td&gt;'</span>+username+<span class="string">'&lt;i class="icon-delete deleteCellInfo hidden"&gt;&lt;/i&gt;&lt;/td&gt;'</span>);</span><br><span class="line">   <span class="comment">// 第二行添加一列</span></span><br><span class="line">   $(<span class="string">"#ageTr"</span>).append(<span class="string">'&lt;td&gt;'</span>+age+<span class="string">'&lt;/td&gt;'</span>);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure></td>
+<td align="left"></td>
+<td align="left"></td>
+</tr>
+</tbody></table>
+<h2 id="5-删除一列"><a href="#5-删除一列" class="headerlink" title="5. 删除一列"></a>5. 删除一列</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 当鼠标移动到每一列时会有个删除按钮显示，点击这个删除按钮，删除此列</span></span><br><span class="line"> $(<span class="built_in">document</span>).on(<span class="string">'click'</span>,<span class="string">'.deleteCellInfo'</span>,<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">     <span class="comment">// 获取当前点击的是第几列</span></span><br><span class="line">     <span class="keyword">var</span> currentCell =$(<span class="string">"#usernameTr td i"</span>).index(<span class="keyword">this</span>) + <span class="number">1</span>;</span><br><span class="line">     <span class="comment">// 获取表格对象</span></span><br><span class="line">     <span class="keyword">let</span> table=<span class="built_in">document</span>.getElementById(<span class="string">"myTable"</span>);</span><br><span class="line">     <span class="comment">// 删除第一行中此列</span></span><br><span class="line">     table.rows[<span class="number">0</span>].deleteCell(currentCell);</span><br><span class="line">     <span class="comment">// 删除第二行中此列</span></span><br><span class="line">     table.rows[<span class="number">1</span>].deleteCell(currentCell);</span><br><span class="line"> &#125;);</span><br></pre></td></tr></table></figure>
+
+<h2 id="6-事件委派"><a href="#6-事件委派" class="headerlink" title="6. 事件委派"></a>6. 事件委派</h2><blockquote>
+<p>因为是动态添加的表格，所以没办法直接为新添加的元素添加事件监听，这个时候就需要用到了事件委派。其实也就是为页面渲染完成后添加的<strong>新元素</strong>加上事件。</p>
+</blockquote>
+<p>上面新添加列，我们为每一个新添加的列都添加一个鼠标移入移出事件，当鼠标移入到此列上时将删除图标显示出来。</p>
+<p>jQuery写法：使用<code>delegate</code></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 鼠标移入时将删除hidden属性将删除图标显示出来</span></span><br><span class="line">$(<span class="string">'#usernameTr'</span>).delegate(<span class="string">'td'</span>, <span class="string">'mouseover'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">ev</span>)</span>&#123;</span><br><span class="line">     $(<span class="keyword">this</span>).find(<span class="string">"i"</span>).removeClass(<span class="string">"hidden"</span>);</span><br><span class="line"> &#125;);</span><br><span class="line"> <span class="comment">// 鼠标移出时将删除图标隐藏</span></span><br><span class="line"> $(<span class="string">'#usernameTr'</span>).delegate(<span class="string">'td'</span>, <span class="string">'mouseout'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">ev</span>)</span>&#123;</span><br><span class="line">     $(<span class="keyword">this</span>).find(<span class="string">"i"</span>).addClass(<span class="string">"hidden"</span>);</span><br><span class="line"> &#125;);</span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+    
+    
+    
+
+    <div>
+      
+        <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
+    
+</div>
+
+      
+    </div>
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/javscript/" rel="tag"><i class="fa fa-tag"></i> javscript</a>
+          
+            <a href="/tags/jquer/" rel="tag"><i class="fa fa-tag"></i> jquer</a>
+          
+            <a href="/tags/添加表格/" rel="tag"><i class="fa fa-tag"></i> 添加表格</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/05/24/Nginx使用总结/" rel="next" title="Nginx使用总结">
+                <i class="fa fa-chevron-left"></i> Nginx使用总结
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/05/27/MySQL实战45讲学习笔记（1~7）/" rel="prev" title="MySQL实战45讲学习笔记（1~7）">
+                MySQL实战45讲学习笔记（1~7） <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/qq.png" alt="派大星">
+            
+              <p class="site-author-name" itemprop="name">派大星</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives">
+              
+                  <span class="site-state-item-count">137</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                
+                  <span class="site-state-item-count">64</span>
+                  <span class="site-state-item-name">categories</span>
+                
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                
+                  <span class="site-state-item-count">230</span>
+                  <span class="site-state-item-name">tags</span>
+                
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/pibigstar" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://blog.csdn.net/junmoxi" target="_blank" title="CSDN">
+                      
+                        <i class="fa fa-fw fa-yelp"></i>CSDN</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#JS操作表格常用操作及事件委派"><span class="nav-number">1.</span> <span class="nav-text">JS操作表格常用操作及事件委派</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-点击添加一行表格"><span class="nav-number">1.1.</span> <span class="nav-text">1. 点击添加一行表格</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-删除一行"><span class="nav-number">1.2.</span> <span class="nav-text">2. 删除一行</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-获取表格中的值转为JSON字符串"><span class="nav-number">1.3.</span> <span class="nav-text">3. 获取表格中的值转为JSON字符串</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-添加一列"><span class="nav-number">1.4.</span> <span class="nav-text">4. 添加一列</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-删除一列"><span class="nav-number">1.5.</span> <span class="nav-text">5. 删除一列</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6-事件委派"><span class="nav-number">1.6.</span> <span class="nav-text">6. 事件委派</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+        <div class="back-to-top">
+          <i class="fa fa-arrow-up"></i>
+          
+        </div>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-[object Object]"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">派大星</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+  <script type="text/javascript" src="/js/src/js.cookie.js?v=5.1.4"></script>
+  <script type="text/javascript" src="/js/src/scroll-cookie.js?v=5.1.4"></script>
+
+
+  
+
+</body>
+</html>
+<!-- 页面点击小红心 -->
+ <script type="text/javascript" src="/js/src/clicklove.js"></script>

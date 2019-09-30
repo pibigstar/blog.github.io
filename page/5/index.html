@@ -270,7 +270,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://pibigstar.com/2019/09/29/网站部署到Linux服务器上并添加https证书/">
+    <link itemprop="mainEntityOfPage" href="http://pibigstar.com/2019/07/16/基于Mysql实现锁机制/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="派大星">
@@ -289,7 +289,7 @@
         
           <h2 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2019/09/29/网站部署到Linux服务器上并添加https证书/" itemprop="url">Untitled</a></h2>
+                <a class="post-title-link" href="/2019/07/16/基于Mysql实现锁机制/" itemprop="url">基于Mysql实现锁机制</a></h2>
         
 
         <div class="post-meta">
@@ -301,8 +301,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-09-29T22:56:41+08:00">
-                2019-09-29
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-07-16T03:03:04+08:00">
+                2019-07-16
               </time>
             
 
@@ -311,6 +311,28 @@
             
           </span>
 
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Java-mysql/" itemprop="url" rel="index">
+                    <span itemprop="name">Java,mysql</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
           
 
           
@@ -341,314 +363,36 @@
       
         
           
-            <p>title: 网站部署到Linux服务器上并添加https证书<br>date: 2018-11-27 22:10:31<br>tags: [Linux,nginx,https]<br>categories: 工具使用,Linux</p>
+            <h1 id="1-ReentrantLock"><a href="#1-ReentrantLock" class="headerlink" title="1 ReentrantLock"></a>1 ReentrantLock</h1><p>它是一个可重入锁，即一个线程可重复加锁，即当前线程获取该锁再次获取不会被阻塞。获得几次锁，解锁也要解几次。<br>它有两种实现，公平锁和非公平锁。</p>
+<ul>
+<li>公平锁：锁的获取顺序就应该符合请求上的绝对时间顺序</li>
+<li>非公平锁：不按请求的时间，谁抢到就是谁的</li>
+</ul>
+<p>默认实现的为非公平锁，因为公平锁为了保证时间上的绝对顺序，需要频繁的上下文切换，而非公平锁会降低一定的上下文切换，降低性能开销。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//创建一个公平锁</span></span><br><span class="line">Lock lock = <span class="keyword">new</span> ReentrantLock(<span class="keyword">true</span>);</span><br></pre></td></tr></table></figure>
+
+<h1 id="2-通过MySQL的GET-LOCK函数实现"><a href="#2-通过MySQL的GET-LOCK函数实现" class="headerlink" title="2. 通过MySQL的GET_LOCK函数实现"></a>2. 通过MySQL的GET_LOCK函数实现</h1><h3 id="获得锁"><a href="#获得锁" class="headerlink" title="获得锁"></a>获得锁</h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">GET_LOCK(str,timeout)</span><br></pre></td></tr></table></figure>
 
-          
-        
-      
-    </div>
-    
-    
-    
-
-    <div>
-      
-    </div>
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://pibigstar.com/2019/09/29/SpringBoot自定义配置文件读取/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="派大星">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/qq.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="派大星的博客">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/09/29/SpringBoot自定义配置文件读取/" itemprop="url">Untitled</a></h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-09-29T22:56:41+08:00">
-                2019-09-29
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>title: SpringBoot自定义配置文件读取<br>date: 2018-10-17 22:10:31<br>tags: [properties,sprintboot]<br>categories: springboot</p>
-<p>有时候我们把配置都放到application.yml文件里面会造成此文件相当不好管理，所以我们可以有意识的进行拆分，将一些配置放到其他的配置文件里面，那么我们如何加载并使用它呢，其实很简单，直接读取然后放到Properties对象中就OK了，看代码</p>
-<h1 id="读取配置"><a href="#读取配置" class="headerlink" title="读取配置"></a>读取配置</h1><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.pibgstar.demo.utils;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> org.slf4j.Logger;</span><br><span class="line"><span class="keyword">import</span> org.slf4j.LoggerFactory;</span><br><span class="line"><span class="keyword">import</span> org.springframework.util.StringUtils;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.io.IOException;</span><br><span class="line"><span class="keyword">import</span> java.io.InputStream;</span><br><span class="line"><span class="keyword">import</span> java.io.UnsupportedEncodingException;</span><br><span class="line"><span class="keyword">import</span> java.util.Properties;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> pibigstar</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@desc</span> 加载配置文件</span></span><br><span class="line"><span class="comment"> **/</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ConfigUtil</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> Logger logger = LoggerFactory.getLogger(ConfigUtil.class);</span><br><span class="line">    <span class="comment">// 配置文件的路径</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> String CONFIG_NAME = <span class="string">"conf/config.properties"</span>;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> Properties ps;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">int</span> <span class="title">getInt</span><span class="params">(String key)</span> </span>&#123;</span><br><span class="line">        String value = getValue(key);</span><br><span class="line">        <span class="keyword">return</span> Integer.parseInt(value);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> String <span class="title">getString</span><span class="params">(String key)</span> </span>&#123;</span><br><span class="line">        String value = getValue(key);</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">new</span> String(value.getBytes(<span class="string">"iso-8859-1"</span>),<span class="string">"utf-8"</span>);</span><br><span class="line">        &#125; <span class="keyword">catch</span> (UnsupportedEncodingException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">""</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">static</span> String <span class="title">getValue</span><span class="params">(String key)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (ps == <span class="keyword">null</span>) &#123;</span><br><span class="line">            init();</span><br><span class="line">        &#125;</span><br><span class="line">        String value = <span class="keyword">null</span>;</span><br><span class="line">        <span class="keyword">if</span> (StringUtils.isEmpty(value)) &#123;</span><br><span class="line">            value = ps.getProperty(key);</span><br><span class="line">        &#125;</span><br><span class="line">        logger.info(<span class="string">"key:"</span>+key+<span class="string">"----value:"</span>+value);</span><br><span class="line">        <span class="keyword">return</span> value;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">synchronized</span> <span class="keyword">void</span> <span class="title">init</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            InputStream ras = ConfigUtil.class.getClassLoader().getResourceAsStream(CONFIG_NAME);</span><br><span class="line">            ps = <span class="keyword">new</span> Properties();</span><br><span class="line">            ps.load(ras);</span><br><span class="line">        &#125; <span class="keyword">catch</span> (IOException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h1 id="配置文件放置"><a href="#配置文件放置" class="headerlink" title="配置文件放置"></a>配置文件放置</h1><p>我们将config.properties放到<code>resources</code>下新建的conf文件夹下面就OK了</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">pibigstar.demo.url=http://www.pibigstar.com</span><br><span class="line">pibigstar.demo.number=8</span><br></pre></td></tr></table></figure>
-
-<h1 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h1><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TestConfigUtil</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span></span>&#123;</span><br><span class="line">        String url = ConfigUtil.getString(<span class="string">"pibigstar.demo.url"</span>);</span><br><span class="line">        <span class="keyword">int</span> number = ConfigUtil.getInt(<span class="string">"pibigstar.demo.number"</span>);</span><br><span class="line">        System.out.println(url + <span class="string">"  "</span> + number);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    <div>
-      
-    </div>
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://pibigstar.com/2019/09/29/SpringBoot整合dubbo/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="派大星">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/qq.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="派大星的博客">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/09/29/SpringBoot整合dubbo/" itemprop="url">Untitled</a></h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-09-29T22:56:41+08:00">
-                2019-09-29
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>title: SpringBoot整合dubbo<br>date: 2018-07-15 22:10:31<br>tags: [springboot,dubbo]<br>categories: springboot,Dubbo,SpringBoot技能大全</p>
-<p>[TOC]</p>
-<h2 id="1-前期准备"><a href="#1-前期准备" class="headerlink" title="1. 前期准备"></a>1. 前期准备</h2><p>###1.1  服务器中安装好zookeeper</p>
 <blockquote>
-<p>安装过程看我之前的博客  <a href="https://blog.csdn.net/junmoxi/article/details/80149237" target="_blank" rel="noopener">点击这里</a></p>
+<p>根据字符串str 得到一个锁，超时为timeout 秒。若成功得到锁，则返回 1，若操作超时则返回0 ，当它获得锁之后，后面相同str的再获取这把锁就会一直等待，当超过timeout，就会返回0</p>
 </blockquote>
-<p>###1.2 服务器中安装dubbo的控制端</p>
-<ol>
-<li><p>下载dubbo-admin的war包  <a href="https://pan.baidu.com/s/1RF8GO2P6IVomHcT-WuEssg" target="_blank" rel="noopener">点击下载</a></p>
-</li>
-<li><p>解压，修改WEB-INF下的dubbo.properties，将dubbo.registry.address修改为你服务器地址，root用户的密码为pibigstar</p>
-</li>
-<li><p>启动tomcat</p>
-</li>
-</ol>
-<p>浏览器访问http://你服务器地址:tomcat启动端口号/dubbo-admin 查看是否能进入dubbo控制端<br><img src="https://img-blog.csdn.net/20180523210711994?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2p1bm1veGk=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt="这里写图片描述"></p>
-<h2 id="2-构建dubbo服务提供者（先有提供者才能有消费者）"><a href="#2-构建dubbo服务提供者（先有提供者才能有消费者）" class="headerlink" title="2. 构建dubbo服务提供者（先有提供者才能有消费者）"></a>2. 构建dubbo服务提供者（先有提供者才能有消费者）</h2><p>###2.1 项目结构</p>
-<p><img src="https://img-blog.csdn.net/20180523211139787?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2p1bm1veGk=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt="这里写图片描述"></p>
-<h3 id="2-2-添加依赖"><a href="#2-2-添加依赖" class="headerlink" title="2.2 添加依赖"></a>2.2 添加依赖</h3><p><strong>pom.xml</strong></p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- dubbo started --&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">groupId</span>&gt;</span>com.alibaba<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>dubbo<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">version</span>&gt;</span>2.4.10<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">exclusions</span>&gt;</span></span><br><span class="line">				<span class="tag">&lt;<span class="name">exclusion</span>&gt;</span></span><br><span class="line">					<span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">					<span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">				<span class="tag">&lt;/<span class="name">exclusion</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;/<span class="name">exclusions</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line"></span><br><span class="line">		<span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.apache.zookeeper<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>zookeeper<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">version</span>&gt;</span>3.4.6<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">exclusions</span>&gt;</span></span><br><span class="line">				<span class="tag">&lt;<span class="name">exclusion</span>&gt;</span></span><br><span class="line">					<span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>slf4j-log4j12<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">					<span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.slf4j<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">				<span class="tag">&lt;/<span class="name">exclusion</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;/<span class="name">exclusions</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line"></span><br><span class="line">		<span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">groupId</span>&gt;</span>com.github.sgroschupf<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>zkclient<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">version</span>&gt;</span>0.1<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line">		<span class="comment">&lt;!-- dubbo end --&gt;</span></span><br></pre></td></tr></table></figure>
+<h3 id="释放锁"><a href="#释放锁" class="headerlink" title="释放锁"></a>释放锁</h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">RELEASE_LOCK(str);</span><br></pre></td></tr></table></figure>
 
-<h3 id="2-3-编写暴露的服务接口"><a href="#2-3-编写暴露的服务接口" class="headerlink" title="2.3 编写暴露的服务接口"></a>2.3 编写暴露的服务接口</h3><p><strong>接口</strong></p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.pibigstar.dubbo.remote;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">TestService</span> </span>&#123;</span><br><span class="line">	</span><br><span class="line">	<span class="function">String <span class="title">sayHello</span><span class="params">(String name)</span></span>;  </span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>释放str这把锁，当连接中断后，这把锁也会释放的</p>
+</blockquote>
+<h2 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">获取锁</span><br><span class="line">SELECT GET_LOCK(&quot;pibigstar&quot;,10)；</span><br><span class="line"></span><br><span class="line">释放锁</span><br><span class="line">SELECT RELEASE_LOCK(“pibigstar”);</span><br></pre></td></tr></table></figure>
 
-<p><strong>实现类</strong></p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.pibigstar.dubbo.remote.impl;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> com.pibigstar.dubbo.remote.TestService;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TestServiceImpl</span> <span class="keyword">implements</span> <span class="title">TestService</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">	<span class="meta">@Override</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> String <span class="title">sayHello</span><span class="params">(String name)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">return</span>  <span class="string">"Hello "</span> + name + <span class="string">"!"</span>;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="3-通过MySQL行级锁进行实现"><a href="#3-通过MySQL行级锁进行实现" class="headerlink" title="3 通过MySQL行级锁进行实现"></a>3 通过MySQL行级锁进行实现</h1><p>原理很简单，我们插入数据的时候都是只能插入一个唯一主键，如果有一个线程插入了，那么其他线程都不能插入了。</p>
+<p>插入实体</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.pibigstar.domain;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> javax.persistence.Entity;</span><br><span class="line"><span class="keyword">import</span> javax.persistence.Id;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Entity</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Mysql</span> </span>&#123;</span><br><span class="line">	<span class="meta">@Id</span></span><br><span class="line">	<span class="keyword">private</span> <span class="keyword">int</span> id;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="title">Mysql</span><span class="params">(<span class="keyword">int</span> id)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">this</span>.id = id;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="comment">//setter、getter方法</span></span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<h3 id="2-4-编写配置文件provider-xml"><a href="#2-4-编写配置文件provider-xml" class="headerlink" title="2.4 编写配置文件provider.xml"></a>2.4 编写配置文件provider.xml</h3><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version="1.0" encoding="UTF-8"?&gt;</span>  </span><br><span class="line"><span class="tag">&lt;<span class="name">beans</span> <span class="attr">xmlns</span>=<span class="string">"http://www.springframework.org/schema/beans"</span>  </span></span><br><span class="line"><span class="tag">      <span class="attr">xmlns:xsi</span>=<span class="string">"http://www.w3.org/2001/XMLSchema-instance"</span>  </span></span><br><span class="line"><span class="tag">      <span class="attr">xmlns:dubbo</span>=<span class="string">"http://code.alibabatech.com/schema/dubbo"</span>  </span></span><br><span class="line"><span class="tag">      <span class="attr">xsi:schemaLocation</span>=<span class="string">"http://www.springframework.org/schema/beans  </span></span></span><br><span class="line"><span class="tag"><span class="string">      http://www.springframework.org/schema/beans/spring-beans.xsd  </span></span></span><br><span class="line"><span class="tag"><span class="string">      http://code.alibabatech.com/schema/dubbo  </span></span></span><br><span class="line"><span class="tag"><span class="string">      http://code.alibabatech.com/schema/dubbo/dubbo.xsd"</span>&gt;</span>       </span><br><span class="line"></span><br><span class="line">   <span class="comment">&lt;!-- 服务提供方应用名，用于计算依赖关系 --&gt;</span>  </span><br><span class="line"></span><br><span class="line">   <span class="tag">&lt;<span class="name">dubbo:application</span> <span class="attr">name</span>=<span class="string">"dubbo-provider"</span> <span class="attr">owner</span>=<span class="string">"dubbo-provider"</span>/&gt;</span>  </span><br><span class="line"></span><br><span class="line">   <span class="comment">&lt;!-- 定义 zookeeper 注册中心地址及协议 --&gt;</span>  </span><br><span class="line">   <span class="tag">&lt;<span class="name">dubbo:registry</span> <span class="attr">protocol</span>=<span class="string">"zookeeper"</span> <span class="attr">address</span>=<span class="string">"139.199.64.253:2181"</span> <span class="attr">client</span>=<span class="string">"zkclient"</span>/&gt;</span>  </span><br><span class="line">  </span><br><span class="line">   <span class="comment">&lt;!-- 定义 Dubbo 协议名称及使用的端口，dubbo 协议缺省端口为 20880，如果配置为 -1 或者没有配置 port，则会分配一个没有被占用的端口 --&gt;</span>  </span><br><span class="line">   <span class="tag">&lt;<span class="name">dubbo:protocol</span> <span class="attr">name</span>=<span class="string">"dubbo"</span> <span class="attr">port</span>=<span class="string">"-1"</span>/&gt;</span>  </span><br><span class="line">   </span><br><span class="line">   <span class="comment">&lt;!-- 声明需要暴露的服务接口 --&gt;</span>  </span><br><span class="line">   <span class="tag">&lt;<span class="name">dubbo:service</span> <span class="attr">interface</span>=<span class="string">"com.pibigstar.dubbo.remote.TestService"</span> <span class="attr">ref</span>=<span class="string">"testService"</span> <span class="attr">timeout</span>=<span class="string">"10000"</span>/&gt;</span>  </span><br><span class="line">   </span><br><span class="line">   <span class="comment">&lt;!-- 和本地 bean 一样实现服务 --&gt;</span>  </span><br><span class="line">   <span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">"testService"</span> <span class="attr">class</span>=<span class="string">"com.pibigstar.dubbo.remote.impl.TestServiceImpl"</span> /&gt;</span>  </span><br><span class="line"><span class="tag">&lt;/<span class="name">beans</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>dao层：使用jpa</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.pibigstar.dao;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> org.springframework.data.jpa.repository.JpaRepository;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> com.pibigstar.domain.Mysql;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">MysqlLockDao</span> <span class="keyword">extends</span> <span class="title">JpaRepository</span>&lt;<span class="title">Mysql</span>, <span class="title">Integer</span>&gt;</span>&#123;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<h3 id="2-5-让SpringBoot启动加载配置文件"><a href="#2-5-让SpringBoot启动加载配置文件" class="headerlink" title="2.5 让SpringBoot启动加载配置文件"></a>2.5 让SpringBoot启动加载配置文件</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.pibigstar;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> org.springframework.boot.SpringApplication;</span><br><span class="line"><span class="keyword">import</span> org.springframework.boot.autoconfigure.SpringBootApplication;</span><br><span class="line"><span class="keyword">import</span> org.springframework.context.annotation.ImportResource;</span><br><span class="line"></span><br><span class="line"><span class="meta">@SpringBootApplication</span></span><br><span class="line"><span class="meta">@ImportResource</span>(value = &#123;<span class="string">"classpath:provider.xml"</span>&#125;)</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">DubboProviderApplication</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">		SpringApplication.run(DubboProviderApplication.class, args);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>具体实现</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.pibigstar.utils;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.util.Random;</span><br><span class="line"><span class="keyword">import</span> java.util.concurrent.TimeUnit;</span><br><span class="line"><span class="keyword">import</span> java.util.concurrent.locks.Condition;</span><br><span class="line"><span class="keyword">import</span> java.util.concurrent.locks.Lock;</span><br><span class="line"><span class="keyword">import</span> org.springframework.beans.factory.annotation.Autowired;</span><br><span class="line"><span class="keyword">import</span> com.pibigstar.dao.MysqlLockDao;</span><br><span class="line"><span class="keyword">import</span> com.pibigstar.domain.Mysql;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 基于mysql实现可重入锁</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> pibigstar</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MysqlLock</span> <span class="keyword">implements</span> <span class="title">Lock</span></span>&#123;</span><br><span class="line"></span><br><span class="line">	<span class="meta">@Autowired</span></span><br><span class="line">	<span class="keyword">private</span> MysqlLockDao mysqlLockDao;</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> Mysql my = <span class="keyword">new</span> Mysql(<span class="number">1</span>);</span><br><span class="line">	</span><br><span class="line">	<span class="meta">@Override</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">lock</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		<span class="comment">//阻塞锁，不拿到资源不罢休</span></span><br><span class="line">		<span class="keyword">if</span> (!tryLock()) &#123;</span><br><span class="line">			<span class="keyword">try</span> &#123;</span><br><span class="line">				<span class="comment">//如果没拿到，睡一下再拿</span></span><br><span class="line">				Thread.sleep(<span class="keyword">new</span> Random().nextInt(<span class="number">10</span>)+<span class="number">1</span>);</span><br><span class="line">			&#125; <span class="keyword">catch</span> (InterruptedException e) &#123;</span><br><span class="line">			&#125;</span><br><span class="line">			lock();<span class="comment">//继续调用自身拿锁</span></span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="meta">@Override</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">tryLock</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		<span class="comment">//非阻塞锁，拿一次，拿到就拿到了，拿不到就撤</span></span><br><span class="line">		<span class="keyword">try</span> &#123;</span><br><span class="line">			mysqlLockDao.save(my);<span class="comment">//插入成功即是拿到了</span></span><br><span class="line">			<span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">		&#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">			<span class="comment">//有异常说明已经被其他线程拿到了，</span></span><br><span class="line">			<span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="meta">@Override</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">unlock</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		<span class="comment">//解锁，将值删除即可</span></span><br><span class="line">		mysqlLockDao.delete(my);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="meta">@Override</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">tryLock</span><span class="params">(<span class="keyword">long</span> time, TimeUnit unit)</span> <span class="keyword">throws</span> InterruptedException </span>&#123;</span><br><span class="line">		<span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="meta">@Override</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">lockInterruptibly</span><span class="params">()</span> <span class="keyword">throws</span> InterruptedException </span>&#123;</span><br><span class="line">		</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	<span class="meta">@Override</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> Condition <span class="title">newCondition</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		<span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<h3 id="2-6-启动dubbo服务提供者"><a href="#2-6-启动dubbo服务提供者" class="headerlink" title="2.6 启动dubbo服务提供者"></a>2.6 启动dubbo服务提供者</h3><p>访问dubbo控制端<br><img src="https://img-blog.csdn.net/20180523211718760?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2p1bm1veGk=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt="这里写图片描述"></p>
-<p><strong>注意：这里有个大坑！！！！！！！！！！！</strong><br>SpringBoot必须要有Controller，不然会自动退出<br>写一个空白的Controller上去。。。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.pibigstar.web;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> org.springframework.web.bind.annotation.RequestMapping;</span><br><span class="line"><span class="keyword">import</span> org.springframework.web.bind.annotation.RestController;</span><br><span class="line"></span><br><span class="line"><span class="meta">@RestController</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TestController</span> </span>&#123;</span><br><span class="line">	</span><br><span class="line">	<span class="meta">@RequestMapping</span>(<span class="string">"/say"</span>)</span><br><span class="line">	<span class="function"><span class="keyword">public</span> String <span class="title">say</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		<span class="keyword">return</span> <span class="string">"test"</span>;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h2 id="3-构建dubbo服务消费者"><a href="#3-构建dubbo服务消费者" class="headerlink" title="3. 构建dubbo服务消费者"></a>3. 构建dubbo服务消费者</h2><h3 id="3-1-项目结构"><a href="#3-1-项目结构" class="headerlink" title="3.1 项目结构"></a>3.1 项目结构</h3><p><img src="https://img-blog.csdn.net/20180523212019792?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2p1bm1veGk=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt="这里写图片描述"></p>
-<h3 id="3-2-添加依赖"><a href="#3-2-添加依赖" class="headerlink" title="3.2 添加依赖"></a>3.2 添加依赖</h3><p><strong>pom.xml</strong></p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- dubbo-consumer Started --&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">groupId</span>&gt;</span>com.alibaba<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>fastjson<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">version</span>&gt;</span>1.1.41<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line"></span><br><span class="line">		<span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">groupId</span>&gt;</span>com.alibaba<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>dubbo<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">version</span>&gt;</span>2.4.10<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">exclusions</span>&gt;</span></span><br><span class="line">				<span class="tag">&lt;<span class="name">exclusion</span>&gt;</span></span><br><span class="line">					<span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">					<span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">				<span class="tag">&lt;/<span class="name">exclusion</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;/<span class="name">exclusions</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line"></span><br><span class="line">		<span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.apache.zookeeper<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>zookeeper<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">version</span>&gt;</span>3.4.6<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">exclusions</span>&gt;</span></span><br><span class="line">				<span class="tag">&lt;<span class="name">exclusion</span>&gt;</span></span><br><span class="line">					<span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>slf4j-log4j12<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">					<span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.slf4j<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">				<span class="tag">&lt;/<span class="name">exclusion</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;/<span class="name">exclusions</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line">		</span><br><span class="line">		<span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">groupId</span>&gt;</span>com.github.sgroschupf<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>zkclient<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">version</span>&gt;</span>0.1<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line">		<span class="comment">&lt;!-- dubbo-consumer end --&gt;</span></span><br></pre></td></tr></table></figure>
-
-<h3 id="3-3-编写暴露的服务接口"><a href="#3-3-编写暴露的服务接口" class="headerlink" title="3.3 编写暴露的服务接口"></a>3.3 编写暴露的服务接口</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.pibigstar.dubbo.remote;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">TestService</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">	 <span class="function">String <span class="title">sayHello</span><span class="params">(String name)</span></span>; </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h3 id="3-4-编写Controller"><a href="#3-4-编写Controller" class="headerlink" title="3.4 编写Controller"></a>3.4 编写Controller</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">package</span> com.pibigstar.dubbo.consumer.controller;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> org.springframework.beans.factory.annotation.Autowired;</span><br><span class="line"><span class="keyword">import</span> org.springframework.web.bind.annotation.PathVariable;</span><br><span class="line"><span class="keyword">import</span> org.springframework.web.bind.annotation.RequestMapping;</span><br><span class="line"><span class="keyword">import</span> org.springframework.web.bind.annotation.RestController;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> com.alibaba.fastjson.JSONObject;</span><br><span class="line"><span class="keyword">import</span> com.pibigstar.dubbo.remote.TestService;</span><br><span class="line"></span><br><span class="line"><span class="meta">@RestController</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TestController</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">	<span class="meta">@Autowired</span>  </span><br><span class="line">	TestService testService;  </span><br><span class="line"></span><br><span class="line">	<span class="meta">@RequestMapping</span>(<span class="string">"/test/&#123;name&#125;"</span>)  </span><br><span class="line">	<span class="function"><span class="keyword">public</span> JSONObject <span class="title">testJson</span><span class="params">(@PathVariable(<span class="string">"name"</span>)</span> String name) </span>&#123;  </span><br><span class="line">		JSONObject jsonObject = <span class="keyword">new</span> JSONObject();  </span><br><span class="line"></span><br><span class="line">		String testStr = testService.sayHello(name);  </span><br><span class="line">		jsonObject.put(<span class="string">"str"</span>, testStr);  </span><br><span class="line">		<span class="keyword">return</span> jsonObject;  </span><br><span class="line">	&#125;  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p><strong>注意：这里接口的包名一定要和你前面服务提供者的包名一样！！</strong></p>
-<h3 id="3-5-编写配置文件consumers-xml"><a href="#3-5-编写配置文件consumers-xml" class="headerlink" title="3.5 编写配置文件consumers.xml"></a>3.5 编写配置文件consumers.xml</h3><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version="1.0" encoding="UTF-8"?&gt;</span>  </span><br><span class="line"><span class="tag">&lt;<span class="name">beans</span> <span class="attr">xmlns</span>=<span class="string">"http://www.springframework.org/schema/beans"</span>  </span></span><br><span class="line"><span class="tag">      <span class="attr">xmlns:xsi</span>=<span class="string">"http://www.w3.org/2001/XMLSchema-instance"</span>  </span></span><br><span class="line"><span class="tag">      <span class="attr">xmlns:dubbo</span>=<span class="string">"http://code.alibabatech.com/schema/dubbo"</span>  </span></span><br><span class="line"><span class="tag">      <span class="attr">xsi:schemaLocation</span>=<span class="string">"http://www.springframework.org/schema/beans  </span></span></span><br><span class="line"><span class="tag"><span class="string">      http://www.springframework.org/schema/beans/spring-beans.xsd  </span></span></span><br><span class="line"><span class="tag"><span class="string">      http://code.alibabatech.com/schema/dubbo  </span></span></span><br><span class="line"><span class="tag"><span class="string">      http://code.alibabatech.com/schema/dubbo/dubbo.xsd"</span>&gt;</span>  </span><br><span class="line"></span><br><span class="line">   <span class="comment">&lt;!-- 配置可参考 http://dubbo.io/User+Guide-zh.htm --&gt;</span>  </span><br><span class="line"></span><br><span class="line">   <span class="comment">&lt;!-- 消费方应用名，用于计算依赖关系，不是匹配条件，不要与提供方一样 --&gt;</span>  </span><br><span class="line">   <span class="tag">&lt;<span class="name">dubbo:application</span>  <span class="attr">name</span>=<span class="string">"dubbo-consumer"</span> <span class="attr">owner</span>=<span class="string">"dubbo-consumer"</span>/&gt;</span>  </span><br><span class="line"></span><br><span class="line">   <span class="comment">&lt;!-- 定义 zookeeper 注册中心地址及协议 --&gt;</span>  </span><br><span class="line">   <span class="tag">&lt;<span class="name">dubbo:registry</span> <span class="attr">protocol</span>=<span class="string">"zookeeper"</span> <span class="attr">address</span>=<span class="string">"139.199.64.253:2181"</span> <span class="attr">client</span>=<span class="string">"zkclient"</span> /&gt;</span>  </span><br><span class="line"></span><br><span class="line">   <span class="comment">&lt;!-- 生成远程服务代理，可以和本地 bean 一样使用 testService(要和提供者名字一样) --&gt;</span>  </span><br><span class="line">   <span class="tag">&lt;<span class="name">dubbo:reference</span> <span class="attr">id</span>=<span class="string">"testService"</span> <span class="attr">interface</span>=<span class="string">"com.pibigstar.dubbo.remote.TestService"</span>/&gt;</span>  </span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;/<span class="name">beans</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<h3 id="3-6-加载配置文件"><a href="#3-6-加载配置文件" class="headerlink" title="3.6 加载配置文件"></a>3.6 加载配置文件</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.pibigstar;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> org.springframework.boot.SpringApplication;</span><br><span class="line"><span class="keyword">import</span> org.springframework.boot.autoconfigure.SpringBootApplication;</span><br><span class="line"><span class="keyword">import</span> org.springframework.context.annotation.ImportResource;</span><br><span class="line"></span><br><span class="line"><span class="meta">@SpringBootApplication</span></span><br><span class="line"><span class="meta">@ImportResource</span>(value = &#123;<span class="string">"classpath:consumers.xml"</span>&#125;) </span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">DubboConsumerApplication</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">		SpringApplication.run(DubboConsumerApplication.class, args);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h3 id="3-7-启动dubbo服务消费者"><a href="#3-7-启动dubbo服务消费者" class="headerlink" title="3.7 启动dubbo服务消费者"></a>3.7 启动dubbo服务消费者</h3><p><img src="https://img-blog.csdn.net/20180523212518188?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2p1bm1veGk=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt="这里写图片描述"></p>
-<p><strong>注意：一定要先启动服务提供者，不然无法启动消费者的</strong></p>
-<h2 id="4-测试"><a href="#4-测试" class="headerlink" title="4 测试"></a>4 测试</h2><p>浏览器访问  <a href="http://localhost:8082/test/pibigstar" target="_blank" rel="noopener">http://localhost:8082/test/pibigstar</a><br><img src="https://img-blog.csdn.net/20180523214204933?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2p1bm1veGk=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt="这里写图片描述"><br><strong>我们看到已经调用了服务提供者的接口实现类</strong></p>
-<h2 id="5-项目以所有工具下载"><a href="#5-项目以所有工具下载" class="headerlink" title="5 项目以所有工具下载"></a>5 项目以所有工具下载</h2><p><a href="https://pan.baidu.com/s/1fsd1LMiZ6kpQui0zpTiMIg" target="_blank" rel="noopener">https://pan.baidu.com/s/1fsd1LMiZ6kpQui0zpTiMIg</a></p>
 
           
         
@@ -701,7 +445,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://pibigstar.com/2019/09/29/自建gitlab仓库/">
+    <link itemprop="mainEntityOfPage" href="http://pibigstar.com/2019/07/16/自建gitlab仓库/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="派大星">
@@ -720,7 +464,7 @@
         
           <h2 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2019/09/29/自建gitlab仓库/" itemprop="url">Untitled</a></h2>
+                <a class="post-title-link" href="/2019/07/16/自建gitlab仓库/" itemprop="url">自建gitlab仓库</a></h2>
         
 
         <div class="post-meta">
@@ -732,8 +476,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-09-29T22:56:41+08:00">
-                2019-09-29
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-07-16T03:03:04+08:00">
+                2019-07-16
               </time>
             
 
@@ -742,6 +486,28 @@
             
           </span>
 
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/工具使用/" itemprop="url" rel="index">
+                    <span itemprop="name">工具使用</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
           
 
           
@@ -772,8 +538,7 @@
       
         
           
-            <p>title: 自建gitlab仓库<br>date: 2019-01-01 22:10:31<br>tags: [gitlab]<br>categories: 工具使用</p>
-<h1 id="1-关闭防火墙"><a href="#1-关闭防火墙" class="headerlink" title="1. 关闭防火墙"></a>1. 关闭防火墙</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 关闭防火墙</span></span><br><span class="line">systemctl stop firewalld</span><br><span class="line"></span><br><span class="line"><span class="comment"># 阻止防火墙开机自启</span></span><br><span class="line">systemctl <span class="built_in">disable</span> firewalld</span><br></pre></td></tr></table></figure>
+            <h1 id="1-关闭防火墙"><a href="#1-关闭防火墙" class="headerlink" title="1. 关闭防火墙"></a>1. 关闭防火墙</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 关闭防火墙</span></span><br><span class="line">systemctl stop firewalld</span><br><span class="line"></span><br><span class="line"><span class="comment"># 阻止防火墙开机自启</span></span><br><span class="line">systemctl <span class="built_in">disable</span> firewalld</span><br></pre></td></tr></table></figure>
 
 <h1 id="2-安装sshd"><a href="#2-安装sshd" class="headerlink" title="2. 安装sshd"></a>2. 安装sshd</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sudo yum install -y curl policycoreutils-python openssh-server</span><br><span class="line">sudo systemctl <span class="built_in">enable</span> sshd</span><br><span class="line">sudo systemctl start sshd</span><br></pre></td></tr></table></figure>
 
@@ -874,7 +639,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://pibigstar.com/2019/09/29/配置Struts2+Hibernate/">
+    <link itemprop="mainEntityOfPage" href="http://pibigstar.com/2019/07/16/SpringBoot使用异步任务/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="派大星">
@@ -893,7 +658,7 @@
         
           <h2 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2019/09/29/配置Struts2+Hibernate/" itemprop="url">Untitled</a></h2>
+                <a class="post-title-link" href="/2019/07/16/SpringBoot使用异步任务/" itemprop="url">SpringBoot使用异步任务</a></h2>
         
 
         <div class="post-meta">
@@ -905,8 +670,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-09-29T22:56:41+08:00">
-                2019-09-29
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-07-16T03:03:04+08:00">
+                2019-07-16
               </time>
             
 
@@ -915,6 +680,28 @@
             
           </span>
 
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Java-springboot-SpringBoot技能大全/" itemprop="url" rel="index">
+                    <span itemprop="name">Java,springboot,SpringBoot技能大全</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
           
 
           
@@ -945,147 +732,18 @@
       
         
           
-            <p>title: 配置Struts2+Hibernate<br>date: 2018-10-12 22:10:31<br>tags: [struts,hibernate]<br>categories: Java,框架学习使用</p>
+            <h1 id="1-开启异步任务"><a href="#1-开启异步任务" class="headerlink" title="1. 开启异步任务"></a>1. 开启异步任务</h1><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.pibigstar;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> org.springframework.boot.SpringApplication;</span><br><span class="line"><span class="keyword">import</span> org.springframework.boot.autoconfigure.SpringBootApplication;</span><br><span class="line"><span class="keyword">import</span> org.springframework.scheduling.annotation.EnableAsync;</span><br><span class="line"></span><br><span class="line"><span class="meta">@SpringBootApplication</span></span><br><span class="line"><span class="meta">@EnableAsync</span> <span class="comment">//开启异步任务</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SpringbootDemoApplication</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">		SpringApplication.run(SpringbootDemoApplication.class, args);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-          
-        
-      
-    </div>
-    
-    
-    
+<h1 id="2-编写异步任务"><a href="#2-编写异步任务" class="headerlink" title="2. 编写异步任务"></a>2. 编写异步任务</h1><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">package</span> com.pibigstar.task;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.util.concurrent.Future;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> org.springframework.scheduling.annotation.Async;</span><br><span class="line"><span class="keyword">import</span> org.springframework.scheduling.annotation.AsyncResult;</span><br><span class="line"><span class="keyword">import</span> org.springframework.stereotype.Component;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Component</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">AsyncTask</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">	<span class="meta">@Async</span> <span class="comment">//异步方法注解</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> Future&lt;Boolean&gt; <span class="title">task1</span><span class="params">()</span> <span class="keyword">throws</span> InterruptedException </span>&#123;</span><br><span class="line">		<span class="keyword">long</span> start = System.currentTimeMillis();</span><br><span class="line">		Thread.sleep(<span class="number">1000</span>);</span><br><span class="line">		<span class="keyword">long</span> end = System.currentTimeMillis();</span><br><span class="line">		System.out.println(<span class="string">"=====任务1 耗时："</span>+(end-start)+<span class="string">"======"</span>);</span><br><span class="line">		<span class="comment">//返回true，告诉此任务已完成</span></span><br><span class="line">		<span class="keyword">return</span> <span class="keyword">new</span> AsyncResult&lt;Boolean&gt;(<span class="keyword">true</span>);</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	<span class="meta">@Async</span> <span class="comment">//异步方法注解</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> Future&lt;Boolean&gt; <span class="title">task2</span><span class="params">()</span> <span class="keyword">throws</span> InterruptedException </span>&#123;</span><br><span class="line">		<span class="keyword">long</span> start = System.currentTimeMillis();</span><br><span class="line">		Thread.sleep(<span class="number">800</span>);</span><br><span class="line">		<span class="keyword">long</span> end = System.currentTimeMillis();</span><br><span class="line">		System.out.println(<span class="string">"=====任务2 耗时："</span>+(end-start)+<span class="string">"======"</span>);</span><br><span class="line">		<span class="comment">//返回true，告诉此任务已完成</span></span><br><span class="line">		<span class="keyword">return</span> <span class="keyword">new</span> AsyncResult&lt;Boolean&gt;(<span class="keyword">true</span>);</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	<span class="meta">@Async</span> <span class="comment">//异步方法注解</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> Future&lt;Boolean&gt; <span class="title">task3</span><span class="params">()</span> <span class="keyword">throws</span> InterruptedException </span>&#123;</span><br><span class="line">		<span class="keyword">long</span> start = System.currentTimeMillis();</span><br><span class="line">		Thread.sleep(<span class="number">600</span>);</span><br><span class="line">		<span class="keyword">long</span> end = System.currentTimeMillis();</span><br><span class="line">		System.out.println(<span class="string">"=====任务3 耗时："</span>+(end-start)+<span class="string">"======"</span>);</span><br><span class="line">		<span class="comment">//返回true，告诉此任务已完成</span></span><br><span class="line">		<span class="keyword">return</span> <span class="keyword">new</span> AsyncResult&lt;Boolean&gt;(<span class="keyword">true</span>);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-    <div>
-      
-    </div>
+<h1 id="3-启动异步任务"><a href="#3-启动异步任务" class="headerlink" title="3. 启动异步任务"></a>3. 启动异步任务</h1><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.pibigstar.web;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.util.concurrent.Future;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> org.springframework.beans.factory.annotation.Autowired;</span><br><span class="line"><span class="keyword">import</span> org.springframework.web.bind.annotation.GetMapping;</span><br><span class="line"><span class="keyword">import</span> org.springframework.web.bind.annotation.RequestMapping;</span><br><span class="line"><span class="keyword">import</span> org.springframework.web.bind.annotation.RestController;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> com.pibigstar.task.AsyncTask;</span><br><span class="line"></span><br><span class="line"><span class="meta">@RestController</span></span><br><span class="line"><span class="meta">@RequestMapping</span>(<span class="string">"/task"</span>)</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">AsyncTaskController</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">	<span class="meta">@Autowired</span></span><br><span class="line">	<span class="keyword">private</span> AsyncTask asyncTask;</span><br><span class="line">	</span><br><span class="line">	<span class="meta">@GetMapping</span>(<span class="string">"test"</span>)</span><br><span class="line">	<span class="function"><span class="keyword">public</span> String <span class="title">test</span><span class="params">()</span> <span class="keyword">throws</span> InterruptedException </span>&#123;</span><br><span class="line">		<span class="keyword">long</span> start = System.currentTimeMillis();</span><br><span class="line">		Future&lt;Boolean&gt; a = asyncTask.task1();</span><br><span class="line">		Future&lt;Boolean&gt; b = asyncTask.task2();</span><br><span class="line">		Future&lt;Boolean&gt; c = asyncTask.task3();</span><br><span class="line">		</span><br><span class="line">		<span class="comment">//循环到三个任务全部完成</span></span><br><span class="line">		<span class="keyword">while</span> (!a.isDone()||!b.isDone()||!c.isDone()) &#123;</span><br><span class="line">			<span class="keyword">if</span> (a.isDone()&amp;&amp;b.isDone()&amp;&amp;c.isDone()) &#123;</span><br><span class="line">				<span class="keyword">break</span>;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">long</span> end = System.currentTimeMillis();</span><br><span class="line">		String result = <span class="string">"任务完成，一共用时为："</span>+(end-start)+<span class="string">"毫秒"</span>;</span><br><span class="line">		System.out.println(result);</span><br><span class="line">		<span class="keyword">return</span> result;	</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://pibigstar.com/2019/09/29/微信小程序部署踩坑/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="派大星">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/qq.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="派大星的博客">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/09/29/微信小程序部署踩坑/" itemprop="url">Untitled</a></h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-09-29T22:56:41+08:00">
-                2019-09-29
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>title: 微信小程序部署踩坑<br>date: 2019-03-21 22:10:31<br>tags: [微信小程序]<br>categories: 微信小程序</p>
-<h1 id="1-配置request合法域名"><a href="#1-配置request合法域名" class="headerlink" title="1. 配置request合法域名"></a>1. 配置request合法域名</h1><p><img src="https://img-blog.csdnimg.cn/20190504153046895.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2p1bm1veGk=,size_16,color_FFFFFF,t_70" alt="、"><br><strong>注意</strong></p>
-<ul>
-<li>必须是https</li>
-<li>域名已经备案了</li>
-</ul>
-<h1 id="2-申请证书"><a href="#2-申请证书" class="headerlink" title="2. 申请证书"></a>2. 申请证书</h1><p>去腾讯云免费申请一年证书：<a href="https://console.qcloud.com/ssl" target="_blank" rel="noopener">https://console.qcloud.com/ssl</a></p>
-<h1 id="3-下载证书"><a href="#3-下载证书" class="headerlink" title="3. 下载证书"></a>3. 下载证书</h1><p><img src="https://img-blog.csdnimg.cn/20190504153316867.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2p1bm1veGk=,size_16,color_FFFFFF,t_70" alt></p>
-<h1 id="4-制作完整证书"><a href="#4-制作完整证书" class="headerlink" title="4. 制作完整证书"></a>4. 制作完整证书</h1><p>进入这个网址：<a href="https://www.myssl.cn/tools/merge-pem-cert.html" target="_blank" rel="noopener">https://www.myssl.cn/tools/merge-pem-cert.html</a><br><img src="https://img-blog.csdnimg.cn/20190504153502427.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2p1bm1veGk=,size_16,color_FFFFFF,t_70" alt><br>勾选这两个，将Apache下的 2_todo.pibigstar.com.crt 放到 第一个文本域里面，3_todo.pibigstar.com.key放到 第二个文本域里面（你勾选之后，文本域就会出来了）</p>
-<h1 id="5-将生成好的PEM文件放到合适位置"><a href="#5-将生成好的PEM文件放到合适位置" class="headerlink" title="5. 将生成好的PEM文件放到合适位置"></a>5. 将生成好的PEM文件放到合适位置</h1><p><img src="https://img-blog.csdnimg.cn/2019050415370760.png" alt></p>
-<h1 id="6-问题说明"><a href="#6-问题说明" class="headerlink" title="6. 问题说明"></a>6. 问题说明</h1><h4 id="1-对应的服务器证书无效。控制台输入-showRequestInfo-可以获取更详细信息。"><a href="#1-对应的服务器证书无效。控制台输入-showRequestInfo-可以获取更详细信息。" class="headerlink" title="1. 对应的服务器证书无效。控制台输入 showRequestInfo() 可以获取更详细信息。"></a>1. 对应的服务器证书无效。控制台输入 showRequestInfo() 可以获取更详细信息。</h4><blockquote>
-<p>这个问题，是证书没有配置好，或没配置证书</p>
+<h1 id="4-运行结果"><a href="#4-运行结果" class="headerlink" title="4. 运行结果"></a>4. 运行结果</h1><p><img src="https://img-blog.csdn.net/20180614165640575?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2p1bm1veGk=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt></p>
+<p><img src="https://img-blog.csdn.net/20180614165701312?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2p1bm1veGk=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt></p>
+<blockquote>
+<p>任务1 睡眠了 1000毫秒，任务2 睡眠了800毫秒，任务3 睡眠了600毫秒，如果是同步执行的话三个任务完成应该是2400毫秒，而这里只使用了1005毫秒，说明我们的任务执行确实是异步执行</p>
 </blockquote>
-<h4 id="2-request-failed-ssl-hand-shake-error"><a href="#2-request-failed-ssl-hand-shake-error" class="headerlink" title="2. request failed:ssl hand shake error"></a>2. request failed:ssl hand shake error</h4><blockquote>
-<p>1、先检测网站证书是否正常，检测地址：<a href="https://www.myssl.cn/tools/check-server-cert.html" target="_blank" rel="noopener">https://www.myssl.cn/tools/check-server-cert.html</a><br>我检测完成，提示缺少中间证书，然后用根证书生成中间证书<br>2、用crt根证书生成中间证书，生成地址：<a href="https://www.myssl.cn/tools/downloadchain.html" target="_blank" rel="noopener">https://www.myssl.cn/tools/downloadchain.html</a><br>3、将根证书和中间证书进行拼接：cat root.crt chain.crt&gt;server.crt  (root为原本根证书，chain.crt是新生成的中间证书)<br>4、将合并好的server.crt上传至服务器，覆盖原本的根证书，重启nginx，OK～</p>
-</blockquote>
-<p><strong>注意</strong><br>经测试，GoFrame需要的pem文件，而不是这个server.crt，如果用这个，会直接报错。</p>
+<h1 id="5-异步执行使用场景"><a href="#5-异步执行使用场景" class="headerlink" title="5. 异步执行使用场景"></a>5. 异步执行使用场景</h1><p><img src="https://img-blog.csdn.net/20180614165950488?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2p1bm1veGk=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt></p>
 
           
         
@@ -1138,7 +796,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://pibigstar.com/2019/09/29/Java基础之—反射/">
+    <link itemprop="mainEntityOfPage" href="http://pibigstar.com/2019/07/06/SpringBoot使用JSR303做参数校验/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="派大星">
@@ -1157,7 +815,7 @@
         
           <h2 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2019/09/29/Java基础之—反射/" itemprop="url">Untitled</a></h2>
+                <a class="post-title-link" href="/2019/07/06/SpringBoot使用JSR303做参数校验/" itemprop="url">SpringBoot使用JSR303做参数校验</a></h2>
         
 
         <div class="post-meta">
@@ -1169,8 +827,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-09-29T22:56:41+08:00">
-                2019-09-29
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-07-06T07:07:04+08:00">
+                2019-07-06
               </time>
             
 
@@ -1179,6 +837,28 @@
             
           </span>
 
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/springboot/" itemprop="url" rel="index">
+                    <span itemprop="name">springboot</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
           
 
           
@@ -1209,7 +889,19 @@
       
         
           
-            <p>title: Java基础之—反射<br>date: 2018-06-06 22:10:31<br>tags: [java,反射]<br>categories: Java</p>
+            <h1 id="1-实体"><a href="#1-实体" class="headerlink" title="1. 实体"></a>1. 实体</h1><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">User</span> </span>&#123;</span><br><span class="line">	<span class="meta">@NotNull</span></span><br><span class="line">	<span class="keyword">private</span> Integer id;</span><br><span class="line">	</span><br><span class="line">	<span class="meta">@NotNull</span></span><br><span class="line">	<span class="keyword">private</span> String name;</span><br><span class="line"></span><br><span class="line">	<span class="meta">@NotNull</span></span><br><span class="line">	<span class="meta">@Length</span>(min=<span class="number">6</span>)</span><br><span class="line">	<span class="keyword">private</span> String password;</span><br><span class="line">	</span><br><span class="line">	<span class="meta">@NotNull</span></span><br><span class="line">	<span class="meta">@IsPhone</span> <span class="comment">//自定义的校验</span></span><br><span class="line">	<span class="keyword">private</span> String phone;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>#2. Controller中使用</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@PostMapping</span>(value=<span class="string">"login"</span>)</span><br><span class="line"><span class="function"><span class="keyword">public</span> String <span class="title">login</span><span class="params">(@Valid User user)</span> </span>&#123;</span><br><span class="line">	</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="3-自定义校验"><a href="#3-自定义校验" class="headerlink" title="3. 自定义校验"></a>3. 自定义校验</h1><p>注解<code>IsPhone</code> 判断是否为手机号 </p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.pibigstar.springboot.validator;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> <span class="keyword">static</span> java.lang.annotation.ElementType.ANNOTATION_TYPE;</span><br><span class="line"><span class="keyword">import</span> <span class="keyword">static</span> java.lang.annotation.ElementType.CONSTRUCTOR;</span><br><span class="line"><span class="keyword">import</span> <span class="keyword">static</span> java.lang.annotation.ElementType.FIELD;</span><br><span class="line"><span class="keyword">import</span> <span class="keyword">static</span> java.lang.annotation.ElementType.METHOD;</span><br><span class="line"><span class="keyword">import</span> <span class="keyword">static</span> java.lang.annotation.ElementType.PARAMETER;</span><br><span class="line"><span class="keyword">import</span> <span class="keyword">static</span> java.lang.annotation.ElementType.TYPE_USE;</span><br><span class="line"><span class="keyword">import</span> <span class="keyword">static</span> java.lang.annotation.RetentionPolicy.RUNTIME;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.lang.annotation.Documented;</span><br><span class="line"><span class="keyword">import</span> java.lang.annotation.Repeatable;</span><br><span class="line"><span class="keyword">import</span> java.lang.annotation.Retention;</span><br><span class="line"><span class="keyword">import</span> java.lang.annotation.Target;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> javax.validation.Constraint;</span><br><span class="line"><span class="keyword">import</span> javax.validation.Payload;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Target</span>(&#123; METHOD, FIELD, ANNOTATION_TYPE, CONSTRUCTOR, PARAMETER, TYPE_USE &#125;)</span><br><span class="line"><span class="meta">@Retention</span>(RUNTIME)</span><br><span class="line"><span class="meta">@Documented</span></span><br><span class="line"><span class="meta">@Constraint</span>(validatedBy = &#123;PhoneValidator.class&#125;)</span><br><span class="line"><span class="keyword">public</span> <span class="meta">@interface</span> IsPhone &#123;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">boolean</span> <span class="title">required</span><span class="params">()</span> <span class="keyword">default</span> <span class="keyword">true</span></span>;</span><br><span class="line">	</span><br><span class="line">	<span class="function">String <span class="title">message</span><span class="params">()</span> <span class="keyword">default</span> "手机号不合法"</span>; <span class="comment">//错误默认提示信息</span></span><br><span class="line"></span><br><span class="line">	Class&lt;?&gt;[] groups() <span class="keyword">default</span> &#123; &#125;;</span><br><span class="line"></span><br><span class="line">	Class&lt;? extends Payload&gt;[] payload() <span class="keyword">default</span> &#123; &#125;;</span><br><span class="line">	</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="4-实现具体校验类"><a href="#4-实现具体校验类" class="headerlink" title="4. 实现具体校验类"></a>4. 实现具体校验类</h1><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.pibigstar.springboot.validator;</span><br><span class="line"><span class="keyword">import</span> java.util.regex.Matcher;</span><br><span class="line"><span class="keyword">import</span> java.util.regex.Pattern;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> javax.validation.ConstraintValidator;</span><br><span class="line"><span class="keyword">import</span> javax.validation.ConstraintValidatorContext;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 手机号码验证者</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> pibigstar</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">PhoneValidator</span> <span class="keyword">implements</span> <span class="title">ConstraintValidator</span>&lt;<span class="title">IsPhone</span>,<span class="title">String</span>&gt;</span>&#123;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">private</span> <span class="keyword">boolean</span> requeired;</span><br><span class="line">	<span class="meta">@Override</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">initialize</span><span class="params">(IsPhone constraintAnnotation)</span> </span>&#123;</span><br><span class="line">		requeired = constraintAnnotation.required();</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">	<span class="meta">@Override</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">isValid</span><span class="params">(String value, ConstraintValidatorContext context)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">if</span> (requeired) &#123;</span><br><span class="line">			<span class="keyword">return</span> isPhone(value);</span><br><span class="line">		&#125;<span class="keyword">else</span> &#123;</span><br><span class="line">			<span class="comment">//phone 不是必须</span></span><br><span class="line">			<span class="keyword">if</span> (value==<span class="keyword">null</span>||value.length()==<span class="number">0</span>) &#123;</span><br><span class="line">				<span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">			&#125;<span class="keyword">else</span> &#123;</span><br><span class="line">				<span class="keyword">return</span> isPhone(value);</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	<span class="function"><span class="keyword">private</span> <span class="keyword">boolean</span> <span class="title">isPhone</span><span class="params">(String phone)</span> </span>&#123;</span><br><span class="line">		<span class="comment">//以1开头，后面跟10个整数，一共11位</span></span><br><span class="line">		Pattern phonePattern = Pattern.compile(<span class="string">"1\\d&#123;10&#125;"</span>);</span><br><span class="line">		<span class="keyword">if</span> (phone==<span class="keyword">null</span>||phone.length()&lt;=<span class="number">0</span>) &#123;</span><br><span class="line">			<span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">		&#125;<span class="keyword">else</span> &#123;</span><br><span class="line">			Matcher matcher = phonePattern.matcher(phone);</span><br><span class="line">			<span class="keyword">return</span> matcher.matches();</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="5-对参数不通过进行统一捕获"><a href="#5-对参数不通过进行统一捕获" class="headerlink" title="5. 对参数不通过进行统一捕获"></a>5. 对参数不通过进行统一捕获</h1><p>参数验证不通过后统一格式返回给前端页面</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.pibigstar.springboot.exception;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.util.List;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> javax.servlet.http.HttpServletRequest;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> org.springframework.validation.BindException;</span><br><span class="line"><span class="keyword">import</span> org.springframework.validation.ObjectError;</span><br><span class="line"><span class="keyword">import</span> org.springframework.web.bind.annotation.ControllerAdvice;</span><br><span class="line"><span class="keyword">import</span> org.springframework.web.bind.annotation.ExceptionHandler;</span><br><span class="line"><span class="keyword">import</span> org.springframework.web.bind.annotation.ResponseBody;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> com.pibigstar.springboot.domain.result.MyResponse;</span><br><span class="line"></span><br><span class="line"><span class="meta">@ControllerAdvice</span></span><br><span class="line"><span class="meta">@ResponseBody</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">GlobalExceptionHandler</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">	<span class="meta">@ExceptionHandler</span>(value=Exception.class)</span><br><span class="line">	<span class="function"><span class="keyword">public</span> MyResponse <span class="title">exceptionHandler</span><span class="params">(HttpServletRequest request,Exception e)</span> </span>&#123;</span><br><span class="line">		<span class="comment">//参数校验异常</span></span><br><span class="line">		<span class="keyword">if</span> (e <span class="keyword">instanceof</span> BindException) &#123;</span><br><span class="line">			BindException exception = (BindException) e;</span><br><span class="line">			List&lt;ObjectError&gt; allErrors = exception.getAllErrors();</span><br><span class="line">			ObjectError objectError = allErrors.get(<span class="number">0</span>);</span><br><span class="line">			String defaultMessage = objectError.getDefaultMessage();</span><br><span class="line">			<span class="keyword">return</span> MyResponse.error(defaultMessage);</span><br><span class="line">		&#125;<span class="keyword">else</span> &#123;</span><br><span class="line">			<span class="comment">//其他异常</span></span><br><span class="line">			<span class="keyword">return</span> MyResponse.error(e);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
 
           
         
@@ -1262,7 +954,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://pibigstar.com/2019/09/29/微信小程序使用npm安装第三方库/">
+    <link itemprop="mainEntityOfPage" href="http://pibigstar.com/2019/07/03/SpringBoot使用RabbitMQ发送消息队列/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="派大星">
@@ -1281,7 +973,7 @@
         
           <h2 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2019/09/29/微信小程序使用npm安装第三方库/" itemprop="url">Untitled</a></h2>
+                <a class="post-title-link" href="/2019/07/03/SpringBoot使用RabbitMQ发送消息队列/" itemprop="url">SpringBoot使用RabbitMQ发送消息队列</a></h2>
         
 
         <div class="post-meta">
@@ -1293,8 +985,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-09-29T22:56:41+08:00">
-                2019-09-29
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-07-03T08:08:04+08:00">
+                2019-07-03
               </time>
             
 
@@ -1303,6 +995,28 @@
             
           </span>
 
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/springboot-SpringBoot技能大全/" itemprop="url" rel="index">
+                    <span itemprop="name">springboot,SpringBoot技能大全</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
           
 
           
@@ -1333,8 +1047,480 @@
       
         
           
-            <p>title: 微信小程序使用npm安装第三方库<br>date: 2019-04-28 22:10:31<br>tags: [vant,npm,微信小程序]<br>categories: 微信小程序</p>
-<p>我们以安装有赞的 <code>vant</code>库做例子</p>
+            <h2 id="准备"><a href="#准备" class="headerlink" title="准备"></a>准备</h2><p>因为RabbitMQ使用erlang语言写的，所以要先安装erlang语言，貌似国内访问很慢，这里放一个下载好的，版本erlang：10.2，rabbitMq：3.7.9</p>
+<p>下载：<a href="https://pan.baidu.com/s/1k0w23XJYTp_0gTaMb5bXRg" target="_blank" rel="noopener">https://pan.baidu.com/s/1k0w23XJYTp_0gTaMb5bXRg</a><br>提取码：aeiz </p>
+<p>启动（两种方式）：</p>
+<ol>
+<li>直接双击rabbitmq_server-3.7.9/sbin/rabbitmq-service.bat</li>
+<li>在cmd中启动</li>
+</ol>
+<p>建议在cmd中启动，直接双击的话关闭只能到任务管理器中关</p>
+<h2 id="1-添加依赖"><a href="#1-添加依赖" class="headerlink" title="1. 添加依赖"></a>1. 添加依赖</h2><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">     <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">     <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-starter-amqp<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line"> <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="2-添加配置"><a href="#2-添加配置" class="headerlink" title="2. 添加配置"></a>2. 添加配置</h2><figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">spring:</span></span><br><span class="line"><span class="attr">  rabbitmq:</span></span><br><span class="line"><span class="attr">    host:</span> <span class="number">127.0</span><span class="number">.0</span><span class="number">.1</span></span><br><span class="line"><span class="attr">    port:</span> <span class="number">5672</span></span><br><span class="line"><span class="attr">    username:</span> <span class="string">guest</span></span><br><span class="line"><span class="attr">    password:</span> <span class="string">guest</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="3-direct模式"><a href="#3-direct模式" class="headerlink" title="3. direct模式"></a>3. direct模式</h2><p>这种是点对点模式，一个发送一个接收</p>
+<h4 id="3-1-配置类"><a href="#3-1-配置类" class="headerlink" title="3.1 配置类"></a>3.1 配置类</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> org.springframework.amqp.core.Queue;</span><br><span class="line"><span class="keyword">import</span> org.springframework.context.annotation.Bean;</span><br><span class="line"><span class="keyword">import</span> org.springframework.context.annotation.Configuration;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> pibigstar</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@create</span> 2018-12-17 10:57</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@desc</span> direct模式，点对点，一个发送一个接收</span></span><br><span class="line"><span class="comment"> **/</span></span><br><span class="line"><span class="meta">@Configuration</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">QueueRabbitConfig</span> </span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> String QUEUE_NAME = <span class="string">"pibigstar"</span>;</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 定义一个名为：pibigstar 的队列</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="meta">@Bean</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> Queue <span class="title">pibigstarQueue</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> Queue(QUEUE_NAME);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="3-2-消费者"><a href="#3-2-消费者" class="headerlink" title="3.2 消费者"></a>3.2 消费者</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> com.pibgstar.demo.amqp.config.QueueRabbitConfig;</span><br><span class="line"><span class="keyword">import</span> org.springframework.amqp.rabbit.annotation.RabbitHandler;</span><br><span class="line"><span class="keyword">import</span> org.springframework.amqp.rabbit.annotation.RabbitListener;</span><br><span class="line"><span class="keyword">import</span> org.springframework.stereotype.Component;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.util.logging.Logger;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> pibigstar</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@create</span> 2018-12-17 11:00</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@desc</span> direct模式消费者</span></span><br><span class="line"><span class="comment"> **/</span></span><br><span class="line"><span class="meta">@Component</span></span><br><span class="line"><span class="comment">// 监听pibigstar队列</span></span><br><span class="line"><span class="meta">@RabbitListener</span>(queues = QueueRabbitConfig.QUEUE_NAME)</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">QueueConsumer</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> Logger logger = Logger.getLogger(<span class="string">"QueueConsumer"</span>);</span><br><span class="line">    <span class="meta">@RabbitHandler</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">process</span><span class="params">(String message)</span> </span>&#123;</span><br><span class="line">        logger.info(<span class="string">"接受到的消息："</span>+message);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="3-3-发送者"><a href="#3-3-发送者" class="headerlink" title="3.3 发送者"></a>3.3 发送者</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> pibigstar</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@create</span> 2018-12-17 11:04</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@desc</span> 消息发送者</span></span><br><span class="line"><span class="comment"> **/</span></span><br><span class="line"><span class="meta">@Component</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Sender</span> </span>&#123;</span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    <span class="keyword">private</span> AmqpTemplate rabbitTemplate;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 点对点发送</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">sendMessage</span><span class="params">(String message)</span> </span>&#123;</span><br><span class="line">        rabbitTemplate.convertAndSend(QueueRabbitConfig.QUEUE_NAME,message);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="4-Topic模式"><a href="#4-Topic模式" class="headerlink" title="4. Topic模式"></a>4. Topic模式</h2><p>这种是订阅/发布模式，一个发送多个接收</p>
+<h4 id="4-1-配置类"><a href="#4-1-配置类" class="headerlink" title="4.1 配置类"></a>4.1 配置类</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> org.springframework.amqp.core.Binding;</span><br><span class="line"><span class="keyword">import</span> org.springframework.amqp.core.BindingBuilder;</span><br><span class="line"><span class="keyword">import</span> org.springframework.amqp.core.Queue;</span><br><span class="line"><span class="keyword">import</span> org.springframework.amqp.core.TopicExchange;</span><br><span class="line"><span class="keyword">import</span> org.springframework.context.annotation.Bean;</span><br><span class="line"><span class="keyword">import</span> org.springframework.context.annotation.Configuration;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> pibigstar</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@create</span> 2018-12-17 11:18</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@desc</span> topic模式，订阅/发布模式，一个发送多个接收</span></span><br><span class="line"><span class="comment"> **/</span></span><br><span class="line"><span class="meta">@Configuration</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TopicRabbitConfig</span> </span>&#123;</span><br><span class="line">    <span class="comment">// 队列1</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">final</span> <span class="keyword">static</span> String ONE = <span class="string">"topic.one"</span>;</span><br><span class="line">    <span class="comment">// 队列2</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">final</span> <span class="keyword">static</span> String TWO = <span class="string">"topic.two"</span>;</span><br><span class="line">    <span class="comment">// 所有队列</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">final</span> <span class="keyword">static</span> String ALL = <span class="string">"topic.#"</span>;</span><br><span class="line">    <span class="comment">// 转发器</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">final</span> <span class="keyword">static</span> String EXCHANGE = <span class="string">"topic.exchange"</span>;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Bean</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> Queue <span class="title">queueOne</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> Queue(TopicRabbitConfig.ONE);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Bean</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> Queue <span class="title">queueTwo</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> Queue(TopicRabbitConfig.TWO);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Bean</span></span><br><span class="line">    <span class="function">TopicExchange <span class="title">exchange</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> TopicExchange(EXCHANGE);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 绑定队列one到转发器上</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="meta">@Bean</span></span><br><span class="line">    <span class="function">Binding <span class="title">bindingExchangeMessage</span><span class="params">(Queue queueOne, TopicExchange exchange)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> BindingBuilder.bind(queueOne).to(exchange).with(ONE);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 绑定所有队列（one和two）到转发器上</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="meta">@Bean</span></span><br><span class="line">    <span class="function">Binding <span class="title">bindingExchangeMessages</span><span class="params">(Queue queueTwo, TopicExchange exchange)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> BindingBuilder.bind(queueTwo).to(exchange).with(ALL);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="4-2-消费者"><a href="#4-2-消费者" class="headerlink" title="4.2 消费者"></a>4.2 消费者</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> com.pibgstar.demo.amqp.config.TopicRabbitConfig;</span><br><span class="line"><span class="keyword">import</span> org.springframework.amqp.rabbit.annotation.RabbitListener;</span><br><span class="line"><span class="keyword">import</span> org.springframework.stereotype.Component;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.util.logging.Logger;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> pibigstar</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@create</span> 2018-12-17 11:29</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@desc</span> topic模式消费者</span></span><br><span class="line"><span class="comment"> **/</span></span><br><span class="line"><span class="meta">@Component</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TopicConsumer</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> Logger logger = Logger.getLogger(<span class="string">"TopicConsumer"</span>);</span><br><span class="line"></span><br><span class="line">    <span class="meta">@RabbitListener</span>(queues = TopicRabbitConfig.ONE)</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">receiveOne</span><span class="params">(String message)</span></span>&#123;</span><br><span class="line">        logger.info(<span class="string">"one接受到的消息："</span>+message);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@RabbitListener</span>(queues = TopicRabbitConfig.TWO)</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">receiveTwo</span><span class="params">(String message)</span></span>&#123;</span><br><span class="line">        logger.info(<span class="string">"two接受到的消息："</span>+message);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="4-3-发送者"><a href="#4-3-发送者" class="headerlink" title="4.3 发送者"></a>4.3 发送者</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> com.pibgstar.demo.amqp.config.QueueRabbitConfig;</span><br><span class="line"><span class="keyword">import</span> com.pibgstar.demo.amqp.config.TopicRabbitConfig;</span><br><span class="line"><span class="keyword">import</span> org.springframework.amqp.core.AmqpTemplate;</span><br><span class="line"><span class="keyword">import</span> org.springframework.beans.factory.annotation.Autowired;</span><br><span class="line"><span class="keyword">import</span> org.springframework.stereotype.Component;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> pibigstar</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@create</span> 2018-12-17 11:04</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@desc</span> 消息发送者</span></span><br><span class="line"><span class="comment"> **/</span></span><br><span class="line"><span class="meta">@Component</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Sender</span> </span>&#123;</span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    <span class="keyword">private</span> AmqpTemplate rabbitTemplate;</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 一对多发送</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">sendTopicMessage</span><span class="params">(String message)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// 往队列one中发送信息, receiverOne和receiverTwo都可以收到</span></span><br><span class="line">        rabbitTemplate.convertAndSend(TopicRabbitConfig.EXCHANGE,TopicRabbitConfig.ONE,message);</span><br><span class="line">        <span class="comment">// 往队列two中发送信息，只有receiverTwo收到</span></span><br><span class="line">        rabbitTemplate.convertAndSend(TopicRabbitConfig.EXCHANGE,TopicRabbitConfig.TWO,message);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    <div>
+      
+    </div>
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://pibigstar.com/2019/07/02/Java虚拟机常用命令参数/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="派大星">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/qq.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="派大星的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/07/02/Java虚拟机常用命令参数/" itemprop="url">Java虚拟机常用命令参数</a></h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-07-02T09:09:04+08:00">
+                2019-07-02
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/JVM/" itemprop="url" rel="index">
+                    <span itemprop="name">JVM</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="1-打印某个类的常量池"><a href="#1-打印某个类的常量池" class="headerlink" title="1. 打印某个类的常量池"></a>1. 打印某个类的常量池</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">javap -v Test.class</span><br></pre></td></tr></table></figure>
+
+<h2 id="2-查看类的加载顺序"><a href="#2-查看类的加载顺序" class="headerlink" title="2. 查看类的加载顺序"></a>2. 查看类的加载顺序</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">java -verbose:class Test</span><br></pre></td></tr></table></figure>
+
+<h2 id="3-反编译字节码"><a href="#3-反编译字节码" class="headerlink" title="3. 反编译字节码"></a>3. 反编译字节码</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">javap -v -c Test</span><br></pre></td></tr></table></figure>
+
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    <div>
+      
+    </div>
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://pibigstar.com/2019/07/02/10行代码搞定微信支付(Java版)/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="派大星">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/qq.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="派大星的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/07/02/10行代码搞定微信支付(Java版)/" itemprop="url">10行代码搞定微信支付(Java版)</a></h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-07-02T09:09:04+08:00">
+                2019-07-02
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/工具使用-Java/" itemprop="url" rel="index">
+                    <span itemprop="name">工具使用,Java</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="微信支付痛点"><a href="#微信支付痛点" class="headerlink" title="微信支付痛点"></a>微信支付痛点</h3><p>对于大多数同学来说，要开发微信支付可不简单。<br>附上微信支付官方文档<a href="https://pay.weixin.qq.com/wiki/doc/api/index.html" target="_blank" rel="noopener">https://pay.weixin.qq.com/wiki/doc/api/index.html</a><br>从文档上可以看出，你需要解决很多问题，我就随便挑几个吧。</p>
+<p><strong>xml与对象的互转</strong>: 微信使用<code>xml</code>格式而不使用<code>json</code>通信, 也确实有点奇葩<br><strong>签名</strong>:千万不要以为只是MD5一下，要是你自己开发，我敢说，你60%的时间都耗在签名调试这一块</p>
+<p><img src="https://img-blog.csdn.net/20181016125820589?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2p1bm1veGk=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt><br>以上是微信公众账号支付的时序图，简单概括为2个点。<br>下单，发起支付<br>接收异步通知，修改订单的支付状态</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//微信公众账号支付配置 </span></span><br><span class="line">WxPayH5Config wxPayH5Config = <span class="keyword">new</span> WxPayH5Config();</span><br><span class="line">wxPayH5Config.setAppId(<span class="string">"xxxxx"</span>); </span><br><span class="line">wxPayH5Config.setAppSecret(<span class="string">"xxxxxxxx"</span>); </span><br><span class="line">wxPayH5Config.setMchId(<span class="string">"xxxxxx"</span>); </span><br><span class="line">wxPayH5Config.setMchKey(<span class="string">"xxxxxxx"</span>); </span><br><span class="line">wxPayH5Config.setNotifyUrl(<span class="string">"http://xxxxx"</span>); </span><br><span class="line"></span><br><span class="line"><span class="comment">//支付类, 所有方法都在这个类里 </span></span><br><span class="line">BestPayServiceImpl bestPayService = <span class="keyword">new</span> BestPayServiceImpl(); </span><br><span class="line">bestPayService.setWxPayH5Config(wxPayH5Config); </span><br><span class="line"></span><br><span class="line"><span class="comment">//发起支付 </span></span><br><span class="line">bestPayService.pay(); </span><br><span class="line"></span><br><span class="line"><span class="comment">//异步回调 </span></span><br><span class="line">bestPayService.asyncNotify();</span><br><span class="line">`</span><br></pre></td></tr></table></figure>
+
+<p>下单和修改支付状态是用户的业务系统干的事，我们来说说如何快速发起支付和接收异步通知<br>可能是目前最好的支付SDK<br>这是一款支付SDK，支付账号借用请往下看, best-pay-sdk<br>项目主页 <a href="https://github.com/Pay-Group/best-pay-sdk" target="_blank" rel="noopener">https://github.com/Pay-Group/best-pay-sdk</a><br>有了它你接入支付的代码只需要像上面一样使用方法<br>去掉注释和空行，刚好10行！更多使用，请访问<a href="https://github.com/Pay-Group/best-pay-sdk" target="_blank" rel="noopener">https://github.com/Pay-Group/best-pay-sdk</a></p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    <div>
+      
+    </div>
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://pibigstar.com/2019/07/02/微信小程序使用npm安装第三方库/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="派大星">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/qq.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="派大星的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/07/02/微信小程序使用npm安装第三方库/" itemprop="url">微信小程序使用npm安装第三方库</a></h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-07-02T09:09:04+08:00">
+                2019-07-02
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/微信小程序/" itemprop="url" rel="index">
+                    <span itemprop="name">微信小程序</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>我们以安装有赞的 <code>vant</code>库做例子</p>
 <h2 id="1-初始化"><a href="#1-初始化" class="headerlink" title="1. 初始化"></a>1. 初始化</h2><p>在小程序根目录中（miniprogram）执行</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm init</span><br></pre></td></tr></table></figure>
 
@@ -1407,7 +1593,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://pibigstar.com/2019/09/29/利用scrapy写一个小爬虫/">
+    <link itemprop="mainEntityOfPage" href="http://pibigstar.com/2019/06/26/批处理脚本启动多个应用/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="派大星">
@@ -1426,7 +1612,7 @@
         
           <h2 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2019/09/29/利用scrapy写一个小爬虫/" itemprop="url">Untitled</a></h2>
+                <a class="post-title-link" href="/2019/06/26/批处理脚本启动多个应用/" itemprop="url">批处理脚本启动多个应用</a></h2>
         
 
         <div class="post-meta">
@@ -1438,8 +1624,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-09-29T22:56:40+08:00">
-                2019-09-29
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-06-26T12:12:04+08:00">
+                2019-06-26
               </time>
             
 
@@ -1448,6 +1634,28 @@
             
           </span>
 
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/工具使用/" itemprop="url" rel="index">
+                    <span itemprop="name">工具使用</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
           
 
           
@@ -1478,7 +1686,15 @@
       
         
           
-            <p>title: 利用scrapy写一个小爬虫<br>date: 2018-08-13 22:10:31<br>tags: [爬虫,scrapy,python]<br>categories: 爬虫相关,pyhton</p>
+            <p>将其保存为 SSR.bat 即可</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">@<span class="built_in">echo</span> off</span><br><span class="line">start  /d <span class="string">"D:\SSR\" SSR4.0.exe</span></span><br><span class="line"><span class="string">start /d "</span>D:\SSR\kcptun\" run.vbs</span><br><span class="line"><span class="built_in">echo</span> successfully open the SSR</span><br><span class="line"><span class="built_in">exit</span></span><br></pre></td></tr></table></figure>
+
+<p>如果想让它开机自启，那么将这个脚本放到下面这个位置即可</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">C:\ProgramData\Microsoft\Windows\Start Menu\Programs\StartUp</span><br></pre></td></tr></table></figure>
+
+<p>如果想在cmd中快速启动，那么将这个脚本放到下面这个位置即可：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">C:\Windows</span><br></pre></td></tr></table></figure>
+
 
           
         
@@ -1531,7 +1747,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://pibigstar.com/2019/09/29/利用web.xml配置数据库/">
+    <link itemprop="mainEntityOfPage" href="http://pibigstar.com/2019/06/26/java随笔记/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="派大星">
@@ -1550,7 +1766,7 @@
         
           <h2 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2019/09/29/利用web.xml配置数据库/" itemprop="url">Untitled</a></h2>
+                <a class="post-title-link" href="/2019/06/26/java随笔记/" itemprop="url">java随笔记</a></h2>
         
 
         <div class="post-meta">
@@ -1562,8 +1778,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-09-29T22:56:40+08:00">
-                2019-09-29
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-06-26T12:12:04+08:00">
+                2019-06-26
               </time>
             
 
@@ -1572,6 +1788,28 @@
             
           </span>
 
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Java/" itemprop="url" rel="index">
+                    <span itemprop="name">Java</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
           
 
           
@@ -1602,7 +1840,27 @@
       
         
           
-            <p>title: 利用web.xml配置数据库<br>date: 2019-03-21 22:10:31<br>tags: [web.xml,java,数据库,链接]<br>categories: 编程常犯错误,Java</p>
+            <h2 id="文件写入"><a href="#文件写入" class="headerlink" title="文件写入"></a>文件写入</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">String fileName = <span class="string">"/root/log/test.log"</span>;</span><br><span class="line">Path file = Paths.get(fileName);</span><br><span class="line"><span class="keyword">boolean</span> exists = Files.exists(Paths.get(dir), LinkOption.NOFOLLOW_LINKS);</span><br><span class="line"><span class="keyword">try</span> &#123;</span><br><span class="line">    <span class="keyword">if</span> (!exists) &#123;</span><br><span class="line">        Files.createDirectories(Paths.get(dir));</span><br><span class="line">    &#125;</span><br><span class="line">    List&lt;String&gt; lines = Arrays.asList(msg);</span><br><span class="line">    <span class="comment">// 写文件，CREATE，APPEND打开文件的标志位， 创建或追加</span></span><br><span class="line">    Files.write(file, lines, Charset.forName(<span class="string">"UTF-8"</span>), </span><br><span class="line">			    StandardOpenOption.CREATE,</span><br><span class="line">			    StandardOpenOption.APPEND);</span><br><span class="line">&#125; <span class="keyword">catch</span> (IOException e) &#123;</span><br><span class="line">    LOGGER.info(<span class="string">"IOException"</span>, e);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="NIO方式复制文件"><a href="#NIO方式复制文件" class="headerlink" title="NIO方式复制文件"></a>NIO方式复制文件</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">copyFileByChannel</span><span class="params">(File source, File dest)</span> <span class="keyword">throws</span> IOException </span>&#123;</span><br><span class="line">    <span class="keyword">try</span> (FileChannel sourceChannel = <span class="keyword">new</span> FileInputStream(source).getChannel();</span><br><span class="line">         FileChannel targetChannel = <span class="keyword">new</span> FileOutputStream(dest).getChannel();)&#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">long</span> count = sourceChannel.size() ;count&gt;<span class="number">0</span> ;) &#123;</span><br><span class="line">            <span class="keyword">long</span> transferred = sourceChannel.transferTo(sourceChannel.position(), count, targetChannel);</span><br><span class="line">             sourceChannel.position(sourceChannel.position() + transferred);</span><br><span class="line">            count -= transferred;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="年月日获取"><a href="#年月日获取" class="headerlink" title="年月日获取"></a>年月日获取</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">LocalDate today = LocalDate.now();</span><br><span class="line"><span class="keyword">int</span> year = today.getYear();</span><br><span class="line"><span class="keyword">int</span> month = today.getMonthValue();</span><br><span class="line"><span class="keyword">int</span> day = today.getDayOfMonth();</span><br></pre></td></tr></table></figure>
+
+<h2 id="根据配置文件来决定是否显示Swagger"><a href="#根据配置文件来决定是否显示Swagger" class="headerlink" title="根据配置文件来决定是否显示Swagger"></a>根据配置文件来决定是否显示Swagger</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@ConditionalOnExpression</span>(<span class="string">"'$&#123;swagger.enable&#125;' == 'true'"</span>)</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SwaggerConfig</span> </span>&#123;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="并发集合不存在则加入"><a href="#并发集合不存在则加入" class="headerlink" title="并发集合不存在则加入"></a>并发集合不存在则加入</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span> ConcurrentMap&lt;String, T&gt; singletonInstances = <span class="keyword">new</span> ConcurrentMap&lt;&gt;();</span><br><span class="line"><span class="comment">// 如果不存在此实例则将其放进去</span></span><br><span class="line">singletonInstances.putIfAbsent(name, instance);</span><br></pre></td></tr></table></figure>
+
+<h2 id="判断不为空"><a href="#判断不为空" class="headerlink" title="判断不为空"></a>判断不为空</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 判断对象不为null，如果为null则抛出空指针异常，不为空返回此对象</span></span><br><span class="line">obj = Objects.requireNonNull(obj);</span><br><span class="line"><span class="comment">// 这个是com.google.common.base包中的方法</span></span><br><span class="line">Preconditions.checkNotNull(url);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 检查集合不为null，为空抛出空指针</span></span><br><span class="line">Collections.checkedList(lists)</span><br><span class="line"><span class="comment">// 检查map不为空，key或value为空则抛出空指针</span></span><br><span class="line">Collections.checkedMap(map)</span><br><span class="line"><span class="comment">// 检查Set不为空</span></span><br><span class="line">Collections.checkedSet(set)</span><br></pre></td></tr></table></figure>
+
+<h2 id="检查某个Class对象是否被某注解注解"><a href="#检查某个Class对象是否被某注解注解" class="headerlink" title="检查某个Class对象是否被某注解注解"></a>检查某个Class对象是否被某注解注解</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 判断clazz对象是否有MyAnnotation注解</span></span><br><span class="line">clazz.isAnnotationPresent(MyAnnotation.class);</span><br></pre></td></tr></table></figure>
+
+<h2 id="读取配置文件"><a href="#读取配置文件" class="headerlink" title="读取配置文件"></a>读取配置文件</h2><p>读取类似properties格式的文件</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">Enumeration&lt;URL&gt; urls = classLoader.getResources(“META-INF/extensions/test.info”);</span><br><span class="line"><span class="keyword">if</span>(urls!=<span class="keyword">null</span> &amp;&amp; urls.hasMoreElements())&#123;</span><br><span class="line">	<span class="keyword">while</span>(urls.hasMoreElements())&#123;</span><br><span class="line">		URL url = urls.nextElement();</span><br><span class="line">		BufferedReader br = <span class="keyword">new</span> BufferedReader(<span class="keyword">new</span> InputStreamReader(url.openStream(), <span class="string">"utf-8"</span>));</span><br><span class="line">		String line = <span class="keyword">null</span>;</span><br><span class="line">		<span class="keyword">while</span> ((line=br.readLine())!=<span class="keyword">null</span>)&#123;</span><br><span class="line">          String config = line;</span><br><span class="line">          <span class="comment">//跳过注释</span></span><br><span class="line">          <span class="keyword">if</span>(config.startsWith(<span class="string">"#"</span>))&#123;</span><br><span class="line">               <span class="keyword">continue</span>;</span><br><span class="line">           &#125;</span><br><span class="line">           String key= <span class="keyword">null</span>;</span><br><span class="line">           String value= <span class="keyword">null</span>;</span><br><span class="line">           <span class="keyword">int</span> i = config.indexOf(<span class="string">'='</span>);</span><br><span class="line">           <span class="keyword">if</span> (i &gt; <span class="number">0</span>) &#123;</span><br><span class="line">               key= config.substring(<span class="number">0</span>, i).trim();</span><br><span class="line">               value= config.substring(i + <span class="number">1</span>).trim();</span><br><span class="line">           &#125;</span><br><span class="line">           System.out.Println(<span class="string">"key:"</span>+key+<span class="string">" value:"</span>+value);</span><br><span class="line">       &#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="字符串格式化"><a href="#字符串格式化" class="headerlink" title="字符串格式化"></a>字符串格式化</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">String str = String.format(<span class="string">"%s has already been exported"</span>, name)</span><br></pre></td></tr></table></figure>
+
+<h1 id="Buffer流写操作"><a href="#Buffer流写操作" class="headerlink" title="Buffer流写操作"></a>Buffer流写操作</h1><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 获取字符解码类</span></span><br><span class="line">CharsetEncoder encoder = Charset.forName(<span class="string">"UTF-8"</span>).newEncoder();</span><br><span class="line"><span class="comment">// 将字符串转换为字节Buffer</span></span><br><span class="line">ByteBuffer bytes = encoder.encode(CharBuffer.wrap(<span class="string">"要写入的值"</span>));</span><br><span class="line">BufferedOutputStream bos = <span class="keyword">new</span> BufferedOutputStream(<span class="keyword">new</span> FileOutputStream(<span class="string">"test.txt"</span>));</span><br><span class="line">bos.write(bytes.array(), <span class="number">0</span>, bytes.limit());</span><br></pre></td></tr></table></figure>
+
 
           
         
@@ -1646,7 +1904,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/4/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/4/">4</a><span class="page-number current">5</span><a class="page-number" href="/page/6/">6</a><span class="space">&hellip;</span><a class="page-number" href="/page/24/">24</a><a class="extend next" rel="next" href="/page/6/"><i class="fa fa-angle-right"></i></a>
+    <a class="extend prev" rel="prev" href="/page/4/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/4/">4</a><span class="page-number current">5</span><a class="page-number" href="/page/6/">6</a><span class="space">&hellip;</span><a class="page-number" href="/page/14/">14</a><a class="extend next" rel="next" href="/page/6/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -1694,7 +1952,7 @@
               
                 <a href="/archives">
               
-                  <span class="site-state-item-count">239</span>
+                  <span class="site-state-item-count">137</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -1705,7 +1963,7 @@
               
               <div class="site-state-item site-state-categories">
                 
-                  <span class="site-state-item-count">1</span>
+                  <span class="site-state-item-count">64</span>
                   <span class="site-state-item-name">categories</span>
                 
               </div>
@@ -1716,7 +1974,7 @@
               
               <div class="site-state-item site-state-tags">
                 
-                  <span class="site-state-item-count">3</span>
+                  <span class="site-state-item-count">230</span>
                   <span class="site-state-item-name">tags</span>
                 
               </div>

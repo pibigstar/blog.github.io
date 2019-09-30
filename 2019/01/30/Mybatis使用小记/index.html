@@ -1,0 +1,857 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/32x32.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/16x16.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="springbot,mybatis,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="@[toc] 1. ${} 和 #{}的区别 Mybatis中的#{}用于传递查询的参数，用于从dao层传递一个string参数过来(也可以是其他参数)，select * from 表名 order by age=#{age}   Mybatis会把这个参数转换成一个字符串。select * from 表名 order by age=”age” 相当于jdbc中的预编译，安全。${}一般用于ord">
+<meta name="keywords" content="springbot,mybatis">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Mybatis使用小记">
+<meta property="og:url" content="http://pibigstar.com/2019/01/30/Mybatis使用小记/index.html">
+<meta property="og:site_name" content="派大星的博客">
+<meta property="og:description" content="@[toc] 1. ${} 和 #{}的区别 Mybatis中的#{}用于传递查询的参数，用于从dao层传递一个string参数过来(也可以是其他参数)，select * from 表名 order by age=#{age}   Mybatis会把这个参数转换成一个字符串。select * from 表名 order by age=”age” 相当于jdbc中的预编译，安全。${}一般用于ord">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-09-30T03:12:58.860Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Mybatis使用小记">
+<meta name="twitter:description" content="@[toc] 1. ${} 和 #{}的区别 Mybatis中的#{}用于传递查询的参数，用于从dao层传递一个string参数过来(也可以是其他参数)，select * from 表名 order by age=#{age}   Mybatis会把这个参数转换成一个字符串。select * from 表名 order by age=”age” 相当于jdbc中的预编译，安全。${}一般用于ord">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":true,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://pibigstar.com/2019/01/30/Mybatis使用小记/">
+
+
+
+
+
+  <title>Mybatis使用小记 | 派大星的博客</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">派大星的博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <h1 class="site-subtitle" itemprop="description">很多事情不是会了才能做，而是做了才能学会</h1>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-schedule">
+          <a href="/schedule/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-calendar"></i> <br>
+            
+            Schedule
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-sitemap">
+          <a href="/sitemap.xml" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-sitemap"></i> <br>
+            
+            Sitemap
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            About
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://pibigstar.com/2019/01/30/Mybatis使用小记/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="派大星">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/qq.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="派大星的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">Mybatis使用小记</h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-01-30T12:12:04+08:00">
+                2019-01-30
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/mybatis-SpringBoot技能大全/" itemprop="url" rel="index">
+                    <span itemprop="name">mybatis,SpringBoot技能大全</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>@[toc]</p>
+<h1 id="1-和-的区别"><a href="#1-和-的区别" class="headerlink" title="1. ${} 和 #{}的区别"></a>1. ${} 和 #{}的区别</h1><blockquote>
+<p>Mybatis中的#{}用于传递查询的参数，用于从dao层传递一个string参数过来(也可以是其他参数)，select * from 表名 order by age=#{age}</p>
+</blockquote>
+<blockquote>
+<p>Mybatis会把这个参数转换成一个字符串。select * from 表名 order by age=”age” 相当于jdbc中的预编译，安全。<br>${}一般用于order by的后面，Mybatis不会对这个参数进行任何的处理，直接生成了sql语句。例：传入一个年龄age的参数，select * from 表名 order by ${age}</p>
+</blockquote>
+<p><strong>所以首选使用 #{}</strong></p>
+<p>但是传递参数为一个以上的时候，需要我们用注解去绑定参数<br>通过使用 <code>@Param</code>注解的方式（org.apache.ibatis.annotations.Param）</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Select</span>(<span class="string">"select * from seckill order by create_time desc limit #&#123;offset&#125;,#&#123;limit&#125;"</span>)</span><br><span class="line"><span class="function">List&lt;Seckill&gt; <span class="title">queryAll</span><span class="params">(@Param(<span class="string">"offset"</span>)</span><span class="keyword">int</span> offset,@<span class="title">Param</span><span class="params">(<span class="string">"limit"</span>)</span><span class="keyword">int</span> limit)</span>;</span><br></pre></td></tr></table></figure>
+
+<h1 id="2-传递参数"><a href="#2-传递参数" class="headerlink" title="2. 传递参数"></a>2. 传递参数</h1><h2 id="2-1-第一种"><a href="#2-1-第一种" class="headerlink" title="2.1 第一种"></a>2.1 第一种</h2><p>通过#{0}，#{1} 方式，#{0} 代码第一个参数，#{1} 代码第二个参数</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> Good <span class="title">selectGood</span><span class="params">(String id, String name)</span></span>;</span><br></pre></td></tr></table></figure>
+
+<p>xml</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">select</span> <span class="attr">id</span>=<span class="string">"selectGood"</span> <span class="attr">resultMap</span>=<span class="string">"GoodMap"</span>&gt;</span></span><br><span class="line">	select * from good where id = #&#123;0&#125; and name=#&#123;1&#125;</span><br><span class="line"><span class="tag">&lt;/<span class="name">select</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="2-2-第二种"><a href="#2-2-第二种" class="headerlink" title="2.2 第二种"></a>2.2 第二种</h2><p>通过固定参数的方式<br>java</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> Good <span class="title">selectGood</span><span class="params">(@param(<span class="string">"id"</span>)</span>String id,@<span class="title">param</span><span class="params">(<span class="string">"name"</span>)</span>String name)</span>;</span><br></pre></td></tr></table></figure>
+
+<p>xml</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">select</span> <span class="attr">id</span>=<span class="string">"selectGood"</span> <span class="attr">resultMap</span>=<span class="string">"GoodMap"</span>&gt;</span></span><br><span class="line">	 select * from good where id = #&#123;id&#125; and name=#&#123;name&#125;</span><br><span class="line"><span class="tag">&lt;/<span class="name">select</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="2-3-第三种"><a href="#2-3-第三种" class="headerlink" title="2.3 第三种"></a>2.3 第三种</h2><p>通过Map集合去传递（推荐）<br>java</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> Good <span class="title">selectGood</span><span class="params">()</span></span>&#123;</span><br><span class="line">     Map map = <span class="keyword">new</span> HashMap();</span><br><span class="line">     map.put(<span class="string">"id"</span>,<span class="number">1</span>);</span><br><span class="line">     map.put(<span class="string">"name"</span>,<span class="string">"pibigstar"</span>);</span><br><span class="line">     Good good = goodService.selectGood(map);</span><br><span class="line">     <span class="keyword">return</span> good;</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
+
+<p>xml</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">select</span> <span class="attr">id</span>=<span class="string">"selectGood"</span> <span class="attr">resultMap</span>=<span class="string">"GoodMap"</span>&gt;</span></span><br><span class="line">	 select * from good where id = #&#123;id&#125; and name=#&#123;name&#125;</span><br><span class="line"> <span class="tag">&lt;/<span class="name">select</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h1 id="3-开启驼峰命名规范"><a href="#3-开启驼峰命名规范" class="headerlink" title="3. 开启驼峰命名规范"></a>3. 开启驼峰命名规范</h1><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//在application.properties中设置</span></span><br><span class="line">mybatis.configuration.map-underscore-to-camel-<span class="keyword">case</span>=<span class="keyword">true</span> <span class="comment">//开启驼峰命名</span></span><br></pre></td></tr></table></figure>
+
+<p>如果不设置需要手动在查询的时候设置：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Select</span>(<span class="string">"select * from seckill"</span>)</span><br><span class="line"><span class="meta">@Results</span>(&#123;</span><br><span class="line">	<span class="comment">//如果不开启驼峰命名，就要手动这样设置</span></span><br><span class="line">	<span class="meta">@Result</span>(property=<span class="string">"seckillId"</span>,column=<span class="string">"seckill_id"</span>),</span><br><span class="line">	<span class="meta">@Result</span>(property=<span class="string">"createTime"</span>,column=<span class="string">"create_time"</span>),</span><br><span class="line">	<span class="meta">@Result</span>(property=<span class="string">"startTime"</span>,column=<span class="string">"start_time"</span>),</span><br><span class="line">	<span class="meta">@Result</span>(property=<span class="string">"endTime"</span>,column=<span class="string">"end_time"</span>),</span><br><span class="line">&#125;)</span><br><span class="line"><span class="function">List&lt;Seckill&gt; <span class="title">list</span><span class="params">()</span></span>;</span><br></pre></td></tr></table></figure>
+
+<h1 id="4-设置扫描包路径"><a href="#4-设置扫描包路径" class="headerlink" title="4. 设置扫描包路径"></a>4. 设置扫描包路径</h1><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//application.properties中设置</span></span><br><span class="line">mybatis.type-aliases-<span class="keyword">package</span>=com.pibigstar.domain</span><br></pre></td></tr></table></figure>
+
+<p>如果不设置可以在启动类中手动设置</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@SpringBootApplication</span></span><br><span class="line"><span class="meta">@MapperScan</span>(<span class="string">"com.pibigstar.mapper"</span>)</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SeckillApplication</span></span>&#123;</span><br><span class="line">	</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">		SpringApplication.run(SeckillApplication.class, args);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="5-联表查询"><a href="#5-联表查询" class="headerlink" title="5. 联表查询"></a>5. 联表查询</h1><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">	<span class="comment">/**</span></span><br><span class="line"><span class="comment">	 * 根据id拿到SuccessSeckilled并携带秒杀商品的对象</span></span><br><span class="line"><span class="comment">	 * <span class="doctag">@param</span> seckillId</span></span><br><span class="line"><span class="comment">	 * <span class="doctag">@return</span></span></span><br><span class="line"><span class="comment">	 */</span></span><br><span class="line"><span class="meta">@Select</span>(<span class="string">"select sk.seckill_id,sk.user_phone,sk.create_time,sk.state,"</span></span><br><span class="line">			+ <span class="string">" s.seckill_id 'seckill.seckill_id',s.name 'seckill.name',s.number 'seckill.number',s.create_time 'seckill.create_time',s.start_time 'seckill.start_time',s.end_time 'seckill.end_time'"</span></span><br><span class="line">			+ <span class="string">" from success_killed sk inner join seckill s on sk.seckill_id=s.seckill_id "</span></span><br><span class="line">			+ <span class="string">" where sk.seckill_id=#&#123;seckillId&#125; and sk.user_phone=#&#123;userPhone&#125;"</span>)</span><br><span class="line">	<span class="function">SuccessKilled <span class="title">queryByIdWithSeckill</span><span class="params">(@Param(<span class="string">"seckillId"</span>)</span><span class="keyword">long</span> seckillId,@<span class="title">Param</span><span class="params">(<span class="string">"userPhone"</span>)</span><span class="keyword">long</span> userPhone)</span>;</span><br></pre></td></tr></table></figure>
+
+<h1 id="6-事务"><a href="#6-事务" class="headerlink" title="6. 事务"></a>6. 事务</h1><blockquote>
+<p>事务方法的执行时间要尽可能短，不要穿插一些网络操作（RPC/HTTP）请求，如果必须需要，那么将这些网络操作剥离出来（定义一个网络操作方法，将拿到的数据再传递给此事务方法）</p>
+<p> 不是所有的方法都需要事务，比如： 只有一条修改操作，或只有 只读操作<br> 一般都是读操作和写操作要在同一个方法中时需要申明事务</p>
+</blockquote>
+<h2 id="6-1-添加事务"><a href="#6-1-添加事务" class="headerlink" title="6.1 添加事务"></a>6.1 添加事务</h2><ul>
+<li>在xml中配置</li>
+</ul>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- 配置事务管理器 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">"transactionManager"</span> <span class="attr">class</span>=<span class="string">"org.springframework.orm.hibernate3.HibernateTransactionManager"</span>&gt;</span></span><br><span class="line">   <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"sessionFactory"</span>&gt;</span></span><br><span class="line">       <span class="tag">&lt;<span class="name">ref</span> <span class="attr">bean</span>=<span class="string">"mySessionFactory"</span>/&gt;</span></span><br><span class="line">   <span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">&lt;!--  配置事务传播特性 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">tx:advice</span> <span class="attr">id</span>=<span class="string">"TestAdvice"</span> <span class="attr">transaction-manager</span>=<span class="string">"transactionManager"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">tx:attributes</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">tx:method</span> <span class="attr">name</span>=<span class="string">"save*"</span> <span class="attr">propagation</span>=<span class="string">"REQUIRED"</span>/&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">tx:method</span> <span class="attr">name</span>=<span class="string">"del*"</span> <span class="attr">propagation</span>=<span class="string">"REQUIRED"</span>/&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">tx:method</span> <span class="attr">name</span>=<span class="string">"update*"</span> <span class="attr">propagation</span>=<span class="string">"REQUIRED"</span>/&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">tx:method</span> <span class="attr">name</span>=<span class="string">"add*"</span> <span class="attr">propagation</span>=<span class="string">"REQUIRED"</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">tx:attributes</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">tx:advice</span>&gt;</span></span><br><span class="line"><span class="comment">&lt;!--  配置参与事务的类 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">aop:config</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">aop:pointcut</span> <span class="attr">id</span>=<span class="string">"allTestServiceMethod"</span> <span class="attr">expression</span>=<span class="string">"execution(* com.test.testAda.test.model.service.*.*(..))"</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">aop:advisor</span> <span class="attr">pointcut-ref</span>=<span class="string">"allTestServiceMethod"</span> <span class="attr">advice-ref</span>=<span class="string">"TestAdvice"</span> /&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">aop:config</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>在方法中添加注解<code>@Transactional</code><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Transactional</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> SeckillExecution <span class="title">executeSeckill</span><span class="params">(<span class="keyword">long</span> seckillId, <span class="keyword">long</span> userPhone, String md5)</span></span></span><br><span class="line"><span class="function">		<span class="keyword">throws</span> SeckillException, RepeatkillException, SeckillCloseException </span>&#123;</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">if</span> (md5==<span class="keyword">null</span>||!md5.equals(MD5Util.getMD5(seckillId))) &#123;</span><br><span class="line">		<span class="keyword">throw</span> <span class="keyword">new</span> SeckillException(<span class="string">"MD5值不合法"</span>);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">try</span> &#123;</span><br><span class="line">		<span class="comment">//执行秒杀，减少库存</span></span><br><span class="line">		Date nowTime = <span class="keyword">new</span> Date();</span><br><span class="line">		<span class="keyword">int</span> updateCount = seckillMapper.reduceNumber(seckillId, nowTime);</span><br><span class="line">		<span class="keyword">if</span> (updateCount&lt;=<span class="number">0</span>) &#123;</span><br><span class="line">			<span class="comment">//没有更新到记录，秒杀结束</span></span><br><span class="line">			<span class="keyword">throw</span> <span class="keyword">new</span> SeckillCloseException(<span class="string">"秒杀结束"</span>);</span><br><span class="line">		&#125;<span class="keyword">else</span> &#123;</span><br><span class="line">			<span class="comment">//记录购买行为</span></span><br><span class="line">			<span class="keyword">int</span> insertCount = successKilledMapper.insert(seckillId, userPhone);</span><br><span class="line">			<span class="keyword">if</span> (insertCount&lt;=<span class="number">0</span>) &#123;</span><br><span class="line">				<span class="comment">//重复插入（主键为seckill和userphone联合主键）</span></span><br><span class="line">				<span class="comment">//返回0，重复秒杀</span></span><br><span class="line">				<span class="keyword">throw</span> <span class="keyword">new</span> RepeatkillException(<span class="string">"重复秒杀"</span>);</span><br><span class="line">			&#125;<span class="keyword">else</span> &#123;</span><br><span class="line">				<span class="comment">//返回1，秒杀成功</span></span><br><span class="line">				SuccessKilled successKilled = successKilledMapper.queryByIdWithSeckill(seckillId, userPhone);</span><br><span class="line">				<span class="keyword">return</span> <span class="keyword">new</span> SeckillExecution(seckillId, SeckillStateEnum.SUCCESS,successKilled);</span><br><span class="line">			&#125;</span><br><span class="line">		</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;<span class="keyword">catch</span> (SeckillCloseException e1) &#123;</span><br><span class="line">		<span class="keyword">throw</span> e1;</span><br><span class="line">	&#125;<span class="keyword">catch</span> (RepeatkillException e2) &#123;</span><br><span class="line">		<span class="keyword">throw</span> e2;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">		logger.error(e.getMessage(),e);</span><br><span class="line">		<span class="comment">//所有编译期异常 转换为了运行期异常</span></span><br><span class="line">		<span class="keyword">throw</span> <span class="keyword">new</span> SeckillException(<span class="string">"seckill inner error:"</span>+e.getMessage());</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<h2 id="6-2-事务回滚"><a href="#6-2-事务回滚" class="headerlink" title="6.2 事务回滚"></a>6.2 事务回滚</h2><p><strong>spring默认当方法抛出运行期异常的时候会回滚事务</strong><br>所以我们一般要将编译期异常转化为运行期异常</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Override</span></span><br><span class="line"><span class="meta">@Transactional</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> SeckillExecution <span class="title">executeSeckill</span><span class="params">(<span class="keyword">long</span> seckillId, <span class="keyword">long</span> userPhone, String md5)</span></span></span><br><span class="line"><span class="function">			<span class="keyword">throws</span> SeckillException, RepeatkillException, SeckillCloseException </span>&#123;</span><br><span class="line">		</span><br><span class="line">		<span class="keyword">if</span> (md5==<span class="keyword">null</span>||!md5.equals(MD5Util.getMD5(seckillId))) &#123;</span><br><span class="line">			<span class="keyword">throw</span> <span class="keyword">new</span> SeckillException(<span class="string">"MD5值不合法"</span>);</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">try</span> &#123;</span><br><span class="line">			<span class="comment">//执行秒杀，减少库存</span></span><br><span class="line">			Date nowTime = <span class="keyword">new</span> Date();</span><br><span class="line">			<span class="keyword">int</span> updateCount = seckillMapper.reduceNumber(seckillId, nowTime);</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">			logger.error(e.getMessage(),e);</span><br><span class="line">			<span class="comment">//将所有编译期异常 转换为了运行期异常</span></span><br><span class="line">			<span class="keyword">throw</span> <span class="keyword">new</span> SeckillException(<span class="string">"seckill inner error:"</span>+e.getMessage());</span><br><span class="line">		&#125;</span><br></pre></td></tr></table></figure>
+
+<p>SeckillException是我们自定义的运行期异常，主要是处理各种业务异常</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.pibigstar.exception;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 秒杀相关业务异常</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> pibigstar</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SeckillException</span> <span class="keyword">extends</span> <span class="title">RuntimeException</span></span>&#123;</span><br><span class="line">	<span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">long</span> serialVersionUID = <span class="number">1L</span>;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="title">SeckillException</span><span class="params">(String message, Throwable cause)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">super</span>(message, cause);</span><br><span class="line">		<span class="comment">// TODO Auto-generated constructor stub</span></span><br><span class="line">	&#125;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="title">SeckillException</span><span class="params">(String message)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">super</span>(message);</span><br><span class="line">		<span class="comment">// TODO Auto-generated constructor stub</span></span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="7-插入返回主键"><a href="#7-插入返回主键" class="headerlink" title="7. 插入返回主键"></a>7. 插入返回主键</h1><ol>
+<li><p>第一种：<br>加入这两个属性：<code>useGeneratedKeys=&quot;true&quot; keyProperty=&quot;id&quot;</code></p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">insert</span> <span class="attr">id</span>=<span class="string">"insert"</span> <span class="attr">useGeneratedKeys</span>=<span class="string">"true"</span> <span class="attr">keyProperty</span>=<span class="string">"id"</span> <span class="attr">parameterType</span>=<span class="string">"com.pibigstar.User"</span>&gt;</span></span><br><span class="line">    insert into user(userName,password,comment)</span><br><span class="line">    values(#&#123;userName&#125;,#&#123;password&#125;,#&#123;comment&#125;)</span><br><span class="line"><span class="tag">&lt;/<span class="name">insert</span>&gt;</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>第二种</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">insert</span> <span class="attr">id</span>=<span class="string">"insertProduct"</span> <span class="attr">parameterType</span>=<span class="string">"com.pibigstar.model.User"</span> &gt;</span></span><br><span class="line">   <span class="tag">&lt;<span class="name">selectKey</span> <span class="attr">resultType</span>=<span class="string">"java.lang.Long"</span> <span class="attr">order</span>=<span class="string">"AFTER"</span> <span class="attr">keyProperty</span>=<span class="string">"id"</span>&gt;</span></span><br><span class="line">      SELECT LAST_INSERT_ID()</span><br><span class="line">  <span class="tag">&lt;/<span class="name">selectKey</span>&gt;</span></span><br><span class="line">    insert into user(userName,password,comment)</span><br><span class="line">    values(#&#123;userName&#125;,#&#123;password&#125;,#&#123;comment&#125;)</span><br><span class="line"><span class="tag">&lt;/<span class="name">insert</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+</li>
+</ol>
+<p>order为<code>AFTER</code>表示插入之后再进行查询一次</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">selectKey</span> <span class="attr">resultType</span>=<span class="string">"java.lang.Long"</span> <span class="attr">order</span>=<span class="string">"AFTER"</span> <span class="attr">keyProperty</span>=<span class="string">"id"</span>&gt;</span></span><br><span class="line">    SELECT LAST_INSERT_ID()</span><br><span class="line"><span class="tag">&lt;/<span class="name">selectKey</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+    
+    
+    
+
+    <div>
+      
+        <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
+    
+</div>
+
+      
+    </div>
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/springbot/" rel="tag"><i class="fa fa-tag"></i> springbot</a>
+          
+            <a href="/tags/mybatis/" rel="tag"><i class="fa fa-tag"></i> mybatis</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/01/30/微信小程序部署踩坑/" rel="next" title="微信小程序部署踩坑">
+                <i class="fa fa-chevron-left"></i> 微信小程序部署踩坑
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/02/14/Java面试通关秘籍（一）/" rel="prev" title="Java面试通关秘籍（一）">
+                Java面试通关秘籍（一） <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/qq.png" alt="派大星">
+            
+              <p class="site-author-name" itemprop="name">派大星</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives">
+              
+                  <span class="site-state-item-count">137</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                
+                  <span class="site-state-item-count">64</span>
+                  <span class="site-state-item-name">categories</span>
+                
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                
+                  <span class="site-state-item-count">230</span>
+                  <span class="site-state-item-name">tags</span>
+                
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/pibigstar" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://blog.csdn.net/junmoxi" target="_blank" title="CSDN">
+                      
+                        <i class="fa fa-fw fa-yelp"></i>CSDN</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#1-和-的区别"><span class="nav-number">1.</span> <span class="nav-text">1. ${} 和 #{}的区别</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2-传递参数"><span class="nav-number">2.</span> <span class="nav-text">2. 传递参数</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#2-1-第一种"><span class="nav-number">2.1.</span> <span class="nav-text">2.1 第一种</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-2-第二种"><span class="nav-number">2.2.</span> <span class="nav-text">2.2 第二种</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-3-第三种"><span class="nav-number">2.3.</span> <span class="nav-text">2.3 第三种</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#3-开启驼峰命名规范"><span class="nav-number">3.</span> <span class="nav-text">3. 开启驼峰命名规范</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#4-设置扫描包路径"><span class="nav-number">4.</span> <span class="nav-text">4. 设置扫描包路径</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#5-联表查询"><span class="nav-number">5.</span> <span class="nav-text">5. 联表查询</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#6-事务"><span class="nav-number">6.</span> <span class="nav-text">6. 事务</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#6-1-添加事务"><span class="nav-number">6.1.</span> <span class="nav-text">6.1 添加事务</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6-2-事务回滚"><span class="nav-number">6.2.</span> <span class="nav-text">6.2 事务回滚</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#7-插入返回主键"><span class="nav-number">7.</span> <span class="nav-text">7. 插入返回主键</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+        <div class="back-to-top">
+          <i class="fa fa-arrow-up"></i>
+          
+        </div>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-[object Object]"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">派大星</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+  <script type="text/javascript" src="/js/src/js.cookie.js?v=5.1.4"></script>
+  <script type="text/javascript" src="/js/src/scroll-cookie.js?v=5.1.4"></script>
+
+
+  
+
+</body>
+</html>
+<!-- 页面点击小红心 -->
+ <script type="text/javascript" src="/js/src/clicklove.js"></script>

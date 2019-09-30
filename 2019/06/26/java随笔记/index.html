@@ -1,0 +1,805 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/32x32.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/16x16.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="java,java日常,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="文件写入123456789101112131415String fileName = &quot;/root/log/test.log&quot;;Path file = Paths.get(fileName);boolean exists = Files.exists(Paths.get(dir), LinkOption.NOFOLLOW_LINKS);try &amp;#123;    if (!exists) &amp;#12">
+<meta name="keywords" content="java,java日常">
+<meta property="og:type" content="article">
+<meta property="og:title" content="java随笔记">
+<meta property="og:url" content="http://pibigstar.com/2019/06/26/java随笔记/index.html">
+<meta property="og:site_name" content="派大星的博客">
+<meta property="og:description" content="文件写入123456789101112131415String fileName = &quot;/root/log/test.log&quot;;Path file = Paths.get(fileName);boolean exists = Files.exists(Paths.get(dir), LinkOption.NOFOLLOW_LINKS);try &amp;#123;    if (!exists) &amp;#12">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-09-30T03:12:58.876Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="java随笔记">
+<meta name="twitter:description" content="文件写入123456789101112131415String fileName = &quot;/root/log/test.log&quot;;Path file = Paths.get(fileName);boolean exists = Files.exists(Paths.get(dir), LinkOption.NOFOLLOW_LINKS);try &amp;#123;    if (!exists) &amp;#12">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":true,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://pibigstar.com/2019/06/26/java随笔记/">
+
+
+
+
+
+  <title>java随笔记 | 派大星的博客</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">派大星的博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <h1 class="site-subtitle" itemprop="description">很多事情不是会了才能做，而是做了才能学会</h1>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-schedule">
+          <a href="/schedule/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-calendar"></i> <br>
+            
+            Schedule
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-sitemap">
+          <a href="/sitemap.xml" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-sitemap"></i> <br>
+            
+            Sitemap
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            About
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://pibigstar.com/2019/06/26/java随笔记/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="派大星">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/qq.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="派大星的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">java随笔记</h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-06-26T12:12:04+08:00">
+                2019-06-26
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Java/" itemprop="url" rel="index">
+                    <span itemprop="name">Java</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="文件写入"><a href="#文件写入" class="headerlink" title="文件写入"></a>文件写入</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">String fileName = <span class="string">"/root/log/test.log"</span>;</span><br><span class="line">Path file = Paths.get(fileName);</span><br><span class="line"><span class="keyword">boolean</span> exists = Files.exists(Paths.get(dir), LinkOption.NOFOLLOW_LINKS);</span><br><span class="line"><span class="keyword">try</span> &#123;</span><br><span class="line">    <span class="keyword">if</span> (!exists) &#123;</span><br><span class="line">        Files.createDirectories(Paths.get(dir));</span><br><span class="line">    &#125;</span><br><span class="line">    List&lt;String&gt; lines = Arrays.asList(msg);</span><br><span class="line">    <span class="comment">// 写文件，CREATE，APPEND打开文件的标志位， 创建或追加</span></span><br><span class="line">    Files.write(file, lines, Charset.forName(<span class="string">"UTF-8"</span>), </span><br><span class="line">			    StandardOpenOption.CREATE,</span><br><span class="line">			    StandardOpenOption.APPEND);</span><br><span class="line">&#125; <span class="keyword">catch</span> (IOException e) &#123;</span><br><span class="line">    LOGGER.info(<span class="string">"IOException"</span>, e);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="NIO方式复制文件"><a href="#NIO方式复制文件" class="headerlink" title="NIO方式复制文件"></a>NIO方式复制文件</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">copyFileByChannel</span><span class="params">(File source, File dest)</span> <span class="keyword">throws</span> IOException </span>&#123;</span><br><span class="line">    <span class="keyword">try</span> (FileChannel sourceChannel = <span class="keyword">new</span> FileInputStream(source).getChannel();</span><br><span class="line">         FileChannel targetChannel = <span class="keyword">new</span> FileOutputStream(dest).getChannel();)&#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">long</span> count = sourceChannel.size() ;count&gt;<span class="number">0</span> ;) &#123;</span><br><span class="line">            <span class="keyword">long</span> transferred = sourceChannel.transferTo(sourceChannel.position(), count, targetChannel);</span><br><span class="line">             sourceChannel.position(sourceChannel.position() + transferred);</span><br><span class="line">            count -= transferred;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="年月日获取"><a href="#年月日获取" class="headerlink" title="年月日获取"></a>年月日获取</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">LocalDate today = LocalDate.now();</span><br><span class="line"><span class="keyword">int</span> year = today.getYear();</span><br><span class="line"><span class="keyword">int</span> month = today.getMonthValue();</span><br><span class="line"><span class="keyword">int</span> day = today.getDayOfMonth();</span><br></pre></td></tr></table></figure>
+
+<h2 id="根据配置文件来决定是否显示Swagger"><a href="#根据配置文件来决定是否显示Swagger" class="headerlink" title="根据配置文件来决定是否显示Swagger"></a>根据配置文件来决定是否显示Swagger</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@ConditionalOnExpression</span>(<span class="string">"'$&#123;swagger.enable&#125;' == 'true'"</span>)</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SwaggerConfig</span> </span>&#123;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="并发集合不存在则加入"><a href="#并发集合不存在则加入" class="headerlink" title="并发集合不存在则加入"></a>并发集合不存在则加入</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span> ConcurrentMap&lt;String, T&gt; singletonInstances = <span class="keyword">new</span> ConcurrentMap&lt;&gt;();</span><br><span class="line"><span class="comment">// 如果不存在此实例则将其放进去</span></span><br><span class="line">singletonInstances.putIfAbsent(name, instance);</span><br></pre></td></tr></table></figure>
+
+<h2 id="判断不为空"><a href="#判断不为空" class="headerlink" title="判断不为空"></a>判断不为空</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 判断对象不为null，如果为null则抛出空指针异常，不为空返回此对象</span></span><br><span class="line">obj = Objects.requireNonNull(obj);</span><br><span class="line"><span class="comment">// 这个是com.google.common.base包中的方法</span></span><br><span class="line">Preconditions.checkNotNull(url);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 检查集合不为null，为空抛出空指针</span></span><br><span class="line">Collections.checkedList(lists)</span><br><span class="line"><span class="comment">// 检查map不为空，key或value为空则抛出空指针</span></span><br><span class="line">Collections.checkedMap(map)</span><br><span class="line"><span class="comment">// 检查Set不为空</span></span><br><span class="line">Collections.checkedSet(set)</span><br></pre></td></tr></table></figure>
+
+<h2 id="检查某个Class对象是否被某注解注解"><a href="#检查某个Class对象是否被某注解注解" class="headerlink" title="检查某个Class对象是否被某注解注解"></a>检查某个Class对象是否被某注解注解</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 判断clazz对象是否有MyAnnotation注解</span></span><br><span class="line">clazz.isAnnotationPresent(MyAnnotation.class);</span><br></pre></td></tr></table></figure>
+
+<h2 id="读取配置文件"><a href="#读取配置文件" class="headerlink" title="读取配置文件"></a>读取配置文件</h2><p>读取类似properties格式的文件</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">Enumeration&lt;URL&gt; urls = classLoader.getResources(“META-INF/extensions/test.info”);</span><br><span class="line"><span class="keyword">if</span>(urls!=<span class="keyword">null</span> &amp;&amp; urls.hasMoreElements())&#123;</span><br><span class="line">	<span class="keyword">while</span>(urls.hasMoreElements())&#123;</span><br><span class="line">		URL url = urls.nextElement();</span><br><span class="line">		BufferedReader br = <span class="keyword">new</span> BufferedReader(<span class="keyword">new</span> InputStreamReader(url.openStream(), <span class="string">"utf-8"</span>));</span><br><span class="line">		String line = <span class="keyword">null</span>;</span><br><span class="line">		<span class="keyword">while</span> ((line=br.readLine())!=<span class="keyword">null</span>)&#123;</span><br><span class="line">          String config = line;</span><br><span class="line">          <span class="comment">//跳过注释</span></span><br><span class="line">          <span class="keyword">if</span>(config.startsWith(<span class="string">"#"</span>))&#123;</span><br><span class="line">               <span class="keyword">continue</span>;</span><br><span class="line">           &#125;</span><br><span class="line">           String key= <span class="keyword">null</span>;</span><br><span class="line">           String value= <span class="keyword">null</span>;</span><br><span class="line">           <span class="keyword">int</span> i = config.indexOf(<span class="string">'='</span>);</span><br><span class="line">           <span class="keyword">if</span> (i &gt; <span class="number">0</span>) &#123;</span><br><span class="line">               key= config.substring(<span class="number">0</span>, i).trim();</span><br><span class="line">               value= config.substring(i + <span class="number">1</span>).trim();</span><br><span class="line">           &#125;</span><br><span class="line">           System.out.Println(<span class="string">"key:"</span>+key+<span class="string">" value:"</span>+value);</span><br><span class="line">       &#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="字符串格式化"><a href="#字符串格式化" class="headerlink" title="字符串格式化"></a>字符串格式化</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">String str = String.format(<span class="string">"%s has already been exported"</span>, name)</span><br></pre></td></tr></table></figure>
+
+<h1 id="Buffer流写操作"><a href="#Buffer流写操作" class="headerlink" title="Buffer流写操作"></a>Buffer流写操作</h1><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 获取字符解码类</span></span><br><span class="line">CharsetEncoder encoder = Charset.forName(<span class="string">"UTF-8"</span>).newEncoder();</span><br><span class="line"><span class="comment">// 将字符串转换为字节Buffer</span></span><br><span class="line">ByteBuffer bytes = encoder.encode(CharBuffer.wrap(<span class="string">"要写入的值"</span>));</span><br><span class="line">BufferedOutputStream bos = <span class="keyword">new</span> BufferedOutputStream(<span class="keyword">new</span> FileOutputStream(<span class="string">"test.txt"</span>));</span><br><span class="line">bos.write(bytes.array(), <span class="number">0</span>, bytes.limit());</span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+    
+    
+    
+
+    <div>
+      
+        <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
+    
+</div>
+
+      
+    </div>
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/java/" rel="tag"><i class="fa fa-tag"></i> java</a>
+          
+            <a href="/tags/java日常/" rel="tag"><i class="fa fa-tag"></i> java日常</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/06/22/SpringBoot整合Druid和MyBatis/" rel="next" title="SpringBoot整合Druid和MyBatis">
+                <i class="fa fa-chevron-left"></i> SpringBoot整合Druid和MyBatis
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/06/26/批处理脚本启动多个应用/" rel="prev" title="批处理脚本启动多个应用">
+                批处理脚本启动多个应用 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/qq.png" alt="派大星">
+            
+              <p class="site-author-name" itemprop="name">派大星</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives">
+              
+                  <span class="site-state-item-count">137</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                
+                  <span class="site-state-item-count">64</span>
+                  <span class="site-state-item-name">categories</span>
+                
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                
+                  <span class="site-state-item-count">230</span>
+                  <span class="site-state-item-name">tags</span>
+                
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/pibigstar" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://blog.csdn.net/junmoxi" target="_blank" title="CSDN">
+                      
+                        <i class="fa fa-fw fa-yelp"></i>CSDN</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#文件写入"><span class="nav-number">1.</span> <span class="nav-text">文件写入</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#NIO方式复制文件"><span class="nav-number">2.</span> <span class="nav-text">NIO方式复制文件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#年月日获取"><span class="nav-number">3.</span> <span class="nav-text">年月日获取</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#根据配置文件来决定是否显示Swagger"><span class="nav-number">4.</span> <span class="nav-text">根据配置文件来决定是否显示Swagger</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#并发集合不存在则加入"><span class="nav-number">5.</span> <span class="nav-text">并发集合不存在则加入</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#判断不为空"><span class="nav-number">6.</span> <span class="nav-text">判断不为空</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#检查某个Class对象是否被某注解注解"><span class="nav-number">7.</span> <span class="nav-text">检查某个Class对象是否被某注解注解</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#读取配置文件"><span class="nav-number">8.</span> <span class="nav-text">读取配置文件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#字符串格式化"><span class="nav-number">9.</span> <span class="nav-text">字符串格式化</span></a></li></ol><li class="nav-item nav-level-1"><a class="nav-link" href="#Buffer流写操作"><span class="nav-number"></span> <span class="nav-text">Buffer流写操作</span></a></li></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+        <div class="back-to-top">
+          <i class="fa fa-arrow-up"></i>
+          
+        </div>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-[object Object]"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">派大星</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+  <script type="text/javascript" src="/js/src/js.cookie.js?v=5.1.4"></script>
+  <script type="text/javascript" src="/js/src/scroll-cookie.js?v=5.1.4"></script>
+
+
+  
+
+</body>
+</html>
+<!-- 页面点击小红心 -->
+ <script type="text/javascript" src="/js/src/clicklove.js"></script>
