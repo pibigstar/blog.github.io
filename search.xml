@@ -177,18 +177,6 @@
       </tags>
   </entry>
   <entry>
-    <title><![CDATA[Linux随笔记]]></title>
-    <url>%2F2019%2F09%2F04%2FLinux%E9%9A%8F%E7%AC%94%E8%AE%B0%2F</url>
-    <content type="text"><![CDATA[@[toc] 后台执行任务 开启任务 1nohup 命令 &gt; temp.log &amp; 查看正在运行的任务 1jobs -l 查找文件从 根目录/ 开始查询 1find / -name "my.ini" Fork炸弹 请不要轻易执行，会耗尽服务器资源，使服务器不能正常的对外提供服务 1:()&#123;:|:&amp;&#125;;: 根据名称停止所有相关进程 杀死进程中所有进程名中有 kube关键字的进程 1pkill -9 kube 漂亮的进程监控 安装htop 1yum install -y htop 查看进程 1htop 效果]]></content>
-      <categories>
-        <category>Linux</category>
-      </categories>
-      <tags>
-        <tag>linux</tag>
-        <tag>随笔记</tag>
-      </tags>
-  </entry>
-  <entry>
     <title><![CDATA[使用Java做ORC图片识别]]></title>
     <url>%2F2019%2F09%2F04%2F%E4%BD%BF%E7%94%A8Java%E5%81%9AORC%E5%9B%BE%E7%89%87%E8%AF%86%E5%88%AB%2F</url>
     <content type="text"><![CDATA[1. 下载训练库下载地址：https://github.com/tesseract-ocr/tessdata 不用全部下载，中文识别下载那个chi_sim.traineddata即可。 2. 添加依赖12345&lt;dependency&gt; &lt;groupId&gt;net.sourceforge.tess4j&lt;/groupId&gt; &lt;artifactId&gt;tess4j&lt;/artifactId&gt; &lt;version&gt;4.3.1&lt;/version&gt;&lt;/dependency&gt; 3. 编写代码1234567891011121314public static String getTextByImage(String imgPath) throws TesseractException &#123; File imageFile = new File(imgPath); if (!imageFile.exists())&#123; throw new RuntimeException("图片不存在"); &#125; Tesseract tesseract = new Tesseract(); // 设置训练库的位置,https://github.com/tesseract-ocr/tessdata tesseract.setDatapath("D://OCR/tessdata"); // 设置识别语言为中文 tesseract.setLanguage("chi_sim"); String result = tesseract.doOCR(imageFile); return result;&#125; 4. 测试123public static void main(String[] args) throws TesseractException &#123; System.out.println(getTextByImage("D://OCR/img/test.png"));&#125;]]></content>
@@ -199,6 +187,18 @@
         <tag>ocr</tag>
         <tag>Java</tag>
         <tag>tesseract</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[Linux随笔记]]></title>
+    <url>%2F2019%2F09%2F04%2FLinux%E9%9A%8F%E7%AC%94%E8%AE%B0%2F</url>
+    <content type="text"><![CDATA[@[toc] 后台执行任务 开启任务 1nohup 命令 &gt; temp.log &amp; 查看正在运行的任务 1jobs -l 查找文件从 根目录/ 开始查询 1find / -name "my.ini" Fork炸弹 请不要轻易执行，会耗尽服务器资源，使服务器不能正常的对外提供服务 1:()&#123;:|:&amp;&#125;;: 根据名称停止所有相关进程 杀死进程中所有进程名中有 kube关键字的进程 1pkill -9 kube 漂亮的进程监控 安装htop 1yum install -y htop 查看进程 1htop 效果]]></content>
+      <categories>
+        <category>Linux</category>
+      </categories>
+      <tags>
+        <tag>linux</tag>
+        <tag>随笔记</tag>
       </tags>
   </entry>
   <entry>
@@ -401,20 +401,6 @@
       </tags>
   </entry>
   <entry>
-    <title><![CDATA[使用java打开网页并截图]]></title>
-    <url>%2F2019%2F07%2F31%2F%E4%BD%BF%E7%94%A8java%E6%89%93%E5%BC%80%E7%BD%91%E9%A1%B5%E5%B9%B6%E6%88%AA%E5%9B%BE%2F</url>
-    <content type="text"><![CDATA[控制浏览器打开网页只适用于JDK1.6之上的 1234567891011121314151617181920212223242526272829303132333435363738package com.pibgstar.demo.utils;import javax.imageio.ImageIO;import java.awt.*;import java.awt.event.KeyEvent;import java.awt.image.BufferedImage;import java.io.File;import java.io.IOException;import java.net.URISyntaxException;import java.net.URL;/** * @author pibigstar * @desc 网页截图工具类 **/public class CutPictureUtil &#123; public static void main(String[] args) throws IOException, URISyntaxException, AWTException &#123; // 控制浏览器打开网页，仅适用于JdK1.6及以上版本 Desktop.getDesktop().browse(new URL("https://blog.csdn.net/junmoxi").toURI()); Robot robot = new Robot(); // 延迟一秒 robot.delay(1000); // 获取屏幕宽度和高度 Dimension d = new Dimension(Toolkit.getDefaultToolkit().getScreenSize()); int width = (int) d.getWidth(); int height = (int) d.getHeight(); // 最大化浏览器 robot.keyRelease(KeyEvent.VK_F11); robot.delay(1000); // 对屏幕进行截图 Image image = robot.createScreenCapture(new Rectangle(0, 0, width, height)); // 通过图形绘制工具类将截图保存 BufferedImage img = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB); Graphics g = img.createGraphics(); g.drawImage(image, 0, 0, width, height, null); // 保存图片 ImageIO.write(img, "jpg", new File("D:/tmp/"+System.currentTimeMillis()+".jpg")); System.out.println("done!"); &#125;&#125;]]></content>
-      <categories>
-        <category>Java,java工具类</category>
-      </categories>
-      <tags>
-        <tag>打开网页</tag>
-        <tag>网页截图</tag>
-        <tag>截屏</tag>
-        <tag>robot</tag>
-      </tags>
-  </entry>
-  <entry>
     <title><![CDATA[Windows下编译Proto文件]]></title>
     <url>%2F2019%2F07%2F31%2FWindows%E4%B8%8B%E7%BC%96%E8%AF%91Proto%E6%96%87%E4%BB%B6%2F</url>
     <content type="text"><![CDATA[此处借助的为Windows的Linux子系统进行编译的 1. 安装Windows子系统（WSL） 设置开启开发者模式 程序中开启WSL子系统 应用商店下载Ubuntu 注意1 装好之后要修改一次密码，不然无法使用root 1sudo passwd 2 更新系统 1sudo apt-get update 3 安装make 1sudo apt-get install make 4 安装dos2unix 1sudo apt-get install dos2unix 2.配置编译环境 安装go百度 Ubuntu安装go 配置go环境编辑 /etc/profile 文件 1vim /etc/profile 将下面内容加入到末尾（GOPAT是我Windows中的GOPATH） 1234export GOROOT=/usr/local/goexport GOPATH=/mnt/f/goWorkexport PATH=$GOPATH/bin:$PATHexport PATH=$PATH:$GOROOT/bin:$GOPATH/bin 执行下面命令使配置生效 1source /etc/profile 如果出现每次关闭Terminal，配置就会失效，那么将配置放到 /etc/bash.bashrc 文件中 安装protoc去这个网址下载：https://github.com/protocolbuffers/protobuf/releases解压：1unzip protoc.zip 将bin文件夹下的 protoc 复制到Linux 中的 /bin目录下 1sudo cp protoc/bin/protoc /bin/protoc 执行 protoc -verson 如果输出版本信息则证明配置成功 安装protoc-gen-go 1go get -u github.com/golang/protobuf/protoc-gen-go protoc-gen-validate 1go get -d -u github.com/envoyproxy/protoc-gen-validate 然后进行到这个项目的目录 12cd $GOPATH/src/github.com/envoyproxy/protoc-gen-validatemake build]]></content>
@@ -465,6 +451,20 @@
         <tag>mybatis</tag>
         <tag>联表查询</tag>
         <tag>注解联表查询</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[使用java打开网页并截图]]></title>
+    <url>%2F2019%2F07%2F31%2F%E4%BD%BF%E7%94%A8java%E6%89%93%E5%BC%80%E7%BD%91%E9%A1%B5%E5%B9%B6%E6%88%AA%E5%9B%BE%2F</url>
+    <content type="text"><![CDATA[控制浏览器打开网页只适用于JDK1.6之上的 1234567891011121314151617181920212223242526272829303132333435363738package com.pibgstar.demo.utils;import javax.imageio.ImageIO;import java.awt.*;import java.awt.event.KeyEvent;import java.awt.image.BufferedImage;import java.io.File;import java.io.IOException;import java.net.URISyntaxException;import java.net.URL;/** * @author pibigstar * @desc 网页截图工具类 **/public class CutPictureUtil &#123; public static void main(String[] args) throws IOException, URISyntaxException, AWTException &#123; // 控制浏览器打开网页，仅适用于JdK1.6及以上版本 Desktop.getDesktop().browse(new URL("https://blog.csdn.net/junmoxi").toURI()); Robot robot = new Robot(); // 延迟一秒 robot.delay(1000); // 获取屏幕宽度和高度 Dimension d = new Dimension(Toolkit.getDefaultToolkit().getScreenSize()); int width = (int) d.getWidth(); int height = (int) d.getHeight(); // 最大化浏览器 robot.keyRelease(KeyEvent.VK_F11); robot.delay(1000); // 对屏幕进行截图 Image image = robot.createScreenCapture(new Rectangle(0, 0, width, height)); // 通过图形绘制工具类将截图保存 BufferedImage img = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB); Graphics g = img.createGraphics(); g.drawImage(image, 0, 0, width, height, null); // 保存图片 ImageIO.write(img, "jpg", new File("D:/tmp/"+System.currentTimeMillis()+".jpg")); System.out.println("done!"); &#125;&#125;]]></content>
+      <categories>
+        <category>Java,java工具类</category>
+      </categories>
+      <tags>
+        <tag>打开网页</tag>
+        <tag>网页截图</tag>
+        <tag>截屏</tag>
+        <tag>robot</tag>
       </tags>
   </entry>
   <entry>
@@ -567,14 +567,16 @@
       </tags>
   </entry>
   <entry>
-    <title><![CDATA[Java虚拟机常用命令参数]]></title>
-    <url>%2F2019%2F07%2F02%2FJava%E8%99%9A%E6%8B%9F%E6%9C%BA%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4%E5%8F%82%E6%95%B0%2F</url>
-    <content type="text"><![CDATA[1. 打印某个类的常量池1javap -v Test.class 2. 查看类的加载顺序1java -verbose:class Test 3. 反编译字节码1javap -v -c Test]]></content>
+    <title><![CDATA[微信小程序使用npm安装第三方库]]></title>
+    <url>%2F2019%2F07%2F02%2F%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8F%E4%BD%BF%E7%94%A8npm%E5%AE%89%E8%A3%85%E7%AC%AC%E4%B8%89%E6%96%B9%E5%BA%93%2F</url>
+    <content type="text"><![CDATA[我们以安装有赞的 vant库做例子 1. 初始化在小程序根目录中（miniprogram）执行 1npm init 输入一些基本的信息，可以一直回车，按默认就可以，然后会生成一个package.json文件 2. 安装第三方库有赞文档地址：https://youzan.github.io/vant-weapp/#/intro执行 1npm i vant-weapp -S --production 3.构建npm回到微信开发者工具中，在工具中点击构建npm 4. 启用npm模块在详情中，把 使用npm模块勾选上 5. 使用 在index.json中引入组件库 123"usingComponents": &#123; "van-button": "vant-weapp/button/index"&#125; 在index.wxml使用按钮 1&lt;van-button type="danger"&gt;危险按钮&lt;/van-button&gt; 注意：如果出现找不到路径，请再次点击 构建npm （步骤3）]]></content>
       <categories>
-        <category>JVM</category>
+        <category>微信小程序</category>
       </categories>
       <tags>
-        <tag>jvm</tag>
+        <tag>微信小程序</tag>
+        <tag>vant</tag>
+        <tag>npm</tag>
       </tags>
   </entry>
   <entry>
@@ -590,16 +592,14 @@
       </tags>
   </entry>
   <entry>
-    <title><![CDATA[微信小程序使用npm安装第三方库]]></title>
-    <url>%2F2019%2F07%2F02%2F%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8F%E4%BD%BF%E7%94%A8npm%E5%AE%89%E8%A3%85%E7%AC%AC%E4%B8%89%E6%96%B9%E5%BA%93%2F</url>
-    <content type="text"><![CDATA[我们以安装有赞的 vant库做例子 1. 初始化在小程序根目录中（miniprogram）执行 1npm init 输入一些基本的信息，可以一直回车，按默认就可以，然后会生成一个package.json文件 2. 安装第三方库有赞文档地址：https://youzan.github.io/vant-weapp/#/intro执行 1npm i vant-weapp -S --production 3.构建npm回到微信开发者工具中，在工具中点击构建npm 4. 启用npm模块在详情中，把 使用npm模块勾选上 5. 使用 在index.json中引入组件库 123"usingComponents": &#123; "van-button": "vant-weapp/button/index"&#125; 在index.wxml使用按钮 1&lt;van-button type="danger"&gt;危险按钮&lt;/van-button&gt; 注意：如果出现找不到路径，请再次点击 构建npm （步骤3）]]></content>
+    <title><![CDATA[Java虚拟机常用命令参数]]></title>
+    <url>%2F2019%2F07%2F02%2FJava%E8%99%9A%E6%8B%9F%E6%9C%BA%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4%E5%8F%82%E6%95%B0%2F</url>
+    <content type="text"><![CDATA[1. 打印某个类的常量池1javap -v Test.class 2. 查看类的加载顺序1java -verbose:class Test 3. 反编译字节码1javap -v -c Test]]></content>
       <categories>
-        <category>微信小程序</category>
+        <category>JVM</category>
       </categories>
       <tags>
-        <tag>微信小程序</tag>
-        <tag>vant</tag>
-        <tag>npm</tag>
+        <tag>jvm</tag>
       </tags>
   </entry>
   <entry>
@@ -701,6 +701,18 @@
       </tags>
   </entry>
   <entry>
+    <title><![CDATA[注解防止表单重复提交]]></title>
+    <url>%2F2019%2F06%2F10%2F%E6%B3%A8%E8%A7%A3%E9%98%B2%E6%AD%A2%E8%A1%A8%E5%8D%95%E9%87%8D%E5%A4%8D%E6%8F%90%E4%BA%A4%2F</url>
+    <content type="text"><![CDATA[1. 注解1234@Target(ElementType.METHOD)@Retention(RetentionPolicy.RUNTIME)public @interface StopRepeatSubmit &#123;&#125; 2. 拦截处理器12345678910111213141516171819202122232425262728293031323334353637383940/** * @author pibigstar * @desc 防止表单重复提交拦截处理器 **/public class StopRepeatSubmitHandlerInterceptor extends HandlerInterceptorAdapter &#123; @Override public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception &#123; if (handler instanceof HandlerMethod) &#123; HandlerMethod handlerMethod = (HandlerMethod) handler; Method method = handlerMethod.getMethod(); StopRepeatSubmit annotation = method.getAnnotation(StopRepeatSubmit.class); if (annotation!=null) &#123; // 判断是否已经提交过了 String paramter = request.getParameterMap().toString(); String url = request.getRequestURL().toString(); String token = url+paramter; Object attrToken = request.getSession().getAttribute("token"); if (attrToken == null) &#123; // 第一次请求 request.getSession().setAttribute("token",token); return true; &#125; if (attrToken.toString().equals(token))&#123; // 重复提交了 return false; &#125; else &#123; // 第一次提交 request.getSession().setAttribute("token",token); return true; &#125; &#125; return true; &#125; else &#123; return super.preHandle(request, response, handler); &#125; &#125;&#125; 3. 使用1234@PostMapping("/submit")@StopRepeatSubmitpublic void submit()&#123;&#125;]]></content>
+      <categories>
+        <category>Java,SpringBoot技能大全</category>
+      </categories>
+      <tags>
+        <tag>注解</tag>
+        <tag>重复提交</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[git常用操作详细说明]]></title>
     <url>%2F2019%2F06%2F10%2Fgit%E5%B8%B8%E7%94%A8%E6%93%8D%E4%BD%9C%E8%AF%A6%E7%BB%86%E8%AF%B4%E6%98%8E%2F</url>
     <content type="text"><![CDATA[初级的就不说了，下面记录一些常用且稍微高级点的操作@[TOC] git的管理流程工作区 ——&gt; git add ——&gt; Index[索引][暂存区] ——&gt; git commit ——&gt; HEAD[快照] 当执行git add 后其实就是将更改的文件放入到暂存区中，当执行git commit时就是将暂存区的内容提交到当前分支 HEAD快照是保存你最后一次commit的内容 git push 是将快照区的内容push 上去 git常用操作12345678910111213141516171819# 图形化显示log日志gitk --all# 简洁的log 日志git log --oneline # 查看所有分支git log --all # 显示最近4个提交git log -n4 # 显示变更信息git log --graph# 查看暂存区与HEAD中的差别git diff --cached # 配置git loggit config --global alias.lg "log --graph --pretty=format:'%Cred%h%Creset - %C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)&lt;%an&gt;%Creset' --abbrev-commit --date=relative"# 使用git lg# 查看提交了多少行代码git log --author="$(git config --get user.name)" --pretty=tformat: --numstat | gawk '&#123; add += $1 ; subs += $2 ; loc += $1 - $2 &#125; END &#123; printf "added lines: %s removed lines : %s total lines: %s\n",add,subs,loc &#125;' - 1. 关联 1.1 关联仓库1git remote add origin 仓库地址 你可以同时关联其他的仓库（也包括gitee和gitlab） 1git remote add origin-2 仓库地址 这样你push的时候 1git push origin-2 master 2. 分支2.1 只创建一个分支1git branch fix-1 2.2 创建分支并切换此分支1git checkout -b feat-1 2.3 切换分支1git checkout master 2.4 查看所有分支1git branch -v 2.5 删除分支1git branch -d feat-1 2.6 删除除master以外的所有分支1git branch | grep -v "master" | xargs git branch -D 3. 临时暂存区3.1 将更改放到临时暂存区1git stash 3.2 将更改从临时暂存区取出1git stash pop 3.3 查看临时暂存区内容1git stash list 3.4 恢复指定临时暂存区1git stash apply stash@&#123;id&#125; 4. 合并冲突1.更新代码 git fetch2.合并分支 git rebase origin/develop //将develop分支与此分支合并3.会进入合并分支，当有CONFLICT:Merge file.txt, 手动去修改此文件4.修改之后添加冲突文件 git add file.txt5.继续合并 git rebase --continue, 如果有错误继续 执行 3 4 步骤6.当分支名变成你的分支名则表示合并完成7.查看当前状态 git status8.如果状态都为已暂存，则可以执行 git push origin 分支名 进行提交 push之前忘记git pull出现 1! [rejected] master -&gt; master (fetch first) 可以使用下面这个命令 1git pull --rebase origin master 这个命令是先取消commit记录，并且把它们临时 保存为补丁(patch)(这些补丁放到”.git/rebase”目录中)，之后同步远程库到本地，最后合并补丁到本地库之中。 然后再直接进行push就可以了 5. 回滚5.1 撤销掉本地修改（还没被git add）1234# 撤销某具体文件git checkout fileName# 撤销所有git checkout . 5.2 撤销上一次git add的内容1234# 撤销某个文件git reset HEAD fileName# 撤销所有git reset HEAD . 只撤销某个文件 1git reset HEAD 文件路径/文件名 5.3 撤销上一次git commit 先查看日志，记录commit id 1git log 恢复到指定commit 123git reset commit_id# 备用git reset --hard commit_id 5.4 修改上一次commit1git commit --amend 5.5 撤销git commit 和 git add 以及 工作区更新的内容1git reset --hard HEAD~ 5.5 删除远程分支中某个文件这个只是让此文件不受版本控制了，而本地是不会删除它的 12345git rm -r –-cached 文件路径/文件名git add .git commit -m "delete the file"git push origin master 5.6 回滚到指定版本 查看日志拿到commitid 1git log 恢复到指定版本 1git reset --hard commit_id 6.开源协作6.1 fork别人代码此时你的仓库就会有一个此项目的副本 6.2 克隆代码1git clone *****.git 6.3 添加别人远程仓库地址为了可以随时更新代码，这里最好将别人仓库的地址也新增一下 1git remote add origin2 *****.git 拉取别人最新代码 1git pull origin2 master 6.4 提交添加新的功能之后开始提交代码，代码是提交到你的仓库中 1git push origin master 6.5 提交PR去你GitHub中此项目然后会有一个New pull Request 点击它，然后向别人的项目提交PR]]></content>
@@ -712,18 +724,6 @@
         <tag>回滚</tag>
         <tag>git删除</tag>
         <tag>暂存区</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title><![CDATA[注解防止表单重复提交]]></title>
-    <url>%2F2019%2F06%2F10%2F%E6%B3%A8%E8%A7%A3%E9%98%B2%E6%AD%A2%E8%A1%A8%E5%8D%95%E9%87%8D%E5%A4%8D%E6%8F%90%E4%BA%A4%2F</url>
-    <content type="text"><![CDATA[1. 注解1234@Target(ElementType.METHOD)@Retention(RetentionPolicy.RUNTIME)public @interface StopRepeatSubmit &#123;&#125; 2. 拦截处理器12345678910111213141516171819202122232425262728293031323334353637383940/** * @author pibigstar * @desc 防止表单重复提交拦截处理器 **/public class StopRepeatSubmitHandlerInterceptor extends HandlerInterceptorAdapter &#123; @Override public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception &#123; if (handler instanceof HandlerMethod) &#123; HandlerMethod handlerMethod = (HandlerMethod) handler; Method method = handlerMethod.getMethod(); StopRepeatSubmit annotation = method.getAnnotation(StopRepeatSubmit.class); if (annotation!=null) &#123; // 判断是否已经提交过了 String paramter = request.getParameterMap().toString(); String url = request.getRequestURL().toString(); String token = url+paramter; Object attrToken = request.getSession().getAttribute("token"); if (attrToken == null) &#123; // 第一次请求 request.getSession().setAttribute("token",token); return true; &#125; if (attrToken.toString().equals(token))&#123; // 重复提交了 return false; &#125; else &#123; // 第一次提交 request.getSession().setAttribute("token",token); return true; &#125; &#125; return true; &#125; else &#123; return super.preHandle(request, response, handler); &#125; &#125;&#125; 3. 使用1234@PostMapping("/submit")@StopRepeatSubmitpublic void submit()&#123;&#125;]]></content>
-      <categories>
-        <category>Java,SpringBoot技能大全</category>
-      </categories>
-      <tags>
-        <tag>注解</tag>
-        <tag>重复提交</tag>
       </tags>
   </entry>
   <entry>
@@ -787,17 +787,6 @@
       </tags>
   </entry>
   <entry>
-    <title><![CDATA[常见正则表达式剖析]]></title>
-    <url>%2F2019%2F06%2F02%2F%E5%B8%B8%E8%A7%81%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F%E5%89%96%E6%9E%90%2F</url>
-    <content type="text"><![CDATA[没错，又是正则，没办法，这东西入门很简单，但真正能写好，那是真心难，继续学吧。。。基本语法我在这里就不赘述了，需要的话可以关注我公众号，里面有很详细的语法介绍和示例。 今天我们来针对几个常见的正则来慢慢刨析 电话号码这个应该是最常用的，没有之一了吧 手机号 中国的手机号码都是11位数字，所以，最简单的表达式就是： 1[0-9]&#123;11&#125; 不过，目前手机号第1位都是1，第2位取值为3、4、5、7、8之一，所以，更精确的表达式是： 11[3|4|5|7|8|][0-9]&#123;9&#125; 为方便表达手机号，手机号中间经常有连字符(即减号’-‘)，形如：186-1234-5678 为表达这种可选的连字符，表达式可以改为： 11[3|4|5|7|8|][0-9]-?[0-9]&#123;4&#125;-?[0-9]&#123;4&#125; 在手机号前面，可能还有0、+86或0086，和手机号码之间可能还有一个空格，比如：018612345678+86 186123456780086 18612345678 为表达这种形式，可以在号码前加如下表达式： 1((0|\+86|0086)\s?)? 如果为了抽取，也要在左右加环视边界匹配，左右不能是数字。所以，完整的表达式为： 1(?&lt;![0-9])((0|\+86|0086)\s?)?1[3|4|5|7|8|][0-9]-?[0-9]&#123;4&#125;-?[0-9]&#123;4&#125;(?![0-9]) 用Java表示的代码为： 12345public static Pattern MOBILE_PHONE_PATTERN = Pattern.compile( "(?&lt;![0-9])" // 左边不能有数字 + "((0|\\+86|0086)\\s?)?" // 0 +86 0086 + "1[3|4|5|7|8|][0-9]-?[0-9]&#123;4&#125;-?[0-9]&#123;4&#125;" // 186-1234-5678 + "(?![0-9])"); // 右边不能有数字 固定电话 不考虑分机，中国的固定电话一般由两部分组成：区号和市内号码，区号是3到4位，市内号码是7到8位。区号以0开头，表达式可以为： 10[0-9]&#123;2,3&#125; 市内号码表达式为： 1[0-9]&#123;7,8&#125; 区号可能用括号包含，区号与市内号码之间可能有连字符，如以下形式：010-62265678(010)62265678 整个区号是可选的，所以整个表达式为： 1(\(?0[0-9]&#123;2,3&#125;\)?-?)?[0-9]&#123;7,8&#125; 再加上左右边界环视，完整的Java表示为： 12345public static Pattern FIXED_PHONE_PATTERN = Pattern.compile( "(?&lt;![0-9])" // 左边不能有数字 + "(\\(?0[0-9]&#123;2,3&#125;\\)?-?)?" // 区号 + "[0-9]&#123;7,8&#125;"// 市内号码 + "(?![0-9])"); // 右边不能有数字 身份证号码身份证有一代和二代之分，一代是15位数字，二代是18位，都不能以0开头，对于二代身份证，最后一位可能为x或X，其他是数字。 一代身份证表达式可以为： 1[1-9][0-9]&#123;14&#125; 二代身份证可以为： 1[1-9][0-9]&#123;16&#125;[0-9xX] 这两个表达式的前面部分是相同的，二代身份证多了如下内容： 1[0-9]&#123;2&#125;[0-9xX] 所以，它们可以合并为一个表达式，即： 1[1-9][0-9]&#123;14&#125;([0-9]&#123;2&#125;[0-9xX])? 加上左右边界环视，完整的Java表示为： 12345public static Pattern ID_CARD_PATTERN = Pattern.compile( "(?&lt;![0-9])" // 左边不能有数字 + "[1-9][0-9]&#123;14&#125;" // 一代身份证 + "([0-9]&#123;2&#125;[0-9xX])?" // 二代身份证多出的部分 + "(?![0-9])"); // 右边不能有数字 符合这个要求的就一定是身份证号码吗？当然不是，身份证还有一些其他的要求，这里就不探究了 邮箱完整的Email规范比较复杂，我们先看一些实际中常用的。 比如新浪邮箱，它的格式如： 1abc@sina.com 对于用户名部分，它的要求是：4-16个字符，可使用英文小写、数字、下划线，但下划线不能在首尾。怎么验证用户名呢？可以为： 1[a-z0-9][a-z0-9_]&#123;2,14&#125;[a-z0-9] 新浪邮箱的完整Java表达式为： 1234public static Pattern SINA_EMAIL_PATTERN = Pattern.compile( "[a-z0-9]" + "[a-z0-9_]&#123;2,14&#125;" + "[a-z0-9]@sina\\.com"); 我们再来看QQ邮箱，它对于用户名的要求为： 3-18字符，可使用英文、数字、减号、点或下划线 必须以英文字母开头，必须以英文字母或数字结尾 点、减号、下划线不能连续出现两次或两次以上 如果只有第一条，可以为： 1[-0-9a-zA-Z._]&#123;3,18&#125; 为满足第二条，可以改为： 1[a-zA-Z][-0-9a-zA-Z._]&#123;1,16&#125;[a-zA-Z0-9] 怎么满足第三条呢？可以使用边界环视，左边加如下表达式： 1(?![-0-9a-zA-Z._]*(--|\.\.|__)) 完整表达式可以为： 1(?![-0-9a-zA-Z._]*(--|\.\.|__))[a-zA-Z][-0-9a-zA-Z._]&#123;1,16&#125;[a-zA-Z0-9] QQ邮箱的完整Java表达式为： 12345public static Pattern QQ_EMAIL_PATTERN = Pattern.compile( "(?![-0-9a-zA-Z._]*(--|\\.\\.|__))" // 点、减号、下划线不能连续出现两次或两次以上 + "[a-zA-Z]" // 必须以英文字母开头 + "[-0-9a-zA-Z._]&#123;1,16&#125;" // 3-18位 英文、数字、减号、点、下划线组成 + "[a-zA-Z0-9]@qq\\.com"); // 由英文字母、数字结尾 以上都是特定邮箱服务商的要求，一般的邮箱是什么规则呢？一般而言，以@作为分隔符，前面是用户名，后面是域名。用户名的一般规则是： 由英文字母、数字、下划线、减号、点号组成 至少1位，不超过64位 开头不能是减号、点号和下划线 比如：pibigstar@example.com 这个表达式可以为： 1[0-9a-zA-Z][-._0-9a-zA-Z]&#123;0,63&#125; 域名部分以点号分隔为多个部分，至少有两个部分。最后一部分是顶级域名，由2到3个英文字母组成，表达式可以为： 1[a-zA-Z]&#123;2,3&#125; 对于域名的其他点号分隔的部分，每个部分一般由字母、数字、减号组成，但减号不能在开头，长度不能超过63个字符，表达式可以为： 1[0-9a-zA-Z][-0-9a-zA-Z]&#123;0,62&#125; 所以，域名部分的表达式为： 1([0-9a-zA-Z][-0-9a-zA-Z]&#123;0,62&#125;\.)+[a-zA-Z]&#123;2,3&#125; 完整的Java表示为： 12345public static Pattern GENERAL_EMAIL_PATTERN = Pattern.compile( "[0-9a-zA-Z][-._0-9a-zA-Z]&#123;0,63&#125;" // 用户名 + "@" + "([0-9a-zA-Z][-0-9a-zA-Z]&#123;0,62&#125;\\.)+" // 域名部分 + "[a-zA-Z]&#123;2,3&#125;"); // 顶级域名 日期日期的表示方式有很多种，我们只看一种，形如：2017-06-212016-11-1 年月日之间用连字符分隔，月和日可能只有一位。最简单的正则表达式可以为： 1\d&#123;4&#125;-\d&#123;1,2&#125;-\d&#123;1,2&#125; 年一般没有限制，但月只能取值1到12，日只能取值1到31，怎么表达这种限制呢？ 对于月，有两种情况，1月到9月，表达式可以为： 10?[1-9] 10月到12月，表达式可以为： 11[0-2] 所以，月的表达式为： 1(0?[1-9]|1[0-2]) 对于日，有三种情况：1到9号，表达式为：0?[1-9]10号到29号，表达式为：[1-2][0-9]30号和31号，表达式为：3[01]所以，整个表达式为： 1\d&#123;4&#125;-(0?[1-9]|1[0-2])-(0?[1-9]|[1-2][0-9]|3[01]) 加上左右边界环视，完整的Java表示为： 123456public static Pattern DATE_PATTERN = Pattern.compile( "(?&lt;![0-9])" // 左边不能有数字 + "\\d&#123;4&#125;-" // 年 + "(0?[1-9]|1[0-2])-" // 月 + "(0?[1-9]|[1-2][0-9]|3[01])"// 日 + "(?![0-9])"); // 右边不能有数字 URLURL的格式比较复杂，我们只考虑http协议，其通用格式是： 1http://&lt;host&gt;:&lt;port&gt;/&lt;path&gt;?&lt;searchpart&gt; 开始是http://，接着是主机名，主机名之后是可选的端口，再之后是可选的路径，路径后是可选的查询字符串，以?开头。 主机名中的字符可以是字母、数字、减号和点号，所以表达式可以为： 1[-0-9a-zA-Z.]+ 端口部分可以写为： 1(:\d+)? 路径由多个子路径组成，每个子路径以/开头，后跟零个或多个非/的字符，简单的说，表达式可以为： 1(/[^/]*)* 更精确的说，把所有允许的字符列出来，表达式为： 1(/[-\w$.+!*&apos;(),%;:@&amp;=] 对于查询字符串，简单的说，由非空字符串组成，表达式为： 1\?[\S]* 更精确的，把所有允许的字符列出来，表达式为： 1\?[-\w$.+!*&apos;(),%;:@&amp;=]* 路径和查询字符串是可选的，且查询字符串只有在至少存在一个路径的情况下才能出现，其模式为： 1(/&lt;sub_path&gt;(/&lt;sub_path&gt;)*(\?&lt;search&gt;)?)? 所以，路径和查询部分的简单表达式为： 1(/[^/]*(/[^/]*)*(\?[\S]*)?)? 精确表达式为： 1(/[-\w$.+!*&apos;(),%;:@&amp;=]*(/[-\w$.+!*&apos;(),%;:@&amp;=]*)*(\?[-\w$.+!*&apos;(),%;:@&amp;=]*)?)? HTTP的完整Java表达式为： 12345678public static Pattern HTTP_PATTERN = Pattern.compile( "http://" + "[-0-9a-zA-Z.]+" // 主机名 + "(:\\d+)?" // 端口 + "(" // 可选的路径和查询 - 开始 + "/[-\\w$.+!*'(),%;:@&amp;=]*" // 第一层路径 + "(/[-\\w$.+!*'(),%;:@&amp;=]*)*" // 可选的其他层路径 + "(\\?[-\\w$.+!*'(),%;:@&amp;=]*)?" // 可选的查询字符串 + ")?"); // 可选的路径和查询 - 结束 IP地址IP地址格式如下： 1192.168.112.110 点号分隔，4段数字，每个数字范围是0到255。最简单的表达式为： 1(\d&#123;1,3&#125;\.)&#123;3&#125;\d&#123;1-3&#125; \d{1,3}太简单，没有满足0到255之间的约束，要满足这个约束，就要分多种情况考虑。 值是1位数，前面可能有0到2个0，表达式为： 10&#123;0,2&#125;[0-9] 值是两位数，前面可能有一个0，表达式为： 10?[0-9]&#123;2&#125; 值是三位数，又要分为多种情况。以1开头的，后两位没有限制，表达式为： 11[0-9]&#123;2&#125; 以2开头的，如果第二位是0到4，则第三位没有限制，表达式为： 12[0-4][0-9] 如果第二位是5，则第三位取值为0到5，表达式为： 125[0-5] 所以，\d{1,3}更为精确的表示为： 1(0&#123;0,2&#125;[0-9]|0?[0-9]&#123;2&#125;|1[0-9]&#123;2&#125;|2[0-4][0-9]|25[0-5]) 所以，加上左右边界环视，IP地址的完整Java表示为： 12345public static Pattern IP_PATTERN = Pattern.compile( "(?&lt;![0-9])" // 左边不能有数字 + "((0&#123;0,2&#125;[0-9]|0?[0-9]&#123;2&#125;|1[0-9]&#123;2&#125;|2[0-4][0-9]|25[0-5])\\.)&#123;3&#125;" + "(0&#123;0,2&#125;[0-9]|0?[0-9]&#123;2&#125;|1[0-9]&#123;2&#125;|2[0-4][0-9]|25[0-5])" + "(?![0-9])"); // 右边不能有数字]]></content>
-      <categories>
-        <category>Java,正则</category>
-      </categories>
-      <tags>
-        <tag>正则</tag>
-      </tags>
-  </entry>
-  <entry>
     <title><![CDATA[Linux下搭建ftp服务器]]></title>
     <url>%2F2019%2F06%2F02%2FLinux%E4%B8%8B%E6%90%AD%E5%BB%BAftp%E6%9C%8D%E5%8A%A1%E5%99%A8%2F</url>
     <content type="text"><![CDATA[[TOC] 1. 安装vsftpd1yum install vsftpd -y 2. 启动服务1service vsftpd start 3. vsftpd的配置 ftp的配置文件主要有三个，位于/etc/vsftpd/目录下，分别是： ftpusers 该文件用来指定那些用户不能访问ftp服务器。 user_list 该文件用来指示的默认账户在默认情况下也不能访问ftp vsftpd.conf vsftpd的主配置文件 4. 修改登录方式默认是匿名登录的，如果你想通过账户去登录则修改vsftpd.conf文件 123456789101112# 允许匿名登录 anonymous_enable=YES# 设置匿名用户的登录目录anon_root=/var/ftp/pub# 打开匿名用户的上传权限anon_upload_enable=YES# 开启匿名用户的下载权限anon_world_readable_only=no# 打开匿名用户创建目录的权限anon_mkdir_write_enable=YES# 打开匿名用户删除和重命名的权限anon_other_write_enable=YES 注意：里面有的配置可能vsftpd.conf 里面没有，则需要你手动添加 5. 创建匿名用户可上传文件夹 默认情况下，ftp的根目录为/var/ftp，为了安全，这个目录默认不允许设置为777权限，否则ftp将无法访问。但是我们要匿名上传文件，需要“other”用户的写权限，正确的做法：在/var/ftp中建立一个upload（名子自己起吧）文件夹，将个文件夹权限设置为777（视具体需要自己设），在upload这个文件夹中，匿名用户可以上传文件、创建文件夹、删除文件等。 123cd /var/ftp/pubmkdir uploadchmod 777 upload 6. 非匿名账户的创建与使用12useradd pibigstarpasswd pibigstar #为pibigstar用户创建密码 7. 访问浏览器或者计算机文件管理系统中输入ftp://你服务器的IP地址 注意：这里默认访问的是 /var/ftp/pub 文件夹下]]></content>
@@ -811,6 +800,17 @@
       </tags>
   </entry>
   <entry>
+    <title><![CDATA[常见正则表达式剖析]]></title>
+    <url>%2F2019%2F06%2F02%2F%E5%B8%B8%E8%A7%81%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F%E5%89%96%E6%9E%90%2F</url>
+    <content type="text"><![CDATA[没错，又是正则，没办法，这东西入门很简单，但真正能写好，那是真心难，继续学吧。。。基本语法我在这里就不赘述了，需要的话可以关注我公众号，里面有很详细的语法介绍和示例。 今天我们来针对几个常见的正则来慢慢刨析 电话号码这个应该是最常用的，没有之一了吧 手机号 中国的手机号码都是11位数字，所以，最简单的表达式就是： 1[0-9]&#123;11&#125; 不过，目前手机号第1位都是1，第2位取值为3、4、5、7、8之一，所以，更精确的表达式是： 11[3|4|5|7|8|][0-9]&#123;9&#125; 为方便表达手机号，手机号中间经常有连字符(即减号’-‘)，形如：186-1234-5678 为表达这种可选的连字符，表达式可以改为： 11[3|4|5|7|8|][0-9]-?[0-9]&#123;4&#125;-?[0-9]&#123;4&#125; 在手机号前面，可能还有0、+86或0086，和手机号码之间可能还有一个空格，比如：018612345678+86 186123456780086 18612345678 为表达这种形式，可以在号码前加如下表达式： 1((0|\+86|0086)\s?)? 如果为了抽取，也要在左右加环视边界匹配，左右不能是数字。所以，完整的表达式为： 1(?&lt;![0-9])((0|\+86|0086)\s?)?1[3|4|5|7|8|][0-9]-?[0-9]&#123;4&#125;-?[0-9]&#123;4&#125;(?![0-9]) 用Java表示的代码为： 12345public static Pattern MOBILE_PHONE_PATTERN = Pattern.compile( "(?&lt;![0-9])" // 左边不能有数字 + "((0|\\+86|0086)\\s?)?" // 0 +86 0086 + "1[3|4|5|7|8|][0-9]-?[0-9]&#123;4&#125;-?[0-9]&#123;4&#125;" // 186-1234-5678 + "(?![0-9])"); // 右边不能有数字 固定电话 不考虑分机，中国的固定电话一般由两部分组成：区号和市内号码，区号是3到4位，市内号码是7到8位。区号以0开头，表达式可以为： 10[0-9]&#123;2,3&#125; 市内号码表达式为： 1[0-9]&#123;7,8&#125; 区号可能用括号包含，区号与市内号码之间可能有连字符，如以下形式：010-62265678(010)62265678 整个区号是可选的，所以整个表达式为： 1(\(?0[0-9]&#123;2,3&#125;\)?-?)?[0-9]&#123;7,8&#125; 再加上左右边界环视，完整的Java表示为： 12345public static Pattern FIXED_PHONE_PATTERN = Pattern.compile( "(?&lt;![0-9])" // 左边不能有数字 + "(\\(?0[0-9]&#123;2,3&#125;\\)?-?)?" // 区号 + "[0-9]&#123;7,8&#125;"// 市内号码 + "(?![0-9])"); // 右边不能有数字 身份证号码身份证有一代和二代之分，一代是15位数字，二代是18位，都不能以0开头，对于二代身份证，最后一位可能为x或X，其他是数字。 一代身份证表达式可以为： 1[1-9][0-9]&#123;14&#125; 二代身份证可以为： 1[1-9][0-9]&#123;16&#125;[0-9xX] 这两个表达式的前面部分是相同的，二代身份证多了如下内容： 1[0-9]&#123;2&#125;[0-9xX] 所以，它们可以合并为一个表达式，即： 1[1-9][0-9]&#123;14&#125;([0-9]&#123;2&#125;[0-9xX])? 加上左右边界环视，完整的Java表示为： 12345public static Pattern ID_CARD_PATTERN = Pattern.compile( "(?&lt;![0-9])" // 左边不能有数字 + "[1-9][0-9]&#123;14&#125;" // 一代身份证 + "([0-9]&#123;2&#125;[0-9xX])?" // 二代身份证多出的部分 + "(?![0-9])"); // 右边不能有数字 符合这个要求的就一定是身份证号码吗？当然不是，身份证还有一些其他的要求，这里就不探究了 邮箱完整的Email规范比较复杂，我们先看一些实际中常用的。 比如新浪邮箱，它的格式如： 1abc@sina.com 对于用户名部分，它的要求是：4-16个字符，可使用英文小写、数字、下划线，但下划线不能在首尾。怎么验证用户名呢？可以为： 1[a-z0-9][a-z0-9_]&#123;2,14&#125;[a-z0-9] 新浪邮箱的完整Java表达式为： 1234public static Pattern SINA_EMAIL_PATTERN = Pattern.compile( "[a-z0-9]" + "[a-z0-9_]&#123;2,14&#125;" + "[a-z0-9]@sina\\.com"); 我们再来看QQ邮箱，它对于用户名的要求为： 3-18字符，可使用英文、数字、减号、点或下划线 必须以英文字母开头，必须以英文字母或数字结尾 点、减号、下划线不能连续出现两次或两次以上 如果只有第一条，可以为： 1[-0-9a-zA-Z._]&#123;3,18&#125; 为满足第二条，可以改为： 1[a-zA-Z][-0-9a-zA-Z._]&#123;1,16&#125;[a-zA-Z0-9] 怎么满足第三条呢？可以使用边界环视，左边加如下表达式： 1(?![-0-9a-zA-Z._]*(--|\.\.|__)) 完整表达式可以为： 1(?![-0-9a-zA-Z._]*(--|\.\.|__))[a-zA-Z][-0-9a-zA-Z._]&#123;1,16&#125;[a-zA-Z0-9] QQ邮箱的完整Java表达式为： 12345public static Pattern QQ_EMAIL_PATTERN = Pattern.compile( "(?![-0-9a-zA-Z._]*(--|\\.\\.|__))" // 点、减号、下划线不能连续出现两次或两次以上 + "[a-zA-Z]" // 必须以英文字母开头 + "[-0-9a-zA-Z._]&#123;1,16&#125;" // 3-18位 英文、数字、减号、点、下划线组成 + "[a-zA-Z0-9]@qq\\.com"); // 由英文字母、数字结尾 以上都是特定邮箱服务商的要求，一般的邮箱是什么规则呢？一般而言，以@作为分隔符，前面是用户名，后面是域名。用户名的一般规则是： 由英文字母、数字、下划线、减号、点号组成 至少1位，不超过64位 开头不能是减号、点号和下划线 比如：pibigstar@example.com 这个表达式可以为： 1[0-9a-zA-Z][-._0-9a-zA-Z]&#123;0,63&#125; 域名部分以点号分隔为多个部分，至少有两个部分。最后一部分是顶级域名，由2到3个英文字母组成，表达式可以为： 1[a-zA-Z]&#123;2,3&#125; 对于域名的其他点号分隔的部分，每个部分一般由字母、数字、减号组成，但减号不能在开头，长度不能超过63个字符，表达式可以为： 1[0-9a-zA-Z][-0-9a-zA-Z]&#123;0,62&#125; 所以，域名部分的表达式为： 1([0-9a-zA-Z][-0-9a-zA-Z]&#123;0,62&#125;\.)+[a-zA-Z]&#123;2,3&#125; 完整的Java表示为： 12345public static Pattern GENERAL_EMAIL_PATTERN = Pattern.compile( "[0-9a-zA-Z][-._0-9a-zA-Z]&#123;0,63&#125;" // 用户名 + "@" + "([0-9a-zA-Z][-0-9a-zA-Z]&#123;0,62&#125;\\.)+" // 域名部分 + "[a-zA-Z]&#123;2,3&#125;"); // 顶级域名 日期日期的表示方式有很多种，我们只看一种，形如：2017-06-212016-11-1 年月日之间用连字符分隔，月和日可能只有一位。最简单的正则表达式可以为： 1\d&#123;4&#125;-\d&#123;1,2&#125;-\d&#123;1,2&#125; 年一般没有限制，但月只能取值1到12，日只能取值1到31，怎么表达这种限制呢？ 对于月，有两种情况，1月到9月，表达式可以为： 10?[1-9] 10月到12月，表达式可以为： 11[0-2] 所以，月的表达式为： 1(0?[1-9]|1[0-2]) 对于日，有三种情况：1到9号，表达式为：0?[1-9]10号到29号，表达式为：[1-2][0-9]30号和31号，表达式为：3[01]所以，整个表达式为： 1\d&#123;4&#125;-(0?[1-9]|1[0-2])-(0?[1-9]|[1-2][0-9]|3[01]) 加上左右边界环视，完整的Java表示为： 123456public static Pattern DATE_PATTERN = Pattern.compile( "(?&lt;![0-9])" // 左边不能有数字 + "\\d&#123;4&#125;-" // 年 + "(0?[1-9]|1[0-2])-" // 月 + "(0?[1-9]|[1-2][0-9]|3[01])"// 日 + "(?![0-9])"); // 右边不能有数字 URLURL的格式比较复杂，我们只考虑http协议，其通用格式是： 1http://&lt;host&gt;:&lt;port&gt;/&lt;path&gt;?&lt;searchpart&gt; 开始是http://，接着是主机名，主机名之后是可选的端口，再之后是可选的路径，路径后是可选的查询字符串，以?开头。 主机名中的字符可以是字母、数字、减号和点号，所以表达式可以为： 1[-0-9a-zA-Z.]+ 端口部分可以写为： 1(:\d+)? 路径由多个子路径组成，每个子路径以/开头，后跟零个或多个非/的字符，简单的说，表达式可以为： 1(/[^/]*)* 更精确的说，把所有允许的字符列出来，表达式为： 1(/[-\w$.+!*&apos;(),%;:@&amp;=] 对于查询字符串，简单的说，由非空字符串组成，表达式为： 1\?[\S]* 更精确的，把所有允许的字符列出来，表达式为： 1\?[-\w$.+!*&apos;(),%;:@&amp;=]* 路径和查询字符串是可选的，且查询字符串只有在至少存在一个路径的情况下才能出现，其模式为： 1(/&lt;sub_path&gt;(/&lt;sub_path&gt;)*(\?&lt;search&gt;)?)? 所以，路径和查询部分的简单表达式为： 1(/[^/]*(/[^/]*)*(\?[\S]*)?)? 精确表达式为： 1(/[-\w$.+!*&apos;(),%;:@&amp;=]*(/[-\w$.+!*&apos;(),%;:@&amp;=]*)*(\?[-\w$.+!*&apos;(),%;:@&amp;=]*)?)? HTTP的完整Java表达式为： 12345678public static Pattern HTTP_PATTERN = Pattern.compile( "http://" + "[-0-9a-zA-Z.]+" // 主机名 + "(:\\d+)?" // 端口 + "(" // 可选的路径和查询 - 开始 + "/[-\\w$.+!*'(),%;:@&amp;=]*" // 第一层路径 + "(/[-\\w$.+!*'(),%;:@&amp;=]*)*" // 可选的其他层路径 + "(\\?[-\\w$.+!*'(),%;:@&amp;=]*)?" // 可选的查询字符串 + ")?"); // 可选的路径和查询 - 结束 IP地址IP地址格式如下： 1192.168.112.110 点号分隔，4段数字，每个数字范围是0到255。最简单的表达式为： 1(\d&#123;1,3&#125;\.)&#123;3&#125;\d&#123;1-3&#125; \d{1,3}太简单，没有满足0到255之间的约束，要满足这个约束，就要分多种情况考虑。 值是1位数，前面可能有0到2个0，表达式为： 10&#123;0,2&#125;[0-9] 值是两位数，前面可能有一个0，表达式为： 10?[0-9]&#123;2&#125; 值是三位数，又要分为多种情况。以1开头的，后两位没有限制，表达式为： 11[0-9]&#123;2&#125; 以2开头的，如果第二位是0到4，则第三位没有限制，表达式为： 12[0-4][0-9] 如果第二位是5，则第三位取值为0到5，表达式为： 125[0-5] 所以，\d{1,3}更为精确的表示为： 1(0&#123;0,2&#125;[0-9]|0?[0-9]&#123;2&#125;|1[0-9]&#123;2&#125;|2[0-4][0-9]|25[0-5]) 所以，加上左右边界环视，IP地址的完整Java表示为： 12345public static Pattern IP_PATTERN = Pattern.compile( "(?&lt;![0-9])" // 左边不能有数字 + "((0&#123;0,2&#125;[0-9]|0?[0-9]&#123;2&#125;|1[0-9]&#123;2&#125;|2[0-4][0-9]|25[0-5])\\.)&#123;3&#125;" + "(0&#123;0,2&#125;[0-9]|0?[0-9]&#123;2&#125;|1[0-9]&#123;2&#125;|2[0-4][0-9]|25[0-5])" + "(?![0-9])"); // 右边不能有数字]]></content>
+      <categories>
+        <category>Java,正则</category>
+      </categories>
+      <tags>
+        <tag>正则</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[MySQL实战45讲学习笔记（1~7）]]></title>
     <url>%2F2019%2F05%2F27%2FMySQL%E5%AE%9E%E6%88%9845%E8%AE%B2%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%881~7%EF%BC%89%2F</url>
     <content type="text"><![CDATA[本文为极客时间《MySQL实战45讲》的总结笔记，如有侵权，请通知我，将立马删除。建议大家去购买这套课程，真的是物有所值。 1、2一条语句的执行过程1. Mysql结构数据库总共分为两大部分：Server层和存储层，其中Server层又分为：连接器、（查询缓存）、分析器、优化器和执行器。存储层是以插件的形式，常见的有InnoDB和MyISAM。 2. 查询语句（select * from T where id = 2） 通过连接器获取连接 查看语句是存在于查询缓存中，如果存在则直接返回，不存在则进行 步骤3，Mysql 8.0版本之后已经去掉了查询缓存功能 通过分析器判断SQL语句是否正确（要做什么） 通过优化器判断使用哪个索引去查询（怎么做） 执行器判断是否拥有该表权限，如果有则调用存储引擎的拿第一条数据的接口，判断id是否是等于2，如果不等则调用拿下一条数据的接口，如果等于则将结果放入到结果集中，继续判断下一条。 3. 日志mysql中的日志分为两个部分：redo log 和 binlog。redo log ：这个服务于存储引擎， 这个是InnoDB引擎特有的日志系统binlog : 这个服务于Server层，是所有引擎都可以使用的。 redo log 是为了减少磁盘的读写和crash-safe而产生的，它记录了更新、删除、插入语句，当Mysql空闲时就从redo log中读取这些日志，把数据更新到磁盘中。而binlog是记录做了哪些事情，当我们恢复备份信息时，可以读取binlog中的记录，然后去执行redo log中的记录去恢复信息。 4. 更新语句（update T c = c+1 where id = 2） 执行器找存储引擎拿到 id = 2 这一行记录，id是主键，存储引擎直接通过树搜索找到这一行记录，如果这一行所在的数据页在内存中则直接返回，如果不在则去读取磁盘到内存中再返回。 执行器拿到这一行记录，将 c 列的值 +1 得到一行新数据，然后再调用存储引擎接口写入这行新数据 存储引擎拿到这行数据写入到内存中，同时将这个更新操作记录到redo log日志中，此时redo log处于prepare状态，并告诉执行器可以提交事务了 执行器生成这个操作的binlog，并把binlog写入到磁盘中。 执行器调用存储引擎的提交事务的接口，存储引擎把刚刚写入的redo log日志状态更新为commit，这也就是两阶段提交 3. 事务隔离3.1 事务隔离的特性ACID：原子性、一致性、隔离性、持久性 3.2 事务的隔离级别 读未提交：一个事务还未提交，其他事务就可以看到它做的更改 读已提交：一个事务在提交之后，其他事务才能看到它的更改 可重复读：一个事务是启动和提交之间读到数据是一致的，它在未提交时，其他事务无法看到它做的更改 串行化：对同一行记录，写会加写锁，读会加读锁，当出现读写锁冲突的时候，后访问的事务必须等前一个事务执行完才能继续执行。 修改隔离级别：设置参数：transaction-isolation 3.3 事务隔离的实现 每条记录在更新的时候都会记录一条回滚操作，记录上的最新值通过回滚操作都能回到它上一个版本，同一条记录在系统中可以存在多个版本，这就是数据库的多版本并发控制（MVCC） 3.4 回滚日志 回滚日志什么时候删除?系统会判断当没有实物需要用到这些回滚日志的时候，回滚日志会被删除。 什么时候不需要？当系统中没有比这个回滚日志更早的read-view的时候3.5 为什么尽量不使用长事务？ 长事务意味着系统里面会存在很老的事务视图，在这个事务提交之前，回滚记录都要保留，这会导致大量占用存储空间。除此之外，长事务还会占用锁资源，可能会拖垮整个库。 4、5 深入浅出索引（上，下）4.1 索引的实现方式有哪些 哈希表 将值放到数组里，然后用哈希函数将key换算为一个确定的位置 ，将value放到数组的这个位置，当哈希冲突时，会拉出一个链表进行保存。适用场景：只适合等值查询情况，不适合用于范围查询 有序数组 将值按顺序放入到数组中，可采用二分法查询，时间复杂度为O(lg(N))，但是插入比较麻烦，需要移动很多值。适用场景：不再变化的值。 二叉树搜索树 每个结点的左儿子小于父节点，右儿子大于父节点，平衡二叉树是搜索速度最快的数据结构，但是索引不仅存在于内存，也要存储到硬盘中，如果用平衡二叉树，那么100万的数据就是一个树高20的二叉树，对应磁盘就是20个数据块，要查询一个数据要访问20个数据块，这就很慢了。 N叉树 N叉树顾名思义就是每个节点有N儿子，儿子之间从左到右递增。它是为了解决二叉树占用数据块太多而产生的。 4.2 Innodb引擎使用的索引 Innodb是使用B+树来存储数据的。每一张表其实就是由多个B+树组成的，树结点的key值就是某一行的主键，value是该行的其他数据。每一个索引都会创建一个B+树。 4.3 索引的类型 索引分为主键索引和非主键索引，主键索引的叶子结点存放的是这一行的数据，而非主键索引的叶子结点存放的是主键索引的值。当使用主键索引去查询时可以直接获取到该行数据，而使用非主键索引去查询时，先拿到主键的值，再根据主键获取到该行数据，这个过程被称为回表 4.4 覆盖索引表 user，id（主键），name（普通索引） 当我们想查询 name = 张三 的id 时我们可以使用 1select * from user where name = '张三' 这条语句的执行过程为：先去索引树name中找到张三拿到张三的id，再去主键索引树中根据id拿到这条记录，而我们只是需要它的id的，使用这条语句会进行一次回表操作，所以我们可以改为下面语句： 1select id from user where name = '张三' 这种方式就叫做覆盖索引，我们可以通过一些联合索引的方式去避免进行二次回表操作。 4.5 索引最左前缀表 user，id（主键），gender（性别），name（姓名），age（年龄）联合索引（name，age） 当我们查询姓张并且年龄为10岁的男孩时： 1select * from user where name like '张%' and age = 10 and gender = 1 它会先找到第一个姓张的记录，然后再向后依次遍历，这种就避免了全表扫描。 一般来说如果建立了 （a，b）联合索引，就不需要在a上单独建立一个索引了，但是如果是根据b来查，那么还是需要在b上建立索引。 6.全局锁和表级锁61. 全局锁全局锁即是锁住整个数据库，mysql提供了一个加全局读锁的语句(FTWRL)： 1flush table with read lock 加完全局读锁之后，数据库整个的更新，删除，添加语句都会被阻塞，这个使用场景就是数据库备份。但是让数据库处于只读状态，这种方式就会让所有更新被阻塞，整个业务就会停摆。这时我们可以使用官方为我们提供的数据库备份工具mysqldump，通过--single-transaction参数来确保拿到一致性视图: 12备份：mysqldump --single-transaction -u用户名 -p密码 数据库名 &gt; back.sql恢复：mysql -u用户名 -p密码 -f 数据库名&lt; back.sql 这样在备份数据库之前就会启动一个事务，来确保拿到一致性视图，采用这种方式数据库也可以正常更新的。但这种方式有种局限性，那就是必须支持事务，而myisam存储引擎就不支持事务，所以还是得采用全局锁的方式。 问 : 让数据库处于只读状态为什么不用set global readonly=true ?这是因为使用readonly的话，一旦客户端出现异常，那么整个数据库都处于不可用状态了，而使用 FTWRL一旦客户端出现异常，那么就会自动释放这个锁，整个数据库即可恢复到正常状态（可读可写）。 6.2 表级锁mysql中的表级锁有两种，一种就是表锁，另一种是元数据锁（MDL）：meta data lock。 6.2.1 表锁mysql添加表锁可采用下面语句 1lock tables 表名 read,表名 write 释放锁和FTWRL类似，当客户端出现异常后也会自动释放锁。也可手动释放： 1unlock tables 表名 6.2.2 元数据锁（MDL）元数据锁是隐式锁，当访问某一张表时，数据库自动加的锁。 当对表增删改查时：加MDL读锁 当更改表结构时：加MDL写锁 读锁之间不互斥，也就是多个线程可以同时对一个表进行增删改查，但是读写锁和写写锁之间互斥，也即是当更改表结构时要等待读锁或写锁释放后才能进行更改。 问：为什么我就给表加个字段，数据库就崩了？如果在更改表结构之前有一个长事务在操作表（MDL读锁），当我们去添加表中一个字段时那么这个操作会添加一个MDL写锁，由于读写锁互斥，那么这个MDL写锁就会被阻塞，以至于后面的增删改查操作要加MDL读锁的都会被阻塞下去。 为了更加安全的更改表结构我们可以使用下面语句： 1alert table 表名 wait 5 add colunm 列名 这个会等待5秒，如果5秒钟拿不到MDL写锁，那么就不再继续阻塞，也就可以后面的操作继续进行下去。 7. 行锁行锁是在引擎层实现的，但不是每个引擎都支持行锁，像MyISAM引擎就不支持行锁，它想控制并发就只能加表锁。 行锁是有需要时才添加的，但释放是在事务提交之后才进行释放的（两阶段锁），根据这个特性，如果你的事务中需要锁多个行，要把最可能造成锁冲突、最可能影响并发度的锁尽量往后放。 举个例子：用户A在电影院B买一张电影票（3元）需要下面三个过程： 从用户A账户中扣掉 3 元 在电影院B的余额中增加 3 元 记录一条交易日志 这个三个过程是放在一个事务中的，但是 2 过程是最可能造成锁冲突的，因为其他用户买了票之后也要在电影院B的余额中增加 3 元，所以我们要把最可能造成锁冲突的放在后面，这样电影院B余额这一行的锁时间就最少，我们调整顺序为：3 、 1 、 2 7.1 死锁和死锁检测 事务A在等待事务B释放id=2的行锁，而事务B在等待事务A释放id=1的行锁，事务A和事务B互相等待对方的资源释放，这就造成了死锁。 死锁解决 超时释放设置超时时间，通过参数innodb_lock_wait_timeout设置，当超过这个时间之后将自动释放锁资源。默认是50s 死锁检测设置innodb_deadlock_detect为on来开启死锁检测，但它会造成额外的负担，每当一个事务被锁的时候，就要看看它所依赖的线程有没有被别人锁住，如此循环，最后判断是否出现了循环等待，也就是死锁。]]></content>
@@ -820,19 +820,6 @@
       <tags>
         <tag>mysql</tag>
         <tag>表级锁</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title><![CDATA[Centos和Ubuntu安装kubeadm]]></title>
-    <url>%2F2019%2F05%2F24%2FCentos%E5%92%8CUbuntu%E5%AE%89%E8%A3%85kubeadm%2F</url>
-    <content type="text"><![CDATA[必须需要更换kubeadm下载源才能安装到 Centos更换源 12345678910cat &lt;&lt;EOF &gt; /etc/yum.repos.d/kubernetes.repo[kubernetes]name=Kubernetesbaseurl=http://mirrors.aliyun.com/kubernetes/yum/repos/kubernetes-el7-x86_64enabled=1gpgcheck=0repo_gpgcheck=0gpgkey=http://mirrors.aliyun.com/kubernetes/yum/doc/yum-key.gpg http://mirrors.aliyun.com/kubernetes/yum/doc/rpm-package-key.gpgEOF 安装 1yum install kubeadm Ubuntu更换源 123cat &lt;&lt;EOF &gt; /etc/apt/sources.list.d/kubernetes.listdeb http://mirrors.ustc.edu.cn/kubernetes/apt kubernetes-xenial mainEOF 更新系统源 1apt-get update 如果提示签名无法验证，则执行下面语句，将 JC054F7C为你执行时显示出的 NO_PUBKEY 的后八位 12gpg --keyserver keyserver.ubuntu.com --recv-keys JC054F7Cgpg --export --armor BA07F4FB | sudo apt-key add - 再次更新 1apt-get update 安装 1apt-get install kubeadm]]></content>
-      <categories>
-        <category>k8s</category>
-      </categories>
-      <tags>
-        <tag>k8s</tag>
-        <tag>kubeadm</tag>
-        <tag>centos</tag>
       </tags>
   </entry>
   <entry>
@@ -855,6 +842,19 @@
       <categories>
         <category>Java,nginx</category>
       </categories>
+  </entry>
+  <entry>
+    <title><![CDATA[Centos和Ubuntu安装kubeadm]]></title>
+    <url>%2F2019%2F05%2F24%2FCentos%E5%92%8CUbuntu%E5%AE%89%E8%A3%85kubeadm%2F</url>
+    <content type="text"><![CDATA[必须需要更换kubeadm下载源才能安装到 Centos更换源 12345678910cat &lt;&lt;EOF &gt; /etc/yum.repos.d/kubernetes.repo[kubernetes]name=Kubernetesbaseurl=http://mirrors.aliyun.com/kubernetes/yum/repos/kubernetes-el7-x86_64enabled=1gpgcheck=0repo_gpgcheck=0gpgkey=http://mirrors.aliyun.com/kubernetes/yum/doc/yum-key.gpg http://mirrors.aliyun.com/kubernetes/yum/doc/rpm-package-key.gpgEOF 安装 1yum install kubeadm Ubuntu更换源 123cat &lt;&lt;EOF &gt; /etc/apt/sources.list.d/kubernetes.listdeb http://mirrors.ustc.edu.cn/kubernetes/apt kubernetes-xenial mainEOF 更新系统源 1apt-get update 如果提示签名无法验证，则执行下面语句，将 JC054F7C为你执行时显示出的 NO_PUBKEY 的后八位 12gpg --keyserver keyserver.ubuntu.com --recv-keys JC054F7Cgpg --export --armor BA07F4FB | sudo apt-key add - 再次更新 1apt-get update 安装 1apt-get install kubeadm]]></content>
+      <categories>
+        <category>k8s</category>
+      </categories>
+      <tags>
+        <tag>k8s</tag>
+        <tag>kubeadm</tag>
+        <tag>centos</tag>
+      </tags>
   </entry>
   <entry>
     <title><![CDATA[使用java画一张海报]]></title>
@@ -1002,19 +1002,6 @@
       </tags>
   </entry>
   <entry>
-    <title><![CDATA[SpringBoot允许跨域访问]]></title>
-    <url>%2F2019%2F04%2F21%2FSpringBoot%E5%85%81%E8%AE%B8%E8%B7%A8%E5%9F%9F%E8%AE%BF%E9%97%AE%2F</url>
-    <content type="text"><![CDATA[当它请求的一个资源是从一个与它本身提供的第一个资源的不同的域名时，一个资源会发起一个跨域HTTP请求(Cross-site HTTP request)。 一般都是异步请求会有这个问题，比如：Ajax，XMLHttpRequest等 使用@Configuration（推荐）1234567891011121314151617181920212223242526import org.springframework.context.annotation.Bean; import org.springframework.context.annotation.Configuration; import org.springframework.web.cors.CorsConfiguration; import org.springframework.web.cors.UrlBasedCorsConfigurationSource; import org.springframework.web.filter.CorsFilter; @Configuration public class CorsConfig &#123; @Bean public CorsFilter corsFilter() &#123; UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource(); source.registerCorsConfiguration("/**", buildConfig()); return new CorsFilter(source); &#125; private CorsConfiguration buildConfig() &#123; CorsConfiguration corsConfiguration = new CorsConfiguration(); // 1允许任何域名使用 corsConfiguration.addAllowedOrigin("*"); // 2允许任何头 corsConfiguration.addAllowedHeader("*"); // 3允许任何方法（post、get等） corsConfiguration.addAllowedMethod("*"); return corsConfiguration; &#125; &#125; 使用Filter123456789101112131415161718import javax.servlet.*; import javax.servlet.http.HttpServletResponse; import java.io.IOException; @Component public class CorsFilter implements Filter &#123; public void doFilter(ServletRequest req, ServletResponse res, FilterChain chain) throws IOException, ServletException &#123; HttpServletResponse response = (HttpServletResponse) res; response.setHeader("Access-Control-Allow-Origin", "*"); response.setHeader("Access-Control-Allow-Methods", "POST, GET"); response.setHeader("Access-Control-Max-Age", "3600"); response.setHeader("Access-Control-Allow-Headers", "x-requested-with"); chain.doFilter(req, res); &#125; public void init(FilterConfig filterConfig) &#123;&#125; public void destroy() &#123;&#125; &#125;]]></content>
-      <categories>
-        <category>springboot</category>
-      </categories>
-      <tags>
-        <tag>springboot</tag>
-        <tag>cors</tag>
-        <tag>跨域</tag>
-      </tags>
-  </entry>
-  <entry>
     <title><![CDATA[SprintBoot任意处获取Request对象]]></title>
     <url>%2F2019%2F04%2F21%2FSprintBoot%E4%BB%BB%E6%84%8F%E5%A4%84%E8%8E%B7%E5%8F%96Request%E5%AF%B9%E8%B1%A1%2F</url>
     <content type="text"><![CDATA[老样子，直接上代码 方式一（粗暴，推荐）123456789101112131415161718192021222324252627282930package com.pibgstar.demo.utils;import org.springframework.web.context.request.RequestAttributes;import org.springframework.web.context.request.RequestContextHolder;import org.springframework.web.context.request.ServletRequestAttributes;import javax.servlet.http.HttpServletRequest;import javax.servlet.http.HttpServletResponse;/** * @author pibigstar * @desc 获取request和response对象 **/public class WebUtil &#123; /** 获取request对象 **/ public static HttpServletRequest getRequest()&#123; RequestAttributes requestAttributes = RequestContextHolder.getRequestAttributes(); if (requestAttributes == null)&#123; return null; &#125; return ((ServletRequestAttributes)requestAttributes).getRequest(); &#125; /** 获取response对象 **/ public static HttpServletResponse getResponse()&#123; RequestAttributes requestAttributes = RequestContextHolder.getRequestAttributes(); if (requestAttributes == null)&#123; return null; &#125; return ((ServletRequestAttributes)requestAttributes).getResponse(); &#125;&#125; 方式二（简单）在你需要的地方，注入即可 1234@AutowiredHttpServletRequest request;@AutowiredHttpServletResponse response]]></content>
@@ -1039,17 +1026,6 @@
       </tags>
   </entry>
   <entry>
-    <title><![CDATA[树莓派初始开机配置]]></title>
-    <url>%2F2019%2F04%2F21%2F%E6%A0%91%E8%8E%93%E6%B4%BE%E5%88%9D%E5%A7%8B%E5%BC%80%E6%9C%BA%E9%85%8D%E7%BD%AE%2F</url>
-    <content type="text"><![CDATA[1. 开启ssh在 内存卡 的 /boot 目录下 新增 一个 ssh 文件夹即可 2. 设置WiFi连接在 内存卡 的 /boot 目录下 新增 一个 wpa_supplicant.conf 文件，里面内容如下 123456789country=CNctrl_interface=DIR=/var/run/wpa_supplicant GROUP=netdevupdate_config=1network=&#123; ssid="wifi名" psk="wifi密码" priority=1&#125; 3. 查看IP地址登录到你路由器后台查看，一般路由器的后台地址都为192.168.1.1，密码一般是123456设备名一般是raspberrypi 4. 修改密码12345# 修改 pi 用户密码sudo passwd pi# 修改root密码sudo passwd root 5. 设置时区 输入date命令看查看当前系统时间 123# 打开时区设置sudo dpkg-reconfigure tzdata# 选择Asia ---&gt; ShangHai 6. 安装vim树莓派默认是 nano编辑器，用着不太爽，用 vim替换它 1234# 更新下软件源sudo apt-get update# 安装vimsudo apt-get install -y vim 改下配置 1sudo vim /etc/vim/vimrc 简单配一下 1234# 语法高亮syntax on# 显示行号set nu 7. 安装oh-my-zsh查看当前使用的shell 1echo $SHELL 查看系统中所有shell 1cat /etc/shells 安装zsh 1sudo apt-get install zsh 修改配置 1vim ~/.zshrc 添加 12345678ZSH_THEME="blinks"ENABLE_CORRECTION="true"# 为zsh添加git和sudo插件plugins=(git sudo)alias ll='ls -all'alias vi='vim'alias ps='ps -A'alias ifconfig='sudo ifconfig' 切换shell为zsh 1chsh -s /bin/zsh 刷新设置 1source ~/.zshrc 安装oh-my-zsh 1sh -c "$(wget https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh -O -)" 8. 开启vnc远程桌面1sudo apt-get install tightvncserver 启动 1tightvncserver :1 关闭 1vncserver -kill :1 关于配置noVNC的，可以查看我之前的文章：https://blog.csdn.net/junmoxi/article/details/100977131 9. 设置内网穿透用的是 ngrok 比较方便，这是教程可以参考：https://www.jianshu.com/p/8702f55d57e3 ngrok 官网： https://www.ngrok.cc]]></content>
-      <categories>
-        <category>树莓派</category>
-      </categories>
-      <tags>
-        <tag>树莓派</tag>
-      </tags>
-  </entry>
-  <entry>
     <title><![CDATA[Go语言入门（4）dep包管理]]></title>
     <url>%2F2019%2F04%2F21%2FGo%E8%AF%AD%E8%A8%80%E5%85%A5%E9%97%A8%EF%BC%884%EF%BC%89dep%E5%8C%85%E7%AE%A1%E7%90%86%2F</url>
     <content type="text"><![CDATA[1. 什么是dep？ dep和go，在一定程度上相当于maven之于Java，composer之于PHP，dep是go语言官方的一个包管理工具。相比较go get而言，dep可以直接给引入的第三方包一个专门的目录，并且可以专门制定一个配置文件，控制go项目所引入的包，版本以及其他依赖关系。 dep这个项目放在golang官方的github中：https://github.com/golang/dep 2. 安装 Mac系统： 1brew install dep Linux系统 1curl https://raw.githubusercontent.com/golang/dep/master/install.sh | sh Windows系统 1go get -u github.com/golang/dep/cmd/dep 3. 使用3.1 初始化在项目根目录下执行 dep init 即可完成初始化，此时会生成三个文件 vendor文件夹存放我们项目需要的包文件 Gopkg.lock文件 Gopkg.toml 文件是我们可以编辑的文件，通过编辑这个文件，并运行dep ensure的命令可以达到引入包的目的： Gopkg.toml: 1234567891011121314151617# 必需包required = ["github.com/gin-gonic/gin"]# 忽略包#ignored = []没有可以不写# 项目元数据#[metadata]# 约束条件[[constraint]] # name = # 可选：版本 # version = # 分支 # branch # 修订 # revision # 可选：指定来源 # source = "github.com/gin-gonic/gin" 3.2 导包使用 dep ensure 即可引入当前项目所需要的包到vendor文件夹中 3.3 查看状态使用 dep status命令查看状态]]></content>
@@ -1059,6 +1035,30 @@
       <tags>
         <tag>dep</tag>
         <tag>go包管理</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[SpringBoot允许跨域访问]]></title>
+    <url>%2F2019%2F04%2F21%2FSpringBoot%E5%85%81%E8%AE%B8%E8%B7%A8%E5%9F%9F%E8%AE%BF%E9%97%AE%2F</url>
+    <content type="text"><![CDATA[当它请求的一个资源是从一个与它本身提供的第一个资源的不同的域名时，一个资源会发起一个跨域HTTP请求(Cross-site HTTP request)。 一般都是异步请求会有这个问题，比如：Ajax，XMLHttpRequest等 使用@Configuration（推荐）1234567891011121314151617181920212223242526import org.springframework.context.annotation.Bean; import org.springframework.context.annotation.Configuration; import org.springframework.web.cors.CorsConfiguration; import org.springframework.web.cors.UrlBasedCorsConfigurationSource; import org.springframework.web.filter.CorsFilter; @Configuration public class CorsConfig &#123; @Bean public CorsFilter corsFilter() &#123; UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource(); source.registerCorsConfiguration("/**", buildConfig()); return new CorsFilter(source); &#125; private CorsConfiguration buildConfig() &#123; CorsConfiguration corsConfiguration = new CorsConfiguration(); // 1允许任何域名使用 corsConfiguration.addAllowedOrigin("*"); // 2允许任何头 corsConfiguration.addAllowedHeader("*"); // 3允许任何方法（post、get等） corsConfiguration.addAllowedMethod("*"); return corsConfiguration; &#125; &#125; 使用Filter123456789101112131415161718import javax.servlet.*; import javax.servlet.http.HttpServletResponse; import java.io.IOException; @Component public class CorsFilter implements Filter &#123; public void doFilter(ServletRequest req, ServletResponse res, FilterChain chain) throws IOException, ServletException &#123; HttpServletResponse response = (HttpServletResponse) res; response.setHeader("Access-Control-Allow-Origin", "*"); response.setHeader("Access-Control-Allow-Methods", "POST, GET"); response.setHeader("Access-Control-Max-Age", "3600"); response.setHeader("Access-Control-Allow-Headers", "x-requested-with"); chain.doFilter(req, res); &#125; public void init(FilterConfig filterConfig) &#123;&#125; public void destroy() &#123;&#125; &#125;]]></content>
+      <categories>
+        <category>springboot</category>
+      </categories>
+      <tags>
+        <tag>springboot</tag>
+        <tag>cors</tag>
+        <tag>跨域</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[树莓派初始开机配置]]></title>
+    <url>%2F2019%2F04%2F21%2F%E6%A0%91%E8%8E%93%E6%B4%BE%E5%88%9D%E5%A7%8B%E5%BC%80%E6%9C%BA%E9%85%8D%E7%BD%AE%2F</url>
+    <content type="text"><![CDATA[1. 开启ssh在 内存卡 的 /boot 目录下 新增 一个 ssh 文件夹即可 2. 设置WiFi连接在 内存卡 的 /boot 目录下 新增 一个 wpa_supplicant.conf 文件，里面内容如下 123456789country=CNctrl_interface=DIR=/var/run/wpa_supplicant GROUP=netdevupdate_config=1network=&#123; ssid="wifi名" psk="wifi密码" priority=1&#125; 3. 查看IP地址登录到你路由器后台查看，一般路由器的后台地址都为192.168.1.1，密码一般是123456设备名一般是raspberrypi 4. 修改密码12345# 修改 pi 用户密码sudo passwd pi# 修改root密码sudo passwd root 5. 设置时区 输入date命令看查看当前系统时间 123# 打开时区设置sudo dpkg-reconfigure tzdata# 选择Asia ---&gt; ShangHai 6. 安装vim树莓派默认是 nano编辑器，用着不太爽，用 vim替换它 1234# 更新下软件源sudo apt-get update# 安装vimsudo apt-get install -y vim 改下配置 1sudo vim /etc/vim/vimrc 简单配一下 1234# 语法高亮syntax on# 显示行号set nu 7. 安装oh-my-zsh查看当前使用的shell 1echo $SHELL 查看系统中所有shell 1cat /etc/shells 安装zsh 1sudo apt-get install zsh 修改配置 1vim ~/.zshrc 添加 12345678ZSH_THEME="blinks"ENABLE_CORRECTION="true"# 为zsh添加git和sudo插件plugins=(git sudo)alias ll='ls -all'alias vi='vim'alias ps='ps -A'alias ifconfig='sudo ifconfig' 切换shell为zsh 1chsh -s /bin/zsh 刷新设置 1source ~/.zshrc 安装oh-my-zsh 1sh -c "$(wget https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh -O -)" 8. 开启vnc远程桌面1sudo apt-get install tightvncserver 启动 1tightvncserver :1 关闭 1vncserver -kill :1 关于配置noVNC的，可以查看我之前的文章：https://blog.csdn.net/junmoxi/article/details/100977131 9. 设置内网穿透用的是 ngrok 比较方便，这是教程可以参考：https://www.jianshu.com/p/8702f55d57e3 ngrok 官网： https://www.ngrok.cc]]></content>
+      <categories>
+        <category>树莓派</category>
+      </categories>
+      <tags>
+        <tag>树莓派</tag>
       </tags>
   </entry>
   <entry>
@@ -1171,6 +1171,18 @@
       </tags>
   </entry>
   <entry>
+    <title><![CDATA[Go代码风格检查脚本]]></title>
+    <url>%2F2019%2F03%2F24%2FGo%E4%BB%A3%E7%A0%81%E9%A3%8E%E6%A0%BC%E6%A3%80%E6%9F%A5%E8%84%9A%E6%9C%AC%2F</url>
+    <content type="text"><![CDATA[Go代码风格检查脚本check.sh 12345678910111213#!/bin/bashcd "$&#123;GOPATH&#125;/src/github.com/pibigstar/go-demo"# 判断是否有环形导入gocyclo -over 25 $(ls -d */ | grep -v vendor | grep -v proto)# 查找是否有错误find . -type f -not -path "./vendor/*" | xargs -0 misspell -error# 对所有代码进行格式化find . -name "*.go" -not -path "./vendor/*" | xargs gofmt -w# 对所有代码进行导入格式化find . -name "*.go" -not -path "./vendor/*" | xargs goimports -w# 判断前后两次是否有差别，如果有则退出git diff --exit-code]]></content>
+      <categories>
+        <category>go</category>
+      </categories>
+      <tags>
+        <tag>gofmt</tag>
+        <tag>go</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[SpringBoot前后端数据传输加密]]></title>
     <url>%2F2019%2F03%2F24%2FSpringBoot%E5%89%8D%E5%90%8E%E7%AB%AF%E6%95%B0%E6%8D%AE%E4%BC%A0%E8%BE%93%E5%8A%A0%E5%AF%86%2F</url>
     <content type="text"><![CDATA[采用的算法为AES算法 1. 编写加密工具类1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950515253545556575859606162636465666768697071package com.pibigstar.utils;import javax.crypto.Cipher;import javax.crypto.KeyGenerator;import javax.crypto.spec.SecretKeySpec;import org.apache.commons.codec.binary.Base64;/** * 前后端数据传输加密工具类 * @author pibigstar * */public class AesEncryptUtils &#123; //可配置到Constant中，并读取配置文件注入 private static final String KEY = "abcdef0123456789"; //参数分别代表 算法名称/加密模式/数据填充方式 private static final String ALGORITHMSTR = "AES/ECB/PKCS5Padding"; /** * 加密 * @param content 加密的字符串 * @param encryptKey key值 * @return * @throws Exception */ public static String encrypt(String content, String encryptKey) throws Exception &#123; KeyGenerator kgen = KeyGenerator.getInstance("AES"); kgen.init(128); Cipher cipher = Cipher.getInstance(ALGORITHMSTR); cipher.init(Cipher.ENCRYPT_MODE, new SecretKeySpec(encryptKey.getBytes(), "AES")); byte[] b = cipher.doFinal(content.getBytes("utf-8")); return Base64.encodeBase64String(b); &#125; /** * 解密 * @param encryptStr 解密的字符串 * @param decryptKey 解密的key值 * @return * @throws Exception */ public static String decrypt(String encryptStr, String decryptKey) throws Exception &#123; KeyGenerator kgen = KeyGenerator.getInstance("AES"); kgen.init(128); Cipher cipher = Cipher.getInstance(ALGORITHMSTR); cipher.init(Cipher.DECRYPT_MODE, new SecretKeySpec(decryptKey.getBytes(), "AES")); byte[] encryptBytes = Base64.decodeBase64(encryptStr); byte[] decryptBytes = cipher.doFinal(encryptBytes); return new String(decryptBytes); &#125; public static String encrypt(String content) throws Exception &#123; return encrypt(content, KEY); &#125; public static String decrypt(String encryptStr) throws Exception &#123; return decrypt(encryptStr, KEY); &#125; public static void main(String[] args) throws Exception &#123; String content = "派大星"; System.out.println("加密前：" + content); String encrypt = encrypt(content, KEY); System.out.println("加密后：" + encrypt); String decrypt = decrypt(encrypt, KEY); System.out.println("解密后：" + decrypt); &#125;&#125; 2. 前端js 文件下载：https://pan.baidu.com/s/11LnXUnsMtGW5C8sycf2SDQ 导入 js 文件 123&lt;script type="text/javascript" src = "js/aes.js"&gt;&lt;/script&gt;&lt;script type="text/javascript" src = "js/pad-zeropadding.js"&gt;&lt;/script&gt;&lt;script type="text/javascript" src = "js/security.js"&gt;&lt;/script&gt; 发送数据 123456789101112131415function sendData() &#123; alert("发送的数据："+Encrypt(JSON.stringify(&#123;name:"派大星"&#125;))); $.ajax(&#123; type: "POST", url:"/save", data:Encrypt(JSON.stringify(&#123;name:"派大星"&#125;)), dataType:'json', contentType: "application/json", success: function(resData) &#123; alert("返回的数据："+resData); alert("解密之后："+Decrypt(resData)); alert("解密之后转json对象："+JSON.parse(Decrypt(resData)).name); &#125; &#125;); &#125;]]></content>
@@ -1182,15 +1194,15 @@
       </tags>
   </entry>
   <entry>
-    <title><![CDATA[Go代码风格检查脚本]]></title>
-    <url>%2F2019%2F03%2F24%2FGo%E4%BB%A3%E7%A0%81%E9%A3%8E%E6%A0%BC%E6%A3%80%E6%9F%A5%E8%84%9A%E6%9C%AC%2F</url>
-    <content type="text"><![CDATA[Go代码风格检查脚本check.sh 12345678910111213#!/bin/bashcd "$&#123;GOPATH&#125;/src/github.com/pibigstar/go-demo"# 判断是否有环形导入gocyclo -over 25 $(ls -d */ | grep -v vendor | grep -v proto)# 查找是否有错误find . -type f -not -path "./vendor/*" | xargs -0 misspell -error# 对所有代码进行格式化find . -name "*.go" -not -path "./vendor/*" | xargs gofmt -w# 对所有代码进行导入格式化find . -name "*.go" -not -path "./vendor/*" | xargs goimports -w# 判断前后两次是否有差别，如果有则退出git diff --exit-code]]></content>
+    <title><![CDATA[Go语言入门（3）beego的安装与使用]]></title>
+    <url>%2F2019%2F03%2F21%2FGo%E8%AF%AD%E8%A8%80%E5%85%A5%E9%97%A8%EF%BC%883%EF%BC%89beego%E7%9A%84%E5%AE%89%E8%A3%85%E4%B8%8E%E4%BD%BF%E7%94%A8%2F</url>
+    <content type="text"><![CDATA[1. 安装库可参考 ：https://beego.me/quickstart 1go get -u github.com/astaxie/beego 再安装bee 1go get -u github.com/beego/bee 2. 配置bee的环境变量在环境变量 path 中新加入 一个 %GOPATH%/bin 3. 测试在cmd 命令窗口中输入 ： bee 即可 4. 使用4.1 新建一个beego项目在cmd 命令行窗口中输入： 1bee new myfirst 4.2 运行先进入你生成的 项目中： 1cd myfirst 运行 1bee run 如果没报错，并且浏览器访问 http://127.0.0.1:8080 出现欢迎页面则证明一切OK]]></content>
       <categories>
         <category>go</category>
       </categories>
       <tags>
-        <tag>gofmt</tag>
         <tag>go</tag>
+        <tag>beego</tag>
       </tags>
   </entry>
   <entry>
@@ -1207,28 +1219,16 @@
       </tags>
   </entry>
   <entry>
-    <title><![CDATA[Go语言入门（3）beego的安装与使用]]></title>
-    <url>%2F2019%2F03%2F21%2FGo%E8%AF%AD%E8%A8%80%E5%85%A5%E9%97%A8%EF%BC%883%EF%BC%89beego%E7%9A%84%E5%AE%89%E8%A3%85%E4%B8%8E%E4%BD%BF%E7%94%A8%2F</url>
-    <content type="text"><![CDATA[1. 安装库可参考 ：https://beego.me/quickstart 1go get -u github.com/astaxie/beego 再安装bee 1go get -u github.com/beego/bee 2. 配置bee的环境变量在环境变量 path 中新加入 一个 %GOPATH%/bin 3. 测试在cmd 命令窗口中输入 ： bee 即可 4. 使用4.1 新建一个beego项目在cmd 命令行窗口中输入： 1bee new myfirst 4.2 运行先进入你生成的 项目中： 1cd myfirst 运行 1bee run 如果没报错，并且浏览器访问 http://127.0.0.1:8080 出现欢迎页面则证明一切OK]]></content>
+    <title><![CDATA[JSP自定义标签使用详解]]></title>
+    <url>%2F2019%2F03%2F17%2FJSP%E8%87%AA%E5%AE%9A%E4%B9%89%E6%A0%87%E7%AD%BE%E4%BD%BF%E7%94%A8%E8%AF%A6%E8%A7%A3%2F</url>
+    <content type="text"><![CDATA[JSP自定义标签使用详解简单写一个可以从数据库中读取配置的单选按钮组件 1. Java部分123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585960616263646566676869707172737475767778798081828384858687888990919293949596979899100101102103104105106107108109110111112113114115116117118119120121122123124125126127128129130131132133134135136137138139140141142143144145146package com.pibgstar.demo.tags;import javax.servlet.jsp.JspException;import javax.servlet.jsp.JspWriter;import javax.servlet.jsp.tagext.SimpleTagSupport;import java.io.IOException;import java.util.ArrayList;/** * @author pibigstar * @create 2018-12-02 17:16 * @desc 自定义radio组件 **/public class RadioTagSupport extends SimpleTagSupport&#123; private String code; private String tip; private String key; private String value; private ArrayList&lt;RadioVo&gt; list; @Override public void doTag() throws JspException, IOException &#123; getData(); StringBuilder sp = new StringBuilder(); sp.append("&lt;div class='radio'&gt;"); sp.append("&lt;span class='tip'&gt;"); sp.append(this.getTip()); sp.append("&lt;/span&gt;"); for (RadioVo r: list) &#123; sp.append("&lt;input type='radio' "); sp.append("name='"); sp.append(r.getName()); sp.append("' value='"); sp.append(r.getValue()); if (r.getChecked()) &#123; sp.append("' checked /&gt;"); &#125;else &#123; sp.append("' /&gt;"); &#125; sp.append(r.getShowValue()); &#125; sp.append("&lt;/div&gt;"); JspWriter out = getJspContext().getOut(); out.write(sp.toString()); // 从body中获取值 //StringWriter sw = new StringWriter(); //getJspBody().invoke(sw); //getJspContext().getOut().write(sw.toString()); &#125; private void getData() &#123; list = new ArrayList(); // 这里可以通过code值，拿到数据库中自己配置的值，这里只是简单的封装几个固定的值 RadioVo r1 = new RadioVo(); r1.setName("sex"); r1.setValue("1"); r1.setShowValue("男"); RadioVo r2= new RadioVo(); r2.setName("sex"); r2.setValue("2"); r2.setShowValue("女"); &#125; public String getCode() &#123; return code; &#125; public void setCode(String code) &#123; this.code = code; &#125; public String getTip() &#123; return tip; &#125; public void setTip(String tip) &#123; this.tip = tip; &#125; public String getKey() &#123; return key; &#125; public void setKey(String key) &#123; this.key = key; &#125; public String getValue() &#123; return value; &#125; public void setValue(String value) &#123; this.value = value; &#125; public ArrayList&lt;RadioVo&gt; getList() &#123; return list; &#125; public void setList(ArrayList&lt;RadioVo&gt; list) &#123; this.list = list; &#125;&#125;class RadioVo &#123; private String name; private String value; private String showValue; private Boolean checked; public String getName() &#123; return name; &#125; public void setName(String name) &#123; this.name = name; &#125; public String getValue() &#123; return value; &#125; public void setValue(String value) &#123; this.value = value; &#125; public String getShowValue() &#123; return showValue; &#125; public void setShowValue(String showValue) &#123; this.showValue = showValue; &#125; public Boolean getChecked() &#123; return checked; &#125; public void setChecked(Boolean checked) &#123; this.checked = checked; &#125;&#125; 2. tld编写12345678910111213141516171819202122232425262728&lt;?xml version="1.0" encoding="UTF-8" ?&gt;&lt;taglib xmlns="http://java.sun.com/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-jsptaglibrary_2_1.xsd" version="2.1"&gt; &lt;description&gt;JSP 自定义标签&lt;/description&gt; &lt;display-name&gt;pibigstar core&lt;/display-name&gt; &lt;tlib-version&gt;1.0&lt;/tlib-version&gt; &lt;short-name&gt;pi&lt;/short-name&gt; &lt;tag&gt; &lt;description&gt;myself radio&lt;/description&gt; &lt;name&gt;radio&lt;/name&gt; &lt;tag-class&gt;com.pibgstar.demo.tags.RadioTagSupport&lt;/tag-class&gt; &lt;body-content&gt;JSP&lt;/body-content&gt; &lt;attribute&gt; &lt;name&gt;code&lt;/name&gt; &lt;required&gt;true&lt;/required&gt; &lt;rtexprvalue&gt;false&lt;/rtexprvalue&gt; &lt;/attribute&gt; &lt;attribute&gt; &lt;name&gt;tip&lt;/name&gt; &lt;required&gt;false&lt;/required&gt; &lt;rtexprvalue&gt;false&lt;/rtexprvalue&gt; &lt;/attribute&gt; &lt;/tag&gt;&lt;/taglib&gt; 3. JSP中使用12345678910&lt;%@taglib prefix="pi" uri="WEB-INFO/tlds/pibigstar-pi.tld" %&gt;&lt;html&gt;&lt;head&gt; &lt;title&gt;自定义radio标签使用&lt;/title&gt;&lt;/head&gt;&lt;body&gt;&lt;pi:radio code="SEX" tip="性别"&gt;&lt;/pi:radio&gt;&lt;/body&gt;&lt;/html&gt;]]></content>
       <categories>
-        <category>go</category>
+        <category>jsp</category>
       </categories>
       <tags>
-        <tag>go</tag>
-        <tag>beego</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title><![CDATA[SpringBoot安全验证之Referer拦截器]]></title>
-    <url>%2F2019%2F03%2F17%2FSpringBoot%E5%AE%89%E5%85%A8%E9%AA%8C%E8%AF%81%E4%B9%8BReferer%E6%8B%A6%E6%88%AA%E5%99%A8%2F</url>
-    <content type="text"><![CDATA[自定义Referer拦截器12345678910111213141516171819202122232425262728293031323334353637383940public class RefererInterceptor extends HandlerInterceptorAdapter &#123; // URL匹配器 private AntPathMatcher matcher = new AntPathMatcher(); @Autowired private RefererProperties properties; @Override public boolean preHandle(HttpServletRequest req, HttpServletResponse resp, Object handler) throws Exception &#123; String referer = req.getHeader("referer"); String host = req.getServerName(); // 只验证POST请求 if ("POST".equals(req.getMethod())) &#123; if (referer == null) &#123; // 状态置为404 resp.setStatus(HttpServletResponse.SC_NOT_FOUND); return false; &#125; java.net.URL url = null; try &#123; url = new java.net.URL(referer); &#125; catch (MalformedURLException e) &#123; // URL解析异常，也置为404 resp.setStatus(HttpServletResponse.SC_NOT_FOUND); return false; &#125; // 首先判断请求域名和referer域名是否相同 if (!host.equals(url.getHost())) &#123; // 如果不等，判断是否在白名单中 if (properties.getRefererDomain() != null) &#123; for (String s : properties.getRefererDomain()) &#123; if (s.equals(url.getHost())) &#123; return true; &#125; &#125; &#125; return false; &#125; &#125; return true; &#125;&#125; 配置白名单Referer域名1234567@Component@ConfigurationProperties(prefix = "referer")public class RefererProperties &#123; // 白名单域名 private List&lt;String&gt; refererDomain; //setter,getter方法&#125; yml配置12345referer: refererDomain: - baidu.com - pibigstar.com - mxspvip.cn]]></content>
-      <categories>
-        <category>springboot</category>
-      </categories>
-      <tags>
-        <tag>referer</tag>
-        <tag>sprintboot</tag>
-        <tag>安全验证</tag>
+        <tag>jsp</tag>
+        <tag>tag</tag>
+        <tag>自定义标签</tag>
       </tags>
   </entry>
 </search>

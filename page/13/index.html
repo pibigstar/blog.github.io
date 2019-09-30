@@ -518,6 +518,193 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://pibigstar.com/2019/02/14/Shell入门实例/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="派大星">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/qq.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="派大星的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/02/14/Shell入门实例/" itemprop="url">Shell入门实例</a></h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-02-14T06:06:04+08:00">
+                2019-02-14
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Linux-shell/" itemprop="url" rel="index">
+                    <span itemprop="name">Linux,shell</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="控制字符"><a href="#控制字符" class="headerlink" title="控制字符"></a>控制字符</h1><p>常见的控制字符有：<code>&amp;</code>，<code>&amp;&amp;</code>，<code>||</code>，<code>;</code>，<code>|</code></p>
+<p><code>&amp;</code>: 将命令在后台执行<br><code>&amp;&amp;</code>: 前面的命令执行成功，后面的命令才会执行<br><code>||</code>: 前面的命令执行失败，后面的命令才会执行<br><code>;</code>:命令顺序执行，前面的命令执行成功与否，后面的命令都会执行<br><code>|</code>:管道符，前面命令的执行结果是后面命令的输入</p>
+<h5 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h5><p>将命令在后台执行，可通过 <code>jobs</code> 命令查看当前后台执行的命令</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">java -jar Test &amp;</span><br></pre></td></tr></table></figure>
+
+<p>当test.txt存在时，查看该文件，只有ls test.txt执行成功后，才会执行 后面的 cat test.txt</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ls test.txt &amp;&amp; cat test.txt</span><br></pre></td></tr></table></figure>
+
+<p>如果有gedit编辑器则打开该程序，否则打开vim编辑器</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gedit || vim</span><br></pre></td></tr></table></figure>
+
+<p>命令依次执行，无论前面命令是否执行成功，后面的命令都会执行</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ls /tmp ; ls /root ; ls /home</span><br></pre></td></tr></table></figure>
+
+<p>查看test.txt文件，并屏蔽其输出（扔到了 /dev/null黑洞里），如果前面命令执行成功，说明文件存在，则打印出文件存在，如果执行失败，说明文件不存在，则打印文件不存在</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cat test.txt &gt; /dev/null &amp;&amp; <span class="built_in">echo</span> <span class="string">"文件存在"</span> || <span class="built_in">echo</span> <span class="string">"文件不存在"</span></span><br></pre></td></tr></table></figure>
+
+<p>输出当前进程中有<code>bash</code>关键字的进程，前面<code>ps -a</code>的输出结果，是 <code>grep bash</code> 的输入参数</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ps -a | grep bash</span><br></pre></td></tr></table></figure>
+
+<h1 id="参数变量"><a href="#参数变量" class="headerlink" title="参数变量"></a>参数变量</h1><ul>
+<li><code>$@</code>所有参数列表，与 <code>$*</code>效果相同</li>
+<li><code>$$</code> Shell本身的PID</li>
+<li><code>$0</code>: Shell本身的文件名 </li>
+<li><code>$1~n</code> 参数值，$1为第一个参数，$2为第二个参数。。。</li>
+</ul>
+<h4 id="实例-1"><a href="#实例-1" class="headerlink" title="实例"></a>实例</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#!/bin/sh</span></span><br><span class="line"><span class="built_in">echo</span> <span class="string">"shell脚本本身的名字: <span class="variable">$0</span>"</span></span><br><span class="line"><span class="built_in">echo</span> <span class="string">"传给shell的第一个参数: <span class="variable">$1</span>"</span></span><br><span class="line"><span class="built_in">echo</span> <span class="string">"传给shell的第二个参数: <span class="variable">$2</span>"</span></span><br></pre></td></tr></table></figure>
+
+<p>将其保存为 <code>test.sh</code>，执行</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">bash Test.sh 1 2</span><br></pre></td></tr></table></figure>
+
+<p>输出结果</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">shell脚本本身的名字: test.sh</span><br><span class="line">传给shell的第一个参数: 1</span><br><span class="line">传给shell的第二个参数:  2</span><br></pre></td></tr></table></figure>
+
+<p><strong>常用脚本demo</strong><br>函数声明一定要在函数调用前面，不然会找不到，切记，和高级语言不一样！</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#!/bin/bash</span></span><br><span class="line"><span class="function"><span class="title">run</span></span>() &#123;</span><br><span class="line">  <span class="built_in">echo</span> <span class="string">"启动 <span class="variable">$1</span> 程序"</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="title">stop</span></span>()&#123;</span><br><span class="line">  <span class="built_in">echo</span> <span class="string">"关闭 <span class="variable">$1</span> 程序"</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="title">restart</span></span>() &#123;</span><br><span class="line">  <span class="built_in">echo</span> <span class="string">"重启动 <span class="variable">$1</span> 程序"</span></span><br><span class="line">  stop <span class="string">"<span class="variable">$1</span>"</span></span><br><span class="line">  run <span class="string">"<span class="variable">$1</span>"</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment"># 帮助文档</span></span><br><span class="line"><span class="function"><span class="title">usage</span></span>() &#123;</span><br><span class="line">   <span class="built_in">echo</span> <span class="string">"start: 启动程序 build.sh start 程序名"</span></span><br><span class="line">   <span class="built_in">echo</span> <span class="string">"stop:  停止程序 build.sh stop 程序名"</span></span><br><span class="line">   <span class="built_in">echo</span> <span class="string">"restart: 重启程序 build.sh restart 程序名"</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="title">main</span></span>() &#123;</span><br><span class="line">    <span class="keyword">case</span> <span class="variable">$1</span> <span class="keyword">in</span></span><br><span class="line">        start)</span><br><span class="line">            run <span class="variable">$2</span></span><br><span class="line">            ;;</span><br><span class="line">        restart)</span><br><span class="line">            restart <span class="variable">$2</span></span><br><span class="line">            ;;</span><br><span class="line">        stop)</span><br><span class="line">            stop <span class="variable">$2</span></span><br><span class="line">            ;;</span><br><span class="line">        *)</span><br><span class="line">            usage</span><br><span class="line">            ;;</span><br><span class="line">    <span class="keyword">esac</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="comment"># 执行main 函数，并将所有参数传递过去</span></span><br><span class="line">main <span class="string">"<span class="variable">$@</span>"</span></span><br></pre></td></tr></table></figure>
+
+<p>使用</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./build.sh stop docker</span><br></pre></td></tr></table></figure>
+
+<h1 id="echo输出彩色字"><a href="#echo输出彩色字" class="headerlink" title="echo输出彩色字"></a>echo输出彩色字</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">echo</span> -e <span class="string">"\033[30m 黑色字 \033[0m"</span></span><br><span class="line"><span class="built_in">echo</span> -e <span class="string">"\033[31m 红色字 \033[0m"</span></span><br><span class="line"><span class="built_in">echo</span> -e <span class="string">"\033[32m 绿色字 \033[0m"</span></span><br><span class="line"><span class="built_in">echo</span> -e <span class="string">"\033[33m 黄色字 \033[0m"</span></span><br><span class="line"><span class="built_in">echo</span> -e <span class="string">"\033[34m 蓝色字 \033[0m"</span></span><br><span class="line"><span class="built_in">echo</span> -e <span class="string">"\033[35m 紫色字 \033[0m"</span></span><br><span class="line"><span class="built_in">echo</span> -e <span class="string">"\033[36m 天蓝字 \033[0m"</span></span><br><span class="line"><span class="built_in">echo</span> -e <span class="string">"\033[37m 白色字 \033[0m"</span></span><br><span class="line"> </span><br><span class="line"></span><br><span class="line"><span class="built_in">echo</span> -e <span class="string">"\033[40;37m 黑底白字 \033[0m"</span></span><br><span class="line"><span class="built_in">echo</span> -e <span class="string">"\033[41;37m 红底白字 \033[0m"</span></span><br><span class="line"><span class="built_in">echo</span> -e <span class="string">"\033[42;37m 绿底白字 \033[0m"</span></span><br><span class="line"><span class="built_in">echo</span> -e <span class="string">"\033[43;37m 黄底白字 \033[0m"</span></span><br><span class="line"><span class="built_in">echo</span> -e <span class="string">"\033[44;37m 蓝底白字 \033[0m"</span></span><br><span class="line"><span class="built_in">echo</span> -e <span class="string">"\033[45;37m 紫底白字 \033[0m"</span></span><br><span class="line"><span class="built_in">echo</span> -e <span class="string">"\033[46;37m 天蓝底白字 \033[0m"</span></span><br><span class="line"><span class="built_in">echo</span> -e <span class="string">"\033[47;30m 白底黑字 \033[0m"</span></span><br></pre></td></tr></table></figure>
+
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    <div>
+      
+    </div>
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://pibigstar.com/2019/02/14/Centos搭建kubernates集群/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -879,193 +1066,6 @@
 <li>启动<code>NettyServerDemo</code></li>
 <li>命令行中输入: <code>telnet localhost 8080</code><br>如果找不到Telnet命令，说明Telnet客户端没有打开，在控制面板中—&gt; 程序 ——&gt; 打开或关闭Windows功能<br><img src="https://img-blog.csdnimg.cn/20190328163412103.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2p1bm1veGk=,size_16,color_FFFFFF,t_70" alt><br>当输入信息后，服务器端会收到点击的键，并输出出来<br><img src="https://img-blog.csdnimg.cn/20190328163510413.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2p1bm1veGk=,size_16,color_FFFFFF,t_70" alt></li>
 </ol>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    <div>
-      
-    </div>
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://pibigstar.com/2019/02/14/Shell入门实例/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="派大星">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/qq.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="派大星的博客">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/02/14/Shell入门实例/" itemprop="url">Shell入门实例</a></h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-02-14T06:06:04+08:00">
-                2019-02-14
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Linux-shell/" itemprop="url" rel="index">
-                    <span itemprop="name">Linux,shell</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="控制字符"><a href="#控制字符" class="headerlink" title="控制字符"></a>控制字符</h1><p>常见的控制字符有：<code>&amp;</code>，<code>&amp;&amp;</code>，<code>||</code>，<code>;</code>，<code>|</code></p>
-<p><code>&amp;</code>: 将命令在后台执行<br><code>&amp;&amp;</code>: 前面的命令执行成功，后面的命令才会执行<br><code>||</code>: 前面的命令执行失败，后面的命令才会执行<br><code>;</code>:命令顺序执行，前面的命令执行成功与否，后面的命令都会执行<br><code>|</code>:管道符，前面命令的执行结果是后面命令的输入</p>
-<h5 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h5><p>将命令在后台执行，可通过 <code>jobs</code> 命令查看当前后台执行的命令</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">java -jar Test &amp;</span><br></pre></td></tr></table></figure>
-
-<p>当test.txt存在时，查看该文件，只有ls test.txt执行成功后，才会执行 后面的 cat test.txt</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ls test.txt &amp;&amp; cat test.txt</span><br></pre></td></tr></table></figure>
-
-<p>如果有gedit编辑器则打开该程序，否则打开vim编辑器</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gedit || vim</span><br></pre></td></tr></table></figure>
-
-<p>命令依次执行，无论前面命令是否执行成功，后面的命令都会执行</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ls /tmp ; ls /root ; ls /home</span><br></pre></td></tr></table></figure>
-
-<p>查看test.txt文件，并屏蔽其输出（扔到了 /dev/null黑洞里），如果前面命令执行成功，说明文件存在，则打印出文件存在，如果执行失败，说明文件不存在，则打印文件不存在</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cat test.txt &gt; /dev/null &amp;&amp; <span class="built_in">echo</span> <span class="string">"文件存在"</span> || <span class="built_in">echo</span> <span class="string">"文件不存在"</span></span><br></pre></td></tr></table></figure>
-
-<p>输出当前进程中有<code>bash</code>关键字的进程，前面<code>ps -a</code>的输出结果，是 <code>grep bash</code> 的输入参数</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ps -a | grep bash</span><br></pre></td></tr></table></figure>
-
-<h1 id="参数变量"><a href="#参数变量" class="headerlink" title="参数变量"></a>参数变量</h1><ul>
-<li><code>$@</code>所有参数列表，与 <code>$*</code>效果相同</li>
-<li><code>$$</code> Shell本身的PID</li>
-<li><code>$0</code>: Shell本身的文件名 </li>
-<li><code>$1~n</code> 参数值，$1为第一个参数，$2为第二个参数。。。</li>
-</ul>
-<h4 id="实例-1"><a href="#实例-1" class="headerlink" title="实例"></a>实例</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#!/bin/sh</span></span><br><span class="line"><span class="built_in">echo</span> <span class="string">"shell脚本本身的名字: <span class="variable">$0</span>"</span></span><br><span class="line"><span class="built_in">echo</span> <span class="string">"传给shell的第一个参数: <span class="variable">$1</span>"</span></span><br><span class="line"><span class="built_in">echo</span> <span class="string">"传给shell的第二个参数: <span class="variable">$2</span>"</span></span><br></pre></td></tr></table></figure>
-
-<p>将其保存为 <code>test.sh</code>，执行</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">bash Test.sh 1 2</span><br></pre></td></tr></table></figure>
-
-<p>输出结果</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">shell脚本本身的名字: test.sh</span><br><span class="line">传给shell的第一个参数: 1</span><br><span class="line">传给shell的第二个参数:  2</span><br></pre></td></tr></table></figure>
-
-<p><strong>常用脚本demo</strong><br>函数声明一定要在函数调用前面，不然会找不到，切记，和高级语言不一样！</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#!/bin/bash</span></span><br><span class="line"><span class="function"><span class="title">run</span></span>() &#123;</span><br><span class="line">  <span class="built_in">echo</span> <span class="string">"启动 <span class="variable">$1</span> 程序"</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="title">stop</span></span>()&#123;</span><br><span class="line">  <span class="built_in">echo</span> <span class="string">"关闭 <span class="variable">$1</span> 程序"</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="title">restart</span></span>() &#123;</span><br><span class="line">  <span class="built_in">echo</span> <span class="string">"重启动 <span class="variable">$1</span> 程序"</span></span><br><span class="line">  stop <span class="string">"<span class="variable">$1</span>"</span></span><br><span class="line">  run <span class="string">"<span class="variable">$1</span>"</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment"># 帮助文档</span></span><br><span class="line"><span class="function"><span class="title">usage</span></span>() &#123;</span><br><span class="line">   <span class="built_in">echo</span> <span class="string">"start: 启动程序 build.sh start 程序名"</span></span><br><span class="line">   <span class="built_in">echo</span> <span class="string">"stop:  停止程序 build.sh stop 程序名"</span></span><br><span class="line">   <span class="built_in">echo</span> <span class="string">"restart: 重启程序 build.sh restart 程序名"</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="title">main</span></span>() &#123;</span><br><span class="line">    <span class="keyword">case</span> <span class="variable">$1</span> <span class="keyword">in</span></span><br><span class="line">        start)</span><br><span class="line">            run <span class="variable">$2</span></span><br><span class="line">            ;;</span><br><span class="line">        restart)</span><br><span class="line">            restart <span class="variable">$2</span></span><br><span class="line">            ;;</span><br><span class="line">        stop)</span><br><span class="line">            stop <span class="variable">$2</span></span><br><span class="line">            ;;</span><br><span class="line">        *)</span><br><span class="line">            usage</span><br><span class="line">            ;;</span><br><span class="line">    <span class="keyword">esac</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="comment"># 执行main 函数，并将所有参数传递过去</span></span><br><span class="line">main <span class="string">"<span class="variable">$@</span>"</span></span><br></pre></td></tr></table></figure>
-
-<p>使用</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./build.sh stop docker</span><br></pre></td></tr></table></figure>
-
-<h1 id="echo输出彩色字"><a href="#echo输出彩色字" class="headerlink" title="echo输出彩色字"></a>echo输出彩色字</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">echo</span> -e <span class="string">"\033[30m 黑色字 \033[0m"</span></span><br><span class="line"><span class="built_in">echo</span> -e <span class="string">"\033[31m 红色字 \033[0m"</span></span><br><span class="line"><span class="built_in">echo</span> -e <span class="string">"\033[32m 绿色字 \033[0m"</span></span><br><span class="line"><span class="built_in">echo</span> -e <span class="string">"\033[33m 黄色字 \033[0m"</span></span><br><span class="line"><span class="built_in">echo</span> -e <span class="string">"\033[34m 蓝色字 \033[0m"</span></span><br><span class="line"><span class="built_in">echo</span> -e <span class="string">"\033[35m 紫色字 \033[0m"</span></span><br><span class="line"><span class="built_in">echo</span> -e <span class="string">"\033[36m 天蓝字 \033[0m"</span></span><br><span class="line"><span class="built_in">echo</span> -e <span class="string">"\033[37m 白色字 \033[0m"</span></span><br><span class="line"> </span><br><span class="line"></span><br><span class="line"><span class="built_in">echo</span> -e <span class="string">"\033[40;37m 黑底白字 \033[0m"</span></span><br><span class="line"><span class="built_in">echo</span> -e <span class="string">"\033[41;37m 红底白字 \033[0m"</span></span><br><span class="line"><span class="built_in">echo</span> -e <span class="string">"\033[42;37m 绿底白字 \033[0m"</span></span><br><span class="line"><span class="built_in">echo</span> -e <span class="string">"\033[43;37m 黄底白字 \033[0m"</span></span><br><span class="line"><span class="built_in">echo</span> -e <span class="string">"\033[44;37m 蓝底白字 \033[0m"</span></span><br><span class="line"><span class="built_in">echo</span> -e <span class="string">"\033[45;37m 紫底白字 \033[0m"</span></span><br><span class="line"><span class="built_in">echo</span> -e <span class="string">"\033[46;37m 天蓝底白字 \033[0m"</span></span><br><span class="line"><span class="built_in">echo</span> -e <span class="string">"\033[47;30m 白底黑字 \033[0m"</span></span><br></pre></td></tr></table></figure>
-
 
           
         
@@ -1815,6 +1815,160 @@ C:要有父类引用指向子类对象。
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://pibigstar.com/2019/01/27/程序员开发必备工具（二）之浏览器插件/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="派大星">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/qq.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="派大星的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/01/27/程序员开发必备工具（二）之浏览器插件/" itemprop="url">程序员开发必备工具（二）之浏览器插件</a></h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-01-27T13:01:04+08:00">
+                2019-01-27
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/工具使用/" itemprop="url" rel="index">
+                    <span itemprop="name">工具使用</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>@[TOC]</p>
+<h1 id="2-浏览器插件"><a href="#2-浏览器插件" class="headerlink" title="2. 浏览器插件"></a>2. 浏览器插件</h1><p>所有插件我都放到了我的微信公众号上面了，关注我微信公众号，发送【浏览器插件】就可以获取了。<br><img src="https://img-blog.csdnimg.cn/20190120141011616.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2p1bm1veGk=,size_16,color_FFFFFF,t_70" alt></p>
+<h2 id="2-1-插件扩展管理器（Extension-Manager）"><a href="#2-1-插件扩展管理器（Extension-Manager）" class="headerlink" title="2.1 插件扩展管理器（Extension Manager）"></a>2.1 插件扩展管理器（Extension Manager）</h2><p>快速启动和关闭插件，非常好用。<br><img src="https://img-blog.csdnimg.cn/20190120140127890.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2p1bm1veGk=,size_16,color_FFFFFF,t_70" alt></p>
+<h2 id="2-2-web前端访问助手（FeHelper）"><a href="#2-2-web前端访问助手（FeHelper）" class="headerlink" title="2.2 web前端访问助手（FeHelper）"></a>2.2 web前端访问助手（FeHelper）</h2><p>自动格式化JSON数据，网页取色，字符串加解密，JS正则<br><img src="https://img-blog.csdnimg.cn/20190120135319592.png" alt></p>
+<h2 id="2-3-油猴插件"><a href="#2-3-油猴插件" class="headerlink" title="2.3 油猴插件"></a>2.3 油猴插件</h2><p>这是一个运行脚本的插件，你可以自己写一下小脚本放到油猴上面。我目前用的有VIP视频破解，百度下载助手等等。你可以在点击<a href="https://greasyfork.org/zh-CN/scripts" target="_blank" rel="noopener">这里</a>下载一些好玩使用的脚本。<br><img src="https://img-blog.csdnimg.cn/20190120140430619.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2p1bm1veGk=,size_16,color_FFFFFF,t_70" alt></p>
+<h2 id="2-4-西瓜插件"><a href="#2-4-西瓜插件" class="headerlink" title="2.4 西瓜插件"></a>2.4 西瓜插件</h2><p>运营微信公众号必不可少的插件！！！非常好用，可以采集别人的文字，采集平时的图片，同时还可以订阅其他公众号来进行采集。<br><img src="https://img-blog.csdnimg.cn/2019012014084649.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2p1bm1veGk=,size_16,color_FFFFFF,t_70" alt></p>
+<h2 id="2-5-Octotree"><a href="#2-5-Octotree" class="headerlink" title="2.5 Octotree"></a>2.5 Octotree</h2><p>这个是程序员必备的，可以将GitHub中的项目进行树结构化，非常方便浏览GitHub上的项目。<br><img src="https://img-blog.csdnimg.cn/20190120141154654.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2p1bm1veGk=,size_16,color_FFFFFF,t_70" alt></p>
+<h2 id="2-6-Infinity（标签页）"><a href="#2-6-Infinity（标签页）" class="headerlink" title="2.6 Infinity（标签页）"></a>2.6 Infinity（标签页）</h2><p>一个非常漂亮的标签页。<br><img src="https://img-blog.csdnimg.cn/20190120141433198.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2p1bm1veGk=,size_16,color_FFFFFF,t_70" alt></p>
+<h2 id="2-7-掘金插件"><a href="#2-7-掘金插件" class="headerlink" title="2.7 掘金插件"></a>2.7 掘金插件</h2><p>掘金开发的一款插件，当你打开新的标签页时，显示的是掘金中优秀的文章。<br><img src="https://img-blog.csdnimg.cn/20190120141622558.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2p1bm1veGk=,size_16,color_FFFFFF,t_70" alt></p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    <div>
+      
+    </div>
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://pibigstar.com/2019/01/27/java使用poi反射读取写入Excel/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -2115,160 +2269,6 @@ C:要有父类引用指向子类对象。
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://pibigstar.com/2019/01/27/程序员开发必备工具（二）之浏览器插件/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="派大星">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/qq.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="派大星的博客">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/01/27/程序员开发必备工具（二）之浏览器插件/" itemprop="url">程序员开发必备工具（二）之浏览器插件</a></h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-01-27T13:01:04+08:00">
-                2019-01-27
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/工具使用/" itemprop="url" rel="index">
-                    <span itemprop="name">工具使用</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>@[TOC]</p>
-<h1 id="2-浏览器插件"><a href="#2-浏览器插件" class="headerlink" title="2. 浏览器插件"></a>2. 浏览器插件</h1><p>所有插件我都放到了我的微信公众号上面了，关注我微信公众号，发送【浏览器插件】就可以获取了。<br><img src="https://img-blog.csdnimg.cn/20190120141011616.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2p1bm1veGk=,size_16,color_FFFFFF,t_70" alt></p>
-<h2 id="2-1-插件扩展管理器（Extension-Manager）"><a href="#2-1-插件扩展管理器（Extension-Manager）" class="headerlink" title="2.1 插件扩展管理器（Extension Manager）"></a>2.1 插件扩展管理器（Extension Manager）</h2><p>快速启动和关闭插件，非常好用。<br><img src="https://img-blog.csdnimg.cn/20190120140127890.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2p1bm1veGk=,size_16,color_FFFFFF,t_70" alt></p>
-<h2 id="2-2-web前端访问助手（FeHelper）"><a href="#2-2-web前端访问助手（FeHelper）" class="headerlink" title="2.2 web前端访问助手（FeHelper）"></a>2.2 web前端访问助手（FeHelper）</h2><p>自动格式化JSON数据，网页取色，字符串加解密，JS正则<br><img src="https://img-blog.csdnimg.cn/20190120135319592.png" alt></p>
-<h2 id="2-3-油猴插件"><a href="#2-3-油猴插件" class="headerlink" title="2.3 油猴插件"></a>2.3 油猴插件</h2><p>这是一个运行脚本的插件，你可以自己写一下小脚本放到油猴上面。我目前用的有VIP视频破解，百度下载助手等等。你可以在点击<a href="https://greasyfork.org/zh-CN/scripts" target="_blank" rel="noopener">这里</a>下载一些好玩使用的脚本。<br><img src="https://img-blog.csdnimg.cn/20190120140430619.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2p1bm1veGk=,size_16,color_FFFFFF,t_70" alt></p>
-<h2 id="2-4-西瓜插件"><a href="#2-4-西瓜插件" class="headerlink" title="2.4 西瓜插件"></a>2.4 西瓜插件</h2><p>运营微信公众号必不可少的插件！！！非常好用，可以采集别人的文字，采集平时的图片，同时还可以订阅其他公众号来进行采集。<br><img src="https://img-blog.csdnimg.cn/2019012014084649.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2p1bm1veGk=,size_16,color_FFFFFF,t_70" alt></p>
-<h2 id="2-5-Octotree"><a href="#2-5-Octotree" class="headerlink" title="2.5 Octotree"></a>2.5 Octotree</h2><p>这个是程序员必备的，可以将GitHub中的项目进行树结构化，非常方便浏览GitHub上的项目。<br><img src="https://img-blog.csdnimg.cn/20190120141154654.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2p1bm1veGk=,size_16,color_FFFFFF,t_70" alt></p>
-<h2 id="2-6-Infinity（标签页）"><a href="#2-6-Infinity（标签页）" class="headerlink" title="2.6 Infinity（标签页）"></a>2.6 Infinity（标签页）</h2><p>一个非常漂亮的标签页。<br><img src="https://img-blog.csdnimg.cn/20190120141433198.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2p1bm1veGk=,size_16,color_FFFFFF,t_70" alt></p>
-<h2 id="2-7-掘金插件"><a href="#2-7-掘金插件" class="headerlink" title="2.7 掘金插件"></a>2.7 掘金插件</h2><p>掘金开发的一款插件，当你打开新的标签页时，显示的是掘金中优秀的文章。<br><img src="https://img-blog.csdnimg.cn/20190120141622558.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2p1bm1veGk=,size_16,color_FFFFFF,t_70" alt></p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    <div>
-      
-    </div>
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -2409,10 +2409,6 @@ C:要有父类引用指向子类对象。
 
   
 </div>
-
-
-  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
-
 
 
 

@@ -1137,7 +1137,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://pibigstar.com/2019/07/02/Java虚拟机常用命令参数/">
+    <link itemprop="mainEntityOfPage" href="http://pibigstar.com/2019/07/02/微信小程序使用npm安装第三方库/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="派大星">
@@ -1156,7 +1156,7 @@
         
           <h2 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2019/07/02/Java虚拟机常用命令参数/" itemprop="url">Java虚拟机常用命令参数</a></h2>
+                <a class="post-title-link" href="/2019/07/02/微信小程序使用npm安装第三方库/" itemprop="url">微信小程序使用npm安装第三方库</a></h2>
         
 
         <div class="post-meta">
@@ -1191,8 +1191,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/JVM/" itemprop="url" rel="index">
-                    <span itemprop="name">JVM</span>
+                  <a href="/categories/微信小程序/" itemprop="url" rel="index">
+                    <span itemprop="name">微信小程序</span>
                   </a>
                 </span>
 
@@ -1230,12 +1230,27 @@
       
         
           
-            <h2 id="1-打印某个类的常量池"><a href="#1-打印某个类的常量池" class="headerlink" title="1. 打印某个类的常量池"></a>1. 打印某个类的常量池</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">javap -v Test.class</span><br></pre></td></tr></table></figure>
+            <p>我们以安装有赞的 <code>vant</code>库做例子</p>
+<h2 id="1-初始化"><a href="#1-初始化" class="headerlink" title="1. 初始化"></a>1. 初始化</h2><p>在小程序根目录中（miniprogram）执行</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm init</span><br></pre></td></tr></table></figure>
 
-<h2 id="2-查看类的加载顺序"><a href="#2-查看类的加载顺序" class="headerlink" title="2. 查看类的加载顺序"></a>2. 查看类的加载顺序</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">java -verbose:class Test</span><br></pre></td></tr></table></figure>
+<p>输入一些基本的信息，可以一直回车，按默认就可以，然后会生成一个<code>package.json</code>文件</p>
+<h2 id="2-安装第三方库"><a href="#2-安装第三方库" class="headerlink" title="2. 安装第三方库"></a>2. 安装第三方库</h2><p>有赞文档地址：<a href="https://youzan.github.io/vant-weapp/#/intro" target="_blank" rel="noopener">https://youzan.github.io/vant-weapp/#/intro</a><br>执行</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm i vant-weapp -S --production</span><br></pre></td></tr></table></figure>
 
-<h2 id="3-反编译字节码"><a href="#3-反编译字节码" class="headerlink" title="3. 反编译字节码"></a>3. 反编译字节码</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">javap -v -c Test</span><br></pre></td></tr></table></figure>
+<h2 id="3-构建npm"><a href="#3-构建npm" class="headerlink" title="3.构建npm"></a>3.构建npm</h2><p>回到微信开发者工具中，在工具中点击构建npm<br><img src="https://img-blog.csdnimg.cn/2019050909513068.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2p1bm1veGk=,size_16,color_FFFFFF,t_70" alt></p>
+<h2 id="4-启用npm模块"><a href="#4-启用npm模块" class="headerlink" title="4. 启用npm模块"></a>4. 启用npm模块</h2><p>在详情中，把 使用npm模块勾选上<br><img src="https://img-blog.csdnimg.cn/20190509095235587.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2p1bm1veGk=,size_16,color_FFFFFF,t_70" alt></p>
+<h2 id="5-使用"><a href="#5-使用" class="headerlink" title="5. 使用"></a>5. 使用</h2><ol>
+<li><p>在index.json中引入组件库</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">"usingComponents": &#123;</span><br><span class="line">  "van-button": "vant-weapp/button/index"</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>在index.wxml使用按钮</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">van-button</span> <span class="attr">type</span>=<span class="string">"danger"</span>&gt;</span>危险按钮<span class="tag">&lt;/<span class="name">van-button</span>&gt;</span></span><br></pre></td></tr></table></figure>
 
+</li>
+</ol>
+<p><img src="https://img-blog.csdnimg.cn/20190509101651613.png" alt></p>
+<p>注意：如果出现找不到路径，请再次点击 构建npm （步骤3）</p>
 
           
         
@@ -1439,7 +1454,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://pibigstar.com/2019/07/02/微信小程序使用npm安装第三方库/">
+    <link itemprop="mainEntityOfPage" href="http://pibigstar.com/2019/07/02/Java虚拟机常用命令参数/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="派大星">
@@ -1458,7 +1473,7 @@
         
           <h2 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2019/07/02/微信小程序使用npm安装第三方库/" itemprop="url">微信小程序使用npm安装第三方库</a></h2>
+                <a class="post-title-link" href="/2019/07/02/Java虚拟机常用命令参数/" itemprop="url">Java虚拟机常用命令参数</a></h2>
         
 
         <div class="post-meta">
@@ -1493,8 +1508,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/微信小程序/" itemprop="url" rel="index">
-                    <span itemprop="name">微信小程序</span>
+                  <a href="/categories/JVM/" itemprop="url" rel="index">
+                    <span itemprop="name">JVM</span>
                   </a>
                 </span>
 
@@ -1532,27 +1547,12 @@
       
         
           
-            <p>我们以安装有赞的 <code>vant</code>库做例子</p>
-<h2 id="1-初始化"><a href="#1-初始化" class="headerlink" title="1. 初始化"></a>1. 初始化</h2><p>在小程序根目录中（miniprogram）执行</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm init</span><br></pre></td></tr></table></figure>
+            <h2 id="1-打印某个类的常量池"><a href="#1-打印某个类的常量池" class="headerlink" title="1. 打印某个类的常量池"></a>1. 打印某个类的常量池</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">javap -v Test.class</span><br></pre></td></tr></table></figure>
 
-<p>输入一些基本的信息，可以一直回车，按默认就可以，然后会生成一个<code>package.json</code>文件</p>
-<h2 id="2-安装第三方库"><a href="#2-安装第三方库" class="headerlink" title="2. 安装第三方库"></a>2. 安装第三方库</h2><p>有赞文档地址：<a href="https://youzan.github.io/vant-weapp/#/intro" target="_blank" rel="noopener">https://youzan.github.io/vant-weapp/#/intro</a><br>执行</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm i vant-weapp -S --production</span><br></pre></td></tr></table></figure>
+<h2 id="2-查看类的加载顺序"><a href="#2-查看类的加载顺序" class="headerlink" title="2. 查看类的加载顺序"></a>2. 查看类的加载顺序</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">java -verbose:class Test</span><br></pre></td></tr></table></figure>
 
-<h2 id="3-构建npm"><a href="#3-构建npm" class="headerlink" title="3.构建npm"></a>3.构建npm</h2><p>回到微信开发者工具中，在工具中点击构建npm<br><img src="https://img-blog.csdnimg.cn/2019050909513068.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2p1bm1veGk=,size_16,color_FFFFFF,t_70" alt></p>
-<h2 id="4-启用npm模块"><a href="#4-启用npm模块" class="headerlink" title="4. 启用npm模块"></a>4. 启用npm模块</h2><p>在详情中，把 使用npm模块勾选上<br><img src="https://img-blog.csdnimg.cn/20190509095235587.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2p1bm1veGk=,size_16,color_FFFFFF,t_70" alt></p>
-<h2 id="5-使用"><a href="#5-使用" class="headerlink" title="5. 使用"></a>5. 使用</h2><ol>
-<li><p>在index.json中引入组件库</p>
-<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">"usingComponents": &#123;</span><br><span class="line">  "van-button": "vant-weapp/button/index"</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>在index.wxml使用按钮</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">van-button</span> <span class="attr">type</span>=<span class="string">"danger"</span>&gt;</span>危险按钮<span class="tag">&lt;/<span class="name">van-button</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h2 id="3-反编译字节码"><a href="#3-反编译字节码" class="headerlink" title="3. 反编译字节码"></a>3. 反编译字节码</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">javap -v -c Test</span><br></pre></td></tr></table></figure>
 
-</li>
-</ol>
-<p><img src="https://img-blog.csdnimg.cn/20190509101651613.png" alt></p>
-<p>注意：如果出现找不到路径，请再次点击 构建npm （步骤3）</p>
 
           
         
@@ -2052,10 +2052,6 @@
 
   
 </div>
-
-
-  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
-
 
 
 
