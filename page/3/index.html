@@ -5,7 +5,7 @@
   
 
 
-<html class="theme-next gemini use-motion" lang="zh-CN">
+<html class="theme-next gemini use-motion" lang="zh-Hans">
 <head><meta name="generator" content="Hexo 3.9.0">
   <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -84,7 +84,7 @@
 <meta property="og:title" content="派大星的博客">
 <meta property="og:url" content="http://pibigstar.com/page/3/index.html">
 <meta property="og:site_name" content="派大星的博客">
-<meta property="og:locale" content="zh-CN">
+<meta property="og:locale" content="zh-Hans">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="派大星的博客">
 
@@ -102,7 +102,7 @@
     motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
     duoshuo: {
       userId: '0',
-      author: 'Author'
+      author: '博主'
     },
     algolia: {
       applicationID: '',
@@ -134,7 +134,7 @@
 
 </head>
 
-<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
 
   
   
@@ -183,17 +183,7 @@
             
               <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
             
-            Home
-          </a>
-        </li>
-      
-        
-        <li class="menu-item menu-item-schedule">
-          <a href="/schedule/" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-calendar"></i> <br>
-            
-            Schedule
+            首页
           </a>
         </li>
       
@@ -203,7 +193,7 @@
             
               <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
             
-            Tags
+            标签
           </a>
         </li>
       
@@ -213,17 +203,7 @@
             
               <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
             
-            Categories
-          </a>
-        </li>
-      
-        
-        <li class="menu-item menu-item-sitemap">
-          <a href="/sitemap.xml" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-sitemap"></i> <br>
-            
-            Sitemap
+            分类
           </a>
         </li>
       
@@ -233,7 +213,7 @@
             
               <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
             
-            About
+            关于
           </a>
         </li>
       
@@ -270,7 +250,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://pibigstar.com/2019/08/29/使用docker搭建MySQL主从架构集群/">
+    <link itemprop="mainEntityOfPage" href="http://pibigstar.com/2019/08/29/Linux防火墙操作/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="派大星">
@@ -289,7 +269,7 @@
         
           <h2 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2019/08/29/使用docker搭建MySQL主从架构集群/" itemprop="url">使用docker搭建MySQL主从架构集群</a></h2>
+                <a class="post-title-link" href="/2019/08/29/Linux防火墙操作/" itemprop="url">Linux防火墙操作</a></h2>
         
 
         <div class="post-meta">
@@ -299,9 +279,9 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Posted on</span>
+                <span class="post-meta-item-text">发表于</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-08-29T05:05:04+08:00">
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-08-29T05:05:04+08:00">
                 2019-08-29
               </time>
             
@@ -320,12 +300,12 @@
                 <i class="fa fa-folder-o"></i>
               </span>
               
-                <span class="post-meta-item-text">In</span>
+                <span class="post-meta-item-text">分类于</span>
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/数据库/" itemprop="url" rel="index">
-                    <span itemprop="name">数据库</span>
+                  <a href="/categories/Linux/" itemprop="url" rel="index">
+                    <span itemprop="name">Linux</span>
                   </a>
                 </span>
 
@@ -363,99 +343,24 @@
       
         
           
-            <h2 id="拉取mysql镜像"><a href="#拉取mysql镜像" class="headerlink" title="拉取mysql镜像"></a>拉取mysql镜像</h2><p>这里拉取的是mysql 5.7版本的镜像</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker pull mysql:5.7</span><br></pre></td></tr></table></figure>
+            <h1 id="1-查看防火墙状态"><a href="#1-查看防火墙状态" class="headerlink" title="1. 查看防火墙状态"></a>1. 查看防火墙状态</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo firewall-cmd --state</span><br></pre></td></tr></table></figure>
 
-<h2 id="启动两个MySQL容器"><a href="#启动两个MySQL容器" class="headerlink" title="启动两个MySQL容器"></a>启动两个MySQL容器</h2><p>启动两个MySQL容器，一个作为master，一个作为slave</p>
-<p>master节点，将本地的 3307端口映射到容器的3306端口，密码为<code>123456</code></p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run -p 3307:3306 --name mysql-master -e MYSQL_ROOT_PASSWORD=123456 -d mysql:5.7</span><br></pre></td></tr></table></figure>
-
-<p>slave节点，将本地的 3308端口映射到容器的3306端口，密码为<code>123456</code></p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run -p 3308:3306 --name mysql-slave -e MYSQL_ROOT_PASSWORD=123456 -d mysql:5.7</span><br></pre></td></tr></table></figure>
-
-<p>启动完成之后，可通过<code>docker ps</code> 查看是否启动成功。</p>
-<h2 id="登录到mysql中"><a href="#登录到mysql中" class="headerlink" title="登录到mysql中"></a>登录到mysql中</h2><p>登录到<code>master</code>节点中</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysql -uroot -h127.0.0.1 -P3307 -p123456</span><br></pre></td></tr></table></figure>
-
-<p>再启动一个命令窗口，进入到 <code>slave</code>节点</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysql -uroot -h127.0.0.1 -P3308 -p123456</span><br></pre></td></tr></table></figure>
-
-<h2 id="配置master"><a href="#配置master" class="headerlink" title="配置master"></a>配置master</h2><p>通过docker exec进入容器内部</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker <span class="built_in">exec</span> -it mysql-master /bin/bash</span><br></pre></td></tr></table></figure>
-
-<p>修改my.cnf文件</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">echo</span> -e <span class="string">"[mysqld]\nserver-id=100\nlog-bin=mysql-bin"</span> &gt;&gt; etc/mysql/my.cnf</span><br></pre></td></tr></table></figure>
-
-<p>其实也就是新增下面两句配置</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">[mysqld]</span><br><span class="line">## 同一局域网内注意要唯一</span><br><span class="line">server-id=100  </span><br><span class="line">## 开启二进制日志功能，可以随便取（关键）</span><br><span class="line">log-bin=mysql-bin</span><br></pre></td></tr></table></figure>
-
-<p>重启mysql服务</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">service mysql restart</span><br></pre></td></tr></table></figure>
-
-<p>重启时容器会退出，我们需要重新启动一次容器</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker start mysql-master</span><br></pre></td></tr></table></figure>
-
-<h2 id="配置slave"><a href="#配置slave" class="headerlink" title="配置slave"></a>配置slave</h2><p>和master一样，修改<code>my.cnf</code>文件</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">echo</span> -e <span class="string">"[mysqld]\nserver-id=101\nlog-bin=mysql-slave-bin\nrelay_log=edu-mysql-relay-bin"</span> &gt;&gt; etc/mysql/my.cnf</span><br></pre></td></tr></table></figure>
-
-<p>其实也就在文件中加入下面的配置</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">[mysqld]</span><br><span class="line">## 设置server_id,注意要唯一</span><br><span class="line">server-id=101  </span><br><span class="line">## 开启二进制日志功能，以备Slave作为其它Slave的Master时使用</span><br><span class="line">log-bin=mysql-slave-bin   </span><br><span class="line">## relay_log配置中继日志</span><br><span class="line">relay_log=edu-mysql-relay-bin</span><br></pre></td></tr></table></figure>
-
-<p>然后重启mysql服务</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">service mysql restart</span><br></pre></td></tr></table></figure>
-
-<p>重启过程中，容器会自动退出，我们需要重新启动一次容器</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker start mysql-master</span><br></pre></td></tr></table></figure>
-
-<p>下一步在Master数据库创建数据同步用户，授予用户<br><code>slave</code> REPLICATION SLAVE权限和REPLICATION CLIENT权限，用于在主从库之间同步数据。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">CREATE USER &apos;slave&apos;@&apos;%&apos; IDENTIFIED BY &apos;123456&apos;;</span><br><span class="line">GRANT REPLICATION SLAVE, REPLICATION CLIENT ON *.* TO &apos;slave&apos;@&apos;%&apos;;</span><br></pre></td></tr></table></figure>
-
-<h2 id="将slave链接到master"><a href="#将slave链接到master" class="headerlink" title="将slave链接到master"></a>将slave链接到master</h2><p>先去<code>master</code>中查看下binlog的状态</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysql -uroot -h127.0.0.1 -P3307 -p123456</span><br></pre></td></tr></table></figure>
-
-<p>查看状态</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">show master status;</span><br></pre></td></tr></table></figure>
-
-<p><img src="https://img-blog.csdnimg.cn/20190520161612360.png" alt></p>
 <blockquote>
-<p><code>File</code>和<code>Position</code>字段的值后面将会用到，在后面的操作完成之前，需要保证Master库不能做任何操作，否则将会引起状态变化，File和Position字段的值也会变化。</p>
+<p>如果是运行中则会输出 running，如果没有运行则会输出 not running</p>
 </blockquote>
-<p>进入到<code>slave</code>中</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysql -uroot -h127.0.0.1 -P3308 -p123456</span><br></pre></td></tr></table></figure>
+<h1 id="2-关闭防火墙"><a href="#2-关闭防火墙" class="headerlink" title="2. 关闭防火墙"></a>2. 关闭防火墙</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 关闭</span></span><br><span class="line">systemctl stop firewalld</span><br><span class="line"><span class="comment"># 关闭开机自启</span></span><br><span class="line">systemctl <span class="built_in">disable</span> firewalld</span><br></pre></td></tr></table></figure>
 
-<p>链接到<code>master</code></p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">change master to master_host=<span class="string">'172.17.0.2'</span>, </span><br><span class="line">master_user=<span class="string">'slave'</span>, </span><br><span class="line">master_password=<span class="string">'123456'</span>, </span><br><span class="line">master_port=3306, </span><br><span class="line">master_log_file=<span class="string">'mysql-bin.000001'</span>, </span><br><span class="line">master_log_pos= 0, </span><br><span class="line">master_connect_retry=30;</span><br></pre></td></tr></table></figure>
+<h1 id="3-开启防火墙"><a href="#3-开启防火墙" class="headerlink" title="3. 开启防火墙"></a>3. 开启防火墙</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">systemctl start firewalld</span><br></pre></td></tr></table></figure>
 
-<p><strong>注：</strong></p>
-<ul>
-<li><p><code>master_host</code>  Master的地址，指的是容器的独立ip,可以通过下面命令查看</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker inspect --format=&apos;&#123;&#123;.NetworkSettings.IPAddress&#125;&#125;&apos;  mysql-master</span><br></pre></td></tr></table></figure>
-</li>
-<li><p><code>master_port</code> 容器的端口号，指的是容器内部运行mysql的端口号 </p>
-</li>
-<li><p><code>master_user</code> 是我们在master中配置的用户主从复制的用户名</p>
-</li>
-<li><p><code>master_log_file</code> 是上一步中从master中查出File字段的值</p>
-</li>
-<li><p><code>master_log_pos</code> 是复制起始点，如果为0，为从头复制</p>
-</li>
-</ul>
-<h2 id="开启主从复制"><a href="#开启主从复制" class="headerlink" title="开启主从复制"></a>开启主从复制</h2><p>在 slave 中查看主从复制状态，可以看到目前主从复制是还没有开启的。</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">show slave status \G;</span><br></pre></td></tr></table></figure>
+<h1 id="4-添加端口白名单"><a href="#4-添加端口白名单" class="headerlink" title="4. 添加端口白名单"></a>4. 添加端口白名单</h1><blockquote>
+<p>将 5901-5905端口添加到白名单中</p>
+</blockquote>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo firewall-cmd --permanent --zone=public --add-port=5901-5905/tcp</span><br></pre></td></tr></table></figure>
 
-<p><img src="https://img-blog.csdnimg.cn/20190520162621173.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2p1bm1veGk=,size_16,color_FFFFFF,t_70" alt></p>
-<p><strong>开启主从复制</strong></p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">start slave;</span><br></pre></td></tr></table></figure>
+<h1 id="5-重新加载"><a href="#5-重新加载" class="headerlink" title="5. 重新加载"></a>5. 重新加载</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo firewall-cmd --reload</span><br></pre></td></tr></table></figure>
 
-<p>再次查看，我们看到主从复制已经开启了。<br><img src="https://img-blog.csdnimg.cn/20190520163700681.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2p1bm1veGk=,size_16,color_FFFFFF,t_70" alt></p>
-<h2 id="测试主从复制"><a href="#测试主从复制" class="headerlink" title="测试主从复制"></a>测试主从复制</h2><p>我们在master中创建一个数据库，看是否在slave中也会创建</p>
-<p>进入到master中的mysql执行创建数据库命令</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">create database test default character set utf8;</span><br></pre></td></tr></table></figure>
+<h1 id="6-查看白名单端口列表"><a href="#6-查看白名单端口列表" class="headerlink" title="6. 查看白名单端口列表"></a>6. 查看白名单端口列表</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo firewall-cmd --list-all-zones</span><br></pre></td></tr></table></figure>
 
-<p>然后进入到slave节点中查看是否有该数据库</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">show databases;</span><br></pre></td></tr></table></figure>
-
-<p><img src="https://img-blog.csdnimg.cn/20190520164102481.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2p1bm1veGk=,size_16,color_FFFFFF,t_70" alt><br>我们看到从库中已经创建了<code>test</code>数据库，至此我们的主从MySQL集群架构已经搭建完毕了。</p>
 
           
         
@@ -537,9 +442,9 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Posted on</span>
+                <span class="post-meta-item-text">发表于</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-08-23T08:08:04+08:00">
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-08-23T08:08:04+08:00">
                 2019-08-23
               </time>
             
@@ -558,7 +463,7 @@
                 <i class="fa fa-folder-o"></i>
               </span>
               
-                <span class="post-meta-item-text">In</span>
+                <span class="post-meta-item-text">分类于</span>
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
@@ -690,9 +595,9 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Posted on</span>
+                <span class="post-meta-item-text">发表于</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-08-21T09:09:04+08:00">
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-08-21T09:09:04+08:00">
                 2019-08-21
               </time>
             
@@ -711,7 +616,7 @@
                 <i class="fa fa-folder-o"></i>
               </span>
               
-                <span class="post-meta-item-text">In</span>
+                <span class="post-meta-item-text">分类于</span>
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
@@ -1008,9 +913,9 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Posted on</span>
+                <span class="post-meta-item-text">发表于</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-08-21T09:09:04+08:00">
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-08-21T09:09:04+08:00">
                 2019-08-21
               </time>
             
@@ -1029,7 +934,7 @@
                 <i class="fa fa-folder-o"></i>
               </span>
               
-                <span class="post-meta-item-text">In</span>
+                <span class="post-meta-item-text">分类于</span>
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
@@ -1178,9 +1083,9 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Posted on</span>
+                <span class="post-meta-item-text">发表于</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-08-17T11:11:04+08:00">
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-08-17T11:11:04+08:00">
                 2019-08-17
               </time>
             
@@ -1199,7 +1104,7 @@
                 <i class="fa fa-folder-o"></i>
               </span>
               
-                <span class="post-meta-item-text">In</span>
+                <span class="post-meta-item-text">分类于</span>
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
@@ -1333,9 +1238,9 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Posted on</span>
+                <span class="post-meta-item-text">发表于</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-08-17T11:11:04+08:00">
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-08-17T11:11:04+08:00">
                 2019-08-17
               </time>
             
@@ -1354,7 +1259,7 @@
                 <i class="fa fa-folder-o"></i>
               </span>
               
-                <span class="post-meta-item-text">In</span>
+                <span class="post-meta-item-text">分类于</span>
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
@@ -1509,9 +1414,9 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Posted on</span>
+                <span class="post-meta-item-text">发表于</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-08-17T11:11:04+08:00">
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-08-17T11:11:04+08:00">
                 2019-08-17
               </time>
             
@@ -1530,7 +1435,7 @@
                 <i class="fa fa-folder-o"></i>
               </span>
               
-                <span class="post-meta-item-text">In</span>
+                <span class="post-meta-item-text">分类于</span>
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
@@ -1692,9 +1597,9 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Posted on</span>
+                <span class="post-meta-item-text">发表于</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-08-11T14:02:04+08:00">
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-08-11T14:02:04+08:00">
                 2019-08-11
               </time>
             
@@ -1713,7 +1618,7 @@
                 <i class="fa fa-folder-o"></i>
               </span>
               
-                <span class="post-meta-item-text">In</span>
+                <span class="post-meta-item-text">分类于</span>
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
@@ -1894,158 +1799,6 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://pibigstar.com/2019/08/11/go语言实现服务器与微信公众平台对接/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="派大星">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/qq.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="派大星的博客">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/08/11/go语言实现服务器与微信公众平台对接/" itemprop="url">go语言实现服务器与微信公众平台对接</a></h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-08-11T14:02:04+08:00">
-                2019-08-11
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/go-微信小程序/" itemprop="url" rel="index">
-                    <span itemprop="name">go,微信小程序</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>微信对接文档：<a href="https://developers.weixin.qq.com/miniprogram/dev/framework/open-ability/customer-message/customer-message.html" target="_blank" rel="noopener">点击查看</a></p>
-<p>在这不得不吐槽一下，写的什么玩意文档，给的例子真他么垃圾，文档说是返回echostr，例子给返回个true，false要不要这么误导人。</p>
-<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">type</span> GetSignature <span class="keyword">struct</span> &#123;</span><br><span class="line">	Signature <span class="keyword">string</span> <span class="string">`json:"signature"`</span> <span class="comment">//微信加密签名，signature结合了开发者填写的token参数和请求中的timestamp参数、nonce参数。</span></span><br><span class="line">	Timestamp <span class="keyword">string</span> <span class="string">`json:"timestamp"`</span> <span class="comment">//时间戳</span></span><br><span class="line">	Nonce     <span class="keyword">string</span> <span class="string">`json:"nonce"`</span>     <span class="comment">//随机数</span></span><br><span class="line">	Echostr   <span class="keyword">string</span> <span class="string">`json:"echostr"`</span>   <span class="comment">//随机字符串</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">signature</span><span class="params">(r *ghttp.Request)</span></span> &#123;</span><br><span class="line">	getSignature := <span class="built_in">new</span>(GetSignature)</span><br><span class="line">	r.GetToStruct(getSignature)</span><br><span class="line">	sign := getSignature.Signature</span><br><span class="line">	nonce := getSignature.Nonce</span><br><span class="line">	timestamp := getSignature.Timestamp</span><br><span class="line">	echostr := getSignature.Echostr</span><br><span class="line">	strs := []<span class="keyword">string</span>&#123;token, timestamp, nonce&#125;</span><br><span class="line">	sort.Strings(strs)</span><br><span class="line"></span><br><span class="line">	tempStr := fmt.Sprintf(<span class="string">"%s%s%s"</span>, strs[<span class="number">0</span>], strs[<span class="number">1</span>], strs[<span class="number">2</span>])</span><br><span class="line">	h := sha1.New()</span><br><span class="line">	io.WriteString(h, tempStr)</span><br><span class="line">	result := fmt.Sprintf(<span class="string">"%x"</span>, h.Sum(<span class="literal">nil</span>))</span><br><span class="line">	<span class="keyword">if</span> result != sign &#123;</span><br><span class="line">		<span class="comment">// 等不等于都让它返回正确的结果，zz验证</span></span><br><span class="line">		r.Response.Write(echostr)</span><br><span class="line">		<span class="keyword">return</span></span><br><span class="line">	&#125;</span><br><span class="line">	r.Response.Write(echostr)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>完全搞不懂微信他们到底要搞什么骚操作，这是什么垃圾验证，中间做了一大堆算法，其实一点屁用都没有，直接用下面这个粗暴的版本也可以：</p>
-<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">signature</span><span class="params">(r *ghttp.Request)</span></span> &#123;</span><br><span class="line">	getSignature := <span class="built_in">new</span>(GetSignature)</span><br><span class="line">	r.GetToStruct(getSignature)</span><br><span class="line">	echostr := getSignature.Echostr</span><br><span class="line">	<span class="comment">// 直接返回就可以了</span></span><br><span class="line">	r.Response.Write(echostr)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    <div>
-      
-    </div>
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://pibigstar.com/2019/08/11/GoLand文件格式化配置/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -2075,9 +1828,9 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Posted on</span>
+                <span class="post-meta-item-text">发表于</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-08-11T14:02:04+08:00">
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-08-11T14:02:04+08:00">
                 2019-08-11
               </time>
             
@@ -2096,7 +1849,7 @@
                 <i class="fa fa-folder-o"></i>
               </span>
               
-                <span class="post-meta-item-text">In</span>
+                <span class="post-meta-item-text">分类于</span>
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
@@ -2190,6 +1943,158 @@
 
 
     
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://pibigstar.com/2019/08/11/go语言实现服务器与微信公众平台对接/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="派大星">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/qq.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="派大星的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/08/11/go语言实现服务器与微信公众平台对接/" itemprop="url">go语言实现服务器与微信公众平台对接</a></h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-08-11T14:02:04+08:00">
+                2019-08-11
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/go-微信小程序/" itemprop="url" rel="index">
+                    <span itemprop="name">go,微信小程序</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>微信对接文档：<a href="https://developers.weixin.qq.com/miniprogram/dev/framework/open-ability/customer-message/customer-message.html" target="_blank" rel="noopener">点击查看</a></p>
+<p>在这不得不吐槽一下，写的什么玩意文档，给的例子真他么垃圾，文档说是返回echostr，例子给返回个true，false要不要这么误导人。</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">type</span> GetSignature <span class="keyword">struct</span> &#123;</span><br><span class="line">	Signature <span class="keyword">string</span> <span class="string">`json:"signature"`</span> <span class="comment">//微信加密签名，signature结合了开发者填写的token参数和请求中的timestamp参数、nonce参数。</span></span><br><span class="line">	Timestamp <span class="keyword">string</span> <span class="string">`json:"timestamp"`</span> <span class="comment">//时间戳</span></span><br><span class="line">	Nonce     <span class="keyword">string</span> <span class="string">`json:"nonce"`</span>     <span class="comment">//随机数</span></span><br><span class="line">	Echostr   <span class="keyword">string</span> <span class="string">`json:"echostr"`</span>   <span class="comment">//随机字符串</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">signature</span><span class="params">(r *ghttp.Request)</span></span> &#123;</span><br><span class="line">	getSignature := <span class="built_in">new</span>(GetSignature)</span><br><span class="line">	r.GetToStruct(getSignature)</span><br><span class="line">	sign := getSignature.Signature</span><br><span class="line">	nonce := getSignature.Nonce</span><br><span class="line">	timestamp := getSignature.Timestamp</span><br><span class="line">	echostr := getSignature.Echostr</span><br><span class="line">	strs := []<span class="keyword">string</span>&#123;token, timestamp, nonce&#125;</span><br><span class="line">	sort.Strings(strs)</span><br><span class="line"></span><br><span class="line">	tempStr := fmt.Sprintf(<span class="string">"%s%s%s"</span>, strs[<span class="number">0</span>], strs[<span class="number">1</span>], strs[<span class="number">2</span>])</span><br><span class="line">	h := sha1.New()</span><br><span class="line">	io.WriteString(h, tempStr)</span><br><span class="line">	result := fmt.Sprintf(<span class="string">"%x"</span>, h.Sum(<span class="literal">nil</span>))</span><br><span class="line">	<span class="keyword">if</span> result != sign &#123;</span><br><span class="line">		<span class="comment">// 等不等于都让它返回正确的结果，zz验证</span></span><br><span class="line">		r.Response.Write(echostr)</span><br><span class="line">		<span class="keyword">return</span></span><br><span class="line">	&#125;</span><br><span class="line">	r.Response.Write(echostr)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>完全搞不懂微信他们到底要搞什么骚操作，这是什么垃圾验证，中间做了一大堆算法，其实一点屁用都没有，直接用下面这个粗暴的版本也可以：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">signature</span><span class="params">(r *ghttp.Request)</span></span> &#123;</span><br><span class="line">	getSignature := <span class="built_in">new</span>(GetSignature)</span><br><span class="line">	r.GetToStruct(getSignature)</span><br><span class="line">	echostr := getSignature.Echostr</span><br><span class="line">	<span class="comment">// 直接返回就可以了</span></span><br><span class="line">	r.Response.Write(echostr)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    <div>
+      
+    </div>
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
   </section>
 
   
@@ -2243,7 +2148,7 @@
                 <a href="/archives">
               
                   <span class="site-state-item-count">137</span>
-                  <span class="site-state-item-name">posts</span>
+                  <span class="site-state-item-name">日志</span>
                 </a>
               </div>
             
@@ -2252,10 +2157,10 @@
               
               
               <div class="site-state-item site-state-categories">
-                
+                <a href="/categories/index.html">
                   <span class="site-state-item-count">64</span>
-                  <span class="site-state-item-name">categories</span>
-                
+                  <span class="site-state-item-name">分类</span>
+                </a>
               </div>
             
 
@@ -2263,10 +2168,10 @@
               
               
               <div class="site-state-item site-state-tags">
-                
+                <a href="/tags/index.html">
                   <span class="site-state-item-count">230</span>
-                  <span class="site-state-item-name">tags</span>
-                
+                  <span class="site-state-item-name">标签</span>
+                </a>
               </div>
             
 
@@ -2332,7 +2237,7 @@
 </div>
 
 
-  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
 
 
 

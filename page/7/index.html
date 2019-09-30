@@ -5,7 +5,7 @@
   
 
 
-<html class="theme-next gemini use-motion" lang="zh-CN">
+<html class="theme-next gemini use-motion" lang="zh-Hans">
 <head><meta name="generator" content="Hexo 3.9.0">
   <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -84,7 +84,7 @@
 <meta property="og:title" content="派大星的博客">
 <meta property="og:url" content="http://pibigstar.com/page/7/index.html">
 <meta property="og:site_name" content="派大星的博客">
-<meta property="og:locale" content="zh-CN">
+<meta property="og:locale" content="zh-Hans">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="派大星的博客">
 
@@ -102,7 +102,7 @@
     motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
     duoshuo: {
       userId: '0',
-      author: 'Author'
+      author: '博主'
     },
     algolia: {
       applicationID: '',
@@ -134,7 +134,7 @@
 
 </head>
 
-<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
 
   
   
@@ -183,17 +183,7 @@
             
               <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
             
-            Home
-          </a>
-        </li>
-      
-        
-        <li class="menu-item menu-item-schedule">
-          <a href="/schedule/" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-calendar"></i> <br>
-            
-            Schedule
+            首页
           </a>
         </li>
       
@@ -203,7 +193,7 @@
             
               <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
             
-            Tags
+            标签
           </a>
         </li>
       
@@ -213,17 +203,7 @@
             
               <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
             
-            Categories
-          </a>
-        </li>
-      
-        
-        <li class="menu-item menu-item-sitemap">
-          <a href="/sitemap.xml" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-sitemap"></i> <br>
-            
-            Sitemap
+            分类
           </a>
         </li>
       
@@ -233,7 +213,7 @@
             
               <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
             
-            About
+            关于
           </a>
         </li>
       
@@ -270,7 +250,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://pibigstar.com/2019/06/07/数据库优化总结/">
+    <link itemprop="mainEntityOfPage" href="http://pibigstar.com/2019/06/07/Go语言入门（1）Go语言的安装与配置/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="派大星">
@@ -289,7 +269,7 @@
         
           <h2 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2019/06/07/数据库优化总结/" itemprop="url">数据库优化总结</a></h2>
+                <a class="post-title-link" href="/2019/06/07/Go语言入门（1）Go语言的安装与配置/" itemprop="url">Go语言入门（1）Go语言的安装与配置</a></h2>
         
 
         <div class="post-meta">
@@ -299,9 +279,9 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Posted on</span>
+                <span class="post-meta-item-text">发表于</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-06-07T23:11:04+08:00">
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-06-07T23:11:04+08:00">
                 2019-06-07
               </time>
             
@@ -320,12 +300,12 @@
                 <i class="fa fa-folder-o"></i>
               </span>
               
-                <span class="post-meta-item-text">In</span>
+                <span class="post-meta-item-text">分类于</span>
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/数据库/" itemprop="url" rel="index">
-                    <span itemprop="name">数据库</span>
+                  <a href="/categories/go/" itemprop="url" rel="index">
+                    <span itemprop="name">go</span>
                   </a>
                 </span>
 
@@ -363,72 +343,18 @@
       
         
           
-            <h1 id="1-数据库设计方面："><a href="#1-数据库设计方面：" class="headerlink" title="1 数据库设计方面："></a>1 数据库设计方面：</h1><p>a. 对查询进行优化，应尽量避免全表扫描，首先应考虑在 where 及 order by 涉及的列上建立索引。<br>b. 应尽量避免在 where 子句中对字段进行 null 值判断，否则将导致引擎放弃使用索引而进行全表扫描，如： select id from t where num is null 可以在num上设置默认值0，确保表中num列没有null值，然后这样查询： select id from t where num=0</p>
-<p>c. 并不是所有索引对查询都有效，SQL是根据表中数据来进行查询优化的，当索引列有大量数据重复时,查询可能不会去利用索引，如一表中有字段sex，male、female几乎各一半，那么即使在sex上建了索引也对查询效率起不了作用。</p>
-<p>d. 索引并不是越多越好，索引固然可以提高相应的 select 的效率，但同时也降低了 insert 及 update 的效率，因为 insert 或 update 时有可能会重建索引，所以怎样建索引需要慎重考虑，视具体情况而定。一个表的索引数最好不要超过6个，若太多则应考虑一些不常使用到的列上建的索引是否有必要。</p>
-<p>e. 应尽可能的避免更新索引数据列，因为索引数据列的顺序就是表记录的物理存储顺序，一旦该列值改变将导致整个表记录的顺序的调整，会耗费相当大的资源。若应用系统需要频繁更新索引数据列，那么需要考虑是否应将该索引建为索引。</p>
-<p>f. 尽量使用数字型字段，若只含数值信息的字段尽量不要设计为字符型，这会降低查询和连接的性能，并会增加存储开销。这是因为引擎在处理查询和连接时会逐个比较字符串中每一个字符，而对于数字型而言只需要比较一次就够了。</p>
-<p>g. 尽可能的使用 varchar/nvarchar 代替 char/nchar ，因为首先变长字段存储空间小，可以节省存储空间，其次对于查询来说，在一个相对较小的字段内搜索效率显然要高些。</p>
-<p>h. 尽量使用表变量来代替临时表。如果表变量包含大量数据，请注意索引非常有限（只有主键索引）。</p>
-<p>i. 避免频繁创建和删除临时表，以减少系统表资源的消耗。</p>
-<p>j. 临时表并不是不可使用，适当地使用它们可以使某些例程更有效，例如，当需要重复引用大型表或常用表中的某个数据集时。但是，对于一次性事件，最好使用导出表。</p>
-<p>k. 在新建临时表时，如果一次性插入数据量很大，那么可以使用 select into 代替 create table，避免造成大量 log ，以提高速度；如果数据量不大，为了缓和系统表的资源，应先create table，然后insert。</p>
-<p>l. 如果使用到了临时表，在存储过程的最后务必将所有的临时表显式删除，先 truncate table ，然后 drop table ，这样可以避免系统表的较长时间锁定。</p>
-<h1 id="2-SQL语句方面："><a href="#2-SQL语句方面：" class="headerlink" title="2 SQL语句方面："></a>2 SQL语句方面：</h1><p>a. 应尽量避免在 where 子句中使用!=或&lt;&gt;操作符，否则将引擎放弃使用索引而进行全表扫描。</p>
-<p>b. 应尽量避免在 where 子句中使用 or 来连接条件，否则将导致引擎放弃使用索引而进行全表扫描，如：</p>
-<p>select id from t where num=10 or num=20</p>
-<p>可以这样查询：</p>
-<p>select id from t where num=10 union all select id from t where num=20</p>
-<p>c. in 和 not in 也要慎用，否则会导致全表扫描，如：</p>
-<p>select id from t where num in(1,2,3)</p>
-<p>对于连续的数值，能用 between 就不要用 in 了：</p>
-<p>select id from t where num between 1 and 3</p>
-<p>d. 下面的查询也将导致全表扫描：</p>
-<p>select id from t where name like ‘%abc%’</p>
-<p>e. 如果在 where 子句中使用参数，也会导致全表扫描。因为SQL只有在运行时才会解析局部变量，但优化程序不能将访问计划的选择推迟到运行时；它必须在编译时进行选择。</p>
-<p>然而，如果在编译时建立访问计划，变量的值还是未知的，因而无法作为索引选择的输入项。如下面语句将进行全表扫描：</p>
-<p>select id from t where num=@num</p>
-<p>可以改为强制查询使用索引：</p>
-<p>select id from t with(index(索引名)) where num=@num</p>
-<p>f. 应尽量避免在 where 子句中对字段进行表达式操作，这将导致引擎放弃使用索引而进行全表扫描。如：</p>
-<p>select id from t where num/2=100</p>
-<p>应改为:</p>
-<p>select id from t where num=100*2</p>
-<p>g. 应尽量避免在where子句中对字段进行函数操作，这将导致引擎放弃使用索引而进行全表扫描。如：</p>
-<p>select id from t where substring(name,1,3)=’abc’</p>
-<p>–name以abc开头的id</p>
-<p>select id from t where datediff(day,createdate,’2005-11-30′)=0</p>
-<p>–‘2005-11-30’生成的id</p>
-<p>应改为:</p>
-<p>select id from t where name like ‘abc%’ select id from t where createdate&gt;=’2005-11-30′ and createdate&lt;’2005-12-1′</p>
-<p>h. 不要在 where 子句中的“=”左边进行函数、算术运算或其他表达式运算，否则系统将可能无法正确使用索引。</p>
-<p>i. 不要写一些没有意义的查询，如需要生成一个空表结构：</p>
-<p>select col1,col2 into #t from t where 1=0</p>
-<p>这类代码不会返回任何结果集，但是会消耗系统资源的，应改成这样：</p>
-<p>create table #t(…)</p>
-<p>j. 很多时候用 exists 代替 in 是一个好的选择：</p>
-<p>select num from a where num in(select num from b)</p>
-<p>用下面的语句替换：</p>
-<p>select num from a where exists(select 1 from b where num=a.num)</p>
-<p>k. 任何地方都不要使用 select * from t ，用具体的字段列表代替“*”，不要返回用不到的任何字段。</p>
-<p>l. 尽量避免使用游标，因为游标的效率较差，如果游标操作的数据超过1万行，那么就应该考虑改写。</p>
-<p>m. 尽量避免向客户端返回大数据量，若数据量过大，应该考虑相应需求是否合理。</p>
-<p>n. 尽量避免大事务操作，提高系统并发能力。</p>
-<h1 id="3-java方面：重点内容"><a href="#3-java方面：重点内容" class="headerlink" title="3 java方面：重点内容"></a>3 java方面：重点内容</h1><p>a.尽可能的少造对象。</p>
-<p>b.合理摆正系统设计的位置。大量数据操作，和少量数据操作一定是分开的。大量的数据操作，肯定不是ORM框架搞定的。，</p>
-<p>c.使用jDBC链接数据库操作数据</p>
-<p>d.控制好内存，让数据流起来，而不是全部读到内存再处理，而是边读取边处理；</p>
-<p>e.合理利用内存，有的数据要缓存</p>
-<p>如何优化数据库，如何提高数据库的性能?</p>
-<p>1） 硬件调整性能</p>
-<p>最有可能影响性能的是磁盘和网络吞吐量,解决办法扩大虚拟内存，并保证有足够可以扩充的空间；把数据库服务器上的不必要服务关闭掉；把数据库服务器和主域服务器分开；把SQL数据库服务器的吞吐量调为最大；在具有一个以上处理器的机器上运行SQL。</p>
-<p>2）调整数据库</p>
-<p>若对该表的查询频率比较高，则建立索引；建立索引时，想尽对该表的所有查询搜索操作， 按照where选择条件建立索引，尽量为整型键建立为有且只有一个簇集索引，数据在物理上按顺序在数据页上，缩短查找范围，为在查询经常使用的全部列建立非簇集索引，能最大地覆盖查询；但是索引不可太多，执行UPDATE DELETE INSERT语句需要用于维护这些索引的开销量急剧增加；避免在索引中有太多的索引键；避免使用大型数据类型的列为索引；保证每个索引键值有少数行。</p>
-<p>3）使用存储过程</p>
-<p>应用程序的实现过程中，能够采用存储过程实现的对数据库的操作尽量通过存储过程来实现，因为存储过程是存放在数据库服务器上的一次性被设计、编码、测试，并被再次使用，需要执行该任务的应用可以简单地执行存储过程，并且只返回结果集或者数值，这样不仅可以使程序模块化，同时提高响应速度，减少网络流量，并且通过输入参数接受输入，使得在应用中完成逻辑的一致性实现。</p>
-<p>4）应用程序结构和算法</p>
-<p>建立查询条件索引仅仅是提高速度的前提条件，响应速度的提高还依赖于对索引的使用。因为人们在使用SQL时往往会陷入一个误区，即太关注于所得的结果是否正确，特别是对数据量不是特别大的数据库操作时，是否建立索引和使用索引的好坏对程序的响应速度并不大，因此程序员在书写程序时就忽略了不同的实现方法之间可能存在的性能差异，这种性能差异在数据量特别大时或者大型的或是复杂的数据库环境中（如联机事务处理OLTP或决策支持系统DSS）中表现得尤为明显。在工作实践中发现，不良的SQL往往来自于不恰当的索引设计、不充份的连接条件和不可优化的where子句。在对它们进行适当的优化后，其运行速度有了明显地提高！</p>
-<p>原文链接：<a href="https://m.2cto.com/database/201503/381295.html" target="_blank" rel="noopener">https://m.2cto.com/database/201503/381295.html</a></p>
+            <h1 id="1-下载Go语言"><a href="#1-下载Go语言" class="headerlink" title="1. 下载Go语言"></a>1. 下载Go语言</h1><p>GO安装包下载地址： <a href="https://studygolang.com/dl" target="_blank" rel="noopener">https://studygolang.com/dl</a></p>
+<h1 id="2-Windows下安装GO"><a href="#2-Windows下安装GO" class="headerlink" title="2. Windows下安装GO"></a>2. Windows下安装GO</h1><p>下载好之后，直接安装，下一步。。。。finsh</p>
+<p>测试是否安装成功：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">go version</span><br></pre></td></tr></table></figure>
+
+<h1 id="3-配置GOPATH"><a href="#3-配置GOPATH" class="headerlink" title="3. 配置GOPATH"></a>3. 配置GOPATH</h1><p>新建环境变量 GOPATH = D:/goWork</p>
+<p>GOPATH是你的工作目录，它包括三个目录：bin（存放编译好的可运行文件）、pkg（存放二进制文件）、src（存放源码文件）</p>
+<p>当通过 go get github.com/astaxie/beego 下载的库都会放到这个GOPATH里面</p>
+<h1 id="4-下载开发工具"><a href="#4-下载开发工具" class="headerlink" title="4. 下载开发工具"></a>4. 下载开发工具</h1><p>这里使用的开发工具为 goland</p>
+<p>下载地址：<a href="https://www.jetbrains.com/go/" target="_blank" rel="noopener">https://www.jetbrains.com/go/</a></p>
+<h1 id="5-配置goland"><a href="#5-配置goland" class="headerlink" title="5. 配置goland"></a>5. 配置goland</h1><p>主要配置 GOROOT 和 GOPATH</p>
+<p><img src="https://img-blog.csdn.net/2018080420560173?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2p1bm1veGk=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt></p>
 
           
         
@@ -510,9 +436,9 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Posted on</span>
+                <span class="post-meta-item-text">发表于</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-06-03T01:01:04+08:00">
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-06-03T01:01:04+08:00">
                 2019-06-03
               </time>
             
@@ -531,7 +457,7 @@
                 <i class="fa fa-folder-o"></i>
               </span>
               
-                <span class="post-meta-item-text">In</span>
+                <span class="post-meta-item-text">分类于</span>
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
@@ -632,179 +558,6 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://pibigstar.com/2019/06/02/Linux下搭建ftp服务器/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="派大星">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/qq.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="派大星的博客">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/06/02/Linux下搭建ftp服务器/" itemprop="url">Linux下搭建ftp服务器</a></h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-06-02T02:02:04+08:00">
-                2019-06-02
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Linux/" itemprop="url" rel="index">
-                    <span itemprop="name">Linux</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>[TOC]</p>
-<h2 id="1-安装vsftpd"><a href="#1-安装vsftpd" class="headerlink" title="1. 安装vsftpd"></a>1. 安装vsftpd</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum install vsftpd -y</span><br></pre></td></tr></table></figure>
-
-<h2 id="2-启动服务"><a href="#2-启动服务" class="headerlink" title="2. 启动服务"></a>2. 启动服务</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">service vsftpd start</span><br></pre></td></tr></table></figure>
-
-<h3 id="3-vsftpd的配置"><a href="#3-vsftpd的配置" class="headerlink" title="3. vsftpd的配置"></a>3. vsftpd的配置</h3><p> <strong>ftp的配置文件主要有三个，位于/etc/vsftpd/目录下，分别是：</strong></p>
-<ul>
-<li>ftpusers 该文件用来指定那些用户不能访问ftp服务器。</li>
-<li>user_list 该文件用来指示的默认账户在默认情况下也不能访问ftp</li>
-<li>vsftpd.conf vsftpd的主配置文件</li>
-</ul>
-<h3 id="4-修改登录方式"><a href="#4-修改登录方式" class="headerlink" title="4. 修改登录方式"></a>4. 修改登录方式</h3><p>默认是匿名登录的，如果你想通过账户去登录则修改vsftpd.conf文件</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 允许匿名登录 </span></span><br><span class="line">anonymous_enable=YES</span><br><span class="line"><span class="comment"># 设置匿名用户的登录目录</span></span><br><span class="line">anon_root=/var/ftp/pub</span><br><span class="line"><span class="comment"># 打开匿名用户的上传权限</span></span><br><span class="line">anon_upload_enable=YES</span><br><span class="line"><span class="comment"># 开启匿名用户的下载权限</span></span><br><span class="line">anon_world_readable_only=no</span><br><span class="line"><span class="comment"># 打开匿名用户创建目录的权限</span></span><br><span class="line">anon_mkdir_write_enable=YES</span><br><span class="line"><span class="comment"># 打开匿名用户删除和重命名的权限</span></span><br><span class="line">anon_other_write_enable=YES</span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p>注意：里面有的配置可能vsftpd.conf 里面没有，则需要你手动添加</p>
-</blockquote>
-<h3 id="5-创建匿名用户可上传文件夹"><a href="#5-创建匿名用户可上传文件夹" class="headerlink" title="5. 创建匿名用户可上传文件夹"></a>5. 创建匿名用户可上传文件夹</h3><blockquote>
-<p>默认情况下，ftp的根目录为/var/ftp，为了安全，这个目录默认不允许设置为777权限，否则ftp将无法访问。但是我们要匿名上传文件，需要“other”用户的写权限，正确的做法：<br>在/var/ftp中建立一个upload（名子自己起吧）文件夹，将个文件夹权限设置为777（视具体需要自己设），在upload这个文件夹中，匿名用户可以上传文件、创建文件夹、删除文件等。</p>
-</blockquote>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">cd /var/ftp/pub</span><br><span class="line">mkdir upload</span><br><span class="line">chmod <span class="number">777</span> upload</span><br></pre></td></tr></table></figure>
-
-<h3 id="6-非匿名账户的创建与使用"><a href="#6-非匿名账户的创建与使用" class="headerlink" title="6. 非匿名账户的创建与使用"></a>6. 非匿名账户的创建与使用</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">useradd pibigstar</span><br><span class="line">passwd pibigstar <span class="comment">#为pibigstar用户创建密码</span></span><br></pre></td></tr></table></figure>
-
-<h3 id="7-访问"><a href="#7-访问" class="headerlink" title="7. 访问"></a>7. 访问</h3><p>浏览器或者计算机文件管理系统中输入<br>ftp://你服务器的IP地址</p>
-<blockquote>
-<p>注意：这里默认访问的是 /var/ftp/pub 文件夹下</p>
-</blockquote>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    <div>
-      
-    </div>
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://pibigstar.com/2019/06/02/常见正则表达式剖析/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -834,9 +587,9 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Posted on</span>
+                <span class="post-meta-item-text">发表于</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-06-02T02:02:04+08:00">
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-06-02T02:02:04+08:00">
                 2019-06-02
               </time>
             
@@ -855,7 +608,7 @@
                 <i class="fa fa-folder-o"></i>
               </span>
               
-                <span class="post-meta-item-text">In</span>
+                <span class="post-meta-item-text">分类于</span>
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
@@ -1144,6 +897,179 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://pibigstar.com/2019/06/02/Linux下搭建ftp服务器/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="派大星">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/qq.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="派大星的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/06/02/Linux下搭建ftp服务器/" itemprop="url">Linux下搭建ftp服务器</a></h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-06-02T02:02:04+08:00">
+                2019-06-02
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Linux/" itemprop="url" rel="index">
+                    <span itemprop="name">Linux</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>[TOC]</p>
+<h2 id="1-安装vsftpd"><a href="#1-安装vsftpd" class="headerlink" title="1. 安装vsftpd"></a>1. 安装vsftpd</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum install vsftpd -y</span><br></pre></td></tr></table></figure>
+
+<h2 id="2-启动服务"><a href="#2-启动服务" class="headerlink" title="2. 启动服务"></a>2. 启动服务</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">service vsftpd start</span><br></pre></td></tr></table></figure>
+
+<h3 id="3-vsftpd的配置"><a href="#3-vsftpd的配置" class="headerlink" title="3. vsftpd的配置"></a>3. vsftpd的配置</h3><p> <strong>ftp的配置文件主要有三个，位于/etc/vsftpd/目录下，分别是：</strong></p>
+<ul>
+<li>ftpusers 该文件用来指定那些用户不能访问ftp服务器。</li>
+<li>user_list 该文件用来指示的默认账户在默认情况下也不能访问ftp</li>
+<li>vsftpd.conf vsftpd的主配置文件</li>
+</ul>
+<h3 id="4-修改登录方式"><a href="#4-修改登录方式" class="headerlink" title="4. 修改登录方式"></a>4. 修改登录方式</h3><p>默认是匿名登录的，如果你想通过账户去登录则修改vsftpd.conf文件</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 允许匿名登录 </span></span><br><span class="line">anonymous_enable=YES</span><br><span class="line"><span class="comment"># 设置匿名用户的登录目录</span></span><br><span class="line">anon_root=/var/ftp/pub</span><br><span class="line"><span class="comment"># 打开匿名用户的上传权限</span></span><br><span class="line">anon_upload_enable=YES</span><br><span class="line"><span class="comment"># 开启匿名用户的下载权限</span></span><br><span class="line">anon_world_readable_only=no</span><br><span class="line"><span class="comment"># 打开匿名用户创建目录的权限</span></span><br><span class="line">anon_mkdir_write_enable=YES</span><br><span class="line"><span class="comment"># 打开匿名用户删除和重命名的权限</span></span><br><span class="line">anon_other_write_enable=YES</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>注意：里面有的配置可能vsftpd.conf 里面没有，则需要你手动添加</p>
+</blockquote>
+<h3 id="5-创建匿名用户可上传文件夹"><a href="#5-创建匿名用户可上传文件夹" class="headerlink" title="5. 创建匿名用户可上传文件夹"></a>5. 创建匿名用户可上传文件夹</h3><blockquote>
+<p>默认情况下，ftp的根目录为/var/ftp，为了安全，这个目录默认不允许设置为777权限，否则ftp将无法访问。但是我们要匿名上传文件，需要“other”用户的写权限，正确的做法：<br>在/var/ftp中建立一个upload（名子自己起吧）文件夹，将个文件夹权限设置为777（视具体需要自己设），在upload这个文件夹中，匿名用户可以上传文件、创建文件夹、删除文件等。</p>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">cd /var/ftp/pub</span><br><span class="line">mkdir upload</span><br><span class="line">chmod <span class="number">777</span> upload</span><br></pre></td></tr></table></figure>
+
+<h3 id="6-非匿名账户的创建与使用"><a href="#6-非匿名账户的创建与使用" class="headerlink" title="6. 非匿名账户的创建与使用"></a>6. 非匿名账户的创建与使用</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">useradd pibigstar</span><br><span class="line">passwd pibigstar <span class="comment">#为pibigstar用户创建密码</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="7-访问"><a href="#7-访问" class="headerlink" title="7. 访问"></a>7. 访问</h3><p>浏览器或者计算机文件管理系统中输入<br>ftp://你服务器的IP地址</p>
+<blockquote>
+<p>注意：这里默认访问的是 /var/ftp/pub 文件夹下</p>
+</blockquote>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    <div>
+      
+    </div>
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://pibigstar.com/2019/06/02/python打包成exe可执行文件/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1173,9 +1099,9 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Posted on</span>
+                <span class="post-meta-item-text">发表于</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-06-02T02:02:04+08:00">
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-06-02T02:02:04+08:00">
                 2019-06-02
               </time>
             
@@ -1194,7 +1120,7 @@
                 <i class="fa fa-folder-o"></i>
               </span>
               
-                <span class="post-meta-item-text">In</span>
+                <span class="post-meta-item-text">分类于</span>
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
@@ -1329,9 +1255,9 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Posted on</span>
+                <span class="post-meta-item-text">发表于</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-05-27T05:05:04+08:00">
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-05-27T05:05:04+08:00">
                 2019-05-27
               </time>
             
@@ -1350,7 +1276,7 @@
                 <i class="fa fa-folder-o"></i>
               </span>
               
-                <span class="post-meta-item-text">In</span>
+                <span class="post-meta-item-text">分类于</span>
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
@@ -1570,185 +1496,6 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://pibigstar.com/2019/05/24/JS操作表格常用操作及事件委派/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="派大星">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/qq.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="派大星的博客">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/05/24/JS操作表格常用操作及事件委派/" itemprop="url">JS操作表格常用操作及事件委派</a></h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-05-24T06:06:04+08:00">
-                2019-05-24
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/js/" itemprop="url" rel="index">
-                    <span itemprop="name">js</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="JS操作表格常用操作及事件委派"><a href="#JS操作表格常用操作及事件委派" class="headerlink" title="JS操作表格常用操作及事件委派"></a>JS操作表格常用操作及事件委派</h1><h2 id="1-点击添加一行表格"><a href="#1-点击添加一行表格" class="headerlink" title="1. 点击添加一行表格"></a>1. 点击添加一行表格</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">addRow</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">     <span class="comment">// 获取当前有多少行(查找第一列序号值)</span></span><br><span class="line">     last_num = $(<span class="string">"#myTabletr:last-child"</span>).children(<span class="string">"td"</span>).find(<span class="string">"input"</span>).val();</span><br><span class="line">     <span class="keyword">if</span> (last_num == <span class="literal">null</span>) &#123;</span><br><span class="line">         last_num = <span class="number">1</span>;</span><br><span class="line">     &#125;</span><br><span class="line">     <span class="keyword">else</span> &#123;</span><br><span class="line">         last_num = <span class="built_in">parseInt</span>(last_num);</span><br><span class="line">         last_num += <span class="number">1</span>;</span><br><span class="line">     &#125;</span><br><span class="line">     <span class="comment">// 获取表格对象</span></span><br><span class="line">     <span class="keyword">let</span> table = <span class="built_in">document</span>.getElementById(<span class="string">"myTable"</span>);</span><br><span class="line">     <span class="comment">// 插入一行</span></span><br><span class="line">     <span class="keyword">let</span> row = table.insertRow();</span><br><span class="line">     <span class="comment">// 插入四列</span></span><br><span class="line">     <span class="keyword">let</span> cell0 = row.insertCell();<span class="comment">//序号</span></span><br><span class="line">     <span class="keyword">let</span> cell1= row.insertCell(); <span class="comment">//名称</span></span><br><span class="line">     <span class="keyword">let</span> cell2 = row.insertCell();<span class="comment">//年龄</span></span><br><span class="line">     <span class="keyword">let</span> cell3 = row.insertCell();<span class="comment">//操作</span></span><br><span class="line">     <span class="comment">// 插入列的内容</span></span><br><span class="line">     cell0.innerHTML = <span class="string">'&lt;input readonly="true" value='</span>+ last_num +<span class="string">'&gt;'</span>;</span><br><span class="line">     cell1.innerHTML = <span class="string">'&lt;input name="username"placeholder="输名称"&gt;'</span>;</span><br><span class="line">     cell2.innerHTML = <span class="string">'&lt;input name="age" placeholder="输入年龄"&gt;'</span>;</span><br><span class="line">     cell3.innerHTML = <span class="string">'&lt;a class="btn-link deleteRowInfo"&gt;删除&lt;/a&gt;'</span>;</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
-
-<h2 id="2-删除一行"><a href="#2-删除一行" class="headerlink" title="2. 删除一行"></a>2. 删除一行</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"> $(<span class="built_in">document</span>).on(<span class="string">'click'</span>,<span class="string">'.deleteRowInfo'</span>,<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">   <span class="comment">// 获取当前点击的哪一行</span></span><br><span class="line">   <span class="keyword">let</span> currentTrIndex = $(<span class="keyword">this</span>).parent().parent().index();</span><br><span class="line">   <span class="comment">// 获取表格对象</span></span><br><span class="line">   <span class="keyword">let</span> table = <span class="built_in">document</span>.getElementById(<span class="string">"myTable"</span>);</span><br><span class="line">   <span class="comment">// 删除行</span></span><br><span class="line">   table.deleteRow(index);</span><br><span class="line">   <span class="comment">// 更新序号</span></span><br><span class="line">   $(<span class="string">"#myTable"</span>).find(<span class="string">"tr"</span>).each(<span class="function"><span class="keyword">function</span>(<span class="params">index,item</span>)</span>&#123;</span><br><span class="line">      <span class="keyword">let</span> tdArr = $(<span class="keyword">this</span>).children();</span><br><span class="line">      tdArr.eq(<span class="number">0</span>).find(<span class="string">"input"</span>).val(index + <span class="number">1</span>);</span><br><span class="line">   &#125;);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
-
-<h2 id="3-获取表格中的值转为JSON字符串"><a href="#3-获取表格中的值转为JSON字符串" class="headerlink" title="3. 获取表格中的值转为JSON字符串"></a>3. 获取表格中的值转为JSON字符串</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"> <span class="function"><span class="keyword">function</span> <span class="title">getData</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">let</span> data = [];</span><br><span class="line">    $(<span class="string">"#myTable"</span>).find(<span class="string">"tr"</span>).each(<span class="function"><span class="keyword">function</span> (<span class="params">i</span>) </span>&#123;</span><br><span class="line">        data[i] = <span class="keyword">new</span> <span class="built_in">Object</span>();</span><br><span class="line">        data[i].username= $(<span class="keyword">this</span>).find(<span class="string">"input[name='username']"</span>).val()</span><br><span class="line">        data[i].age= $(<span class="keyword">this</span>).find(<span class="string">"input[name='age']"</span>).val()</span><br><span class="line">    &#125;);</span><br><span class="line">    <span class="comment">// 转为json字符串</span></span><br><span class="line">    <span class="keyword">let</span> strData = <span class="built_in">JSON</span>.stringify(data);</span><br><span class="line">    <span class="keyword">return</span> strData;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h2 id="4-添加一列"><a href="#4-添加一列" class="headerlink" title="4. 添加一列"></a>4. 添加一列</h2><table>
-<thead>
-<tr>
-<th align="left">姓名</th>
-<th align="left">派大星</th>
-<th align="left">海绵宝宝</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="left">年龄</td>
-<td align="left">22</td>
-<td align="left">25</td>
-</tr>
-<tr>
-<td align="left"><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"> $(<span class="string">".addBtn"</span>).click(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">   <span class="comment">// 获取模态框中输入值</span></span><br><span class="line">   <span class="keyword">let</span> username= $(<span class="string">".username"</span>).val();</span><br><span class="line">   <span class="keyword">let</span> age= $(<span class="string">".age"</span>).val();</span><br><span class="line">   <span class="comment">// 第一行添加一列</span></span><br><span class="line">   $(<span class="string">"#usernameTr"</span>).append(<span class="string">'&lt;td&gt;'</span>+username+<span class="string">'&lt;i class="icon-delete deleteCellInfo hidden"&gt;&lt;/i&gt;&lt;/td&gt;'</span>);</span><br><span class="line">   <span class="comment">// 第二行添加一列</span></span><br><span class="line">   $(<span class="string">"#ageTr"</span>).append(<span class="string">'&lt;td&gt;'</span>+age+<span class="string">'&lt;/td&gt;'</span>);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure></td>
-<td align="left"></td>
-<td align="left"></td>
-</tr>
-</tbody></table>
-<h2 id="5-删除一列"><a href="#5-删除一列" class="headerlink" title="5. 删除一列"></a>5. 删除一列</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 当鼠标移动到每一列时会有个删除按钮显示，点击这个删除按钮，删除此列</span></span><br><span class="line"> $(<span class="built_in">document</span>).on(<span class="string">'click'</span>,<span class="string">'.deleteCellInfo'</span>,<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">     <span class="comment">// 获取当前点击的是第几列</span></span><br><span class="line">     <span class="keyword">var</span> currentCell =$(<span class="string">"#usernameTr td i"</span>).index(<span class="keyword">this</span>) + <span class="number">1</span>;</span><br><span class="line">     <span class="comment">// 获取表格对象</span></span><br><span class="line">     <span class="keyword">let</span> table=<span class="built_in">document</span>.getElementById(<span class="string">"myTable"</span>);</span><br><span class="line">     <span class="comment">// 删除第一行中此列</span></span><br><span class="line">     table.rows[<span class="number">0</span>].deleteCell(currentCell);</span><br><span class="line">     <span class="comment">// 删除第二行中此列</span></span><br><span class="line">     table.rows[<span class="number">1</span>].deleteCell(currentCell);</span><br><span class="line"> &#125;);</span><br></pre></td></tr></table></figure>
-
-<h2 id="6-事件委派"><a href="#6-事件委派" class="headerlink" title="6. 事件委派"></a>6. 事件委派</h2><blockquote>
-<p>因为是动态添加的表格，所以没办法直接为新添加的元素添加事件监听，这个时候就需要用到了事件委派。其实也就是为页面渲染完成后添加的<strong>新元素</strong>加上事件。</p>
-</blockquote>
-<p>上面新添加列，我们为每一个新添加的列都添加一个鼠标移入移出事件，当鼠标移入到此列上时将删除图标显示出来。</p>
-<p>jQuery写法：使用<code>delegate</code></p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 鼠标移入时将删除hidden属性将删除图标显示出来</span></span><br><span class="line">$(<span class="string">'#usernameTr'</span>).delegate(<span class="string">'td'</span>, <span class="string">'mouseover'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">ev</span>)</span>&#123;</span><br><span class="line">     $(<span class="keyword">this</span>).find(<span class="string">"i"</span>).removeClass(<span class="string">"hidden"</span>);</span><br><span class="line"> &#125;);</span><br><span class="line"> <span class="comment">// 鼠标移出时将删除图标隐藏</span></span><br><span class="line"> $(<span class="string">'#usernameTr'</span>).delegate(<span class="string">'td'</span>, <span class="string">'mouseout'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">ev</span>)</span>&#123;</span><br><span class="line">     $(<span class="keyword">this</span>).find(<span class="string">"i"</span>).addClass(<span class="string">"hidden"</span>);</span><br><span class="line"> &#125;);</span><br></pre></td></tr></table></figure>
-
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    <div>
-      
-    </div>
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://pibigstar.com/2019/05/24/Nginx使用总结/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1778,9 +1525,9 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Posted on</span>
+                <span class="post-meta-item-text">发表于</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-05-24T06:06:04+08:00">
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-05-24T06:06:04+08:00">
                 2019-05-24
               </time>
             
@@ -1799,7 +1546,7 @@
                 <i class="fa fa-folder-o"></i>
               </span>
               
-                <span class="post-meta-item-text">In</span>
+                <span class="post-meta-item-text">分类于</span>
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
@@ -1971,6 +1718,161 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://pibigstar.com/2019/05/24/使用java画一张海报/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="派大星">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/qq.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="派大星的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/05/24/使用java画一张海报/" itemprop="url">使用java画一张海报</a></h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-05-24T06:06:04+08:00">
+                2019-05-24
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Java-java工具类/" itemprop="url" rel="index">
+                    <span itemprop="name">Java,java工具类</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>PS: 没找到合适的海报背景，就随便找了一张，使用技术都是相同的</p>
+<h2 id="1-添加依赖"><a href="#1-添加依赖" class="headerlink" title="1. 添加依赖"></a>1. 添加依赖</h2><p>这俩其实跟本章节的核心技术没有关系，是为了获取QQ昵称和QQ头像而引入的。</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- jsoup --&gt;</span></span><br><span class="line"> <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">     <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.jsoup<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">     <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>jsoup<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">     <span class="tag">&lt;<span class="name">version</span>&gt;</span>1.11.3<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"> <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line"> <span class="comment">&lt;!-- fastjson --&gt;</span></span><br><span class="line"> <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">     <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>com.alibaba<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">     <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>fastjson<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">     <span class="tag">&lt;<span class="name">version</span>&gt;</span>1.2.54<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"> <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>talk is cheap， show me the code</p>
+<h2 id="2-上代码"><a href="#2-上代码" class="headerlink" title="2.上代码"></a>2.上代码</h2><p>我就不多说了，注释已经写得很清楚了</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.pibgstar.demo.utils;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> com.alibaba.fastjson.JSONObject;</span><br><span class="line"><span class="keyword">import</span> org.jsoup.Jsoup;</span><br><span class="line"><span class="keyword">import</span> org.jsoup.nodes.Document;</span><br><span class="line"><span class="keyword">import</span> javax.imageio.ImageIO;</span><br><span class="line"><span class="keyword">import</span> java.awt.*;</span><br><span class="line"><span class="keyword">import</span> java.awt.geom.Ellipse2D;</span><br><span class="line"><span class="keyword">import</span> java.awt.image.BufferedImage;</span><br><span class="line"><span class="keyword">import</span> java.io.File;</span><br><span class="line"><span class="keyword">import</span> java.io.IOException;</span><br><span class="line"><span class="keyword">import</span> java.io.InputStream;</span><br><span class="line"><span class="keyword">import</span> java.net.URL;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> pibigstar</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@desc</span> 海报生成工具</span></span><br><span class="line"><span class="comment"> **/</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">PosterUtil</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> String BACKGROUND_IMG = <span class="string">"images/bg.jpg"</span>; <span class="comment">// 背景图片</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> String result_img = <span class="string">"D:/tmp/images/result.jpg"</span>; <span class="comment">// 最终输出图片</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> String QQ = <span class="string">"741047261"</span>;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> String avatar_img = <span class="string">"http://q1.qlogo.cn/g?b=qq&amp;nk="</span>+QQ+<span class="string">"&amp;s=100"</span>;<span class="comment">//QQ获取头像接口</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> String signature = <span class="string">"魔前一叩三千年，回首凡尘不做仙。"</span>; <span class="comment">// 个性签名</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span></span>&#123;</span><br><span class="line">        drawPoster();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@Author</span>:pibigstar</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@Description</span>: 画海报</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">drawPoster</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            <span class="keyword">long</span> startTime = System.currentTimeMillis();</span><br><span class="line">            <span class="comment">// 1. 创建画布</span></span><br><span class="line">            BufferedImage backgroundImg = ImageIO.read(getInputStream(BACKGROUND_IMG));</span><br><span class="line">            BufferedImage canvas = <span class="keyword">new</span> BufferedImage(backgroundImg.getWidth(),backgroundImg.getHeight(),BufferedImage.TYPE_INT_RGB);</span><br><span class="line">            Graphics2D g = (Graphics2D) canvas.getGraphics();</span><br><span class="line">            <span class="comment">// 设置抗锯齿</span></span><br><span class="line">            g.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING, RenderingHints.VALUE_TEXT_ANTIALIAS_LCD_HRGB);</span><br><span class="line"></span><br><span class="line">            <span class="comment">// 2. 将头像设置为圆角</span></span><br><span class="line">            BufferedImage avatar = ImageIO.read(<span class="keyword">new</span> URL(avatar_img));</span><br><span class="line">            BufferedImage newAvatar = <span class="keyword">new</span> BufferedImage(avatar.getWidth(), avatar.getHeight(), BufferedImage.TYPE_INT_ARGB);</span><br><span class="line">            Ellipse2D.Double shape = <span class="keyword">new</span> Ellipse2D.Double(<span class="number">0</span>, <span class="number">0</span>, avatar.getWidth(), avatar.getHeight());</span><br><span class="line">            Graphics2D g2 = newAvatar.createGraphics();</span><br><span class="line">            newAvatar = g2.getDeviceConfiguration().createCompatibleImage(avatar.getWidth(), avatar.getHeight(), Transparency.TRANSLUCENT);</span><br><span class="line">            g2 = newAvatar.createGraphics();</span><br><span class="line">            g2.setComposite(AlphaComposite.Clear);</span><br><span class="line">            g2.fill(<span class="keyword">new</span> Rectangle(newAvatar.getWidth(), newAvatar.getHeight()));</span><br><span class="line">            g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC, <span class="number">1.0f</span>));</span><br><span class="line">            g2.setClip(shape);</span><br><span class="line">            <span class="comment">// 使用 setRenderingHint 设置抗锯齿</span></span><br><span class="line">            g2 = newAvatar.createGraphics();</span><br><span class="line">            g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);</span><br><span class="line">            g2.fillRoundRect(<span class="number">0</span>, <span class="number">0</span>,avatar.getWidth(), avatar.getHeight(), <span class="number">150</span>, <span class="number">150</span>);</span><br><span class="line">            g2.setComposite(AlphaComposite.SrcIn);</span><br><span class="line">            g2.drawImage(avatar, <span class="number">0</span>, <span class="number">0</span>, avatar.getWidth(), avatar.getHeight(), <span class="keyword">null</span>);</span><br><span class="line">            g2.dispose();</span><br><span class="line"></span><br><span class="line">            <span class="comment">// 3. 将背景图和头像结合</span></span><br><span class="line">            <span class="comment">// 画背景</span></span><br><span class="line">            g.drawImage(backgroundImg.getScaledInstance(backgroundImg.getWidth(), backgroundImg.getHeight(), Image.SCALE_DEFAULT), <span class="number">0</span>, <span class="number">0</span>, <span class="keyword">null</span>);</span><br><span class="line">            <span class="comment">// 背景上画头像</span></span><br><span class="line">            g.drawImage(newAvatar.getScaledInstance(<span class="number">100</span>, <span class="number">100</span>, Image.SCALE_DEFAULT), <span class="number">42</span>, <span class="number">35</span>, <span class="keyword">null</span>);</span><br><span class="line"></span><br><span class="line">            <span class="comment">// 4. 写字（昵称）</span></span><br><span class="line">            g.setColor(<span class="keyword">new</span> Color(<span class="number">33</span>, <span class="number">33</span>, <span class="number">33</span>, <span class="number">128</span>));</span><br><span class="line">            g.setFont(getFont(<span class="number">2</span>, <span class="number">32.0f</span>));</span><br><span class="line">            g.drawString(getNickName(QQ), <span class="number">200</span>, <span class="number">75</span>);</span><br><span class="line"></span><br><span class="line">            <span class="comment">// 5. 画个性签名</span></span><br><span class="line">            g.setColor(<span class="keyword">new</span> Color(<span class="number">33</span>, <span class="number">33</span>, <span class="number">33</span>, <span class="number">128</span>));</span><br><span class="line">            g.setFont(getFont(<span class="number">1</span>, <span class="number">40.0f</span>));</span><br><span class="line">            <span class="comment">// 画竖着的文字</span></span><br><span class="line">            <span class="keyword">int</span> x = <span class="number">240</span>; <span class="comment">// 起始位置</span></span><br><span class="line">            <span class="keyword">int</span> length = signature.length();<span class="comment">//字符总长度</span></span><br><span class="line">            <span class="keyword">int</span> size = length/<span class="number">2</span>; <span class="comment">//一竖列的长度</span></span><br><span class="line">            <span class="keyword">int</span> j = <span class="number">0</span>; <span class="comment">// 读取到那个字符了</span></span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">0</span>; i&lt;<span class="number">2</span>; i++) &#123;<span class="comment">//两竖列</span></span><br><span class="line">                <span class="keyword">int</span> y = <span class="number">300</span>;</span><br><span class="line">                <span class="keyword">for</span> (;j &lt; size; j++) &#123;</span><br><span class="line">                    String c = String.valueOf(signature.charAt(j));</span><br><span class="line">                    y += <span class="number">40</span>;</span><br><span class="line">                    g.drawString(c,x,y);</span><br><span class="line">                &#125;</span><br><span class="line">                size = length;</span><br><span class="line">                x += <span class="number">70</span>;<span class="comment">//竖列之间的距离</span></span><br><span class="line">            &#125;</span><br><span class="line">            g.dispose();</span><br><span class="line">            File resultImg = <span class="keyword">new</span> File(result_img);</span><br><span class="line">            ImageIO.write(canvas, <span class="string">"png"</span>, resultImg);</span><br><span class="line"></span><br><span class="line">            System.out.println(<span class="string">"生成成功！"</span>);</span><br><span class="line">            System.out.println(<span class="string">"耗时: "</span> + (System.currentTimeMillis()-startTime)/<span class="number">1000.0</span> + <span class="string">"s"</span>);</span><br><span class="line">            System.out.println(<span class="string">"生成文件路径: "</span> + resultImg.getAbsolutePath());</span><br><span class="line">        &#125;<span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@Description</span>: 获取QQ昵称，无意间发现的QQ音乐的一个漏洞</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">static</span> String <span class="title">getNickName</span><span class="params">(String qq)</span></span>&#123;</span><br><span class="line">        String api = <span class="string">"https://c.y.qq.com/rsc/fcgi-bin/fcg_get_profile_homepage.fcg?cid=205360838&amp;ct=20&amp;userid="</span>+qq+<span class="string">"&amp;reqfrom=1"</span>;</span><br><span class="line">        String nick = <span class="string">""</span>;</span><br><span class="line">        JSONObject creatorObject = <span class="keyword">null</span>;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            Document document = Jsoup.connect(api).ignoreContentType(<span class="keyword">true</span>).timeout(<span class="number">10000</span>).get();</span><br><span class="line">            String body = document.body().text();</span><br><span class="line">            JSONObject jsonObject = JSONObject.parseObject(body);</span><br><span class="line">            JSONObject dataObject = (JSONObject) jsonObject.get(<span class="string">"data"</span>);</span><br><span class="line">            creatorObject = (JSONObject) dataObject.get(<span class="string">"creator"</span>);</span><br><span class="line">            nick = creatorObject.get(<span class="string">"nick"</span>).toString();</span><br><span class="line">        &#125;<span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> nick;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 根据字体类型获取字体</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> type 字体类型</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> size 字体大小</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">static</span> Font <span class="title">getFont</span><span class="params">(<span class="keyword">int</span> type, <span class="keyword">float</span> size)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// 字体路径</span></span><br><span class="line">        String path;</span><br><span class="line">        <span class="keyword">switch</span> (type) &#123;</span><br><span class="line">            <span class="keyword">case</span> <span class="number">1</span>:</span><br><span class="line">                path = <span class="string">"ttf/JianTi.ttf"</span>;</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            <span class="keyword">case</span> <span class="number">2</span>:</span><br><span class="line">                path = <span class="string">"ttf/PingFang.ttf"</span>;</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            <span class="keyword">default</span>:</span><br><span class="line">                path = <span class="string">"ttf/JianTi.ttf"</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        InputStream inputStream = <span class="keyword">null</span>;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            inputStream = getInputStream(path);</span><br><span class="line">            Font font = Font.createFont(Font.TRUETYPE_FONT, inputStream);</span><br><span class="line">            font = font.deriveFont(size);</span><br><span class="line">            <span class="keyword">return</span> font;</span><br><span class="line">        &#125; <span class="keyword">catch</span> (FontFormatException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125; <span class="keyword">catch</span> (IOException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125; <span class="keyword">finally</span> &#123;</span><br><span class="line">            <span class="keyword">try</span> &#123;</span><br><span class="line">                <span class="keyword">if</span> (inputStream != <span class="keyword">null</span>) &#123;</span><br><span class="line">                    inputStream.close();</span><br><span class="line">                &#125;</span><br><span class="line">            &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">                e.printStackTrace();</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 获取resources下的文件输入流</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">static</span> InputStream <span class="title">getInputStream</span><span class="params">(String fileName)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> PosterUtil.class.getClassLoader().getResourceAsStream(fileName);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="3-目录结构"><a href="#3-目录结构" class="headerlink" title="3. 目录结构"></a>3. 目录结构</h2><p><img src="https://img-blog.csdnimg.cn/20190108102241892.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2p1bm1veGk=,size_16,color_FFFFFF,t_70" alt></p>
+<h2 id="4-最终效果"><a href="#4-最终效果" class="headerlink" title="4. 最终效果"></a>4. 最终效果</h2><p><img src="https://img-blog.csdnimg.cn/20190108102447401.jpg?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2p1bm1veGk=,size_16,color_FFFFFF,t_70" alt></p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    <div>
+      
+    </div>
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://pibigstar.com/2019/05/24/Centos和Ubuntu安装kubeadm/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -2000,9 +1902,9 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Posted on</span>
+                <span class="post-meta-item-text">发表于</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-05-24T06:06:04+08:00">
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-05-24T06:06:04+08:00">
                 2019-05-24
               </time>
             
@@ -2021,7 +1923,7 @@
                 <i class="fa fa-folder-o"></i>
               </span>
               
-                <span class="post-meta-item-text">In</span>
+                <span class="post-meta-item-text">分类于</span>
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
@@ -2138,7 +2040,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://pibigstar.com/2019/05/24/使用java画一张海报/">
+    <link itemprop="mainEntityOfPage" href="http://pibigstar.com/2019/05/24/JS操作表格常用操作及事件委派/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="派大星">
@@ -2157,7 +2059,7 @@
         
           <h2 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2019/05/24/使用java画一张海报/" itemprop="url">使用java画一张海报</a></h2>
+                <a class="post-title-link" href="/2019/05/24/JS操作表格常用操作及事件委派/" itemprop="url">JS操作表格常用操作及事件委派</a></h2>
         
 
         <div class="post-meta">
@@ -2167,9 +2069,9 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Posted on</span>
+                <span class="post-meta-item-text">发表于</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-05-24T06:06:04+08:00">
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-05-24T06:06:04+08:00">
                 2019-05-24
               </time>
             
@@ -2188,12 +2090,12 @@
                 <i class="fa fa-folder-o"></i>
               </span>
               
-                <span class="post-meta-item-text">In</span>
+                <span class="post-meta-item-text">分类于</span>
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Java-java工具类/" itemprop="url" rel="index">
-                    <span itemprop="name">Java,java工具类</span>
+                  <a href="/categories/js/" itemprop="url" rel="index">
+                    <span itemprop="name">js</span>
                   </a>
                 </span>
 
@@ -2231,16 +2133,40 @@
       
         
           
-            <p>PS: 没找到合适的海报背景，就随便找了一张，使用技术都是相同的</p>
-<h2 id="1-添加依赖"><a href="#1-添加依赖" class="headerlink" title="1. 添加依赖"></a>1. 添加依赖</h2><p>这俩其实跟本章节的核心技术没有关系，是为了获取QQ昵称和QQ头像而引入的。</p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- jsoup --&gt;</span></span><br><span class="line"> <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">     <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.jsoup<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">     <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>jsoup<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">     <span class="tag">&lt;<span class="name">version</span>&gt;</span>1.11.3<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"> <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line"> <span class="comment">&lt;!-- fastjson --&gt;</span></span><br><span class="line"> <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">     <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>com.alibaba<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">     <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>fastjson<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">     <span class="tag">&lt;<span class="name">version</span>&gt;</span>1.2.54<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"> <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
+            <h1 id="JS操作表格常用操作及事件委派"><a href="#JS操作表格常用操作及事件委派" class="headerlink" title="JS操作表格常用操作及事件委派"></a>JS操作表格常用操作及事件委派</h1><h2 id="1-点击添加一行表格"><a href="#1-点击添加一行表格" class="headerlink" title="1. 点击添加一行表格"></a>1. 点击添加一行表格</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">addRow</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">     <span class="comment">// 获取当前有多少行(查找第一列序号值)</span></span><br><span class="line">     last_num = $(<span class="string">"#myTabletr:last-child"</span>).children(<span class="string">"td"</span>).find(<span class="string">"input"</span>).val();</span><br><span class="line">     <span class="keyword">if</span> (last_num == <span class="literal">null</span>) &#123;</span><br><span class="line">         last_num = <span class="number">1</span>;</span><br><span class="line">     &#125;</span><br><span class="line">     <span class="keyword">else</span> &#123;</span><br><span class="line">         last_num = <span class="built_in">parseInt</span>(last_num);</span><br><span class="line">         last_num += <span class="number">1</span>;</span><br><span class="line">     &#125;</span><br><span class="line">     <span class="comment">// 获取表格对象</span></span><br><span class="line">     <span class="keyword">let</span> table = <span class="built_in">document</span>.getElementById(<span class="string">"myTable"</span>);</span><br><span class="line">     <span class="comment">// 插入一行</span></span><br><span class="line">     <span class="keyword">let</span> row = table.insertRow();</span><br><span class="line">     <span class="comment">// 插入四列</span></span><br><span class="line">     <span class="keyword">let</span> cell0 = row.insertCell();<span class="comment">//序号</span></span><br><span class="line">     <span class="keyword">let</span> cell1= row.insertCell(); <span class="comment">//名称</span></span><br><span class="line">     <span class="keyword">let</span> cell2 = row.insertCell();<span class="comment">//年龄</span></span><br><span class="line">     <span class="keyword">let</span> cell3 = row.insertCell();<span class="comment">//操作</span></span><br><span class="line">     <span class="comment">// 插入列的内容</span></span><br><span class="line">     cell0.innerHTML = <span class="string">'&lt;input readonly="true" value='</span>+ last_num +<span class="string">'&gt;'</span>;</span><br><span class="line">     cell1.innerHTML = <span class="string">'&lt;input name="username"placeholder="输名称"&gt;'</span>;</span><br><span class="line">     cell2.innerHTML = <span class="string">'&lt;input name="age" placeholder="输入年龄"&gt;'</span>;</span><br><span class="line">     cell3.innerHTML = <span class="string">'&lt;a class="btn-link deleteRowInfo"&gt;删除&lt;/a&gt;'</span>;</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
 
-<p>talk is cheap， show me the code</p>
-<h2 id="2-上代码"><a href="#2-上代码" class="headerlink" title="2.上代码"></a>2.上代码</h2><p>我就不多说了，注释已经写得很清楚了</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.pibgstar.demo.utils;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> com.alibaba.fastjson.JSONObject;</span><br><span class="line"><span class="keyword">import</span> org.jsoup.Jsoup;</span><br><span class="line"><span class="keyword">import</span> org.jsoup.nodes.Document;</span><br><span class="line"><span class="keyword">import</span> javax.imageio.ImageIO;</span><br><span class="line"><span class="keyword">import</span> java.awt.*;</span><br><span class="line"><span class="keyword">import</span> java.awt.geom.Ellipse2D;</span><br><span class="line"><span class="keyword">import</span> java.awt.image.BufferedImage;</span><br><span class="line"><span class="keyword">import</span> java.io.File;</span><br><span class="line"><span class="keyword">import</span> java.io.IOException;</span><br><span class="line"><span class="keyword">import</span> java.io.InputStream;</span><br><span class="line"><span class="keyword">import</span> java.net.URL;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> pibigstar</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@desc</span> 海报生成工具</span></span><br><span class="line"><span class="comment"> **/</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">PosterUtil</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> String BACKGROUND_IMG = <span class="string">"images/bg.jpg"</span>; <span class="comment">// 背景图片</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> String result_img = <span class="string">"D:/tmp/images/result.jpg"</span>; <span class="comment">// 最终输出图片</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> String QQ = <span class="string">"741047261"</span>;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> String avatar_img = <span class="string">"http://q1.qlogo.cn/g?b=qq&amp;nk="</span>+QQ+<span class="string">"&amp;s=100"</span>;<span class="comment">//QQ获取头像接口</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> String signature = <span class="string">"魔前一叩三千年，回首凡尘不做仙。"</span>; <span class="comment">// 个性签名</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span></span>&#123;</span><br><span class="line">        drawPoster();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@Author</span>:pibigstar</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@Description</span>: 画海报</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">drawPoster</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            <span class="keyword">long</span> startTime = System.currentTimeMillis();</span><br><span class="line">            <span class="comment">// 1. 创建画布</span></span><br><span class="line">            BufferedImage backgroundImg = ImageIO.read(getInputStream(BACKGROUND_IMG));</span><br><span class="line">            BufferedImage canvas = <span class="keyword">new</span> BufferedImage(backgroundImg.getWidth(),backgroundImg.getHeight(),BufferedImage.TYPE_INT_RGB);</span><br><span class="line">            Graphics2D g = (Graphics2D) canvas.getGraphics();</span><br><span class="line">            <span class="comment">// 设置抗锯齿</span></span><br><span class="line">            g.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING, RenderingHints.VALUE_TEXT_ANTIALIAS_LCD_HRGB);</span><br><span class="line"></span><br><span class="line">            <span class="comment">// 2. 将头像设置为圆角</span></span><br><span class="line">            BufferedImage avatar = ImageIO.read(<span class="keyword">new</span> URL(avatar_img));</span><br><span class="line">            BufferedImage newAvatar = <span class="keyword">new</span> BufferedImage(avatar.getWidth(), avatar.getHeight(), BufferedImage.TYPE_INT_ARGB);</span><br><span class="line">            Ellipse2D.Double shape = <span class="keyword">new</span> Ellipse2D.Double(<span class="number">0</span>, <span class="number">0</span>, avatar.getWidth(), avatar.getHeight());</span><br><span class="line">            Graphics2D g2 = newAvatar.createGraphics();</span><br><span class="line">            newAvatar = g2.getDeviceConfiguration().createCompatibleImage(avatar.getWidth(), avatar.getHeight(), Transparency.TRANSLUCENT);</span><br><span class="line">            g2 = newAvatar.createGraphics();</span><br><span class="line">            g2.setComposite(AlphaComposite.Clear);</span><br><span class="line">            g2.fill(<span class="keyword">new</span> Rectangle(newAvatar.getWidth(), newAvatar.getHeight()));</span><br><span class="line">            g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC, <span class="number">1.0f</span>));</span><br><span class="line">            g2.setClip(shape);</span><br><span class="line">            <span class="comment">// 使用 setRenderingHint 设置抗锯齿</span></span><br><span class="line">            g2 = newAvatar.createGraphics();</span><br><span class="line">            g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);</span><br><span class="line">            g2.fillRoundRect(<span class="number">0</span>, <span class="number">0</span>,avatar.getWidth(), avatar.getHeight(), <span class="number">150</span>, <span class="number">150</span>);</span><br><span class="line">            g2.setComposite(AlphaComposite.SrcIn);</span><br><span class="line">            g2.drawImage(avatar, <span class="number">0</span>, <span class="number">0</span>, avatar.getWidth(), avatar.getHeight(), <span class="keyword">null</span>);</span><br><span class="line">            g2.dispose();</span><br><span class="line"></span><br><span class="line">            <span class="comment">// 3. 将背景图和头像结合</span></span><br><span class="line">            <span class="comment">// 画背景</span></span><br><span class="line">            g.drawImage(backgroundImg.getScaledInstance(backgroundImg.getWidth(), backgroundImg.getHeight(), Image.SCALE_DEFAULT), <span class="number">0</span>, <span class="number">0</span>, <span class="keyword">null</span>);</span><br><span class="line">            <span class="comment">// 背景上画头像</span></span><br><span class="line">            g.drawImage(newAvatar.getScaledInstance(<span class="number">100</span>, <span class="number">100</span>, Image.SCALE_DEFAULT), <span class="number">42</span>, <span class="number">35</span>, <span class="keyword">null</span>);</span><br><span class="line"></span><br><span class="line">            <span class="comment">// 4. 写字（昵称）</span></span><br><span class="line">            g.setColor(<span class="keyword">new</span> Color(<span class="number">33</span>, <span class="number">33</span>, <span class="number">33</span>, <span class="number">128</span>));</span><br><span class="line">            g.setFont(getFont(<span class="number">2</span>, <span class="number">32.0f</span>));</span><br><span class="line">            g.drawString(getNickName(QQ), <span class="number">200</span>, <span class="number">75</span>);</span><br><span class="line"></span><br><span class="line">            <span class="comment">// 5. 画个性签名</span></span><br><span class="line">            g.setColor(<span class="keyword">new</span> Color(<span class="number">33</span>, <span class="number">33</span>, <span class="number">33</span>, <span class="number">128</span>));</span><br><span class="line">            g.setFont(getFont(<span class="number">1</span>, <span class="number">40.0f</span>));</span><br><span class="line">            <span class="comment">// 画竖着的文字</span></span><br><span class="line">            <span class="keyword">int</span> x = <span class="number">240</span>; <span class="comment">// 起始位置</span></span><br><span class="line">            <span class="keyword">int</span> length = signature.length();<span class="comment">//字符总长度</span></span><br><span class="line">            <span class="keyword">int</span> size = length/<span class="number">2</span>; <span class="comment">//一竖列的长度</span></span><br><span class="line">            <span class="keyword">int</span> j = <span class="number">0</span>; <span class="comment">// 读取到那个字符了</span></span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">0</span>; i&lt;<span class="number">2</span>; i++) &#123;<span class="comment">//两竖列</span></span><br><span class="line">                <span class="keyword">int</span> y = <span class="number">300</span>;</span><br><span class="line">                <span class="keyword">for</span> (;j &lt; size; j++) &#123;</span><br><span class="line">                    String c = String.valueOf(signature.charAt(j));</span><br><span class="line">                    y += <span class="number">40</span>;</span><br><span class="line">                    g.drawString(c,x,y);</span><br><span class="line">                &#125;</span><br><span class="line">                size = length;</span><br><span class="line">                x += <span class="number">70</span>;<span class="comment">//竖列之间的距离</span></span><br><span class="line">            &#125;</span><br><span class="line">            g.dispose();</span><br><span class="line">            File resultImg = <span class="keyword">new</span> File(result_img);</span><br><span class="line">            ImageIO.write(canvas, <span class="string">"png"</span>, resultImg);</span><br><span class="line"></span><br><span class="line">            System.out.println(<span class="string">"生成成功！"</span>);</span><br><span class="line">            System.out.println(<span class="string">"耗时: "</span> + (System.currentTimeMillis()-startTime)/<span class="number">1000.0</span> + <span class="string">"s"</span>);</span><br><span class="line">            System.out.println(<span class="string">"生成文件路径: "</span> + resultImg.getAbsolutePath());</span><br><span class="line">        &#125;<span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@Description</span>: 获取QQ昵称，无意间发现的QQ音乐的一个漏洞</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">static</span> String <span class="title">getNickName</span><span class="params">(String qq)</span></span>&#123;</span><br><span class="line">        String api = <span class="string">"https://c.y.qq.com/rsc/fcgi-bin/fcg_get_profile_homepage.fcg?cid=205360838&amp;ct=20&amp;userid="</span>+qq+<span class="string">"&amp;reqfrom=1"</span>;</span><br><span class="line">        String nick = <span class="string">""</span>;</span><br><span class="line">        JSONObject creatorObject = <span class="keyword">null</span>;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            Document document = Jsoup.connect(api).ignoreContentType(<span class="keyword">true</span>).timeout(<span class="number">10000</span>).get();</span><br><span class="line">            String body = document.body().text();</span><br><span class="line">            JSONObject jsonObject = JSONObject.parseObject(body);</span><br><span class="line">            JSONObject dataObject = (JSONObject) jsonObject.get(<span class="string">"data"</span>);</span><br><span class="line">            creatorObject = (JSONObject) dataObject.get(<span class="string">"creator"</span>);</span><br><span class="line">            nick = creatorObject.get(<span class="string">"nick"</span>).toString();</span><br><span class="line">        &#125;<span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> nick;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 根据字体类型获取字体</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> type 字体类型</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> size 字体大小</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">static</span> Font <span class="title">getFont</span><span class="params">(<span class="keyword">int</span> type, <span class="keyword">float</span> size)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// 字体路径</span></span><br><span class="line">        String path;</span><br><span class="line">        <span class="keyword">switch</span> (type) &#123;</span><br><span class="line">            <span class="keyword">case</span> <span class="number">1</span>:</span><br><span class="line">                path = <span class="string">"ttf/JianTi.ttf"</span>;</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            <span class="keyword">case</span> <span class="number">2</span>:</span><br><span class="line">                path = <span class="string">"ttf/PingFang.ttf"</span>;</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            <span class="keyword">default</span>:</span><br><span class="line">                path = <span class="string">"ttf/JianTi.ttf"</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        InputStream inputStream = <span class="keyword">null</span>;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            inputStream = getInputStream(path);</span><br><span class="line">            Font font = Font.createFont(Font.TRUETYPE_FONT, inputStream);</span><br><span class="line">            font = font.deriveFont(size);</span><br><span class="line">            <span class="keyword">return</span> font;</span><br><span class="line">        &#125; <span class="keyword">catch</span> (FontFormatException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125; <span class="keyword">catch</span> (IOException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125; <span class="keyword">finally</span> &#123;</span><br><span class="line">            <span class="keyword">try</span> &#123;</span><br><span class="line">                <span class="keyword">if</span> (inputStream != <span class="keyword">null</span>) &#123;</span><br><span class="line">                    inputStream.close();</span><br><span class="line">                &#125;</span><br><span class="line">            &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">                e.printStackTrace();</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 获取resources下的文件输入流</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">static</span> InputStream <span class="title">getInputStream</span><span class="params">(String fileName)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> PosterUtil.class.getClassLoader().getResourceAsStream(fileName);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="2-删除一行"><a href="#2-删除一行" class="headerlink" title="2. 删除一行"></a>2. 删除一行</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"> $(<span class="built_in">document</span>).on(<span class="string">'click'</span>,<span class="string">'.deleteRowInfo'</span>,<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">   <span class="comment">// 获取当前点击的哪一行</span></span><br><span class="line">   <span class="keyword">let</span> currentTrIndex = $(<span class="keyword">this</span>).parent().parent().index();</span><br><span class="line">   <span class="comment">// 获取表格对象</span></span><br><span class="line">   <span class="keyword">let</span> table = <span class="built_in">document</span>.getElementById(<span class="string">"myTable"</span>);</span><br><span class="line">   <span class="comment">// 删除行</span></span><br><span class="line">   table.deleteRow(index);</span><br><span class="line">   <span class="comment">// 更新序号</span></span><br><span class="line">   $(<span class="string">"#myTable"</span>).find(<span class="string">"tr"</span>).each(<span class="function"><span class="keyword">function</span>(<span class="params">index,item</span>)</span>&#123;</span><br><span class="line">      <span class="keyword">let</span> tdArr = $(<span class="keyword">this</span>).children();</span><br><span class="line">      tdArr.eq(<span class="number">0</span>).find(<span class="string">"input"</span>).val(index + <span class="number">1</span>);</span><br><span class="line">   &#125;);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
 
-<h2 id="3-目录结构"><a href="#3-目录结构" class="headerlink" title="3. 目录结构"></a>3. 目录结构</h2><p><img src="https://img-blog.csdnimg.cn/20190108102241892.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2p1bm1veGk=,size_16,color_FFFFFF,t_70" alt></p>
-<h2 id="4-最终效果"><a href="#4-最终效果" class="headerlink" title="4. 最终效果"></a>4. 最终效果</h2><p><img src="https://img-blog.csdnimg.cn/20190108102447401.jpg?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2p1bm1veGk=,size_16,color_FFFFFF,t_70" alt></p>
+<h2 id="3-获取表格中的值转为JSON字符串"><a href="#3-获取表格中的值转为JSON字符串" class="headerlink" title="3. 获取表格中的值转为JSON字符串"></a>3. 获取表格中的值转为JSON字符串</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"> <span class="function"><span class="keyword">function</span> <span class="title">getData</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">let</span> data = [];</span><br><span class="line">    $(<span class="string">"#myTable"</span>).find(<span class="string">"tr"</span>).each(<span class="function"><span class="keyword">function</span> (<span class="params">i</span>) </span>&#123;</span><br><span class="line">        data[i] = <span class="keyword">new</span> <span class="built_in">Object</span>();</span><br><span class="line">        data[i].username= $(<span class="keyword">this</span>).find(<span class="string">"input[name='username']"</span>).val()</span><br><span class="line">        data[i].age= $(<span class="keyword">this</span>).find(<span class="string">"input[name='age']"</span>).val()</span><br><span class="line">    &#125;);</span><br><span class="line">    <span class="comment">// 转为json字符串</span></span><br><span class="line">    <span class="keyword">let</span> strData = <span class="built_in">JSON</span>.stringify(data);</span><br><span class="line">    <span class="keyword">return</span> strData;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="4-添加一列"><a href="#4-添加一列" class="headerlink" title="4. 添加一列"></a>4. 添加一列</h2><table>
+<thead>
+<tr>
+<th align="left">姓名</th>
+<th align="left">派大星</th>
+<th align="left">海绵宝宝</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">年龄</td>
+<td align="left">22</td>
+<td align="left">25</td>
+</tr>
+<tr>
+<td align="left"><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"> $(<span class="string">".addBtn"</span>).click(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">   <span class="comment">// 获取模态框中输入值</span></span><br><span class="line">   <span class="keyword">let</span> username= $(<span class="string">".username"</span>).val();</span><br><span class="line">   <span class="keyword">let</span> age= $(<span class="string">".age"</span>).val();</span><br><span class="line">   <span class="comment">// 第一行添加一列</span></span><br><span class="line">   $(<span class="string">"#usernameTr"</span>).append(<span class="string">'&lt;td&gt;'</span>+username+<span class="string">'&lt;i class="icon-delete deleteCellInfo hidden"&gt;&lt;/i&gt;&lt;/td&gt;'</span>);</span><br><span class="line">   <span class="comment">// 第二行添加一列</span></span><br><span class="line">   $(<span class="string">"#ageTr"</span>).append(<span class="string">'&lt;td&gt;'</span>+age+<span class="string">'&lt;/td&gt;'</span>);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure></td>
+<td align="left"></td>
+<td align="left"></td>
+</tr>
+</tbody></table>
+<h2 id="5-删除一列"><a href="#5-删除一列" class="headerlink" title="5. 删除一列"></a>5. 删除一列</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 当鼠标移动到每一列时会有个删除按钮显示，点击这个删除按钮，删除此列</span></span><br><span class="line"> $(<span class="built_in">document</span>).on(<span class="string">'click'</span>,<span class="string">'.deleteCellInfo'</span>,<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">     <span class="comment">// 获取当前点击的是第几列</span></span><br><span class="line">     <span class="keyword">var</span> currentCell =$(<span class="string">"#usernameTr td i"</span>).index(<span class="keyword">this</span>) + <span class="number">1</span>;</span><br><span class="line">     <span class="comment">// 获取表格对象</span></span><br><span class="line">     <span class="keyword">let</span> table=<span class="built_in">document</span>.getElementById(<span class="string">"myTable"</span>);</span><br><span class="line">     <span class="comment">// 删除第一行中此列</span></span><br><span class="line">     table.rows[<span class="number">0</span>].deleteCell(currentCell);</span><br><span class="line">     <span class="comment">// 删除第二行中此列</span></span><br><span class="line">     table.rows[<span class="number">1</span>].deleteCell(currentCell);</span><br><span class="line"> &#125;);</span><br></pre></td></tr></table></figure>
+
+<h2 id="6-事件委派"><a href="#6-事件委派" class="headerlink" title="6. 事件委派"></a>6. 事件委派</h2><blockquote>
+<p>因为是动态添加的表格，所以没办法直接为新添加的元素添加事件监听，这个时候就需要用到了事件委派。其实也就是为页面渲染完成后添加的<strong>新元素</strong>加上事件。</p>
+</blockquote>
+<p>上面新添加列，我们为每一个新添加的列都添加一个鼠标移入移出事件，当鼠标移入到此列上时将删除图标显示出来。</p>
+<p>jQuery写法：使用<code>delegate</code></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 鼠标移入时将删除hidden属性将删除图标显示出来</span></span><br><span class="line">$(<span class="string">'#usernameTr'</span>).delegate(<span class="string">'td'</span>, <span class="string">'mouseover'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">ev</span>)</span>&#123;</span><br><span class="line">     $(<span class="keyword">this</span>).find(<span class="string">"i"</span>).removeClass(<span class="string">"hidden"</span>);</span><br><span class="line"> &#125;);</span><br><span class="line"> <span class="comment">// 鼠标移出时将删除图标隐藏</span></span><br><span class="line"> $(<span class="string">'#usernameTr'</span>).delegate(<span class="string">'td'</span>, <span class="string">'mouseout'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">ev</span>)</span>&#123;</span><br><span class="line">     $(<span class="keyword">this</span>).find(<span class="string">"i"</span>).addClass(<span class="string">"hidden"</span>);</span><br><span class="line"> &#125;);</span><br></pre></td></tr></table></figure>
+
 
           
         
@@ -2333,7 +2259,7 @@
                 <a href="/archives">
               
                   <span class="site-state-item-count">137</span>
-                  <span class="site-state-item-name">posts</span>
+                  <span class="site-state-item-name">日志</span>
                 </a>
               </div>
             
@@ -2342,10 +2268,10 @@
               
               
               <div class="site-state-item site-state-categories">
-                
+                <a href="/categories/index.html">
                   <span class="site-state-item-count">64</span>
-                  <span class="site-state-item-name">categories</span>
-                
+                  <span class="site-state-item-name">分类</span>
+                </a>
               </div>
             
 
@@ -2353,10 +2279,10 @@
               
               
               <div class="site-state-item site-state-tags">
-                
+                <a href="/tags/index.html">
                   <span class="site-state-item-count">230</span>
-                  <span class="site-state-item-name">tags</span>
-                
+                  <span class="site-state-item-name">标签</span>
+                </a>
               </div>
             
 
@@ -2422,7 +2348,7 @@
 </div>
 
 
-  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
 
 
 

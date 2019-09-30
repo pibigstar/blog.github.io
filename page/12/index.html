@@ -5,7 +5,7 @@
   
 
 
-<html class="theme-next gemini use-motion" lang="zh-CN">
+<html class="theme-next gemini use-motion" lang="zh-Hans">
 <head><meta name="generator" content="Hexo 3.9.0">
   <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -84,7 +84,7 @@
 <meta property="og:title" content="派大星的博客">
 <meta property="og:url" content="http://pibigstar.com/page/12/index.html">
 <meta property="og:site_name" content="派大星的博客">
-<meta property="og:locale" content="zh-CN">
+<meta property="og:locale" content="zh-Hans">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="派大星的博客">
 
@@ -102,7 +102,7 @@
     motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
     duoshuo: {
       userId: '0',
-      author: 'Author'
+      author: '博主'
     },
     algolia: {
       applicationID: '',
@@ -134,7 +134,7 @@
 
 </head>
 
-<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
 
   
   
@@ -183,17 +183,7 @@
             
               <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
             
-            Home
-          </a>
-        </li>
-      
-        
-        <li class="menu-item menu-item-schedule">
-          <a href="/schedule/" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-calendar"></i> <br>
-            
-            Schedule
+            首页
           </a>
         </li>
       
@@ -203,7 +193,7 @@
             
               <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
             
-            Tags
+            标签
           </a>
         </li>
       
@@ -213,17 +203,7 @@
             
               <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
             
-            Categories
-          </a>
-        </li>
-      
-        
-        <li class="menu-item menu-item-sitemap">
-          <a href="/sitemap.xml" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-sitemap"></i> <br>
-            
-            Sitemap
+            分类
           </a>
         </li>
       
@@ -233,7 +213,7 @@
             
               <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
             
-            About
+            关于
           </a>
         </li>
       
@@ -256,172 +236,6 @@
           <div id="content" class="content">
             
   <section id="posts" class="posts-expand">
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://pibigstar.com/2019/02/23/Windows下交叉编译Go/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="派大星">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/qq.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="派大星的博客">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/02/23/Windows下交叉编译Go/" itemprop="url">Windows下交叉编译Go</a></h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-02-23T02:02:04+08:00">
-                2019-02-23
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/go/" itemprop="url" rel="index">
-                    <span itemprop="name">go</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h2 id="1-Windows下"><a href="#1-Windows下" class="headerlink" title="1. Windows下"></a>1. Windows下</h2><p>编译为Linux可运行文件</p>
-<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">SET</span> CGO_ENABLED=<span class="number">0</span></span><br><span class="line"><span class="built_in">SET</span> GOOS=linux</span><br><span class="line"><span class="built_in">SET</span> GOARCH=amd64</span><br><span class="line">go build main.go</span><br></pre></td></tr></table></figure>
-
-<p>编译为MAC可运行文件</p>
-<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">SET</span> CGO_ENABLED=<span class="number">0</span></span><br><span class="line"><span class="built_in">SET</span> GOOS=darwin</span><br><span class="line"><span class="built_in">SET</span> GOARCH=amd64</span><br><span class="line">go build main.go</span><br></pre></td></tr></table></figure>
-
-<p>编译为Window可运行文件</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">SET GOOS=windows</span><br><span class="line">go build main.go</span><br></pre></td></tr></table></figure>
-
-<h2 id="2-MAC下"><a href="#2-MAC下" class="headerlink" title="2. MAC下"></a>2. MAC下</h2><p>编译为Windows可执行文件</p>
-<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">CGO_ENABLED=<span class="number">0</span> GOOS=windows GOARCH=amd64 go build main.go</span><br></pre></td></tr></table></figure>
-
-<p>编译为Linux可执行文件</p>
-<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">CGO_ENABLED=<span class="number">0</span> GOOS=linux GOARCH=amd64 go build main.go</span><br></pre></td></tr></table></figure>
-
-<h2 id="3-Linux下"><a href="#3-Linux下" class="headerlink" title="3. Linux下"></a>3. Linux下</h2><p>编译为Windows可执行文件</p>
-<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">CGO_ENABLED=<span class="number">0</span> GOOS=windows GOARCH=amd64 go build main.go</span><br></pre></td></tr></table></figure>
-
-<p>编译为MAC可执行文件</p>
-<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">CGO_ENABLED=<span class="number">0</span> GOOS=darwin GOARCH=amd64 go build main.go</span><br></pre></td></tr></table></figure>
-
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    <div>
-      
-    </div>
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
     
       
 
@@ -465,9 +279,9 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Posted on</span>
+                <span class="post-meta-item-text">发表于</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-02-23T02:02:04+08:00">
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-02-23T02:02:04+08:00">
                 2019-02-23
               </time>
             
@@ -486,7 +300,7 @@
                 <i class="fa fa-folder-o"></i>
               </span>
               
-                <span class="post-meta-item-text">In</span>
+                <span class="post-meta-item-text">分类于</span>
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
@@ -668,6 +482,172 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://pibigstar.com/2019/02/23/Windows下交叉编译Go/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="派大星">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/qq.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="派大星的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/02/23/Windows下交叉编译Go/" itemprop="url">Windows下交叉编译Go</a></h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-02-23T02:02:04+08:00">
+                2019-02-23
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/go/" itemprop="url" rel="index">
+                    <span itemprop="name">go</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="1-Windows下"><a href="#1-Windows下" class="headerlink" title="1. Windows下"></a>1. Windows下</h2><p>编译为Linux可运行文件</p>
+<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">SET</span> CGO_ENABLED=<span class="number">0</span></span><br><span class="line"><span class="built_in">SET</span> GOOS=linux</span><br><span class="line"><span class="built_in">SET</span> GOARCH=amd64</span><br><span class="line">go build main.go</span><br></pre></td></tr></table></figure>
+
+<p>编译为MAC可运行文件</p>
+<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">SET</span> CGO_ENABLED=<span class="number">0</span></span><br><span class="line"><span class="built_in">SET</span> GOOS=darwin</span><br><span class="line"><span class="built_in">SET</span> GOARCH=amd64</span><br><span class="line">go build main.go</span><br></pre></td></tr></table></figure>
+
+<p>编译为Window可运行文件</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">SET GOOS=windows</span><br><span class="line">go build main.go</span><br></pre></td></tr></table></figure>
+
+<h2 id="2-MAC下"><a href="#2-MAC下" class="headerlink" title="2. MAC下"></a>2. MAC下</h2><p>编译为Windows可执行文件</p>
+<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">CGO_ENABLED=<span class="number">0</span> GOOS=windows GOARCH=amd64 go build main.go</span><br></pre></td></tr></table></figure>
+
+<p>编译为Linux可执行文件</p>
+<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">CGO_ENABLED=<span class="number">0</span> GOOS=linux GOARCH=amd64 go build main.go</span><br></pre></td></tr></table></figure>
+
+<h2 id="3-Linux下"><a href="#3-Linux下" class="headerlink" title="3. Linux下"></a>3. Linux下</h2><p>编译为Windows可执行文件</p>
+<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">CGO_ENABLED=<span class="number">0</span> GOOS=windows GOARCH=amd64 go build main.go</span><br></pre></td></tr></table></figure>
+
+<p>编译为MAC可执行文件</p>
+<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">CGO_ENABLED=<span class="number">0</span> GOOS=darwin GOARCH=amd64 go build main.go</span><br></pre></td></tr></table></figure>
+
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    <div>
+      
+    </div>
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://pibigstar.com/2019/02/21/将redis和mongodb服务安装到系统服务中/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -697,9 +677,9 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Posted on</span>
+                <span class="post-meta-item-text">发表于</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-02-21T03:03:04+08:00">
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-02-21T03:03:04+08:00">
                 2019-02-21
               </time>
             
@@ -718,7 +698,7 @@
                 <i class="fa fa-folder-o"></i>
               </span>
               
-                <span class="post-meta-item-text">In</span>
+                <span class="post-meta-item-text">分类于</span>
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
@@ -815,181 +795,6 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://pibigstar.com/2019/02/21/MySQL中ignore,replace的使用/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="派大星">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/qq.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="派大星的博客">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/02/21/MySQL中ignore,replace的使用/" itemprop="url">MySQL中ignore,replace的使用</a></h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-02-21T03:03:04+08:00">
-                2019-02-21
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/mysql/" itemprop="url" rel="index">
-                    <span itemprop="name">mysql</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="insert-ignore"><a href="#insert-ignore" class="headerlink" title="insert ignore"></a>insert ignore</h1><blockquote>
-<p>当出现主键或唯一索引重复之后，插入会失败，但不会报错，会忽略此次插入</p>
-</blockquote>
-<p>用法：</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#id为主键</span></span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> <span class="keyword">user</span>(<span class="keyword">id</span>,<span class="keyword">name</span>,age)<span class="keyword">values</span>(<span class="number">1</span>,<span class="string">"小华"</span>,<span class="number">21</span>)</span><br><span class="line"><span class="comment">#由于主键冲突，这个插入将会被忽略</span></span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">ignore</span> <span class="keyword">into</span> <span class="keyword">user</span>(<span class="keyword">id</span>,<span class="keyword">name</span>,age)<span class="keyword">values</span>(<span class="number">1</span>,<span class="string">"小明"</span>,<span class="number">21</span>)</span><br></pre></td></tr></table></figure>
-
-<h1 id="replace-to"><a href="#replace-to" class="headerlink" title="replace to"></a>replace to</h1><blockquote>
-<p>当出现主键或唯一索引重复之后，会删除原先的数据，并将这个新的记录插入进去</p>
-</blockquote>
-<p>用法：</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 由于主键冲突，它会删除原先的记录，再把这个记录插入进来</span></span><br><span class="line"><span class="keyword">replace</span> <span class="keyword">into</span> <span class="keyword">user</span>(<span class="keyword">id</span>,<span class="keyword">name</span>,age)<span class="keyword">values</span>(<span class="number">1</span>,<span class="string">"小花"</span>,<span class="number">23</span>);</span><br></pre></td></tr></table></figure>
-
-<h1 id="on-duplicate-key-update"><a href="#on-duplicate-key-update" class="headerlink" title="on duplicate key update"></a>on duplicate key update</h1><blockquote>
-<p>当出现主键或唯一索引重复之后，则执行UPDATE语句</p>
-</blockquote>
-<p>用法：</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 由于主键冲突，它只会执行 Update语句</span></span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> <span class="keyword">user</span>(<span class="keyword">id</span>,<span class="keyword">name</span>,age)<span class="keyword">values</span>(<span class="number">1</span>,<span class="string">'杰克'</span>, <span class="number">22</span>) <span class="keyword">ON</span> <span class="keyword">DUPLICATE</span> <span class="keyword">KEY</span> <span class="keyword">UPDATE</span> <span class="keyword">name</span>=<span class="string">'杰克'</span>,age=<span class="number">22</span>;</span><br></pre></td></tr></table></figure>
-
-<p>下面列举几个常用的场景</p>
-<h2 id="获取记录或初始化记录"><a href="#获取记录或初始化记录" class="headerlink" title="获取记录或初始化记录"></a>获取记录或初始化记录</h2><blockquote>
-<p>当记录存在时则获取此条记录，当记录不存在时，则插入记录</p>
-</blockquote>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 1.先插入数据，如果有记录将会忽略此次插入，如果没有则插入</span></span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">ignore</span> <span class="keyword">into</span> <span class="keyword">user</span>(<span class="keyword">id</span>,<span class="keyword">name</span>,age)<span class="keyword">values</span>(<span class="number">1</span>,<span class="string">"小明"</span>,<span class="number">21</span>)</span><br><span class="line"><span class="comment"># 2. 再获取数据</span></span><br><span class="line"><span class="keyword">select</span> * <span class="keyword">from</span> <span class="keyword">user</span> <span class="keyword">where</span> <span class="keyword">id</span> = <span class="number">1</span></span><br></pre></td></tr></table></figure>
-
-<h2 id="插入记录或更新记录"><a href="#插入记录或更新记录" class="headerlink" title="插入记录或更新记录"></a>插入记录或更新记录</h2><p>直接使用<code>on duplicate key update</code>语法就OK了</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> <span class="keyword">user</span>(<span class="keyword">id</span>,<span class="keyword">name</span>,age)<span class="keyword">values</span>(<span class="number">1</span>,<span class="string">'杰克'</span>, <span class="number">22</span>) <span class="keyword">ON</span> <span class="keyword">DUPLICATE</span> <span class="keyword">KEY</span> <span class="keyword">UPDATE</span> <span class="keyword">name</span>=<span class="string">'杰克'</span>,age=<span class="number">22</span>;</span><br></pre></td></tr></table></figure>
-
-<h2 id="新数据更新原始数据"><a href="#新数据更新原始数据" class="headerlink" title="新数据更新原始数据"></a>新数据更新原始数据</h2><p>使用<code>replace into</code>语法，当新的数据产生时，用新的去替换老的，这样数据库中关于此主键只会是最新的数据</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">replace</span> <span class="keyword">into</span> <span class="keyword">user</span>(<span class="keyword">id</span>,<span class="keyword">name</span>,age)<span class="keyword">values</span>(<span class="number">1</span>,<span class="string">"小花"</span>,<span class="number">23</span>);</span><br></pre></td></tr></table></figure>
-
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    <div>
-      
-    </div>
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://pibigstar.com/2019/02/21/使用docker安装rabbitmq/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1019,9 +824,9 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Posted on</span>
+                <span class="post-meta-item-text">发表于</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-02-21T03:03:04+08:00">
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-02-21T03:03:04+08:00">
                 2019-02-21
               </time>
             
@@ -1040,7 +845,7 @@
                 <i class="fa fa-folder-o"></i>
               </span>
               
-                <span class="post-meta-item-text">In</span>
+                <span class="post-meta-item-text">分类于</span>
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
@@ -1181,9 +986,9 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Posted on</span>
+                <span class="post-meta-item-text">发表于</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-02-21T03:03:04+08:00">
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-02-21T03:03:04+08:00">
                 2019-02-21
               </time>
             
@@ -1202,7 +1007,7 @@
                 <i class="fa fa-folder-o"></i>
               </span>
               
-                <span class="post-meta-item-text">In</span>
+                <span class="post-meta-item-text">分类于</span>
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
@@ -1390,9 +1195,9 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Posted on</span>
+                <span class="post-meta-item-text">发表于</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-02-21T03:03:04+08:00">
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-02-21T03:03:04+08:00">
                 2019-02-21
               </time>
             
@@ -1411,7 +1216,7 @@
                 <i class="fa fa-folder-o"></i>
               </span>
               
-                <span class="post-meta-item-text">In</span>
+                <span class="post-meta-item-text">分类于</span>
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
@@ -1510,6 +1315,181 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://pibigstar.com/2019/02/21/MySQL中ignore,replace的使用/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="派大星">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/qq.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="派大星的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/02/21/MySQL中ignore,replace的使用/" itemprop="url">MySQL中ignore,replace的使用</a></h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-02-21T03:03:04+08:00">
+                2019-02-21
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/mysql/" itemprop="url" rel="index">
+                    <span itemprop="name">mysql</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="insert-ignore"><a href="#insert-ignore" class="headerlink" title="insert ignore"></a>insert ignore</h1><blockquote>
+<p>当出现主键或唯一索引重复之后，插入会失败，但不会报错，会忽略此次插入</p>
+</blockquote>
+<p>用法：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#id为主键</span></span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> <span class="keyword">user</span>(<span class="keyword">id</span>,<span class="keyword">name</span>,age)<span class="keyword">values</span>(<span class="number">1</span>,<span class="string">"小华"</span>,<span class="number">21</span>)</span><br><span class="line"><span class="comment">#由于主键冲突，这个插入将会被忽略</span></span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">ignore</span> <span class="keyword">into</span> <span class="keyword">user</span>(<span class="keyword">id</span>,<span class="keyword">name</span>,age)<span class="keyword">values</span>(<span class="number">1</span>,<span class="string">"小明"</span>,<span class="number">21</span>)</span><br></pre></td></tr></table></figure>
+
+<h1 id="replace-to"><a href="#replace-to" class="headerlink" title="replace to"></a>replace to</h1><blockquote>
+<p>当出现主键或唯一索引重复之后，会删除原先的数据，并将这个新的记录插入进去</p>
+</blockquote>
+<p>用法：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 由于主键冲突，它会删除原先的记录，再把这个记录插入进来</span></span><br><span class="line"><span class="keyword">replace</span> <span class="keyword">into</span> <span class="keyword">user</span>(<span class="keyword">id</span>,<span class="keyword">name</span>,age)<span class="keyword">values</span>(<span class="number">1</span>,<span class="string">"小花"</span>,<span class="number">23</span>);</span><br></pre></td></tr></table></figure>
+
+<h1 id="on-duplicate-key-update"><a href="#on-duplicate-key-update" class="headerlink" title="on duplicate key update"></a>on duplicate key update</h1><blockquote>
+<p>当出现主键或唯一索引重复之后，则执行UPDATE语句</p>
+</blockquote>
+<p>用法：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 由于主键冲突，它只会执行 Update语句</span></span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> <span class="keyword">user</span>(<span class="keyword">id</span>,<span class="keyword">name</span>,age)<span class="keyword">values</span>(<span class="number">1</span>,<span class="string">'杰克'</span>, <span class="number">22</span>) <span class="keyword">ON</span> <span class="keyword">DUPLICATE</span> <span class="keyword">KEY</span> <span class="keyword">UPDATE</span> <span class="keyword">name</span>=<span class="string">'杰克'</span>,age=<span class="number">22</span>;</span><br></pre></td></tr></table></figure>
+
+<p>下面列举几个常用的场景</p>
+<h2 id="获取记录或初始化记录"><a href="#获取记录或初始化记录" class="headerlink" title="获取记录或初始化记录"></a>获取记录或初始化记录</h2><blockquote>
+<p>当记录存在时则获取此条记录，当记录不存在时，则插入记录</p>
+</blockquote>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 1.先插入数据，如果有记录将会忽略此次插入，如果没有则插入</span></span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">ignore</span> <span class="keyword">into</span> <span class="keyword">user</span>(<span class="keyword">id</span>,<span class="keyword">name</span>,age)<span class="keyword">values</span>(<span class="number">1</span>,<span class="string">"小明"</span>,<span class="number">21</span>)</span><br><span class="line"><span class="comment"># 2. 再获取数据</span></span><br><span class="line"><span class="keyword">select</span> * <span class="keyword">from</span> <span class="keyword">user</span> <span class="keyword">where</span> <span class="keyword">id</span> = <span class="number">1</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="插入记录或更新记录"><a href="#插入记录或更新记录" class="headerlink" title="插入记录或更新记录"></a>插入记录或更新记录</h2><p>直接使用<code>on duplicate key update</code>语法就OK了</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> <span class="keyword">user</span>(<span class="keyword">id</span>,<span class="keyword">name</span>,age)<span class="keyword">values</span>(<span class="number">1</span>,<span class="string">'杰克'</span>, <span class="number">22</span>) <span class="keyword">ON</span> <span class="keyword">DUPLICATE</span> <span class="keyword">KEY</span> <span class="keyword">UPDATE</span> <span class="keyword">name</span>=<span class="string">'杰克'</span>,age=<span class="number">22</span>;</span><br></pre></td></tr></table></figure>
+
+<h2 id="新数据更新原始数据"><a href="#新数据更新原始数据" class="headerlink" title="新数据更新原始数据"></a>新数据更新原始数据</h2><p>使用<code>replace into</code>语法，当新的数据产生时，用新的去替换老的，这样数据库中关于此主键只会是最新的数据</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">replace</span> <span class="keyword">into</span> <span class="keyword">user</span>(<span class="keyword">id</span>,<span class="keyword">name</span>,age)<span class="keyword">values</span>(<span class="number">1</span>,<span class="string">"小花"</span>,<span class="number">23</span>);</span><br></pre></td></tr></table></figure>
+
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    <div>
+      
+    </div>
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://pibigstar.com/2019/02/21/SpringBoot导入导出Excel/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1539,9 +1519,9 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Posted on</span>
+                <span class="post-meta-item-text">发表于</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-02-21T03:03:04+08:00">
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-02-21T03:03:04+08:00">
                 2019-02-21
               </time>
             
@@ -1560,7 +1540,7 @@
                 <i class="fa fa-folder-o"></i>
               </span>
               
-                <span class="post-meta-item-text">In</span>
+                <span class="post-meta-item-text">分类于</span>
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
@@ -1664,6 +1644,157 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://pibigstar.com/2019/02/20/css随笔记/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="派大星">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/qq.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="派大星的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/02/20/css随笔记/" itemprop="url">css随笔记</a></h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-02-20T04:04:04+08:00">
+                2019-02-20
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/前端/" itemprop="url" rel="index">
+                    <span itemprop="name">前端</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="div下加一条分割线"><a href="#div下加一条分割线" class="headerlink" title="div下加一条分割线"></a>div下加一条分割线</h2><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">border-bottom</span><span class="selector-pseudo">:1px</span> <span class="selector-tag">solid</span>  <span class="selector-id">#D7D8D9</span>;</span><br></pre></td></tr></table></figure>
+
+<h1 id="头像圆角并旋转"><a href="#头像圆角并旋转" class="headerlink" title="头像圆角并旋转"></a>头像圆角并旋转</h1><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.site-author-image</span> &#123;</span><br><span class="line">  <span class="attribute">display</span>: block;</span><br><span class="line">  <span class="attribute">margin</span>: <span class="number">0</span> auto;</span><br><span class="line">  <span class="attribute">padding</span>: $site-author-image-padding;</span><br><span class="line">  <span class="attribute">max-width</span>: $site-author-image-width;</span><br><span class="line">  <span class="attribute">height</span>: $site-author-image-height;</span><br><span class="line">  <span class="attribute">border</span>: $site-author-image-border-width solid $site-author-image-border-color;</span><br><span class="line">  <span class="attribute">border-radius</span>: <span class="number">60%</span>;</span><br><span class="line">  <span class="attribute">transition</span>: <span class="number">2.5s</span> all;  </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.site-author-image</span><span class="selector-pseudo">:hover</span> &#123;</span><br><span class="line">    <span class="attribute">transform</span>: <span class="built_in">rotate</span>(360deg);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="selector-class">.site-author-name</span> &#123;</span><br><span class="line">  <span class="attribute">margin</span>: $site-author-name-margin;</span><br><span class="line">  <span class="attribute">text-align</span>: $site-author-name-align;</span><br><span class="line">  <span class="attribute">color</span>: $site-author-name-color;</span><br><span class="line">  <span class="attribute">font-weight</span>: $site-author-name-weight;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.site-description</span> &#123;</span><br><span class="line">  <span class="attribute">margin-top</span>: $site-description-margin-top;</span><br><span class="line">  <span class="attribute">text-align</span>: $site-description-align;</span><br><span class="line">  <span class="attribute">font-size</span>: $site-description-font-size;</span><br><span class="line">  <span class="attribute">color</span>: $site-description-color;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="立体旋转图片"><a href="#立体旋转图片" class="headerlink" title="立体旋转图片"></a>立体旋转图片</h1><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE html&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span> <span class="attr">lang</span>=<span class="string">"zh-cn"</span>&gt;</span><span class="tag">&lt;<span class="name">head</span>&gt;</span><span class="tag">&lt;<span class="name">meta</span> <span class="attr">http-equiv</span>=<span class="string">"Content-Type"</span> <span class="attr">content</span>=<span class="string">"text/html; charset=UTF-8"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">title</span>&gt;</span>立体滚动图<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">style</span>&gt;</span></span><br><span class="line"><span class="css">	<span class="selector-class">.wrap</span>&#123;</span></span><br><span class="line">		width: 120px;</span><br><span class="line">		height: 200px;</span><br><span class="line">		margin: 20px;</span><br><span class="line">		position: fixed;</span><br><span class="line">		top: 15px;</span><br><span class="line">		right: 15px;</span><br><span class="line">		display: table-cell;</span><br><span class="line">		vertical-align: middle;</span><br><span class="line">		text-align: center;</span><br><span class="line">		z-index: 22;</span><br><span class="line">	&#125;</span><br><span class="line"><span class="css">	<span class="selector-class">.cube</span> &#123;</span></span><br><span class="line">		width: 120px;</span><br><span class="line">		height: 120px;</span><br><span class="line">		margin: 0 auto;</span><br><span class="line">		transform-style: preserve-3d;</span><br><span class="line">		transform: rotateX(-30deg) rotateY(-80deg);</span><br><span class="line">		animation: rotate linear 20s infinite;</span><br><span class="line">	&#125;</span><br><span class="line"><span class="css">	@-<span class="keyword">webkit</span>-<span class="keyword">keyframes</span> rotate &#123;</span></span><br><span class="line">		from &#123;</span><br><span class="line">			transform: rotateX(0deg) rotateY(0deg);</span><br><span class="line">		&#125;</span><br><span class="line">		to &#123;</span><br><span class="line">			transform: rotateX(360deg) rotateY(360deg);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line"><span class="css">	<span class="selector-class">.cube</span> <span class="selector-tag">div</span> &#123;</span></span><br><span class="line">		position: absolute;</span><br><span class="line">		width: 120px;</span><br><span class="line">		height: 120px;</span><br><span class="line"><span class="css">		<span class="selector-tag">opacity</span>: 0<span class="selector-class">.8</span>;</span></span><br><span class="line"><span class="css">		<span class="selector-tag">transition</span>: <span class="selector-tag">all</span> <span class="selector-class">.4s</span>;</span></span><br><span class="line">	&#125;</span><br><span class="line"><span class="css">	<span class="selector-class">.cube</span> <span class="selector-class">.out_front</span> &#123;</span></span><br><span class="line">		transform: rotateY(0deg) translateZ(60px);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line"><span class="css">	<span class="selector-class">.cube</span> <span class="selector-class">.out_back</span> &#123;</span></span><br><span class="line">		transform: translateZ(-60px) rotateY(180deg);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line"><span class="css">	<span class="selector-class">.cube</span> <span class="selector-class">.out_left</span> &#123;</span></span><br><span class="line">		transform: rotateY(-90deg) translateZ(60px);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line"><span class="css">	<span class="selector-class">.cube</span> <span class="selector-class">.out_right</span> &#123;</span></span><br><span class="line">		transform: rotateY(90deg) translateZ(60px);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line"><span class="css">	<span class="selector-class">.cube</span> <span class="selector-class">.out_top</span> &#123;</span></span><br><span class="line">		transform: rotateX(90deg) translateZ(60px);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line"><span class="css">	<span class="selector-class">.cube</span> <span class="selector-class">.out_bottom</span> &#123;</span></span><br><span class="line">		transform: rotateX(-90deg) translateZ(60px);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="tag">&lt;/<span class="name">style</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"wrap"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"cube"</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"out_front"</span>&gt;</span><span class="tag">&lt;<span class="name">img</span> <span class="attr">src</span>=<span class="string">"https://files-cdn.cnblogs.com/files/cjsblog/cube01.bmp"</span> <span class="attr">class</span>=<span class="string">"pic"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"out_back"</span>&gt;</span><span class="tag">&lt;<span class="name">img</span> <span class="attr">src</span>=<span class="string">"https://files-cdn.cnblogs.com/files/cjsblog/cube02.bmp"</span> <span class="attr">class</span>=<span class="string">"pic"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"out_left"</span>&gt;</span><span class="tag">&lt;<span class="name">img</span> <span class="attr">src</span>=<span class="string">"https://files-cdn.cnblogs.com/files/cjsblog/cube03.bmp"</span> <span class="attr">class</span>=<span class="string">"pic"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"out_right"</span>&gt;</span><span class="tag">&lt;<span class="name">img</span> <span class="attr">src</span>=<span class="string">"https://files-cdn.cnblogs.com/files/cjsblog/cube04.bmp"</span> <span class="attr">class</span>=<span class="string">"pic"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"out_top"</span>&gt;</span><span class="tag">&lt;<span class="name">img</span> <span class="attr">src</span>=<span class="string">"https://files-cdn.cnblogs.com/files/cjsblog/cube05.bmp"</span> <span class="attr">class</span>=<span class="string">"pic"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"out_bottom"</span>&gt;</span><span class="tag">&lt;<span class="name">img</span> <span class="attr">src</span>=<span class="string">"https://files-cdn.cnblogs.com/files/cjsblog/cube06.bmp"</span> <span class="attr">class</span>=<span class="string">"pic"</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    <div>
+      
+    </div>
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://pibigstar.com/2019/02/20/使用docker部署SpringBoot项目/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1693,9 +1824,9 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Posted on</span>
+                <span class="post-meta-item-text">发表于</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-02-20T04:04:04+08:00">
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-02-20T04:04:04+08:00">
                 2019-02-20
               </time>
             
@@ -1714,7 +1845,7 @@
                 <i class="fa fa-folder-o"></i>
               </span>
               
-                <span class="post-meta-item-text">In</span>
+                <span class="post-meta-item-text">分类于</span>
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
@@ -1820,157 +1951,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://pibigstar.com/2019/02/20/css随笔记/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="派大星">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/qq.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="派大星的博客">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/02/20/css随笔记/" itemprop="url">css随笔记</a></h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-02-20T04:04:04+08:00">
-                2019-02-20
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/前端/" itemprop="url" rel="index">
-                    <span itemprop="name">前端</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h2 id="div下加一条分割线"><a href="#div下加一条分割线" class="headerlink" title="div下加一条分割线"></a>div下加一条分割线</h2><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">border-bottom</span><span class="selector-pseudo">:1px</span> <span class="selector-tag">solid</span>  <span class="selector-id">#D7D8D9</span>;</span><br></pre></td></tr></table></figure>
-
-<h1 id="头像圆角并旋转"><a href="#头像圆角并旋转" class="headerlink" title="头像圆角并旋转"></a>头像圆角并旋转</h1><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.site-author-image</span> &#123;</span><br><span class="line">  <span class="attribute">display</span>: block;</span><br><span class="line">  <span class="attribute">margin</span>: <span class="number">0</span> auto;</span><br><span class="line">  <span class="attribute">padding</span>: $site-author-image-padding;</span><br><span class="line">  <span class="attribute">max-width</span>: $site-author-image-width;</span><br><span class="line">  <span class="attribute">height</span>: $site-author-image-height;</span><br><span class="line">  <span class="attribute">border</span>: $site-author-image-border-width solid $site-author-image-border-color;</span><br><span class="line">  <span class="attribute">border-radius</span>: <span class="number">60%</span>;</span><br><span class="line">  <span class="attribute">transition</span>: <span class="number">2.5s</span> all;  </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.site-author-image</span><span class="selector-pseudo">:hover</span> &#123;</span><br><span class="line">    <span class="attribute">transform</span>: <span class="built_in">rotate</span>(360deg);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="selector-class">.site-author-name</span> &#123;</span><br><span class="line">  <span class="attribute">margin</span>: $site-author-name-margin;</span><br><span class="line">  <span class="attribute">text-align</span>: $site-author-name-align;</span><br><span class="line">  <span class="attribute">color</span>: $site-author-name-color;</span><br><span class="line">  <span class="attribute">font-weight</span>: $site-author-name-weight;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.site-description</span> &#123;</span><br><span class="line">  <span class="attribute">margin-top</span>: $site-description-margin-top;</span><br><span class="line">  <span class="attribute">text-align</span>: $site-description-align;</span><br><span class="line">  <span class="attribute">font-size</span>: $site-description-font-size;</span><br><span class="line">  <span class="attribute">color</span>: $site-description-color;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h1 id="立体旋转图片"><a href="#立体旋转图片" class="headerlink" title="立体旋转图片"></a>立体旋转图片</h1><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE html&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span> <span class="attr">lang</span>=<span class="string">"zh-cn"</span>&gt;</span><span class="tag">&lt;<span class="name">head</span>&gt;</span><span class="tag">&lt;<span class="name">meta</span> <span class="attr">http-equiv</span>=<span class="string">"Content-Type"</span> <span class="attr">content</span>=<span class="string">"text/html; charset=UTF-8"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">title</span>&gt;</span>立体滚动图<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">style</span>&gt;</span></span><br><span class="line"><span class="css">	<span class="selector-class">.wrap</span>&#123;</span></span><br><span class="line">		width: 120px;</span><br><span class="line">		height: 200px;</span><br><span class="line">		margin: 20px;</span><br><span class="line">		position: fixed;</span><br><span class="line">		top: 15px;</span><br><span class="line">		right: 15px;</span><br><span class="line">		display: table-cell;</span><br><span class="line">		vertical-align: middle;</span><br><span class="line">		text-align: center;</span><br><span class="line">		z-index: 22;</span><br><span class="line">	&#125;</span><br><span class="line"><span class="css">	<span class="selector-class">.cube</span> &#123;</span></span><br><span class="line">		width: 120px;</span><br><span class="line">		height: 120px;</span><br><span class="line">		margin: 0 auto;</span><br><span class="line">		transform-style: preserve-3d;</span><br><span class="line">		transform: rotateX(-30deg) rotateY(-80deg);</span><br><span class="line">		animation: rotate linear 20s infinite;</span><br><span class="line">	&#125;</span><br><span class="line"><span class="css">	@-<span class="keyword">webkit</span>-<span class="keyword">keyframes</span> rotate &#123;</span></span><br><span class="line">		from &#123;</span><br><span class="line">			transform: rotateX(0deg) rotateY(0deg);</span><br><span class="line">		&#125;</span><br><span class="line">		to &#123;</span><br><span class="line">			transform: rotateX(360deg) rotateY(360deg);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line"><span class="css">	<span class="selector-class">.cube</span> <span class="selector-tag">div</span> &#123;</span></span><br><span class="line">		position: absolute;</span><br><span class="line">		width: 120px;</span><br><span class="line">		height: 120px;</span><br><span class="line"><span class="css">		<span class="selector-tag">opacity</span>: 0<span class="selector-class">.8</span>;</span></span><br><span class="line"><span class="css">		<span class="selector-tag">transition</span>: <span class="selector-tag">all</span> <span class="selector-class">.4s</span>;</span></span><br><span class="line">	&#125;</span><br><span class="line"><span class="css">	<span class="selector-class">.cube</span> <span class="selector-class">.out_front</span> &#123;</span></span><br><span class="line">		transform: rotateY(0deg) translateZ(60px);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line"><span class="css">	<span class="selector-class">.cube</span> <span class="selector-class">.out_back</span> &#123;</span></span><br><span class="line">		transform: translateZ(-60px) rotateY(180deg);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line"><span class="css">	<span class="selector-class">.cube</span> <span class="selector-class">.out_left</span> &#123;</span></span><br><span class="line">		transform: rotateY(-90deg) translateZ(60px);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line"><span class="css">	<span class="selector-class">.cube</span> <span class="selector-class">.out_right</span> &#123;</span></span><br><span class="line">		transform: rotateY(90deg) translateZ(60px);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line"><span class="css">	<span class="selector-class">.cube</span> <span class="selector-class">.out_top</span> &#123;</span></span><br><span class="line">		transform: rotateX(90deg) translateZ(60px);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line"><span class="css">	<span class="selector-class">.cube</span> <span class="selector-class">.out_bottom</span> &#123;</span></span><br><span class="line">		transform: rotateX(-90deg) translateZ(60px);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="tag">&lt;/<span class="name">style</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"wrap"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"cube"</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"out_front"</span>&gt;</span><span class="tag">&lt;<span class="name">img</span> <span class="attr">src</span>=<span class="string">"https://files-cdn.cnblogs.com/files/cjsblog/cube01.bmp"</span> <span class="attr">class</span>=<span class="string">"pic"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"out_back"</span>&gt;</span><span class="tag">&lt;<span class="name">img</span> <span class="attr">src</span>=<span class="string">"https://files-cdn.cnblogs.com/files/cjsblog/cube02.bmp"</span> <span class="attr">class</span>=<span class="string">"pic"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"out_left"</span>&gt;</span><span class="tag">&lt;<span class="name">img</span> <span class="attr">src</span>=<span class="string">"https://files-cdn.cnblogs.com/files/cjsblog/cube03.bmp"</span> <span class="attr">class</span>=<span class="string">"pic"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"out_right"</span>&gt;</span><span class="tag">&lt;<span class="name">img</span> <span class="attr">src</span>=<span class="string">"https://files-cdn.cnblogs.com/files/cjsblog/cube04.bmp"</span> <span class="attr">class</span>=<span class="string">"pic"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"out_top"</span>&gt;</span><span class="tag">&lt;<span class="name">img</span> <span class="attr">src</span>=<span class="string">"https://files-cdn.cnblogs.com/files/cjsblog/cube05.bmp"</span> <span class="attr">class</span>=<span class="string">"pic"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"out_bottom"</span>&gt;</span><span class="tag">&lt;<span class="name">img</span> <span class="attr">src</span>=<span class="string">"https://files-cdn.cnblogs.com/files/cjsblog/cube06.bmp"</span> <span class="attr">class</span>=<span class="string">"pic"</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    <div>
-      
-    </div>
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -2024,7 +2004,7 @@
                 <a href="/archives">
               
                   <span class="site-state-item-count">137</span>
-                  <span class="site-state-item-name">posts</span>
+                  <span class="site-state-item-name">日志</span>
                 </a>
               </div>
             
@@ -2033,10 +2013,10 @@
               
               
               <div class="site-state-item site-state-categories">
-                
+                <a href="/categories/index.html">
                   <span class="site-state-item-count">64</span>
-                  <span class="site-state-item-name">categories</span>
-                
+                  <span class="site-state-item-name">分类</span>
+                </a>
               </div>
             
 
@@ -2044,10 +2024,10 @@
               
               
               <div class="site-state-item site-state-tags">
-                
+                <a href="/tags/index.html">
                   <span class="site-state-item-count">230</span>
-                  <span class="site-state-item-name">tags</span>
-                
+                  <span class="site-state-item-name">标签</span>
+                </a>
               </div>
             
 
@@ -2113,7 +2093,7 @@
 </div>
 
 
-  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
 
 
 

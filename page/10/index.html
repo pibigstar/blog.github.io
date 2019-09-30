@@ -5,7 +5,7 @@
   
 
 
-<html class="theme-next gemini use-motion" lang="zh-CN">
+<html class="theme-next gemini use-motion" lang="zh-Hans">
 <head><meta name="generator" content="Hexo 3.9.0">
   <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -84,7 +84,7 @@
 <meta property="og:title" content="派大星的博客">
 <meta property="og:url" content="http://pibigstar.com/page/10/index.html">
 <meta property="og:site_name" content="派大星的博客">
-<meta property="og:locale" content="zh-CN">
+<meta property="og:locale" content="zh-Hans">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="派大星的博客">
 
@@ -102,7 +102,7 @@
     motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
     duoshuo: {
       userId: '0',
-      author: 'Author'
+      author: '博主'
     },
     algolia: {
       applicationID: '',
@@ -134,7 +134,7 @@
 
 </head>
 
-<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
 
   
   
@@ -183,17 +183,7 @@
             
               <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
             
-            Home
-          </a>
-        </li>
-      
-        
-        <li class="menu-item menu-item-schedule">
-          <a href="/schedule/" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-calendar"></i> <br>
-            
-            Schedule
+            首页
           </a>
         </li>
       
@@ -203,7 +193,7 @@
             
               <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
             
-            Tags
+            标签
           </a>
         </li>
       
@@ -213,17 +203,7 @@
             
               <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
             
-            Categories
-          </a>
-        </li>
-      
-        
-        <li class="menu-item menu-item-sitemap">
-          <a href="/sitemap.xml" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-sitemap"></i> <br>
-            
-            Sitemap
+            分类
           </a>
         </li>
       
@@ -233,7 +213,7 @@
             
               <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
             
-            About
+            关于
           </a>
         </li>
       
@@ -299,9 +279,9 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Posted on</span>
+                <span class="post-meta-item-text">发表于</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-04-01T06:06:04+08:00">
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-04-01T06:06:04+08:00">
                 2019-04-01
               </time>
             
@@ -320,7 +300,7 @@
                 <i class="fa fa-folder-o"></i>
               </span>
               
-                <span class="post-meta-item-text">In</span>
+                <span class="post-meta-item-text">分类于</span>
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
@@ -432,6 +412,202 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://pibigstar.com/2019/03/30/Mysql中的SQL函数/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="派大星">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/qq.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="派大星的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/03/30/Mysql中的SQL函数/" itemprop="url">Mysql中的SQL函数</a></h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-03-30T07:07:04+08:00">
+                2019-03-30
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/数据库/" itemprop="url" rel="index">
+                    <span itemprop="name">数据库</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="算术函数"><a href="#算术函数" class="headerlink" title="算术函数"></a>算术函数</h3><ul>
+<li>ABS ：取绝对值</li>
+<li>MOD：取余</li>
+<li>ROUND：四舍五入时指定小数点位数</li>
+</ul>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="keyword">ABS</span>(<span class="number">-1</span>);  <span class="comment"># 结果为 1</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">SELECT</span> <span class="keyword">MOD</span>(<span class="number">22</span>,<span class="number">5</span>);  <span class="comment"># 22%5 结果为 2</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">SELECT</span> <span class="keyword">ROUND</span>(<span class="number">15.43</span>,<span class="number">1</span>); <span class="comment"># 结果为 15.4</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="字符串函数"><a href="#字符串函数" class="headerlink" title="字符串函数"></a>字符串函数</h3><ul>
+<li>CONCAT： 将多个字符串连接起来</li>
+<li>LENGTH： 计算字段的长度，一个汉字算三个字符，字母和数字算一个字符</li>
+<li>CHAR_LENGTH：所有都算做一个字符</li>
+<li>LOWER：全部转为小写</li>
+<li>UPPER：全部转为大写</li>
+<li>REPLACE：替换字符</li>
+<li>SUBSTRING：截取字符串（字符串, 开始截取位置, 截取长度）<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="keyword">CONCAT</span>(<span class="string">"%"</span>,<span class="string">"pibigstar"</span>); <span class="comment"># 结果为 %pibigstar</span></span><br><span class="line"><span class="keyword">SELECT</span> <span class="keyword">LENGTH</span>(<span class="string">"你好"</span>); <span class="comment"># 结果为 6</span></span><br><span class="line"><span class="keyword">SELECT</span> <span class="keyword">CHAR_LENGTH</span>(<span class="string">"你好"</span>); <span class="comment"># 结果为 2</span></span><br><span class="line"><span class="keyword">SELECT</span> <span class="keyword">LOWER</span>(<span class="string">"AB"</span>); <span class="comment"># 结果为 ab</span></span><br><span class="line"><span class="keyword">SELECT</span> <span class="keyword">UPPER</span>(<span class="string">"ab"</span>) <span class="comment"># 结果为 AB</span></span><br><span class="line"><span class="keyword">SELECT</span> <span class="keyword">REPLACE</span>(<span class="string">"abc"</span>,<span class="string">"a"</span>, <span class="string">"f"</span>); <span class="comment"># 结果为 fbc</span></span><br><span class="line"><span class="keyword">SELECT</span> <span class="keyword">SUBSTRING</span>(<span class="string">"abc"</span>, <span class="number">1</span>, <span class="number">2</span>); <span class="comment"># 结果为 ab</span></span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<h3 id="日期函数"><a href="#日期函数" class="headerlink" title="日期函数"></a>日期函数</h3><ul>
+<li>CURRENT_DATE：系统当前日期</li>
+<li>CURRENT_TIME：系统当前时间</li>
+<li>CURRENT_TIMESTAMP：系统当前时间（日期+时间）</li>
+<li>ECTRACT：抽取具体的年、月、日</li>
+<li>DATE：返回时间的日期部分</li>
+<li>YEAR：返回时间的年份部分</li>
+<li>MONTH：返回时间的月份部分</li>
+<li>DAY：返回时间的天数部分</li>
+<li>HOUR：返回时间的小时部分</li>
+<li>MINUTE：返回时间的分钟部分</li>
+<li>SECOND： 返回时间的秒部分<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="keyword">CURRENT_DATE</span>(); <span class="comment"># 2019-06-29</span></span><br><span class="line"><span class="keyword">SELECT</span> <span class="keyword">CURRENT_TIME</span>(); <span class="comment"># 21:44:33</span></span><br><span class="line"><span class="keyword">SELECT</span> <span class="keyword">CURRENT_TIMESTAMP</span>(); <span class="comment"># 2019-06-29 21:44:33</span></span><br><span class="line"><span class="keyword">SELECT</span> <span class="keyword">EXTRACT</span>(<span class="keyword">YEAR</span> <span class="keyword">FROM</span> <span class="string">'2019-06-29'</span>); <span class="comment"># 2019</span></span><br><span class="line"><span class="keyword">SELECT</span> <span class="built_in">DATE</span>(<span class="string">'2019-06-29 21:44:33'</span>); <span class="comment"># 2019-06-29</span></span><br><span class="line"><span class="keyword">SELECT</span> <span class="keyword">DAY</span>(<span class="string">'2019-06-29 21:44:33'</span>);  <span class="comment"># 29</span></span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<h3 id="转换函数"><a href="#转换函数" class="headerlink" title="转换函数"></a>转换函数</h3><ul>
+<li>CAST：强制数据类型转换</li>
+<li>COALESCE：返回第一个非空数值<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="keyword">CAST</span>(<span class="number">65.243</span> <span class="keyword">AS</span> <span class="built_in">DECIMAL</span>(<span class="number">8</span>,<span class="number">2</span>)); <span class="comment"># 65.24</span></span><br><span class="line"><span class="keyword">SELECT</span> <span class="keyword">COALESCE</span>(<span class="literal">null</span>,<span class="literal">null</span>,<span class="number">2</span>,<span class="number">3</span>); <span class="comment"># 2</span></span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<h3 id="聚合函数"><a href="#聚合函数" class="headerlink" title="聚合函数"></a>聚合函数</h3><ul>
+<li>SUM：求和</li>
+<li>AVG：求平均值</li>
+<li>MAX：找出最大值</li>
+<li>MIN：找出最小值</li>
+<li>COUNT：计数<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="keyword">SUM</span>(age) <span class="keyword">FROM</span> <span class="keyword">user</span>;</span><br><span class="line"><span class="keyword">SELECT</span> <span class="keyword">AVG</span>(age) <span class="keyword">FROM</span> <span class="keyword">user</span>;</span><br><span class="line"><span class="keyword">SELECT</span> <span class="keyword">MAX</span>(age) <span class="keyword">FROM</span> <span class="keyword">user</span>;</span><br><span class="line"><span class="keyword">SELECT</span> <span class="keyword">MIN</span>(age) <span class="keyword">FROM</span> <span class="keyword">user</span>;</span><br><span class="line"><span class="keyword">SELECT</span> <span class="keyword">COUNT</span>(*) <span class="keyword">FROM</span> <span class="keyword">user</span>; <span class="comment"># 计录全部行数，包括null</span></span><br><span class="line"><span class="keyword">SELECT</span> <span class="keyword">COUNT</span>(age) <span class="keyword">FROM</span> <span class="keyword">user</span>; <span class="comment"># 如果age为null，将过滤</span></span><br><span class="line"><span class="keyword">SELECT</span> <span class="keyword">COUNT</span>(*) <span class="keyword">FROM</span> <span class="keyword">user</span> <span class="keyword">GROUP</span> <span class="keyword">BY</span> age;</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<p>在SELECT的查询中，关键字的顺序不能颠倒，它们的顺序为：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SELECT...FROM...WHERE...GROUP BY...HAVING...ORDER BY...LIMIT...</span><br></pre></td></tr></table></figure>
+
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    <div>
+      
+    </div>
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://pibigstar.com/2019/03/30/protobuf文件详解/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -461,9 +637,9 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Posted on</span>
+                <span class="post-meta-item-text">发表于</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-03-30T07:07:04+08:00">
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-03-30T07:07:04+08:00">
                 2019-03-30
               </time>
             
@@ -482,7 +658,7 @@
                 <i class="fa fa-folder-o"></i>
               </span>
               
-                <span class="post-meta-item-text">In</span>
+                <span class="post-meta-item-text">分类于</span>
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
@@ -672,202 +848,6 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://pibigstar.com/2019/03/30/Mysql中的SQL函数/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="派大星">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/qq.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="派大星的博客">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/03/30/Mysql中的SQL函数/" itemprop="url">Mysql中的SQL函数</a></h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-03-30T07:07:04+08:00">
-                2019-03-30
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/数据库/" itemprop="url" rel="index">
-                    <span itemprop="name">数据库</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h3 id="算术函数"><a href="#算术函数" class="headerlink" title="算术函数"></a>算术函数</h3><ul>
-<li>ABS ：取绝对值</li>
-<li>MOD：取余</li>
-<li>ROUND：四舍五入时指定小数点位数</li>
-</ul>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="keyword">ABS</span>(<span class="number">-1</span>);  <span class="comment"># 结果为 1</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">SELECT</span> <span class="keyword">MOD</span>(<span class="number">22</span>,<span class="number">5</span>);  <span class="comment"># 22%5 结果为 2</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">SELECT</span> <span class="keyword">ROUND</span>(<span class="number">15.43</span>,<span class="number">1</span>); <span class="comment"># 结果为 15.4</span></span><br></pre></td></tr></table></figure>
-
-<h3 id="字符串函数"><a href="#字符串函数" class="headerlink" title="字符串函数"></a>字符串函数</h3><ul>
-<li>CONCAT： 将多个字符串连接起来</li>
-<li>LENGTH： 计算字段的长度，一个汉字算三个字符，字母和数字算一个字符</li>
-<li>CHAR_LENGTH：所有都算做一个字符</li>
-<li>LOWER：全部转为小写</li>
-<li>UPPER：全部转为大写</li>
-<li>REPLACE：替换字符</li>
-<li>SUBSTRING：截取字符串（字符串, 开始截取位置, 截取长度）<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="keyword">CONCAT</span>(<span class="string">"%"</span>,<span class="string">"pibigstar"</span>); <span class="comment"># 结果为 %pibigstar</span></span><br><span class="line"><span class="keyword">SELECT</span> <span class="keyword">LENGTH</span>(<span class="string">"你好"</span>); <span class="comment"># 结果为 6</span></span><br><span class="line"><span class="keyword">SELECT</span> <span class="keyword">CHAR_LENGTH</span>(<span class="string">"你好"</span>); <span class="comment"># 结果为 2</span></span><br><span class="line"><span class="keyword">SELECT</span> <span class="keyword">LOWER</span>(<span class="string">"AB"</span>); <span class="comment"># 结果为 ab</span></span><br><span class="line"><span class="keyword">SELECT</span> <span class="keyword">UPPER</span>(<span class="string">"ab"</span>) <span class="comment"># 结果为 AB</span></span><br><span class="line"><span class="keyword">SELECT</span> <span class="keyword">REPLACE</span>(<span class="string">"abc"</span>,<span class="string">"a"</span>, <span class="string">"f"</span>); <span class="comment"># 结果为 fbc</span></span><br><span class="line"><span class="keyword">SELECT</span> <span class="keyword">SUBSTRING</span>(<span class="string">"abc"</span>, <span class="number">1</span>, <span class="number">2</span>); <span class="comment"># 结果为 ab</span></span><br></pre></td></tr></table></figure>
-
-</li>
-</ul>
-<h3 id="日期函数"><a href="#日期函数" class="headerlink" title="日期函数"></a>日期函数</h3><ul>
-<li>CURRENT_DATE：系统当前日期</li>
-<li>CURRENT_TIME：系统当前时间</li>
-<li>CURRENT_TIMESTAMP：系统当前时间（日期+时间）</li>
-<li>ECTRACT：抽取具体的年、月、日</li>
-<li>DATE：返回时间的日期部分</li>
-<li>YEAR：返回时间的年份部分</li>
-<li>MONTH：返回时间的月份部分</li>
-<li>DAY：返回时间的天数部分</li>
-<li>HOUR：返回时间的小时部分</li>
-<li>MINUTE：返回时间的分钟部分</li>
-<li>SECOND： 返回时间的秒部分<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="keyword">CURRENT_DATE</span>(); <span class="comment"># 2019-06-29</span></span><br><span class="line"><span class="keyword">SELECT</span> <span class="keyword">CURRENT_TIME</span>(); <span class="comment"># 21:44:33</span></span><br><span class="line"><span class="keyword">SELECT</span> <span class="keyword">CURRENT_TIMESTAMP</span>(); <span class="comment"># 2019-06-29 21:44:33</span></span><br><span class="line"><span class="keyword">SELECT</span> <span class="keyword">EXTRACT</span>(<span class="keyword">YEAR</span> <span class="keyword">FROM</span> <span class="string">'2019-06-29'</span>); <span class="comment"># 2019</span></span><br><span class="line"><span class="keyword">SELECT</span> <span class="built_in">DATE</span>(<span class="string">'2019-06-29 21:44:33'</span>); <span class="comment"># 2019-06-29</span></span><br><span class="line"><span class="keyword">SELECT</span> <span class="keyword">DAY</span>(<span class="string">'2019-06-29 21:44:33'</span>);  <span class="comment"># 29</span></span><br></pre></td></tr></table></figure>
-
-</li>
-</ul>
-<h3 id="转换函数"><a href="#转换函数" class="headerlink" title="转换函数"></a>转换函数</h3><ul>
-<li>CAST：强制数据类型转换</li>
-<li>COALESCE：返回第一个非空数值<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="keyword">CAST</span>(<span class="number">65.243</span> <span class="keyword">AS</span> <span class="built_in">DECIMAL</span>(<span class="number">8</span>,<span class="number">2</span>)); <span class="comment"># 65.24</span></span><br><span class="line"><span class="keyword">SELECT</span> <span class="keyword">COALESCE</span>(<span class="literal">null</span>,<span class="literal">null</span>,<span class="number">2</span>,<span class="number">3</span>); <span class="comment"># 2</span></span><br></pre></td></tr></table></figure>
-
-</li>
-</ul>
-<h3 id="聚合函数"><a href="#聚合函数" class="headerlink" title="聚合函数"></a>聚合函数</h3><ul>
-<li>SUM：求和</li>
-<li>AVG：求平均值</li>
-<li>MAX：找出最大值</li>
-<li>MIN：找出最小值</li>
-<li>COUNT：计数<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="keyword">SUM</span>(age) <span class="keyword">FROM</span> <span class="keyword">user</span>;</span><br><span class="line"><span class="keyword">SELECT</span> <span class="keyword">AVG</span>(age) <span class="keyword">FROM</span> <span class="keyword">user</span>;</span><br><span class="line"><span class="keyword">SELECT</span> <span class="keyword">MAX</span>(age) <span class="keyword">FROM</span> <span class="keyword">user</span>;</span><br><span class="line"><span class="keyword">SELECT</span> <span class="keyword">MIN</span>(age) <span class="keyword">FROM</span> <span class="keyword">user</span>;</span><br><span class="line"><span class="keyword">SELECT</span> <span class="keyword">COUNT</span>(*) <span class="keyword">FROM</span> <span class="keyword">user</span>; <span class="comment"># 计录全部行数，包括null</span></span><br><span class="line"><span class="keyword">SELECT</span> <span class="keyword">COUNT</span>(age) <span class="keyword">FROM</span> <span class="keyword">user</span>; <span class="comment"># 如果age为null，将过滤</span></span><br><span class="line"><span class="keyword">SELECT</span> <span class="keyword">COUNT</span>(*) <span class="keyword">FROM</span> <span class="keyword">user</span> <span class="keyword">GROUP</span> <span class="keyword">BY</span> age;</span><br></pre></td></tr></table></figure>
-
-</li>
-</ul>
-<p>在SELECT的查询中，关键字的顺序不能颠倒，它们的顺序为：</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SELECT...FROM...WHERE...GROUP BY...HAVING...ORDER BY...LIMIT...</span><br></pre></td></tr></table></figure>
-
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    <div>
-      
-    </div>
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://pibigstar.com/2019/03/26/使用Callable实现不同回调函数/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -897,9 +877,9 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Posted on</span>
+                <span class="post-meta-item-text">发表于</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-03-26T09:09:04+08:00">
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-03-26T09:09:04+08:00">
                 2019-03-26
               </time>
             
@@ -918,7 +898,7 @@
                 <i class="fa fa-folder-o"></i>
               </span>
               
-                <span class="post-meta-item-text">In</span>
+                <span class="post-meta-item-text">分类于</span>
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
@@ -1053,9 +1033,9 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Posted on</span>
+                <span class="post-meta-item-text">发表于</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-03-25T10:10:04+08:00">
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-03-25T10:10:04+08:00">
                 2019-03-25
               </time>
             
@@ -1074,7 +1054,7 @@
                 <i class="fa fa-folder-o"></i>
               </span>
               
-                <span class="post-meta-item-text">In</span>
+                <span class="post-meta-item-text">分类于</span>
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
@@ -1353,9 +1333,9 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Posted on</span>
+                <span class="post-meta-item-text">发表于</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-03-24T11:11:04+08:00">
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-03-24T11:11:04+08:00">
                 2019-03-24
               </time>
             
@@ -1374,7 +1354,7 @@
                 <i class="fa fa-folder-o"></i>
               </span>
               
-                <span class="post-meta-item-text">In</span>
+                <span class="post-meta-item-text">分类于</span>
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
@@ -1508,9 +1488,9 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Posted on</span>
+                <span class="post-meta-item-text">发表于</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-03-24T11:11:04+08:00">
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-03-24T11:11:04+08:00">
                 2019-03-24
               </time>
             
@@ -1529,7 +1509,7 @@
                 <i class="fa fa-folder-o"></i>
               </span>
               
-                <span class="post-meta-item-text">In</span>
+                <span class="post-meta-item-text">分类于</span>
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
@@ -1656,9 +1636,9 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Posted on</span>
+                <span class="post-meta-item-text">发表于</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-03-21T13:01:04+08:00">
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-03-21T13:01:04+08:00">
                 2019-03-21
               </time>
             
@@ -1677,7 +1657,7 @@
                 <i class="fa fa-folder-o"></i>
               </span>
               
-                <span class="post-meta-item-text">In</span>
+                <span class="post-meta-item-text">分类于</span>
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
@@ -1819,9 +1799,9 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Posted on</span>
+                <span class="post-meta-item-text">发表于</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-03-21T13:01:04+08:00">
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-03-21T13:01:04+08:00">
                 2019-03-21
               </time>
             
@@ -1840,7 +1820,7 @@
                 <i class="fa fa-folder-o"></i>
               </span>
               
-                <span class="post-meta-item-text">In</span>
+                <span class="post-meta-item-text">分类于</span>
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
@@ -1957,7 +1937,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://pibigstar.com/2019/03/17/JSP自定义标签使用详解/">
+    <link itemprop="mainEntityOfPage" href="http://pibigstar.com/2019/03/17/SpringBoot安全验证之Referer拦截器/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="派大星">
@@ -1976,7 +1956,7 @@
         
           <h2 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2019/03/17/JSP自定义标签使用详解/" itemprop="url">JSP自定义标签使用详解</a></h2>
+                <a class="post-title-link" href="/2019/03/17/SpringBoot安全验证之Referer拦截器/" itemprop="url">SpringBoot安全验证之Referer拦截器</a></h2>
         
 
         <div class="post-meta">
@@ -1986,9 +1966,9 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Posted on</span>
+                <span class="post-meta-item-text">发表于</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-03-17T15:03:04+08:00">
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-03-17T15:03:04+08:00">
                 2019-03-17
               </time>
             
@@ -2007,12 +1987,12 @@
                 <i class="fa fa-folder-o"></i>
               </span>
               
-                <span class="post-meta-item-text">In</span>
+                <span class="post-meta-item-text">分类于</span>
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/jsp/" itemprop="url" rel="index">
-                    <span itemprop="name">jsp</span>
+                  <a href="/categories/springboot/" itemprop="url" rel="index">
+                    <span itemprop="name">springboot</span>
                   </a>
                 </span>
 
@@ -2050,12 +2030,11 @@
       
         
           
-            <h1 id="JSP自定义标签使用详解"><a href="#JSP自定义标签使用详解" class="headerlink" title="JSP自定义标签使用详解"></a>JSP自定义标签使用详解</h1><p>简单写一个可以从数据库中读取配置的单选按钮组件</p>
-<h2 id="1-Java部分"><a href="#1-Java部分" class="headerlink" title="1. Java部分"></a>1. Java部分</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.pibgstar.demo.tags;</span><br><span class="line"><span class="keyword">import</span> javax.servlet.jsp.JspException;</span><br><span class="line"><span class="keyword">import</span> javax.servlet.jsp.JspWriter;</span><br><span class="line"><span class="keyword">import</span> javax.servlet.jsp.tagext.SimpleTagSupport;</span><br><span class="line"><span class="keyword">import</span> java.io.IOException;</span><br><span class="line"><span class="keyword">import</span> java.util.ArrayList;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> pibigstar</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@create</span> 2018-12-02 17:16</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@desc</span> 自定义radio组件</span></span><br><span class="line"><span class="comment"> **/</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">RadioTagSupport</span> <span class="keyword">extends</span> <span class="title">SimpleTagSupport</span></span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> String code;</span><br><span class="line">    <span class="keyword">private</span> String tip;</span><br><span class="line">    <span class="keyword">private</span> String key;</span><br><span class="line">    <span class="keyword">private</span> String value;</span><br><span class="line">    <span class="keyword">private</span> ArrayList&lt;RadioVo&gt; list;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">doTag</span><span class="params">()</span> <span class="keyword">throws</span> JspException, IOException </span>&#123;</span><br><span class="line">        getData();</span><br><span class="line">        StringBuilder sp = <span class="keyword">new</span> StringBuilder();</span><br><span class="line">        sp.append(<span class="string">"&lt;div class='radio'&gt;"</span>);</span><br><span class="line">        sp.append(<span class="string">"&lt;span class='tip'&gt;"</span>);</span><br><span class="line">        sp.append(<span class="keyword">this</span>.getTip());</span><br><span class="line">        sp.append(<span class="string">"&lt;/span&gt;"</span>);</span><br><span class="line">        <span class="keyword">for</span> (RadioVo r: list) &#123;</span><br><span class="line">            sp.append(<span class="string">"&lt;input type='radio' "</span>);</span><br><span class="line">            sp.append(<span class="string">"name='"</span>);</span><br><span class="line">            sp.append(r.getName());</span><br><span class="line">            sp.append(<span class="string">"' value='"</span>);</span><br><span class="line">            sp.append(r.getValue());</span><br><span class="line">            <span class="keyword">if</span> (r.getChecked()) &#123;</span><br><span class="line">                sp.append(<span class="string">"' checked /&gt;"</span>);</span><br><span class="line">            &#125;<span class="keyword">else</span> &#123;</span><br><span class="line">                sp.append(<span class="string">"' /&gt;"</span>);</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            sp.append(r.getShowValue());</span><br><span class="line">        &#125;</span><br><span class="line">        sp.append(<span class="string">"&lt;/div&gt;"</span>);</span><br><span class="line"></span><br><span class="line">        JspWriter out = getJspContext().getOut();</span><br><span class="line">        out.write(sp.toString());</span><br><span class="line">        <span class="comment">// 从body中获取值</span></span><br><span class="line">        <span class="comment">//StringWriter sw = new StringWriter();</span></span><br><span class="line">        <span class="comment">//getJspBody().invoke(sw);</span></span><br><span class="line">        <span class="comment">//getJspContext().getOut().write(sw.toString());</span></span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">getData</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        list = <span class="keyword">new</span> ArrayList();</span><br><span class="line">        <span class="comment">// 这里可以通过code值，拿到数据库中自己配置的值，这里只是简单的封装几个固定的值</span></span><br><span class="line">        RadioVo r1 = <span class="keyword">new</span> RadioVo();</span><br><span class="line">        r1.setName(<span class="string">"sex"</span>);</span><br><span class="line">        r1.setValue(<span class="string">"1"</span>);</span><br><span class="line">        r1.setShowValue(<span class="string">"男"</span>);</span><br><span class="line">        RadioVo r2= <span class="keyword">new</span> RadioVo();</span><br><span class="line">        r2.setName(<span class="string">"sex"</span>);</span><br><span class="line">        r2.setValue(<span class="string">"2"</span>);</span><br><span class="line">        r2.setShowValue(<span class="string">"女"</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">getCode</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> code;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setCode</span><span class="params">(String code)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.code = code;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">getTip</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> tip;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setTip</span><span class="params">(String tip)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.tip = tip;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">getKey</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> key;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setKey</span><span class="params">(String key)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.key = key;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">getValue</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> value;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setValue</span><span class="params">(String value)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.value = value;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> ArrayList&lt;RadioVo&gt; <span class="title">getList</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> list;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setList</span><span class="params">(ArrayList&lt;RadioVo&gt; list)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.list = list;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">RadioVo</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> String name;</span><br><span class="line">    <span class="keyword">private</span> String value;</span><br><span class="line">    <span class="keyword">private</span> String showValue;</span><br><span class="line">    <span class="keyword">private</span> Boolean checked;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">getName</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> name;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setName</span><span class="params">(String name)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.name = name;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">getValue</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> value;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setValue</span><span class="params">(String value)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.value = value;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">getShowValue</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> showValue;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setShowValue</span><span class="params">(String showValue)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.showValue = showValue;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> Boolean <span class="title">getChecked</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> checked;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setChecked</span><span class="params">(Boolean checked)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.checked = checked;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+            <h1 id="自定义Referer拦截器"><a href="#自定义Referer拦截器" class="headerlink" title="自定义Referer拦截器"></a>自定义Referer拦截器</h1><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">RefererInterceptor</span> <span class="keyword">extends</span> <span class="title">HandlerInterceptorAdapter</span> </span>&#123;</span><br><span class="line">    <span class="comment">// URL匹配器</span></span><br><span class="line">    <span class="keyword">private</span> AntPathMatcher matcher = <span class="keyword">new</span> AntPathMatcher();</span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    <span class="keyword">private</span> RefererProperties properties;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">preHandle</span><span class="params">(HttpServletRequest req, HttpServletResponse resp, Object handler)</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">        String referer = req.getHeader(<span class="string">"referer"</span>);</span><br><span class="line">        String host = req.getServerName();</span><br><span class="line">        <span class="comment">// 只验证POST请求</span></span><br><span class="line">        <span class="keyword">if</span> (<span class="string">"POST"</span>.equals(req.getMethod())) &#123;</span><br><span class="line">            <span class="keyword">if</span> (referer == <span class="keyword">null</span>) &#123;</span><br><span class="line">                <span class="comment">// 状态置为404</span></span><br><span class="line">                resp.setStatus(HttpServletResponse.SC_NOT_FOUND);</span><br><span class="line">                <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">            &#125; </span><br><span class="line">            java.net.URL url = <span class="keyword">null</span>;</span><br><span class="line">            <span class="keyword">try</span> &#123;</span><br><span class="line">                url = <span class="keyword">new</span> java.net.URL(referer);</span><br><span class="line">            &#125; <span class="keyword">catch</span> (MalformedURLException e) &#123;</span><br><span class="line">                <span class="comment">// URL解析异常，也置为404</span></span><br><span class="line">                resp.setStatus(HttpServletResponse.SC_NOT_FOUND);</span><br><span class="line">                <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="comment">// 首先判断请求域名和referer域名是否相同</span></span><br><span class="line">            <span class="keyword">if</span> (!host.equals(url.getHost())) &#123;</span><br><span class="line">                <span class="comment">// 如果不等，判断是否在白名单中</span></span><br><span class="line">                <span class="keyword">if</span> (properties.getRefererDomain() != <span class="keyword">null</span>) &#123;</span><br><span class="line">                    <span class="keyword">for</span> (String s : properties.getRefererDomain()) &#123;</span><br><span class="line">                        <span class="keyword">if</span> (s.equals(url.getHost())) &#123;</span><br><span class="line">                            <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">                        &#125;</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">           &#125;</span><br><span class="line">        &#125;</span><br><span class="line">      <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">   &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<h2 id="2-tld编写"><a href="#2-tld编写" class="headerlink" title="2. tld编写"></a>2. tld编写</h2><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version="1.0" encoding="UTF-8" ?&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">taglib</span> <span class="attr">xmlns</span>=<span class="string">"http://java.sun.com/xml/ns/javaee"</span></span></span><br><span class="line"><span class="tag">        <span class="attr">xmlns:xsi</span>=<span class="string">"http://www.w3.org/2001/XMLSchema-instance"</span></span></span><br><span class="line"><span class="tag">        <span class="attr">xsi:schemaLocation</span>=<span class="string">"http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-jsptaglibrary_2_1.xsd"</span></span></span><br><span class="line"><span class="tag">        <span class="attr">version</span>=<span class="string">"2.1"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">description</span>&gt;</span>JSP 自定义标签<span class="tag">&lt;/<span class="name">description</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">display-name</span>&gt;</span>pibigstar core<span class="tag">&lt;/<span class="name">display-name</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">tlib-version</span>&gt;</span>1.0<span class="tag">&lt;/<span class="name">tlib-version</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">short-name</span>&gt;</span>pi<span class="tag">&lt;/<span class="name">short-name</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">tag</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">description</span>&gt;</span>myself radio<span class="tag">&lt;/<span class="name">description</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">name</span>&gt;</span>radio<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">tag-class</span>&gt;</span>com.pibgstar.demo.tags.RadioTagSupport<span class="tag">&lt;/<span class="name">tag-class</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">body-content</span>&gt;</span>JSP<span class="tag">&lt;/<span class="name">body-content</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">attribute</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">name</span>&gt;</span>code<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">required</span>&gt;</span>true<span class="tag">&lt;/<span class="name">required</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">rtexprvalue</span>&gt;</span>false<span class="tag">&lt;/<span class="name">rtexprvalue</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">attribute</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">attribute</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">name</span>&gt;</span>tip<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">required</span>&gt;</span>false<span class="tag">&lt;/<span class="name">required</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">rtexprvalue</span>&gt;</span>false<span class="tag">&lt;/<span class="name">rtexprvalue</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">attribute</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">tag</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;/<span class="name">taglib</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h2 id="配置白名单Referer域名"><a href="#配置白名单Referer域名" class="headerlink" title="配置白名单Referer域名"></a>配置白名单Referer域名</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Component</span></span><br><span class="line"><span class="meta">@ConfigurationProperties</span>(prefix = <span class="string">"referer"</span>)</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">RefererProperties</span> </span>&#123;</span><br><span class="line">	<span class="comment">// 白名单域名</span></span><br><span class="line">    <span class="keyword">private</span> List&lt;String&gt; refererDomain;</span><br><span class="line">	<span class="comment">//setter,getter方法</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<h2 id="3-JSP中使用"><a href="#3-JSP中使用" class="headerlink" title="3. JSP中使用"></a>3. JSP中使用</h2><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">%@taglib</span> <span class="attr">prefix</span>=<span class="string">"pi"</span> <span class="attr">uri</span>=<span class="string">"WEB-INFO/tlds/pibigstar-pi.tld"</span> %&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">title</span>&gt;</span>自定义radio标签使用<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">pi:radio</span> <span class="attr">code</span>=<span class="string">"SEX"</span> <span class="attr">tip</span>=<span class="string">"性别"</span>&gt;</span><span class="tag">&lt;/<span class="name">pi:radio</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h2 id="yml配置"><a href="#yml配置" class="headerlink" title="yml配置"></a>yml配置</h2><figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">referer:</span></span><br><span class="line">	<span class="attr">refererDomain:</span></span><br><span class="line">	  <span class="bullet">-</span> <span class="string">baidu.com</span></span><br><span class="line">	  <span class="bullet">-</span> <span class="string">pibigstar.com</span></span><br><span class="line">	  <span class="bullet">-</span> <span class="string">mxspvip.cn</span></span><br></pre></td></tr></table></figure>
 
 
           
@@ -2149,7 +2128,7 @@
                 <a href="/archives">
               
                   <span class="site-state-item-count">137</span>
-                  <span class="site-state-item-name">posts</span>
+                  <span class="site-state-item-name">日志</span>
                 </a>
               </div>
             
@@ -2158,10 +2137,10 @@
               
               
               <div class="site-state-item site-state-categories">
-                
+                <a href="/categories/index.html">
                   <span class="site-state-item-count">64</span>
-                  <span class="site-state-item-name">categories</span>
-                
+                  <span class="site-state-item-name">分类</span>
+                </a>
               </div>
             
 
@@ -2169,10 +2148,10 @@
               
               
               <div class="site-state-item site-state-tags">
-                
+                <a href="/tags/index.html">
                   <span class="site-state-item-count">230</span>
-                  <span class="site-state-item-name">tags</span>
-                
+                  <span class="site-state-item-name">标签</span>
+                </a>
               </div>
             
 
@@ -2238,7 +2217,7 @@
 </div>
 
 
-  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
 
 
 
