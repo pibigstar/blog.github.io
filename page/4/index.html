@@ -250,155 +250,6 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://pibigstar.com/2019/08/05/获取微信公众号信息接口/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="派大星">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/qq.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="派大星的博客">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/08/05/获取微信公众号信息接口/" itemprop="url">获取微信公众号信息接口</a></h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-08-05T18:06:04+08:00">
-                2019-08-05
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/随笔小记/" itemprop="url" rel="index">
-                    <span itemprop="name">随笔小记</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>西瓜插件里面的一个小接口：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">https://chromepluginapi.xiguaji.com/InspireCenter/SearchSubscribePopNew?kw=java派大星</span><br></pre></td></tr></table></figure>
-
-<p>kw为公众号名称</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    <div>
-      
-    </div>
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://pibigstar.com/2019/08/05/SpringBoot使用redis做分布式Session/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -557,7 +408,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://pibigstar.com/2019/07/31/SpringBoot自定义配置文件读取/">
+    <link itemprop="mainEntityOfPage" href="http://pibigstar.com/2019/08/05/获取微信公众号信息接口/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="派大星">
@@ -576,7 +427,7 @@
         
           <h2 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2019/07/31/SpringBoot自定义配置文件读取/" itemprop="url">SpringBoot自定义配置文件读取</a></h2>
+                <a class="post-title-link" href="/2019/08/05/获取微信公众号信息接口/" itemprop="url">获取微信公众号信息接口</a></h2>
         
 
         <div class="post-meta">
@@ -588,8 +439,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-07-31T20:08:04+08:00">
-                2019-07-31
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-08-05T18:06:04+08:00">
+                2019-08-05
               </time>
             
 
@@ -611,8 +462,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/springboot/" itemprop="url" rel="index">
-                    <span itemprop="name">springboot</span>
+                  <a href="/categories/随笔小记/" itemprop="url" rel="index">
+                    <span itemprop="name">随笔小记</span>
                   </a>
                 </span>
 
@@ -650,13 +501,358 @@
       
         
           
-            <p>有时候我们把配置都放到application.yml文件里面会造成此文件相当不好管理，所以我们可以有意识的进行拆分，将一些配置放到其他的配置文件里面，那么我们如何加载并使用它呢，其实很简单，直接读取然后放到Properties对象中就OK了，看代码</p>
-<h1 id="读取配置"><a href="#读取配置" class="headerlink" title="读取配置"></a>读取配置</h1><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.pibgstar.demo.utils;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> org.slf4j.Logger;</span><br><span class="line"><span class="keyword">import</span> org.slf4j.LoggerFactory;</span><br><span class="line"><span class="keyword">import</span> org.springframework.util.StringUtils;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.io.IOException;</span><br><span class="line"><span class="keyword">import</span> java.io.InputStream;</span><br><span class="line"><span class="keyword">import</span> java.io.UnsupportedEncodingException;</span><br><span class="line"><span class="keyword">import</span> java.util.Properties;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> pibigstar</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@desc</span> 加载配置文件</span></span><br><span class="line"><span class="comment"> **/</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ConfigUtil</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> Logger logger = LoggerFactory.getLogger(ConfigUtil.class);</span><br><span class="line">    <span class="comment">// 配置文件的路径</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> String CONFIG_NAME = <span class="string">"conf/config.properties"</span>;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> Properties ps;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">int</span> <span class="title">getInt</span><span class="params">(String key)</span> </span>&#123;</span><br><span class="line">        String value = getValue(key);</span><br><span class="line">        <span class="keyword">return</span> Integer.parseInt(value);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> String <span class="title">getString</span><span class="params">(String key)</span> </span>&#123;</span><br><span class="line">        String value = getValue(key);</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">new</span> String(value.getBytes(<span class="string">"iso-8859-1"</span>),<span class="string">"utf-8"</span>);</span><br><span class="line">        &#125; <span class="keyword">catch</span> (UnsupportedEncodingException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">""</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">static</span> String <span class="title">getValue</span><span class="params">(String key)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (ps == <span class="keyword">null</span>) &#123;</span><br><span class="line">            init();</span><br><span class="line">        &#125;</span><br><span class="line">        String value = <span class="keyword">null</span>;</span><br><span class="line">        <span class="keyword">if</span> (StringUtils.isEmpty(value)) &#123;</span><br><span class="line">            value = ps.getProperty(key);</span><br><span class="line">        &#125;</span><br><span class="line">        logger.info(<span class="string">"key:"</span>+key+<span class="string">"----value:"</span>+value);</span><br><span class="line">        <span class="keyword">return</span> value;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">synchronized</span> <span class="keyword">void</span> <span class="title">init</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            InputStream ras = ConfigUtil.class.getClassLoader().getResourceAsStream(CONFIG_NAME);</span><br><span class="line">            ps = <span class="keyword">new</span> Properties();</span><br><span class="line">            ps.load(ras);</span><br><span class="line">        &#125; <span class="keyword">catch</span> (IOException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+            <p>西瓜插件里面的一个小接口：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">https://chromepluginapi.xiguaji.com/InspireCenter/SearchSubscribePopNew?kw=java派大星</span><br></pre></td></tr></table></figure>
 
-<h1 id="配置文件放置"><a href="#配置文件放置" class="headerlink" title="配置文件放置"></a>配置文件放置</h1><p>我们将config.properties放到<code>resources</code>下新建的conf文件夹下面就OK了</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">pibigstar.demo.url=http://www.pibigstar.com</span><br><span class="line">pibigstar.demo.number=8</span><br></pre></td></tr></table></figure>
+<p>kw为公众号名称</p>
 
-<h1 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h1><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TestConfigUtil</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span></span>&#123;</span><br><span class="line">        String url = ConfigUtil.getString(<span class="string">"pibigstar.demo.url"</span>);</span><br><span class="line">        <span class="keyword">int</span> number = ConfigUtil.getInt(<span class="string">"pibigstar.demo.number"</span>);</span><br><span class="line">        System.out.println(url + <span class="string">"  "</span> + number);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    <div>
+      
+    </div>
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://pibigstar.com/2019/07/31/使用java打开网页并截图/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="派大星">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/qq.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="派大星的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/07/31/使用java打开网页并截图/" itemprop="url">使用java打开网页并截图</a></h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-07-31T20:08:04+08:00">
+                2019-07-31
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Java-java工具类/" itemprop="url" rel="index">
+                    <span itemprop="name">Java,java工具类</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>控制浏览器打开网页只适用于JDK1.6之上的</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.pibgstar.demo.utils;</span><br><span class="line"><span class="keyword">import</span> javax.imageio.ImageIO;</span><br><span class="line"><span class="keyword">import</span> java.awt.*;</span><br><span class="line"><span class="keyword">import</span> java.awt.event.KeyEvent;</span><br><span class="line"><span class="keyword">import</span> java.awt.image.BufferedImage;</span><br><span class="line"><span class="keyword">import</span> java.io.File;</span><br><span class="line"><span class="keyword">import</span> java.io.IOException;</span><br><span class="line"><span class="keyword">import</span> java.net.URISyntaxException;</span><br><span class="line"><span class="keyword">import</span> java.net.URL;</span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> pibigstar</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@desc</span> 网页截图工具类</span></span><br><span class="line"><span class="comment"> **/</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">CutPictureUtil</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> IOException, URISyntaxException, AWTException </span>&#123;</span><br><span class="line">        <span class="comment">// 控制浏览器打开网页，仅适用于JdK1.6及以上版本</span></span><br><span class="line">        Desktop.getDesktop().browse(<span class="keyword">new</span> URL(<span class="string">"https://blog.csdn.net/junmoxi"</span>).toURI());</span><br><span class="line">        Robot robot = <span class="keyword">new</span> Robot();</span><br><span class="line">        <span class="comment">// 延迟一秒</span></span><br><span class="line">        robot.delay(<span class="number">1000</span>);</span><br><span class="line">        <span class="comment">// 获取屏幕宽度和高度</span></span><br><span class="line">        Dimension d = <span class="keyword">new</span> Dimension(Toolkit.getDefaultToolkit().getScreenSize());</span><br><span class="line">        <span class="keyword">int</span> width = (<span class="keyword">int</span>) d.getWidth();</span><br><span class="line">        <span class="keyword">int</span> height = (<span class="keyword">int</span>) d.getHeight();</span><br><span class="line">        <span class="comment">// 最大化浏览器</span></span><br><span class="line">        robot.keyRelease(KeyEvent.VK_F11);</span><br><span class="line">        robot.delay(<span class="number">1000</span>);</span><br><span class="line">        <span class="comment">// 对屏幕进行截图</span></span><br><span class="line">        Image image = robot.createScreenCapture(<span class="keyword">new</span> Rectangle(<span class="number">0</span>, <span class="number">0</span>, width, height));</span><br><span class="line">        <span class="comment">// 通过图形绘制工具类将截图保存</span></span><br><span class="line">        BufferedImage img = <span class="keyword">new</span> BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);</span><br><span class="line">        Graphics g = img.createGraphics();</span><br><span class="line">        g.drawImage(image, <span class="number">0</span>, <span class="number">0</span>, width, height, <span class="keyword">null</span>);</span><br><span class="line">        <span class="comment">// 保存图片</span></span><br><span class="line">        ImageIO.write(img, <span class="string">"jpg"</span>, <span class="keyword">new</span> File(<span class="string">"D:/tmp/"</span>+System.currentTimeMillis()+<span class="string">".jpg"</span>));</span><br><span class="line">        System.out.println(<span class="string">"done!"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    <div>
+      
+    </div>
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://pibigstar.com/2019/07/31/Windows下编译Proto文件/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="派大星">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/qq.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="派大星的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/07/31/Windows下编译Proto文件/" itemprop="url">Windows下编译Proto文件</a></h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-07-31T20:08:04+08:00">
+                2019-07-31
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/go/" itemprop="url" rel="index">
+                    <span itemprop="name">go</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <blockquote>
+<p>此处借助的为Windows的Linux子系统进行编译的</p>
+</blockquote>
+<h1 id="1-安装Windows子系统（WSL）"><a href="#1-安装Windows子系统（WSL）" class="headerlink" title="1. 安装Windows子系统（WSL）"></a>1. 安装Windows子系统（WSL）</h1><ol>
+<li>设置开启开发者模式<br><img src="https://img-blog.csdnimg.cn/20190704221610362.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2p1bm1veGk=,size_16,color_FFFFFF,t_70" alt></li>
+<li>程序中开启WSL子系统<br><img src="https://img-blog.csdnimg.cn/20190704221809454.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2p1bm1veGk=,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></li>
+<li>应用商店下载Ubuntu</li>
+</ol>
+<p><strong>注意</strong><br>1 装好之后要修改一次密码，不然无法使用root</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo passwd</span><br></pre></td></tr></table></figure>
+
+<p>2 更新系统</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get update</span><br></pre></td></tr></table></figure>
+
+<p>3 安装make</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install make</span><br></pre></td></tr></table></figure>
+
+<p>4 安装dos2unix</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install dos2unix</span><br></pre></td></tr></table></figure>
+
+<h1 id="2-配置编译环境"><a href="#2-配置编译环境" class="headerlink" title="2.配置编译环境"></a>2.配置编译环境</h1><ol>
+<li><p>安装go<br>百度 Ubuntu安装go</p>
+</li>
+<li><p>配置go环境<br>编辑 /etc/profile 文件</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vim /etc/profile</span><br></pre></td></tr></table></figure>
+
+</li>
+</ol>
+<p>将下面内容加入到末尾（GOPAT是我Windows中的GOPATH）</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">export</span> GOROOT=/usr/<span class="built_in">local</span>/go</span><br><span class="line"><span class="built_in">export</span> GOPATH=/mnt/f/goWork</span><br><span class="line"><span class="built_in">export</span> PATH=<span class="variable">$GOPATH</span>/bin:<span class="variable">$PATH</span></span><br><span class="line"><span class="built_in">export</span> PATH=<span class="variable">$PATH</span>:<span class="variable">$GOROOT</span>/bin:<span class="variable">$GOPATH</span>/bin</span><br></pre></td></tr></table></figure>
+
+<p>执行下面命令使配置生效</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">source</span> /etc/profile</span><br></pre></td></tr></table></figure>
+
+<p>如果出现每次关闭Terminal，配置就会失效，那么将配置放到 /etc/bash.bashrc 文件中</p>
+<ol start="3">
+<li>安装protoc<br>去这个网址下载：<a href="https://github.com/protocolbuffers/protobuf/releases" target="_blank" rel="noopener">https://github.com/protocolbuffers/protobuf/releases</a><br>解压：<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">unzip protoc.zip</span><br></pre></td></tr></table></figure>
+
+</li>
+</ol>
+<p>将bin文件夹下的 protoc 复制到Linux 中的 /bin目录下</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo cp protoc/bin/protoc /bin/protoc</span><br></pre></td></tr></table></figure>
+
+<p>执行 <code>protoc -verson</code> 如果输出版本信息则证明配置成功</p>
+<ol start="4">
+<li><p>安装protoc-gen-go</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">go</span> get -u github.com/golang/protobuf/protoc-gen-<span class="keyword">go</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>protoc-gen-validate</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">go</span> get -d -u github.com/envoyproxy/protoc-gen-validate</span><br></pre></td></tr></table></figure>
+
+</li>
+</ol>
+<p>然后进行到这个项目的目录</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> <span class="variable">$GOPATH</span>/src/github.com/envoyproxy/protoc-gen-validate</span><br><span class="line">make build</span><br></pre></td></tr></table></figure>
 
 
           
@@ -1005,6 +1201,159 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://pibigstar.com/2019/07/31/SpringBoot自定义配置文件读取/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="派大星">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/qq.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="派大星的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/07/31/SpringBoot自定义配置文件读取/" itemprop="url">SpringBoot自定义配置文件读取</a></h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-07-31T20:08:04+08:00">
+                2019-07-31
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/springboot/" itemprop="url" rel="index">
+                    <span itemprop="name">springboot</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>有时候我们把配置都放到application.yml文件里面会造成此文件相当不好管理，所以我们可以有意识的进行拆分，将一些配置放到其他的配置文件里面，那么我们如何加载并使用它呢，其实很简单，直接读取然后放到Properties对象中就OK了，看代码</p>
+<h1 id="读取配置"><a href="#读取配置" class="headerlink" title="读取配置"></a>读取配置</h1><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.pibgstar.demo.utils;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> org.slf4j.Logger;</span><br><span class="line"><span class="keyword">import</span> org.slf4j.LoggerFactory;</span><br><span class="line"><span class="keyword">import</span> org.springframework.util.StringUtils;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.io.IOException;</span><br><span class="line"><span class="keyword">import</span> java.io.InputStream;</span><br><span class="line"><span class="keyword">import</span> java.io.UnsupportedEncodingException;</span><br><span class="line"><span class="keyword">import</span> java.util.Properties;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> pibigstar</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@desc</span> 加载配置文件</span></span><br><span class="line"><span class="comment"> **/</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ConfigUtil</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> Logger logger = LoggerFactory.getLogger(ConfigUtil.class);</span><br><span class="line">    <span class="comment">// 配置文件的路径</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> String CONFIG_NAME = <span class="string">"conf/config.properties"</span>;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> Properties ps;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">int</span> <span class="title">getInt</span><span class="params">(String key)</span> </span>&#123;</span><br><span class="line">        String value = getValue(key);</span><br><span class="line">        <span class="keyword">return</span> Integer.parseInt(value);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> String <span class="title">getString</span><span class="params">(String key)</span> </span>&#123;</span><br><span class="line">        String value = getValue(key);</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">new</span> String(value.getBytes(<span class="string">"iso-8859-1"</span>),<span class="string">"utf-8"</span>);</span><br><span class="line">        &#125; <span class="keyword">catch</span> (UnsupportedEncodingException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">""</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">static</span> String <span class="title">getValue</span><span class="params">(String key)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (ps == <span class="keyword">null</span>) &#123;</span><br><span class="line">            init();</span><br><span class="line">        &#125;</span><br><span class="line">        String value = <span class="keyword">null</span>;</span><br><span class="line">        <span class="keyword">if</span> (StringUtils.isEmpty(value)) &#123;</span><br><span class="line">            value = ps.getProperty(key);</span><br><span class="line">        &#125;</span><br><span class="line">        logger.info(<span class="string">"key:"</span>+key+<span class="string">"----value:"</span>+value);</span><br><span class="line">        <span class="keyword">return</span> value;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">synchronized</span> <span class="keyword">void</span> <span class="title">init</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            InputStream ras = ConfigUtil.class.getClassLoader().getResourceAsStream(CONFIG_NAME);</span><br><span class="line">            ps = <span class="keyword">new</span> Properties();</span><br><span class="line">            ps.load(ras);</span><br><span class="line">        &#125; <span class="keyword">catch</span> (IOException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="配置文件放置"><a href="#配置文件放置" class="headerlink" title="配置文件放置"></a>配置文件放置</h1><p>我们将config.properties放到<code>resources</code>下新建的conf文件夹下面就OK了</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">pibigstar.demo.url=http://www.pibigstar.com</span><br><span class="line">pibigstar.demo.number=8</span><br></pre></td></tr></table></figure>
+
+<h1 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h1><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TestConfigUtil</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span></span>&#123;</span><br><span class="line">        String url = ConfigUtil.getString(<span class="string">"pibigstar.demo.url"</span>);</span><br><span class="line">        <span class="keyword">int</span> number = ConfigUtil.getInt(<span class="string">"pibigstar.demo.number"</span>);</span><br><span class="line">        System.out.println(url + <span class="string">"  "</span> + number);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    <div>
+      
+    </div>
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://pibigstar.com/2019/07/31/Mybatis联表查询/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1128,355 +1477,6 @@
 <h1 id="2-使用xml配置方式"><a href="#2-使用xml配置方式" class="headerlink" title="2 使用xml配置方式"></a>2 使用xml配置方式</h1><h2 id="2-1-一对一"><a href="#2-1-一对一" class="headerlink" title="2.1 一对一"></a>2.1 一对一</h2><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version="1.0" encoding="UTF-8"?&gt;</span></span><br><span class="line"><span class="meta">&lt;!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd"&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">mapper</span> <span class="attr">namespace</span>=<span class="string">"com.briup.apps.poll.dao.extend.ClazzVMMapper"</span>&gt;</span></span><br><span class="line">  </span><br><span class="line">  <span class="tag">&lt;<span class="name">resultMap</span> <span class="attr">id</span>=<span class="string">"clazzVMResultMap"</span> <span class="attr">type</span>=<span class="string">"com.briup.apps.poll.bean.extend.ClazzVM"</span>&gt;</span></span><br><span class="line">  	<span class="tag">&lt;<span class="name">id</span> <span class="attr">column</span>=<span class="string">"id"</span> <span class="attr">jdbcType</span>=<span class="string">"BIGINT"</span> <span class="attr">property</span>=<span class="string">"id"</span> /&gt;</span></span><br><span class="line">	<span class="comment">&lt;!-- 联表查询 association  --&gt;</span></span><br><span class="line"> 	<span class="tag">&lt;<span class="name">association</span> <span class="attr">column</span>=<span class="string">"grade_id"</span> <span class="attr">property</span>=<span class="string">"grade"</span> <span class="attr">select</span>=<span class="string">"com.briup.apps.poll.dao.GradeMapper.selectByPrimaryKey"</span>&gt;</span><span class="tag">&lt;/<span class="name">association</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">association</span> <span class="attr">column</span>=<span class="string">"charge_id"</span> <span class="attr">property</span>=<span class="string">"charge"</span> <span class="attr">select</span>=<span class="string">"com.briup.apps.poll.dao.UserMapper.selectByPrimaryKey"</span>&gt;</span><span class="tag">&lt;/<span class="name">association</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">resultMap</span>&gt;</span></span><br><span class="line">  </span><br><span class="line">   <span class="tag">&lt;<span class="name">select</span> <span class="attr">id</span>=<span class="string">"selectById"</span> <span class="attr">parameterType</span>=<span class="string">"java.lang.Long"</span> <span class="attr">resultMap</span>=<span class="string">"clazzVMResultMap"</span>&gt;</span></span><br><span class="line">  	select * from poll_clazz where id=#&#123;id&#125;;</span><br><span class="line">  <span class="tag">&lt;/<span class="name">select</span>&gt;</span></span><br><span class="line">   </span><br><span class="line"><span class="tag">&lt;/<span class="name">mapper</span>&gt;</span></span><br></pre></td></tr></table></figure>
 
 <h2 id="2-2-一对多"><a href="#2-2-一对多" class="headerlink" title="2.2 一对多"></a>2.2 一对多</h2><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">resultMap</span> <span class="attr">type</span>=<span class="string">"com.User"</span> <span class="attr">id</span>=<span class="string">"userAndItemsResultMap"</span>&gt;</span></span><br><span class="line">       <span class="comment">&lt;!-- 用户信息 --&gt;</span></span><br><span class="line">       <span class="tag">&lt;<span class="name">id</span> <span class="attr">column</span>=<span class="string">"user_id"</span> <span class="attr">property</span>=<span class="string">"id"</span>/&gt;</span></span><br><span class="line">       <span class="tag">&lt;<span class="name">result</span> <span class="attr">column</span>=<span class="string">"username"</span> <span class="attr">property</span>=<span class="string">"username"</span>/&gt;</span></span><br><span class="line">       <span class="tag">&lt;<span class="name">result</span> <span class="attr">column</span>=<span class="string">"sex"</span> <span class="attr">property</span>=<span class="string">"sex"</span>/&gt;</span></span><br><span class="line">       <span class="tag">&lt;<span class="name">result</span> <span class="attr">column</span>=<span class="string">"address"</span> <span class="attr">property</span>=<span class="string">"address"</span>/&gt;</span></span><br><span class="line">       <span class="comment">&lt;!-- 一个用户对应多个订单 --&gt;</span></span><br><span class="line">       <span class="tag">&lt;<span class="name">collection</span> <span class="attr">property</span>=<span class="string">"ordersList"</span> <span class="attr">ofType</span>=<span class="string">"com.Orders"</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">id</span> <span class="attr">column</span>=<span class="string">"id"</span> <span class="attr">property</span>=<span class="string">"id"</span>/&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">result</span> <span class="attr">column</span>=<span class="string">"user_id"</span> <span class="attr">property</span>=<span class="string">"userid"</span>/&gt;</span></span><br><span class="line">               <span class="tag">&lt;<span class="name">result</span> <span class="attr">column</span>=<span class="string">"number"</span> <span class="attr">property</span>=<span class="string">"number"</span>/&gt;</span></span><br><span class="line">               <span class="tag">&lt;<span class="name">result</span> <span class="attr">column</span>=<span class="string">"createtime"</span> <span class="attr">property</span>=<span class="string">"createTime"</span>/&gt;</span></span><br><span class="line">               <span class="tag">&lt;<span class="name">result</span> <span class="attr">column</span>=<span class="string">"note"</span> <span class="attr">property</span>=<span class="string">"note"</span>/&gt;</span></span><br><span class="line">               <span class="comment">&lt;!-- 一个订单对应多个订单明细 --&gt;</span></span><br><span class="line">               <span class="tag">&lt;<span class="name">collection</span> <span class="attr">property</span>=<span class="string">"orderdetails"</span> <span class="attr">ofType</span>=<span class="string">"com.OrderDetail"</span>&gt;</span></span><br><span class="line">                   <span class="tag">&lt;<span class="name">id</span> <span class="attr">column</span>=<span class="string">"orderdetail_id"</span> <span class="attr">property</span>=<span class="string">"id"</span>/&gt;</span></span><br><span class="line">                   <span class="tag">&lt;<span class="name">result</span> <span class="attr">column</span>=<span class="string">"items_id"</span>   <span class="attr">property</span>=<span class="string">"itemsId"</span>/&gt;</span></span><br><span class="line">                   <span class="tag">&lt;<span class="name">result</span> <span class="attr">column</span>=<span class="string">"items_num"</span>  <span class="attr">property</span>=<span class="string">"itemsNum"</span>/&gt;</span></span><br><span class="line">                   <span class="tag">&lt;<span class="name">result</span> <span class="attr">column</span>=<span class="string">"orders_id"</span>  <span class="attr">property</span>=<span class="string">"ordersId"</span>/&gt;</span></span><br><span class="line">                   <span class="comment">&lt;!-- 一个订单明细对应一个商品 --&gt;</span></span><br><span class="line">                   <span class="tag">&lt;<span class="name">association</span> <span class="attr">property</span>=<span class="string">"items"</span> <span class="attr">javaType</span>=<span class="string">"com.Items"</span>&gt;</span></span><br><span class="line">                       <span class="tag">&lt;<span class="name">id</span> <span class="attr">column</span>=<span class="string">"items_id"</span> <span class="attr">property</span>=<span class="string">"id"</span>/&gt;</span></span><br><span class="line">                       <span class="tag">&lt;<span class="name">result</span> <span class="attr">column</span>=<span class="string">"items_name"</span> <span class="attr">property</span>=<span class="string">"itemsName"</span>/&gt;</span></span><br><span class="line">                       <span class="tag">&lt;<span class="name">result</span> <span class="attr">column</span>=<span class="string">"items_detail"</span> <span class="attr">property</span>=<span class="string">"detail"</span>/&gt;</span></span><br><span class="line">                       <span class="tag">&lt;<span class="name">result</span> <span class="attr">column</span>=<span class="string">"items_price"</span> <span class="attr">property</span>=<span class="string">"price"</span>/&gt;</span></span><br><span class="line">                   <span class="tag">&lt;/<span class="name">association</span>&gt;</span></span><br><span class="line">               <span class="tag">&lt;/<span class="name">collection</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">collection</span>&gt;</span></span><br><span class="line">   <span class="tag">&lt;/<span class="name">resultMap</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    <div>
-      
-    </div>
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://pibigstar.com/2019/07/31/Windows下编译Proto文件/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="派大星">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/qq.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="派大星的博客">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/07/31/Windows下编译Proto文件/" itemprop="url">Windows下编译Proto文件</a></h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-07-31T20:08:04+08:00">
-                2019-07-31
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/go/" itemprop="url" rel="index">
-                    <span itemprop="name">go</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <blockquote>
-<p>此处借助的为Windows的Linux子系统进行编译的</p>
-</blockquote>
-<h1 id="1-安装Windows子系统（WSL）"><a href="#1-安装Windows子系统（WSL）" class="headerlink" title="1. 安装Windows子系统（WSL）"></a>1. 安装Windows子系统（WSL）</h1><ol>
-<li>设置开启开发者模式<br><img src="https://img-blog.csdnimg.cn/20190704221610362.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2p1bm1veGk=,size_16,color_FFFFFF,t_70" alt></li>
-<li>程序中开启WSL子系统<br><img src="https://img-blog.csdnimg.cn/20190704221809454.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2p1bm1veGk=,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></li>
-<li>应用商店下载Ubuntu</li>
-</ol>
-<p><strong>注意</strong><br>1 装好之后要修改一次密码，不然无法使用root</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo passwd</span><br></pre></td></tr></table></figure>
-
-<p>2 更新系统</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get update</span><br></pre></td></tr></table></figure>
-
-<p>3 安装make</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install make</span><br></pre></td></tr></table></figure>
-
-<p>4 安装dos2unix</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install dos2unix</span><br></pre></td></tr></table></figure>
-
-<h1 id="2-配置编译环境"><a href="#2-配置编译环境" class="headerlink" title="2.配置编译环境"></a>2.配置编译环境</h1><ol>
-<li><p>安装go<br>百度 Ubuntu安装go</p>
-</li>
-<li><p>配置go环境<br>编辑 /etc/profile 文件</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vim /etc/profile</span><br></pre></td></tr></table></figure>
-
-</li>
-</ol>
-<p>将下面内容加入到末尾（GOPAT是我Windows中的GOPATH）</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">export</span> GOROOT=/usr/<span class="built_in">local</span>/go</span><br><span class="line"><span class="built_in">export</span> GOPATH=/mnt/f/goWork</span><br><span class="line"><span class="built_in">export</span> PATH=<span class="variable">$GOPATH</span>/bin:<span class="variable">$PATH</span></span><br><span class="line"><span class="built_in">export</span> PATH=<span class="variable">$PATH</span>:<span class="variable">$GOROOT</span>/bin:<span class="variable">$GOPATH</span>/bin</span><br></pre></td></tr></table></figure>
-
-<p>执行下面命令使配置生效</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">source</span> /etc/profile</span><br></pre></td></tr></table></figure>
-
-<p>如果出现每次关闭Terminal，配置就会失效，那么将配置放到 /etc/bash.bashrc 文件中</p>
-<ol start="3">
-<li>安装protoc<br>去这个网址下载：<a href="https://github.com/protocolbuffers/protobuf/releases" target="_blank" rel="noopener">https://github.com/protocolbuffers/protobuf/releases</a><br>解压：<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">unzip protoc.zip</span><br></pre></td></tr></table></figure>
-
-</li>
-</ol>
-<p>将bin文件夹下的 protoc 复制到Linux 中的 /bin目录下</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo cp protoc/bin/protoc /bin/protoc</span><br></pre></td></tr></table></figure>
-
-<p>执行 <code>protoc -verson</code> 如果输出版本信息则证明配置成功</p>
-<ol start="4">
-<li><p>安装protoc-gen-go</p>
-<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">go</span> get -u github.com/golang/protobuf/protoc-gen-<span class="keyword">go</span></span><br></pre></td></tr></table></figure>
-</li>
-<li><p>protoc-gen-validate</p>
-<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">go</span> get -d -u github.com/envoyproxy/protoc-gen-validate</span><br></pre></td></tr></table></figure>
-
-</li>
-</ol>
-<p>然后进行到这个项目的目录</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> <span class="variable">$GOPATH</span>/src/github.com/envoyproxy/protoc-gen-validate</span><br><span class="line">make build</span><br></pre></td></tr></table></figure>
-
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    <div>
-      
-    </div>
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://pibigstar.com/2019/07/31/使用java打开网页并截图/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="派大星">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/qq.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="派大星的博客">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/07/31/使用java打开网页并截图/" itemprop="url">使用java打开网页并截图</a></h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-07-31T20:08:04+08:00">
-                2019-07-31
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Java-java工具类/" itemprop="url" rel="index">
-                    <span itemprop="name">Java,java工具类</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>控制浏览器打开网页只适用于JDK1.6之上的</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.pibgstar.demo.utils;</span><br><span class="line"><span class="keyword">import</span> javax.imageio.ImageIO;</span><br><span class="line"><span class="keyword">import</span> java.awt.*;</span><br><span class="line"><span class="keyword">import</span> java.awt.event.KeyEvent;</span><br><span class="line"><span class="keyword">import</span> java.awt.image.BufferedImage;</span><br><span class="line"><span class="keyword">import</span> java.io.File;</span><br><span class="line"><span class="keyword">import</span> java.io.IOException;</span><br><span class="line"><span class="keyword">import</span> java.net.URISyntaxException;</span><br><span class="line"><span class="keyword">import</span> java.net.URL;</span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> pibigstar</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@desc</span> 网页截图工具类</span></span><br><span class="line"><span class="comment"> **/</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">CutPictureUtil</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> IOException, URISyntaxException, AWTException </span>&#123;</span><br><span class="line">        <span class="comment">// 控制浏览器打开网页，仅适用于JdK1.6及以上版本</span></span><br><span class="line">        Desktop.getDesktop().browse(<span class="keyword">new</span> URL(<span class="string">"https://blog.csdn.net/junmoxi"</span>).toURI());</span><br><span class="line">        Robot robot = <span class="keyword">new</span> Robot();</span><br><span class="line">        <span class="comment">// 延迟一秒</span></span><br><span class="line">        robot.delay(<span class="number">1000</span>);</span><br><span class="line">        <span class="comment">// 获取屏幕宽度和高度</span></span><br><span class="line">        Dimension d = <span class="keyword">new</span> Dimension(Toolkit.getDefaultToolkit().getScreenSize());</span><br><span class="line">        <span class="keyword">int</span> width = (<span class="keyword">int</span>) d.getWidth();</span><br><span class="line">        <span class="keyword">int</span> height = (<span class="keyword">int</span>) d.getHeight();</span><br><span class="line">        <span class="comment">// 最大化浏览器</span></span><br><span class="line">        robot.keyRelease(KeyEvent.VK_F11);</span><br><span class="line">        robot.delay(<span class="number">1000</span>);</span><br><span class="line">        <span class="comment">// 对屏幕进行截图</span></span><br><span class="line">        Image image = robot.createScreenCapture(<span class="keyword">new</span> Rectangle(<span class="number">0</span>, <span class="number">0</span>, width, height));</span><br><span class="line">        <span class="comment">// 通过图形绘制工具类将截图保存</span></span><br><span class="line">        BufferedImage img = <span class="keyword">new</span> BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);</span><br><span class="line">        Graphics g = img.createGraphics();</span><br><span class="line">        g.drawImage(image, <span class="number">0</span>, <span class="number">0</span>, width, height, <span class="keyword">null</span>);</span><br><span class="line">        <span class="comment">// 保存图片</span></span><br><span class="line">        ImageIO.write(img, <span class="string">"jpg"</span>, <span class="keyword">new</span> File(<span class="string">"D:/tmp/"</span>+System.currentTimeMillis()+<span class="string">".jpg"</span>));</span><br><span class="line">        System.out.println(<span class="string">"done!"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 
           
@@ -1863,7 +1863,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://pibigstar.com/2019/07/16/SpringBoot使用异步任务/">
+    <link itemprop="mainEntityOfPage" href="http://pibigstar.com/2019/07/16/网页中QQ常用代码/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="派大星">
@@ -1882,7 +1882,7 @@
         
           <h2 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2019/07/16/SpringBoot使用异步任务/" itemprop="url">SpringBoot使用异步任务</a></h2>
+                <a class="post-title-link" href="/2019/07/16/网页中QQ常用代码/" itemprop="url">网页中QQ常用代码</a></h2>
         
 
         <div class="post-meta">
@@ -1917,8 +1917,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Java-springboot-SpringBoot技能大全/" itemprop="url" rel="index">
-                    <span itemprop="name">Java,springboot,SpringBoot技能大全</span>
+                  <a href="/categories/工具使用-随笔小记/" itemprop="url" rel="index">
+                    <span itemprop="name">工具使用,随笔小记</span>
                   </a>
                 </span>
 
@@ -1956,18 +1956,32 @@
       
         
           
-            <h1 id="1-开启异步任务"><a href="#1-开启异步任务" class="headerlink" title="1. 开启异步任务"></a>1. 开启异步任务</h1><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.pibigstar;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> org.springframework.boot.SpringApplication;</span><br><span class="line"><span class="keyword">import</span> org.springframework.boot.autoconfigure.SpringBootApplication;</span><br><span class="line"><span class="keyword">import</span> org.springframework.scheduling.annotation.EnableAsync;</span><br><span class="line"></span><br><span class="line"><span class="meta">@SpringBootApplication</span></span><br><span class="line"><span class="meta">@EnableAsync</span> <span class="comment">//开启异步任务</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SpringbootDemoApplication</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">		SpringApplication.run(SpringbootDemoApplication.class, args);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+            <p>@[toc]</p>
+<h2 id="1-点击链接打开会话窗口"><a href="#1-点击链接打开会话窗口" class="headerlink" title="1. 点击链接打开会话窗口"></a>1. 点击链接打开会话窗口</h2><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"http://wpa.qq.com/msgrd?v=3&amp;uin=741047261&amp;site=qq&amp;menu=yes"</span>&gt;</span>点击与我联系<span class="tag">&lt;/<span class="name">a</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">&lt;!--下面这个也可以实现 --&gt;</span></span><br><span class="line">tencent://message/?Menu=yes&amp;uin=741047261&amp;Service=300&amp;sigT=45a1e5847943b64c6ff3990f8a9e644d2b31356cb0b4ac6b24663a3c8dd0f8aa12a595b1714f9d45</span><br></pre></td></tr></table></figure>
 
-<h1 id="2-编写异步任务"><a href="#2-编写异步任务" class="headerlink" title="2. 编写异步任务"></a>2. 编写异步任务</h1><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">package</span> com.pibigstar.task;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.util.concurrent.Future;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> org.springframework.scheduling.annotation.Async;</span><br><span class="line"><span class="keyword">import</span> org.springframework.scheduling.annotation.AsyncResult;</span><br><span class="line"><span class="keyword">import</span> org.springframework.stereotype.Component;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Component</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">AsyncTask</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">	<span class="meta">@Async</span> <span class="comment">//异步方法注解</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> Future&lt;Boolean&gt; <span class="title">task1</span><span class="params">()</span> <span class="keyword">throws</span> InterruptedException </span>&#123;</span><br><span class="line">		<span class="keyword">long</span> start = System.currentTimeMillis();</span><br><span class="line">		Thread.sleep(<span class="number">1000</span>);</span><br><span class="line">		<span class="keyword">long</span> end = System.currentTimeMillis();</span><br><span class="line">		System.out.println(<span class="string">"=====任务1 耗时："</span>+(end-start)+<span class="string">"======"</span>);</span><br><span class="line">		<span class="comment">//返回true，告诉此任务已完成</span></span><br><span class="line">		<span class="keyword">return</span> <span class="keyword">new</span> AsyncResult&lt;Boolean&gt;(<span class="keyword">true</span>);</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	<span class="meta">@Async</span> <span class="comment">//异步方法注解</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> Future&lt;Boolean&gt; <span class="title">task2</span><span class="params">()</span> <span class="keyword">throws</span> InterruptedException </span>&#123;</span><br><span class="line">		<span class="keyword">long</span> start = System.currentTimeMillis();</span><br><span class="line">		Thread.sleep(<span class="number">800</span>);</span><br><span class="line">		<span class="keyword">long</span> end = System.currentTimeMillis();</span><br><span class="line">		System.out.println(<span class="string">"=====任务2 耗时："</span>+(end-start)+<span class="string">"======"</span>);</span><br><span class="line">		<span class="comment">//返回true，告诉此任务已完成</span></span><br><span class="line">		<span class="keyword">return</span> <span class="keyword">new</span> AsyncResult&lt;Boolean&gt;(<span class="keyword">true</span>);</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	<span class="meta">@Async</span> <span class="comment">//异步方法注解</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> Future&lt;Boolean&gt; <span class="title">task3</span><span class="params">()</span> <span class="keyword">throws</span> InterruptedException </span>&#123;</span><br><span class="line">		<span class="keyword">long</span> start = System.currentTimeMillis();</span><br><span class="line">		Thread.sleep(<span class="number">600</span>);</span><br><span class="line">		<span class="keyword">long</span> end = System.currentTimeMillis();</span><br><span class="line">		System.out.println(<span class="string">"=====任务3 耗时："</span>+(end-start)+<span class="string">"======"</span>);</span><br><span class="line">		<span class="comment">//返回true，告诉此任务已完成</span></span><br><span class="line">		<span class="keyword">return</span> <span class="keyword">new</span> AsyncResult&lt;Boolean&gt;(<span class="keyword">true</span>);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="2-点击链接添加好友"><a href="#2-点击链接添加好友" class="headerlink" title="2. 点击链接添加好友"></a>2. 点击链接添加好友</h2><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"tencent://AddContact/?fromId=45&amp;fromSubId=1&amp;subcmd=all&amp;uin=741047261&amp;website=www.oicqzone.com"</span>&gt;</span>添加好友<span class="tag">&lt;/<span class="name">a</span>&gt;</span></span><br></pre></td></tr></table></figure>
 
-<h1 id="3-启动异步任务"><a href="#3-启动异步任务" class="headerlink" title="3. 启动异步任务"></a>3. 启动异步任务</h1><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.pibigstar.web;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.util.concurrent.Future;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> org.springframework.beans.factory.annotation.Autowired;</span><br><span class="line"><span class="keyword">import</span> org.springframework.web.bind.annotation.GetMapping;</span><br><span class="line"><span class="keyword">import</span> org.springframework.web.bind.annotation.RequestMapping;</span><br><span class="line"><span class="keyword">import</span> org.springframework.web.bind.annotation.RestController;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> com.pibigstar.task.AsyncTask;</span><br><span class="line"></span><br><span class="line"><span class="meta">@RestController</span></span><br><span class="line"><span class="meta">@RequestMapping</span>(<span class="string">"/task"</span>)</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">AsyncTaskController</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">	<span class="meta">@Autowired</span></span><br><span class="line">	<span class="keyword">private</span> AsyncTask asyncTask;</span><br><span class="line">	</span><br><span class="line">	<span class="meta">@GetMapping</span>(<span class="string">"test"</span>)</span><br><span class="line">	<span class="function"><span class="keyword">public</span> String <span class="title">test</span><span class="params">()</span> <span class="keyword">throws</span> InterruptedException </span>&#123;</span><br><span class="line">		<span class="keyword">long</span> start = System.currentTimeMillis();</span><br><span class="line">		Future&lt;Boolean&gt; a = asyncTask.task1();</span><br><span class="line">		Future&lt;Boolean&gt; b = asyncTask.task2();</span><br><span class="line">		Future&lt;Boolean&gt; c = asyncTask.task3();</span><br><span class="line">		</span><br><span class="line">		<span class="comment">//循环到三个任务全部完成</span></span><br><span class="line">		<span class="keyword">while</span> (!a.isDone()||!b.isDone()||!c.isDone()) &#123;</span><br><span class="line">			<span class="keyword">if</span> (a.isDone()&amp;&amp;b.isDone()&amp;&amp;c.isDone()) &#123;</span><br><span class="line">				<span class="keyword">break</span>;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">long</span> end = System.currentTimeMillis();</span><br><span class="line">		String result = <span class="string">"任务完成，一共用时为："</span>+(end-start)+<span class="string">"毫秒"</span>;</span><br><span class="line">		System.out.println(result);</span><br><span class="line">		<span class="keyword">return</span> result;	</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="3-点击加群"><a href="#3-点击加群" class="headerlink" title="3. 点击加群"></a>3. 点击加群</h2><ol>
+<li>进入 <a href="https://qun.qq.com/join.html" target="_blank" rel="noopener">https://qun.qq.com/join.html</a></li>
+<li>选择哪个群<br><img src="https://img-blog.csdn.net/20180526150938773?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2p1bm1veGk=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt="这里写图片描述"></li>
+<li>复制网页代码即可<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"https://shang.qq.com/wpa/qunwpa?idkey=875408aae56499d92ddcdda3966fa7c01e1d3b587b038d335917df7d41893170"</span>&gt;</span>点击进群<span class="tag">&lt;/<span class="name">a</span>&gt;</span></span><br></pre></td></tr></table></figure>
 
-<h1 id="4-运行结果"><a href="#4-运行结果" class="headerlink" title="4. 运行结果"></a>4. 运行结果</h1><p><img src="https://img-blog.csdn.net/20180614165640575?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2p1bm1veGk=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt></p>
-<p><img src="https://img-blog.csdn.net/20180614165701312?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2p1bm1veGk=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt></p>
+</li>
+</ol>
+<h2 id="4-手机中网页点击链接打开指定会话窗口"><a href="#4-手机中网页点击链接打开指定会话窗口" class="headerlink" title="4. 手机中网页点击链接打开指定会话窗口"></a>4. 手机中网页点击链接打开指定会话窗口</h2><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"mqqwpa://im/chat?chat_type=wpa&amp;uin=5741047261&amp;version=1&amp;src_type=web&amp;web_src=oicqzone.com"</span>&gt;</span>点击联系我<span class="tag">&lt;/<span class="name">a</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="5-Android中打开指定QQ会话窗口"><a href="#5-Android中打开指定QQ会话窗口" class="headerlink" title="5. Android中打开指定QQ会话窗口"></a>5. Android中打开指定QQ会话窗口</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">String url=<span class="string">"mqqwpa://im/chat?chat_type=wpa&amp;uin=741047261"</span>;  </span><br><span class="line">startActivity(<span class="keyword">new</span> Intent(Intent.ACTION_VIEW, Uri.parse(url)));</span><br></pre></td></tr></table></figure>
+
+<h2 id="6-Android中打开指定应用程序"><a href="#6-Android中打开指定应用程序" class="headerlink" title="6. Android中打开指定应用程序"></a>6. Android中打开指定应用程序</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">Intent intent = <span class="keyword">new</span> Intent();</span><br><span class="line">ComponentName cmp = <span class="keyword">new</span> ComponentName(<span class="string">"com.sina.weibo"</span>,<span class="string">"com.sina.weibo.EditActivity"</span>);</span><br><span class="line">intent.setAction(Intent.ACTION_MAIN);</span><br><span class="line">intent.addCategory(Intent.CATEGORY_LAUNCHER);</span><br><span class="line">intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);</span><br><span class="line">intent.setComponent(cmp);</span><br><span class="line">startActivityForResult(intent, <span class="number">0</span>);</span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">另：几个常用的Package命令：</span></span><br><span class="line"><span class="comment">新浪微博（编辑界面）：com.sina.weibo    com.sina.weibo.EditActivity</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">腾讯微博（编辑界面）：com.tencent.WBlog    com.tencent.WBlog.activity.MicroblogInput</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">微信：   com.tencent.mm           com.tencent.mm.ui.LauncherUI</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">QQ:     com.tencent.mobileqq   com.tencent.mobileqq.activity.HomeActivity</span></span><br><span class="line"><span class="comment">**/</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="7-获取QQ头像"><a href="#7-获取QQ头像" class="headerlink" title="7. 获取QQ头像"></a>7. 获取QQ头像</h2><ol>
+<li><a href="http://q1.qlogo.cn/g?b=qq&amp;nk=741047261&amp;s=100" target="_blank" rel="noopener">http://q1.qlogo.cn/g?b=qq&amp;nk=741047261&amp;s=100</a></li>
+<li><a href="http://q2.qlogo.cn/headimg_dl?dst_uin=741047261&amp;spec=100" target="_blank" rel="noopener">http://q2.qlogo.cn/headimg_dl?dst_uin=741047261&amp;spec=100</a></li>
+</ol>
 <blockquote>
-<p>任务1 睡眠了 1000毫秒，任务2 睡眠了800毫秒，任务3 睡眠了600毫秒，如果是同步执行的话三个任务完成应该是2400毫秒，而这里只使用了1005毫秒，说明我们的任务执行确实是异步执行</p>
+<p>nk是你的QQ号，s是尺寸，尺寸对应关系可以看下图</p>
 </blockquote>
-<h1 id="5-异步执行使用场景"><a href="#5-异步执行使用场景" class="headerlink" title="5. 异步执行使用场景"></a>5. 异步执行使用场景</h1><p><img src="https://img-blog.csdn.net/20180614165950488?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2p1bm1veGk=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt></p>
+<p><img src="https://img-blog.csdnimg.cn/20190107152859591.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2p1bm1veGk=,size_16,color_FFFFFF,t_70" alt></p>
 
           
         
@@ -2325,3 +2339,5 @@
 </html>
 <!-- 页面点击小红心 -->
  <script type="text/javascript" src="/js/src/clicklove.js"></script>
+ <!-- 代码复制 -->
+ <script type="text/javascript" src="/js/src/clipboard.js"></script> 

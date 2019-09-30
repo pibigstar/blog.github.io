@@ -409,7 +409,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://pibigstar.com/2019/04/21/树莓派初始开机配置/">
+    <link itemprop="mainEntityOfPage" href="http://pibigstar.com/2019/04/21/SprintBoot任意处获取Request对象/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="派大星">
@@ -428,208 +428,7 @@
         
           <h2 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2019/04/21/树莓派初始开机配置/" itemprop="url">树莓派初始开机配置</a></h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-04-21T21:09:04+08:00">
-                2019-04-21
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/树莓派/" itemprop="url" rel="index">
-                    <span itemprop="name">树莓派</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="1-开启ssh"><a href="#1-开启ssh" class="headerlink" title="1. 开启ssh"></a>1. 开启ssh</h1><p>在 内存卡 的 <code>/boot</code> 目录下 新增 一个 <code>ssh</code> 文件夹即可</p>
-<h1 id="2-设置WiFi连接"><a href="#2-设置WiFi连接" class="headerlink" title="2. 设置WiFi连接"></a>2. 设置WiFi连接</h1><p>在 内存卡 的 <code>/boot</code> 目录下 新增 一个 <code>wpa_supplicant.conf</code> 文件，里面内容如下</p>
-<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">country=CN</span><br><span class="line">ctrl_interface=DIR=/var/run/wpa_supplicant GROUP=netdev</span><br><span class="line">update_config=1</span><br><span class="line"></span><br><span class="line">network=&#123;</span><br><span class="line">    ssid="wifi名"</span><br><span class="line">    psk="wifi密码"</span><br><span class="line">    priority=1</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h1 id="3-查看IP地址"><a href="#3-查看IP地址" class="headerlink" title="3. 查看IP地址"></a>3. 查看IP地址</h1><p>登录到你路由器后台查看，一般路由器的后台地址都为<code>192.168.1.1</code>，密码一般是<code>123456</code><br>设备名一般是<code>raspberrypi</code></p>
-<h1 id="4-修改密码"><a href="#4-修改密码" class="headerlink" title="4. 修改密码"></a>4. 修改密码</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 修改 pi 用户密码</span></span><br><span class="line">sudo passwd pi</span><br><span class="line"></span><br><span class="line"><span class="comment"># 修改root密码</span></span><br><span class="line">sudo passwd root</span><br></pre></td></tr></table></figure>
-
-<h1 id="5-设置时区"><a href="#5-设置时区" class="headerlink" title="5. 设置时区"></a>5. 设置时区</h1><blockquote>
-<p>输入date命令看查看当前系统时间</p>
-</blockquote>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 打开时区设置</span></span><br><span class="line">sudo dpkg-reconfigure tzdata</span><br><span class="line"><span class="comment"># 选择Asia  ---&gt; ShangHai</span></span><br></pre></td></tr></table></figure>
-
-<h1 id="6-安装vim"><a href="#6-安装vim" class="headerlink" title="6. 安装vim"></a>6. 安装vim</h1><p>树莓派默认是 <code>nano</code>编辑器，用着不太爽，用 <code>vim</code>替换它</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 更新下软件源</span></span><br><span class="line">sudo apt-get update</span><br><span class="line"><span class="comment"># 安装vim</span></span><br><span class="line">sudo apt-get install -y vim</span><br></pre></td></tr></table></figure>
-
-<p>改下配置</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo vim /etc/vim/vimrc</span><br></pre></td></tr></table></figure>
-
-<p>简单配一下</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 语法高亮</span></span><br><span class="line">syntax on</span><br><span class="line"><span class="comment"># 显示行号</span></span><br><span class="line"><span class="built_in">set</span> nu</span><br></pre></td></tr></table></figure>
-
-<h1 id="7-安装oh-my-zsh"><a href="#7-安装oh-my-zsh" class="headerlink" title="7. 安装oh-my-zsh"></a>7. 安装oh-my-zsh</h1><p>查看当前使用的shell</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">echo</span> <span class="variable">$SHELL</span></span><br></pre></td></tr></table></figure>
-
-<p>查看系统中所有shell</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cat /etc/shells</span><br></pre></td></tr></table></figure>
-
-<p>安装<code>zsh</code></p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install zsh</span><br></pre></td></tr></table></figure>
-
-<p>修改配置</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vim ~/.zshrc</span><br></pre></td></tr></table></figure>
-
-<p>添加</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">ZSH_THEME=<span class="string">"blinks"</span></span><br><span class="line">ENABLE_CORRECTION=<span class="string">"true"</span></span><br><span class="line"><span class="comment"># 为zsh添加git和sudo插件</span></span><br><span class="line">plugins=(git sudo)</span><br><span class="line"><span class="built_in">alias</span> ll=<span class="string">'ls -all'</span></span><br><span class="line"><span class="built_in">alias</span> vi=<span class="string">'vim'</span></span><br><span class="line"><span class="built_in">alias</span> ps=<span class="string">'ps -A'</span></span><br><span class="line"><span class="built_in">alias</span> ifconfig=<span class="string">'sudo ifconfig'</span></span><br></pre></td></tr></table></figure>
-
-<p>切换shell为zsh</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">chsh -s /bin/zsh</span><br></pre></td></tr></table></figure>
-
-<p>刷新设置</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">source</span> ~/.zshrc</span><br></pre></td></tr></table></figure>
-
-<p>安装<code>oh-my-zsh</code></p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sh -c <span class="string">"<span class="variable">$(wget https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh -O -)</span>"</span></span><br></pre></td></tr></table></figure>
-
-<h1 id="8-开启vnc远程桌面"><a href="#8-开启vnc远程桌面" class="headerlink" title="8. 开启vnc远程桌面"></a>8. 开启vnc远程桌面</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install tightvncserver</span><br></pre></td></tr></table></figure>
-
-<p>启动</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tightvncserver :1</span><br></pre></td></tr></table></figure>
-
-<p>关闭</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vncserver -<span class="built_in">kill</span> :1</span><br></pre></td></tr></table></figure>
-
-<p>关于配置<code>noVNC</code>的，可以查看我之前的文章：<a href="https://blog.csdn.net/junmoxi/article/details/100977131" target="_blank" rel="noopener">https://blog.csdn.net/junmoxi/article/details/100977131</a></p>
-<h1 id="9-设置内网穿透"><a href="#9-设置内网穿透" class="headerlink" title="9. 设置内网穿透"></a>9. 设置内网穿透</h1><p>用的是 <code>ngrok</code> 比较方便，这是教程可以参考：<a href="https://www.jianshu.com/p/8702f55d57e3" target="_blank" rel="noopener">https://www.jianshu.com/p/8702f55d57e3</a></p>
-<p>ngrok 官网： <a href="https://www.ngrok.cc" target="_blank" rel="noopener">https://www.ngrok.cc</a></p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    <div>
-      
-    </div>
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://pibigstar.com/2019/04/21/SpringBoot允许跨域访问/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="派大星">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/qq.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="派大星的博客">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/04/21/SpringBoot允许跨域访问/" itemprop="url">SpringBoot允许跨域访问</a></h2>
+                <a class="post-title-link" href="/2019/04/21/SprintBoot任意处获取Request对象/" itemprop="url">SprintBoot任意处获取Request对象</a></h2>
         
 
         <div class="post-meta">
@@ -703,11 +502,11 @@
       
         
           
-            <p>当它请求的一个资源是从一个与它本身提供的第一个资源的不同的域名时，一个资源会发起一个跨域HTTP请求(Cross-site HTTP request)。</p>
-<p>一般都是异步请求会有这个问题，比如：Ajax，XMLHttpRequest等</p>
-<h1 id="使用-Configuration（推荐）"><a href="#使用-Configuration（推荐）" class="headerlink" title="使用@Configuration（推荐）"></a>使用@Configuration（推荐）</h1><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> org.springframework.context.annotation.Bean;  </span><br><span class="line"><span class="keyword">import</span> org.springframework.context.annotation.Configuration;  </span><br><span class="line"><span class="keyword">import</span> org.springframework.web.cors.CorsConfiguration;  </span><br><span class="line"><span class="keyword">import</span> org.springframework.web.cors.UrlBasedCorsConfigurationSource;  </span><br><span class="line"><span class="keyword">import</span> org.springframework.web.filter.CorsFilter;  </span><br><span class="line">  </span><br><span class="line"><span class="meta">@Configuration</span>  </span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">CorsConfig</span> </span>&#123;</span><br><span class="line">    <span class="meta">@Bean</span>  </span><br><span class="line">    <span class="function"><span class="keyword">public</span> CorsFilter <span class="title">corsFilter</span><span class="params">()</span> </span>&#123;  </span><br><span class="line">        UrlBasedCorsConfigurationSource source = <span class="keyword">new</span> UrlBasedCorsConfigurationSource();  </span><br><span class="line">        source.registerCorsConfiguration(<span class="string">"/**"</span>, buildConfig()); </span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> CorsFilter(source);  </span><br><span class="line">    &#125;  </span><br><span class="line">    </span><br><span class="line">   <span class="function"><span class="keyword">private</span> CorsConfiguration <span class="title">buildConfig</span><span class="params">()</span> </span>&#123;  </span><br><span class="line">        CorsConfiguration corsConfiguration = <span class="keyword">new</span> CorsConfiguration();  </span><br><span class="line">        <span class="comment">// 1允许任何域名使用</span></span><br><span class="line">        corsConfiguration.addAllowedOrigin(<span class="string">"*"</span>); </span><br><span class="line">        <span class="comment">// 2允许任何头</span></span><br><span class="line">        corsConfiguration.addAllowedHeader(<span class="string">"*"</span>); </span><br><span class="line">         <span class="comment">// 3允许任何方法（post、get等） </span></span><br><span class="line">        corsConfiguration.addAllowedMethod(<span class="string">"*"</span>);</span><br><span class="line">        <span class="keyword">return</span> corsConfiguration;  </span><br><span class="line">    &#125;  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+            <p>老样子，直接上代码</p>
+<h1 id="方式一（粗暴，推荐）"><a href="#方式一（粗暴，推荐）" class="headerlink" title="方式一（粗暴，推荐）"></a>方式一（粗暴，推荐）</h1><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.pibgstar.demo.utils;</span><br><span class="line"><span class="keyword">import</span> org.springframework.web.context.request.RequestAttributes;</span><br><span class="line"><span class="keyword">import</span> org.springframework.web.context.request.RequestContextHolder;</span><br><span class="line"><span class="keyword">import</span> org.springframework.web.context.request.ServletRequestAttributes;</span><br><span class="line"><span class="keyword">import</span> javax.servlet.http.HttpServletRequest;</span><br><span class="line"><span class="keyword">import</span> javax.servlet.http.HttpServletResponse;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> pibigstar</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@desc</span> 获取request和response对象</span></span><br><span class="line"><span class="comment"> **/</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">WebUtil</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/** 获取request对象 **/</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> HttpServletRequest <span class="title">getRequest</span><span class="params">()</span></span>&#123;</span><br><span class="line">        RequestAttributes requestAttributes = RequestContextHolder.getRequestAttributes();</span><br><span class="line">        <span class="keyword">if</span> (requestAttributes == <span class="keyword">null</span>)&#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> ((ServletRequestAttributes)requestAttributes).getRequest();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">/** 获取response对象 **/</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> HttpServletResponse <span class="title">getResponse</span><span class="params">()</span></span>&#123;</span><br><span class="line">        RequestAttributes requestAttributes = RequestContextHolder.getRequestAttributes();</span><br><span class="line">        <span class="keyword">if</span> (requestAttributes == <span class="keyword">null</span>)&#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> ((ServletRequestAttributes)requestAttributes).getResponse();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<h1 id="使用Filter"><a href="#使用Filter" class="headerlink" title="使用Filter"></a>使用Filter</h1><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> javax.servlet.*;  </span><br><span class="line"><span class="keyword">import</span> javax.servlet.http.HttpServletResponse;  </span><br><span class="line"><span class="keyword">import</span> java.io.IOException;  </span><br><span class="line"></span><br><span class="line"><span class="meta">@Component</span>  </span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">CorsFilter</span> <span class="keyword">implements</span> <span class="title">Filter</span> </span>&#123;  </span><br><span class="line">  </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">doFilter</span><span class="params">(ServletRequest req, ServletResponse res, FilterChain chain)</span> <span class="keyword">throws</span> IOException, ServletException </span>&#123;  </span><br><span class="line">        HttpServletResponse response = (HttpServletResponse) res;  </span><br><span class="line">        response.setHeader(<span class="string">"Access-Control-Allow-Origin"</span>, <span class="string">"*"</span>);  </span><br><span class="line">        response.setHeader(<span class="string">"Access-Control-Allow-Methods"</span>, <span class="string">"POST, GET"</span>);  </span><br><span class="line">        response.setHeader(<span class="string">"Access-Control-Max-Age"</span>, <span class="string">"3600"</span>);  </span><br><span class="line">        response.setHeader(<span class="string">"Access-Control-Allow-Headers"</span>, <span class="string">"x-requested-with"</span>);   </span><br><span class="line">        chain.doFilter(req, res);  </span><br><span class="line">    &#125;  </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">init</span><span class="params">(FilterConfig filterConfig)</span> </span>&#123;&#125;  </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">destroy</span><span class="params">()</span> </span>&#123;&#125;  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="方式二（简单）"><a href="#方式二（简单）" class="headerlink" title="方式二（简单）"></a>方式二（简单）</h1><p>在你需要的地方，注入即可</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Autowired</span></span><br><span class="line">HttpServletRequest request;</span><br><span class="line"><span class="meta">@Autowired</span></span><br><span class="line">HttpServletResponse response</span><br></pre></td></tr></table></figure>
 
 
           
@@ -1174,7 +973,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://pibigstar.com/2019/04/21/SprintBoot任意处获取Request对象/">
+    <link itemprop="mainEntityOfPage" href="http://pibigstar.com/2019/04/21/SpringBoot允许跨域访问/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="派大星">
@@ -1193,7 +992,7 @@
         
           <h2 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2019/04/21/SprintBoot任意处获取Request对象/" itemprop="url">SprintBoot任意处获取Request对象</a></h2>
+                <a class="post-title-link" href="/2019/04/21/SpringBoot允许跨域访问/" itemprop="url">SpringBoot允许跨域访问</a></h2>
         
 
         <div class="post-meta">
@@ -1267,12 +1066,213 @@
       
         
           
-            <p>老样子，直接上代码</p>
-<h1 id="方式一（粗暴，推荐）"><a href="#方式一（粗暴，推荐）" class="headerlink" title="方式一（粗暴，推荐）"></a>方式一（粗暴，推荐）</h1><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.pibgstar.demo.utils;</span><br><span class="line"><span class="keyword">import</span> org.springframework.web.context.request.RequestAttributes;</span><br><span class="line"><span class="keyword">import</span> org.springframework.web.context.request.RequestContextHolder;</span><br><span class="line"><span class="keyword">import</span> org.springframework.web.context.request.ServletRequestAttributes;</span><br><span class="line"><span class="keyword">import</span> javax.servlet.http.HttpServletRequest;</span><br><span class="line"><span class="keyword">import</span> javax.servlet.http.HttpServletResponse;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> pibigstar</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@desc</span> 获取request和response对象</span></span><br><span class="line"><span class="comment"> **/</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">WebUtil</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/** 获取request对象 **/</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> HttpServletRequest <span class="title">getRequest</span><span class="params">()</span></span>&#123;</span><br><span class="line">        RequestAttributes requestAttributes = RequestContextHolder.getRequestAttributes();</span><br><span class="line">        <span class="keyword">if</span> (requestAttributes == <span class="keyword">null</span>)&#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> ((ServletRequestAttributes)requestAttributes).getRequest();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">/** 获取response对象 **/</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> HttpServletResponse <span class="title">getResponse</span><span class="params">()</span></span>&#123;</span><br><span class="line">        RequestAttributes requestAttributes = RequestContextHolder.getRequestAttributes();</span><br><span class="line">        <span class="keyword">if</span> (requestAttributes == <span class="keyword">null</span>)&#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> ((ServletRequestAttributes)requestAttributes).getResponse();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+            <p>当它请求的一个资源是从一个与它本身提供的第一个资源的不同的域名时，一个资源会发起一个跨域HTTP请求(Cross-site HTTP request)。</p>
+<p>一般都是异步请求会有这个问题，比如：Ajax，XMLHttpRequest等</p>
+<h1 id="使用-Configuration（推荐）"><a href="#使用-Configuration（推荐）" class="headerlink" title="使用@Configuration（推荐）"></a>使用@Configuration（推荐）</h1><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> org.springframework.context.annotation.Bean;  </span><br><span class="line"><span class="keyword">import</span> org.springframework.context.annotation.Configuration;  </span><br><span class="line"><span class="keyword">import</span> org.springframework.web.cors.CorsConfiguration;  </span><br><span class="line"><span class="keyword">import</span> org.springframework.web.cors.UrlBasedCorsConfigurationSource;  </span><br><span class="line"><span class="keyword">import</span> org.springframework.web.filter.CorsFilter;  </span><br><span class="line">  </span><br><span class="line"><span class="meta">@Configuration</span>  </span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">CorsConfig</span> </span>&#123;</span><br><span class="line">    <span class="meta">@Bean</span>  </span><br><span class="line">    <span class="function"><span class="keyword">public</span> CorsFilter <span class="title">corsFilter</span><span class="params">()</span> </span>&#123;  </span><br><span class="line">        UrlBasedCorsConfigurationSource source = <span class="keyword">new</span> UrlBasedCorsConfigurationSource();  </span><br><span class="line">        source.registerCorsConfiguration(<span class="string">"/**"</span>, buildConfig()); </span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> CorsFilter(source);  </span><br><span class="line">    &#125;  </span><br><span class="line">    </span><br><span class="line">   <span class="function"><span class="keyword">private</span> CorsConfiguration <span class="title">buildConfig</span><span class="params">()</span> </span>&#123;  </span><br><span class="line">        CorsConfiguration corsConfiguration = <span class="keyword">new</span> CorsConfiguration();  </span><br><span class="line">        <span class="comment">// 1允许任何域名使用</span></span><br><span class="line">        corsConfiguration.addAllowedOrigin(<span class="string">"*"</span>); </span><br><span class="line">        <span class="comment">// 2允许任何头</span></span><br><span class="line">        corsConfiguration.addAllowedHeader(<span class="string">"*"</span>); </span><br><span class="line">         <span class="comment">// 3允许任何方法（post、get等） </span></span><br><span class="line">        corsConfiguration.addAllowedMethod(<span class="string">"*"</span>);</span><br><span class="line">        <span class="keyword">return</span> corsConfiguration;  </span><br><span class="line">    &#125;  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<h1 id="方式二（简单）"><a href="#方式二（简单）" class="headerlink" title="方式二（简单）"></a>方式二（简单）</h1><p>在你需要的地方，注入即可</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Autowired</span></span><br><span class="line">HttpServletRequest request;</span><br><span class="line"><span class="meta">@Autowired</span></span><br><span class="line">HttpServletResponse response</span><br></pre></td></tr></table></figure>
+<h1 id="使用Filter"><a href="#使用Filter" class="headerlink" title="使用Filter"></a>使用Filter</h1><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> javax.servlet.*;  </span><br><span class="line"><span class="keyword">import</span> javax.servlet.http.HttpServletResponse;  </span><br><span class="line"><span class="keyword">import</span> java.io.IOException;  </span><br><span class="line"></span><br><span class="line"><span class="meta">@Component</span>  </span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">CorsFilter</span> <span class="keyword">implements</span> <span class="title">Filter</span> </span>&#123;  </span><br><span class="line">  </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">doFilter</span><span class="params">(ServletRequest req, ServletResponse res, FilterChain chain)</span> <span class="keyword">throws</span> IOException, ServletException </span>&#123;  </span><br><span class="line">        HttpServletResponse response = (HttpServletResponse) res;  </span><br><span class="line">        response.setHeader(<span class="string">"Access-Control-Allow-Origin"</span>, <span class="string">"*"</span>);  </span><br><span class="line">        response.setHeader(<span class="string">"Access-Control-Allow-Methods"</span>, <span class="string">"POST, GET"</span>);  </span><br><span class="line">        response.setHeader(<span class="string">"Access-Control-Max-Age"</span>, <span class="string">"3600"</span>);  </span><br><span class="line">        response.setHeader(<span class="string">"Access-Control-Allow-Headers"</span>, <span class="string">"x-requested-with"</span>);   </span><br><span class="line">        chain.doFilter(req, res);  </span><br><span class="line">    &#125;  </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">init</span><span class="params">(FilterConfig filterConfig)</span> </span>&#123;&#125;  </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">destroy</span><span class="params">()</span> </span>&#123;&#125;  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    <div>
+      
+    </div>
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://pibigstar.com/2019/04/21/树莓派初始开机配置/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="派大星">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/qq.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="派大星的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/04/21/树莓派初始开机配置/" itemprop="url">树莓派初始开机配置</a></h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-04-21T21:09:04+08:00">
+                2019-04-21
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/树莓派/" itemprop="url" rel="index">
+                    <span itemprop="name">树莓派</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="1-开启ssh"><a href="#1-开启ssh" class="headerlink" title="1. 开启ssh"></a>1. 开启ssh</h1><p>在 内存卡 的 <code>/boot</code> 目录下 新增 一个 <code>ssh</code> 文件夹即可</p>
+<h1 id="2-设置WiFi连接"><a href="#2-设置WiFi连接" class="headerlink" title="2. 设置WiFi连接"></a>2. 设置WiFi连接</h1><p>在 内存卡 的 <code>/boot</code> 目录下 新增 一个 <code>wpa_supplicant.conf</code> 文件，里面内容如下</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">country=CN</span><br><span class="line">ctrl_interface=DIR=/var/run/wpa_supplicant GROUP=netdev</span><br><span class="line">update_config=1</span><br><span class="line"></span><br><span class="line">network=&#123;</span><br><span class="line">    ssid="wifi名"</span><br><span class="line">    psk="wifi密码"</span><br><span class="line">    priority=1</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="3-查看IP地址"><a href="#3-查看IP地址" class="headerlink" title="3. 查看IP地址"></a>3. 查看IP地址</h1><p>登录到你路由器后台查看，一般路由器的后台地址都为<code>192.168.1.1</code>，密码一般是<code>123456</code><br>设备名一般是<code>raspberrypi</code></p>
+<h1 id="4-修改密码"><a href="#4-修改密码" class="headerlink" title="4. 修改密码"></a>4. 修改密码</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 修改 pi 用户密码</span></span><br><span class="line">sudo passwd pi</span><br><span class="line"></span><br><span class="line"><span class="comment"># 修改root密码</span></span><br><span class="line">sudo passwd root</span><br></pre></td></tr></table></figure>
+
+<h1 id="5-设置时区"><a href="#5-设置时区" class="headerlink" title="5. 设置时区"></a>5. 设置时区</h1><blockquote>
+<p>输入date命令看查看当前系统时间</p>
+</blockquote>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 打开时区设置</span></span><br><span class="line">sudo dpkg-reconfigure tzdata</span><br><span class="line"><span class="comment"># 选择Asia  ---&gt; ShangHai</span></span><br></pre></td></tr></table></figure>
+
+<h1 id="6-安装vim"><a href="#6-安装vim" class="headerlink" title="6. 安装vim"></a>6. 安装vim</h1><p>树莓派默认是 <code>nano</code>编辑器，用着不太爽，用 <code>vim</code>替换它</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 更新下软件源</span></span><br><span class="line">sudo apt-get update</span><br><span class="line"><span class="comment"># 安装vim</span></span><br><span class="line">sudo apt-get install -y vim</span><br></pre></td></tr></table></figure>
+
+<p>改下配置</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo vim /etc/vim/vimrc</span><br></pre></td></tr></table></figure>
+
+<p>简单配一下</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 语法高亮</span></span><br><span class="line">syntax on</span><br><span class="line"><span class="comment"># 显示行号</span></span><br><span class="line"><span class="built_in">set</span> nu</span><br></pre></td></tr></table></figure>
+
+<h1 id="7-安装oh-my-zsh"><a href="#7-安装oh-my-zsh" class="headerlink" title="7. 安装oh-my-zsh"></a>7. 安装oh-my-zsh</h1><p>查看当前使用的shell</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">echo</span> <span class="variable">$SHELL</span></span><br></pre></td></tr></table></figure>
+
+<p>查看系统中所有shell</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cat /etc/shells</span><br></pre></td></tr></table></figure>
+
+<p>安装<code>zsh</code></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install zsh</span><br></pre></td></tr></table></figure>
+
+<p>修改配置</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vim ~/.zshrc</span><br></pre></td></tr></table></figure>
+
+<p>添加</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">ZSH_THEME=<span class="string">"blinks"</span></span><br><span class="line">ENABLE_CORRECTION=<span class="string">"true"</span></span><br><span class="line"><span class="comment"># 为zsh添加git和sudo插件</span></span><br><span class="line">plugins=(git sudo)</span><br><span class="line"><span class="built_in">alias</span> ll=<span class="string">'ls -all'</span></span><br><span class="line"><span class="built_in">alias</span> vi=<span class="string">'vim'</span></span><br><span class="line"><span class="built_in">alias</span> ps=<span class="string">'ps -A'</span></span><br><span class="line"><span class="built_in">alias</span> ifconfig=<span class="string">'sudo ifconfig'</span></span><br></pre></td></tr></table></figure>
+
+<p>切换shell为zsh</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">chsh -s /bin/zsh</span><br></pre></td></tr></table></figure>
+
+<p>刷新设置</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">source</span> ~/.zshrc</span><br></pre></td></tr></table></figure>
+
+<p>安装<code>oh-my-zsh</code></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sh -c <span class="string">"<span class="variable">$(wget https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh -O -)</span>"</span></span><br></pre></td></tr></table></figure>
+
+<h1 id="8-开启vnc远程桌面"><a href="#8-开启vnc远程桌面" class="headerlink" title="8. 开启vnc远程桌面"></a>8. 开启vnc远程桌面</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install tightvncserver</span><br></pre></td></tr></table></figure>
+
+<p>启动</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tightvncserver :1</span><br></pre></td></tr></table></figure>
+
+<p>关闭</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vncserver -<span class="built_in">kill</span> :1</span><br></pre></td></tr></table></figure>
+
+<p>关于配置<code>noVNC</code>的，可以查看我之前的文章：<a href="https://blog.csdn.net/junmoxi/article/details/100977131" target="_blank" rel="noopener">https://blog.csdn.net/junmoxi/article/details/100977131</a></p>
+<h1 id="9-设置内网穿透"><a href="#9-设置内网穿透" class="headerlink" title="9. 设置内网穿透"></a>9. 设置内网穿透</h1><p>用的是 <code>ngrok</code> 比较方便，这是教程可以参考：<a href="https://www.jianshu.com/p/8702f55d57e3" target="_blank" rel="noopener">https://www.jianshu.com/p/8702f55d57e3</a></p>
+<p>ngrok 官网： <a href="https://www.ngrok.cc" target="_blank" rel="noopener">https://www.ngrok.cc</a></p>
 
           
         
@@ -2358,3 +2358,5 @@
 </html>
 <!-- 页面点击小红心 -->
  <script type="text/javascript" src="/js/src/clicklove.js"></script>
+ <!-- 代码复制 -->
+ <script type="text/javascript" src="/js/src/clipboard.js"></script> 

@@ -739,169 +739,6 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://pibigstar.com/2019/05/10/Google搜索技巧/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="派大星">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/qq.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="派大星的博客">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/05/10/Google搜索技巧/" itemprop="url">Google搜索技巧</a></h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-05-10T13:01:04+08:00">
-                2019-05-10
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/工具使用/" itemprop="url" rel="index">
-                    <span itemprop="name">工具使用</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <ul>
-<li><p>inurl：搜索URL网址中包含指定字符串</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">inurl:login.php</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>intitle：标题中包含指定的字符串</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">intitle:登录</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>intext： 内容中包含指定的字符串</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">intext:登录</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>site：指定网站，只会在指定网站中查找关键字</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">深入理解JVM虚拟机 site:baidu.com</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>filetype：指定文件类型</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">深入理解JVM虚拟机 filetype:pdf</span><br></pre></td></tr></table></figure>
-
-</li>
-</ul>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    <div>
-      
-    </div>
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://pibigstar.com/2019/05/10/使用python做爬虫总结/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1052,6 +889,169 @@
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">login</span><span class="params">(self,username,password)</span>:</span> </span><br><span class="line">    <span class="keyword">import</span> urllib </span><br><span class="line">    data=urllib.urlencode(&#123;<span class="string">'username'</span>:username, </span><br><span class="line">                           <span class="string">'password'</span>:password, </span><br><span class="line">                           <span class="string">'continue'</span>:<span class="string">'http://www.verycd.com/'</span>, </span><br><span class="line">                           <span class="string">'login_submit'</span>:<span class="string">u'登录'</span>.encode(<span class="string">'utf-8'</span>), </span><br><span class="line">                           <span class="string">'save_cookie'</span>:<span class="number">1</span>,&#125;) </span><br><span class="line">    url = <span class="string">'http://www.verycd.com/signin'</span> </span><br><span class="line">    self.opener.open(url,data).read()</span><br></pre></td></tr></table></figure>
 
 <p>于是在Fetcher初始化时便会自动登录VeryCD网站。</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    <div>
+      
+    </div>
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://pibigstar.com/2019/05/10/Google搜索技巧/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="派大星">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/qq.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="派大星的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/05/10/Google搜索技巧/" itemprop="url">Google搜索技巧</a></h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-05-10T13:01:04+08:00">
+                2019-05-10
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/工具使用/" itemprop="url" rel="index">
+                    <span itemprop="name">工具使用</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <ul>
+<li><p>inurl：搜索URL网址中包含指定字符串</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">inurl:login.php</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>intitle：标题中包含指定的字符串</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">intitle:登录</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>intext： 内容中包含指定的字符串</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">intext:登录</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>site：指定网站，只会在指定网站中查找关键字</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">深入理解JVM虚拟机 site:baidu.com</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>filetype：指定文件类型</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">深入理解JVM虚拟机 filetype:pdf</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
 
           
         
@@ -2274,3 +2274,5 @@
 </html>
 <!-- 页面点击小红心 -->
  <script type="text/javascript" src="/js/src/clicklove.js"></script>
+ <!-- 代码复制 -->
+ <script type="text/javascript" src="/js/src/clipboard.js"></script> 

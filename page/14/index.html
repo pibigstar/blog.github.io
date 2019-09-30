@@ -919,6 +919,208 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://pibigstar.com/2018/12/31/docker搭建本地仓库并制作自己的镜像/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="派大星">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/qq.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="派大星的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/12/31/docker搭建本地仓库并制作自己的镜像/" itemprop="url">docker搭建本地仓库并制作自己的镜像</a></h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-12-31T02:02:04+08:00">
+                2018-12-31
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/工具使用-Linux-docker/" itemprop="url" rel="index">
+                    <span itemprop="name">工具使用,Linux,docker</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p> [TOC]</p>
+<h2 id="1-搭建本地仓库"><a href="#1-搭建本地仓库" class="headerlink" title="1. 搭建本地仓库"></a>1. 搭建本地仓库</h2><h3 id="1-1-下载仓库镜像"><a href="#1-1-下载仓库镜像" class="headerlink" title="1.1 下载仓库镜像"></a>1.1 下载仓库镜像</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker pull registry</span><br></pre></td></tr></table></figure>
+
+<h3 id="1-2-启动仓库容器"><a href="#1-2-启动仓库容器" class="headerlink" title="1.2 启动仓库容器"></a>1.2 启动仓库容器</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run -d -p <span class="number">5000</span>:<span class="number">5000</span> -v /home/registry/:/tmp/registry registry</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>第一个5000是本地的端口，第二个5000是docker里面的端口，将本地5000的端口映射到<br>docker里面的5000端口</p>
+</blockquote>
+<h2 id="2-在CentOS容器中安装JDK"><a href="#2-在CentOS容器中安装JDK" class="headerlink" title="2. 在CentOS容器中安装JDK"></a>2. 在CentOS容器中安装JDK</h2><h3 id="2-1-下载CentOS容器"><a href="#2-1-下载CentOS容器" class="headerlink" title="2.1 下载CentOS容器"></a>2.1 下载CentOS容器</h3><p>镜像仓库地址：<a href="https://dashboard.daocloud.io/packages/explore" target="_blank" rel="noopener">https://dashboard.daocloud.io/packages/explore</a></p>
+<p><img src="https://img-blog.csdn.net/20180615152618861?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2p1bm1veGk=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker pull daocloud.io/library/centos:latest</span><br></pre></td></tr></table></figure>
+
+<h3 id="2-2-运行Linux容器："><a href="#2-2-运行Linux容器：" class="headerlink" title="2.2 运行Linux容器："></a>2.2 运行Linux容器：</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run -d -it --name myCentos 镜像ID /bin/bash</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>*<em>-d 后台运行 *</em></li>
+<li><strong>–name 容器名</strong></li>
+</ul>
+<h3 id="2-3-将JDK复制到myCentos容器中"><a href="#2-3-将JDK复制到myCentos容器中" class="headerlink" title="2.3 将JDK复制到myCentos容器中"></a>2.3 将JDK复制到myCentos容器中</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker cp jdk<span class="number">-10.0</span><span class="number">.1</span>_linux-x64_bin.tar.gz myCentos:/usr/local</span><br></pre></td></tr></table></figure>
+
+<h3 id="2-4-进入容器"><a href="#2-4-进入容器" class="headerlink" title="2.4 进入容器"></a>2.4 进入容器</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker <span class="keyword">exec</span> -it myCentos /bin/bash</span><br></pre></td></tr></table></figure>
+
+<h3 id="2-5-解压JDK"><a href="#2-5-解压JDK" class="headerlink" title="2.5 解压JDK"></a>2.5 解压JDK</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tar -zxvf jdk<span class="number">-10.0</span><span class="number">.1</span>_linux-x64_bin.tar.gz</span><br></pre></td></tr></table></figure>
+
+<h3 id="2-6-配置环境变量"><a href="#2-6-配置环境变量" class="headerlink" title="2.6 配置环境变量"></a>2.6 配置环境变量</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vi /etc/profile</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>在文件末尾添加：<br>export JAVA_HOME=/usr/local/jdk1.8.0_152<br>export PATH=<code>$</code>JAVA_HOME/bin:<code>$</code>PATH<br>export CLASSPATH=.:<code>$</code>JAVA_HOME/lib/dt.jar:$JAVA_HOME/lib/tools.jar</p>
+</blockquote>
+<h4 id="2-6-1-刷新环境变量"><a href="#2-6-1-刷新环境变量" class="headerlink" title="2.6.1 刷新环境变量"></a>2.6.1 刷新环境变量</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">source /etc/profile</span><br></pre></td></tr></table></figure>
+
+<h4 id="2-6-2-设置开机自动执行source"><a href="#2-6-2-设置开机自动执行source" class="headerlink" title="2.6.2 设置开机自动执行source"></a>2.6.2 设置开机自动执行source</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vi ~/.bashrc</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>在第一行添加 source /etc/profile</p>
+</blockquote>
+<h4 id="2-6-3-重启容器"><a href="#2-6-3-重启容器" class="headerlink" title="2.6.3 重启容器"></a>2.6.3 重启容器</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">docker stop myCentos</span><br><span class="line">docker start myCentos</span><br></pre></td></tr></table></figure>
+
+<h3 id="2-7-将容器提交到镜像里"><a href="#2-7-将容器提交到镜像里" class="headerlink" title="2.7 将容器提交到镜像里"></a>2.7 将容器提交到镜像里</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker commit &lt;CONTAINERID&gt; &lt;IMAGE&gt;</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://img-blog.csdn.net/20180419152414991?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2p1bm1veGk=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt="将容器提交到镜像中"></p>
+<h2 id="3-将新制作的镜像推送到仓库中"><a href="#3-将新制作的镜像推送到仓库中" class="headerlink" title="3. 将新制作的镜像推送到仓库中"></a>3. 将新制作的镜像推送到仓库中</h2><h3 id="3-1-修改tag"><a href="#3-1-修改tag" class="headerlink" title="3.1 修改tag"></a>3.1 修改tag</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker tag &lt;REPOSITORY&gt;  仓库IP地址:端口/镜像名</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>tag名应该为 ip:端口/镜像名 的形式，它会将此镜像推送到此IP地址下的仓库，并且定义此镜像名</p>
+</blockquote>
+<p><img src="https://img-blog.csdn.net/20180419153148947?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2p1bm1veGk=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt></p>
+<h3 id="3-2-将镜像推送到仓库中"><a href="#3-2-将镜像推送到仓库中" class="headerlink" title="3.2 将镜像推送到仓库中"></a>3.2 将镜像推送到仓库中</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker push tag名</span><br></pre></td></tr></table></figure>
+
+<p>可通过<a href="http://139.199.64.253:5000/v2/_catalog地址访问你上传的结果" target="_blank" rel="noopener">http://139.199.64.253:5000/v2/_catalog地址访问你上传的结果</a></p>
+<blockquote>
+<p> 注意：如果push报错：The push refers to a repository [139.199.64.253:5000/java]<br>Get <a href="https://139.199.64.253:5000/v1/_ping" target="_blank" rel="noopener">https://139.199.64.253:5000/v1/_ping</a>: http: server gave HTTP response to HTTPS client<br>则修改 /etc/docker 路径下的 daemon.json 文件，如果没有则手动创建，在文件中写入：<br>{ “insecure-registries”:[“139.199.64.253:5000”] }<br>然后重启docker： service docker restart<br>重新启动仓库：docker run -d -p 5000:5000 -v /home/registry/:/tmp/registry registry</p>
+</blockquote>
+<p><img src="https://img-blog.csdn.net/20180419154840508?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2p1bm1veGk=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt></p>
+<blockquote>
+<p>如果想推送到docker的中央仓库则 tag名改为 ： docker.io/java  然后再推送即可</p>
+</blockquote>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    <div>
+      
+    </div>
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://pibigstar.com/2018/12/31/Java生成MD5的两种方式/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1180,208 +1382,6 @@
 <p><strong>把user的bean也放一下</strong></p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.pibigstar.qq.domain;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">User</span> </span>&#123;</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">private</span> String data;<span class="comment">//QQ号</span></span><br><span class="line">	</span><br><span class="line">	<span class="keyword">private</span> String label;<span class="comment">//用户名/备注名</span></span><br><span class="line">	</span><br><span class="line">	<span class="keyword">private</span> String nick;<span class="comment">//昵称</span></span><br><span class="line">	</span><br><span class="line">	<span class="keyword">private</span> String gender;<span class="comment">//性别 1为男  2为女</span></span><br><span class="line">	</span><br><span class="line">	<span class="keyword">private</span> String city;<span class="comment">//城市</span></span><br><span class="line">	</span><br><span class="line">	<span class="keyword">private</span> String country;<span class="comment">//国家</span></span><br><span class="line">	</span><br><span class="line">	<span class="keyword">private</span> String lnick;<span class="comment">//个性签名</span></span><br><span class="line">	</span><br><span class="line">	<span class="keyword">private</span> String personal;<span class="comment">//个人说明</span></span><br><span class="line">	</span><br><span class="line">	<span class="keyword">private</span> String college;<span class="comment">//学校</span></span><br><span class="line">	</span><br><span class="line">	<span class="keyword">private</span> String birthday;<span class="comment">//生日</span></span><br><span class="line">	</span><br><span class="line">	<span class="keyword">private</span> String email;<span class="comment">//邮箱</span></span><br><span class="line">	</span><br><span class="line">	<span class="keyword">private</span> String phone;<span class="comment">//手机</span></span><br><span class="line">	</span><br><span class="line">	<span class="keyword">private</span> String uin;<span class="comment">//qq号</span></span><br><span class="line">	</span><br><span class="line">	<span class="keyword">private</span> <span class="keyword">int</span> age;</span><br><span class="line">	</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">getAge</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		<span class="keyword">return</span> age;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setAge</span><span class="params">(<span class="keyword">int</span> age)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">this</span>.age = age;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> String <span class="title">getUin</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		<span class="keyword">return</span> uin;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setUin</span><span class="params">(String uin)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">this</span>.uin = uin;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> String <span class="title">getData</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		<span class="keyword">return</span> data;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setData</span><span class="params">(String data)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">this</span>.data = data;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> String <span class="title">getLabel</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		<span class="keyword">return</span> label;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setLabel</span><span class="params">(String label)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">this</span>.label = label;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> String <span class="title">getNick</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		<span class="keyword">return</span> nick;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setNick</span><span class="params">(String nick)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">this</span>.nick = nick;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> String <span class="title">getGender</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		<span class="keyword">return</span> gender;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setGender</span><span class="params">(String gender)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">this</span>.gender = gender;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> String <span class="title">getCity</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		<span class="keyword">return</span> city;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setCity</span><span class="params">(String city)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">this</span>.city = city;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> String <span class="title">getCountry</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		<span class="keyword">return</span> country;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setCountry</span><span class="params">(String country)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">this</span>.country = country;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> String <span class="title">getLnick</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		<span class="keyword">return</span> lnick;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setLnick</span><span class="params">(String lnick)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">this</span>.lnick = lnick;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> String <span class="title">getPersonal</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		<span class="keyword">return</span> personal;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setPersonal</span><span class="params">(String personal)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">this</span>.personal = personal;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> String <span class="title">getCollege</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		<span class="keyword">return</span> college;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setCollege</span><span class="params">(String college)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">this</span>.college = college;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> String <span class="title">getBirthday</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		<span class="keyword">return</span> birthday;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setBirthday</span><span class="params">(String birthday)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">this</span>.birthday = birthday;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> String <span class="title">getEmail</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		<span class="keyword">return</span> email;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setEmail</span><span class="params">(String email)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">this</span>.email = email;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> String <span class="title">getPhone</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		<span class="keyword">return</span> phone;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setPhone</span><span class="params">(String phone)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">this</span>.phone = phone;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="meta">@Override</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> String <span class="title">toString</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		<span class="keyword">return</span> <span class="string">"User [data="</span> + data + <span class="string">", label="</span> + label + <span class="string">", nick="</span> + nick + <span class="string">", gender="</span> + gender + <span class="string">", city="</span> + city</span><br><span class="line">				+ <span class="string">", country="</span> + country + <span class="string">", lnick="</span> + lnick + <span class="string">", personal="</span> + personal + <span class="string">", college="</span> + college</span><br><span class="line">				+ <span class="string">", birthday="</span> + birthday + <span class="string">", email="</span> + email + <span class="string">", phone="</span> + phone + <span class="string">"]"</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    <div>
-      
-    </div>
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://pibigstar.com/2018/12/31/docker搭建本地仓库并制作自己的镜像/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="派大星">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/qq.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="派大星的博客">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/12/31/docker搭建本地仓库并制作自己的镜像/" itemprop="url">docker搭建本地仓库并制作自己的镜像</a></h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-12-31T02:02:04+08:00">
-                2018-12-31
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/工具使用-Linux-docker/" itemprop="url" rel="index">
-                    <span itemprop="name">工具使用,Linux,docker</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p> [TOC]</p>
-<h2 id="1-搭建本地仓库"><a href="#1-搭建本地仓库" class="headerlink" title="1. 搭建本地仓库"></a>1. 搭建本地仓库</h2><h3 id="1-1-下载仓库镜像"><a href="#1-1-下载仓库镜像" class="headerlink" title="1.1 下载仓库镜像"></a>1.1 下载仓库镜像</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker pull registry</span><br></pre></td></tr></table></figure>
-
-<h3 id="1-2-启动仓库容器"><a href="#1-2-启动仓库容器" class="headerlink" title="1.2 启动仓库容器"></a>1.2 启动仓库容器</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run -d -p <span class="number">5000</span>:<span class="number">5000</span> -v /home/registry/:/tmp/registry registry</span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p>第一个5000是本地的端口，第二个5000是docker里面的端口，将本地5000的端口映射到<br>docker里面的5000端口</p>
-</blockquote>
-<h2 id="2-在CentOS容器中安装JDK"><a href="#2-在CentOS容器中安装JDK" class="headerlink" title="2. 在CentOS容器中安装JDK"></a>2. 在CentOS容器中安装JDK</h2><h3 id="2-1-下载CentOS容器"><a href="#2-1-下载CentOS容器" class="headerlink" title="2.1 下载CentOS容器"></a>2.1 下载CentOS容器</h3><p>镜像仓库地址：<a href="https://dashboard.daocloud.io/packages/explore" target="_blank" rel="noopener">https://dashboard.daocloud.io/packages/explore</a></p>
-<p><img src="https://img-blog.csdn.net/20180615152618861?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2p1bm1veGk=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt></p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker pull daocloud.io/library/centos:latest</span><br></pre></td></tr></table></figure>
-
-<h3 id="2-2-运行Linux容器："><a href="#2-2-运行Linux容器：" class="headerlink" title="2.2 运行Linux容器："></a>2.2 运行Linux容器：</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run -d -it --name myCentos 镜像ID /bin/bash</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>*<em>-d 后台运行 *</em></li>
-<li><strong>–name 容器名</strong></li>
-</ul>
-<h3 id="2-3-将JDK复制到myCentos容器中"><a href="#2-3-将JDK复制到myCentos容器中" class="headerlink" title="2.3 将JDK复制到myCentos容器中"></a>2.3 将JDK复制到myCentos容器中</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker cp jdk<span class="number">-10.0</span><span class="number">.1</span>_linux-x64_bin.tar.gz myCentos:/usr/local</span><br></pre></td></tr></table></figure>
-
-<h3 id="2-4-进入容器"><a href="#2-4-进入容器" class="headerlink" title="2.4 进入容器"></a>2.4 进入容器</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker <span class="keyword">exec</span> -it myCentos /bin/bash</span><br></pre></td></tr></table></figure>
-
-<h3 id="2-5-解压JDK"><a href="#2-5-解压JDK" class="headerlink" title="2.5 解压JDK"></a>2.5 解压JDK</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tar -zxvf jdk<span class="number">-10.0</span><span class="number">.1</span>_linux-x64_bin.tar.gz</span><br></pre></td></tr></table></figure>
-
-<h3 id="2-6-配置环境变量"><a href="#2-6-配置环境变量" class="headerlink" title="2.6 配置环境变量"></a>2.6 配置环境变量</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vi /etc/profile</span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p>在文件末尾添加：<br>export JAVA_HOME=/usr/local/jdk1.8.0_152<br>export PATH=<code>$</code>JAVA_HOME/bin:<code>$</code>PATH<br>export CLASSPATH=.:<code>$</code>JAVA_HOME/lib/dt.jar:$JAVA_HOME/lib/tools.jar</p>
-</blockquote>
-<h4 id="2-6-1-刷新环境变量"><a href="#2-6-1-刷新环境变量" class="headerlink" title="2.6.1 刷新环境变量"></a>2.6.1 刷新环境变量</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">source /etc/profile</span><br></pre></td></tr></table></figure>
-
-<h4 id="2-6-2-设置开机自动执行source"><a href="#2-6-2-设置开机自动执行source" class="headerlink" title="2.6.2 设置开机自动执行source"></a>2.6.2 设置开机自动执行source</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vi ~/.bashrc</span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p>在第一行添加 source /etc/profile</p>
-</blockquote>
-<h4 id="2-6-3-重启容器"><a href="#2-6-3-重启容器" class="headerlink" title="2.6.3 重启容器"></a>2.6.3 重启容器</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">docker stop myCentos</span><br><span class="line">docker start myCentos</span><br></pre></td></tr></table></figure>
-
-<h3 id="2-7-将容器提交到镜像里"><a href="#2-7-将容器提交到镜像里" class="headerlink" title="2.7 将容器提交到镜像里"></a>2.7 将容器提交到镜像里</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker commit &lt;CONTAINERID&gt; &lt;IMAGE&gt;</span><br></pre></td></tr></table></figure>
-
-<p><img src="https://img-blog.csdn.net/20180419152414991?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2p1bm1veGk=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt="将容器提交到镜像中"></p>
-<h2 id="3-将新制作的镜像推送到仓库中"><a href="#3-将新制作的镜像推送到仓库中" class="headerlink" title="3. 将新制作的镜像推送到仓库中"></a>3. 将新制作的镜像推送到仓库中</h2><h3 id="3-1-修改tag"><a href="#3-1-修改tag" class="headerlink" title="3.1 修改tag"></a>3.1 修改tag</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker tag &lt;REPOSITORY&gt;  仓库IP地址:端口/镜像名</span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p>tag名应该为 ip:端口/镜像名 的形式，它会将此镜像推送到此IP地址下的仓库，并且定义此镜像名</p>
-</blockquote>
-<p><img src="https://img-blog.csdn.net/20180419153148947?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2p1bm1veGk=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt></p>
-<h3 id="3-2-将镜像推送到仓库中"><a href="#3-2-将镜像推送到仓库中" class="headerlink" title="3.2 将镜像推送到仓库中"></a>3.2 将镜像推送到仓库中</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker push tag名</span><br></pre></td></tr></table></figure>
-
-<p>可通过<a href="http://139.199.64.253:5000/v2/_catalog地址访问你上传的结果" target="_blank" rel="noopener">http://139.199.64.253:5000/v2/_catalog地址访问你上传的结果</a></p>
-<blockquote>
-<p> 注意：如果push报错：The push refers to a repository [139.199.64.253:5000/java]<br>Get <a href="https://139.199.64.253:5000/v1/_ping" target="_blank" rel="noopener">https://139.199.64.253:5000/v1/_ping</a>: http: server gave HTTP response to HTTPS client<br>则修改 /etc/docker 路径下的 daemon.json 文件，如果没有则手动创建，在文件中写入：<br>{ “insecure-registries”:[“139.199.64.253:5000”] }<br>然后重启docker： service docker restart<br>重新启动仓库：docker run -d -p 5000:5000 -v /home/registry/:/tmp/registry registry</p>
-</blockquote>
-<p><img src="https://img-blog.csdn.net/20180419154840508?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2p1bm1veGk=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt></p>
-<blockquote>
-<p>如果想推送到docker的中央仓库则 tag名改为 ： docker.io/java  然后再推送即可</p>
-</blockquote>
 
           
         
@@ -1739,3 +1739,5 @@
 </html>
 <!-- 页面点击小红心 -->
  <script type="text/javascript" src="/js/src/clicklove.js"></script>
+ <!-- 代码复制 -->
+ <script type="text/javascript" src="/js/src/clipboard.js"></script> 
