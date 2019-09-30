@@ -435,36 +435,6 @@
   </entry>
   
   <entry>
-    <title>使用Java做ORC图片识别</title>
-    <link href="http://pibigstar.com/2019/09/04/%E4%BD%BF%E7%94%A8Java%E5%81%9AORC%E5%9B%BE%E7%89%87%E8%AF%86%E5%88%AB/"/>
-    <id>http://pibigstar.com/2019/09/04/使用Java做ORC图片识别/</id>
-    <published>2019-09-03T17:01:04.000Z</published>
-    <updated>2019-09-30T03:12:59.276Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="1-下载训练库"><a href="#1-下载训练库" class="headerlink" title="1. 下载训练库"></a>1. 下载训练库</h1><p>下载地址：<a href="https://github.com/tesseract-ocr/tessdata" target="_blank" rel="noopener">https://github.com/tesseract-ocr/tessdata</a></p><p>不用全部下载，中文识别下载那个<code>chi_sim.traineddata</code>即可。</p><h1 id="2-添加依赖"><a href="#2-添加依赖" class="headerlink" title="2. 添加依赖"></a>2. 添加依赖</h1><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>net.sourceforge.tess4j<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>tess4j<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">version</span>&gt;</span>4.3.1<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure><h1 id="3-编写代码"><a href="#3-编写代码" class="headerlink" title="3. 编写代码"></a>3. 编写代码</h1><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> String <span class="title">getTextByImage</span><span class="params">(String imgPath)</span> <span class="keyword">throws</span> TesseractException </span>&#123;</span><br><span class="line">    File imageFile = <span class="keyword">new</span> File(imgPath);</span><br><span class="line">    <span class="keyword">if</span> (!imageFile.exists())&#123;</span><br><span class="line">        <span class="keyword">throw</span> <span class="keyword">new</span> RuntimeException(<span class="string">"图片不存在"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    Tesseract tesseract = <span class="keyword">new</span> Tesseract();</span><br><span class="line">    <span class="comment">// 设置训练库的位置,https://github.com/tesseract-ocr/tessdata</span></span><br><span class="line">    tesseract.setDatapath(<span class="string">"D://OCR/tessdata"</span>);</span><br><span class="line">    <span class="comment">// 设置识别语言为中文</span></span><br><span class="line">    tesseract.setLanguage(<span class="string">"chi_sim"</span>);</span><br><span class="line"></span><br><span class="line">    String result = tesseract.doOCR(imageFile);</span><br><span class="line">    <span class="keyword">return</span> result;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><h1 id="4-测试"><a href="#4-测试" class="headerlink" title="4. 测试"></a>4. 测试</h1><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> TesseractException </span>&#123;</span><br><span class="line">   System.out.println(getTextByImage(<span class="string">"D://OCR/img/test.png"</span>));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p><img src="https://img-blog.csdnimg.cn/20190521205521722.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2p1bm1veGk=,size_16,color_FFFFFF,t_70" alt></p>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;h1 id=&quot;1-下载训练库&quot;&gt;&lt;a href=&quot;#1-下载训练库&quot; class=&quot;headerlink&quot; title=&quot;1. 下载训练库&quot;&gt;&lt;/a&gt;1. 下载训练库&lt;/h1&gt;&lt;p&gt;下载地址：&lt;a href=&quot;https://github.com/tesseract-ocr/t
-      
-    
-    </summary>
-    
-    
-      <category term="java工具类" scheme="http://pibigstar.com/categories/java%E5%B7%A5%E5%85%B7%E7%B1%BB/"/>
-    
-    
-      <category term="ocr" scheme="http://pibigstar.com/tags/ocr/"/>
-    
-      <category term="Java" scheme="http://pibigstar.com/tags/Java/"/>
-    
-      <category term="tesseract" scheme="http://pibigstar.com/tags/tesseract/"/>
-    
-  </entry>
-  
-  <entry>
     <title>Linux随笔记</title>
     <link href="http://pibigstar.com/2019/09/04/Linux%E9%9A%8F%E7%AC%94%E8%AE%B0/"/>
     <id>http://pibigstar.com/2019/09/04/Linux随笔记/</id>
@@ -492,6 +462,36 @@
       <category term="linux" scheme="http://pibigstar.com/tags/linux/"/>
     
       <category term="随笔记" scheme="http://pibigstar.com/tags/%E9%9A%8F%E7%AC%94%E8%AE%B0/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>使用Java做ORC图片识别</title>
+    <link href="http://pibigstar.com/2019/09/04/%E4%BD%BF%E7%94%A8Java%E5%81%9AORC%E5%9B%BE%E7%89%87%E8%AF%86%E5%88%AB/"/>
+    <id>http://pibigstar.com/2019/09/04/使用Java做ORC图片识别/</id>
+    <published>2019-09-03T17:01:04.000Z</published>
+    <updated>2019-09-30T03:12:59.276Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="1-下载训练库"><a href="#1-下载训练库" class="headerlink" title="1. 下载训练库"></a>1. 下载训练库</h1><p>下载地址：<a href="https://github.com/tesseract-ocr/tessdata" target="_blank" rel="noopener">https://github.com/tesseract-ocr/tessdata</a></p><p>不用全部下载，中文识别下载那个<code>chi_sim.traineddata</code>即可。</p><h1 id="2-添加依赖"><a href="#2-添加依赖" class="headerlink" title="2. 添加依赖"></a>2. 添加依赖</h1><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>net.sourceforge.tess4j<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>tess4j<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">version</span>&gt;</span>4.3.1<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure><h1 id="3-编写代码"><a href="#3-编写代码" class="headerlink" title="3. 编写代码"></a>3. 编写代码</h1><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> String <span class="title">getTextByImage</span><span class="params">(String imgPath)</span> <span class="keyword">throws</span> TesseractException </span>&#123;</span><br><span class="line">    File imageFile = <span class="keyword">new</span> File(imgPath);</span><br><span class="line">    <span class="keyword">if</span> (!imageFile.exists())&#123;</span><br><span class="line">        <span class="keyword">throw</span> <span class="keyword">new</span> RuntimeException(<span class="string">"图片不存在"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    Tesseract tesseract = <span class="keyword">new</span> Tesseract();</span><br><span class="line">    <span class="comment">// 设置训练库的位置,https://github.com/tesseract-ocr/tessdata</span></span><br><span class="line">    tesseract.setDatapath(<span class="string">"D://OCR/tessdata"</span>);</span><br><span class="line">    <span class="comment">// 设置识别语言为中文</span></span><br><span class="line">    tesseract.setLanguage(<span class="string">"chi_sim"</span>);</span><br><span class="line"></span><br><span class="line">    String result = tesseract.doOCR(imageFile);</span><br><span class="line">    <span class="keyword">return</span> result;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><h1 id="4-测试"><a href="#4-测试" class="headerlink" title="4. 测试"></a>4. 测试</h1><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> TesseractException </span>&#123;</span><br><span class="line">   System.out.println(getTextByImage(<span class="string">"D://OCR/img/test.png"</span>));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p><img src="https://img-blog.csdnimg.cn/20190521205521722.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2p1bm1veGk=,size_16,color_FFFFFF,t_70" alt></p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h1 id=&quot;1-下载训练库&quot;&gt;&lt;a href=&quot;#1-下载训练库&quot; class=&quot;headerlink&quot; title=&quot;1. 下载训练库&quot;&gt;&lt;/a&gt;1. 下载训练库&lt;/h1&gt;&lt;p&gt;下载地址：&lt;a href=&quot;https://github.com/tesseract-ocr/t
+      
+    
+    </summary>
+    
+    
+      <category term="java工具类" scheme="http://pibigstar.com/categories/java%E5%B7%A5%E5%85%B7%E7%B1%BB/"/>
+    
+    
+      <category term="ocr" scheme="http://pibigstar.com/tags/ocr/"/>
+    
+      <category term="Java" scheme="http://pibigstar.com/tags/Java/"/>
+    
+      <category term="tesseract" scheme="http://pibigstar.com/tags/tesseract/"/>
     
   </entry>
   
